@@ -1,0 +1,21 @@
+---
+layout: default
+---
+
+<h1>{{ page.category }} / {{ page.subcategory }}</h1>
+
+<ul>
+
+    {% for post in site.posts %}
+
+    {% if post.categories[0] == page.category and post.categories[1] == page.subcategory %}
+
+    <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+
+    {% endif %}
+
+    {% endfor %}
+
+</ul>

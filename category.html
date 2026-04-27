@@ -1,0 +1,29 @@
+---
+layout: default
+---
+
+<h1>{{ page.category | capitalize }}</h1>
+
+<ul>
+
+    {% assign subcats = site.posts | where_exp: "post", "post.categories[0] == page.category" | map: "categories" %}
+
+    {% assign subs = "" | split: "" %}
+
+    {% for cat in subcats %}
+    {% assign subs = subs | push: cat[1] %}
+    {% endfor %}
+
+    {% assign subs = subs | uniq %}
+
+    {% for sub in subs %}
+
+    <li>
+        <a href="{{ '/' | append: page.category | append: '/' | append: sub | append: '/' | relative_url }}">
+            {{ sub | capitalize }}
+        </a>
+    </li>
+
+    {% endfor %}
+
+</ul>

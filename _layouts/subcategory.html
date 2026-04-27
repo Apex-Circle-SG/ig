@@ -1,0 +1,23 @@
+---
+layout: default
+---
+
+<h1>{{ page.category }} / {{ page.subcategory }}</h1>
+
+<ul>
+
+    {% assign posts = site.categories[page.subcategory] %}
+
+    {% for post in posts %}
+
+    {% if post.categories contains page.category %}
+
+    <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+
+    {% endif %}
+
+    {% endfor %}
+
+</ul>

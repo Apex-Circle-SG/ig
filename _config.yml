@@ -1,0 +1,19 @@
+title: InsightGinie Archive
+description: Article mirror of insightginie.com
+tagline: News of Tomorrow
+locale: en_US
+
+url: ""
+baseurl: ""
+
+markdown: kramdown
+
+permalink: /:categories/:title/
+
+collections:
+  posts:
+    output: true
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
