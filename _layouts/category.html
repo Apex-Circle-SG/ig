@@ -2,38 +2,18 @@
 layout: default
 ---
 
-<h1>{{ page.category | capitalize }}</h1>
+<h1>{{ page.title }}</h1>
 
 <ul>
 
-{% assign subcategories = "" | split: "" %}
+    {% assign current_main = site.data.categories | where: "slug", page.category | first %}
 
-{% for post in site.categories[page.category] %}
-
-  {% if post.categories and post.categories.size > 1 %}
-
-    {% assign sub = post.categories[1] %}
-
-    {% if sub %}
-      {% unless subcategories contains sub %}
-        {% assign subcategories = subcategories | push: sub %}
-      {% endunless %}
-    {% endif %}
-
-  {% endif %}
-
-{% endfor %}
-
-{% assign sorted_subcategories = subcategories | uniq | sort %}
-
-{% for sub in sorted_subcategories %}
-
-<li>
-  <a href="{{ '/' | append: page.category | append: '/' | append: sub | append: '/' | relative_url }}">
-    {{ sub | capitalize }}
-  </a>
-</li>
-
-{% endfor %}
+    {% for sub in current_main.subcategories %}
+    <li>
+        <a href="{{ '/' | append: page.category | append: '/' | append: sub.slug | append: '/' | relative_url }}">
+            {{ sub.name }}
+        </a>
+    </li>
+    {% endfor %}
 
 </ul>

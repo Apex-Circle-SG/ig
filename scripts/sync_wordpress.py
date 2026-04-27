@@ -8,10 +8,8 @@ from concurrent.futures import ThreadPoolExecutor
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 POST_DIR = BASE_DIR / "_posts"
-MEDIA_DIR = BASE_DIR / "media/images"
 STATE_FILE = BASE_DIR / "scripts/last_sync.json"
 POST_DIR.mkdir(exist_ok=True)
-MEDIA_DIR.mkdir(parents=True, exist_ok=True)
 
 SITE = "https://insightginie.com"
 
@@ -20,9 +18,6 @@ CATEGORY_API = f"{SITE}/wp-json/wp/v2/categories"
 
 PER_PAGE = 100
 MAX_WORKERS = 10
-
-Path(POST_DIR).mkdir(exist_ok=True)
-Path(MEDIA_DIR).mkdir(parents=True, exist_ok=True)
 
 
 # -----------------------------
@@ -95,36 +90,6 @@ def resolve_category(cat_id, categories):
 
 
 # -----------------------------
-# Download image
-# -----------------------------
-
-def download_image(url):
-
-    filename = url.split("/")[-1]
-
-    local_path = f"{MEDIA_DIR}/{filename}"
-
-    if os.path.exists(local_path):
-        return f"/media/images/{filename}"
-
-    try:
-
-        img = requests.get(url, timeout=30)
-
-        if img.status_code == 200:
-
-            with open(local_path, "wb") as f:
-                f.write(img.content)
-
-            return f"/media/images/{filename}"
-
-    except Exception:
-        pass
-
-    return None
-
-
-# -----------------------------
 # Clean content
 # -----------------------------
 
@@ -158,32 +123,15 @@ def save_post(post, categories, executor):
     content = sanitize(content)
 
     original_url = post["link"]
+    post_id = post["id"]
 
-    media_url = None
-
-    if "_embedded" in post:
-
-        media = post["_embedded"].get("wp:featuredmedia")
-
-        if media:
-            media_url = media[0]["source_url"]
-
-    media_path = None
-
-    if media_url:
-
-        future = executor.submit(download_image, media_url)
-
-        media_path = future.result()
+    media_path = f"https://picsum.photos/512/512?random={post_id}"
 
     cats = post["categories"]
 
     if cats:
-
         cat_path = resolve_category(cats[0], categories)
-
     else:
-
         cat_path = ["uncategorized"]
 
     folder = os.path.join(POST_DIR, *cat_path)
@@ -199,11 +147,9 @@ def save_post(post, categories, executor):
         "title": title,
         "date": date,
         "categories": cat_path,
-        "original_url": original_url
+        "original_url": original_url,
+        "featured_image": media_path
     }
-
-    if media_path:
-        frontmatter["featured_image"] = media_path
 
     fm = yaml.dump(frontmatter, sort_keys=False)
 
