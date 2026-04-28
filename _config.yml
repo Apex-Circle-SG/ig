@@ -32,7 +32,4 @@ pagination:
   sort_field: 'date'
   sort_reverse: true
 
-# Nested Categories Configuration (Working 2026 Standard)
-category_path: ''
-category_layout: category
-category_title_prefix: ''
+
