@@ -147,3 +147,16 @@ _site/
 vendor/
 _site/
 .jekyll-cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+.Python
+env/
+venv/
+ENV/
+.pytest_cache/
+.ipynb_checkpoints/
