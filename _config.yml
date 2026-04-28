@@ -22,7 +22,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-paginate-v2
-  - jekyll-archives
+  - jekyll-category-pages
 
 pagination:
   enabled: true
@@ -33,14 +33,10 @@ pagination:
   sort_field: 'date'
   sort_reverse: true
 
-# Jekyll Archives Configuration (FIXES 404 CATEGORY PAGES)
-jekyll-archives:
-  enabled:
-    - categories
-  layouts:
-    category: category
-    subcategory: subcategory
-  permalinks:
-    category: '/:name/'
-    subcategory: '/:parent/:name/'
-  hierarchical_categories: true
+# Nested Categories Configuration - This actually works!
+category_pages:
+  enabled: true
+  layout: category
+  nested: true
+  permalink: '/:slug/'
+  exclude: []

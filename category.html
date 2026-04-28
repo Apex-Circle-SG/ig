@@ -2,28 +2,28 @@
 layout: default
 ---
 
-<h1>{{ page.category | capitalize }}</h1>
+<h1>{{ page.title | capitalize }}</h1>
 
+{% if page.children.size > 0 %}
+<h3>Subcategories:</h3>
 <ul>
-
-    {% assign subcats = site.posts | where_exp: "post", "post.categories[0] == page.category" | map: "categories" %}
-
-    {% assign subs = "" | split: "" %}
-
-    {% for cat in subcats %}
-    {% assign subs = subs | push: cat[1] %}
-    {% endfor %}
-
-    {% assign subs = subs | uniq %}
-
-    {% for sub in subs %}
-
+{% for child in page.children %}
     <li>
-        <a href="{{ '/' | append: page.category | append: '/' | append: sub | append: '/' | relative_url }}">
-            {{ sub | capitalize }}
+        <a href="{{ child.url | relative_url }}">
+            {{ child.title | capitalize }}
         </a>
     </li>
+{% endfor %}
+</ul>
+{% endif %}
 
-    {% endfor %}
+<hr>
 
+<h3>Articles:</h3>
+<ul>
+{% for post in page.posts %}
+    <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+{% endfor %}
 </ul>
