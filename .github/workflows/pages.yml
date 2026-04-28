@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Force Bundler HTTPS for GitHub
-        run: git config --global url."https://github.com/".insteadOf git@github.com:
+        run: 'git config --global url."https://github.com/".insteadOf git@github.com:'
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
