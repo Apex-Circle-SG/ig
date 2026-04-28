@@ -36,4 +36,5 @@ jekyll-archives:
   layouts:
     category: category
   permalinks:
-    category: '/:categories/'
+    category: '/:name/'
+  hierarchical_categories: true

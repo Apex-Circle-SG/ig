@@ -20,12 +20,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Force Bundler HTTPS for GitHub
+        run: git config --global url."https://github.com/".insteadOf git@github.com:
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
-          bundler-version: '3.5.22'
-          bundler-cache: true
+          bundler-version: '2.5.23'
+          bundler-cache: false
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Build with Jekyll
