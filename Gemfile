@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "jekyll"
 gem "jekyll-paginate-v2"
-gem "jekyll-archives"
+gem 'jekyll-archives', github: 'benbalter/jekyll-archives', ref: 'a315f8d'
 gem "jekyll-sitemap"
 gem "jekyll-seo-tag"
 
