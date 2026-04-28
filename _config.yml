@@ -33,10 +33,7 @@ pagination:
   sort_field: 'date'
   sort_reverse: true
 
-# Nested Categories Configuration - This actually works!
-category_pages:
-  enabled: true
-  layout: category
-  nested: true
-  permalink: '/:slug/'
-  exclude: []
+# Nested Categories Configuration (Working 2026 Standard)
+category_path: ''
+category_layout: category
+category_title_prefix: ''
