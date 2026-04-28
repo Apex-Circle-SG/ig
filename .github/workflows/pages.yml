@@ -1,47 +1,40 @@
-name: Build and Deploy Jekyll site to GitHub Pages
-
+name: Deploy Jekyll with GitHub Pages
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
   group: "pages"
   cancel-in-progress: false
-
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Force Bundler HTTPS for GitHub
-        run: 'git config --global url."https://github.com/".insteadOf git@github.com:'
-
-      - name: Setup Ruby
+      - name: Setup Ruby with Bundler cache
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
-          bundler-version: '2.5.23'
-          bundler-cache: false
-      - name: Setup Pages
-        uses: actions/configure-pages@v6
-      - name: Build with Jekyll
+          ruby-version: '3.2'
+          bundler-cache: true
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        id: pages
+      - name: Build Jekyll site with your gems
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
-        env:
-          JEKYLL_ENV: production
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
-
+      - name: Upload built site artifact
+        uses: actions/upload-pages-artifact@v3
   deploy:
-    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
