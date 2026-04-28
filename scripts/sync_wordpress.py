@@ -1,4 +1,5 @@
 import os
+import sys
 import requests
 import yaml
 import json
@@ -165,7 +166,7 @@ def save_post(post, categories, executor):
 # Sync posts
 # -----------------------------
 
-def sync():
+def sync(max_posts=None):
 
     state = load_state()
 
@@ -176,6 +177,9 @@ def sync():
     executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)
 
     page = 1
+    processed = 0
+    stop = False
+    max_id = last_id
 
     while True:
 
@@ -191,34 +195,40 @@ def sync():
         if not posts:
             break
 
-        stop = False
-
-        max_id = last_id
-
         for post in posts:
-
+            if max_posts is not None and processed >= max_posts:
+                stop = True
+                break
+            
             if post["id"] <= last_id:
                 stop = True
                 break
 
             save_post(post, categories, executor)
-
+            
             if post["id"] > max_id:
                 max_id = post["id"]
+            
+            processed += 1
 
         if stop:
             break
 
         page += 1
 
-    state["last_id"] = max_id
-
-    save_state(state)
+    # ONLY update last sync state when running FULL sync (no limit)
+    if max_posts is None:
+        state["last_id"] = max_id
+        save_state(state)
+    
+    print(f"\nDone. Processed {processed} posts.")
 
 # -----------------------------
 # Run
 # -----------------------------
 
 if __name__ == "__main__":
-
-    sync()
+    if len(sys.argv) > 1 and sys.argv[1].isdigit():
+        sync(int(sys.argv[1]))
+    else:
+        sync()
