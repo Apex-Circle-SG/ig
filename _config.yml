@@ -28,3 +28,12 @@ pagination:
   limit: 0
   sort_field: 'date'
   sort_reverse: true
+
+# Jekyll Archives Configuration (FIXES 404 CATEGORY PAGES)
+jekyll-archives:
+  enabled:
+    - categories
+  layouts:
+    category: category
+  permalinks:
+    category: '/:categories/'
