@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "jekyll"
 gem "jekyll-paginate-v2"
-gem 'jekyll-archives', git: 'https://github.com/ashmaroli/jekyll-archives.git', branch: 'nested-categories'
+gem 'jekyll-archives', git: 'https://github.com/ashmaroli/jekyll-archives.git', branch: 'master'
 gem "jekyll-sitemap"
 gem "jekyll-seo-tag"
 
