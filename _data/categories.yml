@@ -1,0 +1,135 @@
+- name: AI
+  slug: ai
+  subcategories:
+  - name: AI Agent
+    slug: ai-agent
+  - name: AI as a Service
+    slug: ai-as-a-service
+  - name: AI in General
+    slug: ai-in-general
+  - name: AI Tools
+    slug: ai-tools
+  - name: Machine Learning
+    slug: machine-learning
+  - name: OpenClaw
+    slug: openclaw
+- name: Business
+  slug: business
+  subcategories:
+  - name: Business Plan
+    slug: business-plan
+  - name: Management
+    slug: management
+  - name: Merger &amp; Acquisition
+    slug: merger-acquisition
+  - name: Operations
+    slug: operations
+  - name: Strategy
+    slug: strategy
+- name: Eclectic
+  slug: eclectic
+  subcategories:
+  - name: Fallacies
+    slug: fallacies
+  - name: Mathematics
+    slug: mathematics
+  - name: Metaheuristics
+    slug: metaheuristics
+  - name: Paradoxes
+    slug: paradoxes
+  - name: Physics
+    slug: physics
+  - name: Psychology
+    slug: psychology
+- name: Finance
+  slug: finance
+  subcategories:
+  - name: Banking
+    slug: banking
+  - name: Payment
+    slug: payment
+  - name: Real World Asset (RWA)
+    slug: real-world-asset-rwa
+  - name: Tracing
+    slug: tracing
+  - name: Verification
+    slug: verification
+- name: Game
+  slug: game
+  subcategories:
+  - name: Metaverse
+    slug: metaverse
+- name: Health
+  slug: health
+  subcategories:
+  - name: Bioscience
+    slug: bioscience
+  - name: Digital phenotyping
+    slug: digital-phenotyping
+  - name: Healthtech
+    slug: healthtech
+  - name: Medtech
+    slug: medtech
+  - name: rPPG
+    slug: rppg
+  - name: Telemedicine
+    slug: telemedicine
+- name: Sales
+  slug: sales
+  subcategories:
+  - name: Art of War
+    slug: art-of-war
+  - name: Kokology
+    slug: kokology
+  - name: NLP
+    slug: nlp
+  - name: Sales Cycle
+    slug: sales-cycle
+- name: Tech
+  slug: tech
+  subcategories:
+  - name: Bio-Computer
+    slug: bio-computer
+  - name: Cloud
+    slug: cloud
+  - name: Cybersec
+    slug: cybersec
+  - name: Energy
+    slug: energy
+  - name: Integrated Circuit
+    slug: integrated-circuit
+  - name: Optical Computing
+    slug: optical-computing
+  - name: Quantum
+    slug: quantum
+- name: Trading
+  slug: trading
+  subcategories:
+  - name: Candle
+    slug: candle
+  - name: Entry
+    slug: entry
+  - name: Fundamental
+    slug: fundamental
+  - name: Indicators
+    slug: indicators
+  - name: Pattern
+    slug: pattern
+  - name: Quantitative AI
+    slug: quantitative-ai
+- name: Uncategorized
+  slug: uncategorized
+  subcategories: []
+- name: Web3
+  slug: web3
+  subcategories:
+  - name: Crypto Security
+    slug: crypto-security
+  - name: Cryptocurrency
+    slug: cryptocurrency
+  - name: Defi
+    slug: defi
+  - name: Network
+    slug: network
+  - name: Zero Knowledge
+    slug: zero-knowledge

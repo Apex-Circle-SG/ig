@@ -13,49 +13,21 @@ This repository is a mirror of the InsightGinie knowledge archive.
 
 ## Categories
 
-{% assign mains = "" | split: "" %}
-
-{% for post in site.posts %}
-  {% if post.categories and post.categories.size > 0 %}
-    {% assign main_cat = post.categories[0] %}
-    {% if main_cat %}
-      {% assign mains = mains | push: main_cat %}
-    {% endif %}
-  {% endif %}
-{% endfor %}
-
-{% assign mains = mains | uniq | sort %}
-
 <ul>
 
-{% for main in mains %}
+{% for main in site.data.categories %}
 
 <li>
 
-<strong>{{ main | capitalize }}</strong>
+<strong>{{ main.name }}</strong>
 
 <ul>
 
-{% assign subs = "" | split: "" %}
-
-{% for post in site.posts %}
-  {% if post.categories and post.categories.size > 1 %}
-    {% if post.categories[0] == main %}
-      {% assign sub_cat = post.categories[1] %}
-      {% if sub_cat %}
-        {% assign subs = subs | push: sub_cat %}
-      {% endif %}
-    {% endif %}
-  {% endif %}
-{% endfor %}
-
-{% assign subs = subs | uniq | sort %}
-
-{% for sub in subs %}
+{% for sub in main.subcategories %}
 
 <li>
-<a href="/{{ main }}/{{ sub }}/">
-{{ sub | capitalize }}
+<a href="/{{ main.slug }}/{{ sub.slug }}/">
+{{ sub.name }}
 </a>
 </li>
 

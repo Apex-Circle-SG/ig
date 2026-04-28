@@ -3,12 +3,12 @@ description: Article mirror of insightginie.com
 tagline: News of Tomorrow
 locale: en_US
 
-url: ""
+url: "https://github.insightginie.com"
 baseurl: ""
 
 markdown: kramdown
 
-permalink: /:categories/:title/
+permalink: /:slug/
 
 collections:
   posts:
@@ -17,3 +17,14 @@ collections:
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-paginate-v2
+  - jekyll-archives
+
+pagination:
+  enabled: true
+  per_page: 100
+  permalink: '/page/:num/'
+  title: ':title - Page :num'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
