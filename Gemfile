@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gem "jekyll"
 gem "kramdown-parser-gfm"
 gem "jekyll-paginate-v2"
-gem "jekyll-category-pages"
+gem "jekyll-category-pages", git: 'https://github.com/field-theory/jekyll-category-pages.git', branch: 'fix-paginate-v2-compat'
 gem "jekyll-sitemap"
 gem "jekyll-seo-tag"
 
