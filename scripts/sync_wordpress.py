@@ -135,13 +135,9 @@ def save_post(post, categories, executor):
     else:
         cat_path = ["uncategorized"]
 
-    folder = os.path.join(POST_DIR, *cat_path)
-
-    Path(folder).mkdir(parents=True, exist_ok=True)
-
     filename = f"{date[:10]}-{slug}.md"
 
-    path = os.path.join(folder, filename)
+    path = os.path.join(POST_DIR, filename)
 
     frontmatter = {
         "layout": "post",
