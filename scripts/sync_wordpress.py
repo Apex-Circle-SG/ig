@@ -6,6 +6,7 @@ import json
 import re
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
+from create_post import create_post
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 POST_DIR = BASE_DIR / "_posts"

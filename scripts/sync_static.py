@@ -5,6 +5,7 @@ import json
 import re
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
+from sitemap import append_sitemap, regenerate_full_sitemap
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PUBLIC_DIR = BASE_DIR / "post"
@@ -73,7 +74,7 @@ def render_post(post):
     media_path = f"https://picsum.photos/1200/630?random={post['id']}"
 
     # DYNAMIC TEMPLATE POST FORMAT - Header/Footer loaded via JS
-    html = f'''<!DOCTYPE html>
+    html = '''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -88,22 +89,23 @@ def render_post(post):
     <meta name="twitter:image" content="{media_path}">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://aloycwl.github.io/post/{slug}">
+    <link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
     <style>
-        :root {{ color-scheme: light; }}
-        body {{ margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }}
-        .container {{ max-width: 960px; margin: 0 auto; padding: 1rem; }}
-        header {{ border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }}
-        header a {{ color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }}
-        img {{ max-width: 100%; height: auto; border-radius: 4px; }}
-        a {{ color: #0b57d0; text-decoration: none; }}
-        a:hover {{ text-decoration: underline; }}
-        .post-list {{ list-style: none; padding: 0; }}
-        .post-item {{ padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }}
-        .post-title {{ font-size: 1.1rem; font-weight: 500; }}
-        .post-date {{ font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }}
-        .pagination {{ display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }}
-        .pagination a {{ padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }}
-        .footer {{ margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }}
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {{
@@ -140,48 +142,207 @@ def render_post(post):
     }
 
 
+def generate_sitemap(all_posts):
+    url_list = []
+    for post in all_posts:
+        url_list.append({
+            "url": f"https://aloycwl.github.io/{post['slug']}",
+            "lastmod": post["date"][:10]
+        })
+    
+    # Add all static pages
+    total_pages = (len(all_posts) + POSTS_PER_PAGE - 1) // POSTS_PER_PAGE
+    for page_num in range(1, total_pages + 1):
+        url_list.append({
+            "url": f"https://aloycwl.github.io/page/{page_num}/",
+            "lastmod": all_posts[0]["date"][:10] if page_num == total_pages else all_posts[(page_num-1)*POSTS_PER_PAGE]["date"][:10]
+        })
+    
+    regenerate_full_sitemap(url_list)
+
+
 def render_index(all_posts):
     total = len(all_posts)
     pages = (total + POSTS_PER_PAGE - 1) // POSTS_PER_PAGE
 
+    # Create data directory
+    data_dir = BASE_DIR / "data"
+    data_dir.mkdir(exist_ok=True)
+
+    # Write master posts index
+    master_index = []
+    for i, post in enumerate(all_posts):
+        master_index.append({
+            "slug": post["slug"],
+            "title": post["title"],
+            "date": post["date"][:10],
+            "page": (i // POSTS_PER_PAGE) + 1
+        })
+
+    with open(BASE_DIR / "posts.json", "w", encoding="utf-8") as f:
+        json.dump(master_index, f)
+
+    # Write batch data files and static page folders
+    page_dir_base = BASE_DIR / "page"
+    page_dir_base.mkdir(exist_ok=True)
+    
     for page_num in range(1, pages + 1):
         start = (page_num - 1) * POSTS_PER_PAGE
         end = start + POSTS_PER_PAGE
         page_posts = all_posts[start:end]
 
-        html = HEAD_TEMPLATE.format(
-            title="InsightGinie Archive",
-            description="News of Tomorrow",
-            slug="",
-            og_image=""
-        )
+        # Write json data
+        with open(data_dir / f"{page_num}.json", "w", encoding="utf-8") as f:
+            json.dump(page_posts, f)
+        
+        # Create static page directory (SEO permanent paths)
+        page_dir = page_dir_base / str(page_num)
+        page_dir.mkdir(exist_ok=True)
+        
+        # Only modify page index if it's the latest page (older pages are immutable)
+        if page_num == pages or not os.path.exists(page_dir / "index.html"):
+            # Generate static index.html for this page
+            page_html = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InsightGinie - Page {page}</title>
+    <link rel="icon" type="image/jpeg" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+    <script>window.location = "/?page={page}";</script>
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=/?page={page}">
+    </noscript>
+</head>
+<body>
+    Redirecting...
+</body>
+</html>'''.format(page=page_num)
+            
+            with open(page_dir / "index.html", "w", encoding="utf-8") as f:
+                f.write(page_html)
 
-        html += '<h1>InsightGinie Archive</h1><p style="color:#718096;">News of Tomorrow</p>'
-        html += '<ul class="post-list">'
+    # Write single root index.html
+    html = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InsightGinie</title>
+    <meta name="description" content="News of Tomorrow">
+    <link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; cursor: pointer; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination button { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; border: none; cursor: pointer; }
+        .pagination button:disabled { opacity: 0.4; cursor: default; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+        #loading { text-align: center; padding: 2rem; }
+    </style>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <div id="loading">Loading...</div>
+    <div id="content"></div>
+    <div id="pagination" class="pagination"></div>
+</div>
+<div id="site-footer"></div>
 
-        for post in page_posts:
-            html += f"""<li class="post-item">
-                <a href="{post['slug']}.html" class="post-title">{post['title']}</a>
-                <span class="post-date">{post['date'][:10]}</span>
-            </li>"""
+<script>
+let allPosts = [];
+let currentPage = 1;
+let totalPages = 1;
+const POSTS_PER_PAGE = 100;
 
-        html += '</ul>'
+document.addEventListener('DOMContentLoaded', init);
 
-        if pages > 1:
-            html += '<div class="pagination">'
-            if page_num > 1:
-                prev = 'index.html' if page_num == 2 else f'page-{page_num-1}.html'
-                html += f'<a href="{prev}">&laquo; Previous</a>'
-            html += f'<span>Page {page_num} / {pages}</span>'
-            if page_num < pages:
-                html += f'<a href="page-{page_num+1}.html">Next &raquo;</a>'
-            html += '</div>'
+async function init() {
+    allPosts = await fetch('/posts.json').then(r => r.json());
+    totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+    currentPage = totalPages; // Always start on newest page
 
-        html += FOOTER_TEMPLATE
+    const [header, footer] = await Promise.all([
+        fetch('/templates/header.html').then(r => r.text()),
+        fetch('/templates/footer.html').then(r => r.text())
+    ]);
+    document.getElementById('site-header').innerHTML = header;
+    document.getElementById('site-footer').innerHTML = footer;
 
-        filename = 'index.html' if page_num == 1 else f'page-{page_num}.html'
-        with open(PUBLIC_DIR / filename, "w", encoding="utf-8") as f:
-            f.write(html)
+    window.addEventListener('popstate', handleRoute);
+    handleRoute();
+}
+
+async function handleRoute() {
+    const path = window.location.pathname.slice(1);
+
+    if (!path || path === 'index.html') {
+        renderPage(currentPage);
+    } else {
+        renderPost(path);
+    }
+}
+
+async function renderPage(pageNum) {
+    currentPage = pageNum;
+    const posts = await fetch(`/data/${pageNum}.json`).then(r => r.json());
+
+    let html = '<h1>InsightGinie Archive</h1><p style="color:#718096;">News of Tomorrow</p><ul class="post-list">';
+
+    for (const post of posts) {
+        html += `<li class="post-item">
+            <a onclick="navigate('${post.slug}'); return false;" class="post-title">${post.title}</a>
+            <span class="post-date">${post.date.slice(0,10)}</span>
+        </li>`;
+    }
+
+    html += '</ul>';
+    document.getElementById('content').innerHTML = html;
+
+    let phtml = '';
+    if (currentPage > 1) phtml += `<button onclick="renderPage(${currentPage-1})">&laquo; Previous</button>`;
+    phtml += `<span>Page ${currentPage} / ${totalPages}</span>`;
+    if (currentPage < totalPages) phtml += `<button onclick="renderPage(${currentPage+1})">Next &raquo;</button>`;
+    document.getElementById('pagination').innerHTML = phtml;
+}
+
+async function renderPost(slug) {
+    const postMeta = allPosts.find(p => p.slug === slug);
+    if (!postMeta) { renderPage(totalPages); return; }
+
+    const posts = await fetch(`/data/${postMeta.page}.json`).then(r => r.json());
+    const post = posts.find(p => p.slug === slug);
+
+    document.getElementById('content').innerHTML = `
+        <h1>${post.title}</h1>
+        <p style="color:#718096; font-size:0.9rem;">${post.date.slice(0,10)}</p>
+        ${post.content}
+    `;
+    document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
+}
+
+function navigate(slug) {
+    const url = '/' + slug;
+    history.pushState(null, '', url);
+    handleRoute();
+}
+</script>
+</body>
+</html>'''
+
+    with open(BASE_DIR / "index.html", "w", encoding="utf-8") as f:
+        f.write(html)
 
 
 def sync(max_posts=None):
@@ -231,6 +392,7 @@ def sync(max_posts=None):
     print(f"Rendering index pages...")
     all_posts = sorted(processed_posts.values(), key=lambda x: x["date"], reverse=True)
     render_index(all_posts)
+    generate_sitemap(all_posts)
 
     if max_posts is None:
         state["last_id"] = max_id
