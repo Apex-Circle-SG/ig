@@ -135,7 +135,7 @@ def save_post(post, categories, executor):
     else:
         cat_path = ["uncategorized"]
 
-    filename = f"{date[:10]}-{slug}.md"
+    filename = f"{slug}.md"
 
     path = os.path.join(POST_DIR, filename)
 
