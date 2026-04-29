@@ -22,15 +22,9 @@ collections:
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
-  - jekyll-paginate-v2
+  - jekyll-paginate
 
-pagination:
-  enabled: true
-  per_page: 100
-  permalink: '/page/:num/'
-  title: ':title - Page :num'
-  limit: 0
-  sort_field: 'date'
-  sort_reverse: true
+paginate: 100
+paginate_path: "/page/:num/"
 
 
