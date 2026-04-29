@@ -72,7 +72,7 @@ layout: default
 </div>
 
 <ul class="post-list">
-{% for post in site.posts %}
+{% for post in site.posts reversed %}
   <li class="post-item">
     <a href="{{ post.url | relative_url }}" class="post-title">{{ post.title }}</a>
     <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
