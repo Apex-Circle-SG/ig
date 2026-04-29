@@ -2,6 +2,8 @@
 layout: default
 pagination: 
   enabled: true
+  collection: posts
+  future: true
 ---
 
 <style>
