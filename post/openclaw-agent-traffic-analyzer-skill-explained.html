@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenClaw Agent Traffic Analyzer Skill Explained</title>
+    <meta name="description" content="The Agent Traffic Analyzer skill helps analyze communication patterns between OpenClaw agents, identify bottlenecks, and optimize workflows through detailed vis">
+    <meta property="og:title" content="OpenClaw Agent Traffic Analyzer Skill Explained">
+    <meta property="og:description" content="The Agent Traffic Analyzer skill helps analyze communication patterns between OpenClaw agents, identify bottlenecks, and optimize workflows through detailed vis">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/openclaw-agent-traffic-analyzer-skill-explained">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8917">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8917">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/openclaw-agent-traffic-analyzer-skill-explained">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>OpenClaw Agent Traffic Analyzer Skill Explained</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <h2>What is the Agent Traffic Analyzer Skill?</h2>
+<p>The Agent Traffic Analyzer is an OpenClaw skill designed to monitor, analyze, and optimize how agents communicate with each other. It provides insights into communication patterns, identifies inefficiencies, and suggests improvements to enhance overall agent workflow performance.</p>
+<h2>Key Features and Capabilities</h2>
+<p>The skill offers comprehensive analysis tools for understanding agent interactions:</p>
+<ul>
+<li><strong>Communication Pattern Analysis</strong> &#8211; Extracts and analyzes message flow patterns between agents</li>
+<li><strong>Network Visualization</strong> &#8211; Generates visual representations of communication networks and traffic volumes</li>
+<li><strong>Bottleneck Detection</strong> &#8211; Identifies inefficiencies and potential bottlenecks in agent interactions</li>
+<li><strong>Optimization Suggestions</strong> &#8211; Provides actionable recommendations for improving agent coordination</li>
+<li><strong>Historical Comparison</strong> &#8211; Tracks and compares communication patterns over time</li>
+</ul>
+<h2>Installation and Setup</h2>
+<p>The skill can be easily installed using npm:</p>
+<pre><code>npm install
+</code></pre>
+<h2>Usage Examples</h2>
+<p>Once installed, the Agent Traffic Analyzer offers several command-line options for different analysis needs:</p>
+<h3>Basic Analysis</h3>
+<pre><code># Analyze a communication log file
+agent-traffic-analyzer analyze &lt;logfile.json&gt;
+</code></pre>
+<h3>Visualization</h3>
+<pre><code># Generate a network visualization
+agent-traffic-analyzer visualize &lt;logfile.json&gt; --format dot
+</code></pre>
+<h3>Comprehensive Reporting</h3>
+<pre><code># Generate a full report
+agent-traffic-analyzer report &lt;logfile.json&gt; --output report.json
+</code></pre>
+<h3>Quick Insights</h3>
+<pre><code># Show summary statistics
+agent-traffic-analyzer summary &lt;logfile.json&gt;
+
+# Find bottlenecks
+agent-traffic-analyzer bottlenecks &lt;logfile.json&gt;
+</code></pre>
+<h2>Input Format</h2>
+<p>The tool expects JSON files containing an array of agent communication messages with the following structure:</p>
+<pre><code>[
+  {
+    "id": "msg-001",
+    "from": "agent-alpha",
+    "to": "agent-beta",
+    "timestamp": "2026-01-15T10:30:00Z",
+    "type": "request",
+    "payload_size": 1024,
+    "latency_ms": 45,
+    "status": "delivered"
+  }
+]
+</code></pre>
+<h2>Output Formats</h2>
+<p>The skill supports multiple output formats to suit different analysis needs:</p>
+<ul>
+<li><strong>JSON</strong> &#8211; Structured analysis results for programmatic use</li>
+<li><strong>CSV</strong> &#8211; Tabular data compatible with spreadsheet applications</li>
+<li><strong>DOT</strong> &#8211; Graphviz network graph definition for visualization tools</li>
+</ul>
+<h2>Practical Applications</h2>
+<p>This skill is particularly useful for:</p>
+<ul>
+<li><strong>Performance Optimization</strong> &#8211; Identifying and resolving communication bottlenecks</li>
+<li><strong>Workflow Analysis</strong> &#8211; Understanding how agents interact and coordinate</li>
+<li><strong>Capacity Planning</strong> &#8211; Determining if agent infrastructure needs scaling</li>
+<li><strong>Quality Assurance</strong> &#8211; Ensuring reliable agent-to-agent communication</li>
+</ul>
+<h2>Version and Compatibility</h2>
+<p>The current version of the Agent Traffic Analyzer skill is 1.0.0, offering stable functionality for production environments. It integrates seamlessly with other OpenClaw tools and services.</p>
+<h2>Conclusion</h2>
+<p>The Agent Traffic Analyzer skill is an essential tool for anyone working with OpenClaw agent systems. By providing deep insights into communication patterns and performance bottlenecks, it enables teams to optimize their agent workflows and improve overall system efficiency.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/martinforsulu/neo-agent-traffic-analyzer/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/martinforsulu/neo-agent-traffic-analyzer/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

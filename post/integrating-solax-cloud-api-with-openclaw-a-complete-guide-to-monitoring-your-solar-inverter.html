@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Integrating Solax Cloud API with OpenClaw: A Complete Guide to Monitoring Your Solar Inverter</title>
+    <meta name="description" content="Learn how to use the OpenClaw solax-summary-fetch skill to pull real-time solar inverter data from Solax Cloud for custom automation and dashboards.">
+    <meta property="og:title" content="Integrating Solax Cloud API with OpenClaw: A Complete Guide to Monitoring Your Solar Inverter">
+    <meta property="og:description" content="Learn how to use the OpenClaw solax-summary-fetch skill to pull real-time solar inverter data from Solax Cloud for custom automation and dashboards.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/integrating-solax-cloud-api-with-openclaw-a-complete-guide-to-monitoring-your-solar-inverter">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9264">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9264">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/integrating-solax-cloud-api-with-openclaw-a-complete-guide-to-monitoring-your-solar-inverter">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Integrating Solax Cloud API with OpenClaw: A Complete Guide to Monitoring Your Solar Inverter</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-18</p>
+    <h2>Introduction to OpenClaw and Solax Integration</h2>
+<p>In the rapidly evolving world of smart energy management, the ability to centralize data from your hardware is paramount. For solar energy enthusiasts running Solax inverters, bridging the gap between proprietary cloud platforms and personalized automation dashboards can often be a challenge. Enter the OpenClaw framework—a powerful, modular environment designed to streamline exactly these types of integrations. Specifically, the <code>solax-summary-fetch</code> skill provides a standardized, secure way to interface with the Solax Cloud API, unlocking the potential to bring your energy data into local automations, Grafana dashboards, or custom home control scripts.</p>
+<h2>Understanding the solax-summary-fetch Skill</h2>
+<p>The <code>solax-summary-fetch</code> skill is designed to act as an abstraction layer. Instead of requiring you to write custom network request logic every time you want to poll your inverter, this OpenClaw skill encapsulates the necessary dependencies—specifically the <code>solax-cloud-api</code> npm package—to fetch, process, and return data in a consistent JSON format. It is intended for scenarios where you have a <code>tokenId</code> and an inverter serial number (<code>sn</code>) and require current, accurate energy metrics in a machine-readable format.</p>
+<h3>How It Works Under the Hood</h3>
+<p>At its core, this skill leverages version 0.2.0 of the <code>solax-cloud-api</code> library. When triggered, the script performs a sequence of operations: it authenticates via the API token, fetches raw data using the <code>getAPIData()</code> method, and then passes this through the <code>SolaxCloudAPI.toSummary()</code> converter. The result is a clean, typed <code>SolaxSummary</code> JSON object output to stdout. This makes it incredibly easy to pipe the output into other command-line tools or integrate it directly into more complex OpenClaw workflows.</p>
+<h2>Setting Up Your Environment</h2>
+<p>To ensure security and reliability, the setup process follows best practices for credential management. It is important to note that this skill requires Node.js. Because the package does not ship with a lockfile, you will perform a standard <code>npm install</code> within the skill directory located at <code>/home/openclaw/.openclaw/workspace/skills/solax-summary-fetch/scripts</code>. This installs the necessary library dependencies locally, ensuring that your environment is self-contained and version-controlled.</p>
+<h3>Managing Credentials Securely</h3>
+<p>Security is a critical aspect of this integration. The skill requires two pieces of information: the Solax Cloud <code>tokenId</code> and the inverter <code>sn</code>. It is strongly recommended—and effectively required for production-grade setups—to use environment variables (<code>SOLAX_TOKENID</code> and <code>SOLAX_SN</code>). Storing these in your environment prevents the leakage of sensitive credentials into your command-line history or code repositories. Never hardcode these values directly into the script files.</p>
+<h2>Execution and Usage</h2>
+<p>Once configured, executing the skill is straightforward. While you can pass arguments via the CLI (e.g., <code>--tokenId <token> --sn <serial></code>), using environment variables is the preferred method for automated tasks. The execution command points to the <code>fetch_summary.mjs</code> script. This script handles the heavy lifting, ensuring that the API interactions are correctly formatted and that error handling is applied.</p>
+<p>A critical feature of this implementation is its robust error handling. In the event of a network timeout, an authentication failure, or an API error, the script does not simply crash or print messy stack traces. Instead, it returns a structured JSON object with an <code>ok: false</code> property and a human-readable <code>error</code> message. This allows downstream automation tools to gracefully handle outages rather than causing system-wide failures.</p>
+<h2>Why Use OpenClaw for Solar Monitoring?</h2>
+<p>The beauty of the <code>solax-summary-fetch</code> skill lies in its modularity. Because it follows a standard output format (the <code>SolaxSummary</code> interface), it is interoperable with any other tool in your ecosystem that can consume JSON. Imagine linking this skill to a home automation platform that tracks your battery state of charge (SoC) and automatically triggers high-load appliances when solar production exceeds a certain threshold. By utilizing OpenClaw, you remove the complexity of API endpoint management and focus on the business logic of your energy strategy.</p>
+<h3>Data Consistency and Transparency</h3>
+<p>The interface contract, defined in <code>references/solax-summary.d.ts</code>, ensures that the data you receive is consistent every time you call the script. This eliminates the risk of &#8220;field drifting,&#8221; where API changes might otherwise break your dashboard calculations. As long as the <code>solax-cloud-api</code> package maintains the <code>SolaxSummary</code> contract, your automations will remain stable. Furthermore, the skill&#8217;s strict guardrails regarding log privacy—specifically, the instruction to never log the <code>tokenId</code>—ensure that even when debugging, your sensitive API credentials remain private.</p>
+<h2>Conclusion</h2>
+<p>Integrating your Solax inverter into a wider home automation ecosystem is an excellent way to maximize self-consumption and monitor efficiency. The OpenClaw <code>solax-summary-fetch</code> skill provides a secure, reliable, and standardized path to achieving this. By adhering to the recommended environment variable setup and utilizing the structured JSON outputs, you can build a robust energy monitoring solution that is both easy to maintain and highly effective. Whether you are a seasoned developer building complex dashboards or a home automation enthusiast looking to get more value out of your solar hardware, this skill is a fundamental building block for your project. Remember to always keep your dependencies updated and respect your API rate limits to ensure long-term, trouble-free operation of your solar data pipeline.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/allmightysauron/solax-cloud-api/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/allmightysauron/solax-cloud-api/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seedance 2.0 API Skill: Complete Guide to AI Video Generation</title>
+    <meta name="description" content="Learn how to use the Seedance 2.0 API skill for end-to-end AI video creation, from storyboard development to final video output with MCP and script modes.">
+    <meta property="og:title" content="Seedance 2.0 API Skill: Complete Guide to AI Video Generation">
+    <meta property="og:description" content="Learn how to use the Seedance 2.0 API skill for end-to-end AI video creation, from storyboard development to final video output with MCP and script modes.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/seedance-2-0-api-skill-complete-guide-to-ai-video-generation">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8644">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8644">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/seedance-2-0-api-skill-complete-guide-to-ai-video-generation">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Seedance 2.0 API Skill: Complete Guide to AI Video Generation</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-11</p>
+    <h2>What is the Seedance 2.0 API Skill?</h2>
+<p>The Seedance 2.0 API skill is an open-source workflow tool that enables end-to-end AI video generation. It builds storyboards, generates reference images using Seedream 4.5, submits video tasks, and polls results automatically. This skill supports both MCP (Model Context Protocol) and standalone Python script execution modes, making it versatile for different development environments.</p>
+<h2>Key Features</h2>
+<ul>
+<li>End-to-end workflow from concept to final video</li>
+<li>Storyboard creation with 5-dimensional deep dive</li>
+<li>Reference image generation using Seedream 4.5</li>
+<li>Two generation modes: Omni Reference and First &#038; Last Frames</li>
+<li>Support for MCP and standalone Python script execution</li>
+<li>Asset management for images, videos, and audio</li>
+</ul>
+<h2>Prerequisites</h2>
+<p>Before using this skill, ensure you have:</p>
+<ul>
+<li>Python 3.8 or higher</li>
+<li>requests library installed</li>
+<li>XSKILL_API_KEY environment variable set</li>
+<li>Cursor, Claude Code, or any SKILL.md-compatible agent</li>
+</ul>
+<h2>Execution Modes: MCP vs Script</h2>
+<h3>Step 0: Determine Execution Mode</h3>
+<p>The skill automatically detects whether to use MCP or script mode:</p>
+<ol>
+<li>Check MCP availability by reading <code>mcps/user-xskill-ai/STATUS.md</code></li>
+<li>If MCP is available, use <code>submit_task</code> and <code>get_task</code> tools</li>
+<li>If MCP is unavailable, switch to script mode</li>
+</ol>
+<h3>Script Mode Setup</h3>
+<p>If using script mode, verify:</p>
+<ul>
+<li>XSKILL_API_KEY is set: <code>echo $XSKILL_API_KEY | head -c 10</code></li>
+<li>requests library is installed: <code>pip install requests</code></li>
+<li>Script location: <code>.cursor/skills/seedance2-api/scripts/seedance_api.py</code></li>
+</ul>
+<h2>Step-by-Step Workflow</h2>
+<h3>Step 1: Understand the User&#8217;s Idea</h3>
+<p>Collect essential information:</p>
+<ul>
+<li>Story concept: one-sentence summary</li>
+<li>Duration: 4-15 seconds</li>
+<li>Aspect ratio: 16:9, 9:16, 1:1, 21:9, 4:3, or 3:4</li>
+<li>Visual style: realistic, animation, ink wash, sci-fi, cyberpunk, etc.</li>
+<li>Assets: existing images/videos/audio or need AI generation</li>
+<li>Function mode: first_last_frames or omni_reference</li>
+</ul>
+<h3>Step 2: Deep Dive Analysis</h3>
+<p>Guide users through 5 dimensions for richer detail:</p>
+<ul>
+<li>Content: Who, what, where</li>
+<li>Visuals: Lighting, color palette, texture, mood</li>
+<li>Camera: Push in, pull out, pan, tilt, track, orbit, crane</li>
+<li>Motion: Subject actions and pacing</li>
+<li>Audio: Music style, sound effects, dialogue</li>
+</ul>
+<h3>Step 3: Build Storyboard Structure</h3>
+<p>Use this formula to structure your storyboard:</p>
+<pre><code>[Style] _____ style, _____ seconds, _____ ratio, _____ mood
+0-Xs: [Camera movement] + [Visual content] + [Action description]
+X-Ys: [Camera movement] + [Visual content] + [Action description]
+...
+[Audio] _____ music + _____ SFX + _____ dialogue
+[References] @image_file_1 _____, @video_file_1 _____</code></pre>
+<h3>Step 4: Generate Reference Images</h3>
+<p>Generate images using Seedream 4.5 if needed:</p>
+<h4>Text-to-Image Generation</h4>
+<pre><code>MCP Method:
+submit_task with model_id: fal-ai/bytedance/seedream/v4.5/text-to-image
+Script Method:
+python seedance_api.py submit --model "fal-ai/bytedance/seedream/v4.5/text-to-image" --params '{"prompt":"...", "image_size":"landscape_16_9", "num_images":1}'</code></pre>
+<h4>Image Editing</h4>
+<pre><code>MCP Method:
+submit_task with model_id: fal-ai/bytedance/seedream/v4.5/edit
+Script Method:
+python seedance_api.py submit --model "fal-ai/bytedance/seedream/v4.5/edit" --params '{"prompt":"...", "image_urls":[...], "image_size":"landscape_16_9"}'</code></pre>
+<h4>Poll Image Results</h4>
+<pre><code>MCP Method:
+get_task tool, first query after 30s, then every 30s
+Script Method:
+python seedance_api.py poll --task-id "TASK_ID" --interval 10 --timeout 180</code></pre>
+<h3>Step 5: Compose Final Prompt</h3>
+<p>Merge storyboard and references using @image_file_N, @video_file_N, @audio_file_N syntax:</p>
+<pre><code>@image_file_1 as character reference, follow @video_file_1 camera movement, with @audio_file_1 as background music</code></pre>
+<h3>Step 6: Submit Video Task</h3>
+<h4>Upload Local Images</h4>
+<pre><code>MCP Method:
+upload_image tool
+Script Method:
+python seedance_api.py upload --image-url "https://..." or --image-path "/path/to/image.png"</code></pre>
+<h4>Submit Seedance 2.0 Task</h4>
+<pre><code>MCP Method:
+submit_task with model_id: st-ai/super-seed2
+Script Method:
+python seedance_api.py submit --model "st-ai/super-seed2" --params '{"prompt":"...", "functionMode":"omni_reference", "image_files":[...], "ratio":"16:9", "duration":15, "model":"seedance_2.0_fast"}'</code></pre>
+<h2>Aspect Ratio Reference</h2>
+<table>
+<tr>
+<th>Aspect Ratio</th>
+<th>Recommended image_size</th>
+<th>Note</th>
+</tr>
+<tr>
+<td>16:9</td>
+<td>landscape_16_9</td>
+<td>Landscape</td>
+</tr>
+<tr>
+<td>9:16</td>
+<td>portrait_16_9</td>
+<td>Portrait</td>
+</tr>
+<tr>
+<td>4:3</td>
+<td>landscape_4_3</td>
+<td>Landscape</td>
+</tr>
+<tr>
+<td>3:4</td>
+<td>portrait_4_3</td>
+<td>Portrait</td>
+</tr>
+<tr>
+<td>1:1</td>
+<td>square_hd</td>
+<td>Square</td>
+</tr>
+<tr>
+<td>21:9</td>
+<td>landscape_16_9</td>
+<td>Approximate ultrawide</td>
+</tr>
+</table>
+<h2>Function Modes</h2>
+<h3>Omni Reference Mode</h3>
+<p>Default mode that uses multiple reference images for context. Parameters include:</p>
+<ul>
+<li>prompt: Full video description</li>
+<li>functionMode: omni_reference</li>
+<li>image_files: Up to 9 reference images</li>
+<li>video_files: Up to 3 reference videos (≤15s total)</li>
+<li>audio_files: Up to 3 reference audio clips</li>
+<li>ratio: Aspect ratio</li>
+<li>duration: Video length (4-15 seconds)</li>
+<li>model: seedance_2.0_fast or seedance_2.0</li>
+</ul>
+<h3>First &#038; Last Frames Mode</h3>
+<p>Mode that controls only the first and last frames:</p>
+<ul>
+<li>prompt: Video description</li>
+<li>functionMode: first_last_frames</li>
+<li>filePaths: Array of image URLs (0 = text-to-video)</li>
+</ul>
+<h2>Getting Started</h2>
+<ol>
+<li>Set up your API key: <code>export XSKILL_API_KEY=sk-your-api-key</code></li>
+<li>Install dependencies: <code>pip install requests</code></li>
+<li>Choose your execution mode (MCP or script)</li>
+<li>Follow the 6-step workflow above</li>
+</ol>
+<h2>Support and Resources</h2>
+<p>Get your API key at: <a href="https://www.xskill.ai/#/v2/api-keys">https://www.xskill.ai/#/v2/api-keys</a></p>
+<p>Documentation and examples available in the skill&#8217;s reference.md file.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/tony6830377-arch/seedance2-api/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/tony6830377-arch/seedance2-api/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

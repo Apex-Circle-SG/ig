@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Anima Avatar &#8211; Interactive Video Generation Engine</title>
+    <meta name="description" content="Anima Avatar generates high-quality interactive videos with dynamic character sprites, synced audio, and text overlay using advanced AI tools.">
+    <meta property="og:title" content="Anima Avatar &#8211; Interactive Video Generation Engine">
+    <meta property="og:description" content="Anima Avatar generates high-quality interactive videos with dynamic character sprites, synced audio, and text overlay using advanced AI tools.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/anima-avatar-interactive-video-generation-engine">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8366">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8366">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/anima-avatar-interactive-video-generation-engine">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Anima Avatar &#8211; Interactive Video Generation Engine</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-08</p>
+    <h2>Anima Avatar &#8211; Interactive Video Generation Engine</h2>
+<p>Anima Avatar is a sophisticated interactive video generation engine that creates dynamic, high-quality videos featuring a character named Shutiao. This system combines advanced text-to-speech, AI-powered image generation, and professional video composition to produce engaging video content with synchronized audio and expressive character animations.</p>
+<h3>Core Capabilities</h3>
+<p>The Anima Avatar system offers several powerful features that make it stand out as a video generation solution:</p>
+<ul>
+<li><strong>True Voice</strong>: Utilizes Fish Audio API for realistic speech synthesis that brings text to life with natural-sounding voices</li>
+<li><strong>Dynamic Sprites</strong>: Automatically selects from a library of over 30 sprites representing different emotions and actions</li>
+<li><strong>Smart Director</strong>: Manages parallel rendering, audio synchronization, and video composition using FFmpeg</li>
+<li><strong>Pro Delivery</strong>: Uploads generated videos as native streams to Feishu for direct playback with accurate duration</li>
+</ul>
+<h3>System Architecture</h3>
+<p>The engine is built with a modular structure that separates concerns and enables efficient processing:</p>
+<ul>
+<li><strong>src/director.js</strong>: The core engine that generates frames, audio, and final video composition</li>
+<li><strong>src/send_video_pro.js</strong>: Handles transcoding, duration calculation, and Feishu upload</li>
+<li><strong>src/batch_generator.js</strong>: Creates sprite variants using Gemini image generation</li>
+<li><strong>assets/sprites/</strong>: Library of 1920&#215;1080 PNG sprite files</li>
+<li><strong>assets/production_plan.csv</strong>: Asset registry with 25 predefined sprites</li>
+<li><strong>assets/manifest.json</strong>: Sprite metadata reference</li>
+<li><strong>output/</strong>: Directory for generated videos</li>
+</ul>
+<h3>Getting Started Guide</h3>
+<p>Setting up Anima Avatar requires several steps to prepare your custom character and background assets. Here&#8217;s a comprehensive guide to get you started:</p>
+<h4>Step 1: Prepare Your Character Image</h4>
+<p>You&#8217;ll need a standalone character illustration with a transparent background in PNG format. This character will serve as the foundation for all generated sprites. The image should be at least 1920&#215;1080 resolution, and a full-body illustration works best for creating dynamic animations.</p>
+<h4>Step 2: Prepare Your Background Image</h4>
+<p>Choose a background scene that will appear behind your character in every video frame. This could be a cherry blossom garden, classroom, city street, or any environment that fits your content. The background should also be at least 1920&#215;1080 resolution.</p>
+<h4>Step 3: Fuse Character and Background</h4>
+<p>This crucial step merges your character onto the background using Gemini AI image generation. The AI creates a natural-looking composite that handles lighting, shadows, and blending automatically. You can use either:</p>
+<ul>
+<li><strong>Method A (Recommended)</strong>: Use Gemini directly with your background image as input, character image as reference, and a prompt describing the desired composition</li>
+<li><strong>Method B</strong>: Use the built-in compose script for a simple mechanical overlay</li>
+</ul>
+<p>Save the output as <code>assets/sprites/shutiao_base.png</code>.</p>
+<h4>Step 4: Plan Sprite Variants</h4>
+<p>Open <code>assets/production_plan.csv</code> and customize it according to your needs. The CSV file contains columns for ID, Emotion, Variant, Description, Filename, Prompt, and Status. You can add, remove, or modify rows to create the exact sprite library you need.</p>
+<h4>Step 5: Generate Sprite Variants</h4>
+<p>This step uses Gemini AI to create expression variants. For each pending row in your CSV, the system sends your base sprite plus the prompt to Gemini, asking it to change only the expression or pose while keeping everything else identical. The process includes:</p>
+<ul>
+<li>Reading the production plan CSV</li>
+<li>Finding all rows with Status=Pending</li>
+<li>Generating images through the Gemini API</li>
+<li>Saving PNG files to the sprites directory</li>
+<li>Updating CSV status to Done</li>
+<li>Waiting 10 seconds between generations to respect API rate limits</li>
+</ul>
+<h4>Step 6: Verify and Test</h4>
+<p>After generation, verify that all sprites exist and run a quick test using the preview command. This ensures everything works correctly before creating full videos.</p>
+<h3>Technical Requirements</h3>
+<p>The system has specific dependencies and requirements:</p>
+<h4>System Dependencies</h4>
+<p>FFmpeg is required for video processing. Installation varies by platform:</p>
+<ul>
+<li>macOS: <code>brew install ffmpeg</code></li>
+<li>Linux: <code>sudo apt install ffmpeg</code></li>
+<li>Windows: Download and install FFmpeg, then add to PATH</li>
+</ul>
+<h4>Node Dependencies</h4>
+<p>Navigate to the skill folder and install dependencies:</p>
+<pre><code>cd skills/anima
+npm install
+</code></pre>
+<p>The only native dependency is sharp, which ships with prebuilt binaries for all major platforms via N-API. It doesn&#8217;t require recompilation when Node versions change.</p>
+<h4>External Services</h4>
+<p>The system requires API keys for two external services:</p>
+<ol>
+<li><strong>Fish Audio (TTS)</strong>: Generates realistic voice audio from text. Used by src/director.js for the generateAudio() function. Get a key from https://fish.audio/dashboard/api and set FISH_AUDIO_KEY and FISH_AUDIO_REF_ID environment variables.</li>
+<li><strong>Gemini API (Image Generation)</strong>: Generates sprite variants using Google Gemini. Used by src/batch_generator.js. Set GEMINI_API_KEY in your environment.</li>
+</ol>
+<h3>Usage and Customization</h3>
+<p>Once set up, Anima Avatar provides flexible options for creating interactive videos. You can customize scripts, add new emotions, adjust timing, and integrate the system into larger applications. The modular design makes it easy to extend functionality or modify the generation pipeline.</p>
+<p>The system is particularly well-suited for educational content, interactive storytelling, virtual presentations, and any application where a dynamic, expressive character can enhance engagement and communication.</p>
+<h3>Sprite Library Management</h3>
+<p>The sprite system uses a CSV-based approach to manage variants. Each sprite is categorized by emotion (Happy, Angry, Shy, Think, Sad, Action, Base) and can have multiple variants. The system automatically selects appropriate sprites based on emotion tags in your script, creating a seamless viewing experience where the character&#8217;s expressions match the content.</p>
+<p>The default library includes 25 sprites covering common emotions and actions, but you can expand this collection as needed by adding new rows to the CSV and generating corresponding images.</p>
+<h3>Audio Integration</h3>
+<p>Fish Audio provides high-quality text-to-speech synthesis that integrates seamlessly with the video generation pipeline. The system automatically synchronizes audio with visual elements, ensuring that mouth movements, expressions, and gestures match the spoken content. Multiple voice models are supported, allowing you to choose the perfect voice for your character.</p>
+<h3>Video Composition</h3>
+<p>The Smart Director component handles all aspects of video composition using FFmpeg. It manages parallel rendering of frames, audio synchronization, text overlay, and final video assembly. The system produces professional-quality 16:9 videos suitable for various platforms and use cases.</p>
+<p>Whether you&#8217;re creating educational content, interactive presentations, or entertainment videos, Anima Avatar provides a powerful, flexible solution for bringing your characters to life through dynamic, engaging video content.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/hmyaoyuan/anima/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/hmyaoyuan/anima/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to Send Native iMessage Voice Replies with OpenClaw</title>
+    <meta name="description" content="Learn how to generate and send native iMessage voice messages using local Kokoro TTS with OpenClaw&#8217;s iMessage Voice Reply skill.">
+    <meta property="og:title" content="How to Send Native iMessage Voice Replies with OpenClaw">
+    <meta property="og:description" content="Learn how to generate and send native iMessage voice messages using local Kokoro TTS with OpenClaw&#8217;s iMessage Voice Reply skill.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/how-to-send-native-imessage-voice-replies-with-openclaw">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8951">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8951">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/how-to-send-native-imessage-voice-replies-with-openclaw">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>How to Send Native iMessage Voice Replies with OpenClaw</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <h2>What This Skill Does</h2>
+<p>The iMessage Voice Reply skill enables you to send native iMessage voice messages using local Kokoro TTS. Voice messages appear as inline playable bubbles with waveforms—identical to voice messages recorded directly in Messages.app. This skill is perfect for voice-to-voice iMessage conversations or when you want to send audio responses.</p>
+<h2>Key Features</h2>
+<ul>
+<li>Generates native iMessage voice bubbles (CAF/Opus format) that play inline with waveforms</li>
+<li>Zero cost—all TTS processing runs locally on your device</li>
+<li>Requires BlueBubbles channel configured in OpenClaw</li>
+<li>Supports multiple voices and languages</li>
+</ul>
+<h2>How It Works</h2>
+<p>Your text response → Kokoro TTS (local) → afconvert (native Apple encoder) → CAF/Opus → BlueBubbles → iMessage voice bubble</p>
+<h2>Setup</h2>
+<p>Run the setup script to install dependencies and download Kokoro models:</p>
+<pre><code>bash ${baseDir}/scripts/setup.sh
+</code></pre>
+<p>This installs kokoro-onnx, soundfile, numpy, and downloads Kokoro models (~136MB) to ~/.cache/kokoro-onnx/.</p>
+<h2>Generating and Sending a Voice Reply</h2>
+<h3>Step 1: Generate Audio</h3>
+<p>Write your response text to a temp file, then generate the voice reply:</p>
+<pre><code>echo "Your response text here" > /tmp/voice_text.txt
+${baseDir}/.venv/bin/python ${baseDir}/scripts/generate_voice_reply.py --text-file /tmp/voice_text.txt --output /tmp/voice_reply.caf
+</code></pre>
+<p>Alternatively, pass text directly:</p>
+<pre><code>${baseDir}/.venv/bin/python ${baseDir}/scripts/generate_voice_reply.py --text "Your response text here" --output /tmp/voice_reply.caf
+</code></pre>
+<p>Available options:<br />
+&#8211; <code>--voice af_heart</code> — Kokoro voice (default: af_heart)<br />
+&#8211; <code>--speed 1.15</code> — Playback speed (default: 1.15)<br />
+&#8211; <code>--lang en-us</code> — Language code (default: en-us)</p>
+<h3>Step 2: Send via BlueBubbles</h3>
+<p>Use the message tool with these critical parameters for native voice bubble rendering:</p>
+<pre><code>{
+  "action": "sendAttachment",
+  "channel": "bluebubbles",
+  "target": "+1XXXXXXXXXX",
+  "path": "/tmp/voice_reply.caf",
+  "filename": "Audio Message.caf",
+  "contentType": "audio/x-caf",
+  "asVoice": true
+}
+</code></pre>
+<p>All three parameters are required:<br />
+&#8211; <code>filename="Audio Message.caf"</code><br />
+&#8211; <code>contentType="audio/x-caf"</code><br />
+&#8211; <code>asVoice=true</code></p>
+<h2>Voice Options</h2>
+<p>Available voices by language:</p>
+<table>
+<thead>
+<tr>
+<th>Language</th>
+<th>Female</th>
+<th>Male</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>English</td>
+<td>af_heart ⭐</td>
+<td>am_puck</td>
+</tr>
+<tr>
+<td>Spanish</td>
+<td>ef_dora</td>
+<td>em_alex</td>
+</tr>
+<tr>
+<td>French</td>
+<td>ff_siwis</td>
+<td></td>
+</tr>
+<tr>
+<td>Japanese</td>
+<td>jf_alpha</td>
+<td>jm_beta</td>
+</tr>
+<tr>
+<td>Chinese</td>
+<td>zf_xiaobei</td>
+<td>zm_yunjian</td>
+</tr>
+</tbody>
+</table>
+<h2>When to Use Voice Replies</h2>
+<p>Reply with a voice message when:</p>
+<ul>
+<li>The user sent you a voice message (voice-for-voice)</li>
+<li>The user explicitly asks for an audio/voice response</li>
+</ul>
+<p>Always include a text reply alongside the voice message for accessibility.</p>
+<h2>Audio Format</h2>
+<p>On macOS: CAF container, Opus codec, 48kHz mono, 32kbps—encoded by Apple&#8217;s native afconvert. Identical to what Messages.app produces.</p>
+<p>Fallback: MP3 via ffmpeg (works but may not render as native voice bubble on all iMessage versions).</p>
+<h2>Cost</h2>
+<p>$0. Kokoro TTS runs entirely locally. No API calls for voice generation.</p>
+<h2>Troubleshooting</h2>
+<p>Voice message shows as file attachment — Ensure all three parameters are set: filename=&#8221;Audio Message.caf&#8221;, contentType=&#8221;audio/x-caf&#8221;, asVoice=true.</p>
+<p>First word clipped — The script prepends 150ms silence automatically. If still clipped, increase the silence pad in the script.</p>
+<p>Kokoro model not found — Run bash ${baseDir}/scripts/setup.sh.</p>
+<p>afconvert not found — Only available on macOS. Script falls back to ffmpeg/MP3 on Linux.</p>
+<h2>Security Note</h2>
+<p>The Python script uses argparse and subprocess.run with list arguments (no shell=True). Input is handled safely within the script. When calling from a shell, prefer &#8211;text-file for untrusted input to avoid shell metacharacter issues.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bolander72/imessage-voice-reply/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bolander72/imessage-voice-reply/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

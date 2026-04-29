@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A Guide to OpenClaw&#8217;s Platform-API-Connector Skill: Simplifying Social Media API Authentications</title>
+    <meta name="description" content="Learn how OpenClaw&#8217;s Platform-API-Connector Skill streamlines the process of setting up API access for major social media platforms.">
+    <meta property="og:title" content="A Guide to OpenClaw&#8217;s Platform-API-Connector Skill: Simplifying Social Media API Authentications">
+    <meta property="og:description" content="Learn how OpenClaw&#8217;s Platform-API-Connector Skill streamlines the process of setting up API access for major social media platforms.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/a-guide-to-openclaws-platform-api-connector-skill-simplifying-social-media-api-authentications">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8831">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8831">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/a-guide-to-openclaws-platform-api-connector-skill-simplifying-social-media-api-authentications">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>A Guide to OpenClaw&#8217;s Platform-API-Connector Skill: Simplifying Social Media API Authentications</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-13</p>
+    <h1><strong>Introduction</strong></h1>
+<p>In today&#8217;s digital landscape, harnessing the power of Application Programming Interfaces (APIs) is vital for effective content management and social media engagement. OpenClaw&#8217;s Platform-API-Connector skill is a game-changer, simplifying the often complex process of obtaining and managing API credentials for major platforms like Facebook, Instagram, YouTube, Twitter/X, and TikTok.</p>
+<h2><strong>Understanding the OpenClaw Platform-API-Connector Skill</strong></h2>
+<p>OpenClaw&#8217;s Platform-API-Connector skill focuses on guiding users through the intricacies of developer portals, app creation, OAuth token acquisition, and credential storage. It significantly reduces the barriers to accessing these APIs, making it an invaluable tool for developers and content managers.</p>
+<h3><strong>General Workflow</strong></h3>
+<p>The skill follows a consistent pattern across platforms:</p>
+<ul>
+<li>Create a developer app in the platform&#8217;s developer portal.</li>
+<li>Configure OAuth redirect URIs and scopes.</li>
+<li>Complete the OAuth flow or generate API keys.</li>
+<li>Store credentials in a structured format.</li>
+<li>Test with a simple API call.</li>
+</ul>
+<h2><strong>Platform-Specific Guidelines</strong></h2>
+<h3><strong>Facebook and Instagram</strong></h3>
+<p>Facebook and Instagram share an authentication system, and one Facebook Page Token unlocks both platforms.</p>
+<h4><strong>Setup Process</strong></h4>
+<ol>
+<li>Go to developers.facebook.com/apps and create a business type app.</li>
+<li>Add the &#8220;Facebook Login&#8221; product.</li>
+<li>In Graph API Explorer, select your app and add necessary permissions like pages_show_list, pages_read_engagement, pages_manage_posts, instagram_basic, and instagram_content_publish.</li>
+<li>Generate a User Access Token and exchange it for a long-lived token.</li>
+<li>Get a Page Access Token and find the Instagram Business Account ID.</li>
+</ol>
+<h4><strong>Storing Credentials</strong></h4>
+<p>Credentials are stored in a JSON format, including platform, app_id, app_secret, page_id, page_access_token, and ig_user_id.</p>
+<h4><strong>Important Note</strong></h4>
+<p>Page Access Tokens derived from long-lived user tokens are permanent and do not expire.</p>
+<h3><strong>YouTube</strong></h3>
+<h4><strong>Setup Process</strong></h4>
+<ol>
+<li>Go to console.cloud.google.com and create an OAuth 2.0 Client ID.</li>
+<li>Add the redirect URI and enable the YouTube Data API v3.</li>
+<li>Run the local OAuth flow to obtain the access token, refresh token, and expiry.</li>
+</ol>
+<h4><strong>Storing Credentials</strong></h4>
+<p>Credentials include platform, client_id, client_secret, access_token, refresh_token, and token_expiry.</p>
+<h4><strong>Important Note</strong></h4>
+<p>If the user previously authorized with limited scopes, you may need to re-authorize with prompt=&#8217;consent&#8217; to get a new refresh token with full scopes.</p>
+<h3><strong>Twitter/X</strong></h3>
+<h4><strong>Setup Process</strong></h4>
+<ol>
+<li>Go to developer.x.com/en/portal/dashboard and create a project and app in the Free tier.</li>
+<li>Under Keys and Tokens, obtain the API Key, Secret, Bearer Token, and Access Token with Read &#038; Write permissions.</li>
+</ol>
+<h4><strong>Storing Credentials</strong></h4>
+<p>Credentials include platform, api_key, api_secret, bearer_token, access_token, and access_token_secret.</p>
+<h4><strong>Important Note</strong></h4>
+<p>The Free tier caps posting at 100 posts per month. Ensure the Access Token has the correct permissions.</p>
+<h3><strong>TikTok</strong></h3>
+<h4><strong>Setup Process</strong></h4>
+<ol>
+<li>Go to developers.tiktok.com and create an app.</li>
+<li>Add products like Login Kit and Content Posting API.</li>
+<li>Configure app settings, including icons, category, ToS, Privacy Policy, and redirect URI.</li>
+<li>Submit for review, which may take days to weeks.</li>
+<li>Use Manual mode for content generation until approved.</li>
+</ol>
+<h4><strong>Important Note</strong></h4>
+<p>TikTok requires a full app review with a demo video, which can take weeks. Login Kit operates in sandbox mode for development purposes.</p>
+<h2><strong>Credential Storage Pattern</strong></h2>
+<p>The Platform-API-Connector skill uses a standard pattern for storing credentials in a database, typically Supabase or any other preferred database. The credential storage table uses a JSONB column for flexibility, accommodating each platform&#8217;s unique authentication framework without needing schema changes.</p>
+<h2><strong>Token Refresh Pattern</strong></h2>
+<p>The skill also includes a function to automatically refresh tokens before they expire, ensuring uninterrupted API access.</p>
+<h2><strong>Conclusion</strong></h2>
+<p>OpenClaw&#8217;s Platform-API-Connector skill is a robust solution designed to streamline and simplify the complex process of API authentication for major social media platforms. By following the outlined guidelines, you can efficiently set up and manage API credentials, saving time and effort while maximizing productivity.</p>
+<p>Ready to simplify your API authentication process? Dive into OpenClaw&#8217;s Platform-API-Connector skill today and unlock the full potential of social media APIs.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/brandonwadepackard-cell/platform-api-connector/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/brandonwadepackard-cell/platform-api-connector/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

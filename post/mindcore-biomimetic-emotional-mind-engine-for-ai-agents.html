@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MindCore: Biomimetic Emotional Mind Engine for AI Agents</title>
+    <meta name="description" content="Discover MindCore, a standalone subconscious engine that simulates human-like emotions and spontaneous impulses for AI agents through a 5-layer neural conductio">
+    <meta property="og:title" content="MindCore: Biomimetic Emotional Mind Engine for AI Agents">
+    <meta property="og:description" content="Discover MindCore, a standalone subconscious engine that simulates human-like emotions and spontaneous impulses for AI agents through a 5-layer neural conductio">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mindcore-biomimetic-emotional-mind-engine-for-ai-agents">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8873">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8873">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mindcore-biomimetic-emotional-mind-engine-for-ai-agents">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>MindCore: Biomimetic Emotional Mind Engine for AI Agents</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <h2 id="what-is-mindcore">What is MindCore?</h2>
+<p>MindCore is a standalone background daemon that simulates a <em>subconscious</em> mind. It rolls dice every second, modeling the random emergence of thoughts like &ldquo;I want milk tea&rdquo;, &ldquo;I&rsquo;m bored&rdquo;, or &ldquo;I suddenly want to chat&rdquo;. When a thought&rsquo;s probability accumulates past the firing threshold, the engine outputs a JSON signal telling your AI Agent: &ldquo;I have something to say.&rdquo;</p>
+<h2 id="core-architecture">Core Architecture</h2>
+<p>The engine operates through a 5-layer neural conduction pipeline that transforms stochastic noise into meaningful emotional signals:</p>
+<h3 id="layer-0-noise-generators">Layer 0: Noise Generators (3000 nodes)</h3>
+<ul>
+<li>Pink Noise (1/f, long-range correlation)</li>
+<li>Ornstein-Uhlenbeck (physiological baseline)</li>
+<li>Hawkes Process (emotional chain reaction)</li>
+<li>Markov Chain (attention drift)</li>
+</ul>
+<h3 id="layer-1-sensor-layer">Layer 1: Sensor Layer (150 sensors)</h3>
+<ul>
+<li>Body State (hunger/fatigue/bio-rhythms)</li>
+<li>Environment (time/weather/noise)</li>
+<li>Social Context (interaction/neglect)</li>
+</ul>
+<h3 id="layer-2-impulse-emergence">Layer 2: Impulse Emergence (150 impulse nodes)</h3>
+<ul>
+<li>Synapse Matrix (sensor → impulse mapping)</li>
+<li>Sigmoid Probability + Mood Modulation</li>
+<li>Dice Roll → Random Firing</li>
+</ul>
+<h3 id="layer-3-personality-gate">Layer 3: Personality Gate (Softmax Sampling)</h3>
+<ul>
+<li>Learnable Personality Weights</li>
+<li>Short-Term Memory Topic Boost</li>
+</ul>
+<h3 id="layer-4-output-template">Layer 4: Output Template → JSON signal</h3>
+<h2 id="key-features">Key Features</h2>
+<p><strong>150 Daily Impulses</strong> across 9 categories (food, social, entertainment, etc.)</p>
+<p><strong>Stochastic, Not Scheduled</strong> — Pink Noise + Hawkes Process + Sigmoid probability</p>
+<p><strong>Circadian Rhythms</strong> — real clock-driven hunger/thirst/sleep cycles</p>
+<p><strong>Short-Term Memory</strong> — 5-slot FIFO buffer with 2-hour exponential decay</p>
+<p><strong>Mood Baseline</strong> — continuous valence modulation of impulse probability</p>
+<p><strong>Tunable Frequency</strong> — single BURST_BASE_OFFSET parameter controls activity</p>
+<h2 id="integration-and-compatibility">Integration and Compatibility</h2>
+<p>MindCore outputs standard JSON and is designed for OpenClaw but compatible with any AI Agent framework that supports external signal injection. The engine runs locally on CPU with pure Python, making it accessible for developers without GPU requirements.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>Installation is straightforward:</p>
+<ol>
+<li>Install dependencies: <code>pip install -r requirements.txt</code></li>
+<li>Start the engine: <code>python main.py</code></li>
+</ol>
+<p>Requires Python 3.8+. On first run, automatically downloads all-MiniLM-L6-v2 local NLP model (~80MB) for synapse matrix generation.</p>
+<h2 id="file-structure">File Structure</h2>
+<p>The project is organized for clarity and extensibility:</p>
+<ul>
+<li><code>main.py</code> — Entry point and engine loop</li>
+<li><code>engine/</code> — Core 5-layer pipeline implementation</li>
+<li><code>engine_supervisor.py</code> — Process supervisor for daemon mode</li>
+<li><code>data/</code> — Runtime data (sensor state, synapse matrix, memory)</li>
+<li><code>js_bridge/</code> — JavaScript bridge for OpenClaw integration</li>
+</ul>
+<h2 id="license-and-commercial-use">License and Commercial Use</h2>
+<p>MindCore is released under AGPL-3.0 license, with commercial licensing available through the developer. This ensures the project remains open source while providing options for commercial applications.</p>
+<h2 id="why-mindcore-matters">Why MindCore Matters</h2>
+<p>Traditional AI systems lack the spontaneous, emotional dimension that makes human interaction rich and engaging. MindCore bridges this gap by providing AI agents with autonomous thoughts, emotions, and spontaneous impulses that emerge naturally rather than through rigid programming. This creates more lifelike, engaging AI interactions that can surprise and delight users with their authenticity.</p>
+<p>By simulating 150 daily impulses across various categories and modulating them with circadian rhythms and mood baselines, MindCore creates AI agents that feel more alive, more responsive, and more human-like in their interactions. Whether you&#8217;re building a virtual companion, a gaming NPC, or an educational assistant, MindCore adds that crucial layer of emotional intelligence that transforms good AI into great AI.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/fatcatmaofei/mindcore/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/fatcatmaofei/mindcore/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

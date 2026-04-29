@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ramadan Times Skill &#8211; Intelligent Islamic Prayer Time Assistant</title>
+    <meta name="description" content="The Ramadan Times skill is an intelligent Islamic prayer time assistant that automatically detects your location and provides accurate iftar and sahur times in ">
+    <meta property="og:title" content="Ramadan Times Skill &#8211; Intelligent Islamic Prayer Time Assistant">
+    <meta property="og:description" content="The Ramadan Times skill is an intelligent Islamic prayer time assistant that automatically detects your location and provides accurate iftar and sahur times in ">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/ramadan-times-skill-intelligent-islamic-prayer-time-assistant">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8968">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8968">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/ramadan-times-skill-intelligent-islamic-prayer-time-assistant">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Ramadan Times Skill &#8211; Intelligent Islamic Prayer Time Assistant</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <h2>Introduction to the Ramadan Times Skill</h2>
+<p>The Ramadan Times skill is a sophisticated Islamic prayer time assistant designed to provide accurate iftar and sahur times for users worldwide. This intelligent skill automatically detects your location, supports multiple languages, and covers over 100 cities globally, making it an essential tool for Muslims observing Ramadan.</p>
+<h2>Core Features and Capabilities</h2>
+<p>The skill offers a comprehensive set of features that make it stand out from basic prayer time applications. Let me walk you through the key capabilities that make this skill so valuable for users.</p>
+<h3>Automatic Location Detection</h3>
+<p>One of the most impressive features of this skill is its ability to automatically detect your location and timezone. The system checks your OpenClaw configuration for timezone information and uses this data to provide accurate prayer times. If no timezone is found, it defaults to Istanbul, ensuring you always get reliable results.</p>
+<h3>Multi-Language Support</h3>
+<p>The skill supports an impressive array of languages, making it accessible to users worldwide. Currently supported languages include Turkish (TR), English (EN), Arabic (AR), German (DE), French (FR), Spanish (ES), and Russian (RU). This multi-language capability ensures that users can interact with the skill in their preferred language.</p>
+<h3>Global City Coverage</h3>
+<p>With support for over 100 cities worldwide, the skill provides comprehensive coverage for major urban centers. From Istanbul, Ankara, and Izmir to London, New York, Los Angeles, Dubai, Cairo, Paris, Berlin, Moscow, and Tokyo, users can get accurate prayer times no matter where they are located.</p>
+<h2>Intelligent Usage and Natural Language Processing</h2>
+<p>The skill is designed to understand natural language queries, making it incredibly user-friendly. You can ask questions in various ways, and the system will understand your intent and provide the appropriate response.</p>
+<h3>Common Usage Examples</h3>
+<p>Users can ask naturally about prayer times using phrases like &#8220;İftar saatleri?&#8221; (What time is iftar?), &#8220;Sahur ne zaman?&#8221; (When is sahur?), or &#8220;Ramazan ne zaman başlıyor?&#8221; (When does Ramadan start?). The skill also understands city-specific queries like &#8220;İstanbul iftar&#8221; or &#8220;London iftar time.&#8221;</p>
+<h3>Advanced Features</h3>
+<p>Beyond basic prayer time queries, the skill offers several advanced features. It can calculate and display the time remaining until iftar, provide weekly schedules, and even send daily reminders. The system can show the entire week&#8217;s schedule upon request, making it easy to plan ahead.</p>
+<h2>Technical Implementation</h2>
+<p>The skill leverages multiple API sources to ensure accuracy and reliability. It primarily uses the sunrise-sunset.org API for sunrise and sunset times, with a prayer times API as a fallback option. In emergency situations, the skill can perform manual calculations to provide accurate results.</p>
+<h3>Data Sources and Reliability</h3>
+<p>The multi-source approach ensures that users always get accurate prayer times, even if one API source becomes unavailable. This redundancy is crucial for maintaining service reliability during the important month of Ramadan.</p>
+<h2>Integration and Automation</h2>
+<p>The skill supports integration with cron jobs, allowing users to set up automated reminders. For example, you can configure a daily reminder that triggers two hours before iftar time, ensuring you never miss the opportunity to break your fast on time.</p>
+<h3>Cron Example</h3>
+<p>A typical cron configuration might look like this: &#8220;0 17 * * * &#8211; &#8216;İftara 2 saat kaldı!&#8217; reminder&#8221; This would send a reminder every day at 5 PM, giving users ample time to prepare for iftar.</p>
+<h2>User Experience and Interface</h2>
+<p>The skill provides a clean, informative response format that includes all the essential information users need. A typical response includes the current date, sahur time, iftar time, and the time remaining until iftar, all presented in a clear, easy-to-read format with appropriate emojis for visual appeal.</p>
+<h3>Response Format Examples</h3>
+<p>For Turkish users, the response might look like this: &#8220;🌙 RAMADAN &#8211; İstanbul</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/xymoxy/ramadan-times/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/xymoxy/ramadan-times/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

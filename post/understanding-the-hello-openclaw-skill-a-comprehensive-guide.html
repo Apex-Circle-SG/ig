@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the Hello OpenCLAW Skill: A Comprehensive Guide</title>
+    <meta name="description" content="The Hello OpenCLAW skill is a fundamental demonstration skill that helps users understand basic OpenCLAW structure while providing friendly greetings. Learn abo">
+    <meta property="og:title" content="Understanding the Hello OpenCLAW Skill: A Comprehensive Guide">
+    <meta property="og:description" content="The Hello OpenCLAW skill is a fundamental demonstration skill that helps users understand basic OpenCLAW structure while providing friendly greetings. Learn abo">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-hello-openclaw-skill-a-comprehensive-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9175">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9175">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-hello-openclaw-skill-a-comprehensive-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the Hello OpenCLAW Skill: A Comprehensive Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <h2>What is the Hello OpenCLAW Skill?</h2>
+<p>The Hello OpenCLAW skill is a fundamental demonstration skill designed to help users understand the basic structure and functionality of OpenCLAW skills. This skill serves as an excellent starting point for developers who are new to the OpenCLAW framework and want to learn how skills are constructed and implemented.</p>
+<h2>Purpose and Functionality</h2>
+<p>The primary purpose of this skill is twofold: to provide a friendly greeting to users and to demonstrate the basic structure of an OpenCLAW skill. When invoked, the skill responds with a welcoming message that introduces users to the concept of OpenCLAW skills while providing helpful information about how the system works.</p>
+<h3>When to Use This Skill</h2>
+<p>This skill is particularly useful in several scenarios:</p>
+<ul>
+<li>When you want to greet someone with a friendly, welcoming message</li>
+<li>When you&#8217;re learning how OpenCLAW skills work and need a practical example</li>
+<li>When you need a starting point for creating new skills and want to understand the basic structure</li>
+<li>When testing your OpenCLAW installation to ensure everything is working correctly</li>
+</ul>
+<h2>Skill Structure and Components</h2>
+<p>A basic OpenCLAW skill follows a specific structure that this demonstration skill exemplifies perfectly. Understanding this structure is crucial for creating your own skills.</p>
+<h3>Main Skill File (SKILL.md)</h3>
+<p>The core of every OpenCLAW skill is the SKILL.md file, which contains:</p>
+<ul>
+<li>YAML frontmatter with essential metadata including name, description, and trigger phrases</li>
+<li>Markdown instructions that explain what the skill does and how to use it</li>
+<li>Optional sections for advanced functionality</li>
+</ul>
+<h3>Optional Directories</h3>
+<p>Beyond the main SKILL.md file, skills can include several optional directories:</p>
+<ul>
+<li><strong>scripts/</strong> &#8211; Contains executable code in various languages such as Python, Bash, or other scripting languages</li>
+<li><strong>references/</strong> &#8211; Holds documentation and additional information about the skill</li>
+<li><strong>assets/</strong> &#8211; Stores files needed for the skill&#8217;s output, such as images, templates, or configuration files</li>
+</ul>
+<h2>Metadata and Configuration</h2>
+<p>The skill includes important metadata that defines its behavior:</p>
+<ul>
+<li><strong>Name</strong>: hello-openclaw</li>
+<li><strong>Description</strong>: A simple skill to greet users and demonstrate basic OpenCLAW skill structure</li>
+<li><strong>Triggers</strong>: &#8220;test openclaw&#8221;, &#8220;run test&#8221;, &#8220;hello test&#8221;</li>
+<li><strong>User-invocable</strong>: true</li>
+</ul>
+<h2>How to Use the Skill</h2>
+<p>Using this skill is straightforward and intuitive. Simply trigger the skill by mentioning specific phrases in your conversation, such as &#8220;hello&#8221; or &#8220;hello openclaw.&#8221; The skill will then respond with its friendly greeting message and provide information about OpenCLAW skills.</p>
+<h3>Testing the Skill</h3>
+<p>The skill includes a test script that you can run to see it in action:</p>
+<pre><code>python scripts/test.py
+</code></pre>
+<p>This script demonstrates the skill&#8217;s functionality and shows the expected output format.</p>
+<h2>Example Output</h2>
+<p>When the skill is triggered, it produces output similar to the following:</p>
+<pre><code>Hello! Welcome to OpenCLAW!
+This is a demo skill showing how skills work.
+Skills can respond to user requests with helpful information.
+</code></pre>
+<h2>Learning Value</h2>
+<p>This skill is an invaluable learning tool for several reasons:</p>
+<ul>
+<li>It demonstrates the complete lifecycle of an OpenCLAW skill from trigger to response</li>
+<li>It shows how metadata and configuration work together to define skill behavior</li>
+<li>It provides a template that developers can modify when creating their own skills</li>
+<li>It illustrates the relationship between different skill components and how they interact</li>
+</ul>
+<h2>Best Practices Demonstrated</h2>
+<p>The Hello OpenCLAW skill also demonstrates several best practices for skill development:</p>
+<ul>
+<li>Clear, descriptive naming conventions</li>
+<li>Comprehensive documentation within the skill file</li>
+<li>Proper use of YAML frontmatter for configuration</li>
+<li>Modular structure that allows for easy expansion</li>
+<li>Testing capabilities built into the skill</li>
+</ul>
+<h2>Extending the Skill</h2>
+<p>While this skill is simple, it provides a foundation that can be easily extended. Developers can add new triggers, modify the response behavior, or integrate more complex functionality while maintaining the core structure demonstrated in this example.</p>
+<h2>Conclusion</h2>
+<p>The Hello OpenCLAW skill is more than just a simple greeting tool; it&#8217;s a comprehensive learning resource that introduces developers to the OpenCLAW framework. By understanding and experimenting with this skill, developers can gain the knowledge and confidence needed to create their own sophisticated skills for the OpenCLAW platform.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/luna825/hello-demo/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/luna825/hello-demo/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

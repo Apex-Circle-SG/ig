@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How WIP File Guard Protects Your Identity Files from Destructive Edits</title>
+    <meta name="description" content="Discover how the WIP.file-guard skill safeguards your OpenClaw and Claude Code identity documents against harmful changes.">
+    <meta property="og:title" content="How WIP File Guard Protects Your Identity Files from Destructive Edits">
+    <meta property="og:description" content="Discover how the WIP.file-guard skill safeguards your OpenClaw and Claude Code identity documents against harmful changes.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/how-wip-file-guard-protects-your-identity-files-from-destructive-edits">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8460">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8460">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/how-wip-file-guard-protects-your-identity-files-from-destructive-edits">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>How WIP File Guard Protects Your Identity Files from Destructive Edits</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <h1>How WIP File Guard Protects Your Identity Files from Destructive Edits</h1>
+<p>In this article, we&#8217;ll explore the <a href="https://github.com/openclaw/skills/blob/main/skills/skills/parkertoddbrooks/wip-file-guard/SKILL.md">wip-file-guard</a> skill, a crucial technical guardrail for protecting identity files in <a href="https://github.com/openclaw">OpenClaw</a> and <a href="https://github.com/workpresence">Claude Code</a> environments. Understand how this tool blocks harmful edits while allowing useful modifications to your important CLAUDE.md, SOUL.md, IDENTITY.md, MEMORY.md, and other identity files.</p>
+<h2>What is WIP File Guard?</h2>
+<p>The <strong>wip-file-guard</strong> skill, created by Parker Todd Brooks, is a safeguard mechanism designed to prevent destructive edits to protected identity files in Claude Code CLI and OpenClaw environments. Its primary function is to block overwrites and excessive removals while allowing small, constructive edits to crucial configuration files.</p>
+<h2>When to Use WIP File Guard</h2>
+<p>This skill becomes particularly valuable in several scenarios:</p>
+<ul>
+<li><strong>Protecting identity files:</strong> Prevents accidental overwrites of core files like CLAUDE.md, SOUL.md, IDENTITY.md, MEMORY.md, and CONTEXT.md.</li>
+<li><strong>Preventing destructive AI agent actions:</strong> Blocks agents from replacing file content instead of properly extending it.</li>
+<li><strong>Surviving context compaction:</strong> Unlike behavioral rules, file guards persist through context compaction events.</li>
+<li><strong>Maintaining project integrity:</strong> Preserve your Soul, define your AI, secure your prompt, and keep your role intact.</li>
+<li><strong>Workpresence configuration protection:</strong> Safeguard your business setup docs from accidental destruction.</li>
+</ul>
+<h2>Key Features and Functionality</h2>
+<p>The wip-file-guard implements two primary rules:</p>
+<ol>
+<li><strong>Write blocking:</strong> Completely blocks any Write operations on protected files, redirecting the agent to use Edit instead.</li>
+<li><strong>Conditional edit blocking:</strong> Blocks Edit operations that remove more than 2 net lines from protected files while allowing smaller modifications.</li>
+</ol>
+<p>It protects specific files including CLAUDE.md, SHARED-CONTEXT.md, SOUL.md, IDENTITY.md, CONTEXT.md, TOOLS.md, MEMORY.md, as well as any file matching patterns like memory, memories, journal, diary, or daily log.</p>
+<h2>Installation and Configuration</h2>
+<p>To implement the wip-file-guard in your Claude Code environment:</p>
+<ol>
+<li>Ensure you have Node.js installed on your system</li>
+<li>Download the wip-file-guard skill from the OpenClaw GitHub repository</li>
+<li>Add the hook configuration to your ~/.claude/settings.json file:</li>
+</ol>
+<pre><code>{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node "/path/to/wip-file-guard/guard.mjs"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+<p>You can verify the installation by running <code>node guard.mjs --list</code> to view protected files.</p>
+<h2>How It Works: The Technical Protection Mechanism</h2>
+<p>The wip-file-guard functions as a pre-operation hook that examines requests before they execute. Here&#8217;s how it processes different operations:</p>
+<ul>
+<li><strong>Write operations:</strong> Detects attempts to overwrite protected files and blocks them, prompting the agent to switch to Edit operations.</li>
+<li><strong>Edit operations:</strong> Calculates the net line changes. If the edit would remove more than 2 lines, it blocks the operation; otherwise, it allows the edit to proceed.</li>
+<li><strong>Protected file identification:</strong> Maintains a list of protected files and file pattern matches that are constantly verified against any file operation requests.</li>
+</ul>
+<p>When an operation is blocked, the agent receives a clear denial message explaining the protection and suggesting appropriate alternatives, such as using Edit instead of Write.</p>
+<h2>Best Practices and Common Use Cases</h2>
+<p>To maximize the effectiveness of wip-file-guard, follow these recommendations:</p>
+<ul>
+<li><strong>Regularly update your identity files:</strong> While protected, these files should still be maintained to reflect current configurations and knowledge.</li>
+<li><strong>Use the allowed edit operations:</strong> Know that small edits (adding or modifying 1-2 lines) are permitted and sufficient for most adjustments.</li>
+<li><strong>Verify protected files:</strong> Periodically check the list of protected files using the <code>--list</code> flag to ensure important files aren&#8217;t missed.</li>
+<li><strong>Monitor agent behavior:</strong> Watch for attempts to circumvent the protection, which may indicate the agent has lost context or is acting unpredictably.</li>
+</ul>
+<h2>Troubleshooting and Limitations</h2>
+<p>Be aware of these potential issues and their solutions:</p>
+<ul>
+<li><strong>Agent insistence on Write operations:</strong> The deny message tells the agent to use Edit instead. If the agent persists, it may be due to context compaction or loss. In such cases, the protection will continue to block, ensuring safety.</li>
+<li><strong>Unexpected Edit blocking:</strong> If reasonable edits are blocked, verify the net line changes. Edits removing more than 2 lines from protected files will be denied.</li>
+<li><strong>Limitation on binary files:</strong> The protection doesn&#8217;t work on binary files or images.</li>
+<li><strong>Execution timeout:</strong> The hook runs for a maximum of 5 seconds to prevent hanging operations.</li>
+</ul>
+<p>Importantly, note that this skill is designed specifically for code-based identity file protection and may not be suitable for all file types or projects. For non-technical guardrails, explicit prompt instructions should be used.</p>
+<h2>The Importance of File Protection</h2>
+<p>Protected identity files like CLAUDE.md contain fundamental configurations, memories, tools, and behavioral rules that define how your AI operates. Destructive edits to these files can:</p>
+<ul>
+<li>Eliminate critical context and knowledge about your environment</li>
+<li>Remove configured behaviors and constraints</li>
+<li>Overwrite established identities and tool access</li>
+<li>Compromise your agent&#8217;s ability to act in accordance with your expectations</li>
+</ul>
+<p>Without such technical protections, the AI might replace rather than extend your identity files, potentially leading to ineffective or unsafe agent behavior. Context compaction only exacerbates this risk by erasing behavioral rules while preserving hooks like wip-file-guard.</p>
+<h2>Conclusion</h2>
+<p>The wip-file-guard skill provides essential technical protection for your identity files in Claude Code and OpenClaw environments. By carefully controlling edits while allowing small modifications, this tool helps maintain the integrity of your configurations and prevents accidental or malicious overwrites. As you work with AI agents, remember that technical protections like hooks work alongside, not instead of, explicit prompt instructions—offering an additional layer of safety for your critical configuration files.</p>
+<p>For those interested in technical guardrails and agent safety, consider exploring other OpenClaw skills and techniques that complement file protection, such as memory preservation, behavioral constraints, and context verification.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/parkertoddbrooks/wip-file-guard/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/parkertoddbrooks/wip-file-guard/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

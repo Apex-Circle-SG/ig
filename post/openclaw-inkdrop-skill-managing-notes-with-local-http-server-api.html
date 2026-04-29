@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenClaw Inkdrop Skill: Managing Notes with Local HTTP Server API</title>
+    <meta name="description" content="Learn how to integrate Inkdrop notes with OpenClaw using local HTTP server API for seamless note management, including CRUD operations and setup instructions.">
+    <meta property="og:title" content="OpenClaw Inkdrop Skill: Managing Notes with Local HTTP Server API">
+    <meta property="og:description" content="Learn how to integrate Inkdrop notes with OpenClaw using local HTTP server API for seamless note management, including CRUD operations and setup instructions.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/openclaw-inkdrop-skill-managing-notes-with-local-http-server-api">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8722">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8722">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/openclaw-inkdrop-skill-managing-notes-with-local-http-server-api">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>OpenClaw Inkdrop Skill: Managing Notes with Local HTTP Server API</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-12</p>
+    <h2>What is the OpenClaw Inkdrop Skill?</h2>
+<p>The OpenClaw Inkdrop Skill is a powerful integration that allows you to interact with your Inkdrop notes directly through OpenClaw&#8217;s skill system. This skill enables you to read, create, update, search, and delete notes using Inkdrop&#8217;s local HTTP server API, making it perfect for managing your thoughts, project backlogs, task lists, and any other information you want to persist in Inkdrop.</p>
+<h2>Prerequisites and Setup</h2>
+<p>Before you can use the Inkdrop skill, you&#8217;ll need to have a few things in place:</p>
+<ol>
+<li>Install and run the <strong>Inkdrop desktop app</strong> on your machine</li>
+<li>Enable the <strong>Local HTTP Server</strong> in Inkdrop preferences (Preferences → API → Enable Local HTTP Server)</li>
+<li>Take note of the port number, username, and password from your Inkdrop preferences</li>
+</ol>
+<p>Once you have these prerequisites, you&#8217;ll need to set up your environment variables:</p>
+<pre><code class="language-bash">export INKDROP_URL="http://localhost:19840" # default port
+export INKDROP_AUTH="username:password" # from Inkdrop preferences
+</code></pre>
+<p>For OpenClaw specifically, it&#8217;s recommended to store these credentials in a secrets file (like workspace secrets.md) and source them at runtime rather than persisting plaintext credentials in your shell profile.</p>
+<h2>Connecting to Inkdrop</h2>
+<p>The skill connects to Inkdrop using a base URL (default: http://localhost:19840) and Basic authentication via the INKDROP_AUTH environment variable. You can verify your connection works with this simple test:</p>
+<pre><code class="language-bash">curl -s -u "$INKDROP_AUTH" "${INKDROP_URL:-http://localhost:19840}/"
+</code></pre>
+<p>This should return a JSON response like: <code>{"version":"5.x.x","ok":true}</code></p>
+<h2>Core Functionality</h2>
+<h3>Managing Notes</h3>
+<p>The skill provides comprehensive note management capabilities:</p>
+<ul>
+<li><strong>List Notes</strong>: Retrieve all notes or search with specific keywords, limit results, and sort by various criteria</li>
+<li><strong>Get Single Document</strong>: Fetch individual notes, notebooks, tags, or files using their document ID</li>
+<li><strong>Create Notes</strong>: Add new markdown notes with titles, content, and categorization</li>
+<li><strong>Update Notes</strong>: Modify existing notes (requires fetching the current revision token first)</li>
+<li><strong>Delete Documents</strong>: Remove notes, notebooks, tags, or files</li>
+</ul>
+<h3>Working with Notebooks</h3>
+<p>Organize your notes into notebooks:</p>
+<ul>
+<li><strong>List Notebooks</strong>: View all available notebooks</li>
+<li><strong>Create Notebook</strong>: Add new notebooks for better organization</li>
+</ul>
+<h3>Managing Tags</h3>
+<p>Enhance note organization with tags:</p>
+<ul>
+<li><strong>List Tags</strong>: See all existing tags</li>
+<li><strong>Create Tag</strong>: Add new tags with custom colors</li>
+</ul>
+<h3>Handling Attachments</h3>
+<p>Manage files and images that can be attached to notes through the files endpoint.</p>
+<h3>Changes Feed</h3>
+<p>Monitor updates in real-time using the changes feed, which returns notes in the order they were modified. This is particularly useful for syncing or watching for updates.</p>
+<h2>Using the Helper Script</h2>
+<p>The skill includes a convenient helper script (scripts/inkdrop.sh) that wraps common operations:</p>
+<pre><code class="language-bash"># List all notes
+./scripts/inkdrop.sh notes
+
+# Search notes
+./scripts/inkdrop.sh search "project ideas"
+
+# Get a specific note
+./scripts/inkdrop.sh get "note:abc123"
+
+# Create a note
+./scripts/inkdrop.sh create "My Note" "book:inbox" "Note content here"
+
+# List notebooks
+./scripts/inkdrop.sh books
+
+# List tags
+./scripts/inkdrop.sh tags
+
+# Delete a document
+./scripts/inkdrop.sh delete "note:abc123"
+</code></pre>
+<h2>Note Structure and Conventions</h2>
+<p>Notes in Inkdrop have a specific structure:</p>
+<ul>
+<li><strong>_id</strong>: Auto-generated note identifier (e.g., note:abc123)</li>
+<li><strong>_rev</strong>: Revision token required for updates to prevent conflicts</li>
+<li><strong>title</strong>: The note&#8217;s title</li>
+<li><strong>body</strong>: Markdown content</li>
+<li><strong>doctype</strong>: Always &#8220;markdown&#8221;</li>
+<li><strong>bookId</strong>: Notebook ID (use &#8220;book:inbox&#8221; as default)</li>
+<li><strong>tags</strong>: Array of tag IDs</li>
+<li><strong>status</strong>: One of: none, active, onHold, completed, dropped</li>
+<li><strong>pinned</strong>: Boolean to pin to top</li>
+<li><strong>share</strong>: private or public</li>
+<li><strong>createdAt/updatedAt</strong>: Unix timestamps</li>
+</ul>
+<p>Common conventions include using &#8220;book:inbox&#8221; as the default notebook for quick captures, matching notebook names when context is clear, using markdown formatting in note bodies, and always fetching the _rev before updating to avoid conflicts.</p>
+<h2>When to Use This Skill</h2>
+<p>The Inkdrop skill is ideal when users ask to:</p>
+<ul>
+<li>Take notes</li>
+<li>Save ideas</li>
+<li>Manage project notes</li>
+<li>Read notes</li>
+<li>Search notes</li>
+<li>Interact with Inkdrop in any way</li>
+<li>Organize thoughts, project backlogs, or task lists that should persist in Inkdrop</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw Inkdrop Skill provides a seamless bridge between OpenClaw&#8217;s capabilities and Inkdrop&#8217;s powerful note-taking features. By leveraging the local HTTP server API, it offers a robust solution for managing your digital notes and ideas directly from your OpenClaw environment. Whether you&#8217;re capturing quick thoughts, organizing complex projects, or maintaining a personal knowledge base, this skill makes it easy to integrate your note-taking workflow into your broader productivity system.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/iamngoni/inkdrop/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/iamngoni/inkdrop/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

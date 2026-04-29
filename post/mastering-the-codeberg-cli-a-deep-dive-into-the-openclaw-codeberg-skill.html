@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering the Codeberg CLI: A Deep Dive into the OpenClaw Codeberg Skill</title>
+    <meta name="description" content="Learn how to streamline your development workflow by integrating the Codeberg CLI with the OpenClaw Codeberg skill. Automate PRs, issues, and CI/CD tasks.">
+    <meta property="og:title" content="Mastering the Codeberg CLI: A Deep Dive into the OpenClaw Codeberg Skill">
+    <meta property="og:description" content="Learn how to streamline your development workflow by integrating the Codeberg CLI with the OpenClaw Codeberg skill. Automate PRs, issues, and CI/CD tasks.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-the-codeberg-cli-a-deep-dive-into-the-openclaw-codeberg-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8598">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8598">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-the-codeberg-cli-a-deep-dive-into-the-openclaw-codeberg-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering the Codeberg CLI: A Deep Dive into the OpenClaw Codeberg Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-11</p>
+    <h1>Mastering the Codeberg CLI: A Deep Dive into the OpenClaw Codeberg Skill</h1>
+<p>In the modern landscape of collaborative software development, managing repositories, issues, and pull requests directly from the command line is no longer just a luxury—it is a necessity for efficiency. For those working within the Forgejo ecosystem, particularly on Codeberg, the OpenClaw project offers a powerful solution through its dedicated <strong>Codeberg Skill</strong>. In this article, we will break down exactly what this skill does, how to set it up, and how it can revolutionize your daily development workflow.</p>
+<h2>What is the OpenClaw Codeberg Skill?</h2>
+<p>The OpenClaw Codeberg skill is an integration package designed to bridge the gap between your local environment and your Codeberg repositories. At its heart, the skill leverages the <code>tea</code> command-line interface (CLI). The <code>tea</code> tool is a robust, feature-rich utility designed to interact with Gitea and Forgejo instances, making it the perfect tool for Codeberg users.</p>
+<p>By installing this skill via OpenClaw, you gain the ability to perform complex repository management tasks without ever leaving your terminal. Whether you are a solo developer or working within a large open-source team, this skill reduces context switching and keeps your focus where it belongs: on the code.</p>
+<h2>Prerequisites and Installation</h2>
+<p>To get started, you must first ensure that the <code>tea</code> CLI is installed on your machine. The OpenClaw skill documentation suggests two primary methods for installation:</p>
+<ul>
+<li><strong>Using Homebrew:</strong> For macOS and Linux users, simply running <code>brew install tea</code> is the most straightforward path.</li>
+<li><strong>Using Go:</strong> For those who prefer direct package management, you can install the latest version directly from the source using <code>go install code.gitea.io/tea@latest</code>.</li>
+</ul>
+<p>Once the <code>tea</code> binary is accessible in your shell, you have successfully met the core infrastructure requirement for the OpenClaw Codeberg skill.</p>
+<h2>Configuring Your Login</h2>
+<p>Before you can interact with your private or public repositories, you must authenticate. The <code>tea</code> CLI handles this securely by allowing you to store login credentials, which are then referenced by your commands. To configure your connection to Codeberg, run the following command:</p>
+<p><code>tea login add --name codeberg --url https://codeberg.org --token &lt;your-token&gt;</code></p>
+<p>Once configured, you can simply append <code>--login codeberg</code> to any subsequent command. This modular approach allows you to manage multiple Forgejo or Gitea instances simultaneously, which is a major advantage for developers contributing to various platforms.</p>
+<h2>Key Features and Use Cases</h2>
+<h3>1. Managing Pull Requests</h3>
+<p>Pull requests are the lifeblood of open-source development. With the OpenClaw Codeberg skill, you can audit the state of your project instantly. Use <code>tea pulls --repo owner/repo</code> to list all open pull requests. If you need to dive deeper into a specific request, <code>tea pr 55 --repo owner/repo</code> gives you a comprehensive overview of the status, comments, and relevant metadata, allowing you to perform code reviews directly from the terminal.</p>
+<h3>2. Tracking Issues</h3>
+<p>Never lose track of your bug reports or feature requests again. The skill provides seamless access to the issue tracker. By running <code>tea issues --repo owner/repo</code>, you can see exactly what needs your attention. To get details on a specific issue, the <code>tea issue 123 --repo owner/repo</code> command acts as a lightning-fast gateway to the ticket&#8217;s history and current status.</p>
+<h3>3. CI/CD and Actions</h3>
+<p>Modern development relies heavily on continuous integration. The Codeberg skill allows you to inspect your repository secrets and variables without navigating the web UI. Commands like <code>tea actions secrets list --repo owner/repo</code> provide visibility into your CI environment, ensuring your workflows remain secure and properly configured.</p>
+<h2>Advanced Queries with the API</h2>
+<p>One of the most powerful aspects of this skill is its ability to interface directly with the Codeberg API. Sometimes, the standard subcommands don&#8217;t provide the exact data view you need. This is where <code>tea api</code> shines. By piping the output into <code>jq</code>, you can create custom, data-rich reports.</p>
+<p>For example, if you wanted to pull the title, state, and author of a specific pull request for a custom dashboard or script, you could run:</p>
+<p><code>tea api repos/owner/repo/pulls/55 | jq '.title, .state, .user.login'</code></p>
+<p>This level of flexibility is what sets the OpenClaw Codeberg skill apart. It isn&#8217;t just a basic tool; it is a programmable interface that allows you to treat your repository data as a data set that can be queried and filtered.</p>
+<h2>Why Developers are Choosing This Workflow</h2>
+<p>The primary benefit of integrating the OpenClaw Codeberg skill into your workflow is speed. Navigating a web browser, waiting for pages to load, and clicking through complex UI menus to check a CI/CD variable is slow and disruptive to your flow state. By using the terminal:</p>
+<ul>
+<li><strong>Speed:</strong> Commands execute in milliseconds.</li>
+<li><strong>Scriptability:</strong> You can chain commands together to automate your morning triage.</li>
+<li><strong>Consistency:</strong> The same workflow applies regardless of which repository you are working on.</li>
+<li><strong>Focus:</strong> You stay inside your IDE or terminal environment, reducing cognitive load.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw Codeberg skill is an essential utility for any developer deeply invested in the Codeberg/Forgejo ecosystem. By wrapping the power of the <code>tea</code> CLI into an easy-to-manage package, OpenClaw has provided a way to maintain high productivity levels while managing complex project lifecycles. Whether you are managing issues, reviewing code, or fine-tuning your CI/CD pipelines, this skill provides the necessary tools to do it faster and more efficiently. If you haven&#8217;t yet, take a few minutes to install the <code>tea</code> CLI, configure your credentials, and experience the speed of command-line repository management today.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/razzeee/codeberg/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/razzeee/codeberg/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

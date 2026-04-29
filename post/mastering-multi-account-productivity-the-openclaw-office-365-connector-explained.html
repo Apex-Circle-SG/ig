@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering Multi-Account Productivity: The OpenClaw Office 365 Connector Explained</title>
+    <meta name="description" content="Discover how the OpenClaw Office 365 Connector simplifies email, calendar, and contact management across multiple identities with resilient OAuth support.">
+    <meta property="og:title" content="Mastering Multi-Account Productivity: The OpenClaw Office 365 Connector Explained">
+    <meta property="og:description" content="Discover how the OpenClaw Office 365 Connector simplifies email, calendar, and contact management across multiple identities with resilient OAuth support.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-multi-account-productivity-the-openclaw-office-365-connector-explained">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9085">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9085">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-multi-account-productivity-the-openclaw-office-365-connector-explained">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering Multi-Account Productivity: The OpenClaw Office 365 Connector Explained</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-16</p>
+    <h1>Mastering Multi-Account Productivity: The OpenClaw Office 365 Connector Explained</h1>
+<p>In the modern professional landscape, managing a single digital identity is rarely enough. Between personal email, primary employment, side projects, and consulting gigs, many users find themselves juggling multiple Microsoft 365 accounts. Keeping track of calendars, emails, and contacts across these silos is a major productivity drain. Enter the <strong>OpenClaw Office 365 Connector</strong>, a powerful skill designed to bridge this gap, bringing all your Microsoft 365 services directly into your automated workflow.</p>
+<h2>What is the OpenClaw Office 365 Connector?</h2>
+<p>The OpenClaw Office 365 Connector is a robust, production-ready skill that bridges the gap between your local automation scripts and the Microsoft ecosystem. Whether you need to read incoming emails, manage calendar invitations, or synchronize contact lists, this tool acts as an intermediary, leveraging the Microsoft Graph API to perform complex tasks with simple commands.</p>
+<p>With the release of version 2.0.0, this skill has undergone a significant transformation, introducing multi-account support that changes the game for power users and consultants alike. No longer are you restricted to a single environment variable setup; you can now manage various identities—work, personal, or client-based—simultaneously from one unified interface.</p>
+<h2>Key Features and Capabilities</h2>
+<h3>1. Multi-Account Management</h3>
+<p>The standout feature of v2.0.0 is its sophisticated multi-account architecture. You can now define distinct profiles for each of your M365 identities. Each account is isolated with its own secure token storage, ensuring that your work emails never cross paths with your personal correspondence unless you explicitly command them to.</p>
+<h3>2. Comprehensive Microsoft 365 Integration</h3>
+<p>The connector provides full CRUD (Create, Read, Update, Delete) capabilities across the three pillars of M365:</p>
+<ul>
+<li><strong>Email:</strong> Beyond basic reading and sending, you can search through your inbox, move messages between folders, manage flags, and handle attachments with HTML-formatted body support.</li>
+<li><strong>Calendar:</strong> Stay on top of your schedule by reading upcoming events, checking availability, creating new meetings, or modifying existing ones. It even handles recurring events and time zone adjustments seamlessly.</li>
+<li><strong>Contacts:</strong> Easily search, add, or update contact information, and manage contact groups to streamline your communication workflows.</li>
+</ul>
+<h3>3. Resilient OAuth Authentication</h3>
+<p>Security is a primary concern when dealing with account data. The OpenClaw connector utilizes the <strong>OAuth 2.0 Device Code Flow</strong>. This ensures that you never have to hardcode passwords. Instead, the connector generates a secure device code, prompts you to visit the Microsoft authentication URL, and retrieves a set of access and refresh tokens. These tokens are stored locally with strict file permissions (0600) and are automatically refreshed by the system when they expire, meaning your automation scripts stay connected without constant manual intervention.</p>
+<h2>Why You Need This for Your Workflow</h2>
+<p>If you are a consultant or freelancer, this tool is an absolute necessity. Imagine being able to run a single terminal command to check the availability across three different client calendars or sending an automated status update to a client using the correct professional identity, all without logging in and out of web browsers. </p>
+<p>By separating your personal and professional data while maintaining a unified automation layer, you reduce the &#8216;context switching&#8217; tax that kills productivity. The ability to set a &#8216;default&#8217; account while keeping others accessible via the <code>--account</code> flag provides the perfect balance between convenience and control.</p>
+<h2>Getting Started: A Quick Path to Automation</h2>
+<p>Setting up the connector involves a one-time configuration in your Azure Portal. You will need to create an App Registration to obtain your <strong>Tenant ID</strong>, <strong>Client ID</strong>, and <strong>Client Secret</strong>. While this requires a bit of upfront effort (about 10-15 minutes per account), it is a one-time investment that ensures the security and reliability of your connection.</p>
+<p>Once configured, the CLI tools are incredibly intuitive. Adding an account is as simple as running:</p>
+<p><code>node accounts.js add work &lt;tenant-id&gt; &lt;client-id&gt; &lt;client-secret&gt; you@work.com "Work Account"</code></p>
+<p>After that, performing actions across your accounts becomes second nature:</p>
+<ul>
+<li>Check your work calendar: <code>node calendar.js today --account=work</code></li>
+<li>Read recent personal emails: <code>node email.js recent 10 --account=personal</code></li>
+<li>Send a project update from your consulting email: <code>node send-email.js send client@example.com "Update" "Body" --account=consulting</code></li>
+</ul>
+<h2>Security and Permissions</h2>
+<p>The skill uses granular, delegated permissions, which means you only grant the access you actually need. Whether it&#8217;s <code>Mail.Read</code> or <code>Calendars.ReadWrite</code>, the system is transparent about what it needs to function. Because it relies on standard Microsoft Graph API permissions, you can audit the access level at any time through your Azure Admin portal, providing you with full oversight of your data security.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw Office 365 Connector is more than just an API wrapper; it is an essential piece of infrastructure for anyone looking to bring professional automation into their daily life. By solving the complex problems of OAuth handling, token persistence, and multi-identity management, it allows you to focus on what matters: getting work done. Whether you are automating repetitive email tasks or building a sophisticated personal dashboard to track your busy schedule, this skill provides the reliability and depth required to scale your productivity.</p>
+<p>Ready to streamline your workflow? Dive into the documentation, configure your Azure App Registrations, and take control of your digital identity today.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/tirandagan/office365-connector/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/tirandagan/office365-connector/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

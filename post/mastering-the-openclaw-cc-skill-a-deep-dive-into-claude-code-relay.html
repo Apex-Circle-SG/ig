@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering the OpenClaw &#8216;cc&#8217; Skill: A Deep Dive into Claude Code Relay</title>
+    <meta name="description" content="Learn how the OpenClaw cc skill acts as a powerful bridge to Claude Code, streamlining project management and communication through efficient slash commands.">
+    <meta property="og:title" content="Mastering the OpenClaw &#8216;cc&#8217; Skill: A Deep Dive into Claude Code Relay">
+    <meta property="og:description" content="Learn how the OpenClaw cc skill acts as a powerful bridge to Claude Code, streamlining project management and communication through efficient slash commands.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-the-openclaw-cc-skill-a-deep-dive-into-claude-code-relay">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9184">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9184">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-the-openclaw-cc-skill-a-deep-dive-into-claude-code-relay">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering the OpenClaw &#8216;cc&#8217; Skill: A Deep Dive into Claude Code Relay</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <h1>Understanding the OpenClaw &#8216;cc&#8217; Skill: Your Gateway to Claude Code Relay</h1>
+<p>In the rapidly evolving world of developer productivity tools, the OpenClaw project stands out as a modular, extensible ecosystem. One of its most critical components is the <code>cc</code> (Claude Code) skill. If you have been wondering how to bridge your local development environment with the powerful capabilities of Claude Code, this guide is for you. We will break down exactly what this skill does, how it works, and why it is a game-changer for your daily workflow.</p>
+<h2>What is the OpenClaw &#8216;cc&#8217; Skill?</h2>
+<p>The <code>cc</code> skill is a short slash command wrapper designed to facilitate seamless interactions with Claude Code relay sessions. Think of it as your command center for managing AI-driven coding sessions directly within your terminal or interface. Instead of juggling multiple windows or manually configuring relay connections, the <code>cc</code> skill provides a unified, concise interface to initiate, manage, and terminate sessions on a project-by-project basis.</p>
+<h2>The Power of Command Routing</h2>
+<p>At its core, the <code>cc</code> skill is built on a robust command routing system that interprets user intent and executes the corresponding logic via <code>scripts/cc.sh</code>. Here is a breakdown of the primary commands you will use most often:</p>
+<ul>
+<li><strong>/cc projects:</strong> This command lists all available projects, pulling data from your local map and project root. It is the perfect way to get an overview of what you are currently working on.</li>
+<li><strong>/cc on [project]:</strong> This is the activation command. It starts or reuses a Claude session, using fuzzy matching to find your target project directory. Once initiated, you enter the critical &#8216;relay mode.&#8217;</li>
+<li><strong>/cc off [project]:</strong> When you are finished, this command gracefully stops the session, allowing you to move on to your next task without leaving background processes running.</li>
+<li><strong>/cc tail [project] [lines]:</strong> Need to see what happened in the last few minutes? The tail command pulls recent output from your session, with a default view of 120 lines to keep your workspace clean.</li>
+<li><strong>/cc status:</strong> This provides a quick snapshot of all active relay sessions, ensuring you stay organized.</li>
+</ul>
+<h2>The Relay Mode Contract: A Transparent Pipe</h2>
+<p>The most important concept to grasp when working with the <code>cc</code> skill is the &#8216;relay mode&#8217; contract. Once you execute <code>/cc on [project]</code>, the system enters a specific state. In this mode, the OpenClaw <code>cc</code> skill acts as a transparent pipe between you and Claude Code.</p>
+<p>This means that <em>all</em> your user messages are forwarded directly to the AI. The skill is strictly prohibited from interpreting, answering, or acting on these messages itself. By design, it does not try to be &#8216;helpful&#8217; in a way that interferes with the AI&#8217;s logic; it simply delivers the prompt to Claude Code and returns the final output to you. This ensures that you get the raw, powerful insights of the Claude model without any middleware interference.</p>
+<h2>Why This Architecture Matters</h2>
+<p>By enforcing this strict separation of concerns, the OpenClaw <code>cc</code> skill ensures reliability. You do not have to worry about the &#8216;middleman&#8217; hallucinating or getting in the way of your code generation. Furthermore, by handling tool calls and menu interactions as inline buttons, the skill keeps your terminal output readable and navigable. Whether you are dealing with complex debugging tasks or scaffolding new features, this approach keeps the developer-to-AI feedback loop incredibly tight.</p>
+<h2>Getting Started: Environment Configuration</h2>
+<p>To get the most out of the <code>cc</code> skill, you should be aware of the environment variables that govern its behavior. These can be adjusted to match your specific system setup:</p>
+<ul>
+<li><strong>CLAUDE_RELAY_DIR:</strong> Automatically detected, this points to your specific claude-relay skill directory.</li>
+<li><strong>CLAUDE_RELAY_ROOT:</strong> Defaults to <code>$HOME/projects</code>. This is the root directory where the tool searches for your active work.</li>
+<li><strong>CLAUDE_RELAY_MAP:</strong> Points to your project alias map file, allowing you to create custom shorthand for your project folders.</li>
+</ul>
+<h2>Best Practices for Efficient Workflow</h2>
+<p>To maximize your efficiency, we recommend treating your terminal like a dedicated conversation space. Start by listing your projects with <code>/cc projects</code>, jump into a session with <code>/cc on</code>, and rely on the status checks to prevent session bloat. If you find yourself needing to switch contexts, simply execute <code>/cc off</code> to clean up the previous session before starting a new one. Remember, the <code>cc</code> skill is designed to move at the speed of your thoughts—keep your commands brief, and let the relay mode do the heavy lifting.</p>
+<h2>Conclusion</h2>
+<p>The <code>cc</code> skill in OpenClaw is more than just a wrapper; it is an essential piece of infrastructure for anyone serious about AI-assisted development. By providing a clean, reliable, and transparent interface for Claude Code, it removes the friction of session management and allows you to focus on what really matters: writing high-quality code. Explore the GitHub repository, install the necessary dependencies, and start integrating Claude Code into your local environment today. Your productivity will thank you.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/artwalker/cc/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/artwalker/cc/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the Review Orchestrator Skill: Multi-Perspective Code Review System</title>
+    <meta name="description" content="The Review Orchestrator skill coordinates multiple review perspectives to catch what single-pass review misses, providing technical, creative, and cognitive mod">
+    <meta property="og:title" content="Understanding the Review Orchestrator Skill: Multi-Perspective Code Review System">
+    <meta property="og:description" content="The Review Orchestrator skill coordinates multiple review perspectives to catch what single-pass review misses, providing technical, creative, and cognitive mod">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-review-orchestrator-skill-multi-perspective-code-review-system">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8407">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8407">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-review-orchestrator-skill-multi-perspective-code-review-system">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the Review Orchestrator Skill: Multi-Perspective Code Review System</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <h2>What This Solves</h2>
+<p>One perspective has blind spots. This skill coordinates multiple review perspectives to catch what single-pass review misses:</p>
+<ul>
+<li>Twin review &#8211; technical and creative perspectives for balance</li>
+<li>Cognitive modes &#8211; analyzer (&#8220;what conflicts&#8221;), architect (&#8220;how to restructure&#8221;), implementer (&#8220;how to implement&#8221;)</li>
+</ul>
+<p>The insight: N=2 catches more than N=1. Different perspectives see different things. Coordinate them systematically.</p>
+<h2>Core Logic</h2>
+<p>The Review Orchestrator uses intelligent selection based on context and risk level:</p>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Risk</th>
+<th>Recommended Review</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Implementation</td>
+<td>Low</td>
+<td>/ro twin &#8211;technical-only</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td>Medium</td>
+<td>/ro twin (both perspectives)</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td>High</td>
+<td>/ro twin + /ro cognitive</td>
+</tr>
+<tr>
+<td>Architecture</td>
+<td>Any</td>
+<td>/ro cognitive</td>
+</tr>
+<tr>
+<td>Documentation</td>
+<td>Any</td>
+<td>/ro twin &#8211;creative-only</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>Any</td>
+<td>/ro cognitive + external review</td>
+</tr>
+</tbody>
+</table>
+<h2>Multi-Perspective Review</h2>
+<p>The system provides different analytical perspectives:</p>
+<h3>Technical Perspective</h3>
+<ul>
+<li>Focus: Architecture, standards, patterns, security</li>
+<li>Japanese: 技術</li>
+</ul>
+<h3>Creative Perspective</h3>
+<ul>
+<li>Focus: UX, communication, philosophy alignment</li>
+<li>Japanese: 創造</li>
+</ul>
+<h3>Cognitive Modes</h3>
+<p>These provide different analytical approaches:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Perspective</th>
+<th>Focus</th>
+<th>Japanese</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>analyzer</td>
+<td>&#8220;Here&#8217;s what conflicts&#8221;</td>
+<td>Tensions, trade-offs, contradictions</td>
+<td>審碼</td>
+</tr>
+<tr>
+<td>architect</td>
+<td>&#8220;Here&#8217;s how to restructure&#8221;</td>
+<td>Architecture, patterns, organization</td>
+<td>審構</td>
+</tr>
+<tr>
+<td>implementer</td>
+<td>&#8220;Here&#8217;s how to implement&#8221;</td>
+<td>Concrete steps, complexity, path forward</td>
+<td>審實</td>
+</tr>
+</tbody>
+</table>
+<h2>Quality Gate Configuration</h2>
+<p>The system includes configurable quality gates with these checks:</p>
+<ul>
+<li>Tests pass (critical)</li>
+<li>Coverage maintained (important)</li>
+<li>No critical findings (critical)</li>
+<li>Docs updated (minor)</li>
+</ul>
+<h2>Installation</h2>
+<pre><code>openclaw install leegitw/review-orchestrator
+# With dependencies
+openclaw install leegitw/context-verifier
+openclaw install leegitw/failure-memory
+openclaw install leegitw/review-orchestrator
+</code></pre>
+<h2>Usage Examples</h2>
+<pre><code>/ro select --context "Refactoring authentication handler" --risk high
+/ro twin src/handlers/auth.go
+/ro cognitive src/handlers/auth.go --modes analyzer,architect
+/ro gate --stage 2 --strict
+</code></pre>
+<h2>Output Format</h2>
+<p>Review results are written to docs/reviews/ in your workspace, with findings categorized by severity (critical, important, minor) and tagged for easy filtering.</p>
+<h2>Configuration</h2>
+<p>Configuration is loaded from (in order of precedence):</p>
+<ol>
+<li>.openclaw/review-orchestrator.yaml (OpenClaw standard)</li>
+<li>.claude/review-orchestrator.yaml (Claude Code compatibility)</li>
+<li>Defaults (built-in)</li>
+</ol>
+<p>This skill operates within your agent&#8217;s trust boundary, using your configured model for review orchestration without external API calls.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/leegitw/review-orchestrator/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/leegitw/review-orchestrator/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

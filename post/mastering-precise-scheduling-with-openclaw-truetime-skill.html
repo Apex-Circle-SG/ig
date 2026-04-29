@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering Precise Scheduling with OpenClaw TrueTime Skill</title>
+    <meta name="description" content="Discover how the OpenClaw TrueTime skill eliminates scheduling errors by handling timezone drift, DST, and precise duration calculations for developers.">
+    <meta property="og:title" content="Mastering Precise Scheduling with OpenClaw TrueTime Skill">
+    <meta property="og:description" content="Discover how the OpenClaw TrueTime skill eliminates scheduling errors by handling timezone drift, DST, and precise duration calculations for developers.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-precise-scheduling-with-openclaw-truetime-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9285">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9285">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-precise-scheduling-with-openclaw-truetime-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering Precise Scheduling with OpenClaw TrueTime Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-18</p>
+    <h1>Understanding the TrueTime Skill in OpenClaw</h1>
+<p>Time is arguably the most complex dimension in software development. Between Daylight Savings Time (DST), leap years, cross-timezone coordination, and the nuances of NTP versus local system clocks, scheduling tasks often leads to bugs that are difficult to reproduce. The OpenClaw project addresses these challenges head-on with the <strong>TrueTime skill</strong>, a robust framework designed to ensure real-time, accurate scheduling and planning across diverse environmental constraints.</p>
+<h2>The Core Philosophy of TrueTime</h2>
+<p>At its heart, the TrueTime skill is built on a non-negotiable principle: <strong>exact duration fidelity</strong>. Many systems fall into the trap of using &#8220;example values&#8221; or approximation algorithms that cause drift over time. TrueTime treats user-provided duration values as authoritative. It never replaces your specific inputs with generic placeholders, ensuring that when you schedule a task for 1.5 months or 250 milliseconds, the system executes it with the precision requested.</p>
+<h2>How It Works: The Workflow</h2>
+<p>The skill operates through a strictly defined lifecycle to prevent calculation errors. When a user issues a command, the system follows these steps:</p>
+<ul>
+<li><strong>Extraction:</strong> It captures the literal phrase, value, unit, and any timezone hints provided by the user.</li>
+<li><strong>Verification:</strong> It reads the current real-time clock to establish a baseline.</li>
+<li><strong>Canonical Calculation:</strong> It computes the target time in UTC first. By establishing a UTC anchor, the system avoids the inconsistencies inherent in local server time.</li>
+<li><strong>Display Conversion:</strong> Only after the math is done in UTC is the target time converted for user-facing display, whether that be local server time, user local time, or an arbitrary international zone.</li>
+<li><strong>Validation:</strong> The system verifies the delta (Target UTC minus Now UTC) against the requested duration before any execution occurs.</li>
+</ul>
+<h2>Handling Relative and Absolute Time</h2>
+<p>One of the most powerful aspects of TrueTime is its ability to handle both relative offsets and absolute timestamps with equal ease. The underlying script (<code>true_time.mjs</code>) acts as a deterministic engine for these calculations.</p>
+<h3>Relative Time Calculations</h3>
+<p>Relative time is fraught with peril—what is a &#8216;month&#8217; exactly? TrueTime defines strict rules for calendar units (months, years, decades, centuries) versus fixed units (milliseconds, seconds, minutes). Fixed-unit decimals are computed to millisecond precision, while calendar-aware units handle shifts based on the <code>--calendar-tz</code> parameter. For example, if you add one month to January 31st, TrueTime intelligently clamps to the last valid day of February (the 28th or 29th), preventing invalid date overflows.</p>
+<h3>Absolute Time and Timezones</h3>
+<p>TrueTime relies on IANA timezone names (e.g., <code>America/Los_Angeles</code>) to eliminate ambiguity. It discourages the use of vague abbreviations like &#8216;CST&#8217; or &#8216;IST,&#8217; which often hold different meanings depending on the geographic context. By requiring full IANA identifiers, TrueTime ensures that calculations remain deterministic.</p>
+<h2>Solving the DST Nightmare</h2>
+<p>Daylight Savings Time is a major source of production outages. TrueTime provides explicit guardrails to handle the complexities of transition windows:</p>
+<ul>
+<li><strong>Fall-back Overlaps:</strong> If a local time is ambiguous due to a fall-back transition, the system requires an explicit offset (e.g., -07:00 or -08:00) to proceed.</li>
+<li><strong>Spring-forward Gaps:</strong> If a user requests a time that doesn&#8217;t exist due to a spring-forward gap, TrueTime identifies the invalid local time and requests a correction.</li>
+</ul>
+<p>By forcing the developer or user to resolve these edge cases, TrueTime prevents silent failures and ensures that schedules remain consistent throughout the year.</p>
+<h2>Advanced Features: NTP and Lunar Calendars</h2>
+<p>For applications where server clock drift is unacceptable, TrueTime offers an NTP-sourced time mode. By setting <code>--time-source ntp</code>, the system bypasses the local OS clock and fetches accurate time from a public NTP server. If the connection fails, the process halts rather than continuing with potentially stale data, adhering to the fail-safe mentality of the skill.</p>
+<p>Furthermore, the skill includes support for the Chinese Lunar Calendar. While it uses Gregorian UTC for internal scheduling, it provides full support for Lunar field translation. This makes it an invaluable tool for internationalized applications that must respect traditional calendar-based events alongside modern, digital cron-based schedules.</p>
+<h2>Why You Should Integrate TrueTime</h2>
+<p>If your application involves reminders, cron jobs, or any form of time-sensitive planning, integrating with the TrueTime skill provides a safety net that is hard to build from scratch. It forces developers to be explicit about their timezone context and duration units, which in turn leads to cleaner, more maintainable, and significantly more reliable code.</p>
+<p>In conclusion, the OpenClaw TrueTime skill is not just a utility script; it is a rigorous framework for handling the most difficult aspects of time in computing. By treating time as a first-class citizen with strict validation, calculation, and reporting requirements, it provides the precision necessary for high-stakes, time-critical software environments.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/cccat6/truetime/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/cccat6/truetime/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

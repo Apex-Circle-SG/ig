@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>C/C++ Language Server Integration with clangd LSP</title>
+    <meta name="description" content="clangd LSP provides comprehensive code intelligence for C/C++ development including autocomplete, error detection, and refactoring support through the LLVM-base">
+    <meta property="og:title" content="C/C++ Language Server Integration with clangd LSP">
+    <meta property="og:description" content="clangd LSP provides comprehensive code intelligence for C/C++ development including autocomplete, error detection, and refactoring support through the LLVM-base">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/c-c-language-server-integration-with-clangd-lsp">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8736">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8736">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/c-c-language-server-integration-with-clangd-lsp">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>C/C++ Language Server Integration with clangd LSP</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-12</p>
+    <p>clangd LSP is a powerful C/C++ language server integration that provides comprehensive code intelligence through the clangd tool, which is part of the LLVM project. This skill enhances the development experience for C and C++ programmers by offering advanced features like autocomplete, go-to-definition, find references, error detection, formatting, and refactoring capabilities.</p>
+<h2>Core Capabilities</h2>
+<p>The clangd LSP skill delivers several essential features that streamline C/C++ development:</p>
+<h3>Code Intelligence</h3>
+<p>The language server provides intelligent code assistance including autocomplete suggestions, go-to-definition navigation, and find references functionality. These features help developers write code more efficiently and navigate large codebases with ease.</p>
+<h3>Error Detection</h3>
+<p>Real-time diagnostics are a key feature, providing immediate feedback on compilation errors as you type. This helps catch issues early in the development process, reducing debugging time and improving code quality.</p>
+<h3>Code Formatting</h3>
+<p>clangd integrates with clang-format to provide consistent code formatting across your projects. This ensures that code adheres to style guidelines and maintains readability.</p>
+<h3>Refactoring Support</h3>
+<p>The skill includes refactoring capabilities such as renaming symbols and extracting functions, making it easier to restructure and improve existing code.</p>
+<h2>Installation and Setup</h2>
+<p>Installing clangd depends on your operating system:</p>
+<h3>macOS via Homebrew</h3>
+<pre><code>brew install llvm
+# Add to PATH
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+</code></pre>
+<h3>Linux Distributions</h3>
+<p>For Ubuntu/Debian systems:</p>
+<pre><code>sudo apt install clangd
+</code></pre>
+<p>For Fedora:</p>
+<pre><code>sudo dnf install clang-tools-extra
+</code></pre>
+<p>For Arch Linux:</p>
+<pre><code>sudo pacman -S clang
+</code></pre>
+<h3>Windows</h3>
+<p>Windows users can install via winget:</p>
+<pre><code>winget install LLVM.LLVM
+</code></pre>
+<p>Alternatively, download directly from LLVM releases.</p>
+<p>Verify installation with:</p>
+<pre><code>clangd --version
+</code></pre>
+<h2>Usage Patterns</h2>
+<p>Once installed, the language server runs automatically in LSP-compatible editors. For manual operations, you can compile code using:</p>
+<pre><code>gcc file.c -o output    # C
+g++ file.cpp -o output   # C++
+clang file.c -o output   # with clang
+</code></pre>
+<p>Format code with:</p>
+<pre><code>clang-format -i file.cpp
+</code></pre>
+<p>Perform static analysis using:</p>
+<pre><code>clang-tidy file.cpp -- -std=c++17
+</code></pre>
+<h2>Configuration Options</h2>
+<p>Project configuration can be done through a <code>.clangd</code> file in the project root:</p>
+<pre><code>CompileFlags:
+  Add: [-std=c++17, -Wall, -Wextra]
+  Remove: [-W*]
+Diagnostics:
+  UnusedIncludes:
+    Strict
+  MissingIncludes:
+    Strict
+</code></pre>
+<p>For complex projects, <code>compile_commands.json</code> provides more comprehensive configuration:</p>
+<pre><code>cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
+# or
+bear -- make
+</code></pre>
+<h2>Common Compilation Flags</h2>
+<p>When working with clangd, several compilation flags are commonly used:</p>
+<ul>
+<li><code>-std=c++17</code>: Sets the C++ standard to C++17</li>
+<li><code>-Wall -Wextra</code>: Enables comprehensive warnings</li>
+<li><code>-O2</code>: Optimization level 2</li>
+<li><code>-g</code>: Includes debug symbols</li>
+<li><code>-I&lt;path&gt;</code>: Specifies include paths</li>
+<li><code>-L&lt;path&gt;</code>: Specifies library paths</li>
+</ul>
+<h2>Integration Pattern</h2>
+<p>The typical workflow when using clangd involves:</p>
+<ol>
+<li>clangd uses <code>compile_commands.json</code> to understand project structure</li>
+<li>clang-format is run to format code according to style guidelines</li>
+<li>clang-tidy performs static analysis to identify potential issues</li>
+<li>Code is compiled with warnings enabled to catch issues early</li>
+</ol>
+<h2>Advanced Features</h2>
+<p>clang-tidy provides additional static analysis capabilities with various checks that can be run individually or in groups:</p>
+<pre><code>clang-tidy file.cpp --checks="*" --
+clang-tidy file.cpp --fix --
+</code></pre>
+<p>The <code>--fix</code> flag automatically applies fixes to issues that can be resolved automatically.</p>
+<h2>Resources and Further Information</h2>
+<p>For more detailed information about clangd and its capabilities, visit:</p>
+<ul>
+<li><a href="https://clangd.llvm.org/">clangd Website</a></li>
+<li><a href="https://clangd.llvm.org/get_started">Getting Started Guide</a></li>
+<li><a href="https://llvm.org/">LLVM Project</a></li>
+</ul>
+<p>This skill represents a significant improvement in the C/C++ development workflow, bringing modern IDE features to any text editor that supports LSP, making development more efficient and less error-prone.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bowen31337/clangd-lsp/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bowen31337/clangd-lsp/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

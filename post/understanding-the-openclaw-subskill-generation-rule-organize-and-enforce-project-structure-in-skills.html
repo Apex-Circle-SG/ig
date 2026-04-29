@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the OpenClaw Subskill Generation Rule: Organize and Enforce Project Structure in Skills</title>
+    <meta name="description" content="Learn about OpenClaw&#8217;s Subskill Generation Rule and how it helps maintain a clean and organized project structure for skills.">
+    <meta property="og:title" content="Understanding the OpenClaw Subskill Generation Rule: Organize and Enforce Project Structure in Skills">
+    <meta property="og:description" content="Learn about OpenClaw&#8217;s Subskill Generation Rule and how it helps maintain a clean and organized project structure for skills.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-openclaw-subskill-generation-rule-organize-and-enforce-project-structure-in-skills">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8484">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8484">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-openclaw-subskill-generation-rule-organize-and-enforce-project-structure-in-skills">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the OpenClaw Subskill Generation Rule: Organize and Enforce Project Structure in Skills</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <h1>Understanding the OpenClaw Subskill Generation Rule: Organize and Enforce Project Structure in Skills</h1>
+<h2>Introduction</h2>
+<p>In the realm of software development, maintaining a clean and organized project structure is crucial for efficient collaboration, easy navigation, and smooth maintenance. OpenClaw, a popular open-source project, provides a set of guidelines and rules known as the Subskill Generation Rule to help achieve this goal. This article will delve into the specifics of this rule, its purpose, and how it can be applied to your projects.</p>
+<h2>What is the Subskill Generation Rule?</h2>
+<p>The Subskill Generation Rule is a set of conventions and guidelines designed to standardize the organization of files and folders within a skill project. The primary goal of this rule is to enforce a consistent structure, making it easier for developers to understand and navigate the project. The rule applies to:</p>
+<ul>
+<li>Creating new subskills</li>
+<li>Organizing existing features</li>
+<li>Enforcing file placement conventions</li>
+<li>Keeping the skill root clean</li>
+</ul>
+<h2>The Rules</h2>
+<p>The Subskill Generation Rule comprises several key directives that must be adhered to:</p>
+<ol>
+<li><strong>Store newly generated recommendation/result artifacts in data/:</strong> This folder is intended to house all generated outputs, such as recommendations or results, ensuring they are easily accessible and separate from the source code.</li>
+<li><strong>Place newly generated code scripts in subskills=&lt;feature&gt;/:</strong> Each new feature should have its dedicated folder under the subskills directory. This helps in isolating the functionality of different features and makes the codebase more modular.</li>
+<li><strong>Use one folder per feature under subskills/:</strong> This directive emphasizes the importance of having a dedicated folder for each feature, which should include all related files, such as Python scripts and any associated documentation.</li>
+<li><strong>Add SKILL.md inside the feature folder when behavior/usage needs instructions:</strong> The SKILL.md file serves as documentation for the feature, providing insights into its behavior and usage. This file should be included in the feature folder whenever necessary to ensure that developers have access to relevant information.</li>
+<li><strong>Avoid adding one-off scripts and generated files in the main skill root:</strong> The main skill root should be kept clean and clutter-free. One-off scripts and generated files should be placed in their respective folders under subskills/ or data/.</li>
+</ol>
+<h2>Recommended Layout</h2>
+<p>The following layout is recommended to adhere to the Subskill Generation Rule:</p>
+<pre>
+&lt;skill&gt;/<br>
+  SKILL.md<br>
+  config.json<br>
+  data/<br>
+  subskills/<br>
+    &lt;feature-a&gt;<br>
+      SKILL.md<br>
+      *.py<br>
+    &lt;feature-b&gt;<br>
+      SKILL.md<br>
+      *.py<br/>
+</pre>
+<h2>Why Use the Subskill Generation Rule?</h2>
+<p>Adopting the Subskill Generation Rule offers several benefits:</p>
+<ul>
+<li><strong>Improved Organization:</strong> By enforcing a consistent project structure, the rule makes it easier to navigate the codebase and locate specific files or features.</li>
+<li><strong>Enhanced Collaboration:</strong> A well-organized project structure facilitates better collaboration among team members, as everyone understands where to find and place files.</li>
+<li><strong>Easier Maintenance:</strong> Modularizing the codebase and keeping the skill root clean simplifies the maintenance process, as changes can be made in isolation without affecting other parts of the project.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw Subskill Generation Rule is a valuable tool for maintaining a clean and organized project structure in skill projects. By adhering to its guidelines, developers can ensure improved organization, enhanced collaboration, and easier maintenance. Implementing this rule in your projects can significantly boost productivity and efficiency, making it a worthwhile investment.</p>
+<p>For more information and to explore the Subskill Generation Rule in action, visit the <a href='https://github.com/openclaw/skills'>OpenClaw skills repository on GitHub</a>.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/kenera/subskill-generation-rule/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/kenera/subskill-generation-rule/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

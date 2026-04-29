@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the OpenClaw Context Clean Up Skill</title>
+    <meta name="description" content="Learn how the OpenClaw Context Clean Up skill audits prompt context bloat and provides safe, reversible plans without making automatic changes.">
+    <meta property="og:title" content="Understanding the OpenClaw Context Clean Up Skill">
+    <meta property="og:description" content="Learn how the OpenClaw Context Clean Up skill audits prompt context bloat and provides safe, reversible plans without making automatic changes.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-openclaw-context-clean-up-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8575">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8575">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-openclaw-context-clean-up-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the OpenClaw Context Clean Up Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-10</p>
+    <h2>What is the OpenClaw Context Clean Up Skill?</h2>
+<p>The Context Clean Up skill is designed to identify and address prompt context bloat in OpenClaw systems. When your AI assistant is experiencing slow replies, rising costs, or noisy transcripts due to bloated context, this skill provides a comprehensive audit and actionable plan.</p>
+<h3>Core Purpose</h3>
+<p>This skill operates on a simple contract: audit-only by default, with no automatic deletions or unattended configuration edits. It generates a ranked list of context offenders and proposes 3-8 lowest-risk fixes with rollback notes, but never applies changes automatically.</p>
+<h2>When to Use This Skill</h2>
+<p>Use the Context Clean Up skill when:</p>
+<ul>
+<li>Prompt context is bloating, causing slow replies or rising costs</li>
+<li>Transcripts are becoming noisy and hard to parse</li>
+<li>You want to understand what&#8217;s consuming context before making changes</li>
+</ul>
+<p>Don&#8217;t use it when you need automatic deletions or want unattended configuration edits. This skill prioritizes safety and reversibility over automation.</p>
+<h2>How It Works</h2>
+<h3>Safety First Approach</h3>
+<p>The skill follows strict safety guidelines:</p>
+<ul>
+<li>No <code>exec</code> tool usage</li>
+<li>No <code>read</code> tool usage</li>
+<li>If file-level analysis is needed, run the bundled script manually and paste the JSON</li>
+</ul>
+<h3>Quick Start</h3>
+<p>To get started, simply use the <code>/context-clean-up</code> command. This will trigger an audit and provide an actionable plan without making any changes to your system.</p>
+<h2>What to Measure</h2>
+<p>The skill focuses on high-signal fields rather than subjective feelings:</p>
+<ul>
+<li>Eligible skills</li>
+<li>Skills.promptChars</li>
+<li>ProjectContextChars</li>
+<li>SystemPrompt.chars</li>
+<li>PromptTokens</li>
+</ul>
+<p>When available, the skill prefers fresh-session <code>/context</code> JSON receipts over subjective claims like &#8220;it feels leaner.&#8221;</p>
+<h2>Common Context Bloat Offenders</h2>
+<h3>Tool Result Dumps</h3>
+<p>Oversized outputs from various tools can significantly bloat context:</p>
+<ul>
+<li>Large <code>exec</code> command outputs</li>
+<li>Extensive <code>read</code> file contents</li>
+<li>Long <code>web_fetch</code> payloads</li>
+</ul>
+<h3>Automation Transcript Noise</h3>
+<p>Repetitive automation messages can accumulate:</p>
+<ul>
+<li>Cron jobs that say &#8220;OK&#8221; every run</li>
+<li>Heartbeat messages that aren&#8217;t alert-only</li>
+</ul>
+<h3>Bootstrap Reinjection Bloat</h3>
+<p>Overgrown documentation files can be reinjected repeatedly:</p>
+<ul>
+<li>Large <code>AGENTS.md</code> files</li>
+<li>Extensive <code>MEMORY.md</code> or <code>SOUL.md</code> files</li>
+<li>Long runbooks embedded directly in <code>SKILL.md</code></li>
+</ul>
+<h3>Ambient Specialist Surface</h3>
+<p>Too many always-visible specialist skills can bloat context when they should be on-demand workers or subagents.</p>
+<h3>Summary Accretion</h3>
+<p>Repeated summaries that keep historical detail instead of restart-critical facts only can accumulate over time.</p>
+<h2>Recommended Trim Ladder</h2>
+<p>The skill proposes fixes in order of increasing risk:</p>
+<h3>Phase 1 &#8211; Noise Discipline</h3>
+<p>Make no-op automation truly silent using <code>NO_REPLY</code> or nothing on success. Keep alerts out-of-band when possible.</p>
+<h3>Phase 2 &#8211; Bootstrap Slimming</h3>
+<p>Keep always-injected files short. Move long guidance to <code>references/</code>, <code>memory/</code>, or external notes.</p>
+<h3>Phase 3 &#8211; Ambient Surface Reduction</h3>
+<p>Remove low-frequency specialist skills from always-on prompt surface. Prefer worker/subagent invocation for specialist flows.</p>
+<h3>Phase 4 &#8211; Higher-Risk Changes</h3>
+<p>Tool-surface or deeper runtime/config narrowing. Only propose with stronger rollback and explicit approval.</p>
+<h2>Workflow: Audit to Plan</h2>
+<h3>Step 0 &#8211; Determine Scope</h3>
+<p>You&#8217;ll need your workspace directory and state directory (typically <code>~/.openclaw</code> on macOS/Linux or <code>%USERPROFILE%\.openclaw</code> on Windows).</p>
+<h3>Step 1 &#8211; Run the Audit Script</h3>
+<p>Execute: <code>python3 scripts/context_cleanup_audit.py --workspace . --state-dir <OPENCLAW_STATE_DIR> --out context-cleanup-audit.json</code></p>
+<h3>Step 2 &#8211; Produce a Fix Plan</h3>
+<p>The skill will include top offenders, lowest-risk fixes first, expected impact, rollback notes, and verification steps.</p>
+<h3>Step 3 &#8211; Verify</h3>
+<p>After changes, confirm automation is silent on success, check context growth flattens, and if possible, compare fresh-session <code>/context</code> JSON before/after.</p>
+<h2>Important Caveat</h2>
+<p>Many OpenClaw runtimes snapshot skills/bootstrap per session. Skill/config slimming often does not fully apply to the current session. Use a new session for authoritative verification.</p>
+<h2>References</h2>
+<p>The skill provides links to additional resources:</p>
+<ul>
+<li><a href="references/out-of-band-delivery.md">Out-of-band delivery</a></li>
+<li><a href="references/cron-noise-checklist.md">Cron noise checklist</a></li>
+</ul>
+<h2>License and Version</h2>
+<p>The Context Clean Up skill is available under the MIT license, currently at version 1.0.7.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw Context Clean Up skill provides a safe, systematic approach to managing prompt context bloat. By following its audit-only approach and implementing the recommended trim ladder, you can significantly improve your AI assistant&#8217;s performance without risking unintended consequences.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/phenomenoner/context-clean-up/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/phenomenoner/context-clean-up/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

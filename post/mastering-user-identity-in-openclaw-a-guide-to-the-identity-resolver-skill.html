@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering User Identity in OpenClaw: A Guide to the Identity-Resolver Skill</title>
+    <meta name="description" content="Learn how the OpenClaw Identity-Resolver skill unifies multi-channel user identities, solving fragmentation for agents across Discord, Telegram, and WhatsApp.">
+    <meta property="og:title" content="Mastering User Identity in OpenClaw: A Guide to the Identity-Resolver Skill">
+    <meta property="og:description" content="Learn how the OpenClaw Identity-Resolver skill unifies multi-channel user identities, solving fragmentation for agents across Discord, Telegram, and WhatsApp.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-user-identity-in-openclaw-a-guide-to-the-identity-resolver-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9197">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9197">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-user-identity-in-openclaw-a-guide-to-the-identity-resolver-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering User Identity in OpenClaw: A Guide to the Identity-Resolver Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <h1>Unified User Experiences with OpenClaw&#8217;s Identity-Resolver</h1>
+<p>In the rapidly evolving world of autonomous agents and automated workflows, one of the most persistent hurdles is identity fragmentation. As users interact with your OpenClaw agents across multiple platforms—perhaps sending a message from Telegram in the morning, a request via WhatsApp during their commute, and a command through Discord in the evening—the agent often treats these as three separate individuals. This results in disjointed memory, fragmented access control, and a poor user experience. Enter the <strong>Identity-Resolver</strong> skill, a critical component of the OpenClaw ecosystem designed to bridge these gaps.</p>
+<h2>The Core Problem: Multi-Channel Fragmentation</h2>
+<p>In a standard agent setup, each messaging channel carries its own unique user identifier. A platform like Telegram provides a numeric ID, while Discord uses a username and tag combination, and web-based interfaces might use email or session cookies. Without a translation layer, the agent cannot inherently know that &#8216;Telegram User A&#8217; and &#8216;Discord User B&#8217; are actually the same person. This leads to several technical challenges: your memory systems become siloed, access control rules fail to apply consistently, and personalization becomes impossible because your agent doesn&#8217;t have a single, holistic view of the user&#8217;s history.</p>
+<h2>The Identity-Resolver Solution</h2>
+<p>The Identity-Resolver skill acts as a middleware layer that maps various channel-specific identities to a single, &#8216;canonical&#8217; user ID. By creating a unified backbone, all your other skills—whether they deal with tiered memory, access control, or user preferences—can query this resolver to ensure they are always interacting with the correct underlying identity. It effectively turns a collection of disparate platform accounts into a single, cohesive user entity.</p>
+<h2>Key Technical Features</h2>
+<p>The beauty of this skill lies in its simplicity and robustness. Here is why it is essential for your OpenClaw deployment:</p>
+<ul>
+<li><strong>Zero Dependency Architecture:</strong> The skill is built entirely with pure Python standard library components. This ensures maximum portability and minimal overhead, making it easy to integrate into any agent environment.</li>
+<li><strong>Thread-Safe Operations:</strong> Utilizing <code>fcntl</code> file locking, the Identity-Resolver handles concurrent requests safely. In an environment where multiple messages might arrive simultaneously from different channels, this ensures the identity map remains consistent and free from corruption.</li>
+<li><strong>Path Traversal Protection:</strong> Security is paramount when dealing with user identifiers. The skill automatically sanitizes all canonical IDs, restricting them to alphanumeric characters, underscores, and hyphens to prevent malicious path traversal attempts.</li>
+<li><strong>Owner Auto-Registration:</strong> The system automatically detects the primary owner from the project&#8217;s <code>USER.md</code> file, ensuring that administrative access is set up immediately upon installation.</li>
+</ul>
+<h2>Getting Started: Installation and Setup</h2>
+<p>Installation is straightforward for those familiar with the OpenClaw workspace. The recommended approach is using ClawHub:</p>
+<p><code>clawhub install identity-resolver</code></p>
+<p>Alternatively, if you prefer manual integration via Git, you can simply clone the repository into your <code>skills/</code> directory. Once installed, the initialization process is a one-time command that sets up your identity map. From there, verifying a user&#8217;s status is as simple as running a command through the included CLI: <code>uv run python scripts/identity_cli.py resolve --channel [channel_name] --user-id [your_id]</code>.</p>
+<h2>Developer Deep-Dive: Integrating into Your Skills</h2>
+<p>For developers, the true power of the Identity-Resolver is in its Python API. By importing <code>resolve_canonical_id</code> into your own skills, you can ensure that your data storage is always keyed by a stable identifier. Imagine a memory system that stores user-specific files in a directory structure like <code>data/users/{canonical_id}/memory.json</code>. By using the resolver, it doesn&#8217;t matter if the user switched devices or platforms; their memories remain accessible.</p>
+<p>Example integration code snippet:</p>
+<p><code>from identity import resolve_canonical_id<br />channel = os.getenv("OPENCLAW_CHANNEL")<br />user_id = os.getenv("OPENCLAW_USER_ID")<br />canonical_id = resolve_canonical_id(channel, user_id)<br /># Use canonical_id for all user-specific operations</code></p>
+<h2>Practical Use Cases</h2>
+<h3>1. Unified Memory Systems</h3>
+<p>When implementing a tiered memory skill, you need to be certain that the information you are retrieving belongs to the current user, regardless of how they are reaching out to the agent. The Identity-Resolver ensures that your memory trees are indexed by the canonical ID, providing a consistent knowledge base across every channel.</p>
+<h3>2. Global Access Control</h3>
+<p>Security rules should not be bound to the platform. By checking the user&#8217;s status against their canonical ID, you can implement robust access control. For instance, you can grant administrative privileges exclusively to the owner, ensuring that even if someone manages to compromise a specific channel, the agent&#8217;s core permissions remain protected by the central identity map.</p>
+<h3>3. Cross-Platform Tracking</h3>
+<p>Perhaps you want your agent to recognize a user when they move from a desktop web interface to a mobile messaging app. The Identity-Resolver enables seamless tracking by mapping these unique interactions to the same canonical ID, allowing the agent to pick up exactly where the conversation left off.</p>
+<h2>Conclusion</h2>
+<p>The Identity-Resolver is more than just a mapping tool; it is a foundational piece of infrastructure for any serious OpenClaw agent developer. By solving the multi-channel identity problem, it empowers you to build smarter, safer, and more personalized user experiences. Whether you are building complex memory systems, granular access control, or simply trying to track users across a fragmented digital landscape, this skill provides the reliability and security you need. Start your integration today and unify your agent&#8217;s understanding of the world.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bowen31337/identity-resolver/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bowen31337/identity-resolver/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

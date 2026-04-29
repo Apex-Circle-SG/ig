@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the OpenClaw Torch Prediction Market Kit Skill</title>
+    <meta name="description" content="Learn how the OpenClaw skill enables safe, autonomous prediction markets on Solana using Torch Market’s bonding curve and vault custody.">
+    <meta property="og:title" content="Understanding the OpenClaw Torch Prediction Market Kit Skill">
+    <meta property="og:description" content="Learn how the OpenClaw skill enables safe, autonomous prediction markets on Solana using Torch Market’s bonding curve and vault custody.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-openclaw-torch-prediction-market-kit-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9156">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9156">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-openclaw-torch-prediction-market-kit-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the OpenClaw Torch Prediction Market Kit Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <p>OpenClaw’s Torch Prediction Market Kit skill is a ready‑to‑run autonomous agent that lets anyone launch and manage binary prediction markets on the Solana blockchain without needing to provide liquidity or worry about custodial risk. The skill packages the Torch SDK and a lightweight bot that reads a simple <code>markets.json</code> file, creates Torch tokens for each market, seeds them with initial liquidity from a vault you control, monitors price and volume, and resolves each market at its deadline using an oracle (CoinGecko price feed or a manual feed). All SOL used for token creation and seed liquidity flows through the vault, while the agent’s disposable keypair holds no funds of value.</p>
+<h2>Why This Skill Exists</h2>
+<p>Prediction markets are powerful tools for aggregating information, but deploying them on‑chain has traditionally required deep knowledge of AMMs, liquidity provision, and complex smart‑contract interactions. The OpenClaw skill abstracts away those complexities. By leveraging the Torch Market protocol, each market becomes a simple Torch token whose price on a bonding curve directly reflects the crowd’s belief about a binary outcome. The 10 % treasury built into the token captures trading fees, providing a sustainable revenue stream for the market creator without any extra steps.</p>
+<p>The skill is designed with safety in mind. The agent wallet is generated in‑process each time the bot starts, meaning there is no permanent private key file that could be stolen. The wallet is intentionally funded with only enough SOL to cover transaction gas (≈0.01 SOL). All valuable assets—SOL and the newly minted market tokens—reside in the vault that you, the human principal, create and fund. If the agent’s keypair were ever compromised, an attacker could only drain the negligible gas balance and would still need to break the vault link to steal any real value.</p>
+<h2>Core Components</h2>
+<ul>
+<li><strong>Vault</strong>: A Torch Vault account that holds SOL and all market tokens. You create and fund it from your authority wallet (hardware wallet, multisig, etc.). The vault is the sole custodian of value.</li>
+<li><strong>Agent Keypair</strong>: A disposable Ed25519 keypair generated at runtime. It signs transactions for token creation, liquidity seeding, and market resolution but never holds funds.</li>
+<li><strong>Markets.json</strong>: A plain‑text configuration file where you define each prediction market. Each entry includes a name, symbol, metadata URI, oracle type (price‑feed or manual), deadline, and the amount of SOL to seed.</li>
+<li><strong>Oracle</strong>: The skill defaults to CoinGecko’s public API for price feeds, requiring no API key. For non‑price outcomes you can switch to a manual oracle by updating the oracle field in <code>markets.json</code>.</li>
+<li><strong>Bonding Curve &#038; Treasury</strong>: When a market token is created, its price follows a deterministic bonding curve. Every trade incurs a 10 % fee that goes to the treasury, which accumulates inside the vault.</li>
+</ul>
+<h2>How the Market Cycle Works</h2>
+<p>The bot operates in a continuous loop governed by the <code>SCAN_INTERVAL_MS</code> environment variable (default 30 seconds). Each iteration performs the following steps:</p>
+<ol>
+<li><strong>Load Market Definitions</strong>: The bot reads <code>markets.json</code> from the working directory.</li>
+<li><strong>Create Pending Markets</strong>: For any market whose status is <code>pending</code>, the bot builds a token‑creation transaction using the Torch SDK’s <code>buildCreateTokenTransaction</code> function, signs it with the agent keypair, submits it to the Solana RPC, and waits for confirmation.</li>
+<li><strong>Seed Liquidity</strong>: Immediately after token creation, the bot calls <code>buildBuyTransaction</code> to purchase an amount of the new token directly from the vault. This seeds the bonding curve with initial liquidity, ensuring the market has a non‑zero price from the start.</li>
+<li><strong>Update Status</strong>: On success, the market’s status is switched to <code>active</code> and its mint address is stored back into <code>markets.json</code>.</li>
+<li><strong>Monitor Active Markets</strong>: For each <code>active</code> market, the bot queries the token account to get the current price, volume, and holder count.</li>
+<li><strong>Check Deadline</strong>: If the current UNIX timestamp exceeds the market’s deadline, the bot invokes the oracle:</li>
+<ul>
+<li>For a price‑feed oracle, it fetches the latest price from CoinGecko and compares it to the strike price defined in the market.</li>
+<li>For a manual oracle, it reads a user‑provided outcome flag from <code>markets.json</code>.</li>
+</ul>
+<li><strong>Resolve Market</strong>: The bot records the outcome (YES or NO) and updates the market status to <code>resolved</code>. No payout transaction is needed because the token price itself is the prediction; traders can simply sell their tokens back to the bonding curve to realize profit or loss.</li>
+<li><strong>Persist State</strong>: The updated <code>markets.json</code> is written to disk.</li>
+<li><strong>Sleep</strong>: The bot pauses for <code>SCAN_INTERVAL_MS</code> milliseconds before repeating the loop.</li>
+</ol>
+<p>Throughout this loop, every SOL transaction originates from the vault. The agent’s keypair only pays the negligible network fee, ensuring that even if the key were exposed, the attacker could not siphon meaningful funds.</p>
+<h2>Getting Started</h2>
+<ol>
+<li><strong>Install the Kit</strong>:
+<pre>npm install torch-prediction-market-kit@2.0.2</pre>
+<p>    Alternatively, you can clone the repository and use the bundled source found in <code>lib/torchsdk/</code> (the Torch SDK) and <code>lib/kit/</code> (the bot code).</li>
+<li><strong>Create and Fund a Vault</strong>:
+<p>From your authority wallet (the wallet that will retain full control), run the Torch SDK’s vault creation command:</p>
+<pre>torch-sdk create-vault --authority <YOUR_AUTHORITY_PUBKEY></pre>
+<p>    Fund the vault with the amount of SOL you wish to allocate for market seeding and transaction fees (e.g., 0.5 SOL).</li>
+<li><strong>Link the Agent Wallet</strong>:
+<p>On first run the bot will output a message like:</p>
+<blockquote><p>
+      &#8212; ACTION REQUIRED &#8212;<br />
+      agent wallet is NOT linked to the vault.<br />
+      link it by running (from your authority wallet):<br />
+      buildLinkWalletTransaction(connection, {<br />
+        authority: &#8220;<YOUR_AUTHORITY_PUBKEY>&#8220;,<br />
+        vault_creator: &#8220;<YOUR_VAULT_CREATOR_PUBKEY>&#8220;,<br />
+        wallet_to_link: &#8220;<AGENT_PUBKEY>&#8221;<br />
+      })<br />
+      then restart the bot.
+    </p></blockquote>
+<p>    Execute the displayed command using your authority wallet, then restart the bot.</li>
+<li><strong>Prepare markets.json</strong>:
+<p>Create a file named <code>markets.json</code> in the bot’s working directory. A minimal example looks like this:</p>
+<pre>[
+      {
+        "name": "Will BTC exceed $70k by 2025-12-31?",
+        "symbol": "BTC70K",
+        "uri": "https://example.com/metadata/btc70k.json",
+        "oracle": {
+          "type": "pricefeed",
+          "feed": "coingecko",
+          "token": "bitcoin",
+          "threshold": 70000
+        },
+        "deadline": 1767225600,
+        "seed_sol": 0.1
+      }
+    ]
+    </pre>
+<p>    Each object defines a binary market. Adjust the fields to suit your use case.</li>
+<li><strong>Run the Bot</strong>:
+<pre>npm start</pre>
+<p>    The bot will read the configuration, create the markets, seed liquidity, and begin monitoring.</li>
+</ol>
+<h2>Safety and Control</h2>
+<p>Because the skill sets <code>disable-model-invocation: true</code>, it cannot be triggered autonomously by an AI model without explicit user initiation. This prevents any unintended market creation or manipulation. All critical actions—vault creation, funding, and wallet linking—must be performed from your authority wallet, ensuring that you retain full custody.</p>
+<p>The agent’s disposable nature means that even in the unlikely event of a key compromise, the attacker gains nothing beyond the negligible gas balance. You can instantly revoke access by running the <code>unlinkWallet</code> instruction from your authority wallet, which removes the agent’s permission to interact with the vault without affecting any other funds.</p>
+<h2>Use Cases</h2>
+<ul>
+<li>Community‑driven event forecasting (sports outcomes, election results, product launches).</li>
+<li>Internal corporate prediction markets for project timelines or metric achievement.</li>
+<li>Educational demonstrations of on‑chain AMMs and oracle integration.</li>
+<li>Experimental financial products where the token price itself serves as the settlement mechanism.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw Torch Prediction Market Kit skill turns the sophisticated Torch Market protocol into a plug‑and‑play agent that anyone can deploy with a few commands. By isolating value in a vault you control, using a disposable agent keypair, and automating the full market lifecycle—from token creation to oracle‑based resolution—the skill offers a safe, transparent, and low‑maintenance way to run prediction markets on Solana. Whether you are a hobbyist looking to experiment with crowdsourced forecasts or a developer seeking a composable building block for larger DeFi applications, this kit provides the necessary tools, documentation, and safety guarantees to get started quickly and confidently.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/mrsirg97-rgb/torchpredictionmarketkit/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/mrsirg97-rgb/torchpredictionmarketkit/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

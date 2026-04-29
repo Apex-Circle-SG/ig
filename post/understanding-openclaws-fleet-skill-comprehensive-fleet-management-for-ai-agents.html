@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding OpenClaw&#8217;s Fleet Skill: Comprehensive Fleet Management for AI Agents</title>
+    <meta name="description" content="Explore the Fleet skill in OpenClaw, a powerful tool for managing AI agent workflows and ensuring smooth operations.">
+    <meta property="og:title" content="Understanding OpenClaw&#8217;s Fleet Skill: Comprehensive Fleet Management for AI Agents">
+    <meta property="og:description" content="Explore the Fleet skill in OpenClaw, a powerful tool for managing AI agent workflows and ensuring smooth operations.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-openclaws-fleet-skill-comprehensive-fleet-management-for-ai-agents">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8973">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8973">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-openclaws-fleet-skill-comprehensive-fleet-management-for-ai-agents">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding OpenClaw&#8217;s Fleet Skill: Comprehensive Fleet Management for AI Agents</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <h1><b>Understanding OpenClaw&#8217;s Fleet Skill: Comprehensive Fleet Management for AI Agents</b></h1>
+<p>Welcome to a deep dive into the Fleet skill within the OpenClaw framework, a robust tool designed for managing a fleet of AI agent gateways. This skill is tailored for coordinator AI agents, providing them with the ability to monitor, manage, and dispatch tasks to their fleet efficiently. Let&#8217;s break down what this skill does, its security model, and how it operates within a defined trust boundary.</p>
+<h2><b>Introduction to OpenClaw and the Fleet Skill</b></h2>
+<p>OpenClaw is a revolutionary framework that enables AI agents to work collaboratively, forming a cohesive fleet to tackle complex tasks. The Fleet skill is a specialized toolkit built for coordinator AI agents, empowering them to manage and optimize the performance of their fleet autonomously.</p>
+<p>The Fleet skill is designed to be seamless and efficient, ensuring that the coordinator agent can perform its duties without unnecessary interruptions. It is crucial to understand that this skill operates within strict parameters set by the operator, ensuring that all actions are transparent and controlled.</p>
+<h2><b>Main Features and Capabilities</b></h2>
+<p>The Fleet skill offers a wide range of functionalities to manage and monitor the fleet effectively. Here are some of the key capabilities:</p>
+<ul>
+<li><b>Check Agents:</b> Monitor the status of all agents in the fleet.</li>
+<li><b>Dispatch Tasks:</b> Assign tasks to specific agents or the entire fleet.</li>
+<li><b>Health Check:</b> Perform regular checks to ensure all agents are operational.</li>
+<li><b>Parallel Tasks:</b> Distribute tasks across multiple agents for efficient execution.</li>
+<li><b>Backup Config:</b> Backup configuration files for disaster recovery.</li>
+<li><b>Show Agents:</b> Display a list of all agents in the fleet.</li>
+<li><b>Report Generation:</b> Generate detailed reports on fleet status and performance.</li>
+</ul>
+<p>These features ensure that the coordinator agent can maintain a high level of efficiency and effectiveness in managing the fleet.</p>
+<h2><b>Security Model and Trust Boundary</b></h2>
+<p>The Fleet skill operates within a strictly defined trust boundary to ensure the security and integrity of the system. Here are some of the key aspects of the security model:</p>
+<ul>
+<li><b>Network Scope:</b> The Fleet skill only makes HTTP connections to the operator&#8217;s own agent gateways (127.0.0.1) and GitHub API for CI status reads.</li>
+<li><b>Filesystem Scope:</b> The skill reads and writes only within the operator&#8217;s home directory, ensuring no unauthorized access to other parts of the system.</li>
+<li><b>Credential Scope:</b> The skill reads auth tokens from the operator&#8217;s own config files and never transmits them outside the loopback.</li>
+<li><b>Privilege Scope:</b> The Fleet skill never calls <code>sudo</code> or requests elevated permissions, operating solely within the limits of the installing user&#8217;s permissions.</li>
+</ul>
+<p>These measures ensure that the Fleet skill operates securely and within the boundaries set by the operator.</p>
+<h2><b>Auto-Setup and Initial Configuration</b></h2>
+<p>The auto-setup process for the Fleet skill is designed to be seamless and non-intrusive. It ensures that the fleet binary is usable on first run, with minimal intervention required from the operator. Here are the steps involved in the auto-setup process:</p>
+<ol>
+<li><b>Make the Binary Executable:</b> The setup process ensures that the fleet binary is executable.</li>
+<li><b>Symlink into ~/.local/bin:</b> A symlink is created in the standard user-local bin directory (~/.local/bin) to ensure easy access to the fleet binary.</li>
+<li><b>Add to PATH:</b> The setup process adds the PATH export to the user&#8217;s shell rc file if ~/.local/bin is not already on PATH.</li>
+</ol>
+<p>This process is designed to be non-invasive and operates only within the operator&#8217;s home directory, ensuring no system-wide changes are made.</p>
+<h2><b>Quick Reference for Common Tasks</b></h2>
+<p>For coordinator AI agents, the Fleet skill provides a quick reference for common tasks:</p>
+<ol>
+<li><b>Send a Task to an Agent:</b> Use <code>fleet task coder<br /> "add pagination to /api/spots"</code> to dispatch a task.</li>
+<li><b>Watch Agent Activity:</b> Use <code>fleet watch coder</code> to monitor what an agent is doing.</li>
+<li><b>Send Mid-Task Correction:</b> Use <code>fleet steer coder<br /> "also add rate limiting"</code> to send corrections.</li>
+<li><b>Stop an Agent&#8217;s Current Task:</b> Use <code>fleet kill coder</code> to halt an agent&#8217;s current task.</li>
+<li><b>See Recent Dispatches:</b> Use <code>fleet log</code> to review dispatch history.</li>
+</ol>
+<p>These commands provide the coordinator agent with the tools needed to manage the fleet effectively and efficiently.</p>
+<h2><b>Subordinate Consent Instructions</b></h2>
+<p>For subordinate agents, consent instructions ensure that they are aware of the actions being taken by the coordinator agent. This includes:</p>
+<ul>
+<li><b>Providing Context:</b> Explain the purpose of the action and what the agent will do.</li>
+<li><b>Asking for Agreement:</b> Display an actionable prompt with clear options to agree or disagree.</li>
+<li><b>Documenting the Fleetsitrep:</b> Maintain a log of commands and their states.</li>
+<li><b>Allowing Direct Action:</b> Provide options for each listed task.</li>
+<li><b>Executing Confirmed Commands:</b> Perform the action after receiving sufficient confirmation.</li>
+<li><b>Documenting Execution:</b> Log confirmation and execution details.</li>
+</ul>
+<p>These instructions ensure that subordinate agents are fully informed and consent to the actions being taken.</p>
+<h2><b>Conclusion</b></h2>
+<p>The Fleet skill in OpenClaw is a powerful tool for managing and optimizing a fleet of AI agent gateways. It operates within a strictly defined trust boundary, ensuring security and integrity. The auto-setup process is seamless and non-intrusive, while the quick reference for common tasks provides the coordinator agent with the tools needed for effective fleet management.</p>
+<p>By understanding the capabilities, security model, and auto-setup process of the Fleet skill, operators and coordinator agents can work together efficiently and securely to achieve their goals.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/oguzhnatly/fleet/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/oguzhnatly/fleet/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

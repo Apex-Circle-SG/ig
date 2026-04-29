@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding OpenClaw&#8217;s Agent OS Skill: Persistent Multi‑Agent Orchestration</title>
+    <meta name="description" content="Discover how the Agent OS skill gives OpenClaw agents memory, learning, and coordination for complex projects.">
+    <meta property="og:title" content="Understanding OpenClaw&#8217;s Agent OS Skill: Persistent Multi‑Agent Orchestration">
+    <meta property="og:description" content="Discover how the Agent OS skill gives OpenClaw agents memory, learning, and coordination for complex projects.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-openclaws-agent-os-skill-persistent-multi-agent-orchestration">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9152">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9152">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-openclaws-agent-os-skill-persistent-multi-agent-orchestration">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding OpenClaw&#8217;s Agent OS Skill: Persistent Multi‑Agent Orchestration</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <article>
+<h1>What the Agent OS Skill Does in OpenClaw</h1>
+<p>OpenClaw is a framework that lets developers compose autonomous agents to solve real‑world problems. One of its most powerful building blocks is the <strong>Agent OS</strong> skill, found at <code>skills/skills/cryptocana/agent-os/SKILL.md</code> in the official repository. This skill transforms a collection of stateless workers into a coordinated, memory‑enabled operating system for agents. Below is a detailed walk‑through of its core capabilities, architecture, and practical usage.</p>
+<h2>Persistent Agent Memory</h2>
+<p>The defining feature of Agent OS is that each agent retains a personal memory across sessions. Whenever an agent finishes a task, it writes two JSON files to the <code>data/</code> folder: <code>[agent-id]-memory.json</code> and <code>[agent-id]-state.json</code>. The memory file stores lessons learned, success rates, and a historical log of every task the agent has attempted. The state file captures the agent’s current task, progress percentage, and any blockers. Because this data lives on disk, shutting down the process or restarting the machine does not erase an agent’s experience. When the system boots again, Agent OS reloads these files, giving each worker instant access to its past performance.</p>
+<p>This persistence solves a common problem in LLM‑based agents: the need to re‑inject the same context over and over, which wastes tokens and increases cost. By keeping a compact summary of what worked and what did not, agents can make better decisions without repeatedly prompting the model with large blocks of text.</p>
+<h2>Task Decomposition and Smart Routing</h2>
+<p>Agent OS includes a <strong>TaskRouter</strong> component that turns high‑level goals into concrete, executable steps. When you call <code>runProject(goal, taskTypes)</code>, the router first breaks the goal into a sequence of task types—for example, turning “Build a feature” into <em>planning → design → development → testing</em>. Each task type is matched against the list of registered agents and their declared capabilities.</p>
+<p>The matcher uses a simple fitness score: an agent receives a point for each capability it shares with the task type. The agent with the highest score is assigned the task. If multiple agents tie, the router prefers the one with the best historical success rate stored in memory. This ensures that work is routed to the most suitable worker while still allowing less‑experienced agents to gain experience on simpler tasks.</p>
+<h2>Execution Tracking and Live Progress</h2>
+<p>Once tasks are assigned, the <strong>Executor</strong> runs them sequentially (with plans for parallel DAG execution in future releases). As each task proceeds, the executor calls the agent’s <code>updateProgress(percentage, message)</code> method, which updates the agent’s state file and, if a dashboard is enabled, pushes the information to a live HTML UI.</p>
+<p>The dashboard (<code>ui/dashboard.html</code>) provides a real‑time kanban‑style board showing every agent’s current task, completion percentage, and any active blockers. This visibility makes it easy for humans to intervene when an agent stalls, and it gives developers a clear audit trail of what happened during a run.</p>
+<h2>State Persistence and Project Resumability</h2>
+<p>Beyond per‑agent memory, Agent OS persists the entire project state in <code>[project-id]-project.json</code>. This file contains the ordered list of tasks, each task’s status (pending, in‑progress, completed, blocked), and any output produced so far. If the process crashes after completing five of twelve tasks, a subsequent call to <code>runProject</code> with the same project ID will load the project file, skip the already‑finished tasks, and resume at task six.</p>
+<p>This feature is invaluable for long‑running workflows such as multi‑day research projects, iterative software development, or any scenario where you cannot guarantee uninterrupted uptime. It also enables checkpoint‑based debugging: you can inspect the project file after each step to verify intermediate results.</p>
+<h2>Core Components Overview</h2>
+<ul>
+<li><strong>Agent class</strong> (<code>core/agent.js</code>) – Encapsulates memory, state, capabilities, and methods like <code>startTask</code>, <code>completeTask</code>, <code>recordError</code>, and <code>learnLesson</code>.</li>
+<li><strong>TaskRouter class</strong> (<code>core/task-router.js</code>) – Implements goal decomposition, capability matching, dependency tracking, and utilities such as <code>getNextTask</code> and <code>canExecuteTask</code>.</li>
+<li><strong>Executor class</strong> (<code>core/executor.js</code>) – Drives the sequential execution loop, handles errors, and persists state after each task.</li>
+<li><strong>AgentOS class</strong> (<code>core/index.js</code>) – The public façade that exposes registration, initialization, project execution, and status querying methods.</li>
+</ul>
+<h2>API Reference at a Glance</h2>
+<p>Using Agent OS in a Node.js project is straightforward:</p>
+<ol>
+<li>Install via ClawHub: <code>clawhub install nova/agent-os</code></li>
+<li>Require the main class:</li>
+<li><code>const { AgentOS } = require('agent-os');</code></li>
+<li>Create an instance, optionally passing a project ID:</li>
+<li><code>const os = new AgentOS('my‑project');</code></li>
+<li>Register agents with unique IDs, display names, and capability arrays:</li>
+<li><code>os.registerAgent('research', '🔍 Research', ['research', 'planning']);</code></li>
+<li><code>os.registerAgent('design', '🎨 Design', ['design', 'planning']);</code></li>
+<li><code>os.registerAgent('dev', '💻 Development', ['development']);</code></li>
+<li>Initialize the system (loads existing state from disk):</li>
+<li><code>await os.initialize();</code></li>
+<li>Run a project by supplying a goal string and an ordered list of task types:</li>
+<li><code>const result = await os.runProject('Build a feature', ['planning', 'design', 'development']);</code></li>
+<li>Retrieve progress or full status via <code>os.getStatus()</code> or <code>os.getAgentStatus(agentId)</code>.</li>
+</ol>
+<p>The returned <code>result</code> object contains a <code>progress</code> field (0‑100) and an array of per‑task outputs, making it easy to log or forward to other systems.</p>
+<h2>Example Workflow: Research → Design → Development</h2>
+<p>The repository includes an illustrative example at <code>examples/research-project.js</code>. Running <code>npm start</code> in that folder produces output similar to:</p>
+<pre>Registered 3 agents
+📋 Task Plan: 12 tasks
+🚀 Starting execution...
+✅ [Task 1] Complete
+✅ [Task 2] Complete
+...
+📊 PROJECT COMPLETE - 100% progress</pre>
+<p>In this scenario:</p>
+<ul>
+<li>The research agent gathers requirements, creates a specification, and records lessons about ambiguous user stories.</li>
+<li>The design agent receives the spec, produces wireframes, and updates its memory with UI patterns that received positive feedback.</li>
+<li>The development agent implements the features, logs any bugs, and updates its success rate for each component type.</li>
+<li>All three agents write their memory and state after every step, so if you stop after the design phase and restart later, the development agent will pick up exactly where it left off, without needing to re‑read the spec.</li>
+</ul>
+<h2>Roadmap: What’s Coming in v0.2+</h2>
+<p>The Agent OS skill is actively evolving. Planned enhancements include:</p>
+<ul>
+<li>An HTTP server that serves the live dashboard remotely, enabling team‑wide monitoring.</li>
+<li>Parallel task execution using a directed‑acyclic‑graph (DAG) solver to run independent tasks concurrently.</li>
+<li>A capability‑learning system that automatically adjusts agent scores based on outcomes, reducing the need for manual capability tuning.</li>
+<li>Improved smart routing that factors in current workload, estimated duration, and historical variance.</li>
+<li>Failure recovery with exponential back‑off and retry logic for transient errors.</li>
+<li>Token‑usage tracking per agent to help optimize cost.</li>
+<li>Human checkpoints for high‑risk outputs, allowing a reviewer to approve or request revisions before proceeding.</li>
+</ul>
+<h2>Philosophical Underpinnings</h2>
+<p>Agent OS embodies the idea that agents should <em>remember what they learn</em>. Traditional agent frameworks treat each invocation as a blank slate, forcing developers to repeatedly inject context, which not only inflates token costs but also prevents agents from benefitting from experience. By contrast, Agent OS treats memory as a first‑class citizen:</p>
+<ul>
+<li><strong>Remember</strong> – Agents retain a compact history, eliminating redundant context resets.</li>
+<li><strong>Learn</strong> – Success rates and lessons improve over time, yielding better task allocations.</li>
+<li><strong>Coordinate</strong> – Shared project state prevents duplicate work and clarifies dependencies.</li>
+<li><strong>Cost less</strong> – Smaller prompts mean lower API usage and faster responses.</li>
+</ul>
+<h2>Getting Started</h2>
+<p>To try Agent OS today:</p>
+<ol>
+<li>Clone the OpenClaw skills repository: <code>git clone https://github.com/openclaw/skills.git</code></li>
+<li>Navigate to <code>skills/skills/cryptocana/agent-os</code>.</li>
+<li>Run <code>npm install</code> to fetch dependencies.</li>
+<li>Start the example: <code>npm run example</code> or <code>node examples/research-project.js</code>.</li>
+<li>Observe the live dashboard at <code>http://localhost:3000/ui/dashboard.html</code> (if the server feature is enabled) or inspect the generated JSON files in the <code>data/</code> folder.</li>
+</ol>
+<p>Because the skill is MIT‑licensed, you are free to adapt it for commercial or research projects. The modular design lets you replace the storage layer (e.g., swap JSON files for a database) or extend the TaskRouter with domain‑specific templates without touching the core orchestration logic.</p>
+<h2>Conclusion</h2>
+<p>The Agent OS skill equips OpenClaw with a persistent, multi‑agent operating system that transforms fleeting, stateless workers into knowledgeable, cooperative teammates. By providing durable memory, intelligent task routing, real‑time progress tracking, and seamless project resumability, it addresses the most common pain points in LLM‑driven automation: context waste, duplicated effort, and fragile workflows. Whether you are building a simple research assistant or a complex software‑development pipeline, Agent OS offers the foundation needed to create agents that not only execute tasks but also get better at them over time.</p>
+</article>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/cryptocana/agent-os/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/cryptocana/agent-os/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

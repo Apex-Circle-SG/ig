@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding hex-vetter: Physical-Layer Hex Auditing for Skill Security</title>
+    <meta name="description" content="hex-vetter performs deep hex-level analysis of files to detect what text-based reviewers miss, designed for security audits of skill packages to detect hidden p">
+    <meta property="og:title" content="Understanding hex-vetter: Physical-Layer Hex Auditing for Skill Security">
+    <meta property="og:description" content="hex-vetter performs deep hex-level analysis of files to detect what text-based reviewers miss, designed for security audits of skill packages to detect hidden p">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-hex-vetter-physical-layer-hex-auditing-for-skill-security">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9211">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9211">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-hex-vetter-physical-layer-hex-auditing-for-skill-security">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding hex-vetter: Physical-Layer Hex Auditing for Skill Security</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-18</p>
+    <h2>What is hex-vetter?</h2>
+<p>hex-vetter is a physical-layer hex auditing skill that performs deep hex-level analysis of files to detect what text-based reviewers miss. It&#8217;s designed specifically for security audits of skill packages, detecting hidden payloads, obfuscated code, and suspicious binary data that could pose security risks.</p>
+<h2>Why Physical-Layer Analysis Matters</h2>
+<p>Traditional text-based code review methods can miss critical security issues because they only examine the surface level of files. Malicious actors often hide dangerous content using various techniques:</p>
+<ul>
+<li>Binary injection through null bytes</li>
+<li>Control characters that manipulate terminal behavior</li>
+<li>Unicode directional overrides that hide text</li>
+<li>Base64 or other encoded payloads</li>
+<li>Known malware signatures</li>
+</ul>
+<p>hex-vetter addresses these blind spots by examining files at the hex level, where the actual binary data lives regardless of how it&#8217;s presented in text editors or IDEs.</p>
+<h2>Core Features and Detection Capabilities</h2>
+<p>The skill detects multiple categories of suspicious content:</p>
+<h3>Binary Injection Detection</h3>
+<p>Null bytes (0x00) are a common sign of binary injection or file padding. These can be used to trick parsers or hide malicious content between legitimate text. hex-vetter flags any occurrence of null bytes as a potential security concern.</p>
+<h3>Control Character Analysis</h3>
+<p>Control characters (0x01-0x1F) can create hidden terminal sequences that manipulate how text is displayed or processed. These characters might be used to hide malicious commands or create confusing visual presentations that deceive users.</p>
+<h3>Unicode Manipulation Detection</h3>
+<p>Unicode directional overrides like LRO (Left-to-Right Override) and RLO (Right-to-Left Override) can be used to reverse text direction, potentially hiding malicious content or creating confusing command sequences.</p>
+<h3>Encoding Analysis</h3>
+<p>A high ratio of non-ASCII bytes often indicates Base64 encoding or other encoding schemes that might be hiding malicious payloads. hex-vetter analyzes the distribution of byte values to detect suspicious encoding patterns.</p>
+<h3>Signature Matching</h3>
+<p>The skill includes a database of known magic bytes and signatures that can identify specific file types or known malicious patterns. This helps detect malware, compressed archives, or other suspicious file formats.</p>
+<h2>Installation and Usage</h2>
+<h3>Command Line Interface</h3>
+<p>hex-vetter provides a simple command-line interface for scanning files and directories:</p>
+<pre><code>git clone https://github.com/Matrix-Meta/hex-vetter.git
+cd hex-vetter
+npm install
+</code></pre>
+<p>Basic usage includes:</p>
+<pre><code># Scan a single file
+node vet.js &lt;file_path&gt;
+
+# Scan a directory recursively
+node scan_all.js &lt;directory_path&gt;
+
+# Verify file integrity
+node verify.js &lt;file_path&gt;
+</code></pre>
+<h3>Programmatic API</h3>
+<p>For integration into larger systems, hex-vetter provides a Node.js module interface:</p>
+<pre><code>const { scanFile } = require('./vet.js');
+const result = await scanFile('/path/to/file.bin');
+console.log(result.riskLevel); // 'LOW', 'MEDIUM', 'HIGH'
+console.log(result.flags); // Array of detected issues
+console.log(result.hexDump); // Formatted hex output
+</code></pre>
+<h2>Understanding Risk Levels</h2>
+<p>hex-vetter classifies findings into three risk levels:</p>
+<ul>
+<li><strong>🟢 LOW</strong>: Normal file, no suspicious content detected</li>
+<li><strong>🟡 MEDIUM</strong>: Some flags detected, manual review recommended</li>
+<li><strong>🔴 HIGH</strong>: Significant suspicious content, MUST be manually reviewed</li>
+</ul>
+<p>The risk assessment is heuristic-based, meaning it uses patterns and probabilities rather than absolute certainty. This approach helps catch potential issues while minimizing false positives.</p>
+<h2>Security Policy and Mandatory Review</h2>
+<p>hex-vetter enforces a strict security policy: any file flagged as HIGH RISK must be manually inspected by a human or trusted agent before the skill is used. This mandatory review process ensures that potentially dangerous content doesn&#8217;t slip through automated analysis.</p>
+<h3>Common False Positives</h3>
+<p>The system acknowledges that some legitimate files may trigger warnings. Common false positives include:</p>
+<ul>
+<li>.env mentions in .npmignore files</li>
+<li>Documentation with encoded examples</li>
+<li>Compressed assets and binary files</li>
+</ul>
+<h3>Agent Action Requirements</h3>
+<p>When an agent performs an audit and finds HIGH RISK content, it must:</p>
+<ol>
+<li>Notify the user immediately</li>
+<li>Provide the specific reason for the flag (e.g., signature match vs. binary data)</li>
+<li>Suggest next steps for manual review</li>
+</ol>
+<h2>Technical Architecture</h2>
+<p>The hex-vetter project is organized into several key components:</p>
+<ul>
+<li><strong>starfragment.js</strong>: Core module with self-modifying storage capabilities</li>
+<li><strong>scan_all.js</strong>: Recursive directory scanner</li>
+<li><strong>verify.js</strong>: Integrity verification module</li>
+<li><strong>vet.js</strong>: Main entry point for file scanning</li>
+</ul>
+<h3>Self-Modifying Storage</h3>
+<p>One of the most interesting technical features is the use of self-modifying storage in the starfragment.js module. This module reads and writes data from/to its own file at runtime, storing constants as valid JavaScript comments at the end of the source file. This approach allows for persistent storage without external dependencies while maintaining the file&#8217;s executable nature.</p>
+<h2>API Reference</h2>
+<h3>scanFile() Function</h3>
+<p>The primary scanning function analyzes a single file and returns comprehensive results:</p>
+<pre><code>const result = await scanFile('./somefile.js');
+// Returns: { riskLevel, flags, hexDump, details }
+</code></pre>
+<p>The result object includes the overall risk level, an array of specific flags detected, a formatted hex dump for manual inspection, and detailed analysis information.</p>
+<h3>scanDirectory() Function</h3>
+<p>For bulk analysis, the scanDirectory function recursively scans all files in a directory:</p>
+<pre><code>const results = await scanDirectory('./skills/');
+// Returns: Array of scan results for each file
+</code></pre>
+<h3>verifyIntegrity() Function</h3>
+<p>Integrity verification ensures files haven&#8217;t been tampered with:</p>
+<pre><code>const result = await verifyIntegrity('./starfragment.js');
+// Returns: { valid, expected, actual }
+</code></pre>
+<h2>Contributing and Development</h2>
+<p>The hex-vetter project welcomes contributions through GitHub. The modular architecture makes it easy to extend detection capabilities or improve existing analysis algorithms. Contributors can add new detection patterns, improve false positive handling, or enhance the reporting interface.</p>
+<h2>Real-World Applications</h2>
+<p>hex-vetter is particularly valuable in several scenarios:</p>
+<h3>Skill Marketplace Security</h3>
+<p>For platforms that host and distribute skills or plugins, hex-vetter provides automated security screening to prevent malicious content from being distributed to users.</p>
+<h3>Enterprise Development</h3>
+<p>Organizations can use hex-vetter to enforce security policies on third-party code before it&#8217;s integrated into their systems, reducing the risk of supply chain attacks.</p>
+<h3>Educational Environments</h3>
+<p>In educational settings where students share code, hex-vetter helps ensure that shared content doesn&#8217;t contain hidden malicious payloads or inappropriate content.</p>
+<h2>Future Enhancements</h2>
+<p>Potential future developments for hex-vetter include:</p>
+<ul>
+<li>Machine learning-based anomaly detection</li>
+<li>Integration with popular CI/CD pipelines</li>
+<li>Support for additional file formats and encoding schemes</li>
+<li>Real-time scanning for development environments</li>
+<li>Enhanced reporting with actionable remediation steps</li>
+</ul>
+<h2>Conclusion</h2>
+<p>hex-vetter represents a crucial advancement in security auditing for skill packages and similar code distribution systems. By examining files at the physical layer rather than just the text layer, it catches threats that traditional code review would miss. The combination of comprehensive detection capabilities, clear risk assessment, and mandatory review policies makes it an essential tool for anyone serious about software security.</p>
+<p>As the software ecosystem continues to evolve and threats become more sophisticated, tools like hex-vetter that look beyond surface-level analysis will become increasingly important for maintaining security and trust in distributed software systems.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/matrix-meta/hex-vetter/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/matrix-meta/hex-vetter/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

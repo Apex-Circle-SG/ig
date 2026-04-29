@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LobsterGuard Explained: OpenClaw’s Bilingual Security Auditor &#038; Shield</title>
+    <meta name="description" content="Discover how LobsterGuard audits OpenClaw with 68 checks, 11 auto‑fixes, OWASP coverage and real‑time threat interception.">
+    <meta property="og:title" content="LobsterGuard Explained: OpenClaw’s Bilingual Security Auditor &#038; Shield">
+    <meta property="og:description" content="Discover how LobsterGuard audits OpenClaw with 68 checks, 11 auto‑fixes, OWASP coverage and real‑time threat interception.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/lobsterguard-explained-openclaws-bilingual-security-auditor-shield">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9294">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9294">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/lobsterguard-explained-openclaws-bilingual-security-auditor-shield">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>LobsterGuard Explained: OpenClaw’s Bilingual Security Auditor &#038; Shield</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-19</p>
+    <h1>LobsterGuard Explained: OpenClaw’s Bilingual Security Auditor &#038; Shield</h1>
+<p>OpenClaw is a modular AI agent framework that lets users load skills, run automations, and extend functionality through community contributions. As the ecosystem grows, so does the attack surface. LobsterGuard steps in as a dedicated security skill that audits, hardens, and protects OpenClaw installations. Below is a deep‑dive into what LobsterGuard does, how it works, and why it matters for anyone running OpenClaw.</p>
+<h2>Core Identity and Purpose</h2>
+<p>LobsterGuard describes itself as a &#8220;bilingual security auditor for OpenClaw.&#8221; The term bilingual refers to its ability to communicate with users in both English and Spanish, switching language based on the user’s input or a simple prompt. Its primary mission is to scan the host system and the OpenClaw skill library for security weaknesses, present findings in a clear, actionable format, and optionally apply fixes—always with explicit user consent.</p>
+<p>The skill is versioned at 6.1.0 and is maintained by the GitHub user <code>jarb02</code> in the <a href='https://github.com/jarb02/lobsterguard'>openclaw/skills</a> repository. It is released under an open‑source license, encouraging review and community contributions.</p>
+<h2>What LobsterGuard Checks: 68 Tests Across Six Categories</h2>
+<p>When invoked, LobsterGuard runs a total of 68 individual checks. These checks are grouped into six logical categories, each targeting a different facet of system and OpenClaw security:</p>
+<ul>
+<li><strong>System Security</strong> – examines firewall rules (UFW), kernel parameters via sysctl, core dump settings, and temporary directory permissions.</li>
+<li><strong>OpenClaw Configuration</strong> – audits file permissions, environment variables, skill manifest files, and whether the OpenClaw service runs as a dedicated non‑root user.</li>
+<li><strong>Network Security</strong> – scans for open ports, exposed services, and validates SSL/TLS configurations where applicable.</li>
+<li><strong>OWASP Agentic AI Top 10</strong> – maps directly to the OWASP Top 10 for agentic AI systems, covering prompt injection, tool poisoning, rogue agents, insecure output handling, RAG data poisoning, and related threats.</li>
+<li><strong>Forensic Detection</strong> – looks for signs of tampering, unexpected processes, unauthorized file modifications, and anomalous log entries.</li>
+<li><strong>Skill Ecosystem</strong> – evaluates third‑party skills for malicious behavior, dependency risks, excessive permission requests, and version mismatches.</li>
+</ul>
+<p>Each check returns a pass/fail status. Failed checks that have an associated remediation are marked with the tag <code>[auto‑fix]</code>, indicating that LobsterGuard can automatically apply a corrective action after user approval.</p>
+<h2>Auto‑Fix Capabilities: Eleven Safe Remediations</h2>
+<p>Out of the 68 checks, 11 support automatic fixing. These remediations are designed to be low‑risk, reversible, and transparent. The auto‑fix categories are:</p>
+<ul>
+<li><strong>Firewall</strong> – configures UFW to restrict inbound/outbound traffic to only necessary ports.</li>
+<li><strong>Backups</strong> – sets up a simple automated backup script for OpenClaw data and skill directories.</li>
+<li><strong>Kernel Hardening</strong> – applies sysctl tweaks such as disabling IP forwarding, enabling source route verification, and tightening memory protections.</li>
+<li><strong>Core Dump Protection</strong> – disables core dumps for services that do not need them, reducing information leakage.</li>
+<li><strong>Auditd Logging</strong> – installs and configures the Linux Auditing System (auditd) to log privileged operations.</li>
+<li><strong>Sandbox Mode</strong> – enables restrictive namespaces (user, mount, network) for skill execution where possible.</li>
+<li><strong>Environment Leakage</strong> – scrubs dangerous environment variables (e.g., <code>LD_PRELOAD</code>, <code>PYTHONPATH</code>) before launching skills.</li>
+<li><strong>Temporary Directory Security</strong> – sets <code>noexec</code> and <code>nosuid</code> flags on <code>/tmp</code> and <code>/var/tmp</code> via mount options or bind mounts.</li>
+<li><strong>Code Execution Sandbox</strong> – wraps skill execution in a lightweight container or seccomp‑filtered process.</li>
+<li><strong>Systemd Hardening</strong> – adds protective directives like <code>ProtectSystem=full</code>, <code>PrivateTmp=yes</code>, and <code>NoNewPrivileges=yes</code> to OpenClaw‑related service units.</li>
+<li><strong>OpenClaw User Migration</strong> – creates a dedicated system user, moves OpenClaw files to that user’s home, and adjusts ownership and permissions.</li>
+</ul>
+<p>When a user consents to an auto‑fix, LobsterGuard follows a strict four‑step workflow: generate a plan, display the plan, obtain explicit confirmation, execute each step sequentially, verify the outcome, and offer rollback on any failure. This ensures that no change is applied without the user’s full awareness and approval.</p>
+<h2>Real‑Time Threat Interception: The Gateway Shield Plugin</h2>
+<p>Beyond periodic scanning, LobsterGuard ships with a gateway plugin that runs as a man‑in‑the‑middle layer between the user and the OpenClaw core. The plugin inspects every incoming prompt and outgoing response for known attack patterns. It currently matches 31 signatures, including:</p>
+<ul>
+<li>Prompt injection attempts (e.g., &#8220;Ignore previous instructions…&#8221;)</li>
+<li>Path traversal sequences (<code>../</code> repetitions)</li>
+<li>Command injection patterns (<code>;</code>, <code>&amp;</code>, backticks)</li>
+<li>Script tags and HTML injection attempts</li>
+<li>Unexpected binary payloads encoded in base64</li>
+</ul>
+<p>When a pattern is detected, the plugin can:</p>
+<ul>
+<li>Block the request and return a safe error message.</li>
+<li>Log the event locally for forensic review.</li>
+<li>Optionally send a concise alert to the user’s personal Telegram bot (see the Telegram integration section).</li>
+<li>Quarantine the offending skill automatically, preventing further execution until the user reviews it.</li>
+</ul>
+<p>All inspection is performed via pattern matching; no content is sent outside the machine except the optional Telegram notification, which is strictly limited to the user‑owned bot.</p>
+<h2>Telegram Integration: Alerts Without Exposure</h2>
+<p>LobsterGuard respects a strict privacy‑by‑design policy. The only external communication it ever makes is to the Telegram Bot API, using the user‑provided <code>TELEGRAM_BOT_TOKEN</code> and <code>TELEGRAM_CHAT_ID</code> environment variables. Through this channel it can:</p>
+<ul>
+<li>Deliver scan results after a manual or scheduled check.</li>
+<li>Notify the user when a threat is blocked by the gateway shield.</li>
+<li>Report the outcome of an auto‑fix operation (success or failure).</li>
+<li>Accept simple commands like <code>/scan</code>, <code>/fixlist</code>, <code>/fixfw</code> to trigger actions from within Telegram.</li>
+</ul>
+<p>No telemetry, analytics, or usage data is ever transmitted to third‑party services. All logs, reports, and quarantine files remain stored locally under <code>~/.openclaw/skills/lobsterguard/data/</code>.</p>
+<h2>Installation and First‑Run Workflow</h2>
+<p>Getting LobsterGuard up and running is streamlined via an included <code>install.sh</code> script. The steps are:</p>
+<ol>
+<li>Clone the repository: <code>git clone https://github.com/jarb02/lobsterguard.git</code></li>
+<li>Enter the directory: <code>cd lobsterguard</code></li>
+<li>Make the installer executable: <code>chmod +x install.sh</code></li>
+<li>Run the installer: <code>./install.sh</code></li>
+</ol>
+<p>The installer performs the following actions:</p>
+<ul>
+<li>Copies the Python and Bash scripts to <code>~/.openclaw/skills/lobsterguard/</code>.</li>
+<li>Places the gateway extension (JavaScript bundle) into <code>~/.openclaw/extensions/lobsterguard-shield/</code>.</li>
+<li>Installs three systemd user services: <code>lobsterguard-autoscan.service</code> (periodic full scans), <code>lobsterguard-autoscan.timer</code> (to trigger the service), and <code>lobsterguard-quarantine.service</code> (to monitor the quarantine directory).</li>
+<li>Creates the necessary data directories for reports, logs, and quarantined skills.</li>
+<li>Prompts the user to set the Telegram variables if they wish to enable notifications.</li>
+</ol>
+<p>After installation, the user can launch a quick, token‑efficient scan with:</p>
+<pre>python3 ~/.openclaw/skills/lobsterguard/scripts/check.py --compact</pre>
+<p>This command runs all 68 checks locally and returns only the failed items plus an overall score. If every check passes, a one‑line success message is shown. The full report is always cached automatically for later review.</p>
+<h2>Interpreting the Compact Report</h2>
+<p>The output of the compact scan is meant to be displayed verbatim—no reformatting or summarising. A typical result might look like:</p>
+<pre>[✓] System Security: 12/12
+[✗] OpenClaw Configuration: 3/5 (missing env_leakage fix)
+[✗] Network Security: 1/2 (port 8080 exposed)
+[✓] OWASP Agentic AI Top 10: 8/8
+[✗] Forensic Detection: 0/2 (auditd not running)
+[✓] Skill Ecosystem: 4/4
+Overall score: 71/100</pre>
+<p>Any check flagged with <code>[auto‑fix]</code> appears in the list of failures. LobsterGuard then prompts the user in the matching language:</p>
+<ul>
+<li>English: &#8220;I can fix [issue] automatically. Want me to do it?&#8221;
+<li>Español: &#8220;Puedo arreglar [problema] automáticamente. ¿Quieres que lo haga?&#8221;
+</ul>
+<p>If the user affirms, the skill proceeds with the plan‑execute‑verify cycle described earlier.</p>
+<h2>Guided Manual Remediation</h2>
+<p>For users who prefer to understand each command before applying it, LobsterGuard can output a step‑by‑step explanation. For example, if the <code>kernel_hardening</code> check fails, the skill might show:</p>
+<ol>
+<li>Check current sysctl values: <code>sysctl -a | grep -E 'net.ipv4.conf.all.accept_source_route|fs.suid_dumpable'</code></li>
+<li>Apply recommended settings via <code>sysctl -w net.ipv4.conf.all.accept_source_route=0</code> and <code>sysctl -w fs.suid_dumpable=0</code>.</li>
+<li>Make the changes persistent by adding them to <code>/etc/sysctl.d/99-lobsterguard.conf</code>.</li>
+<li>Verify with <code>sysctl net.ipv4.conf.all.accept_source_route fs.suid_dumpable</code>.</li>
+</ol>
+<p>Each step is presented in plain language, with estimated time and impact, allowing the user to copy‑paste or adapt the commands as needed.</p>
+<h2>Why LobsterGuard Matters for OpenClaw Users</h2>
+<p>OpenClaw’s strength lies in its extensibility, but that same flexibility can introduce risk. Skills can request broad file system access, modify environment variables, or execute arbitrary code. Without oversight, a malicious or poorly written skill could:</p>
+<ul>
+<li>Expose sensitive data through environment leakage.</li>
+<li>Open unintended network ports.</li>
+<li>Escalate privileges via misconfigured systemd units.</li>
+<li>Inject prompts that manipulate the AI into performing unwanted actions.</li>
+<li>Leave forensic traces that hinder incident response.</li>
+</ul>
+<p>LobsterGuard addresses these concerns by providing:</p>
+<ul>
+<li><strong>Visibility</strong> – a clear, categorized audit that highlights exactly where the installation deviates from best‑practice baselines.</li>
+<ul>
+<li><strong>Control</strong> – optional auto‑fixes that require explicit consent, ensuring the user remains the ultimate authority.</li>
+<li><strong>Real‑time Protection</strong> – the gateway shield blocks common injection attempts before they reach the AI core.</li>
+<li><strong>Low‑Overhead Privacy</strong> – no external telemetry, only optional Telegram alerts to a user‑owned bot.</li>
+<li><strong>Community Trust</strong> – fully open source, inviting audits and contributions.</li>
+</ul>
+<h2>Best Practices and Recommendations</h2>
+<p>To get the most out of LobsterGuard, consider the following:</p>
+<ol>
+<li><strong>Run the compact scan regularly** – at least weekly, or after installing new skills.</li>
+<li><strong>Enable the autoscan timer** – the installed systemd timer can run a full scan daily during low‑usage hours.</li>
+<li><strong>Review the quarantine** – if a skill is automatically quarantined, inspect its manifest and code before deciding to restore or delete it.</li>
+<li><strong>Use Docker for added isolation** – while LobsterGuard works on bare metal, running OpenClaw inside a Docker container adds an extra layer of namespace segregation. The project includes a <code>docs/docker-setup-guide.md</code> with detailed instructions.</li>
+<li><strong>Keep the skill up‑to‑date** – pull the latest version from the GitHub repository periodically to benefit from new checks and fixes.</li>
+<li><strong>Back up your OpenClaw data** – before applying any auto‑fix, especially those that modify firewall rules or systemd units, ensure you have a recent backup.</li>
+</ol>
+<h2>Conclusion</h2>
+<p>LobsterGuard is more than a simple security checker; it is a comprehensive auditing and hardening suite tailored for the OpenClaw ecosystem. Its 68 checks span system, configuration, network, AI‑specific, forensic, and skill‑ecosystem domains, offering a holistic view of potential weaknesses. The eleven auto‑fixes provide safe, reversible remediations, all gated by explicit user approval. The real‑time gateway shield adds an active defense layer against prompt injection and related attacks, while the Telegram integration keeps users informed without compromising privacy.</p>
+<p>By installing LobsterGuard, OpenClaw users gain a vigilant, bilingual security partner that speaks their language, respects their boundaries, and helps keep their AI assistants running safely and reliably. Whether you are a hobbyist experimenting with community skills or an organization deploying OpenClaw at scale, incorporating LobsterGuard into your workflow is a prudent step toward a more secure, trustworthy AI environment.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/jarb02/lobsterguard/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/jarb02/lobsterguard/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

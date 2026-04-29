@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Automating Presentations: A Guide to the OpenClaw 2slides AI Skill</title>
+    <meta name="description" content="Learn how to use the OpenClaw 2slides skill to automate professional presentation creation, from content-based generation to reference image styling.">
+    <meta property="og:title" content="Automating Presentations: A Guide to the OpenClaw 2slides AI Skill">
+    <meta property="og:description" content="Learn how to use the OpenClaw 2slides skill to automate professional presentation creation, from content-based generation to reference image styling.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/automating-presentations-a-guide-to-the-openclaw-2slides-ai-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8537">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8537">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/automating-presentations-a-guide-to-the-openclaw-2slides-ai-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Automating Presentations: A Guide to the OpenClaw 2slides AI Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-10</p>
+    <h1>Automating Presentations: A Guide to the OpenClaw 2slides AI Skill</h1>
+<p>In the modern era of professional productivity, the ability to rapidly transform raw data into visually compelling presentations is an invaluable asset. Enter the OpenClaw project, a sophisticated collection of AI-powered tools designed to streamline complex tasks. Among these, the 2slides skill stands out as a powerful utility for anyone needing to generate decks on the fly using the 2slides AI API. In this post, we will explore exactly what this skill does and how you can leverage it to supercharge your workflow.</p>
+<h2>Understanding the 2slides Skill</h2>
+<p>The 2slides skill is an AI-powered engine integrated into the OpenClaw ecosystem. Its primary function is to interpret user intent—such as requests to &#8216;make slides&#8217; or &#8216;create a presentation&#8217;—and translate those requests into polished, professional-grade visual documents. Whether you have a structured document, a set of bullet points, or even a reference image, this skill provides the necessary interface to generate presentations seamlessly.</p>
+<h2>Key Functionalities</h2>
+<p>The flexibility of the 2slides skill is its greatest strength. It is built to handle a variety of input methods and output requirements:</p>
+<ul>
+<li><strong>Content-Based Generation:</strong> By providing clear, structured text, you can instantly turn your notes into a slide deck. The skill allows for theme selection to match your brand identity and supports multiple languages.</li>
+<li><strong>Reference Image Matching:</strong> This is a game-changer for branding. By uploading a reference image, the AI analyzes the visual style, color palette, and layout, and applies those aesthetics to your new presentation.</li>
+<li><strong>Custom PDF Generation:</strong> For those who require specific design requirements without a template, the custom PDF generation mode allows for detailed design specifications.</li>
+<li><strong>Document Summarization:</strong> If you are dealing with lengthy reports or articles, the tool can digest the content and distill it into a concise summary presented in a slide format.</li>
+<li><strong>Voice Narration:</strong> Beyond visuals, the skill supports the addition of AI-generated audio narration to your slides, perfect for self-running presentations.</li>
+</ul>
+<h2>Getting Started: Technical Setup</h2>
+<p>Before you can begin automating your presentations, you need to ensure your environment is correctly configured. The 2slides skill requires a valid API key, which can be obtained via the official 2slides platform. Once you have your key, store it in your environment variables under <code>SLIDES_2SLIDES_API_KEY</code>. This allows the various Python scripts, such as <code>generate_slides.py</code>, to authenticate your requests securely.</p>
+<h2>Workflow Efficiency</h2>
+<p>The beauty of the OpenClaw implementation is the clear decision tree it provides to the user. Depending on your request, the tool selects the most efficient path. For example, if you provide a simple prompt to &#8216;create a presentation,&#8217; the system defaults to content-based generation with a pre-selected theme. If you are aiming for high-end, custom-designed, or high-resolution outputs (up to 4K), the tool adjusts its processing and credit consumption accordingly.</p>
+<p>Processing times are optimized for efficiency, usually hovering around 30 seconds per page for complex tasks. Both synchronous and asynchronous modes are available, with the latter being highly recommended for longer, more data-heavy presentations to ensure system stability.</p>
+<h2>Why Use 2slides via OpenClaw?</h2>
+<p>Integrating 2slides into your existing development or automation pipeline offers significant advantages over manual slide creation. First, it ensures consistency. By using standardized themes or reference images, your presentations maintain a uniform look and feel. Second, it saves massive amounts of time. Instead of spending hours in PowerPoint or Keynote, you can generate the baseline of your presentation in minutes, allowing you to focus on refining the narrative rather than adjusting font sizes and margins.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw 2slides skill is more than just a wrapper for an API; it is a comprehensive workflow management system for document automation. By mastering the commands for content input, theme selection, and stylistic control, you can drastically reduce the friction associated with presentation creation. Whether you are a project manager preparing reports or a content creator designing a deck, this skill provides the automation necessary to stay ahead of the curve. Dive into the OpenClaw documentation, set up your API credentials, and start building better presentations today.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/javainthinking/2slides-skills/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/javainthinking/2slides-skills/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

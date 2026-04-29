@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding OpenClaw&#8217;s Search-Memory Skill: A Deep Dive into Local Knowledge Management</title>
+    <meta name="description" content="Master your local files with the OpenClaw search-memory skill. Learn how to index, search, and manage your memory files with this powerful CLI-based tool.">
+    <meta property="og:title" content="Understanding OpenClaw&#8217;s Search-Memory Skill: A Deep Dive into Local Knowledge Management">
+    <meta property="og:description" content="Master your local files with the OpenClaw search-memory skill. Learn how to index, search, and manage your memory files with this powerful CLI-based tool.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-openclaws-search-memory-skill-a-deep-dive-into-local-knowledge-management">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9193">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9193">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-openclaws-search-memory-skill-a-deep-dive-into-local-knowledge-management">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding OpenClaw&#8217;s Search-Memory Skill: A Deep Dive into Local Knowledge Management</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <h2>Introduction to OpenClaw&#8217;s Search-Memory Skill</h2>
+<p>In an era dominated by cloud-based AI and sprawling, disconnected notes, the &#8216;local-first&#8217; movement has gained significant traction. Developers and power users alike are seeking ways to maintain sovereignty over their data while still benefiting from intelligent organization and retrieval. This is where OpenClaw’s <code>search-memory</code> skill steps in as a vital tool. As part of the OpenClaw ecosystem, this skill is designed to turn your scattered local markdown notes into a structured, searchable knowledge base, directly from your command line interface.</p>
+<h2>What Does the Search-Memory Skill Actually Do?</h2>
+<p>At its core, the <code>search-memory</code> skill provides a streamlined mechanism to index and query your personal knowledge base. If you have ever felt overwhelmed by the sheer number of markdown files in your project directories—forgetting where you stored that specific snippet of code or that vital project note—this tool is designed for you.</p>
+<p>The skill accomplishes three primary objectives: it indexes your local memory files, provides a fast keyword-based search interface, and facilitates the integration of memory lookup capabilities via CLI slash commands. Instead of relying on slow, generic desktop search tools that often lack context, this skill leverages a specialized, local-first approach that understands the structure of your development environment.</p>
+<h2>The Mechanics of Indexing</h2>
+<p>The strength of <code>search-memory</code> lies in its ability to parse and structure your existing file hierarchy. By default, the tool looks for a <code>MEMORY.md</code> file, which acts as a primary entry point, while also recursively searching through any <code>memory/**/*.md</code> files within your directory. This structure allows you to organize your thoughts in a way that feels natural, without forcing a rigid database schema upon your personal files.</p>
+<p>When you run the indexing script, the tool creates an incremental cache. This is a crucial feature for performance; rather than re-indexing your entire library every time a single file changes, the system intelligently updates only what is necessary. This cache is stored locally at <code>memory/cache/</code>, ensuring that your data remains entirely within your control and does not require external network requests to function.</p>
+<h2>Searching: Keyword Scoring and Recency Boost</h2>
+<p>A search tool is only as good as its relevancy ranking. OpenClaw’s approach is surprisingly sophisticated for a CLI tool, utilizing a combination of traditional keyword scoring and a &#8216;recency boost.&#8217;</p>
+<p>When you perform a search, the engine doesn&#8217;t just look for words that match; it ranks results based on how frequently those keywords appear and, perhaps more importantly, how recently the file was modified. By prioritizing documents modified within the last 30 to 90 days, the search engine inherently understands that your more active projects and thoughts are likely more relevant to your current workflow. This creates a search experience that feels adaptive rather than static.</p>
+<h2>Quick Start: Getting Up and Running</h2>
+<p>Getting started with <code>search-memory</code> is designed to be as frictionless as possible. The repository provides two essential scripts to handle the heavy lifting:</p>
+<ul>
+<li><strong>Building the Index:</strong> You initiate the indexing process by running <code>scripts/index-memory.py</code>. This will crawl your designated memory directories, parse the markdown, and generate the cache necessary for fast retrieval.</li>
+<li><strong>Searching Your Memory:</strong> Once the index is built, you can execute a search using <code>scripts/search-memory.py "your query" --top 5</code>. The <code>--top</code> parameter allows you to limit the number of results returned, helping you maintain focus without being overwhelmed by a flood of data.</li>
+</ul>
+<h2>Why Choose a Local-First Approach?</h2>
+<p>There are substantial benefits to handling your knowledge base locally. First is speed; searching a local cache is instantaneous, eliminating the latency associated with cloud-based note-taking applications. Second is security; your data never leaves your machine, making this an ideal solution for developers handling sensitive configuration files, API keys, or private project documentation. Finally, there is the portability aspect. Because everything is stored as standard markdown files, you are never locked into the OpenClaw platform. If you ever decide to switch tools, your data is already in a clean, readable format.</p>
+<h2>Integrating with the Wider OpenClaw Ecosystem</h2>
+<p>The true power of this skill is realized when it is integrated into the broader OpenClaw automation workflows. By acting as a &#8216;wire&#8217; for slash commands, <code>search-memory</code> allows you to trigger memory lookups during interactive chat sessions or automation workflows. Imagine being in the middle of a coding task, needing a reminder of a specific API design decision you made last month, and simply typing a command to pull that information directly into your current context. That is the promise of this skill.</p>
+<h2>Conclusion</h2>
+<p>OpenClaw’s <code>search-memory</code> skill is a testament to the power of simple, well-executed CLI tools. By focusing on efficient indexing, relevant search scoring, and local data control, it provides a robust solution for developers who need to keep their knowledge base accessible and organized. Whether you are managing a small set of project notes or a large library of technical documentation, the tools provided in the OpenClaw skills repository are well-equipped to help you regain control over your information.</p>
+<p>To explore the code or to contribute to the project, head over to the <a href="https://github.com/openclaw/skills">OpenClaw GitHub repository</a>. Embrace the local-first philosophy and see how much faster your development workflow can become when your notes are just a command away.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/trumppo/search-memory/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/trumppo/search-memory/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

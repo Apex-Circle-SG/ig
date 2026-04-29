@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenClaw Skill: macOS Node Snapshot for Reliable Screen Capture</title>
+    <meta name="description" content="A permission-friendly method to capture macOS screens using OpenClaw&#8217;s node screen.record functionality, ideal for headless environments and ensuring capt">
+    <meta property="og:title" content="OpenClaw Skill: macOS Node Snapshot for Reliable Screen Capture">
+    <meta property="og:description" content="A permission-friendly method to capture macOS screens using OpenClaw&#8217;s node screen.record functionality, ideal for headless environments and ensuring capt">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/openclaw-skill-macos-node-snapshot-for-reliable-screen-capture">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8989">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8989">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/openclaw-skill-macos-node-snapshot-for-reliable-screen-capture">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>OpenClaw Skill: macOS Node Snapshot for Reliable Screen Capture</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <p>The OpenClaw skill <strong>mac-node-snapshot</strong> provides a robust solution for capturing screenshots on macOS systems, particularly in environments where traditional screen capture methods face permission limitations. This skill leverages OpenClaw&#8217;s node screen.record functionality to create a reliable workflow for obtaining high-quality screen captures.</p>
+<h2>How It Works</h2>
+<p>The skill operates by recording a 1-second video clip at 10 frames per second, then extracting a single high-quality PNG frame from that recording. This approach bypasses common screencapture permission issues that plague many macOS applications and ensures a reliable image return every time.</p>
+<h2>Quick Start Implementation</h2>
+<p>Users can implement this skill with a single command without requiring additional scripts. The process involves creating a temporary directory, recording the screen for one second, and then using ffmpeg to extract a single frame as a PNG image. All paths are relative to the skill directory, making the implementation straightforward and portable.</p>
+<h2>Trigger Phrases</h2>
+<p>The skill activates when users request actions such as &#8220;Take a screenshot,&#8221; &#8220;What is on my screen?,&#8221; &#8220;Capture the screen,&#8221; or &#8220;Screenshot via screen.record.&#8221; These natural language triggers make the skill intuitive and accessible for everyday use.</p>
+<h2>Technical Requirements</h2>
+<p>The skill requires ffmpeg to be installed on the system. Users should be prompted to install this dependency if it&#8217;s not already available. The skill also needs proper Screen Recording permissions granted in macOS System Settings, which cannot be bypassed for security reasons.</p>
+<h2>Troubleshooting Common Issues</h2>
+<p>Several common issues may arise during implementation. If the screen_record command fails due to node disconnection, users should check the nodes status and ensure the OpenClaw app is running and properly paired. When screenRecording returns false, it indicates that Screen Recording permissions have not been granted in System Settings. If the extracted frame appears black, this typically means the screen was asleep or locked, requiring the user to wake the screen before retrying.</p>
+<h2>Integration and Usage</h2>
+<p>The captured PNG image can be read from the skill&#8217;s temporary directory and attached to replies or responses. This makes the skill particularly useful for automated systems, remote assistance scenarios, and applications where reliable screen capture is essential for functionality.</p>
+<h2>Advantages Over Traditional Methods</h2>
+<p>Unlike traditional screencapture commands that often fail due to permission restrictions or require complex configuration, this node-based approach provides a more robust and permission-friendly alternative. It&#8217;s especially valuable in headless environments where GUI-based screen capture tools may not function properly.</p>
+<h2>Best Practices</h2>
+<p>For optimal results, users should ensure their system meets all requirements before attempting screen capture. This includes having ffmpeg installed, proper permissions configured, and ensuring the display is active before initiating capture. The skill&#8217;s design prioritizes reliability and ease of use, making it suitable for both technical and non-technical users.</p>
+<p>By implementing this skill, developers and users can overcome many of the common challenges associated with macOS screen capture, providing a dependable solution for obtaining screen images in various contexts and environments.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/taozhe6/mac-node-snapshot/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/taozhe6/mac-node-snapshot/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the OpenClaw Setup-Sandbox Skill: A Complete Developer Guide</title>
+    <meta name="description" content="Learn how the OpenClaw setup-sandbox skill automates file system architecture for Recoupable projects by scaffolding organization and artist directories.">
+    <meta property="og:title" content="Understanding the OpenClaw Setup-Sandbox Skill: A Complete Developer Guide">
+    <meta property="og:description" content="Learn how the OpenClaw setup-sandbox skill automates file system architecture for Recoupable projects by scaffolding organization and artist directories.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-openclaw-setup-sandbox-skill-a-complete-developer-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8933">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8933">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-openclaw-setup-sandbox-skill-a-complete-developer-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the OpenClaw Setup-Sandbox Skill: A Complete Developer Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <h1>Understanding the OpenClaw setup-sandbox Skill</h1>
+<p>In the evolving ecosystem of developer tooling, managing project architecture efficiently is a core challenge. For teams utilizing the OpenClaw framework, the <code>setup-sandbox</code> skill stands out as an essential utility for initializing environments. This article delves into the purpose, mechanics, and implementation of this specific skill to help you streamline your workflow.</p>
+<h2>What is the setup-sandbox Skill?</h2>
+<p>The <code>setup-sandbox</code> skill is designed to automate the initial file system scaffolding for a new workspace or sandbox. When working with the Recoupable platform, maintaining a standardized directory structure is vital for consistency and ease of navigation. This skill bridges the gap between raw data and a functional development environment by fetching account-specific organization and artist information via the Recoup CLI and mapping it directly onto your local file system.</p>
+<h2>Prerequisites and Use Cases</h2>
+<p>Before executing this skill, it is crucial to understand when it should be triggered. The <code>setup-sandbox</code> skill is intended for use immediately after a new sandbox has been created. If your current environment is empty and lacks an existing <code>orgs/</code> directory, this is your starting point. However, if the <code>orgs/</code> directory already exists, running this skill is unnecessary and could potentially interfere with your existing setup.</p>
+<h3>Environment Configuration</h3>
+<p>The skill relies on the <code>RECOUP_ACCOUNT_ID</code> environment variable. Depending on your authentication method, the behavior of the CLI changes:</p>
+<ul>
+<li><strong>Org API Key:</strong> You must explicitly set the <code>RECOUP_ACCOUNT_ID</code> to ensure the CLI fetches data for the correct account.</li>
+<li><strong>Personal API Key:</strong> You can omit the <code>--account</code> flag entirely, as the CLI will default to the currently authenticated account context.</li>
+</ul>
+<h2>The Mechanics: How it Works</h2>
+<p>The internal logic of the <code>setup-sandbox</code> skill follows a systematic process to ensure that your workspace is structured according to best practices:</p>
+<ol>
+<li><strong>Account Verification:</strong> The script first checks if the <code>RECOUP_ACCOUNT_ID</code> variable is present. If it is, all subsequent CLI commands include the flag to isolate the data scope.</li>
+<li><strong>Data Acquisition:</strong> It calls <code>recoup orgs list --json</code> to retrieve a comprehensive list of organizations associated with the account.</li>
+<li><strong>Artist Mapping:</strong> For every organization identified, the skill performs a subsequent call to <code>recoup artists list --org {organization_id} --json</code>, mapping the artists to their respective organizational containers.</li>
+<li><strong>Directory Scaffolding:</strong> The skill executes <code>mkdir -p</code> commands to create a nested hierarchy: <code>orgs/{org}/artists/{artist-slug}</code>. This ensures that every artist has a dedicated, predictable location in the project tree.</li>
+<li><strong>Identity Creation (RECOUP.md):</strong> Each artist folder receives a <code>RECOUP.md</code> file. This file serves as the identity marker for the workspace. It tracks the artist&#8217;s name, slug, UUID, and setup status (defaulting to <code>not-setup</code>).</li>
+<li><strong>Git Integration:</strong> Finally, the skill automatically performs a <code>git add</code>, <code>commit</code>, and <code>push</code> to ensure that the initial structural state is committed to your version control system.</li>
+</ol>
+<h2>The Role of RECOUP.md</h2>
+<p>The <code>RECOUP.md</code> file is more than just a documentation file; it is the heartbeat of your artist workspace. It acts as an identity bridge between your local repository and the Recoupable platform. By keeping track of the <code>artistId</code> and the <code>status</code>, it enables developers to quickly ascertain the state of the project. When the status is set to <code>not-setup</code>, it acts as a clear signal that the workspace is currently uninitialized and ready for further configuration.</p>
+<h2>Post-Setup: Moving to setup-artist</h2>
+<p>Once the sandbox has been created by the <code>setup-sandbox</code> skill, the process is not complete. Your next step is to run the <code>setup-artist</code> skill. This is where the actual scaffolding occurs—building out the deeper context files, memory systems, and localized READMEs necessary for development.</p>
+<p>You can identify which artists require further attention by running a quick terminal command:</p>
+<p><code>grep -rl "status: not-setup" orgs/*/artists/*/RECOUP.md</code></p>
+<p>This command will surface every directory that is still pending the <code>setup-artist</code> process. If you find that <code>setup-artist</code> is missing from your environment, you can quickly add it using <code>npx skills add recoupable/setup-artist</code>.</p>
+<h2>Conclusion</h2>
+<p>The <code>setup-sandbox</code> skill is a quintessential example of how automation can save developers time and prevent structural drift. By enforcing a strict folder hierarchy and providing a clear mechanism for tracking setup status via <code>RECOUP.md</code>, it ensures that your workspace is always audit-ready and organized. If you are starting a new project within the Recoupable framework, integrating this skill into your initial setup routine is an absolute necessity for long-term scalability and clean code management.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/sweetmantech/setup-sandbox/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/sweetmantech/setup-sandbox/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

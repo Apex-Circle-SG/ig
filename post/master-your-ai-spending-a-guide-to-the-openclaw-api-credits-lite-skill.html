@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Master Your AI Spending: A Guide to the OpenClaw API-Credits-Lite Skill</title>
+    <meta name="description" content="Learn how to track your Anthropic, OpenAI, and other AI provider credits effortlessly using the OpenClaw API-Credits-Lite skill and its unique health bars.">
+    <meta property="og:title" content="Master Your AI Spending: A Guide to the OpenClaw API-Credits-Lite Skill">
+    <meta property="og:description" content="Learn how to track your Anthropic, OpenAI, and other AI provider credits effortlessly using the OpenClaw API-Credits-Lite skill and its unique health bars.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/master-your-ai-spending-a-guide-to-the-openclaw-api-credits-lite-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8433">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8433">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/master-your-ai-spending-a-guide-to-the-openclaw-api-credits-lite-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Master Your AI Spending: A Guide to the OpenClaw API-Credits-Lite Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <h1>Master Your AI Spending: A Guide to the OpenClaw API-Credits-Lite Skill</h1>
+<p>In the rapidly evolving world of artificial intelligence, managing your consumption across multiple platforms can quickly become a headache. As developers and power users integrate tools like OpenAI, Anthropic, Mistral, Groq, and OpenRouter into their workflows, tracking usage becomes paramount. If you are an OpenClaw user, you have access to a fantastic utility designed to simplify this process: the <strong>api-credits-lite</strong> skill. In this post, we will dive deep into what this skill does, how to use it, and why it is a game-changer for your AI productivity.</p>
+<h2>What is api-credits-lite?</h2>
+<p>The <em>api-credits-lite</em> skill is a specialized tool within the OpenClaw ecosystem. Its primary mission is to provide a clean, visual, and highly accessible way to monitor the credit balances of five core AI providers. Unlike standard administrative dashboards that require you to log in, navigate through menus, and parse through billing statements, this skill brings your financial data directly into your terminal or chat interface.</p>
+<p>One of the most engaging features of this tool is its use of retro, video-game-style health bars. This visual feedback makes it instantly obvious how much &#8216;life&#8217;—or in this case, budget—you have remaining. It uses a color-coded system that provides an intuitive at-a-glance status: 🟩 green for healthy balances over 75%, 🟨 yellow for 50–75%, 🟧 orange for 25–50%, and 🟥 red for when you are running low (under 25%).</p>
+<h2>When Should You Use This Skill?</h2>
+<p>Understanding the context for when to deploy a skill is critical. You should reach for <em>api-credits-lite</em> whenever you want to maintain awareness of your spending. Specifically, use this skill when:</p>
+<ul>
+<li>You want to check your current credit balance across your providers.</li>
+<li>You have just topped up an account and want to update the records in your local environment.</li>
+<li>You are curious if you are running low on credits before starting a compute-heavy task.</li>
+<li>You want to verify that your manual updates or API auto-checks are being reflected correctly.</li>
+</ul>
+<p>It is important to note what this skill is <em>not</em>. If you require advanced enterprise features—such as tracking 16+ providers, integration with cloud SDKs (AWS, Azure, GCP), or heartbeat monitoring—you should look into the <em>api-credits-pro</em> version. The &#8216;Lite&#8217; version is designed for simplicity, speed, and standard user workflows.</p>
+<h2>How It Works: Manual Sync vs. API Auto-Check</h2>
+<p>The flexibility of the <em>api-credits-lite</em> skill lies in its dual approach to gathering data. Depending on the provider, you can either let the machine do the heavy lifting or input the data manually.</p>
+<h3>Manual Balance Sync</h3>
+<p>Not every AI provider offers a public balance API. For services like Anthropic, Mistral, and Groq, you will need to perform a manual sync. The skill is designed to make this as painless as possible. When you see your balance in the provider&#8217;s billing console, you can simply tell OpenClaw, &#8216;Set my Anthropic balance to $22.97.&#8217; Behind the scenes, the skill executes a script to update your local config file, ensuring that the visual health bar remains accurate.</p>
+<h3>API Auto-Check</h3>
+<p>For providers like OpenAI, OpenRouter, and Vercel, the skill can leverage your API keys to fetch balance information automatically. Once you have configured your environment variables (like OPENAI_API_KEY), you can simply ask, &#8216;Check my OpenAI balance.&#8217; The system will query the endpoint and refresh your dashboard automatically. This is a significant time-saver, as it removes the friction of manual data entry for your most active services.</p>
+<h2>The Workflow: Command Line Efficiency</h2>
+<p>While the user interacts with the skill through natural language prompts, it is helpful to understand the underlying logic. The skill operates within the OpenClaw workspace at <code>~/.openclaw/workspace/skills/api-credits-lite/</code>. All actions are handled via Python scripts located in the <code>/scripts/</code> directory.</p>
+<p>For example, running <code>python3 scripts/show_credits.py</code> triggers the main display function. If you are adding funds, <code>python3 scripts/topup.py [provider] [amount]</code> updates your records instantly. This architecture is robust, predictable, and incredibly fast, allowing you to get the information you need in milliseconds without ever leaving your terminal.</p>
+<h2>Troubleshooting and Configuration</h2>
+<p>If you find that your dashboard is blank or shows no providers, don&#8217;t worry. This is usually due to an empty or missing <code>config.json</code> file. To get started, you can copy the example configuration using <code>cp config.example.json config.json</code>. Once the file is in place, running your first manual sync will populate the configuration and get your health bars glowing again.</p>
+<p>Remember that for API-based checks, security is paramount. Ensure that your API keys are stored safely as environment variables. The skill only contacts the specific APIs necessary to retrieve your balance information and does not compromise your personal credentials.</p>
+<h2>Why Developers Love It</h2>
+<p>For developers, time is the most valuable resource. Switching contexts between your IDE, your browser, and multiple AI billing portals breaks the flow of work. By bringing your billing data into the OpenClaw environment, you stay in your &#8216;zone.&#8217; Whether you are building a new application or fine-tuning a model, having a constant, unobtrusive indicator of your remaining credit keeps you grounded and prevents the dreaded &#8216;API limit reached&#8217; error during critical deployment phases.</p>
+<h2>Final Thoughts</h2>
+<p>The <em>api-credits-lite</em> skill is a perfect example of how small, well-designed tools can significantly improve developer experience. By gamifying the boring task of billing management, it encourages consistent monitoring. If you are already using OpenClaw, this is an essential skill to add to your toolkit. It is lightweight, efficient, and ensures that you are never caught off guard by a depleted balance. Take a moment to set it up, sync your accounts, and watch your productivity—and your health bars—soar.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/franciscobuiltdat/api-credits-lite/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/franciscobuiltdat/api-credits-lite/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

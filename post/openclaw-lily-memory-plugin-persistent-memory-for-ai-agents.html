@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenClaw Lily Memory Plugin: Persistent Memory for AI Agents</title>
+    <meta name="description" content="Lily Memory is a persistent memory plugin for OpenClaw agents that provides long-term memory, auto-recall, auto-capture, and hybrid search capabilities with zer">
+    <meta property="og:title" content="OpenClaw Lily Memory Plugin: Persistent Memory for AI Agents">
+    <meta property="og:description" content="Lily Memory is a persistent memory plugin for OpenClaw agents that provides long-term memory, auto-recall, auto-capture, and hybrid search capabilities with zer">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/openclaw-lily-memory-plugin-persistent-memory-for-ai-agents">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9133">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9133">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/openclaw-lily-memory-plugin-persistent-memory-for-ai-agents">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>OpenClaw Lily Memory Plugin: Persistent Memory for AI Agents</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <p>The Lily Memory plugin is a persistent memory solution for OpenClaw agents that enables long-term memory retention across sessions. This plugin provides agents with the ability to remember past interactions, automatically recall relevant information, and maintain context over extended conversations.</p>
+<h2>How Lily Memory Works</h2>
+<p>The plugin operates through several key mechanisms. Auto-recall injects relevant memories as context before each LLM turn, ensuring the agent has access to pertinent information from previous interactions. Auto-capture extracts facts from conversations and stores them automatically, building a knowledge base over time.</p>
+<p>The system uses hybrid search combining SQLite FTS5 keyword search with Ollama vector cosine similarity for semantic matching. This dual approach ensures both precise keyword matching and contextual understanding. The plugin also includes stuck detection to identify when conversations are looping and memory consolidation to deduplicate entries on startup.</p>
+<h2>Key Features</h2>
+<p>The plugin offers zero npm dependencies, using only sqlite3 CLI and native fetch. It includes dynamic entities with config-driven allowlists and runtime tools to add new entities. The system gracefully degrades to keyword-only mode when Ollama is unavailable.</p>
+<p>Auto-recall functionality extracts keywords from messages, performs FTS5 and vector searches, merges results, and injects memories as context. Auto-capture uses regex scanning to identify entity patterns, validates against allowlists, stores facts to SQLite, and asynchronously embeds them via Ollama.</p>
+<h2>Configuration Options</h2>
+<p>Users can configure various parameters including database path, auto-recall and auto-capture toggles, maximum recall results, stuck detection settings, and vector search options. The plugin supports custom entities and allows configuration of the Ollama endpoint and embedding model.</p>
+<h2>Technical Architecture</h2>
+<p>The recall flow extracts keywords, performs dual searches, merges and deduplicates results, then injects context. The capture flow identifies patterns, validates entities, stores facts, and creates embeddings. Stuck detection tracks content words, calculates Jaccard similarity, and triggers Reflexion nudges when repetition is detected.</p>
+<h2>Installation and Setup</h2>
+<p>Installation requires adding the plugin to the extensions directory and configuring it in the openclaw.json file. The system needs Node.js 18+ for native fetch, SQLite 3.33+ with FTS5 support, and optionally Ollama with the nomic-embed-text model for semantic search capabilities.</p>
+<h2>Available Tools</h2>
+<p>The plugin provides several tools including memory_search for FTS5 keyword search, memory_entity for looking up facts by entity, memory_store for saving facts, memory_semantic_search for vector similarity search, and memory_add_entity for registering new entities at runtime.</p>
+<h2>Memory Management</h2>
+<p>The system automatically manages memory through consolidation, deduplicating entries on startup to maintain efficiency. It tracks conversation patterns to prevent loops and ensures relevant information is surfaced when needed. The hybrid search approach balances precision with semantic understanding.</p>
+<h2>Integration Benefits</h2>
+<p>By providing persistent memory, the plugin enables agents to maintain context across sessions, remember user preferences, track project details, and build upon previous conversations. This creates more natural, productive interactions and reduces repetitive questioning.</p>
+<h2>Performance Considerations</h2>
+<p>The plugin is designed for efficiency with configurable limits on recall results and capture operations. The SQLite backend provides fast local storage, while the optional Ollama integration adds semantic capabilities without blocking operations. The system automatically manages resource usage through consolidation and deduplication.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/kevinodell/lily-memory-plugin/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/kevinodell/lily-memory-plugin/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Securing Your AI Agents: A Deep Dive into OpenClaw Guard-Scanner</title>
+    <meta name="description" content="Learn how the Guard-Scanner tool protects your AI agent skills from prompt injection, supply chain attacks, and malicious memory poisoning.">
+    <meta property="og:title" content="Securing Your AI Agents: A Deep Dive into OpenClaw Guard-Scanner">
+    <meta property="og:description" content="Learn how the Guard-Scanner tool protects your AI agent skills from prompt injection, supply chain attacks, and malicious memory poisoning.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/securing-your-ai-agents-a-deep-dive-into-openclaw-guard-scanner">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8805">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8805">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/securing-your-ai-agents-a-deep-dive-into-openclaw-guard-scanner">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Securing Your AI Agents: A Deep Dive into OpenClaw Guard-Scanner</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-13</p>
+    <h1>Securing Your AI Agents: A Deep Dive into OpenClaw Guard-Scanner</h1>
+<p>As the adoption of AI agents continues to explode, the security landscape for these intelligent systems has become increasingly complex. If you are developing with the OpenClaw ecosystem, the <strong>guard-scanner</strong> skill is no longer optional—it is a critical necessity for maintaining the integrity of your AI-driven workflows. This article explores how this powerful tool functions as both a static security scanner and a runtime guard to keep your agentic systems safe.</p>
+<h2>What is Guard-Scanner?</h2>
+<p>Guard-Scanner is a specialized security utility designed specifically for AI agent skills. It features an impressive arsenal of 358 static threat patterns categorized across 35 distinct areas, alongside 27 sophisticated runtime checks. By providing five layers of defense, it ensures that your AI agents remain resilient against modern cyber threats that traditional static analysis tools often fail to detect.</p>
+<h2>Why Do You Need It?</h2>
+<p>AI agents are vulnerable to unique attack vectors, such as prompt injection, identity hijacking, and memory poisoning. Because these agents interact with external tools and APIs, they can become conduits for supply chain attacks or unauthorized data exfiltration. Guard-Scanner addresses these risks by auditing your assets, monitoring for leaked credentials, and providing real-time security during the development lifecycle.</p>
+<h3>Key Threat Coverage</h3>
+<ul>
+<li><strong>Prompt Injection:</strong> Detects hidden instructions, invisible Unicode characters, and homoglyphs designed to manipulate your model.</li>
+<li><strong>Identity Hijacking:</strong> Protects against persona swapping and SOUL.md overwrites that could compromise your agent&#8217;s identity.</li>
+<li><strong>Memory Poisoning:</strong> Guards against crafted conversation injections that aim to alter your agent&#8217;s historical context or decision-making process.</li>
+<li><strong>MCP Security:</strong> Specifically identifies tool poisoning, SSRF (Server-Side Request Forgery), and shadow server configurations.</li>
+<li><strong>Supply Chain Protection:</strong> Prevents attacks like typosquatting and slopsquatting, which are increasingly common in the AI dependency ecosystem.</li>
+</ul>
+<h2>Core Functionality and Usage</h2>
+<p>The beauty of Guard-Scanner lies in its versatility. It can be integrated into your CI/CD pipelines, used as an MCP server in your IDE, or run as a background watch process during development. Its command-line interface is intuitive and powerful.</p>
+<h3>Getting Started</h3>
+<p>To perform a standard scan of your skill directory, you can simply run:</p>
+<p><code>npx -y @guava-parity/guard-scanner ./my-skills/ --verbose</code></p>
+<p>For those prioritizing identity protection, the <code>--soul-lock</code> and <code>--strict</code> flags enable deeper, more rigorous inspection of agent behavior and identity configurations.</p>
+<h2>Runtime Guarding with OpenClaw</h2>
+<p>Perhaps the most advanced feature is the runtime guard. By hooking into the <code>before_tool_call</code> event in OpenClaw v2026.3.8, the tool provides real-time protection. When an agent attempts to execute a tool, Guard-Scanner evaluates the request across five defense layers, including threat detection (reverse shells), trust defense, safety judgments, behavioral analysis, and authority claim validation.</p>
+<h2>CI/CD and Automation</h2>
+<p>Security is most effective when it is automated. Guard-Scanner supports multiple output formats including JSON, SARIF, and HTML. This makes it an ideal candidate for CI/CD integration, allowing you to automatically fail builds that contain security vulnerabilities. For example, you can integrate it into your GitHub Actions to upload findings to CodeQL, ensuring that no malicious code ever reaches your production environment.</p>
+<h2>VirusTotal Integration</h2>
+<p>For even greater peace of mind, Guard-Scanner includes an optional integration with VirusTotal. By leveraging their global database of over 70 antivirus engines, you can add a double-layered validation to your scans, catching known malicious signatures that might otherwise be overlooked.</p>
+<h2>Extensibility with Custom Rules</h2>
+<p>Not every project is the same, and sometimes you need to enforce custom security policies. Guard-Scanner allows you to define custom rules via a simple JavaScript configuration file. You can specify patterns, regex definitions, and severity levels, and load these directly into the scanner using the <code>--plugin</code> flag. This makes Guard-Scanner an adaptable tool that grows alongside your specific security requirements.</p>
+<h2>Final Thoughts</h2>
+<p>The evolution of AI security is moving fast, and the tools we use must be equally agile. Guard-Scanner offers a comprehensive approach to securing OpenClaw skills by combining static analysis, runtime protection, and supply chain monitoring. Whether you are an individual developer building personal projects or a team managing enterprise-grade agents, integrating this scanner into your workflow is a proactive step toward safer, more reliable AI interactions. Don&#8217;t wait for a security breach to happen—secure your agents today with Guard-Scanner.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/koatora20/guard-scanner/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/koatora20/guard-scanner/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

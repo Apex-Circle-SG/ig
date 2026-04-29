@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering Agent Security: A Deep Dive into OpenClaw&#8217;s Agent Access Control Skill</title>
+    <meta name="description" content="Secure your AI agents with OpenClaw&#8217;s Agent Access Control. Learn how to manage tiered permissions, stranger deflection, and owner-approval flows effectiv">
+    <meta property="og:title" content="Mastering Agent Security: A Deep Dive into OpenClaw&#8217;s Agent Access Control Skill">
+    <meta property="og:description" content="Secure your AI agents with OpenClaw&#8217;s Agent Access Control. Learn how to manage tiered permissions, stranger deflection, and owner-approval flows effectiv">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-agent-security-a-deep-dive-into-openclaws-agent-access-control-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9187">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9187">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-agent-security-a-deep-dive-into-openclaws-agent-access-control-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering Agent Security: A Deep Dive into OpenClaw&#8217;s Agent Access Control Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <h1>Securing Your AI: An Introduction to Agent Access Control</h1>
+<p>As AI agents become increasingly integrated into our daily workflows and personal messaging platforms, the need for robust security has never been more critical. Whether you are running an AI assistant on WhatsApp, Telegram, Discord, or Signal, exposing an unmanaged agent to the internet is a recipe for privacy breaches and resource abuse. This is where the <strong>Agent Access Control</strong> skill for the OpenClaw framework shines. In this article, we will break down what this skill does, why it is essential, and how you can implement it to protect your digital personal assistant.</p>
+<h2>What is Agent Access Control?</h2>
+<p>At its core, the Agent Access Control skill is a sophisticated permission management system designed to sit between your messaging platform and your AI agent&#8217;s core processing logic. Think of it as a digital bouncer for your agent. It classifies every incoming message based on the sender&#8217;s identity, allowing you to define granular rules for how your agent should interact with different categories of people.</p>
+<p>Instead of a binary &#8220;all or nothing&#8221; approach, this skill implements a tiered permission structure. This allows you to differentiate between yourself (the owner), trusted colleagues, casual contacts, and complete strangers. By implementing this, you prevent unauthorized users from triggering sensitive tools, accessing private memory, or wasting your token budget on malicious or irrelevant interactions.</p>
+<h2>The Four Tiers of Access</h2>
+<p>The strength of this skill lies in its tiered approach. By categorizing users, you can apply the principle of least privilege, ensuring that your agent behaves appropriately regardless of who is sending the message.</p>
+<h3>Tier 0: Strangers</h3>
+<p>Strangers represent any user who has not been explicitly vetted by you. When a stranger reaches out, the skill automatically triggers a &#8216;diplomatic deflection.&#8217; The agent sends a polite, pre-configured message explaining that it is currently busy assisting the owner and cannot engage in open chat. Importantly, the agent captures the message, logs the incident, and notifies the owner, providing them with the option to approve or block the new contact.</p>
+<h3>Tier 1: Chat-Only</h3>
+<p>This tier is perfect for casual acquaintances or contacts you want to talk to but do not fully trust with your agent&#8217;s functionality. Users at this level can hold basic conversations but are strictly prohibited from using tools like web search, file execution, or accessing private memory. If they attempt to prompt the agent for more, the agent is hardcoded to refuse and refer them to the owner.</p>
+<h3>Tier 2: Trusted</h3>
+<p>This is the middle ground. Trusted contacts can have a more productive experience, utilizing helpful tools like weather lookups or general information queries. However, they still remain blocked from sensitive actions like reading personal files, managing calendars, or interacting with other contacts on your behalf. It allows for helpful collaboration without full administrative overreach.</p>
+<h3>Tier 3: Owner</h3>
+<p>The owner, identified by their specific, normalized IDs (e.g., phone numbers or platform-specific numeric IDs), has full, unrestricted access to all agent tools, files, memory, and actions. This is the only level capable of performing sensitive operations.</p>
+<h2>The Message Handling Workflow</h2>
+<p>Understanding the internal logic is key to mastering this skill. When a message arrives, the skill performs a rigorous check:</p>
+<ol>
+<li><strong>Normalization:</strong> It cleans up the sender&#8217;s ID (stripping spaces, standardizing phone numbers) to ensure it can accurately compare the user against your list of approved or blocked IDs.</li>
+<li><strong>Owner Check:</strong> If the user is identified as the owner, they get immediate, full access.</li>
+<li><strong>Blocklist Check:</strong> If the user is on the blocklist, the agent remains silent—no reply is generated, preventing further engagement.</li>
+<li><strong>Contact Check:</strong> It checks the <code>approvedContacts</code> list to determine the appropriate tier.</li>
+<li><strong>Stranger Flow:</strong> If none of the above apply, the agent defaults to the stranger protocol, notifying you and requesting approval.</li>
+</ol>
+<h2>Why Manual Approval Matters</h2>
+<p>The &#8220;Owner Approval&#8221; flow is arguably the most powerful feature. When a stranger messages your agent, you receive a notification on your preferred channel (Telegram, WhatsApp, etc.). The notification includes the sender&#8217;s identity and the first 100 characters of their message. You can reply directly to that notification with commands like &#8220;approve,&#8221; &#8220;chat,&#8221; or &#8220;block.&#8221; This allows you to manage your agent&#8217;s connections in real-time without ever needing to touch a code editor or configuration file again.</p>
+<h2>Rate Limiting and Audit Logs</h2>
+<p>Beyond access, the skill includes built-in protection against abuse, such as spam or automated flooding. It tracks message volume per tier. If a user tries to spam your agent, they will be hit with a rate limit message, protecting your platform usage limits. Additionally, all stranger interactions are logged in a dedicated file, <code>memory/access-control-log.json</code>. This acts as an audit trail, allowing you to review who has been reaching out to your agent over time, ensuring you remain in control of your digital ecosystem.</p>
+<h2>Implementation Best Practices</h2>
+<p>To successfully deploy this, keep these security rules in mind:</p>
+<ul>
+<li><strong>Keep it secret:</strong> Never include real phone numbers or tokens in your public repositories. Store configurations in the `memory/` folder, which is typically git-ignored.</li>
+<li><strong>Personalization:</strong> Customize the <code>strangerMessage</code> to fit your agent&#8217;s personality, but ensure it remains professional and does not reveal sensitive information.</li>
+<li><strong>Normalization is key:</strong> Ensure all owner IDs are correctly formatted in your configuration. Inconsistent ID formats are the most common cause of setup issues.</li>
+<li><strong>Regular Audits:</strong> Periodically review your <code>access-control.json</code> file to prune contacts that no longer require trusted status.</li>
+</ul>
+<p>By implementing OpenClaw&#8217;s Agent Access Control, you are taking a massive step forward in personal AI security. It transforms your agent from an open, vulnerable endpoint into a secure, gated assistant that works strictly on your terms.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bowen31337/agent-access-control/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bowen31337/agent-access-control/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

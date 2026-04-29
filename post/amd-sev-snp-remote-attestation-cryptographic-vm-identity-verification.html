@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AMD SEV-SNP Remote Attestation: Cryptographic VM Identity Verification</title>
+    <meta name="description" content="Learn how to perform AMD SEV-SNP remote attestation to verify VM identity and integrity in confidential computing environments using cryptographic verification ">
+    <meta property="og:title" content="AMD SEV-SNP Remote Attestation: Cryptographic VM Identity Verification">
+    <meta property="og:description" content="Learn how to perform AMD SEV-SNP remote attestation to verify VM identity and integrity in confidential computing environments using cryptographic verification ">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/amd-sev-snp-remote-attestation-cryptographic-vm-identity-verification">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8779">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8779">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/amd-sev-snp-remote-attestation-cryptographic-vm-identity-verification">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>AMD SEV-SNP Remote Attestation: Cryptographic VM Identity Verification</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-13</p>
+    <h2>What is AMD SEV-SNP Remote Attestation?</h2>
+<p>AMD SEV-SNP (Secure Encrypted Virtualization &#8211; Secure Nested Paging) remote attestation is a cryptographic process that verifies the identity and integrity of a virtual machine running in a genuine AMD SEV-SNP confidential computing environment. This skill provides a complete workflow for proving that your VM is authentic and hasn&#8217;t been tampered with.</p>
+<h2>When to Use SEV-SNP Attestation</h2>
+<p>You should use this skill when:</p>
+<ul>
+<li>Proving to remote parties that your VM is running in a genuine AMD SEV-SNP environment</li>
+<li>Verifying VM integrity before trusting it with sensitive secrets or cryptographic keys</li>
+<li>Checking if SEV-SNP is properly configured and available on your system</li>
+<li>Generating attestation reports for third-party verification</li>
+<li>Validating the complete AMD certificate chain (ARK → ASK → VCEK)</li>
+<li>Debugging attestation failures or certificate-related issues</li>
+</ul>
+<h2>The Complete Attestation Workflow</h2>
+<p>The SEV-SNP attestation process follows a structured 6-step workflow that ensures comprehensive verification:</p>
+<h3>Step 1: Detection &#8211; Is SEV-SNP Available?</h3>
+<p>The first step checks whether the system supports SEV-SNP and if the necessary device files are accessible. This requires root access or membership in the &#8216;sev&#8217; group to access /dev/sev-guest.</p>
+<h3>Step 2: Generate Report</h3>
+<p>If SEV-SNP is available, the system generates a cryptographic attestation report. This report contains measurements of the VM&#8217;s current state, including firmware, hypervisor, and VM configuration.</p>
+<h3>Step 3: Display Report Information</h3>
+<p>The generated report is displayed with detailed information about the VM&#8217;s Trusted Computing Base (TCB) level, launch configuration, and other critical measurements.</p>
+<h3>Step 4: Fetch AMD Certificates</h3>
+<p>The system retrieves the AMD certificate chain from AMD&#8217;s Key Distribution Service (KDS) at https://kdsintf.amd.com. This includes the AMD Root Key (ARK), AMD Signing Key (ASK), and the VCEK certificate.</p>
+<h3>Step 5: Verify Certificate Chain</h3>
+<p>The certificate chain is validated to ensure it follows the proper hierarchy: ARK (self-signed) → ASK → VCEK. This confirms that the certificates are authentic and issued by AMD.</p>
+<h3>Step 6: Verify Report Signature</h3>
+<p>Finally, the attestation report&#8217;s signature is verified using the VCEK certificate. This confirms that the report was indeed generated by a genuine AMD SEV-SNP platform.</p>
+<h2>Quick Start Commands</h2>
+<p>Getting started with SEV-SNP attestation is straightforward:</p>
+<pre><code>Check if SEV-SNP is Available
+./scripts/detect-sev-snp.sh
+
+Run Full Attestation
+./scripts/full-attestation.sh [output_dir]
+</code></pre>
+<p>The full attestation script runs all six steps and outputs either &#8220;PASSED&#8221; or &#8220;FAILED&#8221; based on the verification results.</p>
+<h2>Individual Step Scripts</h2>
+<p>Each step can be run independently for debugging or custom workflows:</p>
+<pre><code>scripts/detect-sev-snp.sh - Check SEV-SNP availability
+scripts/generate-report.sh &lt;output_dir&gt; - Generate attestation report with nonce
+scripts/fetch-certificates.sh &lt;report_file&gt; &lt;output_dir&gt; - Fetch AMD certificates from KDS
+scripts/verify-chain.sh &lt;certs_dir&gt; - Verify certificate chain
+scripts/verify-report.sh &lt;report_file&gt; &lt;certs_dir&gt; - Verify report signature
+</code></pre>
+<h2>Prerequisites and Installation</h2>
+<p>Before running the attestation workflow, ensure you have the following:</p>
+<ul>
+<li>snpguest: Rust CLI from virtee/snpguest (install with cargo install snpguest)</li>
+<li>openssl: For certificate operations</li>
+<li>curl: For fetching certificates from AMD KDS</li>
+<li>Root access: Required to access /dev/sev-guest or membership in the &#8216;sev&#8217; group</li>
+</ul>
+<h2>Technical Details</h2>
+<p>Understanding the technical aspects helps with troubleshooting and implementation:</p>
+<ul>
+<li>AMD KDS URL: https://kdsintf.amd.com</li>
+<li>Certificate Chain: ARK (self-signed) → ASK → VCEK</li>
+<li>Report Signature: ECDSA P-384</li>
+<li>Device: /dev/sev-guest (requires root or sev group membership)</li>
+</ul>
+<h2>Report Fields and Error Handling</h2>
+<p>The attestation report contains detailed fields about the VM&#8217;s configuration and measurements. Common error codes are documented to help troubleshoot issues during the attestation process.</p>
+<h2>Manual Verification Options</h2>
+<p>For advanced users, there&#8217;s an OpenSSL-based verification option that allows attestation without the snpguest CLI, providing more control over the verification process.</p>
+<h2>Security Benefits</h2>
+<p>SEV-SNP attestation provides critical security guarantees:</p>
+<ul>
+<li>Confidentiality: Ensures VMs run in isolated, encrypted environments</li>
+<li>Integrity: Verifies VMs haven&#8217;t been tampered with</li>
+<li>Authentication: Confirms VMs are running on genuine AMD hardware</li>
+<li>Remote Trust: Enables third parties to verify VM authenticity</li>
+</ul>
+<h2>Real-World Use Cases</h2>
+<p>Organizations use SEV-SNP attestation for:</p>
+<ul>
+<li>Secure cloud computing where tenants verify their VMs run in confidential environments</li>
+<li>Blockchain nodes that need to prove they&#8217;re running in trusted execution environments</li>
+<li>Financial services applications handling sensitive transactions</li>
+<li>Healthcare systems processing protected health information</li>
+<li>Multi-party computation scenarios requiring verified secure environments</li>
+</ul>
+<h2>Conclusion</h2>
+<p>AMD SEV-SNP remote attestation is a powerful tool for establishing trust in confidential computing environments. By following the complete workflow, organizations can cryptographically verify VM identity and integrity, ensuring that sensitive workloads run in genuine, secure environments. Whether you&#8217;re building cloud services, secure applications, or need to verify your VM&#8217;s authenticity, this skill provides the tools and processes necessary for robust attestation.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/xinyuwang/sev-attestation/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/xinyuwang/sev-attestation/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

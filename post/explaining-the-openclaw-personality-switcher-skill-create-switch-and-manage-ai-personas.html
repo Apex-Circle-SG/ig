@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Explaining the OpenClaw Personality Switcher Skill: Create, Switch, and Manage AI Personas</title>
+    <meta name="description" content="Learn how the OpenClaw personality‑switcher skill lets you create, save, and instantly swap AI assistant personalities with automatic backups and heartbeat rest">
+    <meta property="og:title" content="Explaining the OpenClaw Personality Switcher Skill: Create, Switch, and Manage AI Personas">
+    <meta property="og:description" content="Learn how the OpenClaw personality‑switcher skill lets you create, save, and instantly swap AI assistant personalities with automatic backups and heartbeat rest">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/explaining-the-openclaw-personality-switcher-skill-create-switch-and-manage-ai-personas">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9200">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9200">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/explaining-the-openclaw-personality-switcher-skill-create-switch-and-manage-ai-personas">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Explaining the OpenClaw Personality Switcher Skill: Create, Switch, and Manage AI Personas</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <p>The OpenClaw ecosystem continues to grow with a variety of community‑contributed skills that extend the capabilities of the AI assistant. One of the most interesting additions is the <strong>personality‑switcher</strong> skill, which enables users to craft, store, and toggle between distinct AI personalities on the fly. This post dives deep into how the skill works, what files it creates, how it protects your data, and practical ways you can use it to shape your interactions with the assistant.</p>
+<h2>What the Personality Switcher Skill Does</h2>
+<p>At its core, the personality‑switcher skill provides a lightweight framework for managing multiple AI assistant personas. Each persona consists of two markdown files:</p>
+<ul>
+<li><strong>SOUL.md</strong> – contains the core philosophy, voice, mannerisms, and behavioural boundaries that define how the assistant thinks and responds.</li>
+<li><strong>IDENTITY.md</strong> – holds the surface‑level traits such as name, emoji, catchphrase, and overall vibe.</li>
+</ul>
+<p>These files live inside a dedicated <code>personalities/</code> folder under the OpenClaw workspace. When you activate a personality, the skill copies the corresponding SOUL.md and IDENTITY.md into the workspace root, overwriting the active versions that the assistant reads. Crucially, a shared <code>USER.md</code> (and <code>MEMORY.md</code>) remains untouched, preserving user‑specific context across all personalities.</p>
+<h2>Installation and Initial Setup</h2>
+<p>When you install the personality‑switcher skill, several actions occur automatically:</p>
+<ol>
+<li>A <code>personalities/</code> directory is created in <code>~/.openclaw/workspace/</code>.</li>
+<li>The current SOUL.md and IDENTITY.md are backed up as a <code>default</code> personality, giving you a safety net.</li>
+<li>A state file <code>_personality_state.json</code> is initialized to track which personality is active.</li>
+<li>The <code>HEARTBEAT.md</code> file is updated to include a restoration script that runs on every heartbeat, ensuring the active personality survives session restarts and conversation compaction.</li>
+</ol>
+<p>If you ever uninstall the skill, the default personality is restored to the workspace root, the heartbeat entry is removed, and the personalities folder is left intact for manual cleanup.</p>
+<h2>Quick Start Commands</h2>
+<p>The skill registers a set of native commands (usable in the CLI or Telegram) that make personality management intuitive:</p>
+<ul>
+<li><code>/personality [name]</code> – lists all personalities when called without arguments, or switches to the specified name.</li>
+<li><code>/create‑personality &lt;description&gt;</code> – creates a new personality from a free‑form description; the skill auto‑generates a concise name and populates SOUL.md and IDENTITY.md.</li>
+<li><code>/rename‑personality &lt;old&gt; &lt;new&gt;</code> – renames an existing personality (cannot rename <code>default</code>).</li>
+<li><code>/delete‑personality &lt;name&gt;</code> – permanently deletes a personality (cannot delete <code>default</code>; if the active personality is deleted, the skill first switches to <code>default</code>).</li>
+</ul>
+<p>Example usage:</p>
+<pre>
+/personality
+# Shows list: default, aelindor, sage …
+
+/personality aelindor
+# Switches to the ‘aelindor’ personality
+
+/create‑personality "A stoic dwarf who loves ale and mining"
+# Creates a personality named something like ‘dwarf’ with appropriate SOUL/IDENTITY files.
+</pre>
+<h2>How the Switching Process Works</h2>
+<p>The skill treats each personality change as an atomic operation, meaning that either all steps succeed or the system rolls back to the previous state, preventing corrupted files.</p>
+<h3>Step‑by‑Step Switch</h3>
+<ol>
+<li><strong>Preserve Current State</strong> – Before any changes, the skill creates a timestamped backup of the current SOUL.md and IDENTITY.md in the <code>backups/</code> subfolder.</li>
+<li><strong>Persist Changes</strong> – Any edits you made to the active personality’s files are written back to its folder under <code>personalities/&lt;name&gt;/</code>.</li>
+<li><strong>Load New Personality</strong> – The skill copies the SOUL.md and IDENTITY.md of the target personality into the workspace root, overwriting the active files.</li>
+<li><strong>Update State</strong> – The <code>_personality_state.json</code> file is updated with the new active personality name and a timestamp.</li>
+<li><strong>Verify Integrity</strong> – The skill checks that the files were copied correctly. If any step fails, it automatically restores the most recent backup, ensuring no data loss.</li>
+</ol>
+<p>Because the backup is stored in a dedicated <code>backups/</code> folder (not scattered in the workspace root), the skill keeps the workspace tidy while still providing a robust safety net.</p>
+<h2>Backup Management</h2>
+<p>The skill automatically prunes old backups to prevent unlimited growth. By default, it retains the ten most recent backups. You can run a cleanup script manually:</p>
+<pre>
+python3 ~/.openclaw/workspace/skills/personality-switcher/scripts/cleanup_backups.py --keep 5
+python3 ~/.openclaw/workspace/skills/personality-switcher/scripts/cleanup_backups.py --keep 10 --days 7
+</pre>
+<p>Options:</p>
+<ul>
+<li><code>--keep N</code> – retain the N most recent backups (default 10).</li>
+<li><code>--days D</code> – also delete backups older than D days.</li>
+</ul>
+<p>For continuous maintenance, you can add the cleanup command to your <code>HEARTBEAT.md</code> file, ensuring backups stay tidy without manual intervention.</p>
+<h2>The Special “default” Personality</h2>
+<p>The <code>default</code> personality is treated specially:</p>
+<ul>
+<li>It is automatically created during installation from your original SOUL.md and IDENTITY.md, giving you an exact copy of the assistant’s initial configuration.</li>
+<li>It is always available and selectable via <code>/personality default</code>.</li>
+<li>The skill protects it from accidental deletion or renaming, so you always have a reliable fallback.</li>
+<li>If you ever delete the active personality, the skill switches you to <code>default</code> first, preventing a state where no personality is loaded.</li>
+</ul>
+<p>This design makes the skill safe for experimentation: you can try out wild personas, safe in the knowledge that you can revert to your original setup instantly.</p>
+<h2>Integration with OpenClaw’s Heartbeat System</h2>
+<p>OpenClaw relies on a heartbeat mechanism to run periodic maintenance tasks. The personality‑switcher skill leverages this by inserting a restoration script into <code>HEARTBEAT.md</code>:</p>
+<pre>
+python3 ~/.openclaw/workspace/skills/personality-switcher/scripts/restore_personality.py
+</pre>
+<p>On each heartbeat, the script reads <code>_personality_state.json</code> and reapplies the active personality’s SOUL.md and IDENTITY.md to the workspace root. This means that even if you close the terminal, restart the OpenClaw service, or experience a conversation‑compacting event, your chosen personality persists automatically.</p>
+<h2>Telegram Native Commands</h2>
+<p>If you interact with OpenClaw via Telegram, the skill registers the same commands as native bot commands, allowing you to manage personalities directly from chat:</p>
+<ul>
+<li><code>/personality</code> – list or switch.</li>
+<li><code>/create‑personality &lt;desc&gt;</code> – create a new persona.</li>
+<li><code>/rename‑personality &lt;old&gt; &lt;new&gt;</code> – rename.</li>
+<li><code>/delete‑personality &lt;name&gt;</code> – delete.</li>
+</ul>
+<p>Because the commands are native, they respond instantly and provide feedback such as “Switched to personality ‘aelindor’.” or “Backup: _personality_current_2026-02-08T18-27-33.371866”.</p>
+<h2>Folder Structure Overview</h2>
+<p>After installing the skill and creating a few personalities, your workspace will look like this:</p>
+<pre>
+~/.openclaw/workspace/
+├── SOUL.md                          (active personality’s soul)
+├── IDENTITY.md                      (active personality’s identity)
+├── USER.md                          (SHARED – never changed by personality)
+├── MEMORY.md                        (SHARED – never changed)
+├── _personality_state.json          (tracks active personality)
+└── personalities/
+    ├── default/
+    │   ├── SOUL.md
+    │   └── IDENTITY.md
+    ├── aelindor/
+    │   ├── SOUL.md
+    │   └── IDENTITY.md
+    ├── sage/
+    │   ├── SOUL.md
+    │   └── IDENTITY.md
+    └── backups/
+        ├── current_2026-02-08T17-27-41.628113/
+        │   ├── SOUL.md
+        │   └── IDENTITY.md
+        └── current_2026-02-08T17-27-33.371866/
+            ├── SOUL.md
+            └── IDENTITY.md
+</pre>
+<p>The <code>USER.md</code> and <code>MEMORY.md</code> files remain shared, meaning any personal preferences, knowledge base entries, or conversation history you accumulate are accessible regardless of which personality is active.</p>
+<h2>Practical Use Cases</h2>
+<p>Why would you want multiple personalities? Here are a few scenarios where the skill shines:</p>
+<ul>
+<li><strong>Role‑playing and storytelling</strong> – Switch between a whimsical bard, a grim detective, or a wise sage to match the tone of your narrative.</li>
+<li><strong>Professional contexts</strong> – Use a formal, concise personality for work‑related queries and a relaxed, friendly one for casual chats.</li>
+<li><strong>Learning and experimentation</strong> – Test how changes to SOUL.md (e.g., altering the assistant’s stance on risk) affect responses without jeopardizing your core configuration.</li>
+<li><strong>Team collaboration</strong> – Share a set of predefined personalities with teammates so everyone can adopt a consistent voice for joint projects.</li>
+<li><strong>Accessibility</strong> – Create a personality that uses simpler language or extra empathy for users who need a gentler interaction style.</li>
+</ul>
+<p>Because the switch is instantaneous and safe, you can experiment freely, knowing that a single command returns you to your baseline.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw personality‑switcher skill is a powerful yet straightforward tool for anyone who wants to shape their AI assistant’s behaviour on demand. By separating core philosophy (SOUL.md) from surface traits (IDENTITY.md) and preserving a shared user context, it gives you the flexibility to craft distinct personas while safeguarding your data through atomic switches, automatic backups, and heartbeat‑driven restoration. Whether you are a storyteller, a professional, a hobbyist, or just curious about AI behaviour, this skill adds a new layer of personalization and safety to your OpenClaw experience.</p>
+<p>Give it a try: install the skill, run <code>/create‑personality "Your idea here"</code>, and watch how easily you can jump between different AI identities—all with the confidence that your original setup is just a command away.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/robb1010/personality-switcher/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/robb1010/personality-switcher/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

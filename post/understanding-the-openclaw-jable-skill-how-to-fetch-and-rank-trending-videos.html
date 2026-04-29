@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the OpenClaw Jable Skill: How to Fetch and Rank Trending Videos</title>
+    <meta name="description" content="Discover how the OpenClaw Jable skill automates the process of fetching and ranking the latest trending videos by likes using customizable time windows.">
+    <meta property="og:title" content="Understanding the OpenClaw Jable Skill: How to Fetch and Rank Trending Videos">
+    <meta property="og:description" content="Discover how the OpenClaw Jable skill automates the process of fetching and ranking the latest trending videos by likes using customizable time windows.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-openclaw-jable-skill-how-to-fetch-and-rank-trending-videos">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8475">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8475">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-openclaw-jable-skill-how-to-fetch-and-rank-trending-videos">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the OpenClaw Jable Skill: How to Fetch and Rank Trending Videos</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <h1>Mastering the OpenClaw Jable Skill: A Comprehensive Guide</h1>
+<p>In the evolving landscape of digital automation and content curation, the OpenClaw framework stands out as a powerful tool for power users and developers alike. One of its most specialized and highly requested additions is the <strong>Jable Skill</strong>. Whether you are a content researcher, a data enthusiast, or simply someone looking to optimize how you discover new media, understanding this skill is essential. In this guide, we will break down exactly what the Jable skill does, how it works under the hood, and how you can implement it to enhance your workflow.</p>
+<h2>What is the Jable Skill?</h2>
+<p>At its core, the Jable skill is a specialized OpenClaw automation designed to fetch, filter, and rank the latest content from Jable.tv. Unlike a manual browsing experience where you might spend hours scrolling through pages to find quality content, this skill automates the entire discovery process. It acts as a data bridge between the raw RSS feeds of the platform and your chat interface, providing you with a curated list of top-rated videos based on specific metrics.</p>
+<p>The skill is explicitly designed to handle the heavy lifting: gathering data from the latest-updates section and the RSS feed, cross-referencing timestamps, counting likes, and presenting the findings in a clean, readable format. It is a perfect example of how OpenClaw transforms a mundane browsing task into an efficient, command-line-driven intelligence request.</p>
+<h2>Key Functionality and Workflow</h2>
+<p>The Jable skill operates on a clear, logical workflow that ensures the data returned is both accurate and relevant to your needs. The process is broken down into four distinct steps:</p>
+<ul>
+<li><strong>RSS Monitoring:</strong> The script first checks the RSS feed for new video publish times. This is the primary trigger that defines what is considered &#8216;new.&#8217;</li>
+<li><strong>Data Aggregation:</strong> Once the videos are identified, the skill visits the &#8216;latest-updates&#8217; pages to extract individual like counts. This step is crucial because, without it, you would only have a list of videos without any indication of their popularity.</li>
+<li><strong>Temporal Filtering:</strong> The script applies a &#8216;recent window&#8217; filter. By default, this is set to 48 hours, ensuring that you aren&#8217;t seeing outdated content.</li>
+<li><strong>Ranking and Sorting:</strong> Finally, the content is sorted in descending order based on total likes, and the top N results are formatted into an easy-to-read list for the end-user.</li>
+</ul>
+<h2>Installation and Setup</h2>
+<p>Getting started with the Jable skill is straightforward for anyone familiar with the OpenClaw ecosystem. You have two primary options for installation:</p>
+<ol>
+<li><strong>ClawHub Installation:</strong> The recommended method is to use the terminal command <code>clawhub install jable</code>. This automatically handles the file placement and integration within your OpenClaw workspace.</li>
+<li><strong>Manual GitHub Deployment:</strong> If you prefer to manage your skills manually, you can clone the repository directly. Ensure that you place the folder within your <code>skills/</code> directory structure so that the OpenClaw engine can detect it properly.</li>
+</ol>
+<p>Once installed, the core functionality is accessed through the <code>top_liked_recent.py</code> script. This script accepts several parameters that allow you to tune the output to your specific needs.</p>
+<h2>Customizing Your Queries</h2>
+<p>One of the strongest features of this skill is its flexibility. You are not forced to stick to default settings. The script provides three main command-line parameters:</p>
+<ul>
+<li><code>--hours</code>: This allows you to define the &#8216;recency&#8217; window. If you want to see what has trended in the last 6 hours, you can set this parameter accordingly.</li>
+<li><code>--top</code>: This controls the volume of your output. Whether you want a quick &#8216;Top 3&#8217; or a comprehensive &#8216;Top 20&#8217; list, this parameter handles it.</li>
+<li><code>--pages</code>: This is the &#8216;depth&#8217; parameter. By telling the script how many pages of latest updates to scan, you increase the likelihood of finding videos that have garnered significant engagement. Increasing this number is recommended if you notice that some videos are missing like counts.</li>
+</ul>
+<h2>User Interaction and Output Style</h2>
+<p>The beauty of this skill lies in how it interacts with the user. It is user-invocable, meaning you can trigger it naturally within a chat conversation. For example, simply asking, <em>&#8220;Pull Jable latest updates and show top 5 by likes from last 24h,&#8221;</em> will trigger the skill to run, process, and return the data in a standardized, clean format.</p>
+<p>The output format is specifically designed for quick readability, utilizing emojis to separate metadata:</p>
+<ul>
+<li><strong>1️⃣ Title:</strong> The video title.</li>
+<li><strong>❤️ Likes:</strong> The number of likes retrieved.</li>
+<li><strong>🔗 URL:</strong> The direct link for immediate access.</li>
+</ul>
+<p>This consistent layout ensures that you can scan a list of ten videos in seconds, rather than manually clicking through a website&#8217;s navigation menus.</p>
+<h2>Important Considerations and Best Practices</h2>
+<p>While the Jable skill is incredibly efficient, there are a few nuances to keep in mind. First, the accuracy of the data depends on the accessibility of the &#8216;latest-updates&#8217; pages. If a video is published via RSS but does not appear in the pages the script scans, the script will skip it due to missing like data. If you notice your favorite videos are missing from your results, try increasing the <code>--pages</code> parameter to expand the scope of the scan.</p>
+<p>Additionally, always ensure your Python environment is correctly configured with the necessary dependencies that OpenClaw requires. Since the skill relies on web scraping to gather like counts, maintaining a stable internet connection is required for the script to execute the HTTP requests properly.</p>
+<h2>Conclusion</h2>
+<p>The Jable skill is a shining example of the utility provided by the OpenClaw community. By automating the discovery of popular content, it saves users significant time and provides a data-backed approach to media consumption. Whether you are a casual user looking for the day&#8217;s highlights or a developer looking to understand how to build custom skills within the OpenClaw framework, the Jable repository offers a wealth of knowledge and functionality.</p>
+<p>Start by installing the skill today, tweak your parameters, and experience a more intelligent way to navigate your favorite content updates. If you run into issues, remember to check the GitHub issues page for the <code>openclaw/skills</code> repository, where the community is constantly improving the scripts to handle platform changes and edge cases.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/kangbuilds/invisiblechris-jable/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/kangbuilds/invisiblechris-jable/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

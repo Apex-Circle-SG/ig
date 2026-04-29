@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Master Content Repurposing with OpenClaw: Turn Blog Posts into Social Media Gold</title>
+    <meta name="description" content="Learn how the OpenClaw Content Repurposer skill automates your social media workflow by transforming long-form articles into perfectly formatted posts.">
+    <meta property="og:title" content="Master Content Repurposing with OpenClaw: Turn Blog Posts into Social Media Gold">
+    <meta property="og:description" content="Learn how the OpenClaw Content Repurposer skill automates your social media workflow by transforming long-form articles into perfectly formatted posts.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/master-content-repurposing-with-openclaw-turn-blog-posts-into-social-media-gold">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9011">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9011">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/master-content-repurposing-with-openclaw-turn-blog-posts-into-social-media-gold">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Master Content Repurposing with OpenClaw: Turn Blog Posts into Social Media Gold</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <h1>Maximize Your Reach: Introducing the OpenClaw Content Repurposer</h1>
+<p>In today&#8217;s fast-paced digital marketing landscape, the ability to produce high-quality content across multiple platforms is a significant competitive advantage. However, creating unique content for X (Twitter), LinkedIn, Instagram, and email newsletters for every single blog post is an incredibly time-consuming task. Enter the <strong>OpenClaw Content Repurposer</strong>—a powerful tool designed to streamline your content production process and ensure your message reaches your audience wherever they are.</p>
+<h2>What is the OpenClaw Content Repurposer?</h2>
+<p>The OpenClaw Content Repurposer is a specialized skill within the OpenClaw ecosystem designed to take a single source of content—a blog post or article—and automatically generate optimized outputs for various social media platforms. By analyzing your input (whether it is a URL or a text file), the tool parses the essential information, strips away unnecessary elements like navigation bars or sidebars, and crafts platform-specific versions of your content.</p>
+<h2>Why Content Repurposing Matters</h2>
+<p>Consistency is the hallmark of a successful brand. Yet, many creators fall into the trap of writing a blog post and then simply sharing the link once on social media. This approach fails to account for the unique communication styles required by different networks. A formal LinkedIn post, a pithy Twitter thread, and an engaging Instagram caption all serve different purposes. The Content Repurposer automates this diversification, ensuring that you don&#8217;t just dump links, but instead provide value tailored to the user experience of each individual platform.</p>
+<h2>Key Features and Output Formats</h2>
+<p>The beauty of this tool lies in its flexibility. It doesn&#8217;t just produce generic text; it understands the limitations and best practices of each social media channel:</p>
+<ul>
+<li><strong>Twitter/X Threads:</strong> The tool generates a series of 5-8 tweets, each under 280 characters, complete with compelling hooks and relevant hashtags to maximize thread engagement.</li>
+<li><strong>LinkedIn Posts:</strong> Designed for professional resonance, it crafts an insight-driven post (up to 1300 characters) that concludes with a strong call-to-action (CTA).</li>
+<li><strong>Instagram Captions:</strong> It creates storytelling-style captions with a limit of 2200 characters, including a curated list of 20-30 hashtags to boost discoverability.</li>
+<li><strong>Email Snippets:</strong> Perfect for newsletters, the output includes a catchy subject line, engaging preview text, and a summary body.</li>
+<li><strong>Summaries:</strong> A concise 3-sentence TL;DR summary, ideal for quick sharing or internal documentation.</li>
+</ul>
+<h2>Getting Started with the Tool</h2>
+<p>Getting the Content Repurposer up and running is straightforward for anyone familiar with basic command-line operations. Leveraging the <code>uv</code> package manager and <code>beautifulsoup4</code> for web scraping, you can initiate the process from a URL with a single command.</p>
+<p>For instance, if you want to generate content from an existing blog post, you can run:</p>
+<p><code>uv run --with beautifulsoup4 python scripts/repurpose.py url "https://example.com/blog-post"</code></p>
+<p>This command pulls the article content, processes it, and provides you with ready-to-use text for all supported platforms. If you have specific requirements, such as only needing content for Twitter and LinkedIn, you can customize the output using the <code>--formats</code> flag. You can even output the result in JSON format, which is perfect for developers looking to integrate this skill into a larger automated content pipeline or a CMS workflow.</p>
+<h2>Workflow Integration Tips</h2>
+<p>To make the most of the OpenClaw Content Repurposer, consider these strategies:</p>
+<ul>
+<li><strong>Batch Processing:</strong> Don&#8217;t wait until the end of the week. Run the tool as soon as you publish a new article to ensure your social channels stay active and aligned with your latest thoughts.</li>
+<li><strong>Save to Directories:</strong> Use the <code>-o</code> flag to output your content into specific project folders. This keeps your drafts organized and ready for your social media management tool.</li>
+<li><strong>Combine with Piped Input:</strong> If you are drafting content in a markdown editor, you can pipe your clipboard text directly into the script using <code>echo "your text" | python scripts/repurpose.py stdin</code>.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw Content Repurposer isn&#8217;t just about saving time; it&#8217;s about amplifying the reach of the work you have already done. By turning one pillar piece of content into a multi-channel campaign, you ensure that your message is heard, read, and shared by a wider audience. If you are looking to scale your content marketing efforts without increasing your workload, integrating this tool into your workflow is the next logical step. Explore the official repository, experiment with the commands, and start repurposing your content today.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/mariusfit/oc-content-repurposer/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/mariusfit/oc-content-repurposer/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

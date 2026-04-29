@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RugCheck: How to Analyze Solana Tokens for Rug Pull Risks &#8211; A Comprehensive Guide</title>
+    <meta name="description" content="Learn how RugCheck&#8217;s Solana token analyzer helps detect rug pull risks and assess token safety using comprehensive risk scores and detailed reports.">
+    <meta property="og:title" content="RugCheck: How to Analyze Solana Tokens for Rug Pull Risks &#8211; A Comprehensive Guide">
+    <meta property="og:description" content="Learn how RugCheck&#8217;s Solana token analyzer helps detect rug pull risks and assess token safety using comprehensive risk scores and detailed reports.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/rugcheck-how-to-analyze-solana-tokens-for-rug-pull-risks-a-comprehensive-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8368">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8368">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/rugcheck-how-to-analyze-solana-tokens-for-rug-pull-risks-a-comprehensive-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>RugCheck: How to Analyze Solana Tokens for Rug Pull Risks &#8211; A Comprehensive Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-08</p>
+    <h1>Understanding RugCheck: Your Solana Token Safety Analyzer</h1>
+<p>In the fast-paced world of cryptocurrencies, especially in ecosystems like Solana, the need for reliable token analysis tools is paramount to avoid potential rug pulls and scams. RugCheck has emerged as a popular solution for Solana token safety analysis. This article will explore what RugCheck does and how you can use it to evaluate Solana tokens effectively.</p>
+<h2>What is RugCheck?</h2>
+<p>RugCheck is a free API service that allows users to analyze Solana tokens by their mint addresses for potential rug pull risks. It provides a comprehensive report that includes risk scores, risk flags, liquidity provider information, token metadata, holder distribution, and more.</p>
+<h2>Key Features of RugCheck</h2>
+<h3>Risk Score and Flags</h3>
+<p>RugCheck assigns a risk score to each token on a scale from 0 to 100, with higher scores indicating higher risk. The scores are accompanied by risk flags that highlight specific concerns, such as mutable metadata, low liquidity, or a single holder owning a large percentage of the token supply.</p>
+<ul>
+<li><strong>0-30:</strong> Low risk (Good)</li>
+<li><strong>30-60:</strong> Medium risk (Caution)</li>
+<li><strong>60-100:</strong> High risk (Danger)</li>
+</ul>
+<h3>Liquidity Provider Information</h3>
+<p>One of the critical aspects RugCheck analyzes is the percentage of liquidity provider (LP) tokens that are locked. If the LP tokens are not locked, it indicates that the creator can pull the liquidity anytime, which is a significant red flag for potential rug pulls.</p>
+<h3>Token Metadata Analysis</h3>
+<p>RugCheck examines token metadata to determine if it is mutable, meaning the creator can change the token&#8217;s name, image, or other metadata. This is another critical red flag, as it can be used to deceive holders.</p>
+<h3>Holder Distribution</h3>
+<p>The tool also provides detailed information about the distribution of token holders. Highly concentrated holder distributions, where a few wallets hold a large percentage of the token supply, can indicate potential risks.</p>
+<h2>How to Use RugCheck</h2>
+<h3>Getting Started</h3>
+<p>The easiest way to use RugCheck is through its command-line script. Below are some basic commands to help you get started:</p>
+<h4>1. Get Risk Summary</h4>
+<p>To get a quick summary of a token&#8217;s risk, use the following command:</p>
+<pre>bash scripts/rugcheck.sh summary &lt;MINT_ADDRESS&gt;</pre>
+<p>This will provide you with a risk score, risk flags, and the percentage of LP tokens locked.</p>
+<h4>2. Get Full Detailed Report</h4>
+<p>For a more comprehensive report, use this command:</p>
+<pre>bash scripts/rugcheck.sh report &lt;MINT_ADDRESS&gt;</pre>
+<p>This will give you detailed information about the token&#8217;s metadata, holders, markets, creator information, and more.</p>
+<h3>Interpreting the Results</h3>
+<p>Here are the key fields and their meanings:</p>
+<ul>
+<li><strong>score_normalised:</strong> Risk score from 0 to 100.</li>
+<li><strong>risks[]:</strong> An array of risk flags with details including risk type, level, description, and raw risk contribution.</li>
+<li><strong>lpLockedPct:</strong> Percentage of LP tokens locked.</li>
+<li><strong>tokenProgram:</strong> SPL token program used.</li>
+<li><strong>tokenType:</strong> Token type classification.</li>
+<li><strong>tokenMeta:</strong> Information about the token&#8217;s name, symbol, URI, mutable flag, and update authority.</li>
+<li><strong>token:</strong> Details about the token&#8217;s supply, decimals, mint authority, and freeze authority.</li>
+<li><strong>creator/creatorBalance:</strong> Information about the token creator and their current balance.</li>
+<li><strong>topHolders[]:</strong> Top holders with their addresses, owner information, percentage of supply, and UI amount.</li>
+<li><strong>markets[]:</strong> DEX markets/pools with liquidity data.</li>
+<li><strong>insiderNetworks:</strong> Connected insider wallet clusters.</li>
+</ul>
+<h2>Red Flag Checklist</h2>
+<p>When analyzing a token with RugCheck, it&#8217;s essential to look out for the following red flags:</p>
+<ul>
+<li><strong>Mutable Metadata:</strong> If token metadata is mutable, the creator can change the token&#8217;s name or image, which is a significant risk.</li>
+<li><strong>Low Liquidity:</strong> Tokens with low liquidity are easier to manipulate.</li>
+<li><strong>High Holder Concentration:</strong> If the top 10 holders own more than 50% of the supply, it indicates high risk.</li>
+<li><strong>Single Holder Dominance:</strong> If one wallet holds more than 20% of the supply, it&#8217;s a red flag.</li>
+<li><strong>LP Not Locked:</strong> If the LP tokens are not locked, the creator can pull liquidity anytime.</li>
+<li><strong>Mint Authority Exists:</strong> The creator can mint an infinite number of tokens if the mint authority exists.</li>
+<li><strong>Freeze Authority Exists:</strong> If the freeze authority exists, the creator can freeze wallets.</li>
+<li><strong>Few LP Providers:</strong> If only 1-2 wallets are providing liquidity, it&#8217;s a risk.</li>
+<li><strong>Low/Zero Trade Volume:</strong> No real market activity is a red flag.</li>
+<li><strong>Creator Holds Large Balance:</strong> If the creator still holds a significant portion of the supply, it indicates potential risk.</li>
+</ul>
+<h2>presenting Findings</h2>
+<p>To present the analysis findings clearly, you can format the results like this example:</p>
+<pre>🔍 RugCheck Analysis: CLWDN (ClawdNation)<br>Mint: 3zvSRWfjPvcnt8wfTrKhgCtQVwVSrYfBY6g1jPwzfHJG<br>⚠️ Risk Score: 59/100 (Medium-High Risk)<br><br>🚩 Risk Flags:<br>🔴 Low Liquidity — $102.55<br>⚠️ Single holder ownership — 40.00%<br>⚠️ High holder concentration — Top 10 hold &gt;50%<br>⚠️ Low amount of holders<br>⚠️ Low LP providers<br>⚠️ Mutable metadata<br><br>🔓 LP Locked: 0% (NOT LOCKED)<br>📊 Top Holders:<br>1. 40.0% — 3Y3g...p7rk<br>2. 15.0% — 5bNH...4VGj<br>3. 15.0% — 4dkX...Ncg6<br>4. 10.0% — 8yY2...CKn8<br>5. 10.0% — 2MT5...eB3h<br><br>Verdict: HIGH RISK — Multiple red flags. No locked liquidity, concentrated holdings, mutable metadata. Exercise extreme caution.<br></pre>
+<h2>API Details</h2>
+<p>The RugCheck API allows you to access its functionality programmatically. Here are some essential details about the API:</p>
+<h3>Base URL</h3>
+<p><a href="https://api.rugcheck.xyz">https://api.rugcheck.xyz</a></p>
+<h3>Auth</h3>
+<p>Auth is not required for read endpoints such as viewing token summaries or detailed reports.</p>
+<h3>Rate Limits</h3>
+<p>Respect 429 responses and add delays of 2-3 seconds between bulk queries to avoid rate limiting.</p>
+<h3>Bulk Queries</h3>
+<p>For larger-scale analyses, RugCheck offers bulk query endpoints that require a JWT from Solana wallet auth:</p>
+<ul>
+<li><strong>POST /v1/bulk/tokens/summary:</strong> Check multiple tokens at once.</li>
+<li><strong>POST /v1/bulk/tokens/report:</strong> Get full reports for multiple tokens.</li>
+</ul>
+<p>Please note that these bulk query endpoints may not be accessible to most agents without proper authentication.</p>
+<h2> RugCheck Web Interface</h2>
+<p>In addition to the API, RugCheck also offers a web interface where users can easily check tokens by entering the mint address:</p>
+<p><a href="https://rugcheck.xyz/tokens/&lt;mint&gt;">https://rugcheck.xyz/tokens/&lt;mint&gt;</a></p>
+<p>This user-friendly interface makes it easy for non-technical users to analyze token safety.</p>
+<h2>Conclusion</h2>
+<p>RugCheck is an invaluable tool for anyone looking to analyze Solana tokens and avoid potential rug pulls. By providing comprehensive risk scores, detailed reports, and an easy-to-use interface, it empowers users to make informed decisions about token safety. Whether you&#8217;re an investor, developer, or just curious about the Solana ecosystem, RugCheck is a resource you shouldn&#8217;t overlook.</p>
+<p>To explore RugCheck in depth, visit the <a href="https://github.com/openclaw/skills/tree/main/skills/skills/psychotechv4/rugcheck">OpenClaw skills repository on GitHub</a> for more information and usage examples.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/psychotechv4/rugcheck/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/psychotechv4/rugcheck/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

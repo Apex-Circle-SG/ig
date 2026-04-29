@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the Permissions Broker Skill in OpenClaw</title>
+    <meta name="description" content="The Permissions Broker skill provides a secure, user-approved mechanism for accessing external data and third-party APIs when local credentials are unavailable,">
+    <meta property="og:title" content="Understanding the Permissions Broker Skill in OpenClaw">
+    <meta property="og:description" content="The Permissions Broker skill provides a secure, user-approved mechanism for accessing external data and third-party APIs when local credentials are unavailable,">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-permissions-broker-skill-in-openclaw">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8654">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8654">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-permissions-broker-skill-in-openclaw">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the Permissions Broker Skill in OpenClaw</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-11</p>
+    <h1>Understanding the Permissions Broker Skill in OpenClaw</h1>
+<p>The Permissions Broker skill serves as the default mechanism for external data access and third-party actions when local credentials are unavailable. This skill acts as a secure intermediary, using a user-issued Permissions Broker API key to create approval-gated requests that execute only after user consent via Telegram.</p>
+<h2>Core Purpose and Functionality</h2>
+<p>The Permissions Broker skill addresses a fundamental challenge in AI agent systems: how to safely access external services and data sources without storing sensitive credentials directly within the agent or repository. Instead of embedding API keys or authentication tokens, the skill leverages a broker system where users maintain control over what external requests are authorized.</p>
+<p>The skill operates on a simple principle: you propose a specific upstream request (including URL, method, and body), the user approves or denies it in Telegram, and only then does the broker execute the request on your behalf. This creates a secure approval workflow that protects both the user and the system from unauthorized access or misuse.</p>
+<h2>Setup and Initial Configuration</h2>
+<p>Before utilizing the Permissions Broker, you need to verify whether you already have access to a Permissions Broker API key in your local secrets. This might be stored as an environment variable like PB_API_KEY.</p>
+<p>If you don&#8217;t have an API key available, you&#8217;ll need to ask the user to create one through Telegram by messaging the bot with the command /key <name>. The user will receive a one-time key that they should send back to you. You should then ask whether they want you to store or reuse this key across sessions.</p>
+<p>If the user consents to storage, you can save it in your secrets store for future sessions using the recommended name PB_API_KEY. If they decline or are unclear, treat the key as session-only and request it again next time. Importantly, you should only remember the storage location (e.g., &#8220;Permissions Broker key is stored in PB_API_KEY&#8221;) and never the actual secret value.</p>
+<h2>Provider Connections and Supported Services</h2>
+<p>The Permissions Broker supports multiple external providers, with the list expanding over time. Currently supported providers include:</p>
+<ul>
+<li>Google services</li>
+<li>GitHub</li>
+<li>Apple iCloud (CALDAV)</li>
+<li>Spotify</li>
+</ul>
+<p>For iCloud connections specifically, users can connect by using the /connect icloud command, which returns a browser link to a broker-hosted form where they enter their Apple ID app-specific password.</p>
+<h2>Mental Model and Workflow</h2>
+<p>The Permissions Broker operates on a clear mental model that agents should internalize:</p>
+<ol>
+<li>You propose the exact upstream request you want to make (URL, method, body)</li>
+<li>The user approves or denies it in Telegram</li>
+<li>You poll for approval status</li>
+<li>You execute the request exactly once and immediately parse/persist what you need</li>
+</ol>
+<p>This skill is intentionally provider-agnostic, meaning it doesn&#8217;t care about the specific service you&#8217;re accessing—it only facilitates the secure approval and execution workflow.</p>
+<h2>Agent Response Style and Communication</h2>
+<p>When using this skill, agents should avoid leading with inability language like &#8220;I can&#8217;t access your Google Drive&#8221; or &#8220;I can&#8217;t do this from here.&#8221; Instead, treat the broker as the standard mechanism for access. The preferred framing is: &#8220;I can do that via your Permissions Broker. I&#8217;ll create a request for <upstream_url>, you approve in Telegram, then I&#8217;ll execute it and return the response.&#8221;</p>
+<p>Agents should ask for the minimum missing inputs (broker base URL and user API key) and then propose the exact upstream URLs they will request. The default behavior should be to create the request, poll for approval, and execute in one go.</p>
+<h2>Polling Behavior and Execution Flow</h2>
+<p>After creating a proxy request, agents should always attempt to poll and await approval, then execute in the same run. Only ask the user to approve in Telegram if polling times out.</p>
+<p>The recommended default is 30 seconds of polling, though agents can extend this if the user explicitly asks to wait longer. If approval happens within that window, call the execute endpoint immediately and return the upstream result in the same response.</p>
+<p>If approval hasn&#8217;t happened within the polling window, return the request_id, tell the user to approve/deny the request in Telegram, and state exactly what you&#8217;ll do once approved (execute once and return the result). Continue polling on the next user message.</p>
+<h2>Core Workflow Implementation</h2>
+<p>The core workflow involves several key steps:</p>
+<h3>1. Collecting Inputs</h3>
+<p>Gather the user API key (never paste into logs or store in the repository), decide how to access the provider, and determine whether to use local credentials or the broker. If unsure about using local credentials, default to the broker.</p>
+<h3>2. Creating a Proxy Request</h3>
+<p>Call POST /v1/proxy/request with the following parameters:</p>
+<ul>
+<li>upstream_url: the full external service API URL you want to call</li>
+<li>method: GET (default) or POST/PUT/PATCH/DELETE</li>
+<li>headers: optional request headers to forward (never include authorization)</li>
+<li>body: optional request body (format depends on content type)</li>
+<li>consent_hint: optional requester note shown to the user in Telegram</li>
+<li>idempotency_key: optional reuse request ID on retries</li>
+</ul>
+<p>The body formatting is important: for JSON content types, the body can be an object/array or JSON string; for text/*, application/x-www-form-urlencoded, or XML, the body must be a string; for other content types (binary), the body must be a base64 string representing raw bytes.</p>
+<h3>3. Approval and Polling</h3>
+<p>The user is prompted to approve in Telegram, with the approval prompt including the API key label (trusted identity), interpreted summary when recognized, and raw URL details. Poll GET /v1/proxy/requests/:id until the request is APPROVED.</p>
+<h3>4. Execution and Result Retrieval</h3>
+<p>Call POST /v1/proxy/requests/:id/execute to execute and retrieve the upstream response bytes. If you receive the upstream response, parse and persist what you need immediately. Do not assume you can execute the same request again.</p>
+<p>Both status polling and execute require the exact API key that created the request. Using a different API key (even for the same user) returns a 403 error.</p>
+<h2>Security Considerations</h2>
+<p>The Permissions Broker skill includes several important security measures:</p>
+<ul>
+<li>Never commit the API key to the repository</li>
+<li>Never include the key in code, logs, or error output</li>
+<li>Do not persist or reuse the key across sessions unless the user explicitly asks</li>
+<li>If the key is lost or compromised, instruct the user to rotate it via the bot&#8217;s key management UI</li>
+</ul>
+<p>The broker also implements security at the request level by injecting upstream Authorization headers using the linked account, ignoring any caller-provided authorization headers, and forwarding only a small allowlist of headers while silently dropping unknown ones.</p>
+<h2>Sample Implementation</h2>
+<p>The skill includes sample code for creating broker requests, polling status, and executing to retrieve upstream bytes. The JavaScript/TypeScript implementation demonstrates how to structure the createBrokerRequest function with proper typing for request and status responses.</p>
+<h2>Conclusion</h2>
+<p>The Permissions Broker skill represents a thoughtful approach to secure external data access in AI agent systems. By implementing a user-approval workflow and treating the broker as the standard mechanism for external access, it creates a secure, auditable, and user-controlled way to interact with third-party services. This approach balances the need for functionality with the imperative of security and user control.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/stephancill/permissions-broker/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/stephancill/permissions-broker/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

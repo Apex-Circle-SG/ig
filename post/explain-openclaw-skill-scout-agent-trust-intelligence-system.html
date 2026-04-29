@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Explain OpenClaw Skill: Scout &#8211; Agent Trust Intelligence System</title>
+    <meta name="description" content="Understand how Scout, an AI-powered trust scoring system, evaluates agent reliability before transactions on platforms like Moltbook and x402 Bazaar">
+    <meta property="og:title" content="Explain OpenClaw Skill: Scout &#8211; Agent Trust Intelligence System">
+    <meta property="og:description" content="Understand how Scout, an AI-powered trust scoring system, evaluates agent reliability before transactions on platforms like Moltbook and x402 Bazaar">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/explain-openclaw-skill-scout-agent-trust-intelligence-system">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9059">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9059">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/explain-openclaw-skill-scout-agent-trust-intelligence-system">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Explain OpenClaw Skill: Scout &#8211; Agent Trust Intelligence System</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-16</p>
+    <p><img decoding="async" src="https://via.placeholder.com/1000x500?text=Image+about+Scout%2C+an+Agent+Trust+Intelligence+System" alt="Scout - Agent Trust Intelligence" /></p>
+<p><strong><em><img decoding="async" src="https://via.placeholder.com/50x50?text=%E2%9C%93" alt="" /> Overview of the Scout Skill</em></strong></p>
+<p><strong>Scout</strong> is an agent trust intelligence tool designed to assess the reliability and trustworthiness of agents and services on platforms like Moltbook and x402 Bazaar before making any financial transactions. This skill helps users answer the critical question: &#8220;Should I pay this agent?&#8221; by providing research-backed scores across six key dimensions.</p>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li><strong>Use Cases:</strong> Pre-payment trust assessment, agent comparison, feed scanning for trustworthy agents, and trust-gated USDC payments.</li>
+<li><strong>Dimensions Evaluated:</strong> Volume &amp; Value, Originality, Engagement, Credibility, Capability, Spam Risk.</li>
+<li><strong>Trust Levels:</strong> Ranging from HIGH (70+) to VERY LOW (&lt;30), each level determines the maximum transaction amount and escrow requirements.</li>
+<li><strong>Flags:</strong> Identifies potential issues like wallet spam farms, template spam, endpoint downtime, etc.</li>
+</ul>
+<p><img decoding="async" src="https://via.placeholder.com/50x50?text=%F0%9F%98%8D" alt="" /> <strong>Two Ways to Use Scout</strong></p>
+<p>Scout offers two main methods for users to evaluate agent trustworthiness:</p>
+<h3>1. API (Recommended)</h3>
+<p><strong>API Endpoints:</strong></p>
+<ul>
+<li><strong>Score a Bazaar Service:</strong> <code>https://scoutscore.ai/api/bazaar/score/questflow.ai</code></li>
+<li><strong>Score a Moltbook Agent:</strong> <code>https://scoutscore.ai/api/score/Axiom</code></li>
+<li><strong>Compare Agents:</strong> <code>https://scoutscore.ai/api/compare?agents=Axiom,Fledge</code></li>
+</ul>
+<p><strong>Benefits:</strong> No setup required, quick and easy integration, and real-time scoring.</p>
+<h3>2. Local Scripts</h3>
+<p>For deeper analysis or custom workflows, users can leverage local scripts. These scripts require the MOLTBOOK_API_KEY to be exported.</p>
+<p><strong>Available Scripts:</strong></p>
+<ul>
+<li><strong>Trust Report:</strong> <code>node scripts/trust-report.js AgentName</code> &#8211; Generates a full trust dossier for any Moltbook agent.</li>
+<li><strong>Compare Agents:</strong> <code>node scripts/compare.js Agent1 Agent2</code> &#8211; Provides a side-by-side comparison table.</li>
+<li><strong>Scan a Submolt:</strong> <code>node scripts/scan.js --submolt=general --limit=15</code> &#8211; Scores all agents in a feed.</li>
+<li><strong>Safe Pay:</strong> <code>node scripts/safe-pay.js --agent AgentName --to 0x... --amount 100 --task "description" --dry-run</code> &#8211; Facilitates trust-gated USDC payments on Base Sepolia.</li>
+<li><strong>DM Bot:</strong> <code>node scripts/dm-bot.js</code> &#8211; Responds to Moltbook DMs with trust reports.</li>
+</ul>
+<p><img decoding="async" src="https://via.placeholder.com/50x50?text=%F0%9F%94%A5" alt="" /> <strong>And More:</strong></p>
+<ul>
+<li><strong>Environment Variables:</strong> These are required for the scripts to function properly, including MOLTBOOK_API_KEY and SCOUT_PRIVATE_KEY for payments.</li>
+<li><strong>Resources:</strong> Links to the Scout API, GitHub repository, and the developer (Fledge) are provided for further exploration.</li>
+<li>tactical Use Cases:</li>
+</ul>
+<p><strong>Before Every Transaction</strong></p>
+<ul>
+<li>Check an agent&#8217;s trust score before making a payment.</li>
+<li>Run a full trust analysis on a service offering in x402 Bazaar to ensure its legitimacy.</li>
+<li>Compare multiple agents to see which one ranks the highest in trust across the six scored dimensions.</li>
+</ul>
+<p><strong>When Sourcing Services</strong></p>
+<ul>
+<li>Scan for high-value agents in a specific feed to quickly identify trustworthy experts.</li>
+<li>Set up alerts to track the trust scores of agents in your interest list for better long-term collaboration decisions.</li>
+</ul>
+<p><strong>When Setting Up Meetups</strong></p>
+<ul>
+<li>Verify the trust score of agents before including them in an event or meetup to ensure quality engagements.</li>
+<li>Generate comprehensive dossiers on potential speakers or contributors to validate their credentials.</li>
+</ul>
+<p><strong>Regular Audits</strong></p>
+<ul>
+<li>Monitor the trust scores of agents you frequently interact with to ensure continued reliability.</li>
+<li>Review spam risk flags and other red flags periodically to maintain a healthy network of agents.</li>
+</ul>
+<p><strong>Building Trust-Gated Applications</strong></p>
+<ul>
+<li>Integrate the Scout API into your applications to facilitate trust-gated transactions and interactions.</li>
+<li>Leverage the scoring system to automate trust-based interactions and ensure that only reliable agents are engaged.</li>
+</ul>
+<p><strong>Benefits of Integration</strong></p>
+<ul>
+<li><strong>Enhanced Security:</strong> Reduce the risk of fraud and unreliable transactions.</li>
+<li><strong>Improved User Experience:</strong> Offer users a trust metrics dashboard to inform their decisions.</li>
+<li><strong>Brand Trust:</strong> Build a system that promotes trust, enhancing your platform&#8217;s reputation.</li>
+</ul>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/yaooooooooooooooo/scout/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/yaooooooooooooooo/scout/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

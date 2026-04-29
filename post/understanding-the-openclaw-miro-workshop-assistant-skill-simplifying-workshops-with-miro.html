@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the OpenClaw Miro Workshop Assistant Skill: Simplifying Workshops with Miro</title>
+    <meta name="description" content="Discover how the OpenClaw Miro Workshop Assistant Skill streamlines workshop outputs into clean, editable Miro diagrams with advanced features like deduplicatio">
+    <meta property="og:title" content="Understanding the OpenClaw Miro Workshop Assistant Skill: Simplifying Workshops with Miro">
+    <meta property="og:description" content="Discover how the OpenClaw Miro Workshop Assistant Skill streamlines workshop outputs into clean, editable Miro diagrams with advanced features like deduplicatio">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-openclaw-miro-workshop-assistant-skill-simplifying-workshops-with-miro">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8823">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8823">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-openclaw-miro-workshop-assistant-skill-simplifying-workshops-with-miro">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the OpenClaw Miro Workshop Assistant Skill: Simplifying Workshops with Miro</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-13</p>
+    <h1>Understanding the OpenClaw Miro Workshop Assistant Skill: Simplifying Workshops with Miro</h1>
+<p>In today’s fast-paced digital world, tools that enhance collaboration and streamline workflows are invaluable. One such tool is the OpenClaw Miro Workshop Assistant Skill, designed to transform workshop outputs into structured, editable Miro diagrams with advanced features like deduplication and undo capabilities. This article delves into the functionality of this skill, its key features, and how it can revolutionize your workshop experiences.</p>
+<h2>Introduction to OpenClaw and Miro</h2>
+<p>OpenClaw is a platform that leverages artificial intelligence to automate and enhance various tasks. Miro, on the other hand, is a popular digital whiteboard tool used for visual collaboration. The OpenClaw Miro Workshop Assistant Skill bridges these two platforms, enabling users to convert workshop photos and notes into well-organized, interactive Miro diagrams.</p>
+<h2>Core Functionality of the Miro Workshop Assistant Skill</h2>
+<p>The primary goal of the Miro Workshop Assistant Skill is to create a workshop output on Miro that is both readable and easy to edit. It focuses on producing diagrams with:</p>
+<ul>
+<li><strong>Readability:</strong> Ensures that the diagram is not just a collection of scattered post-its but a structured visual representation.</li>
+<li><strong>Editability:</strong> Uses real containers, making it easy to modify the content.</li>
+<li><strong>Idempotency:</strong> Avoids duplicates, ensuring that each run produces a consistent output.</li>
+<li><strong>Correctability:</strong> Provides features like undo, delete, and update to correct any mistakes.</li>
+</ul>
+<h2>Key Features</h2>
+<h3>Security Measures</h3>
+<p>The skill places a strong emphasis on security. It never prints the MIRO_ACCESS_TOKEN and uses only environment variables (MIRO_ACCESS_TOKEN and MIRO_BOARD_ID) for authentication. This ensures that sensitive information is never exposed or stored in browser cookies/session tokens.</p>
+<h3>Container Management</h3>
+<p>A fundamental rule of the skill is that a workshop container must be represented as a FRAME on Miro. A FRAME is created when:</p>
+<ul>
+<li>There is a large rectangle or square with a clear title.</li>
+<li>There is a swimlane or column with a title.</li>
+<li>A box is clearly grouping multiple elements.</li>
+</ul>
+<p>Conversely, FRAMES are not created for blank spaces or decorative borders without grouping meaning. This ensures that the diagram remains clean and organized.</p>
+<h4>Hard Requirements for Container Management</h4>
+<p>The skill enforces strict requirements for container management:</p>
+<ul>
+<li>FRAMES must be created when the board contains categories or areas.</li>
+<li>A non-null frameId must be assigned to each sticky, except for explicit &#8220;outside notes.&#8221;</li>
+<li>If FRAMES are empty or more than 10% of stickies have a null frameId, the skill will not run the push command. Instead, it will regenerate the structure (up to two attempts).</li>
+</ul>
+<h3>Quality Gate — Container Sanity Check</h3>
+<p>Before pushing the diagram to Miro, the skill performs a sanity check to ensure the quality of the containers:</p>
+<ul>
+<li>If the image contains two or more titled containers, the number of FRAMES must be at least two, and at least 95% of stickies must have a non-null frameId.</li>
+<li>If these conditions are not met, the skill will not push the diagram. Instead, it will regenerate the structure (up to two attempts).</li>
+</ul>
+<h3>Mandatory Planning</h3>
+<p>Before generating the JSON and running the direct push, the skill performs mandatory planning:</p>
+<ul>
+<li>Identifies candidate FRAMES based on large rectangles with titles or areas labeled on the side or centered above/below.</li>
+<li>Assigns every sticky to a candidate frame, adding warnings if a sticky is ambiguous.</li>
+<li>Generates the final JSON only after completing the planning phase.</li>
+</ul>
+<h3>Quality Gate Before Execution</h3>
+<p>Before executing the push command, the skill enforces another quality gate to ensure the integrity of the diagram:</p>
+<ul>
+<li>At least one FRAME must exist.</li>
+<li>At least 90% of stickies must have a non-null frameId.</li>
+<li>No FRAME should be &#8220;giant&#8221; if the image clearly contains multiple distinct areas.</li>
+<li>If the gate fails, the skill will not push the diagram. Instead, it will regenerate the structure (up to two attempts).</li>
+</ul>
+<h3>Dedup / Idempotency</h3>
+<p>To prevent duplicates and ensure idempotency, the skill includes a stable sessionKey for the same diagram/topic (e.g., &#8220;easy-vision-workshop&#8221;) and a unique runId (timestamp) for each push. If the sessionKey is the same, the skill will remove the previous run (automatic undo) before applying the new one.</p>
+<h3>Operating Modes</h3>
+<p>The skill offers two operating modes:</p>
+<ul>
+<li><strong>Direct Push (Default Mode):</strong>
+<ul>
+<li>Generates a Miro-ready JSON including meta.sessionKey (stable) and meta.runId (unique).</li>
+<li>Saves the JSON to a specified path.</li>
+<li>Executes the push command using the miro-push.mjs script.</li>
+<li>Provides feedback including the number of frames, stickies, and connectors created, along with any warnings.</li>
+</ul>
+</li>
+<li><strong>Corrections Mode:</strong>
+<ul>
+<li>Allows users to undo a session using the sessionKey.</li>
+<li>Enables users to regenerate a corrected JSON with the same sessionKey and run the apply command again.</li>
+</ul>
+</li>
+</ul>
+<h3>Smart Layout Rules</h3>
+<p>The skill follows smart layout rules to ensure a clean and organized diagram:</p>
+<ul>
+<li>Inside each frame, elements are placed as follows:
+<ul>
+<li>Left: Inputs/Sources</li>
+<li>Center: Processing/API/Platforms</li>
+<li>Right: Outputs/UI/External Integrations</li>
+</ul>
+</li>
+<li>Spacing guideline: x += 420, y += 260</li>
+<li>For long arrows crossing the diagram, the skill prefers shorter connectors via intermediate nodes to improve readability.</li>
+<li>Connector/relationship rules: Creates connectors when there are arrows/lines or when the text implies a flow (e.g., &#8220;API&#8221;, &#8220;sensoren&#8221;, &#8220;data&#8221;, &#8220;->&#8221;, &#8220;integration&#8221;). Default connector shape is &#8220;elbowed&#8221; for better readability.</li>
+<li>Anti-overlap rules: Ensures connectors do not cross over stickies/notes by keeping a free &#8220;routing lane&#8221;. Minimum inner frame padding is 160px.</li>
+</ul>
+<h3>JSON Output</h3>
+<p>The skill generates a FRAME-based JSON output with the following schema:</p>
+<pre>
+{
+  "meta": {
+    "title": "string",
+    "source": "photo|notes",
+    "language": "it|de|en",
+    "createdAt": "ISO-8601",
+    "sessionKey": "string (stable)",
+    "runId": "string (unique)"
+  },
+  "frames": [
+    { "id": "F1", "title": "string", "x": 0, "y": 0, "w": 1400, "h": 900 }
+  ],
+  "stickies": [
+    {
+      "id": "S1",
+      "frameId": "F1|null",
+      "text": "string",
+      "color": "light_yellow|light_blue|light_green|light_pink|gray",
+      "x": 0,
+      "y": 0,
+      "unclear": false
+    }
+  ],
+  "connectors": [
+    { "from": "S1", "to": "S2", "label": "string|null", "shape": "straight|elbowed|curved" }
+  ],
+  "warnings": [ "string" ]
+}
+</pre>
+<h3>Hard Containment Detection</h3>
+<p>The skill enforces hard containment detection rules:</p>
+<ul>
+<li>A &#8220;container&#8221; is a large rectangle that encloses other notes and has a title (e.g., &#8220;Product A&#8221;, &#8220;Product B&#8221;).</li>
+<li>Every inner note must be assigned to that frame via frameId.</li>
+<li>Only outer notes (explicitly outside all containers) may have frameId=null.</li>
+<li>Containment is interpreted literally: if an element is visually inside the container boundaries, it belongs to that container.</li>
+</ul>
+<h3>Quality Checklist Before Pushing</h3>
+<p>Before pushing the diagram to Miro, the skill performs a quality checklist to ensure:</p>
+<ul>
+<li>sessionKey is present and stable.</li>
+<li>No giant &#8220;Workshop&#8221; frame unless the photo truly shows a single big box.</li>
+<li>Every sticky belongs to the correct frame (category).</li>
+<li>No duplicate stickies with identical text inside the same frame.</li>
+<li>Connectors are created only where they make sense (not between every pair).</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw Miro Workshop Assistant Skill is a powerful tool that enhances the efficiency and productivity of workshop sessions. By automating the conversion of workshop outputs into structured, editable Miro diagrams, it ensures that the final output is both readable and easy to edit. With features like idempotency, undo capabilities, and smart layout rules, this skill offers a comprehensive solution for managing workshop outputs. Whether you are a team leader, a project manager, or a facilitator, the OpenClaw Miro Workshop Assistant Skill can significantly improve your workshop experiences by providing a structured and efficient approach to visual collaboration.</p>
+<p>To explore more about OpenClaw and the Miro Workshop Assistant Skill, visit the official repository on <a href='https://github.com/openclaw/skills'>GitHub</a>. Start leveraging the power of AI and visual collaboration to transform your workshop outputs into actionable insights!</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/simoneferrario/miro-workshop-assistant/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/simoneferrario/miro-workshop-assistant/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

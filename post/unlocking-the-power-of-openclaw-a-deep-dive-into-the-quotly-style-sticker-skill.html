@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unlocking the Power of OpenClaw: A Deep Dive into the QuotLy Style Sticker Skill</title>
+    <meta name="description" content="Learn how the OpenClaw QuotLy style sticker skill automates the creation of professional quote stickers from forwarded messages for seamless social sharing.">
+    <meta property="og:title" content="Unlocking the Power of OpenClaw: A Deep Dive into the QuotLy Style Sticker Skill">
+    <meta property="og:description" content="Learn how the OpenClaw QuotLy style sticker skill automates the creation of professional quote stickers from forwarded messages for seamless social sharing.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/unlocking-the-power-of-openclaw-a-deep-dive-into-the-quotly-style-sticker-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8425">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8425">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/unlocking-the-power-of-openclaw-a-deep-dive-into-the-quotly-style-sticker-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Unlocking the Power of OpenClaw: A Deep Dive into the QuotLy Style Sticker Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <h1>Mastering the OpenClaw QuotLy Style Sticker Skill</h1>
+<p>In the ever-evolving ecosystem of automation and messaging, the ability to transform plain text into visually appealing content is a highly sought-after feature. Whether you are managing a high-traffic community group on Telegram or building a personalized bot, the <strong>quotly-style-sticker</strong> skill within the <strong>OpenClaw</strong> framework provides a powerful, modular way to generate stylish quote stickers. This article explores the mechanics, implementation, and security features of this specific skill.</p>
+<h2>What is the QuotLy Style Sticker Skill?</h2>
+<p>At its core, this skill is designed to take forwarded messages or specific quoted text and convert them into the iconic, professional-looking quote stickers that have become a staple in modern messaging apps like Telegram. By leveraging external rendering services, it bridges the gap between raw data and aesthetic visual communication.</p>
+<p>When a user requests a quote sticker from a forwarded message, the skill processes the payload, handles formatting, and returns a media path. This allows for an &#8216;auto-send&#8217; workflow where the bot transparently handles the generation and delivery of the sticker without needing manual intervention from the bot operator.</p>
+<h2>How the Integration Works</h2>
+<p>The skill operates on a specific payload structure. To use it effectively, developers must build a JSON object containing <code>selected_messages</code>. The versatility of the skill is found in its support for both simple text and complex, rich-text formatting.</p>
+<h3>The Input Payload</h3>
+<p>The skill is highly granular. It allows you to pass message content, sender information (including avatars and custom status URLs), and even perform overrides. For example, if you want to change the text of a forwarded message to something more humorous before the sticker is generated, the <code>overwrite_message</code> field provides that capability.</p>
+<p>Furthermore, the skill supports full Telegram-style entity formatting. You can define offsets and lengths for various styles such as <strong>bold</strong>, <em>italic</em>, URLs, and even custom emojis. This ensures that the generated sticker perfectly mirrors the visual intent of the original message.</p>
+<h3>Deduplication Mechanisms</h3>
+<p>One of the most impressive features of the OpenClaw skill is its built-in deduplication. By utilizing <code>context.event.update_id</code> (or a variety of fallback keys), the skill tracks requests to prevent redundant sticker generation. If a user tries to trigger the same request within the <code>QUOTLY_DEDUP_WINDOW_SECONDS</code> (default 180 seconds), the skill silently ignores the duplicate request, saving API resources and preventing spam.</p>
+<h2>Technical Configuration</h2>
+<p>The skill is highly configurable via environment variables, allowing it to fit into various infrastructure setups:</p>
+<ul>
+<li><strong>QUOTLY_API_URL:</strong> Point the skill to any compliant QuotLy-compatible endpoint.</li>
+<li><strong>QUOTLY_API_ALLOW_HOSTS:</strong> A critical security feature that restricts API connections to only trusted, whitelisted domains.</li>
+<li><strong>QUOTLY_AUDIT_LOG:</strong> Enables detailed monitoring, essential for debugging and security audits in enterprise environments.</li>
+</ul>
+<h2>Security: A Priority for OpenClaw</h2>
+<p>Because this skill communicates with external APIs to render images, security is paramount. The OpenClaw team has implemented several layers of SSRF (Server-Side Request Forgery) protection to ensure that malicious actors cannot abuse the bot to scan internal networks or probe metadata services.</p>
+<p>Key security features include:</p>
+<ul>
+<li><strong>DNS Rebinding Protection:</strong> The skill validates resolved IP addresses to ensure they are not targeting local or private network ranges.</li>
+<li><strong>Path Traversal Prevention:</strong> Strict filtering blocks suspicious patterns that could lead to unauthorized file access.</li>
+<li><strong>Credential Stripping:</strong> Automatically removes sensitive login info from URLs passed to the rendering service.</li>
+</ul>
+<h2>Implementation Example</h2>
+<p>To implement the skill in your agent, you need to structure your request with the necessary context. Below is a simplified representation of the expected JSON payload:</p>
+<pre>{ "context": { "event": { "channel": "telegram", "update_id": 123456789 } }, "selected_messages": [ { "message": { "message_id": 2002, "text": "This is a great quote for a sticker!" } } ] }</pre>
+<p>Upon successful processing, the skill emits a <code>MEDIA:</code> line containing the absolute path to the generated <code>.webp</code> file, which your bot can then send directly to the chat interface. Because the assistant&#8217;s final text output is kept empty, the experience remains clean and professional, focusing solely on the sticker delivery.</p>
+<h2>Why Choose OpenClaw for Your Bots?</h2>
+<p>The <strong>quotly-style-sticker</strong> skill is a perfect example of the modularity that makes OpenClaw a standout framework. It isn&#8217;t just about functionality; it&#8217;s about providing a safe, predictable, and scalable way to handle media generation. By abstracting the complexities of image rendering and API communication, it allows bot developers to focus on what matters most: creating engaging content for their users.</p>
+<p>Whether you are building a tool to archive group conversations, create meme generators, or simply add flair to your Telegram bot, this skill offers a battle-tested path to success. By adhering to the provided documentation and respecting the security best practices, you can integrate high-quality, professional quote generation into your project in a matter of minutes.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/sakullla/quotly-style-sticker/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/sakullla/quotly-style-sticker/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

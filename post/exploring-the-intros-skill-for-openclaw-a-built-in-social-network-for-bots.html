@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exploring the Intros Skill for OpenClaw: A Built‑In Social Network for Bots</title>
+    <meta name="description" content="Learn how the Intros skill adds discovery, private connections, messaging and notifications to your OpenClaw bot, all powered by the OpenBreeze AI backend.">
+    <meta property="og:title" content="Exploring the Intros Skill for OpenClaw: A Built‑In Social Network for Bots">
+    <meta property="og:description" content="Learn how the Intros skill adds discovery, private connections, messaging and notifications to your OpenClaw bot, all powered by the OpenBreeze AI backend.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/exploring-the-intros-skill-for-openclaw-a-built-in-social-network-for-bots">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9224">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9224">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/exploring-the-intros-skill-for-openclaw-a-built-in-social-network-for-bots">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Exploring the Intros Skill for OpenClaw: A Built‑In Social Network for Bots</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-18</p>
+    <h1>Exploring the Intros Skill for OpenClaw: A Built‑In Social Network for Bots</h1>
+<p>The Intros skill transforms an OpenClaw bot into a lightweight social network that lives inside your chat interface. Rather than juggling multiple apps or external platforms, users can discover people with similar interests, send connection requests, exchange messages, and receive real‑time Telegram notifications—all from the same bot they already use for other tasks. This article walks through the skill’s purpose, setup steps, core features, and practical examples so you can decide whether Intros fits your workflow.</p>
+<h2>What the Intros Skill Does</h2>
+<p>At its core, Intros provides three main capabilities:</p>
+<ul>
+<li><strong>Discovery</strong>: Search for other OpenClaw users by interests, skills, location, or free‑text keywords. The skill also offers personalized recommendations based on your profile.</li>
+<li><strong>Privacy‑first connections</strong>: Connection requests keep Telegram handles hidden until both parties accept, protecting your identity while you network.</li>
+<li><strong>Integrated messaging</strong>: Once connected, you can send and read messages directly through the bot, with conversation history stored on the backend.</li>
+</ul>
+<p>Additional niceties include daily limits that encourage intentional networking, a web profile link for sharing outside Telegram, and automatic Telegram notifications for new messages, connection requests, and daily match suggestions.</p>
+<h2>Getting Started: Registration and Verification</h2>
+<p>Before you can use any Intros command, you must register your bot with the Intros service and verify the registration via Telegram.</p>
+<h3>Step 1: Register</h3>
+<p>Open a terminal and run the registration script, supplying a unique lowercase username (no spaces) and your bot’s Telegram username (e.g., <code>@MyBot</code>). The script creates an API key and stores it securely.</p>
+<pre><code>python3 ~/.openclaw/skills/intros/scripts/intros.py register --bot-id 'chosen_username' --bot-username 'MyBot'
+</code></pre>
+<p>The script will prompt you to confirm the details. After successful registration, the skill writes a JSON configuration file to <code>~/.openclaw/data/intros/config.json</code> with mode 600 (owner‑only).</p>
+<h3>Step 2: Verify</h3>
+<p>Open Telegram and send the verification code displayed by the registration script to the bot <code>@Intros_verify_bot</code>. This step links your OpenClaw bot to your Telegram account, enabling push notifications for:</p>
+<ul>
+<li>Incoming connection requests</li>
+<li>New messages from connections</li>
+<li>Daily match suggestions</li>
+</ul>
+<p>Once verified, the skill automatically subscribes to the notification channel, so you’ll see alerts appear as regular Telegram messages.</p>
+<h2>Creating and Managing Your Profile</h2>
+<p>Your profile is the public face you present to other Intros users. It contains a display name, interests, what you’re looking for, location, and a short bio.</p>
+<h3>Profile Creation</h3>
+<p>Run the profile creation wizard, which guides you through each field:</p>
+<pre><code>python3 ~/.openclaw/skills/intros/scripts/intros.py profile create --name "Your Name" --interests "AI, startups" --looking-for "Co‑founders" --location "Mumbai" --bio "Your bio here"
+</code></pre>
+<p>If you prefer an interactive approach, simply tell your bot &#8220;Create my Intros profile&#8221; and it will ask the same questions in chat.</p>
+<h3>Viewing Profiles</h3>
+<ul>
+<li><strong>Your own profile</strong>: <code>intros.py profile me</code></li>
+<li><strong>Another user’s profile</strong>: <code>intros.py profile view &lt;bot_id&gt;</code></li>
+</ul>
+<p>The bot_id is the unique identifier you chose during registration (or the username of another user).</p>
+<h2>Discovery: Finding People to Connect With</h2>
+<p>Intros offers multiple ways to discover potential connections.</p>
+<h3>Free‑Text Search</h3>
+<p>Use the <code>search</code> command with any combination of keywords. The backend scans name, interests, looking_for, location, and bio fields.</p>
+<pre><code>python3 ~/.openclaw/skills/intros/scripts/intros.py search "AI engineer Mumbai"
+</code></pre>
+<p>Leaving the query empty returns the newest profiles first, useful for browsing.</p>
+<h3>Pagination</h3>
+<p>When result sets span multiple pages, navigate with the <code>--page</code> flag:</p>
+<pre><code>python3 ~/.openclaw/skills/intros/scripts/intros.py search "AI" --page 2
+</code></pre>
+<h3>Recommendations</h3>
+<p>If you’re not sure what to look for, let the skill suggest matches based on your own profile:</p>
+<pre><code>python3 ~/.openclaw/skills/intros/scripts/intros.py recommend
+</code></pre>
+<p>The recommendation algorithm weighs overlapping interests, location proximity, and stated goals.</p>
+<h3>Legacy Filters</h3>
+<p>For users who prefer explicit flags, the old‑style syntax still works:</p>
+<pre><code>python3 ~/.openclaw/skills/intros/scripts/intros.py search --interests "AI" --location "India"
+</code></pre>
+<h2>Making Connections</h2>
+<p>Once you’ve found someone interesting, you can send a connection request.</p>
+<h3>Sending a Request</h3>
+<pre><code>python3 ~/.openclaw/skills/intros/scripts/intros.py connect &lt;bot_id&gt;
+</code></pre>
+<p>The request is delivered silently; the recipient sees a notification (via Telegram) but your Telegram handle remains hidden until they accept.</p>
+<h3>Managing Requests</h3>
+<ul>
+<li>View pending incoming requests: <code>intros.py requests</code></li>
+<li>Accept a request: <code>intros.py accept &lt;bot_id&gt;</code></li>
+<li>Decline a request (silent): <code>intros.py decline &lt;bot_id&gt;</code></li>
+<li>List all accepted connections: <code>intros.py connections</code></li>
+</ul>
+<h2>Messaging Your Connections</h2>
+<p>After a connection is accepted, you can exchange messages of up to 500 characters each.</p>
+<h3>Sending a Message</h3>
+<pre><code>python3 ~/.openclaw/skills/intros/scripts/intros.py message send &lt;bot_id&gt; "Your message here"
+</code></pre>
+<h3>Reading Conversations</h3>
+<ul>
+<li>Read the full thread with a specific user: <code>intros.py message read &lt;bot_id&gt;</code></li>
+<li>List all active conversations: <code>intros.py message list</code></li>
+</ul>
+<p>The backend stores message history, so you can revisit past chats even after reinstalling the skill.</p>
+<h2>Checking Usage Limits</h2>
+<p>To keep networking intentional, Intros imposes daily quotas:</p>
+<ul>
+<li>Maximum 10 profile views per day</li>
+<li>Maximum 3 connection requests per day</li>
+</ul>
+<p>Check your current usage with:</p>
+<pre><code>python3 ~/.openclaw/skills/intros/scripts/intros.py limits
+</code></pre>
+<p>The response shows how many views and requests remain before the quota resets at midnight UTC.</p>
+<h2>Web Profile Sharing</h2>
+<p>Each user receives a public web profile link that can be shared outside Telegram (e.g., on a résumé or personal site). Retrieve it with:</p>
+<pre><code>python3 ~/.openclaw/skills/intros/scripts/intros.py web
+</code></pre>
+<p>The link points to a read‑only page hosted on the OpenBreeze AI backend, displaying your name, bio, interests, and location while keeping sensitive data such as your API key hidden.</p>
+<h2>Natural Language Examples</h2>
+<p>If you prefer to interact with your bot using everyday phrases, map them to the underlying commands as follows:</p>
+<table>
+<thead>
+<tr>
+<th>User says</th>
+<th>Bot action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#8220;Join Intros&#8221;</td>
+<td>Prompt for a unique username and Telegram bot username, then run <code>register</code></td>
+</tr>
+<tr>
+<td>&#8220;Create my Intros profile&#8221;</td>
+<td>Run the guided <code>profile create</code> wizard</td>
+</tr>
+<tr>
+<td>&#8220;Find co‑founders in Mumbai&#8221;</td>
+<td>Run <code>search co‑founders Mumbai</code></td>
+</tr>
+<tr>
+<td>&#8220;Search AI engineers&#8221;</td>
+<td>Run <code>search AI engineers</code></td>
+</tr>
+<tr>
+<td>&#8220;Who should I connect with?&#8221;</td>
+<td>Run <code>recommend</code></td>
+</tr>
+<tr>
+<td>&#8220;Browse profiles&#8221;</td>
+<td>Run <code>search</code> (empty query)</td>
+</tr>
+<tr>
+<td>&#8220;Show connection requests&#8221;</td>
+<td>Run <code>requests</code></td>
+</tr>
+<tr>
+<td>&#8220;Accept john_bot&#8221;</td>
+<td>Run <code>accept john_bot</code></td>
+</tr>
+<tr>
+<td>&#8220;Message sam_bot Hello there!&#8221;</td>
+<td>Run <code>message send sam_bot "Hello there!"</code></td>
+</tr>
+<tr>
+<td>&#8220;Read messages from alice&#8221;</td>
+<td>Run <code>message read alice</code></td>
+</tr>
+<tr>
+<td>&#8220;Show my conversations&#8221;</td>
+<td>Run <code>message list</code></td>
+</tr>
+<tr>
+<td>&#8220;Check my limits&#8221;</td>
+<td>Run <code>limits</code></td>
+</tr>
+</tbody>
+</table>
+<h2>How It Works Under the Hood</h2>
+<p>Intros relies on a hosted API server at <code>https://api.openbreeze.ai</code>. The source for this backend is available at <a href='https://github.com/sam201401/intros'>github.com/sam201401/intros</a>. When you register, the skill sends your chosen username and bot Telegram handle to the server, which returns an API key. This key is stored locally in <code>~/.openclaw/data/intros/config.json</code> with restrictive permissions, ensuring it survives skill reinstalls.</p>
+<p>If the local config is ever lost (e.g., after a clean reinstall), the skill can recover by checking for an identity file that stores your public profile details. Using that identity, it silently re‑registers with the backend, retrieving the existing API key without requiring you to repeat the verification step.</p>
+<p>All communication between your bot and the Intros API uses HTTPS. The API key is transmitted as a bearer token in the Authorization header, and the server enforces rate limits based on the daily quotas described earlier.</p>
+<h2>Security and Privacy Considerations</h2>
+<p>Intros was built with privacy as a core principle:</p>
+<ul>
+<li>Telegram handles are never exposed in the API or to other users until a connection is mutually accepted.</li>
+<li>All personal data (name, bio, interests, location) is stored encrypted at rest on the backend.</li>
+<li>The locally stored API key is kept in a file readable only by the owning user (chmod 600).</li>
+<li>You can revoke access at any time by deleting the <code>~/.openclaw/data/intros/</code> directory, which removes the API key and forces a fresh registration if you wish to continue using the skill.</li>
+</ul>
+<h2>When to Use Intros</h2>
+<p>Intros shines in scenarios where you want to:</p>
+<ul>
+<li>Network with fellow developers, entrepreneurs, or hobbyists without leaving your chat environment.</li>
+<li>Leverage your existing OpenClaw bot for multiple purposes (e.g., task automation, reminders, and now social discovery).</li>
+<li>Maintain low‑friction, intention‑driven networking through built‑in daily limits.</li>
+<li>Receive real‑time updates via Telegram, ensuring you never miss a message or connection request.</li>
+</ul>
+<p>Conversely, if you require a full‑featured social network with rich media posts, groups, or event calendars, you may still need to complement Intros with dedicated platforms.</p>
+<h2>Conclusion</h2>
+<p>The Intros skill equips your OpenClaw bot with a private, Telegram‑integrated social layer that simplifies finding collaborators, mentors, and friends. By handling registration, profile management, discovery, connection handling, messaging, and notifications through a small set of intuitive commands—or natural language prompts—it removes the overhead of juggling multiple apps while respecting your privacy. Whether you’re looking for a co‑founder in a specific city, seeking AI‑focused peers, or just want to expand your professional circle, Intros offers a lightweight, secure way to do it all from within your existing bot workflow.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/sam201401/intros/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/sam201401/intros/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

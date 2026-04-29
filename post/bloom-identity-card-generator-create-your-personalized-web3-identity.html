@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bloom Identity Card Generator: Create Your Personalized Web3 Identity</title>
+    <meta name="description" content="Generate personalized Bloom Identity Cards based on conversation history and Twitter/X activity. Discover your personality type and get matched with optimal Ope">
+    <meta property="og:title" content="Bloom Identity Card Generator: Create Your Personalized Web3 Identity">
+    <meta property="og:description" content="Generate personalized Bloom Identity Cards based on conversation history and Twitter/X activity. Discover your personality type and get matched with optimal Ope">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/bloom-identity-card-generator-create-your-personalized-web3-identity">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8350">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8350">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/bloom-identity-card-generator-create-your-personalized-web3-identity">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Bloom Identity Card Generator: Create Your Personalized Web3 Identity</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-08</p>
+    <h2>What is the Bloom Identity Card Generator?</h2>
+<p>The Bloom Identity Card Generator is an innovative skill that creates personalized identity cards by analyzing your conversation history and social media activity. This tool helps you discover your personality type within the Web3 ecosystem and recommends the most suitable OpenClaw skills for your profile.</p>
+<h3>How It Works</h3>
+<p>The system uses a weighted approach to analyze your digital footprint:</p>
+<ul>
+<li><strong>Conversation History (85% weight)</strong> &#8211; Analyzes your interactions with OpenClaw</li>
+<li><strong>Twitter/X Activity (15% weight)</strong> &#8211; Optional enrichment of your profile</li>
+</ul>
+<h3>Personality Types</h3>
+<p>The generator identifies one of five personality types:</p>
+<ul>
+<li>Visionary</li>
+<li>Explorer</li>
+<li>Cultivator</li>
+<li>Optimizer</li>
+<li>Innovator</li>
+</ul>
+<h3>Key Features</h3>
+<ul>
+<li>Generates personalized identity cards with confidence scores</li>
+<li>Recommends matching OpenClaw skills</li>
+<li>Creates agent wallets for tipping and payments</li>
+<li>Provides dashboard access with authentication</li>
+</ul>
+<h3>Usage Requirements</h3>
+<p>To generate your Bloom Identity Card, you need:</p>
+<ul>
+<li>Minimum 3 messages in your OpenClaw session</li>
+<li>Optional Twitter/X authorization for enhanced analysis</li>
+</ul>
+<h3>Privacy &#038; Security</h3>
+<p>The system prioritizes privacy by:</p>
+<ul>
+<li>Not analyzing wallet transaction history</li>
+<li>Using conversation-first approach</li>
+<li>Implementing EIP-191 signed tokens</li>
+</ul>
+<h3>Technical Implementation</h3>
+<p>The skill runs on Node.js 18+ and integrates with:</p>
+<ul>
+<li>Coinbase AgentKit</li>
+<li>ClawHub API</li>
+<li>bird CLI for Twitter/X data</li>
+</ul>
+<h3>Getting Started</h3>
+<p>Simply ask OpenClaw to &#8220;generate my bloom identity&#8221; or &#8220;create my identity card&#8221; to begin the process. The system will analyze your data and provide a comprehensive personality profile with skill recommendations.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/unicornbloom/bloom-identity-skill/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/unicornbloom/bloom-identity-skill/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

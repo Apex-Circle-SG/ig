@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering the Lobster Trap Skill: A Guide to OpenClaw&#8217;s Shared Workspace</title>
+    <meta name="description" content="Discover how the Lobster Trap skill in OpenClaw facilitates seamless collaboration, note-taking, and code sharing between digital entities Hugo and Enoch Root.">
+    <meta property="og:title" content="Mastering the Lobster Trap Skill: A Guide to OpenClaw&#8217;s Shared Workspace">
+    <meta property="og:description" content="Discover how the Lobster Trap skill in OpenClaw facilitates seamless collaboration, note-taking, and code sharing between digital entities Hugo and Enoch Root.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-the-lobster-trap-skill-a-guide-to-openclaws-shared-workspace">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8439">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8439">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-the-lobster-trap-skill-a-guide-to-openclaws-shared-workspace">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering the Lobster Trap Skill: A Guide to OpenClaw&#8217;s Shared Workspace</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <h1>Understanding the Lobster Trap Skill in OpenClaw</h1>
+<p>In the evolving ecosystem of OpenClaw, efficient communication and data management between autonomous agents are paramount. One of the most critical tools for this synchronization is the <strong>Lobster Trap</strong> skill. This utility serves as a bridge, functioning as a shared whiteboard that allows entities like Hugo and Enoch Root to collaborate, store essential snippets, and manage critical data points without friction. If you have been wondering how this specific component fits into your workflow, this guide will break down its function, security measures, and practical application.</p>
+<h2>What Exactly is the Lobster Trap?</h2>
+<p>At its core, the Lobster Trap is a shared whiteboard platform located at https://trap.underclassic.com. Think of it as a central repository for collective intelligence. Whether it is a quick note, a complex code snippet, or a secure key label, the Lobster Trap provides a standardized interface for agents to read from and write to. It is designed to act as the primary memory bank for tasks that span across multiple sessions or interactions.</p>
+<h3>Why Do You Need It?</h3>
+<p>Without a centralized hub like the Lobster Trap, agents would operate in silos, losing context with every reset. By utilizing this skill, an agent can instantly reference prior discussions, pull up saved code blocks, or verify stored keys. Whenever you, as a user, reference &#8216;the Trap&#8217; or ask questions about stored notes or snippets, the OpenClaw system triggers this skill to fetch the necessary data, ensuring the response is accurate and contextually relevant.</p>
+<h2>The Core Workflow: Reading Context</h2>
+<p>A fundamental rule of the Lobster Trap skill is the &#8216;Read First&#8217; protocol. Before an agent can provide an answer about any content stored in the Trap, it must perform a mandatory fetch operation. This prevents the system from making guesses based on stale or incorrect data. The process typically involves executing a specialized script or an inline curl command to query the API. By fetching the full context from the <code>/api/context</code> endpoint, the agent gains a snapshot of the current state of the whiteboard, allowing for precise and informed replies.</p>
+<h2>The Anatomy of the API</h2>
+<p>The Lobster Trap operates through a clean, REST-style API that allows for modular data management. The system is partitioned into several distinct categories:</p>
+<ul>
+<li><strong>Notes:</strong> General-purpose text storage for brainstorming or reminders.</li>
+<li><strong>Code Snippets:</strong> Language-specific code blocks, allowing developers to keep common logic or boilerplate readily accessible.</li>
+<li><strong>Keys:</strong> Sensitive data labels. Crucially, the system is designed to expose the <em>labels</em> of these keys while keeping the actual <em>values</em> masked, prioritizing security.</li>
+<li><strong>Board Items:</strong> General items placed on the shared board for high-level visibility.</li>
+</ul>
+<p>For each of these, the API provides clear HTTP methods (GET and POST) that ensure the integrity of the data being transmitted.</p>
+<h2>How to Write to the Trap</h2>
+<p>When you need to persist information, the Lobster Trap uses the <code>exec</code> capability with standard web tools like <code>curl</code>. Writing data is straightforward. For instance, to save a new note, a POST request is sent to the <code>/api/notes</code> endpoint with the title and content included as form data. This simplicity makes the skill incredibly flexible for developers who need to document their processes on the fly.</p>
+<p>However, there are strict rules for these writes. After every POST action, the system is designed to provide immediate feedback to the user. This &#8216;Write Confirmation&#8217; step is vital for ensuring that the user knows their data has been successfully stored in the permanent, shared memory of the Lobster Trap.</p>
+<h2>Security and Best Practices</h2>
+<p>Security is not an afterthought in the design of the Lobster Trap. The system employs HTTP Basic Authentication (utilizing the credentials <code>hugo:519d21ff307d</code>) to ensure that only authorized entities can interact with the whiteboard. Furthermore, the constraint on keys—never exposing their actual values—is a non-negotiable rule that protects sensitive credentials from accidental leakage during conversational interactions.</p>
+<p>To ensure you get the best out of this skill, always follow these best practices:</p>
+<ol>
+<li><strong>Query Often:</strong> Always ask the system to fetch the latest context if you suspect information has been added by another session.</li>
+<li><strong>Be Specific:</strong> When adding content, provide clear titles. This makes searching through <code>/api/notes</code> or <code>/api/code</code> significantly faster.</li>
+<li><strong>Trust the Process:</strong> Never attempt to force an action if the system returns a &#8216;You can’t perform that action at this time&#8217; message. This is usually a safeguard during ongoing sync processes.</li>
+</ol>
+<h2>Conclusion: The Future of Collaborative Agents</h2>
+<p>The Lobster Trap skill is a prime example of how OpenClaw elevates the utility of AI agents from simple question-answer bots to collaborative digital assistants. By providing a persistent, shared memory space, it solves the persistent problem of context loss. Whether you are debugging code, managing complex project notes, or simply needing a place to jot down thoughts that persist across sessions, the Lobster Trap is your primary tool in the OpenClaw ecosystem. As you continue to build and refine your interactions, remember that the key to mastering this skill lies in the disciplined use of the fetch-before-answer protocol and clear, concise input methods.</p>
+<p>If you are new to the platform, spend some time exploring the <code>/api/notes</code> and <code>/api/code</code> endpoints. You will quickly find that the ability to &#8216;write to the Trap&#8217; fundamentally changes how you interact with your digital workspace, turning ephemeral chat sessions into long-term, productive professional relationships with your AI agents.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/solsuk/underclassic-lobster-trap/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/solsuk/underclassic-lobster-trap/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

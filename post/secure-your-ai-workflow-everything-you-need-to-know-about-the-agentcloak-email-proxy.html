@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Secure Your AI Workflow: Everything You Need to Know About the AgentCloak Email Proxy</title>
+    <meta name="description" content="Discover how AgentCloak protects your inbox when using AI agents. Learn about credential isolation, PII redaction, and how to safely integrate email with OpenCl">
+    <meta property="og:title" content="Secure Your AI Workflow: Everything You Need to Know About the AgentCloak Email Proxy">
+    <meta property="og:description" content="Discover how AgentCloak protects your inbox when using AI agents. Learn about credential isolation, PII redaction, and how to safely integrate email with OpenCl">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/secure-your-ai-workflow-everything-you-need-to-know-about-the-agentcloak-email-proxy">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8935">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8935">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/secure-your-ai-workflow-everything-you-need-to-know-about-the-agentcloak-email-proxy">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Secure Your AI Workflow: Everything You Need to Know About the AgentCloak Email Proxy</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <h1>Introduction: The Security Challenge of AI and Email</h1>
+<p>As we increasingly rely on AI agents to manage our professional and personal workflows, the intersection of Large Language Models (LLMs) and email has become a critical security frontier. Most AI integrations demand access to your inbox, but giving an agent full, unfiltered access is a dangerous gamble. This is where <strong>AgentCloak</strong> comes in. As an OpenClaw skill, it acts as a secure intermediary, ensuring that your AI assistant can help you process your email without ever gaining the keys to your digital kingdom.</p>
+<h2>What is AgentCloak?</h2>
+<p>AgentCloak is a specialized email proxy designed explicitly for AI agents. Unlike standard email integrations that provide raw, unfiltered access to your Gmail or IMAP accounts, AgentCloak inserts a high-security layer between your inbox and your AI. It enables your agents to search, read, and draft emails while keeping your sensitive data, passwords, and authentication tokens completely isolated.</p>
+<h2>Key Security Pillars</h2>
+<p>The core value proposition of AgentCloak lies in its 4-stage security pipeline. Let’s break down how it protects your data:</p>
+<h3>1. Credential Isolation</h3>
+<p>Perhaps the most significant risk in AI integration is handing over your OAuth tokens or IMAP passwords directly to a third-party tool. With AgentCloak, your credentials remain stored securely on the server side (or locally if you self-host). The AI agent only interacts with an API key, meaning that even if the agent&#8217;s context window were compromised, your actual email login credentials remain safely tucked away.</p>
+<h3>2. The 4-Stage Content Filter</h3>
+<p>Before any email content reaches your agent, it passes through a rigorous sanitization pipeline:</p>
+<ul>
+<li><strong>Blocklist:</strong> This stage proactively blocks communications from known high-risk domains, financial institutions, and suspicious security alerts. You can also define custom rules to blacklist specific patterns or senders.</li>
+<li><strong>HTML Sanitizer:</strong> Malicious actors often use hidden Unicode characters or complex HTML tags to execute prompt injection attacks. AgentCloak converts HTML to plaintext and strips away potential vectors for these attacks.</li>
+<li><strong>PII Redaction:</strong> Sensitive information such as Social Security Numbers, credit card details, API keys, and private keys are automatically detected and replaced with placeholders. This ensures that your agent operates only on the information it strictly needs.</li>
+<li><strong>Prompt Injection Detection:</strong> Using a library of known injection patterns, the proxy scans for attempts to override the agent&#8217;s instructions or steal data. If found, it flags the email, allowing your agent to make a safe, informed decision on how to handle the message.</li>
+</ul>
+<h2>The &#8220;Read and Draft&#8221; Limitation</h2>
+<p>Security is often about what you <em>cannot</em> do. AgentCloak intentionally limits the agent&#8217;s capabilities. Agents can search, list, read, and draft emails, but they have no permission to send, delete, or modify existing content. Furthermore, all drafted content requires a human to review it before it ever leaves your outbox. This &#8220;human-in-the-loop&#8221; design ensures that you stay in full control of your communication at all times.</p>
+<h2>How to Get Started</h2>
+<p>You have two primary ways to deploy AgentCloak within your OpenClaw ecosystem.</p>
+<h3>Option A: The Hosted Version (Quickest)</h3>
+<p>For users who want to hit the ground running, the hosted version on Railway is the simplest path. You sign up, connect your email account, and generate an API key. Once configured, you simply add the proxy to your McPorter configuration using the provided base URL and your unique authorization bearer token.</p>
+<h3>Option B: Self-Hosted (Maximum Privacy)</h3>
+<p>For those with strict data sovereignty requirements, AgentCloak is fully open-source. By cloning the repository and running the application locally, you ensure that zero data ever leaves your machine. All processing happens on your own hardware, and you maintain complete control over the filtering pipeline.</p>
+<h2>Practical Usage Examples</h2>
+<p>Once you have configured the skill, interacting with your inbox via your AI agent becomes incredibly straightforward. Here are a few ways to leverage the tools provided by the AgentCloak skill:</p>
+<ul>
+<li><strong>Search:</strong> Use natural language or standard Gmail-style queries: <code>mcporter call agentcloak.search_emails query: "is:unread" max_results:10</code>.</li>
+<li><strong>Reading Threads:</strong> Need to catch up on a long conversation? Use <code>agentcloak.get_thread</code> to pull the entire history of an email chain.</li>
+<li><strong>Drafting:</strong> Creating a draft is as simple as defining the parameters: <code>mcporter call agentcloak.create_draft subject: "Follow up" body: "I have received your email..." in_reply_to_thread_id: "[thread_id]"</code>.</li>
+</ul>
+<h2>Conclusion: A Necessary Step Forward for AI Agents</h2>
+<p>The era of &#8220;give your agent full access to everything&#8221; is ending. As we move toward more autonomous AI systems, security tools like AgentCloak will become the industry standard. By providing a hardened, privacy-first interface for your inbox, it allows you to enjoy the benefits of AI productivity without the anxiety of potential data leaks or unauthorized actions. Whether you are a casual user or a power user managing sensitive business accounts, integrating AgentCloak via OpenClaw is the single most important step you can take to secure your AI-assisted communication workflow.</p>
+<p>Ready to start? Head over to the official GitHub repository at <a href="https://github.com/ryanfren/AgentCloak">github.com/ryanfren/AgentCloak</a>, choose your deployment method, and take command of your inbox with the confidence of robust security.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/ryanfren/agentcloak-email-proxy/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/ryanfren/agentcloak-email-proxy/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

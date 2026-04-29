@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Markdown Editor with Chat: A Lightweight Filesystem-Based Tool</title>
+    <meta name="description" content="Discover Markdown Editor with Chat, a self-contained Node.js tool for editing markdown files locally with optional AI assistance via OpenClaw gateway integratio">
+    <meta property="og:title" content="Markdown Editor with Chat: A Lightweight Filesystem-Based Tool">
+    <meta property="og:description" content="Discover Markdown Editor with Chat, a self-contained Node.js tool for editing markdown files locally with optional AI assistance via OpenClaw gateway integratio">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/markdown-editor-with-chat-a-lightweight-filesystem-based-tool">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9088">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9088">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/markdown-editor-with-chat-a-lightweight-filesystem-based-tool">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Markdown Editor with Chat: A Lightweight Filesystem-Based Tool</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-16</p>
+    <h2>What is Markdown Editor with Chat?</h2>
+<p>Markdown Editor with Chat is a lightweight, self-contained markdown editor that serves files from a local directory with optional OpenClaw gateway chat integration. This tool provides a filesystem-based approach to markdown editing without requiring any database setup.</p>
+<h2>Key Features</h2>
+<ul>
+<li><strong>Filesystem-based</strong>: Point to any directory containing markdown files</li>
+<li><strong>No database</strong>: Files are the source of truth</li>
+<li><strong>Folder navigation</strong>: Browse nested directories</li>
+<li><strong>Live preview</strong>: See rendered markdown as you type</li>
+<li><strong>Optional chat</strong>: Connect to OpenClaw gateway for AI assistance</li>
+<li><strong>Zero external dependencies</strong>: Pure Node.js, self-contained HTML</li>
+</ul>
+<h2>Quick Start Guide</h2>
+<h3>Using CLI Arguments</h3>
+<pre><code>node scripts/server.mjs --folder /path/to/markdown --port 3333
+# Or short form
+node scripts/server.mjs -f /path/to/markdown -p 3333
+</code></pre>
+<h3>With Gateway Chat Enabled</h3>
+<pre><code>export OPENCLAW_GATEWAY_URL=http://127.0.0.1:18789
+export OPENCLAW_GATEWAY_TOKEN=your-token
+node scripts/server.mjs -f /path/to/markdown
+</code></pre>
+<p>Then open <a href="http://localhost:3333">http://localhost:3333</a> in your browser.</p>
+<h2>Configuration Options</h2>
+<h3>CLI Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Short</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#8211;folder</td>
+<td>-f</td>
+<td>Yes*</td>
+<td>&#8211;</td>
+<td>Directory containing markdown files</td>
+</tr>
+<tr>
+<td>&#8211;port</td>
+<td>-p</td>
+<td>No</td>
+<td>3333</td>
+<td>Server port</td>
+</tr>
+<tr>
+<td>&#8211;host</td>
+<td>-h</td>
+<td>No</td>
+<td>127.0.0.1</td>
+<td>Server host (localhost only by default)</td>
+</tr>
+<tr>
+<td>&#8211;help</td>
+<td></td>
+<td>No</td>
+<td></td>
+<td>Show help message</td>
+</tr>
+</tbody>
+</table>
+<p>*Required unless MARKDOWN_DIR env var is set.</p>
+<h3>Environment Variables</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MARKDOWN_DIR</td>
+<td>Yes*</td>
+<td>&#8211;</td>
+<td>Directory containing markdown files</td>
+</tr>
+<tr>
+<td>PORT</td>
+<td>No</td>
+<td>3333</td>
+<td>Server port</td>
+</tr>
+<tr>
+<td>HOST</td>
+<td>No</td>
+<td>127.0.0.1</td>
+<td>Server host</td>
+</tr>
+<tr>
+<td>OPENCLAW_GATEWAY_URL</td>
+<td>No</td>
+<td>&#8211;</td>
+<td>Gateway URL for chat feature</td>
+</tr>
+<tr>
+<td>OPENCLAW_GATEWAY_TOKEN</td>
+<td>No</td>
+<td>&#8211;</td>
+<td>Gateway auth token</td>
+</tr>
+</tbody>
+</table>
+<p>CLI arguments take precedence over environment variables.</p>
+<h2>Security Features</h2>
+<ul>
+<li><strong>Localhost only by default</strong>: Server binds to 127.0.0.1, rejects public IPs</li>
+<li><strong>Same-origin only</strong>: No CORS headers, browser enforces same-origin policy</li>
+<li><strong>Path traversal protection</strong>: Cannot access files outside MARKDOWN_DIR</li>
+<li><strong>No credentials in code</strong>: All secrets via environment variables</li>
+<li><strong>Gateway proxy</strong>: Tokens never exposed to browser</li>
+</ul>
+<p>This is a local development tool. The API is intentionally simple (no auth) because it&#8217;s designed for localhost use on directories you control.</p>
+<h2>API Endpoints</h2>
+<ul>
+<li>GET / &#8211; Serves the editor UI</li>
+<li>GET /api/files &#8211; List files and folders</li>
+<li>GET /api/files/:path &#8211; Get file content</li>
+<li>PUT /api/files/:path &#8211; Save file content</li>
+<li>POST /api/files/:path &#8211; Create new file</li>
+<li>POST /api/chat &#8211; Proxy chat to gateway (if configured)</li>
+</ul>
+<h2>Use Cases</h2>
+<ul>
+<li>Browse and edit OpenClaw pearls</li>
+<li>Personal markdown wiki</li>
+<li>Note-taking with AI assistance</li>
+<li>Documentation browser</li>
+</ul>
+<h2>Why Choose This Tool?</h2>
+<p>Markdown Editor with Chat offers a unique combination of simplicity and functionality. Unlike traditional markdown editors that require complex setup or cloud services, this tool works entirely offline with your local files. The optional OpenClaw gateway integration provides AI assistance when needed, while the core functionality remains completely self-contained.</p>
+<p>The filesystem-based approach means you&#8217;re always working with your actual files, not a database copy. This makes it perfect for managing documentation, personal notes, or any collection of markdown files where you want to maintain direct control over your content.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/musketyr/markdown-editor-with-chat/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/musketyr/markdown-editor-with-chat/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

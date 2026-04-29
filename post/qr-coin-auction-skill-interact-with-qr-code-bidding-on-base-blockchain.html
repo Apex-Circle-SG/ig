@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QR Coin Auction Skill &#8211; Interact with QR Code Bidding on Base Blockchain</title>
+    <meta name="description" content="Learn how to participate in QR Coin auctions on Base blockchain, bid for URL display on QR codes, and use Bankr for seamless transactions.">
+    <meta property="og:title" content="QR Coin Auction Skill &#8211; Interact with QR Code Bidding on Base Blockchain">
+    <meta property="og:description" content="Learn how to participate in QR Coin auctions on Base blockchain, bid for URL display on QR codes, and use Bankr for seamless transactions.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/qr-coin-auction-skill-interact-with-qr-code-bidding-on-base-blockchain">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8438">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8438">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/qr-coin-auction-skill-interact-with-qr-code-bidding-on-base-blockchain">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>QR Coin Auction Skill &#8211; Interact with QR Code Bidding on Base Blockchain</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <h2>What is QR Coin?</h2>
+<p>QR Coin is an innovative auction platform built on Base blockchain that allows users to bid for the opportunity to display their URLs on QR codes. The highest bidder&#8217;s URL gets encoded when the auction ends, creating a unique way to gain visibility through physical QR codes.</p>
+<h2>How QR Coin Auctions Work</h2>
+<p>Each QR Coin auction runs for a fixed period of approximately 24 hours. Bidders submit URLs along with USDC payments (where 1 USDC = 1,000,000 units due to 6 decimal precision). There are two ways to participate: creating a new bid or contributing to an existing bid.</p>
+<p>Creating a new bid costs approximately 11.11 USDC and requires the createBid function, while contributing to an existing bid costs around 1.00 USDC using the contributeToBid function. The winner&#8217;s URL is encoded in the QR code, losers receive refunds, and winners receive QR tokens as rewards.</p>
+<h2>Getting Started with QR Coin</h2>
+<p>Before participating in any auction, you&#8217;ll need to approve the QR Coin auction contract to spend your USDC. This is a one-time approval process that allows the contract to manage your funds during the bidding process.</p>
+<p>The typical workflow involves querying the current token ID to identify the active auction, checking the auction end time, approving USDC if you haven&#8217;t already, and then deciding whether to create a new bid or contribute to an existing one.</p>
+<h2>Technical Implementation</h2>
+<p>QR Coin uses several smart contracts on Base Mainnet. The primary auction contract is located at 0x7309779122069EFa06ef71a45AE0DB55A259A176, with USDC deployed at 0x833589fCD6eDb6E08f4c7c32D4f71b54bdA02913.</p>
+<p>Key functions include currentTokenId() to get the active auction ID, auctionEndTime() to check when the auction ends, createBidReserve() and contributeReserve() to check minimum bid amounts, and the main bidding functions createBid() and contributeToBid().</p>
+<h2>Using Bankr for Transactions</h2>
+<p>Bankr simplifies the process of interacting with QR Coin auctions by handling function signature parsing, parameter encoding, gas estimation, transaction signing, and confirmation monitoring. This eliminates the need for manual contract interaction.</p>
+<p>To use Bankr, you&#8217;ll need to provide specific prompts including the contract address, function name, and parameters. For example, to create a new bid, you would use: &#8220;Send transaction to 0x7309779122069EFa06ef71a45AE0DB55A259A176 on Base calling createBid(329, &#8216;https://example.com&#8217;, &#8216;MyName&#8217;)&#8221;.</p>
+<h2>Common Error Handling</h2>
+<p>Several error codes may occur during the bidding process. RESERVE_PRICE_NOT_MET indicates your bid amount is below the minimum required. URL_ALREADY_HAS_BID means the URL you&#8217;re trying to bid on already has an active bid, so you should use contributeToBid instead. BID_NOT_FOUND occurs when trying to contribute to a URL that doesn&#8217;t have an existing bid.</p>
+<p>Other common errors include AUCTION_OVER when the current auction has ended, AUCTION_NOT_STARTED when waiting for the auction to begin, and INSUFFICIENT_ALLOWANCE when USDC hasn&#8217;t been approved for the auction contract.</p>
+<h2>Best Practices and Tips</h2>
+<p>Start small by contributing to existing bids to learn the system before creating your own bids. Always check auction timing since they have fixed end times, and monitor your bids as others can outbid you. Use Bankr for all transactions to ensure proper execution, and always specify &#8220;on Base&#8221; when using Bankr to avoid confusion with other networks.</p>
+<p>Contributing to an existing bid is generally cheaper than creating a new one, so check if someone has already bid for your URL before creating a new bid. This strategy can save you money while still achieving your goal of displaying your URL on a QR code.</p>
+<h2>Monitoring and Claiming Rewards</h2>
+<p>After participating in an auction, monitor the results to see if you&#8217;ve won or been outbid. Winners receive QR tokens as rewards, while losers get their USDC refunded. The claiming process is automatic for refunds, but winners may need to take additional steps to claim their QR tokens depending on the specific implementation.</p>
+<p>Keep track of auction end times and be prepared to bid again in future auctions if you&#8217;re interested in continued participation. The QR Coin ecosystem provides an ongoing opportunity to gain visibility through QR code placements.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/ktaesthetix/qrcoin/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/ktaesthetix/qrcoin/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenClaw PinchBench Skill: Comprehensive Benchmark Testing for AI Agents</title>
+    <meta name="description" content="The OpenClaw PinchBench skill provides a complete benchmarking framework to evaluate AI agent performance across 23 real-world tasks, from calendar management t">
+    <meta property="og:title" content="OpenClaw PinchBench Skill: Comprehensive Benchmark Testing for AI Agents">
+    <meta property="og:description" content="The OpenClaw PinchBench skill provides a complete benchmarking framework to evaluate AI agent performance across 23 real-world tasks, from calendar management t">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/openclaw-pinchbench-skill-comprehensive-benchmark-testing-for-ai-agents">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8571">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8571">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/openclaw-pinchbench-skill-comprehensive-benchmark-testing-for-ai-agents">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>OpenClaw PinchBench Skill: Comprehensive Benchmark Testing for AI Agents</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-10</p>
+    <h2>What is the PinchBench Skill for OpenClaw?</h2>
+<p>The PinchBench skill is a comprehensive benchmarking framework designed specifically for OpenClaw agents. It evaluates how well AI models perform as the &#8220;brain&#8221; of an OpenClaw agent across a wide range of real-world tasks. The skill runs standardized tests and uploads results to a public leaderboard at pinchbench.com, allowing users to compare different models and track performance improvements over time.</p>
+<h2>Core Purpose and Functionality</h2>
+<p>The primary purpose of the PinchBench skill is to measure LLM model performance when integrated with OpenClaw agents. It tests models across 23 distinct tasks that represent common real-world scenarios, including calendar management, email handling, research, coding, and multi-step workflows. This provides objective data about which models work best for different types of agent tasks.</p>
+<h2>Available Tasks (23 Total)</h2>
+<p>The benchmark covers an extensive range of task categories:</p>
+<ul>
+<li><strong>Basic Tasks:</strong> task_00_sanity &#8211; Verify agent functionality</li>
+<li><strong>Productivity:</strong> task_01_calendar (calendar events), task_15_daily_summary (digest creation)</li>
+<li><strong>Research:</strong> task_02_stock (stock prices), task_06_events (conference research), task_18_market_research (analysis)</li>
+<li><strong>Writing:</strong> task_03_blog (post creation), task_07_email (drafting), task_14_humanizer (text humanization)</li>
+<li><strong>Coding:</strong> task_04_weather (script development)</li>
+<li><strong>Analysis:</strong> task_05_summary (document summarization), task_19_spreadsheet_summary (spreadsheet analysis)</li>
+<li><strong>Memory &#038; Knowledge:</strong> task_08_memory (context retrieval), task_22_second_brain (knowledge management)</li>
+<li><strong>Files:</strong> task_09_files (file structure creation)</li>
+<li><strong>Integration:</strong> task_10_workflow (multi-step API workflows)</li>
+<li><strong>Skills:</strong> task_11_clawdhub (ClawHub interaction), task_12_skill_search (skill discovery)</li>
+<li><strong>Creative:</strong> task_13_image_gen (image generation)</li>
+<li><strong>Email:</strong> task_16_email_triage (inbox management), task_17_email_search (email search)</li>
+<li><strong>Specialized:</strong> task_20_eli5_pdf_summary (PDF simplification), task_21_openclaw_comprehension (documentation understanding)</li>
+</ul>
+<h2>Technical Requirements</h2>
+<p>To run the PinchBench skill, you need:</p>
+<ul>
+<li>Python 3.10 or higher</li>
+<li>uv package manager for dependency management</li>
+<li>An active OpenClaw instance</li>
+<li>API access to the LLM models you want to test</li>
+</ul>
+<h2>Quick Start Guide</h2>
+<p>Getting started with PinchBench is straightforward:</p>
+<ol>
+<li>Navigate to the skill directory</li>
+<li>Run the benchmark with your chosen model using: <code>uv run benchmark.py --model anthropic/claude-sonnet-4</code></li>
+<li>Review results in the output directory</li>
+<li>Optionally upload to the public leaderboard</li>
+</ol>
+<h2>Command Line Options</h2>
+<p>The skill provides extensive customization through command line arguments:</p>
+<ul>
+<li><code>--model</code>: Specify the model identifier (e.g., anthropic/claude-sonnet-4)</li>
+<li><code>--suite</code>: Choose all tasks, automated-only, or specific comma-separated tasks</li>
+<li><code>--output-dir</code>: Set results directory (defaults to results/)</li>
+<li><code>--timeout-multiplier</code>: Adjust timeouts for slower models</li>
+<li><code>--runs</code>: Number of runs per task for averaging</li>
+<li><code>--no-upload</code>: Skip leaderboard submission</li>
+<li><code>--register</code>: Request new API token for submissions</li>
+<li><code>--upload FILE</code>: Upload previous results JSON</li>
+</ul>
+<h2>Leaderboard Integration</h2>
+<p>Results are automatically uploaded to pinchbench.com where you can view:</p>
+<ul>
+<li>Model rankings by overall score</li>
+<li>Per-task performance breakdowns</li>
+<li>Historical performance trends</li>
+<li>Comparative analysis across different models</li>
+</ul>
+<p>To participate in the leaderboard, you&#8217;ll need to register for an API token using the <code>--register</code> flag.</p>
+<h2>Results Analysis</h2>
+<p>The skill saves comprehensive JSON results that can be analyzed using jq commands:</p>
+<ul>
+<li>View task scores: <code>jq '.tasks[] | {task_id, score: .grading.mean}' results/0001_anthropic-claude-sonnet-4.json</code></li>
+<li>Show failed tasks: <code>jq '.tasks[] | select(.grading.mean < 0.5)' results/*.json</code></li>
+<li>Calculate overall score: <code>jq '{average: ([.tasks[].grading.mean] | add / length)}' results/*.json</code></li>
+</ul>
+<h2>Adding Custom Tasks</h2>
+<p>Developers can extend the benchmark by creating custom tasks in the tasks/ directory following the TASK_TEMPLATE.md format. Each task requires:</p>
+<ul>
+<li>YAML frontmatter (id, name, category, grading_type, timeout)</li>
+<li>Prompt section</li>
+<li>Expected behavior description</li>
+<li>Grading criteria</li>
+<li>Automated checks (Python grading function)</li>
+</ul>
+<h2>Why Use PinchBench?</h2>
+<p>The PinchBench skill provides several key benefits:</p>
+<ol>
+<li><strong>Objective Evaluation:</strong> Standardized testing across multiple real-world scenarios</li>
+<li><strong>Performance Comparison:</strong> Direct comparison between different LLM models</li>
+<li><strong>Benchmark Tracking:</strong> Monitor improvements as models and OpenClaw evolve</li>
+<li><strong>Task-Specific Insights:</strong> Identify which models excel at specific task types</li>
+<li><strong>Community Standards:</strong> Contribute to and benefit from community benchmarking efforts</li>
+</ol>
+<h2>Best Use Cases</h2>
+<p>The PinchBench skill is particularly valuable when:</p>
+<ul>
+<li>Testing new LLM models for OpenClaw integration</li>
+<li>Comparing model performance for specific use cases</li>
+<li>Evaluating OpenClaw setup capabilities</li>
+<li>Benchmarking improvements after system updates</li>
+<li>Participating in the broader OpenClaw community benchmarking efforts</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw PinchBench skill is an essential tool for anyone serious about optimizing AI agent performance. By providing comprehensive, standardized testing across 23 real-world tasks, it enables data-driven decisions about model selection and system optimization. Whether you're a developer building OpenClaw agents, a researcher evaluating LLM capabilities, or simply curious about AI performance, PinchBench offers valuable insights into how well different models handle the complexities of real-world agent tasks.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/olearycrew/pinchbench/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/olearycrew/pinchbench/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

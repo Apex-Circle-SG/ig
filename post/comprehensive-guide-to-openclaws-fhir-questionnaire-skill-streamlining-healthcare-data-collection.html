@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comprehensive Guide to OpenClaw&#8217;s FHIR Questionnaire Skill: Streamlining Healthcare Data Collection</title>
+    <meta name="description" content="Learn how OpenClaw&#8217;s FHIR Questionnaire Skill revolutionizes healthcare data collection through standardized clinical questionnaires and efficient coding.">
+    <meta property="og:title" content="Comprehensive Guide to OpenClaw&#8217;s FHIR Questionnaire Skill: Streamlining Healthcare Data Collection">
+    <meta property="og:description" content="Learn how OpenClaw&#8217;s FHIR Questionnaire Skill revolutionizes healthcare data collection through standardized clinical questionnaires and efficient coding.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/comprehensive-guide-to-openclaws-fhir-questionnaire-skill-streamlining-healthcare-data-collection">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8375">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8375">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/comprehensive-guide-to-openclaws-fhir-questionnaire-skill-streamlining-healthcare-data-collection">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Comprehensive Guide to OpenClaw&#8217;s FHIR Questionnaire Skill: Streamlining Healthcare Data Collection</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-08</p>
+    <h1>Comprehensive Guide to OpenClaw&#8217;s FHIR Questionnaire Skill: Streamlining Healthcare Data Collection</h1>
+<p>OpenClaw&#8217;s FHIR Questionnaire Skill is a powerful tool designed to simplify and standardize the process of creating and managing healthcare questionnaires. This skill leverages the Fast Healthcare Interoperability Resources (FHIR) standard, ensuring interoperability and facilitating seamless data exchange across different healthcare systems. In this guide, we&#8217;ll delve into the functionalities of this skill, exploring how it aids in creating FHIR-conforming questionnaire definitions and integrates with clinical coding systems like LOINC and SNOMED CT.</p>
+<h2>Understanding the FHIR Questionnaire Skill</h2>
+<p>The FHIR Questionnaire Skill is meticulously crafted to transform plain requirement ideation documents into fully compliant FHIR questionnaires. It includes a suite of scripts that enable users to look up LOINC (Logical Observation Identifiers Names and Codes) and SNOMED CT (Systematized Nomenclature of Medicine&#8211;Clinical Terms) codes, two of the most widely used clinical coding systems globally. What sets this skill apart is that it eliminates the need for API keys, streamlining the process and making it more accessible.</p>
+<h2>Key Features and Functionalities</h2>
+<h3>Dependency Requirements</h3>
+<p>To utilize the FHIR Questionnaire Skill, users need to have the following dependencies installed:</p>
+<ul>
+<li>Python 3.8 or higher</li>
+<li>JSONSchema 4.0.0 or higher</li>
+</ul>
+<h3>Network Access Requirements</h3>
+<p>The skill requires whitelisted network access to the following resources:</p>
+<ul>
+<li><a href="https://clinicaltables.nlm.nih.gov/">clinicaltables.nlm.nih.gov</a> (for LOINC search)</li>
+<li><a href="https://tx.fhir.org/">tx.fhir.org</a> (for LOINC answer lists and SNOMED CT search via FHIR terminology server)</li>
+</ul>
+<p>If network access fails, the skill will halt operations to prevent the use of incorrect or unreliable clinical codes.</p>
+<h3>Critical Rules and Guidelines</h3>
+<p>To ensure the accuracy and reliability of clinical coding, the FHIR Questionnaire Skill enforces several critical rules:</p>
+<ul>
+<li><strong>Never suggest LOINC or SNOMED CT codes from memory or training data:</strong> Always use the provided search and query scripts to retrieve clinical codes.</li>
+<li><strong>Use LOINC for clinical questions/observations:</strong> Before suggesting any LOINC code, users must run the <code>search_loinc.py</code> script with appropriate search terms.</li>
+<li><strong>Use SNOMED CT for clinical concepts/conditions:</strong> Similarly, users must always run the <code>search_snomed.py</code> script before suggesting any SNOMED CT code.</li>
+<li><strong>Only use codes returned by the scripts:</strong> If a search fails or returns no results, users should not attempt to make up codes or suggest codes from memory.</li>
+<li><strong>Network access failures:</strong> If the network access fails during a code search or query, users should stop the process immediately and not proceed with suggesting codes.</li>
+</ul>
+<h3>Essential Scripts for Clinical Coding</h3>
+<p>The FHIR Questionnaire Skill provides a set of essential scripts that users must utilize to ensure accurate and reliable clinical coding:</p>
+<h4>1. Searching LOINC Codes</h4>
+<p>To search for LOINC codes, users should run the <code>search_loinc.py</code> script with relevant clinical questions or observations. This script queries the clinicaltables.nlm.nih.gov server and returns matching LOINC codes. For example:</p>
+<pre>
+<code>python scripts/search_loinc.py "depression screening"
+python scripts/search_loinc.py "blood pressure" --format fhir</code>
+</pre>
+<h4>2. Searching SNOMED CT Codes</h4>
+<p>To search for SNOMED CT codes, users should run the <code>search_snomed.py</code> script with relevant clinical concepts or conditions. This script queries the tx.fhir.org terminology server and returns matching SNOMED CT codes. For example:</p>
+<pre>
+<code>python scripts/search_snomed.py "diabetes"
+python scripts/search_snomed.py "hypertension" --format fhir
+python scripts/search_snomed.py "diabetes mellitus" --semantic-tag "disorder"</code>
+</pre>
+<p>Note that the <code>--semantic-tag</code> filter works best when the semantic tag appears in the display name (e.g., &#8220;Diabetes mellitus (disorder)&#8221;).</p>
+<h4>3. Finding Answer Options</h4>
+<p>For questions with standardized answers, users can use the <code>query_valueset.py</code> script to find answer options. This script queries the tx.fhir.org terminology server and returns matching answer lists. For example:</p>
+<pre>
+<code>python scripts/query_valueset.py --loinc-code "72166-2"
+python scripts/query_valueset.py --loinc-code "72166-2" --format fhir</code>
+</pre>
+<h4>4. Validating Questionnaires</h4>
+<p>Before finalizing a questionnaire, users should validate its structure using the <code>validate_questionnaire.py</code> script. This script checks the questionnaire definition against the FHIR specifications. For example:</p>
+<pre>
+<code>python scripts/validate_questionnaire.py questionnaire.json
+python scripts/validate_questionnaire.py questionnaire.json --verbose</code>
+</pre>
+<h2>Templates and Workflows</h2>
+<p>The FHIR Questionnaire Skill provides a variety of templates to help users get started with creating FHIR questionnaires. These templates range from minimal JSON structures to advanced questionnaires with conditional logic. Users can find these templates in the <code>assets/templates/</code> directory:</p>
+<ul>
+<li><code>minimal.json</code>: A bare-bones structure to get started</li>
+<li><code>basic.json</code>: A simple questionnaire with basic elements</li>
+<li><code>advanced.json</code>: A complex questionnaire with conditional logic</li>
+</ul>
+<p>The skill also outlines several workflows to guide users through the process of creating different types of FHIR questionnaires:</p>
+<h3>Standardized Clinical Instruments (PHQ-9, GAD-7, etc.)</h3>
+<p>To create questionnaires for standardized clinical instruments like the PHQ-9 (Patient Health Questionnaire-9) or GAD-7 (Generalized Anxiety Disorder-7), users should follow these steps:</p>
+<ol>
+<li>Find the panel code for the clinical instrument using the <code>search_loinc.py</code> script. This step is critical and should never be skipped.</li>
+<li>Find the answer options for the clinical instrument using the <code>query_valueset.py</code> script with the found LOINC code.</li>
+<li>Refer to the examples and templates provided in the <code>references/examples.md</code> file for complete implementations.</li>
+</ol>
+<h3>Custom Organizational Questionnaires</h3>
+<p>To create custom questionnaires specific to an organization&#8217;s needs, users should follow these steps:</p>
+<ol>
+<li>Start with a template from the <code>assets/templates/</code> directory.</li>
+<li>For any clinical questions, search for LOINC codes using the <code>search_loinc.py</code> script.</li>
+<li>Add answer options if available using the <code>query_valueset.py</code> script with the found LOINC code.</li>
+<li>For custom questions without LOINC results, use inline <code>answerOptions</code> without a coding system.</li>
+<li>Validate the questionnaire using the <code>validate_questionnaire.py</code> script.</li>
+</ol>
+<h2>Common Patterns and Best Practices</h2>
+<p>Users of the FHIR Questionnaire Skill should be familiar with the following common patterns and best practices:</p>
+<h3>Conditional Display</h3>
+<p>To create questionnaires with conditional display, users can utilize the <code>enableWhen</code> property. This allows for showing or hiding questions based on previous answers.</p>
+<h3>Repeating Groups</h3>
+<p>To create repeating groups within a questionnaire, users should set the <code>"repeats": true</code> property. This is particularly useful for sections like medications or allergies.</p>
+<h3>Standardized Answers</h3>
+<p>To use standardized answers for questions, users should utilise the <code>query_valueset.py</code> script with the appropriate LOINC code. This ensures that the answers are backed by LOINC and facilitates interoperability.</p>
+<h3>Custom Answers</h3>
+<p>For questions without standardized answers, users should use inline <code>answerOption</code> with <code>valueCoding</code> (and no coding system). This is the simplest and most spec-compliant approach for custom answer lists.</p>
+<h2>Advanced Features and Custom Coding Systems</h2>
+<h3>Opt-in: Reusable Welshare Coding System</h3>
+<p>For users who require reusable codes that can be shared across multiple questionnaires, the FHIR Questionnaire Skill offers the Welshare coding system. This namespace (<code>http://codes.welshare.app</code>) can be utilized to create CodeSystem and ValueSet pairs. To convert an inline answer list to the reusable format, users should add the appropriate system URI to each <code>valueCoding</code> and optionally reference the ValueSet via <code>answerValueSet</code>.</p>
+<p>To create reusable custom codes, users can run the following command:</p>
+<pre>
+<code>python scripts/create_custom_codesystem.py --interactive</code>
+</pre>
+<h2>Troubleshooting and Support</h2>
+<p>While using the FHIR Questionnaire Skill, users might encounter various issues and errors. Here are some common problems and their solutions:</p>
+<h3>No LOINC Results</h3>
+<p>If a LOINC search returns no suitable results, users should try using broader search terms. For example, searching for &#8220;depression&#8221; instead of &#8220;PHQ-9 question 1&#8221;.</p>
+<h3>Network Errors</h3>
+<p>If network errors occur during a code search or query, users can try using alternative servers with the <code>--server</code> flag. For instance:</p>
+<pre>
+<code>python scripts/search_loinc.py "blood pressure" --server https://hapi.fhir.org/baseR4
+python scripts/search_loinc.py "blood pressure" --server https://r4.ontoserver.csiro.au/fhir</code>
+</pre>
+<h3>Validation Errors</h3>
+<p>If validation errors occur during the questionnaire validation process, users should refer to the FHIR Questionnaire specifications in the <code>references/fhir_questionnaire_spec.md</code> file for guidance.</p>
+<h3>No Answer List Found</h3>
+<p>If no answer list is found for a particular LOINC code, users should use inline <code>answerOption</code> with system-less <code>valueCoding</code> (code + display only). This approach is the simplest and most spec-compliant for custom answer lists. Users should not attempt to fall back to a custom coding system unless explicitly requested by the user.</p>
+<h2>Conclusion</h2>
+<p>The FHIR Questionnaire Skill by OpenClaw is a comprehensive and powerful tool for creating and managing FHIR-conforming questionnaires. By leveraging standardized clinical coding systems like LOINC and SNOMED CT, this skill ensures interoperability, accuracy, and efficiency in healthcare data collection. With its user-friendly scripts, extensive templates, and robust validation mechanisms, the FHIR Questionnaire Skill empowers healthcare professionals to create tailored, reliable, and standardized questionnaires that meet the unique needs of their organizations and patients.</p>
+<p>Whether you are looking to implement standardized clinical instruments or create custom questionnaires, the FHIR Questionnaire Skill offers the flexibility and support needed to streamline the process and enhance healthcare data management.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/elmariachi111/fhir-questionnaire/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/elmariachi111/fhir-questionnaire/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

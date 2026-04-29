@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skill Publisher: Build and Publish Skills to ClawHub</title>
+    <meta name="description" content="Skill Publisher is a tool that helps developers create, validate, security-scan, and publish skills to ClawHub. It provides a streamlined workflow for building ">
+    <meta property="og:title" content="Skill Publisher: Build and Publish Skills to ClawHub">
+    <meta property="og:description" content="Skill Publisher is a tool that helps developers create, validate, security-scan, and publish skills to ClawHub. It provides a streamlined workflow for building ">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/skill-publisher-build-and-publish-skills-to-clawhub">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8532">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8532">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/skill-publisher-build-and-publish-skills-to-clawhub">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Skill Publisher: Build and Publish Skills to ClawHub</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-10</p>
+    <h2>Introduction to Skill Publisher</h2>
+<p>Skill Publisher is a comprehensive tool designed to streamline the process of creating, validating, security-scanning, and publishing skills to ClawHub. This tool is essential for developers who want to build and distribute agent capabilities efficiently and securely.</p>
+<h2>Core Functionality</h2>
+<p>The Skill Publisher serves multiple purposes in the skill development lifecycle. It provides a structured approach to skill creation, ensuring that all necessary components are included and properly formatted. The tool also incorporates security measures to protect against potential vulnerabilities and ensures that skills meet quality standards before publication.</p>
+<h2>Quick Start Guide</h2>
+<p>Getting started with Skill Publisher is straightforward and follows a five-step process:</p>
+<ol>
+<li><strong>Scaffold a new skill</strong> &#8211; Use the provided script to create a new skill folder with a template structure</li>
+<li><strong>Fill in the skill</strong> &#8211; Edit the generated SKILL.md file with your skill&#8217;s name, description, and instructions</li>
+<li><strong>Validate</strong> &#8211; Run validation checks to ensure all required files and formatting are correct</li>
+<li><strong>Security scan</strong> &#8211; Perform automated security checks to identify potential vulnerabilities</li>
+<li><strong>Publish</strong> &#8211; Deploy your skill to ClawHub with proper versioning</li>
+</ol>
+<h2>Skill Anatomy</h2>
+<p>A well-structured skill follows a specific directory structure:</p>
+<pre><code>my-skill/
+├── SKILL.md          ← Required. Frontmatter (name, description) + instructions.
+├── scripts/          ← Optional. Executable code (bash, python, etc.)
+├── references/       ← Optional. Docs loaded on-demand into context.
+└── assets/           ← Optional. Templates, images, files used in output.
+</code></pre>
+<h2>Key Features</h2>
+<p>The Skill Publisher includes several important features that make it valuable for developers:</p>
+<h3>Template Generation</h3>
+<p>The tool provides a scaffold script that automatically generates the basic structure for a new skill, saving developers time and ensuring consistency across projects.</p>
+<h3>Validation System</h3>
+<p>Before publishing, skills undergo rigorous validation to check for required files, proper frontmatter formatting, naming conventions, and forbidden file types. This ensures that all published skills meet minimum quality standards.</p>
+<h3>Security Scanning</h3>
+<p>Security is a top priority, and the tool includes automated scanning for potential vulnerabilities such as remote code execution, data exfiltration, environment variable harvesting, and prompt injection attacks.</p>
+<h3>Publishing Workflow</h3>
+<p>The publish script handles the deployment process to ClawHub, including authentication and version management. This simplifies the distribution process for developers.</p>
+<h2>Best Practices</h2>
+<p>When using Skill Publisher, developers should follow these key principles:</p>
+<ul>
+<li>Be concise in skill descriptions to optimize context window usage</li>
+<li>Craft comprehensive descriptions in frontmatter to ensure proper triggering</li>
+<li>Utilize progressive disclosure by keeping the SKILL.md body concise</li>
+<li>Prefer scripts over inline code for deterministic, repeatable operations</li>
+</ol>
+<h2>Technical Requirements</h2>
+<p>To use Skill Publisher effectively, developers need:</p>
+<ul>
+<li>Basic command-line interface knowledge</li>
+<li>Access to the OpenClaw repository</li>
+<li>Authentication credentials for ClawHub</li>
+<li>Understanding of skill development best practices</li>
+</ul>
+<h2>Workflow Integration</h2>
+<p>Skill Publisher integrates seamlessly into development workflows. The one-liner command combines scaffolding, validation, security scanning, and publishing into a single operation, making it ideal for rapid development and deployment.</p>
+<h2>Quality Assurance</h2>
+<p>The multi-step process ensures that skills meet quality standards before reaching end users. Validation checks prevent common errors, while security scanning protects against malicious code or vulnerabilities.</p>
+<h2>Community Benefits</h2>
+<p>By providing a standardized approach to skill development and publishing, Skill Publisher helps build a more robust and secure ecosystem of agent capabilities. This benefits both developers and end users by ensuring consistent quality and security standards.</p>
+<h2>Future Development</h2>
+<p>The Skill Publisher tool continues to evolve with the OpenClaw ecosystem. Future enhancements may include additional validation checks, improved security scanning capabilities, and expanded publishing options.</p>
+<h2>Conclusion</h2>
+<p>Skill Publisher represents a significant advancement in skill development and distribution. By providing a comprehensive, secure, and user-friendly platform for creating and publishing skills, it enables developers to focus on building valuable agent capabilities while handling the complexities of validation, security, and deployment automatically.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/theashbhat/skillpub/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/theashbhat/skillpub/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

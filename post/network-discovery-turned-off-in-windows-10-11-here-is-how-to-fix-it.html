@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Network Discovery Turned Off in Windows 10/11? Here is How to Fix It</title>
+    <meta name="description" content="Is network discovery not turning on in Windows 11 or 10? Discover why your network settings are stuck and follow our step-by-step guide to fix it immediately.">
+    <meta property="og:title" content="Network Discovery Turned Off in Windows 10/11? Here is How to Fix It">
+    <meta property="og:description" content="Is network discovery not turning on in Windows 11 or 10? Discover why your network settings are stuck and follow our step-by-step guide to fix it immediately.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/network-discovery-turned-off-in-windows-10-11-here-is-how-to-fix-it">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=10635">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=10635">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/network-discovery-turned-off-in-windows-10-11-here-is-how-to-fix-it">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Network Discovery Turned Off in Windows 10/11? Here is How to Fix It</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-04-08</p>
+    <h1>Why Network Discovery Keeps Turning Off in Windows 10 and 11</h1>
+<p>Network discovery is a vital setting in Windows that allows your computer to see other devices on the network and, conversely, allows other devices to see your computer. It is the backbone of seamless file sharing, printer networking, and media streaming. However, a common frustration for many users is discovering that their Windows 10 or 11 system refuses to keep network discovery turned on. Whether you toggle it to &#8216;On&#8217; and it immediately reverts to &#8216;Off,&#8217; or the option is completely greyed out, this issue can halt your productivity.</p>
+<h2>Understanding Why Network Discovery Fails</h2>
+<p>Before diving into the fixes, it is important to understand *why* this happens. Often, Windows disables network discovery for security reasons, especially if it detects that your network profile is set to &#8216;Public&#8217; rather than &#8216;Private.&#8217; If your firewall or specific system services are misconfigured, Windows will automatically revert your settings to a &#8216;Safe&#8217; (Off) state to prevent potential unauthorized access. Common causes include:</p>
+<ul>
+<li>Incorrect Network Profile (Public vs. Private)</li>
+<li>Disabled Essential Networking Services</li>
+<li>Third-Party Firewall Interference</li>
+<li>Corrupted Network Stack</li>
+</ul>
+<h2>Step-by-Step Fixes for Network Discovery Issues</h2>
+<h3>1. Change Your Network Profile to Private</h3>
+<p>Windows treats Public networks as untrusted environments. If you are on a public network, Windows will intentionally disable discovery. If you are on your home or office network, ensure your PC knows it is trusted.</p>
+<ul>
+<li>Open <strong>Settings</strong> (Win + I).</li>
+<li>Go to <strong>Network &#038; internet</strong>.</li>
+<li>Select <strong>Wi-Fi</strong> or <strong>Ethernet</strong> based on your connection.</li>
+<li>Click on the name of your network.</li>
+<li>Under <strong>Network profile type</strong>, select <strong>Private</strong>.</li>
+</ul>
+<p>After changing this, go to <strong>Advanced network settings</strong> > <strong>Advanced sharing settings</strong> and try enabling Network Discovery again.</p>
+<h3>2. Verify Essential Windows Services</h3>
+<p>Network discovery relies on specific background services. If these services are disabled or stopped, discovery cannot function properly.</p>
+<p>Press <strong>Win + R</strong>, type <code>services.msc</code>, and hit Enter. Locate the following services and ensure they are running and set to &#8216;Automatic&#8217;:</p>
+<ul>
+<li><strong>Function Discovery Provider Host</strong></li>
+<li><strong>Function Discovery Resource Publication</strong></li>
+<li><strong>SSDP Discovery</strong></li>
+<li><strong>UPnP Device Host</strong></li>
+</ul>
+<p>Right-click each service, select <strong>Properties</strong>, set the <strong>Startup type</strong> to <strong>Automatic</strong>, and click <strong>Start</strong> if they are not already running.</p>
+<h3>3. Check Windows Firewall Settings</h3>
+<p>If you use a third-party antivirus or firewall, it might be blocking the rules required for network discovery. Even the built-in Windows Defender Firewall can sometimes have corrupted rules.</p>
+<p>To reset these rules:</p>
+<ol>
+<li>Open Control Panel and navigate to <strong>System and Security</strong> > <strong>Windows Defender Firewall</strong>.</li>
+<li>Click <strong>Restore defaults</strong> on the left-hand menu.</li>
+<li>Follow the prompts to confirm. This will clear out any misconfigured rules that might be blocking network traffic.</li>
+</ol>
+<h3>4. Use the Command Prompt to Reset the Network Stack</h3>
+<p>Sometimes the issue lies deeper within the TCP/IP stack. You can reset this using elevated command prompts.</p>
+<ol>
+<li>Open Start, type <code>cmd</code>, right-click, and select <strong>Run as administrator</strong>.</li>
+<li>Type the following commands, pressing Enter after each one:</li>
+</ol>
+<ul>
+<li><code>netsh int ip reset</code></li>
+<li><code>netsh winsock reset</code></li>
+<li><code>ipconfig /flushdns</code></li>
+</ul>
+<p>Restart your computer after executing these commands to apply the changes.</p>
+<h2>Advanced Troubleshooting</h2>
+<p>If the steps above did not work, it is time to look at group policies or potential registry interference. For users on Windows Pro or Enterprise, the Group Policy Editor (<code>gpedit.msc</code>) is a powerful tool to force network discovery settings if local settings are being overridden.</p>
+<p>Navigate to <code>Computer Configuration > Administrative Templates > Network > Network Connections > Windows Defender Firewall > Domain Profile</code>. Look for <strong>Windows Defender Firewall: Define inbound port exceptions</strong> and ensure it is not configured to block discovery ports.</p>
+<h2>Conclusion</h2>
+<p>Having network discovery stuck in the &#8216;Off&#8217; position can be incredibly frustrating, but it is rarely a sign of hardware failure. In most cases, it is a simple matter of Windows security protocols being overly cautious with your network profile or a few background services failing to start automatically. By setting your network profile to &#8216;Private&#8217; and ensuring the core dependency services are running, you should be able to resolve the issue in minutes. If you continue to face problems, consider checking for any recently installed third-party security software that might be overriding your Windows settings.</p>
+<h2>Frequently Asked Questions (FAQ)</h2>
+<h3>Why does Windows keep changing my network to Public?</h3>
+<p>Windows automatically detects the network environment. If it cannot verify the network&#8217;s security parameters or if it&#8217;s the first time you are connecting, it defaults to &#8216;Public&#8217; for security. You must manually change it to &#8216;Private&#8217; to enable discovery.</p>
+<h3>Are there security risks in enabling network discovery?</h3>
+<p>Yes, if you are in a public space like a coffee shop or airport, having network discovery enabled allows others on the same network to see your shared files. Only enable this on networks you trust completely, like your home or work network.</p>
+<h3>Do I need to restart my computer after these fixes?</h3>
+<p>While not strictly necessary for every step, restarting is highly recommended after modifying network services or resetting the network stack to ensure all changes take effect correctly.</p>
+<h3>What if the &#8216;Network Discovery&#8217; checkbox remains greyed out?</h3>
+<p>If the option is greyed out, this is often a sign of group policy restrictions or a corrupted user profile. Try creating a new local user account to see if the problem persists there, which can help determine if your current user profile settings are the culprit.</p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

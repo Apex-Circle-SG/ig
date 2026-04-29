@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering Infrastructure Monitoring: A Deep Dive into OpenClaw&#8217;s Infra-Watchdog Skill</title>
+    <meta name="description" content="Learn how to monitor your self-hosted infrastructure with OpenClaw&#8217;s Infra-Watchdog. Ensure uptime for Docker, APIs, and servers with local alerts.">
+    <meta property="og:title" content="Mastering Infrastructure Monitoring: A Deep Dive into OpenClaw&#8217;s Infra-Watchdog Skill">
+    <meta property="og:description" content="Learn how to monitor your self-hosted infrastructure with OpenClaw&#8217;s Infra-Watchdog. Ensure uptime for Docker, APIs, and servers with local alerts.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-infrastructure-monitoring-a-deep-dive-into-openclaws-infra-watchdog-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8566">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8566">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-infrastructure-monitoring-a-deep-dive-into-openclaws-infra-watchdog-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering Infrastructure Monitoring: A Deep Dive into OpenClaw&#8217;s Infra-Watchdog Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-10</p>
+    <h1>Why Infrastructure Monitoring Matters for Your Homelab</h1>
+<p>In the world of self-hosting and private infrastructure, uptime is everything. Whether you are running a series of Docker containers for your media server, hosting private APIs, or managing critical databases, the last thing you want is a service outage that goes unnoticed until a user reports it. Traditional monitoring tools often rely on third-party SaaS platforms, which can introduce privacy concerns or complex subscription models. This is where the OpenClaw Infra-Watchdog skill comes into play as a powerful, privacy-first solution.</p>
+<h2>What is Infra-Watchdog?</h2>
+<p>Infra-Watchdog is a sophisticated skill designed for the OpenClaw ecosystem that provides comprehensive, self-hosted infrastructure monitoring. It is designed to work entirely locally, meaning no external telemetry or third-party cloud data processing is required. By leveraging OpenClaw, this tool allows administrators to gain granular visibility into their services, resources, and SSL certificates, all while keeping data securely within their own infrastructure.</p>
+<h2>Key Capabilities and Features</h2>
+<p>The flexibility of Infra-Watchdog is what makes it stand out. It goes beyond simple &#8220;ping&#8221; tests, offering deep insights into various layers of your technology stack:</p>
+<h3>1. Web Service Monitoring (HTTP/HTTPS)</h3>
+<p>Ensure your web applications are not just running, but responding correctly. The HTTP/HTTPS monitor checks for specific status codes, measures response latency, and verifies the validity of your SSL/TLS certificates. This is essential for preventing downtime for APIs and web portals.</p>
+<h3>2. Resource and System Health</h3>
+<p>Monitoring physical or virtual server health is vital to preventing sudden crashes. The resource monitor allows you to track CPU usage, RAM availability, and disk space occupancy. With configurable thresholds, you can receive alerts when disk usage exceeds 80% or 90%, giving you time to clean up logs or expand storage before a system-wide failure occurs.</p>
+<h3>3. Container and Port Awareness</h3>
+<p>For those utilizing Docker, the container status check is a game-changer. It monitors whether your services are &#8220;running,&#8221; &#8220;stopped,&#8221; or experiencing issues. Furthermore, TCP port checks ensure that background services like PostgreSQL, Redis, or custom SSH ports are listening and accepting connections.</p>
+<h3>4. SSL Certificate Expiry Tracking</h3>
+<p>Expired SSL certificates are a leading cause of &#8220;not secure&#8221; warnings and service interruptions. Infra-Watchdog proactively notifies you 30 days before a certificate is set to expire, ensuring you have ample time to run your ACME challenges or renew your certificates manually.</p>
+<h2>Configuring Alert Channels</h2>
+<p>One of the most important aspects of any monitoring tool is how it informs you of issues. Infra-Watchdog supports multiple alert channels, allowing you to choose the platform that fits your notification workflow. You can easily switch between WhatsApp, Telegram, or Discord by updating your configuration file. This level of customization ensures that you are alerted on the platform you actually check, significantly reducing the Mean Time to Acknowledge (MTTA) for critical issues.</p>
+<h2>How to Get Started</h2>
+<p>Getting up and running with Infra-Watchdog is straightforward. After installing the skill within your OpenClaw environment, you can use the command-line interface to build your monitor dashboard. The `infra-watchdog init` command prepares your local database, after which you can begin adding monitors. For example, adding a Docker check is as simple as running <code>infra-watchdog add-monitor --type docker --name "My App" --container myapp</code>. Once your monitors are configured, you can use the <code>cron-install</code> command to set up automated polling every five minutes, effectively automating your entire infrastructure health strategy.</p>
+<h2>Why Choose Local Monitoring?</h2>
+<p>Privacy is the core advantage here. Because Infra-Watchdog uses a local SQLite database for storage, your monitor configurations and historical status data never leave your premises. In an era where data privacy is paramount, hosting your monitoring tools locally ensures that you are not leaking information about your internal network topology or service health to third-party providers. Furthermore, because it does not depend on an external cloud, the watchdog will continue to alert you even if your primary internet connection is degraded, provided your internal network is functional.</p>
+<h2>Advanced Use Cases</h2>
+<p>Beyond basic homelab setups, Infra-Watchdog is suitable for more complex environments. If you are an API developer listing services on platforms like RapidAPI, this tool acts as your first line of defense. By monitoring your public-facing endpoints, you can fix issues before your customers notice. Proxmox users can also take advantage of local API checks to monitor the status of Virtual Machines and Containers, adding a layer of management that is often missing from standard server-side dashboards.</p>
+<h2>Best Practices for Monitoring</h2>
+<p>To maximize the effectiveness of your setup, it is recommended to balance sensitivity with utility. Avoid setting alerts that are too &#8220;noisy.&#8221; Utilize the `alert_cooldown_minutes` configuration value to ensure that you don&#8217;t get bombarded with duplicate messages during a known maintenance window or a transient network spike. Always verify your threshold settings—alerting at 90% disk usage is usually ideal, but ensure you also have a monitoring strategy for memory leaks which might show up as slower response times before a service actually crashes.</p>
+<h2>Conclusion</h2>
+<p>Infra-Watchdog is a robust, essential tool for any OpenClaw user. By bringing enterprise-grade monitoring capabilities into the self-hosted world, it empowers users to take full control of their server environments. Whether you are a casual tinkerer or a serious homelab enthusiast, the peace of mind offered by knowing exactly what is happening with your infrastructure is invaluable. Start small with a few port checks, then expand to full system resource monitoring to see the true power of this automated guardian.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/mariusfit/infra-watchdog/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/mariusfit/infra-watchdog/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

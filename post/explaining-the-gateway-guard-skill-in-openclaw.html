@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Explaining the Gateway Guard Skill in OpenClaw</title>
+    <meta name="description" content="Discover how the Gateway Guard skill ensures consistent auth in OpenClaw and automatically resolves run errors.">
+    <meta property="og:title" content="Explaining the Gateway Guard Skill in OpenClaw">
+    <meta property="og:description" content="Discover how the Gateway Guard skill ensures consistent auth in OpenClaw and automatically resolves run errors.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/explaining-the-gateway-guard-skill-in-openclaw">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9108">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9108">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/explaining-the-gateway-guard-skill-in-openclaw">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Explaining the Gateway Guard Skill in OpenClaw</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-16</p>
+    <h1>Understanding the Gateway Guard Skill in OpenClaw</h1>
+<p>In the realm of software systems, ensuring consistent authentication and handling errors efficiently are crucial for smooth operations. One such tool that plays a pivotal role in managing these aspects within the OpenClaw framework is the Gateway Guard skill. This article delves into the intricacies of this skill, explaining its functionality, use cases, and significance in maintaining system integrity.</p>
+<h2>Introduction to Gateway Guard</h2>
+<p>The <strong>Gateway Guard</strong> skill is a component of the OpenClaw framework designed to ensure that the authentication settings of the OpenClaw gateway are consistent with the configurations stored in <code>openclaw.json</code>. Additionally, it has the capability to automatically prompt a &#8220;continue&#8221; action when a run error is detected in the gateway logs.</p>
+<h2>Core Functionality</h2>
+<p>The primary functions of the Gateway Guard skill include:</p>
+<ul>
+<li><strong>Authentication Consistency:</strong> It checks and ensures that the gateway&#8217;s authentication settings match those specified in <code>openclaw.json</code>. This helps in preventing issues like token or password mismatches and <code>device_token_mismatch</code> errors.</li>
+<li><strong>Error Handling:</strong> It monitors the gateway logs for run errors and can automatically send a &#8220;continue&#8221; command to the agent when such errors are detected. This feature is particularly useful in scenarios where manual intervention is cumbersome or impractical.</li>
+</ul>
+<h2>Use Cases</h2>
+<p>The Gateway Guard skill is particularly useful in several scenarios:</p>
+<ul>
+<li><strong>Checking Gateway Auth Issues:</strong> When users or logs report gateway authentication issues or <code>device_token_mismatch</code> errors, the Gateway Guard can be used to check and correct these issues.</li>
+<li><strong>Delegating to Sub-Agents:</strong> Before delegating tasks to sub-agents, it ensures that the gateway is running with the correct authentication settings, thereby preventing potential issues downstream.</li>
+<li><strong>Automatic Error Resolution:</strong> In cases where run errors appear in the gateway logs, the Gateway Guard can automatically prompt a &#8220;continue&#8221; action, reducing the need for manual intervention and ensuring smoother operations.</li>
+</ul>
+<h2>Installation and Configuration</h2>
+<p>Before installing the Gateway Guard skill, it is essential to back up the <code>openclaw.json</code> file, as the installation process may modify it to correct any mismatches in the gateway&#8217;s authentication settings. Additionally, it is recommended to test the script in read-only mode first to understand its impact without making any changes.</p>
+<h3>Installing the Watcher</h3>
+<p>The Gateway Guard includes an optional LaunchAgent that runs every 30 seconds to ensure continuous monitoring and correction of gateway authentication issues. To install this watcher:</p>
+<ul>
+<li>Run the <code>install_watcher.sh</code> script located in the skill directory.</li>
+<li>This script will copy the <code>com.openclaw.gateway-guard.watcher.plist</code> file to the <code>~/Library/LaunchAgents</code> directory and load it using <code>launchctl</code>.</li>
+<li>Ensure that the environment variables <code>OPENCLAW_HOME</code> and <code>OPENCLAW_BIN</code> are correctly set before running the installation script.</li>
+</ul>
+<h2>Usage and Commands</h2>
+<p>The Gateway Guard skill provides several commands to manage gateway authentication and handle errors:</p>
+<ul>
+<li><code>status</code>: Reports whether the running gateway&#8217;s authentication settings match those in <code>openclaw.json</code>. It exits with status 0 if they match and 1 if there is a mismatch.</li>
+<li><code>ensure</code>: Checks the gateway&#8217;s authentication settings and restarts the gateway with the correct credentials if a mismatch is detected. The <code>--apply</code> flag is used to apply the changes, and the <code>--wait</code> flag can be used to wait until the gateway port is open.</li>
+<li><code>ensure_gateway_then.sh</code>: Ensures the gateway is running (starts it if needed) and then runs the specified command. This is useful for automatically ensuring the gateway is operational before executing other tasks.</li>
+<li><code>continue-on-error</code>: Monitors the gateway logs for run errors and sends a &#8220;continue&#8221; command to the agent when such errors are detected. The <code>--once</code> flag runs the check once and exits, while the <code>--loop</code> flag runs the check every specified interval.</li>
+<li><code>watch</code>: Combines the functionality of token synchronization and error handling in a single daemon. It ensures the gateway&#8217;s authentication settings are consistent, provides a summary of any recent issues, and checks for run errors.</li>
+</ul>
+<h2>Behavior and Requirements</h2>
+<p>The Gateway Guard skill reads the <code>openclaw.json</code> file to obtain the gateway&#8217;s authentication settings and port number. It compares these with the process listening on the specified port and updates the configuration if necessary. If the <code>ensure --apply</code> flag is used, it restarts the gateway with the correct authentication settings.</p>
+<p>To use the Gateway Guard skill, the following requirements must be met:</p>
+<ul>
+<li>The OpenClaw framework must be installed.</li>
+<li>The <code>openclaw.json</code> file must contain the <code>gateway.auth</code> and <code>gateway.port</code> settings.</li>
+<li>The OpenClaw CLI must be available on the system&#8217;s PATH.</li>
+</ul>
+<h2>JSON Output</h2>
+<p>The Gateway Guard skill can provide JSON output for orchestration purposes. The <code>status --json</code> and <code>ensure --json</code> commands return detailed information about the gateway&#8217;s status, authentication settings, and recommended actions. This output can be used to automate the management of gateway authentication and error handling.</p>
+<h2>Conclusion</h2>
+<p>The Gateway Guard skill plays a crucial role in ensuring the consistency of gateway authentication settings and handling run errors efficiently within the OpenClaw framework. By understanding its functionality, use cases, and installation process, users can leverage this tool to maintain system integrity and enhance operational efficiency. Whether it&#8217;s checking gateway auth issues, delegating to sub-agents, or automatically resolving run errors, the Gateway Guard skill is an invaluable component of the OpenClaw ecosystem.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/runeweaverstudios/gateway-guard/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/runeweaverstudios/gateway-guard/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

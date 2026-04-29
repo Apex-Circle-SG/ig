@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding OpenClaw&#8217;s Multi-Subscription Auth Fallbacks for CodeSi</title>
+    <meta name="description" content="Learn how OpenClaw&#8217;s skill manages multiple OpenAI Codex OAuth profiles for seamless failover and automatic model switching.">
+    <meta property="og:title" content="Understanding OpenClaw&#8217;s Multi-Subscription Auth Fallbacks for CodeSi">
+    <meta property="og:description" content="Learn how OpenClaw&#8217;s skill manages multiple OpenAI Codex OAuth profiles for seamless failover and automatic model switching.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-openclaws-multi-subscription-auth-fallbacks-for-codesi">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8716">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8716">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-openclaws-multi-subscription-auth-fallbacks-for-codesi">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding OpenClaw&#8217;s Multi-Subscription Auth Fallbacks for CodeSi</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-12</p>
+    <h1>Understanding OpenClaw&#8217;s Multi-Subscription Auth Fallbacks for CodeSi</h1>
+<p>The OpenClaw skill &#8220;codex-multi-subscription-auth-fallbacks&#8221; is a comprehensive solution designed to manage multiple OpenAI Codex OAuth profiles within OpenClaw. This skill is particularly useful for users looking to set up multiple OpenAI Codex accounts for rate-limit failover, adding new Codex OAuth profiles via device flow, or automatically switching models when a provider hits cooldown.</p>
+<h2>Overview of the Skill</h2>
+<p>The skill enables OpenClaw to support multiple authentication profiles per provider, allowing the platform to fail over to another profile when one hits a rate limit. This setup ensures uninterrupted usage and enhances the overall efficiency of the system. The key functionalities covered by this skill include:</p>
+<ul>
+<li>Adding Codex OAuth profiles via device-flow login.</li>
+<li>Configuring <code>openclaw.json</code> for provider fallback order.</li>
+<li>Setting up <code>auth-profiles.json</code> with multiple profiles.</li>
+<li>Deploying a cron job to auto-switch models on cooldown.</li>
+</ul>
+<h2>Prerequisites</h2>
+<p>To utilize this skill, you need the following:</p>
+<ul>
+<li>An OpenClaw instance that is running.</li>
+<li>The <code>codex</code> CLI installed, which also ensures Node.js is available.</li>
+<li>One or more OpenAI accounts with Codex access.</li>
+</ul>
+<h2>Security &#038; Safety Features</h2>
+<p>The skill prioritizes security and safety with the following measures:</p>
+<ul>
+<li><strong>Token Localization:</strong> All tokens are kept local. No tokens are sent to any external endpoint.</li>
+<li><strong>Automatic Backups:</strong> Both <code>~/.codex/auth.json</code> and <code>~/.openclaw/agents/main/agent/auth-profiles.json</code> are backed up with timestamps before any modification.</li>
+<li><strong>Interactive Confirmation:</strong> The script prompts for confirmation before clearing the Codex CLI auth file, allowing you to abort if needed.</li>
+<li><strong>No Elevated Privileges:</strong> The script runs as the user and does not require <code>sudo</code> or any special permissions.</li>
+</ul>
+<p>It is also recommended to manually back up <code>~/.codex/auth.json</code> and OpenClaw configs before running the script, especially on first use. Consider testing with a non-production OpenAI account initially.</p>
+<h2>Step-by-Step Guide</h2>
+<h3>Step 1: Adding Codex OAuth Profiles</h3>
+<p>To add Codex OAuth profiles for each OpenAI account, run the bundled script:</p>
+<pre><code>./scripts/codex-add-profile.sh &lt;profile-name&gt;</code></pre>
+<p>The script performs the following actions:</p>
+<ol>
+<li>Backs up <code>~/.codex/auth.json</code> and <code>auth-profiles.json</code>.</li>
+<li>Clears Codex CLI auth to force a fresh device-flow login.</li>
+<li>Runs <code>codex auth login</code> (opens browser for OAuth).</li>
+<li>Extracts tokens and imports them into OpenClaw&#8217;s <code>auth-profiles.json</code>.</li>
+<li>Restores the original Codex CLI auth.</li>
+</ol>
+<p>Repeat this process for each OpenAI account, using short identifiers (e.g., OpenAI usernames) for profile names.</p>
+<h3>Step 2: Configuring openclaw.json</h3>
+<p>Add authentication profile declarations and fallback model configurations to <code>openclaw.json</code>. Refer to the templates in <code>references/config-templates.md</code> for the exact JSON blocks to include.</p>
+<p>Key sections to configure:</p>
+<ul>
+<li><code>auth.profiles</code>: Declare each profile with the provider and mode.</li>
+<li><code>auth.order</code>: Set the failover priority per provider.</li>
+<li><code>agents.defaults.model</code>: Set the primary model and fallbacks.</li>
+</ul>
+<h3>Step 3: Auth Profiles JSON Structure</h3>
+<p>OpenClaw stores live tokens in <code>agents/main/agent/auth-profiles.json</code>. Refer to <code>references/config-templates.md</code> for the schema.</p>
+<p>Each Codex profile contains the following fields:</p>
+<ul>
+<li><code>type</code>: Specifies the type as &#8220;oauth&#8221;.</li>
+<li><code>provider</code>: Identifies the provider as &#8220;openai-codex&#8221;.</li>
+<li><code>access</code>: Contains the JWT access token, auto-populated by the add-profile script.</li>
+<li><code>refresh</code>: Contains the refresh token, auto-populated by the script.</li>
+<li><code>expires</code>: Token expiry in milliseconds, parsed from the JWT.</li>
+<li><code>accountId</code>: OpenAI account ID, parsed from the JWT.</li>
+</ul>
+<p>The <code>order</code> object controls which profile is tried first per provider. The <code>usageStats</code> object tracks rate limits and cooldowns automatically.</p>
+<h3>Step 4: Model Cooldown Auto-Switch Cron (Optional)</h3>
+<p>This step is optional and not required for most users. Depending on your situation, this may be useful:</p>
+<p>The cron job checks cooldown state every 10 minutes and switches the active model, ensuring uninterrupted service. To deploy the cron job:</p>
+<pre><code>openclaw models status</code></pre>
+<p>The cron job:</p>
+<ul>
+<li>Runs <code>openclaw models status</code> to check cooldown state.</li>
+<li>Picks the best available model (priority: opus > codex profiles in order).</li>
+<li>Updates the session model override if needed.</li>
+<li>Logs state to a local memory file; only notifies on change.</li>
+</ul>
+<p>Before enabling the cron job:</p>
+<ul>
+<li>Test manually first: run <code>openclaw models status</code> to verify your profiles are working.</li>
+<li>Review the cron job template in <code>references/config-templates.md</code>: the job only runs local commands and writes to a local state file.</li>
+<li>The job runs in an isolated session and does not affect your main chat unless a model switch occurs.</li>
+</ul>
+<p>Add the job to <code>cron/jobs.json</code> using the template in the references.</p>
+<h2>File Layout</h2>
+<pre><code>codex-auth-fallback/
+├── SKILL.md                    # This file
+├── scripts/
+│   └── codex-add-profile.sh    # Device-flow profile importer
+└── references/
+    └── config-templates.md     # openclaw.json, auth-profiles, cron templates</code></pre>
+<p>In conclusion, the &#8220;codex-multi-subscription-auth-fallbacks&#8221; skill from OpenClaw provides a robust solution for managing multiple OpenAI Codex OAuth profiles, ensuring seamless failover and automatic model switching. By following the steps outlined in this guide, users can effectively configure and utilize this skill to enhance their OpenClaw experience.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/markeljan/codex-multi-subscription-auth-fallbacks/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/markeljan/codex-multi-subscription-auth-fallbacks/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

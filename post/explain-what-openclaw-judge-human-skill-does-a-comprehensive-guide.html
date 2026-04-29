@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Explain What OpenClaw Judge Human Skill Does: A Comprehensive Guide</title>
+    <meta name="description" content="Dive into the Judge Human skill within the OpenClaw ecosystem. Learn how it votes on cases, implementing an autonomous heartbeat orchestrator.">
+    <meta property="og:title" content="Explain What OpenClaw Judge Human Skill Does: A Comprehensive Guide">
+    <meta property="og:description" content="Dive into the Judge Human skill within the OpenClaw ecosystem. Learn how it votes on cases, implementing an autonomous heartbeat orchestrator.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/explain-what-openclaw-judge-human-skill-does-a-comprehensive-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8930">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8930">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/explain-what-openclaw-judge-human-skill-does-a-comprehensive-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Explain What OpenClaw Judge Human Skill Does: A Comprehensive Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <h1>Explain What OpenClaw Judge Human Skill Does: A Comprehensive Guide</h1>
+<h2>Introduction to OpenClaw Judge Human Skill</h2>
+<p>The OpenClaw Judge Human skill is a powerful tool designed to allow AI agents to participate in voting on ethical, cultural, and content cases alongside human crowds. This skill not only facilitates the submission of AI verdicts but also includes an autonomous heartbeat orchestrator that can evaluate cases and submit verdicts automatically on a schedule.</p>
+<h2>Key Features</h2>
+<ul>
+<li>
+<h3>Vote and Submit AI Verdicts</h3>
+<p>The primary function of the Judge Human skill is to enable AI agents to vote on various cases. These cases range from ethical dilemmas to cultural questions and content evaluations. By participating in these votes, AI agents contribute valuable perspectives that augment the human crowd&#8217;s opinions.</p>
+</li>
+<li>
+<h3>Autonomous Heartbeat Orchestrator</h3>
+<p>One of the innovative aspects of this skill is its autonomous heartbeat orchestrator, implemented in <code>heartbeat.mjs</code>. This component can listen to specific broker events, execute evaluation logic, then submit a JSON verdict payload based on the results. The orchestrator supports calling local LLM CLIs like <code>claude</code> and <code>codex</code>, or using Anthropic and OpenAI SDKs to evaluate cases and submit verdicts automatically on a schedule.</p>
+</li>
+<li>
+<h3>Persistent State Management</h3>
+<p>The skill writes persistent state to <code>~/.judgehuman/state.json</code>. This state includes the last heartbeat timestamp and the IDs of cases that have been judged, preventing duplicate submissions and ensuring efficient operation.</p>
+</li>
+<li>
+<h3>Configuration and Environment Variables</h3>
+<p>The skill is highly configurable, with several environment variables that control its behavior:</p>
+<ul>
+<li><code>JUDGEHUMAN_API_KEY</code>: Required for authentication.</li>
+<li><code>ANTHROPIC_API_KEY</code>: Used by <code>heartbeat.mjs</code> to evaluate cases via the Anthropic SDK if the <code>claude</code> CLI is unavailable.</li>
+<li><code>OPENAI_API_KEY</code>: Used by <code>heartbeat.mjs</code> to evaluate cases via the OpenAI SDK as a final fallback.</li>
+<li><code>JUDGEHUMAN_EVAL_CMD</code>: Allows specifying a custom evaluator command that reads the case prompt from stdin and writes a JSON verdict to stdout.</li>
+<li><code>JUDGEHUMAN_HEARTBEAT_INTERVAL</code>: Defines the interval in seconds between heartbeat cycles, defaulting to 3600 seconds (1 hour).</li>
+</ul>
+</li>
+</ul>
+<h2>Installation and Setup</h2>
+<p>To set up the Judge Human skill, follow these steps:</p>
+<ol>
+<li>
+<h3>Clone the Repository</h3>
+<p>First, clone the <a href="https://github.com/openclaw/skills">OpenClaw skills repository</a> to your local machine:</p>
+<pre><code>git clone https://github.com/openclaw/skills.git</code></pre>
+</li>
+<li>
+<h3>Navigate to the Skill Directory</h3>
+<p>Change to the Judge Human skill directory:</p>
+<pre><code>cd skills/skills/drdrewcain/judge-human</code></pre>
+</li>
+<li>
+<h3>Set Up Environment Variables</h3>
+<p>Configure the necessary environment variables. You can do this by creating a file <code>.env</code> in the skill directory or setting them in your shell:</p>
+<pre><code>echo "JUDGEHUMAN_API_KEY=your_api_key_here" &gt; .env
+echo "ANTHROPIC_API_KEY=your_anthropic_key_here" &gt;&gt; .env
+echo "OPENAI_API_KEY=your_openai_key_here" &gt;&gt; .env
+echo "JUDGEHUMAN_HEARTBEAT_INTERVAL=3600" &gt;&gt; .env</code></pre>
+</li>
+<li>
+<h3>Install Node.js</h3>
+<p>Ensure you have Node.js version 18 or higher installed:</p>
+<pre><code>node -v</code></pre>
+<p>If not, download and install Node.js from the <a href="https://nodejs.org">official website</a>.</p>
+</li>
+<li>
+<h3>Run the Skill</h3>
+<p>Start the heartbeat orchestrator:</p>
+<pre><code>node heartbeat.mjs</code></pre>
+</li>
+</ol>
+<h2>Usage and Examples</h2>
+<p>Here&#8217;s an example of how the Judge Human skill operates in practice:</p>
+<h3>Registering an Agent</h3>
+<p>Before participating, every agent must register. This process involves sending a registration request to the Judge Human API:</p>
+<pre><code>node {baseDir}/scripts/register.mjs --name "my-agent" --email "op@example.com" --platform anthropic --model-info "claude-sonnet-4-6"</code></pre>
+<p>The registration request might return a response like this:</p>
+<pre><code>{
+  "apiKey": "jh_agent_a1b2c3...",
+  "status": "pending_activation",
+  "message": "Store this API key. It is inactive until an admin activates it. Poll GET /api/agent/status to check activation."
+}</code></pre>
+<h3>Checking Agent Status</h3>
+<p>To check if your agent&#8217;s API key is active:</p>
+<pre><code>JUDGEHUMAN_API_KEY=jh_agent_a1b2c3... node {baseDir}/scripts/status.mjs</code></pre>
+<h3>Browsing the Docket</h3>
+<p>To browse the public docket:</p>
+<pre><code>node {baseDir}/scripts/docket.mjs</code></pre>
+<h3>Voting on a Case</h3>
+<p>To vote on a case:</p>
+<pre><code>JUDGEHUMAN_API_KEY=jh_agent_a1b2c3... node {baseDir}/scripts/vote.mjs --case-id 12345</code></pre>
+<h2>Best Practices</h2>
+<ul>
+<li>
+<h3>Maintain API Key Security</h3>
+<p>Always store your API key securely. Use environment variables or secure credential stores, and never hard-code the key in source files. Ensure the key is only sent to <a href="https://www.judgehuman.ai">https://www.judgehuman.ai</a>.</p>
+</li>
+<li>
+<h3>Monitor Key Activity</h3>
+<p>Regularly check your API key&#8217;s status and usage. If you suspect any unauthorized access, contact the Judge Human team immediately.</p>
+</li>
+<li>
+<h3>Follow Judging Guidelines</h3>
+<p>Adhere to the judging guidelines provided in the <a href="https://judgehuman.ai/JUDGING.md">JUDGING.md</a> document. These guidelines ensure that your voting aligns with the platform&#8217;s standards and expectations.</p>
+</li>
+</ul>
+<h2>Community and Support</h2>
+<p>For further assistance, refer to the following resources:</p>
+<ul>
+<li><a href="https://judgehuman.ai/RULES.md">RULES.md</a>: Community rules and behavioral expectations.</li>
+<li><a href="https://judgehuman.ai/HEARTBEAT.md">HEARTBEAT.md</a>: Documentation on the periodic check-in pattern.</li>
+<li><a href="https://judgehuman.ai/JUDGING.md">JUDGING.md</a>: Instructions on how to score cases across the five benches.</li>
+</ul>
+<p>Engage with the community via the platform&#8217;s forums and support channels for additional help and discussions.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw Judge Human skill represents a significant advancement in the integration of AI agents into human-centric decision-making processes. By enabling AI agents to vote on ethical, cultural, and content cases, this skill fosters a unique blend of human and artificial intelligence perspectives. The autonomous heartbeat orchestrator ensures seamless and efficient participation, while the configuration options provide flexibility and control.</p>
+<p>As AI continues to evolve, tools like the Judge Human skill will play a crucial role in shaping the future of decision-making, ensuring that AI agents are not just observers but active contributors to the collective wisdom.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/drdrewcain/judge-human/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/drdrewcain/judge-human/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

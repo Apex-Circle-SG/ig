@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exploring the Credex Protocol Skill for OpenClaw: A Comprehensive Guide</title>
+    <meta name="description" content="Unlock unsecured credit lines for AI agents with Credex Protocol. Learn borrowing, lending, and liquidity management on Arc Network.">
+    <meta property="og:title" content="Exploring the Credex Protocol Skill for OpenClaw: A Comprehensive Guide">
+    <meta property="og:description" content="Unlock unsecured credit lines for AI agents with Credex Protocol. Learn borrowing, lending, and liquidity management on Arc Network.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/exploring-the-credex-protocol-skill-for-openclaw-a-comprehensive-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8565">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8565">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/exploring-the-credex-protocol-skill-for-openclaw-a-comprehensive-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Exploring the Credex Protocol Skill for OpenClaw: A Comprehensive Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-10</p>
+    <p>The <a href="https://github.com/openclaw/skills/tree/main/skills/skills/capgoblin/credex-protocol/SKILL.md">Credex Protocol Skill</a> unlocks decentralized credit systems for AI agents operating on the Arc Network. Developed as part of the OpenClaw ecosystem, it provides capabilities to borrow, lend, and manage USDC aid in creative projects.</p>
+<p><!--
+<picture style="display:block; margin-bottom:20px;"> 
+<source media="(min-width:650px)" srcset="https://via.placeholder.com/1200x400?text=Credex+Protocol+Skill" style="max-width:1200px;">
+ <img decoding="async" src="https://via.placeholder.com/650x250?text=Credex+Protocol+Skill" alt="Credex Protocol Illustration"/>
+</picture>
+--></p>
+<h2>Understanding Credex Protocol Integration</h2>
+<p>The Credex Protocol skill focuses on providing AI agents with access to unsecured credit lines, allowing them to leverage <a href="https://www.circle.com/what-we-do/usd-coin-usdc/">USDC</a> for various tasks while using their reputation as collateral. Built specifically for the Arc Network (currently on testnet), this system enables seamless financial manueverability for machines.</p>
+<h2>Core Functionalities</h2>
+<ol>
+<li><strong>Borrowing Against Reputation</strong><br />
+AI agents can apply for credit by borrowing USDC based on their proven reputation. The protocol calculates creditworthiness and establishes a credit limit dynamically based on historical performance indicators. For example,{\&#8221;creditLimit\&#8221;:\&#8221;100.000000\&#8221;} for agents with strong track records.</li>
+<li><strong>Debt Management</strong><br />
+The system supports debt repayment functionality, where agents can repay their borrowed amounts plus accrued interest. This action allows for credit limit expansion by 10% with satisfactory repayments. Example response for repayment{\&#8221;newCreditLimit\&#8221;:\&#8221;110.000000\&#8221;}</li>
+<li><strong>Liquidity Provisioning</strong><br />
+Agents can act as liquidity providers by depositing USDC into a shared pool. When assets in the pool are loaned out, providers earn a percentage of the interest generated by borrowers. The share price reflects the underlying asset value based on{\&#8221;totalAssets\&#8221;:\&#8221;1000.000000\&#8221;,\&#8221;totalShares\&#8221;:\&#8221;950.000000\&#8221;}</li>
+<li><strong>Cross-Chain Functionality</strong><br />
+Agents can transfer USDC between Arc Testnet and Base Sepolia via integration with Circle Bridge. This feature enhances pool utilization and agent liquidity management. Example parameter usage: bridge 10.0 arc base</li>
+</ol>
+<h2>Technical Requirements</h2>
+<p>To leverage the Credex Protocol Skill, users must provide the following environment variables:</p>
+<ul>
+<li><code>WALLET_PRIVATE_KEY</code> &#8211; Private key for signing blockchain transactions</li>
+<li><code>RPC_URL</code> &#8211; Arc Network connection endpoint, with the default value pointing to <code>https://rpc.testnet.arc.network</code></li>
+<li><code>CREDEX_POOL_ADDRESS</code> &#8211; Address of the CredexPool contract (configurable)</li>
+<li><code>CREDEX_AGENT_URL</code> &#8211; Credex agent server URL (optional)</li>
+</ul>
+<h2>Usage Examples</h2>
+<h3>Borrower Commands</h3>
+<ol>
+<li>Check credit status:<br />
+<code>npx ts-node scripts/client.ts status &lt;agent_address&gt;</code><br />
+This returns detailed information such as:<br />
+<code>{\"availableCredit\":\"95.000000\", ...}</code></li>
+<li>Request funds:<br />
+<code>npx ts-node scripts/client.ts borrow 5.0</code><br />
+Example output:<br />
+<code>{\"borrowed\":\"5.000000\",\"newDebt\":\"5.000000\",...}</code></li>
+<li>Calculate em hourly payments:<br />
+<code>npx ts-node scripts/client.ts repay 5.5</code><br />
+Key details in response:<br />
+<code>{\"remainingDebt\":\"0.000000\",\"newCreditLimit\":\"110.000000\"}</code></li>
+</ol>
+<h3>Liquidity Provider (LP) Commands</h3>
+<ol>
+<li>Assess pool status:<br />
+<code>npx ts-node scripts/lp.ts pool-status</code><br />
+Outputs metrics like:<br />
+<code>{\"totalAssets\":\"800.000000\",\"sharePrice\":\"1.052631\"}</code></li>
+<li>Add funds:<br />
+<code>npx ts-node scripts/lp.ts deposit 100.0</code><br />
+Returns confirmation:<br />
+<code>{\"deposited\":\"100.000000\",\"sharesReceived\":\"95.000000\"}</code></li>
+</ol>
+<h2>Protocol Mechanics</h2>
+<ul>
+<li><strong>Interest Accrual</strong>: 0.1% charged per minute in testnet (actual network parameters may vary). This is calculated and added to the principal using: <code>debt = principal + accrued_interest</code></li>
+<li><strong>Credit Limit Growth</strong>: Each successful repayment increases the agent&#8217;s credit limit by 10%, capped at 10,000 USDC. This compounding effect can be visualized as: <code>currentLimit × 1.10 = newLimit</code></li>
+<li><strong>Liquidity Provider Logic</strong>: When agents deposit funds, they receive LP shares proportional to the value of the <code>totalAssets</code> (which include <code>liquidity + outstandingDebt</code>). The <code>sharePrice</code> is recalculated with each pool update.</li>
+</ul>
+<h2>Security Considerations</h2>
+<p>Users should be aware of the following when integrating with Credex Protocol:</p>
+<ul>
+<li><strong>Private Key Security</strong>: Always securely store the <code>WALLET_PRIVATE_KEY</code> and never expose it in shared environments. The protocol requires signing for all financial operations.</li>
+<li><strong>Slippage and Bridge Delays</strong>: During periods of high activity, tokens transferred via Circle Bridge may experience temporary latency (5-10 minutes) when moving between Arc Testnet and Base Sepolia.</li>
+<li><strong>Transaction Monitoring</strong>: Due to the decentralized nature, agents should verify that transactions complete successfully. In case of errors such as &#8220;Nonce too low,&#8221; wait and retry after 10 seconds.</li>
+</ul>
+<h2>Closing Remarks</h2>
+<p>The Credex Protocol Skill exemplifies how AI-driven agents can leverage decentralized financial solutions within the OpenClaw ecosystem. By integrating these functionalities, users enable a range of credit operations from borrowing against reputation to providing liquidity as LP.</p>
+<p>Developers and AI engineers interested in further customization may find it beneficial to explore the <a href="https://github.com/openclaw/skills/tree/main/references/contracts.md">contract ABIs</a> and the <code>scripts/</code> directory for added control over interaction patterns.</p>
+<p>For support or updates on Credex Protocol, participate in the <a href="https://github.com/openclaw/skills">OpenClaw repository discussions</a> or contribute to advancing the toolkit.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/capgoblin/credex-protocol/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/capgoblin/credex-protocol/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Autobahn Skill: Operating Autonomous Onchain-Governed Entities with AI Agents</title>
+    <meta name="description" content="Autobahn is an AI-powered platform enabling autonomous entities to be formed, governed, financed, and litigated by specialized agent personas using on-chain sma">
+    <meta property="og:title" content="Autobahn Skill: Operating Autonomous Onchain-Governed Entities with AI Agents">
+    <meta property="og:description" content="Autobahn is an AI-powered platform enabling autonomous entities to be formed, governed, financed, and litigated by specialized agent personas using on-chain sma">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/autobahn-skill-operating-autonomous-onchain-governed-entities-with-ai-agents">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8771">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8771">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/autobahn-skill-operating-autonomous-onchain-governed-entities-with-ai-agents">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Autobahn Skill: Operating Autonomous Onchain-Governed Entities with AI Agents</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-13</p>
+    <h2>What Is the Autobahn Skill?</h2>
+<p>The Autobahn skill is a specialized AI agent framework that enables autonomous entities—such as Wyoming DAO LLCs, DUNAs (Decentralized Unincorporated Non-profit Associations), and unincorporated associations—to be formed, governed, financed, and litigated entirely by AI agents. Built on Ethereum and OpenLaw infrastructure, Autobahn combines on-chain smart contracts with off-chain legal automation to create a complete autonomous entity lifecycle.</p>
+<h2>Core Architecture</h2>
+<p>At its foundation, Autobahn operates through a unified agent identity system using ERC-8004 for agent identity management. Each autonomous entity is operated by a single OpenClaw agent with one wallet and one ERC-8004 identity, but internally orchestrated by multiple specialized personas working in concert.</p>
+<p>The system requires smart accounts for governance operations, automatically created during registration. Most entity operations work through the API server&#8217;s deployer key, while your agent wallet handles authentication via EIP-712 challenge-response.</p>
+<h2>Specialized Agent Personas</h2>
+<p>Autobahn employs eight distinct personas, each with specific responsibilities:</p>
+<ul>
+<li><strong>Founder/Coordinator</strong> &#8211; Orchestrates workflows and manages entity lifecycle</li>
+<li><strong>Business Planner</strong> &#8211; Generates and updates business plans, prepares loan justifications</li>
+<li><strong>Treasury</strong> &#8211; Models cash flows, prepares repayment schedules, ensures FeeRouter compliance</li>
+<li><strong>Governance</strong> &#8211; Prepares proposals, enforces timelock discipline, monitors quorum</li>
+<li><strong>Legal Drafter</strong> &#8211; Renders formation documents, operating agreements, loan agreements</li>
+<li><strong>Risk/Compliance</strong> &#8211; Flags prohibited actions, monitors covenant compliance</li>
+<li><strong>Community/BD</strong> &#8211; Manages AutoRed registry, recruits cofounders and lenders</li>
+<li><strong>Litigation Prep</strong> &#8211; Generates demand letters, complaint packets, routes to attorneys</li>
+</ul>
+<p>These personas share one wallet and one identity, providing LLM-level separation rather than cryptographic security. The real security boundary is governance: proposals require votes from multiple agents/members, with timelocks allowing cancellation of malicious actions.</p>
+<h2>Entity Formation and Types</h2>
+<p>Autobahn supports multiple entity types with different governance and compliance requirements:</p>
+<ul>
+<li><strong>Wyoming DAO LLC</strong> &#8211; On-chain governed LLC with DAO structure</li>
+<li><strong>DUNA</strong> &#8211; Decentralized unincorporated non-profit with strict non-distribution rules</li>
+<li><strong>Unincorporated Association</strong> &#8211; Simple entity with minimal compliance overhead</li>
+</ul>
+<p>Entity formation workflows include automatic legal document generation, canonical JSON hashing for document integrity, and watermarked drafts requiring attorney review before filing.</p>
+<h2>Governance and Security</h2>
+<p>Governance operates through proposal/vote/queue/execute sequences with mandatory timelocks. The system enforces strict compliance rules: never bypass timelocks, always require EIP-712 signatures for legal documents, and verify all document hashes against canonical JSON.</p>
+<p>Security features include the Guardian Emergency System for crisis intervention, Diamond Proxy Upgrades for contract evolution, and comprehensive error recovery procedures. All USDC transfers must route through FeeRouter (0.1% fee), and legal documents must cite only verified Wyoming statutes.</p>
+<h2>Financial Operations</h2>
+<p>Autobahn includes integrated lending and borrowing workflows with automatic loan agreement generation, repayment scheduling, and default handling. The system generates demand letters and complaint packets, routing complex litigation to licensed attorneys through a marketplace system.</p>
+<p>The AutoRed registry and community features enable public discovery of autonomous entities, while the provider bounty system incentivizes ecosystem development. Real-time events and notifications keep all stakeholders informed of entity activities.</p>
+<h2>Getting Started</h2>
+<p>Standard agent onboarding requires just two commands: <code>autobahn register</code> to generate keys and create the smart account, then <code>autobahn login</code> for authentication. All CLI commands work immediately after registration, including governance operations.</p>
+<p>The platform emphasizes safety with absolute rules against fabricating legal claims, bypassing governance, or logging private keys. Every legal assertion must reference verifiable on-chain transactions or notarized documents, ensuring accountability and compliance.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/unifiedh/autobahn/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/unifiedh/autobahn/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

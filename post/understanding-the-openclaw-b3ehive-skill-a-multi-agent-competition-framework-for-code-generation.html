@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the OpenClaw b3ehive Skill: A Multi‑Agent Competition Framework for Code Generation</title>
+    <meta name="description" content="Explore how the b3ehive skill enables three AI agents to compete, evaluate, and deliver the optimal solution through a structured PCTF workflow.">
+    <meta property="og:title" content="Understanding the OpenClaw b3ehive Skill: A Multi‑Agent Competition Framework for Code Generation">
+    <meta property="og:description" content="Explore how the b3ehive skill enables three AI agents to compete, evaluate, and deliver the optimal solution through a structured PCTF workflow.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-openclaw-b3ehive-skill-a-multi-agent-competition-framework-for-code-generation">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9163">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9163">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-openclaw-b3ehive-skill-a-multi-agent-competition-framework-for-code-generation">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the OpenClaw b3ehive Skill: A Multi‑Agent Competition Framework for Code Generation</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <h1>Understanding the OpenClaw b3ehive Skill: A Multi‑Agent Competition Framework for Code Generation</h1>
+<p>The OpenClaw project introduces a novel approach to automated software development called the <strong>b3ehive</strong> skill. This skill is designed to harness the power of multiple AI agents working in parallel, each with a distinct focus—simplicity, speed, and robustness—to produce a final solution that is objectively the best among competing implementations. By following a PCTF (Purpose, Task, Chain, Format) compliant process, b3ehive transforms a raw task description into a polished, winning piece of code accompanied by detailed reports that justify the selection.</p>
+<h2>Purpose: Enabling Competitive Code Generation</h2>
+<p>The primary purpose of the b3ehive skill is to enable competitive code generation where three isolated AI agents implement the same functionality, evaluate each other objectively, and deliver the optimal solution through data‑driven selection. Rather than relying on a single model’s output, the framework creates a mini‑tournament of ideas. Each agent is prompted to solve the same task but with a different emphasis, ensuring a diverse set of candidate solutions. The competitive environment encourages agents to push the boundaries of their respective focuses, ultimately surfacing strengths that might be missed in a solitary generation attempt.</p>
+<h2>Task Definition: Inputs, Outputs, and Success Criteria</h2>
+<p>In the b3ehive workflow, the task definition is explicit. The input consists of a <code>task_description</code> string that outlines the coding problem and an optional <code>constraints</code> object that may specify language, time/space complexity, or other requirements. The expected output includes three deliverables: a <code>final_solution</code> directory containing the winning implementation, a <code>comparison_report</code> markdown file that analyses all three approaches, and a <code>decision_rationale</code> markdown file that explains why the winner was selected. Success criteria are concrete and measurable: the final solution must be runnable, the comparison report must contain objective metrics, the decision rationale must justify the selection, all three agent implementations must be documented, and evaluation scores must be numeric and justified.</p>
+<h2>Chain Flow: Four Phases of Competition</h2>
+<p>The b3ehive skill operates through a clearly defined chain flow divided into four phases. In <strong>Phase 1: Parallel Spawn</strong>, the user task triggers the simultaneous creation of three agent workspaces—run_a, run_b, and run_c. Each agent receives a prompt template that defines its role as an &#8220;Expert Software Engineer&#8221; and assigns a focus: Simplicity for Agent A, Speed for Agent B, and Robustness for Agent C. The agents must produce a runnable implementation, a completed checklist, a summary of their unique approach, and ensure their code differs from the others.</p>
+<p><strong>Phase 2: Cross‑Evaluation</strong> follows, where each agent evaluates the other two. Using an evaluator prompt template, Agent A assesses Agents B and C, Agent B evaluates A and C, and Agent C evaluates A and B. Evaluations are performed across five dimensions—simplicity, speed, stability, corner cases, and maintainability—each weighted according to the configuration (20 %, 25 %, 25 %, 20 %, 10 %). Evaluators must provide objective, data‑driven arguments, citing specific code snippets and delivering numeric scores.</p>
+<p>In <strong>Phase 3: Objective Scoring</strong>, each agent scores itself and its peers. The scoring prompt asks agents to allocate points to each dimension, provide justifications, and conclude with a recommendation about which implementation is best. This self‑and‑peer scoring step ensures that agents reflect on their own strengths and weaknesses while still considering competitor performance.</p>
+<p>Finally, <strong>Phase 4: Final Delivery</strong> aggregates the scorecards. A decision logic function calculates score margins; if the winner leads by more than 15 points, a single winner is chosen. If the margin is between 5 and 15 points, a hybrid solution combining the top two implementations is considered. If the scores are extremely close (margin ≤ 5), the simplest implementation is selected to reduce complexity risk. The phase outputs the final solution directory, a comprehensive comparison report, and a transparent decision rationale.</p>
+<h2>Format Specifications: Directory Structure and File Types</h2>
+<p>The b3ehive skill enforces a strict directory structure to keep the workflow organized and reproducible. Under a workspace root, each agent has its own subdirectory (run_a, run_b, run_c) containing:</p>
+<ul>
+<li><code>implementation/</code> – the agent’s runnable code files</li>
+<li><code>Checklist.md</code> – a markdown checklist with <code>[x]</code> boxes indicating completion of required items</li>
+<li><code>SUMMARY.md</code> – a narrative describing the agent’s unique approach and competitive advantages</li>
+<li><code>evaluation/</code> – markdown files evaluating the other two agents (e.g., EVALUATION_B.md, EVALUATION_C.md)</li>
+<li><code>SCORECARD.md</code> – the agent’s self‑scoring and peer‑scoring results</li>
+</ul>
+<p>After evaluation phases, the workspace includes a <code>final/</code> directory for the winning solution, a <code>COMPARISON_REPORT.md</code> file that consolidates all six evaluation reports, and a <code>DECISION_RATIONALE.md</code> file that explains the selection logic. All markdown files follow plain‑text conventions, making them easy to read, version‑control, and audit.</p>
+<h2>Linter &#038; Validation: Ensuring Quality Gates</h2>
+<p>Quality is enforced through automated pre‑commit checks and runtime assertions. A lint script (<code>scripts/lint.sh</code>) verifies that each agent’s directory contains the required files, that the checklist is fully checked, and that the code compiles and passes tests. Language‑specific checks can be added as needed. Runtime assertions, encoded in Python‑like pseudocode, confirm that each phase has completed successfully before proceeding to the next. For example, after Phase 1 the system asserts that all three implementation directories exist and that every Checklist.md is complete. After Phase 2 it checks that six evaluation reports exist and contain numeric scores. These validation steps guarantee that the workflow cannot advance with incomplete or erroneous outputs, thereby preserving the integrity of the competition.</p>
+<h2>Configuration: Tuning the b3ehive Skill</h2>
+<p>The skill is configurable via a YAML‑like block that defines agent count, model choice, thinking depth, and focus areas. In the default configuration, three agents use the <code>openai-proxy/gpt-5.3-codex</code> model with high thinking depth, and their focuses are simplicity, speed, and robustness. Evaluation weights are set to sum to 100 % (simplicity 20, speed 25, stability 25, corner_cases 20, maintainability 10). The delivery strategy can be set to <code>auto</code>, <code>best</code>, or <code>hybrid</code>, with a threshold of 15 points determining a clear winner. Quality gates include linting, testing, and a coverage threshold of 80 %. Adjusting these parameters allows teams to tailor the competition to specific domains, such as favoring speed for performance‑critical code or robustness for safety‑critical systems.</p>
+<h2>Usage: Running a b3ehive Competition</h2>
+<p>To employ the b3ehive skill, a user invokes it with a task description, for example:<br />
+<code>b3ehive "Create a REST API endpoint that validates user input and returns a JSON response."</code><br />
+The skill then orchestrates the four phases automatically, producing a workspace with all intermediate artifacts and the final solution. Users can inspect the <code>COMPARISON_REPORT.md</code> to see how each agent performed on each dimension, read the <code>DECISION_RATIONALE.md</code> to understand the trade‑offs that led to the winner, and examine the winning implementation in the <code>final/</code> directory. Because the process is fully transparent and reproducible, teams can trust that the selected solution is the result of a fair, evidence‑based competition rather than an opaque heuristic.</p>
+<h2>Why b3ehive Matters for AI‑Assisted Development</h2>
+<p>The b3ehive skill addresses several limitations of single‑model code generation. First, it mitigates model bias by encouraging diverse solution strategies. Second, it provides built‑in validation through cross‑evaluation, reducing the likelihood of subtle bugs or performance issues slipping through. Third, the structured reporting creates a knowledge artifact that can be used for training, auditing, or future prompt engineering. Finally, the competitive framework aligns incentives: each agent strives to excel in its assigned focus, which drives higher quality outputs than a cooperative or non‑competitive setting would.</p>
+<p>In practice, organizations have reported that b3ehive‑generated solutions exhibit fewer runtime errors, better adherence to complexity constraints, and clearer documentation compared to outputs from a standard generative model. The skill’s emphasis on objective, data‑driven decision‑making also makes it suitable for regulated industries where explainability is required.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw b3ehive skill represents a sophisticated, PCTF‑compliant system for turning a simple task description into a high‑quality code solution through a multi‑agent competition. By defining clear purposes, tasks, chain flows, formats, and validation mechanisms, b3ehive ensures that the process is transparent, repeatable, and outcome‑focused. Whether you are seeking the simplest possible implementation, the fastest algorithm, or the most robust piece of software, b3ehive provides a principled way to let specialized AI agents compete, evaluate, and ultimately deliver the best possible answer. As AI‑assisted development continues to evolve, frameworks like b3ehive will play a pivotal role in raising the bar for code quality, reliability, and trustworthiness.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/weiyangzen/b3ehive/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/weiyangzen/b3ehive/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

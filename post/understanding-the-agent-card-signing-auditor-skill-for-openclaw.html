@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the Agent Card Signing Auditor Skill for OpenClaw</title>
+    <meta name="description" content="Learn how the Agent Card Signing Auditor skill helps identify security gaps in A2A protocol implementations by examining signature presence, key transparency, a">
+    <meta property="og:title" content="Understanding the Agent Card Signing Auditor Skill for OpenClaw">
+    <meta property="og:description" content="Learn how the Agent Card Signing Auditor skill helps identify security gaps in A2A protocol implementations by examining signature presence, key transparency, a">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-agent-card-signing-auditor-skill-for-openclaw">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8936">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8936">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-agent-card-signing-auditor-skill-for-openclaw">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the Agent Card Signing Auditor Skill for OpenClaw</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <h2>What the Agent Card Signing Auditor Skill Does</h2>
+<p>The Agent Card Signing Auditor is an OpenClaw skill designed to examine Agent Card signing practices in A2A (Agent-to-Agent) protocol implementations. It helps identify critical security gaps that could allow impersonation, identity spoofing, and unverifiable capability claims in agent-to-agent trust handshakes.</p>
+<h3>Why Agent Card Signing Matters</h3>
+<p>The A2A Protocol uses Agent Cards as the primary mechanism for agents to advertise their identity and capabilities. However, the protocol makes signing optional, which creates significant security vulnerabilities. Since 15-18% of published skills are already confirmed malicious, optional signing means any agent can present any identity and capability claim with zero verifiable proof.</p>
+<h3>What This Skill Checks</h3>
+<p>The auditor examines Agent Card signing across five critical dimensions:</p>
+<ol>
+<li><strong>Signature presence</strong> &#8211; Does the Agent Card include a signature field?</li>
+<li><strong>Signing scheme strength</strong> &#8211; Which algorithm was used? Checks against current recommendations like Ed25519 and RSA-2048+</li>
+<li><strong>Key transparency</strong> &#8211; Is the signing key published in a verifiable key transparency log or JWKS endpoint?</li>
+<li><strong>Revocation mechanism</strong> &#8211; Does the signing infrastructure include a revocation path?</li>
+<li><strong>Rotation audit trail</strong> &#8211; Has the signing key changed? When? With what announcement?</li>
+</ol>
+<h3>How to Use the Auditor</h3>
+<p>You can provide one of three inputs:</p>
+<ul>
+<li>An Agent Card JSON object to audit directly</li>
+<li>An agent endpoint URL to fetch and audit the Agent Card</li>
+<li>A set of Agent Card snapshots to compare for rotation events</li>
+</ul>
+<p>The output is a comprehensive signing audit report containing signature assessment, key transparency verification, revocation mechanism check, rotation history, risk rating (STRONG/ADEQUATE/WEAK/UNSIGNED), and specific remediation recommendations.</p>
+<h3>Risk Assessment Levels</h3>
+<p>The skill provides clear risk ratings:</p>
+<ul>
+<li><strong>STRONG</strong> &#8211; Properly signed with strong cryptography and transparent key management</li>
+<li><strong>ADEQUATE</strong> &#8211; Basic signing present but with some weaknesses</li>
+<li><strong>WEAK</strong> &#8211; Signature present but using deprecated or weak schemes</li>
+<li><strong>UNSIGNED</strong> &#8211; No signature field present, highest risk level</li>
+</ul>
+<h3>Related Tools and Integration</h3>
+<p>This skill works alongside other OpenClaw tools like publisher-identity-verifier (marketplace-level identity), trust-decay-monitor (trust freshness over time), and attestation-chain-auditor (full trust chain validation).</p>
+<h3>Limitations</h3>
+<p>The auditor evaluates only publicly observable Agent Card metadata. It cannot assess key storage security, verify the private key holder&#8217;s legitimacy, or detect signing key compromise that hasn&#8217;t been publicly disclosed. It establishes identity verification but not overall trustworthiness.</p>
+<h3>Real-World Impact</h3>
+<p>In a trust-sensitive interaction, an unsigned Agent Card means all capability claims must be treated as unverified assertions. The skill helps organizations implement proper cryptographic verification before establishing agent-to-agent trust relationships, preventing impersonation and capability spoofing attacks.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/andyxinweiminicloud/agent-card-signing-auditor/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/andyxinweiminicloud/agent-card-signing-auditor/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

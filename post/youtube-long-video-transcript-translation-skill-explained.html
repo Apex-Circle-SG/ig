@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YouTube Long Video Transcript &#038; Translation Skill Explained</title>
+    <meta name="description" content="This skill provides a complete workflow for transcribing and translating YouTube videos longer than one hour, using the DownSub API and handling long context th">
+    <meta property="og:title" content="YouTube Long Video Transcript &#038; Translation Skill Explained">
+    <meta property="og:description" content="This skill provides a complete workflow for transcribing and translating YouTube videos longer than one hour, using the DownSub API and handling long context th">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/youtube-long-video-transcript-translation-skill-explained">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8732">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8732">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/youtube-long-video-transcript-translation-skill-explained">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>YouTube Long Video Transcript &#038; Translation Skill Explained</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-12</p>
+    <h2>What This Skill Does</h2>
+<p>This skill provides a complete workflow for transcribing and translating YouTube videos longer than one hour. It uses the DownSub API to extract subtitles from YouTube videos and handles the entire process from extraction to final translation.</p>
+<h3>Core Functionality</h3>
+<p>The skill performs four main tasks:</p>
+<ol>
+<li>Extracts subtitles from YouTube videos using the DownSub API</li>
+<li>Translates English transcripts to Chinese verbatim</li>
+<li>Handles long videos that exceed session limits through chunked processing</li>
+<li>Processes DownSub API responses and generates formatted documents</li>
+</ol>
+<h3>Technical Requirements</h3>
+<p>The skill requires several key components to function:</p>
+<ul>
+<li>DownSub API key (Bearer token starting with AIza&#8230;)</li>
+<li>zhiyan tool (optional, for online document generation)</li>
+<li>Sub-agent spawn capability for processing long videos</li>
+</ul>
+<h3>API Configuration</h3>
+<p>The skill connects to the DownSub API at https://api.downsub.com/download using POST method with these headers:</p>
+<ul>
+<li>Authorization: Bearer AIzaM9ifctIOxusNAldvGeajHqq4rH6e7MJNfN</li>
+<li>Content-Type: application/json</li>
+</ul>
+<p>The body contains the YouTube video URL in this format:</p>
+<pre><code>{ "url": "https://www.youtube.com/watch?v=VIDEO_ID" }
+</code></pre>
+<h3>Critical Language Check</h3>
+<p>The skill performs a crucial language validation step:</p>
+<ul>
+<li>Always checks the lang field in the API response</li>
+<li>Only processes en or en-auto language codes</li>
+<li>Stops processing if it detects other languages like lt (Lithuanian)</li>
+</ul>
+<h3>Three-Stage Workflow</h3>
+<h4>Stage 1: Preparation (Main Session)</h4>
+<p>The main session verifies API access, checks output capabilities, and determines if sub-agent processing is needed based on video length.</p>
+<h4>Stage 2: Execution (Sub-Agent)</h4>
+<p>For long videos, a sub-agent processes the transcript in 500-line chunks, translates to Chinese, and creates separate files. It also generates an executive summary and key metrics table.</p>
+<h4>Stage 3: Delivery (Main Session)</h4>
+<p>The main session receives the final file path, uploads it using zhiyan if available, and sends the document link or file to the user.</p>
+<h3>Common Issues and Solutions</h3>
+<p>The skill includes troubleshooting for common problems:</p>
+<ul>
+<li>Missing API key (401 Unauthorized errors)</li>
+<li>zhiyan tool not found</li>
+<li>Wrong subtitle track (nonsense translations)</li>
+<li>Timeouts for very long videos</li>
+</ul>
+<h3>Output Format</h3>
+<p>The final output includes:</p>
+<ul>
+<li>Executive summary (3-5 bullets in Chinese)</li>
+<li>Key metrics table</li>
+<li>Full translated transcript</li>
+</ul>
+<p>This skill is specifically designed for users who need to process long YouTube videos that exceed typical session limits, providing a robust solution for video transcription and translation workflows.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/qingliu1617-art/ytb-transcript-long/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/qingliu1617-art/ytb-transcript-long/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

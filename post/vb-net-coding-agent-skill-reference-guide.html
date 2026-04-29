@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VB.NET Coding Agent Skill Reference Guide</title>
+    <meta name="description" content="Comprehensive reference for VB.NET coding agents, covering compiler directives, naming conventions, file organization, and best practices for modern .NET develo">
+    <meta property="og:title" content="VB.NET Coding Agent Skill Reference Guide">
+    <meta property="og:description" content="Comprehensive reference for VB.NET coding agents, covering compiler directives, naming conventions, file organization, and best practices for modern .NET develo">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/vb-net-coding-agent-skill-reference-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8512">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8512">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/vb-net-coding-agent-skill-reference-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>VB.NET Coding Agent Skill Reference Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-10</p>
+    <h2>VB.NET CODING AGENT SKILL REFERENCE</h2>
+<p><strong>Target</strong>: Claude-Code, Codex, AI coding agents<br /><strong>Version</strong>: 2026 Modern .NET<br /><strong>Max Lines</strong>: 500</p>
+<h3>DETAILED REFERENCES</h3>
+<p>For detailed patterns, examples, and best practices on specific topics, see:</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>File</th>
+<th>When to consult</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type System</td>
+<td>docs/types-and-declarations.md</td>
+<td>Variable declarations, nullable types, field declarations</td>
+</tr>
+<tr>
+<td>Control Flow</td>
+<td>docs/control-flow.md</td>
+<td>If/ElseIf, Select Case, loops, Exit/Continue</td>
+</tr>
+<tr>
+<td>Async/Await</td>
+<td>docs/async-patterns.md</td>
+<td>Async method structure, ConfigureAwait, cancellation, Task.WhenAll</td>
+</tr>
+<tr>
+<td>Error Handling</td>
+<td>docs/error-handling.md</td>
+<td>Exceptions, Try/Catch/Finally, IDisposable, Using statement</td>
+</tr>
+<tr>
+<td>LINQ</td>
+<td>docs/linq-patterns.md</td>
+<td>Query/method syntax, common operations, deferred execution</td>
+</tr>
+<tr>
+<td>Strings &amp; Collections</td>
+<td>docs/strings-and-collections.md</td>
+<td>String comparison/building, List, Dictionary, HashSet, arrays</td>
+</tr>
+<tr>
+<td>Class Design &amp; Patterns</td>
+<td>docs/class-design-and-patterns.md</td>
+<td>Properties, constructors, interfaces, Factory, Repository, Null Object</td>
+</tr>
+</tbody>
+</table>
+<h3>CRITICAL COMPILER DIRECTIVES</h3>
+<h4>Mandatory File Headers</h4>
+<p>ALWAYS include at top of every file:</p>
+<pre><code>Option Explicit On
+Option Strict On
+Option Infer On
+</code></pre>
+<p><strong>Rationale</strong>: Option Explicit On prevents undeclared variable usage (catches typos), Option Strict On enforces type safety (prevents implicit conversions causing runtime errors), Option Infer On enables local type inference while maintaining type safety.</p>
+<p><strong>Never use</strong>: Option Explicit Off or Option Strict Off &#8211; these create runtime errors, performance degradation, and late binding overhead.</p>
+<p><strong>Project-level setting preferred</strong>: Set in .vbproj file rather than per-file when possible.</p>
+<h3>NAMING CONVENTIONS</h3>
+<h4>Core Rules</h4>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Convention</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Namespace</td>
+<td>PascalCase, hierarchical</td>
+<td>CompanyName.ProductName.ComponentName</td>
+</tr>
+<tr>
+<td>Class/Interface</td>
+<td>PascalCase, noun/noun phrase</td>
+<td>CustomerRepository, IPaymentProcessor</td>
+</tr>
+<tr>
+<td>Interface prefix</td>
+<td>Starts with I</td>
+<td>IDisposable, IEnumerable(Of T)</td>
+</tr>
+<tr>
+<td>Method</td>
+<td>PascalCase, verb/verb phrase</td>
+<td>CalculateTotal(), ProcessPayment()</td>
+</tr>
+<tr>
+<td>Property</td>
+<td>PascalCase, noun/adjective</td>
+<td>CustomerName, IsActive</td>
+</tr>
+<tr>
+<td>Field (private)</td>
+<td>_camelCase with underscore</td>
+<td>_connectionString, _maxRetries</td>
+</tr>
+<tr>
+<td>Field (public/shared)</td>
+<td>PascalCase</td>
+<td>MaxValue, DefaultTimeout</td>
+</tr>
+<tr>
+<td>Parameter/Local</td>
+<td>camelCase</td>
+<td>userId, itemCount</td>
+</tr>
+<tr>
+<td>Constant</td>
+<td>PascalCase or UPPER_SNAKE</td>
+<td>MaxConnections, DEFAULT_TIMEOUT</td>
+</tr>
+<tr>
+<td>Enum Type</td>
+<td>PascalCase, singular</td>
+<td>OrderStatus, FileMode</td>
+</tr>
+<tr>
+<td>Enum Members</td>
+<td>PascalCase</td>
+<td>OrderStatus.Pending, FileMode.Read</td>
+</tr>
+<tr>
+<td>Event</td>
+<td>PascalCase, verb phrase</td>
+<td>DataReceived, ConnectionClosed</td>
+</tr>
+<tr>
+<td>Delegate</td>
+<td>PascalCase, ends with Handler/Callback</td>
+<td>EventHandler, DataReceivedCallback</td>
+</tr>
+<tr>
+<td>Generic Type Param</td>
+<td>T + PascalCase</td>
+<td>TKey, TValue, TEntity</td>
+</tr>
+</tbody>
+</table>
+<h4>Specific Guidelines</h4>
+<p>Boolean names: Use Is, Has, Can, Should prefixes:</p>
+<pre><code>Dim isValid As Boolean
+Dim hasChildren As Boolean
+Dim canProcess As Boolean
+</code></pre>
+<p>Collection/Array naming: Plural nouns:</p>
+<pre><code>Dim customers As List(Of Customer)
+Dim orderIds() As Integer
+</code></pre>
+<p>Async method suffix: Always use Async:</p>
+<pre><code>Public Async Function LoadDataAsync() As Task(Of DataSet)
+Public Async Function SaveCustomerAsync(customer As Customer) As Task
+</code></pre>
+<p>Avoid: Hungarian notation (strName, intCount), My prefix (conflicts with VB.NET My namespace), abbreviations unless universally known (OK: Id, Xml, Http; Avoid: Mgr, Proc, Calc).</p>
+<h3>CODE LAYOUT AND STYLE</h3>
+<h4>Indentation and Spacing</h4>
+<ul>
+<li>4 spaces per indentation level (never tabs)</li>
+<li>One statement per line</li>
+<li>One blank line between methods/properties</li>
+<li>Line continuation: Use implicit continuation (no underscore) where possible</li>
+</ul>
+<pre><code>' ✓✓ Implicit line continuation (no underscore needed)
+Dim result = customers
+   .Where(Function(c) c.IsActive)
+   .OrderBy(Function(c) c.Name)
+   .ToList()
+
+Dim customer = New Customer With {
+   .Name = "John",
+   .Email = "john@example.com",
+   .IsActive = True
+}
+
+' Method parameters
+Public Function ProcessOrder(orderId As Integer, customerId As Integer, processDate As Date) As OrderResult
+</code></pre>
+<h4>Comments</h4>
+<pre><code>' Single-line comment for brief explanations
+''' &lt;summary&gt;
+''' Processes customer orders asynchronously.
+''' &lt;/summary&gt;
+''' &lt;param name="customerId"&gt;The unique customer identifier.&lt;/param&gt;
+''' &lt;param name="cancellationToken"&gt;Token to cancel the operation.&lt;/param&gt;
+''' &lt;returns&gt;A task representing the async operation with the order result.&lt;/returns&gt;
+''' &lt;exception cref="CustomerNotFoundException"&gt;Thrown when customer not found.&lt;/exception&gt;
+Public Async Function ProcessOrdersAsync(customerId As Integer, cancellationToken As CancellationToken) As Task(Of OrderResult)
+   ' Implementation
+End Function
+</code></pre>
+<p>Avoid: Commenting obvious code, redundant comments, commented-out code (use version control).</p>
+<h3>FILE ORGANIZATION</h3>
+<h4>Standard file structure</h4>
+<pre><code>Option Explicit On
+Option Strict On
+Option Infer On
+
+Imports System
+Imports System.Collections.Generic
+Imports System.Linq
+Imports System.Threading.Tasks
+
+Namespace CompanyName.ProjectName.ComponentName
+
+''' &lt;summary&gt;
+''' Brief class description.
+''' &lt;/summary&gt;
+Public Class ClassName
+   ' Constants
+   Private Const DefaultTimeout As Integer = 30
+   
+   ' Shared (static) fields
+   Public Shared ReadOnly MaxConnections As Integer = 100
+   
+   ' Private fields
+   Private _connectionString As String
+   Private ReadOnly _logger As ILogger
+   
+   ' Constructors
+   Public Sub New(logger As ILogger)
+      _logger = logger
+   End Sub
+   
+   ' Properties
+   Public Property Name As String
+   
+   ' Methods
+   Public Function DoSomething() As Integer
+      ' Implementation
+   End Function
+   
+   ' IDisposable implementation if needed
+   Public Sub Dispose() Implements IDisposable.Dispose
+      ' Cleanup
+   End Sub
+End Class
+
+End Namespace
+</code></pre>
+<h3>PERFORMANCE CONSIDERATIONS</h3>
+<ul>
+<li>Avoid boxing/unboxing: Use generics instead of Object collections.</li>
+<li>String comparisons: Use StringComparison.Ordinal for best performance when culture doesn&#8217;t matter.</li>
+<li>LINQ materialization: Call .ToList() only when needed; leverage deferred execution.</li>
+<li>Async I/O: Always use async for file, database, network operations.</li>
+<li>ConfigureAwait(False): Use in library code to avoid sync context overhead.</li>
+<li>StringBuilder: Use for concatenating >3-4 strings in loops.</li>
+<li>Collection capacity: Set initial capacity for List(Of T) and Dictionary(Of K, V) when size known.</li>
+</ul>
+<pre><code>Dim customers As New List(Of Customer)(expectedCount)
+' Avoid reallocations
+</code></pre>
+<h3>COMMON ANTI-PATTERNS TO AVOID</h3>
+<ul>
+<li>❌ Option Strict Off &#8211; causes runtime errors, performance issues</li>
+<li>❌ Async void methods &#8211; unobservable exceptions (except event handlers)</li>
+<li>❌ Blocking async code &#8211; .Result, .Wait() cause deadlocks</li>
+<li>❌ Catching Exception without logging &#8211; swallows errors</li>
+<li>❌ Not disposing IDisposable &#8211; memory/resource leaks</li>
+<li>❌ Using == for strings &#8211; culture-dependent, use .Equals() with StringComparison</li>
+<li>❌ String concatenation in loops &#8211; O(n²) performance</li>
+<li>❌ Not using Using statement &#8211; resources not released on exception</li>
+<li>❌ Hungarian notation &#8211; outdated, conflicts with modern style</li>
+<li>❌ Magic numbers &#8211; use named constants</li>
+<li>❌ Deep nesting &#8211; extract methods, early returns</li>
+</ul>
+<h3>AGENT-SPECIFIC GUIDANCE</h3>
+<p>When generating VB.NET code:</p>
+<ul>
+<li>Always include Option Explicit On and Option Strict On at file top</li>
+<li>Use explicit types for all declarations</li>
+<li>Prefer method syntax LINQ over query syntax (easier for agent parsing)</li>
+<li>Always use Using for IDisposable objects</li>
+<li>Use Async/Await for any I/O operations</li>
+<li>Include XML documentation for public APIs</li>
+<li>Use meaningful names &#8211; prioritize readability over brevity</li>
+<li>Handle exceptions explicitly</li>
+</ul>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/alexwoo-awso/vbnet-coder-en/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/alexwoo-awso/vbnet-coder-en/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

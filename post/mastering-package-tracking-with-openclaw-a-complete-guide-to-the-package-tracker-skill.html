@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering Package Tracking with OpenClaw: A Complete Guide to the Package-Tracker Skill</title>
+    <meta name="description" content="Learn how to automate your package tracking using the OpenClaw Package-Tracker skill. Follow our guide to setup, API integration, and status monitoring.">
+    <meta property="og:title" content="Mastering Package Tracking with OpenClaw: A Complete Guide to the Package-Tracker Skill">
+    <meta property="og:description" content="Learn how to automate your package tracking using the OpenClaw Package-Tracker skill. Follow our guide to setup, API integration, and status monitoring.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-package-tracking-with-openclaw-a-complete-guide-to-the-package-tracker-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8972">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8972">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-package-tracking-with-openclaw-a-complete-guide-to-the-package-tracker-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering Package Tracking with OpenClaw: A Complete Guide to the Package-Tracker Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <h1>Automate Your Shipments: The OpenClaw Package-Tracker Skill Explained</h1>
+<p>In the modern era of e-commerce, keeping track of multiple deliveries can quickly become a full-time job. From unexpected delays to forgotten orders, staying informed requires constant manual checking across various courier websites. Fortunately, if you are an OpenClaw enthusiast, there is a powerful solution built right into the ecosystem: the <strong>package-tracker</strong> skill. This guide will walk you through what this skill does, how to set it up, and how it can revolutionize your digital life.</p>
+<h2>What is the Package-Tracker Skill?</h2>
+<p>The package-tracker skill is an integration for OpenClaw that leverages the <strong>17track universal API</strong> to provide real-time updates on your shipments. Whether you are ordering through FedEx, UPS, DHL, USPS, or any of the 2,000+ carriers supported by 17track, this tool acts as a centralized dashboard for all your deliveries. Instead of bookmarking dozens of carrier sites, the skill allows you to add tracking numbers, monitor status changes, and receive automated notifications directly through your OpenClaw-linked messaging platforms like Telegram, Discord, or WhatsApp.</p>
+<h2>Key Features</h2>
+<p>This skill isn&#8217;t just a basic tracker; it is a sophisticated, data-driven utility designed for power users:</p>
+<ul>
+<li><strong>Universal Carrier Support:</strong> With automatic carrier detection, the system recognizes the format of your tracking number and associates it with the correct courier.</li>
+<li><strong>Comprehensive Status Mapping:</strong> It translates cryptic courier status codes into human-readable emojis (e.g., 🚚 for In Transit, ✅ for Delivered).</li>
+<li><strong>Local Data Storage:</strong> Privacy is paramount. The skill uses a local SQLite database (<code>tracker.db</code>) to store your tracking events, keeping your personal data away from prying eyes.</li>
+<li><strong>Automated Notifications:</strong> By integrating with OpenClaw&#8217;s heartbeat or system cron jobs, you can receive push notifications the moment your package status changes.</li>
+<li><strong>Deep Linking:</strong> Every package is assigned a specific tracking URL, allowing you to jump directly to the official carrier’s site for granular details if needed.</li>
+</ul>
+<h2>Getting Started: Setup and Configuration</h2>
+<p>Setting up the package-tracker skill is straightforward, provided you follow the configuration steps carefully. First, ensure you have cloned the skill repository into your OpenClaw workspace. Navigate to the directory and run the provided <code>setup.sh</code> script to initialize the virtual environment.</p>
+<p>The most critical step involves obtaining an API key. Visit the official 17track admin portal to secure a free key. The free tier is generous, offering 100 registrations per month and unlimited status checks, which is more than sufficient for most households. Once you have your key, populate the <code>scripts/.env</code> file with the <code>SEVENTEEN_TRACK_API_KEY</code> variable. Without this, the system will not be able to communicate with the tracking infrastructure.</p>
+<h2>Daily Usage Commands</h2>
+<p>The package-tracker is controlled via a simple command-line interface (CLI). Here is how you can manage your shipments effectively:</p>
+<h3>Adding a Package</h3>
+<p>To start tracking, use the <code>add</code> command followed by your tracking number. You can optionally add a description to help you remember what is inside the box. If the system fails to auto-detect your carrier, you can manually override it with the <code>-c</code> flag.</p>
+<h3>Listing and Details</h3>
+<p>Keep your dashboard clean by using the <code>list</code> command. You can view only active shipments or pass the <code>--all</code> argument to review history, including packages that have already been delivered. Need to see the full movement log? The <code>details</code> command provides a comprehensive breakdown of every checkpoint the package has passed through.</p>
+<h3>Automatic Updates with Cron</h3>
+<p>Manual checking defeats the purpose of automation. The best way to use this skill is to schedule it via <code>cron</code>. By adding a simple entry to your crontab—for instance, checking for updates every three hours—you ensure that your OpenClaw instance is always up-to-date. When a status change (like a package moving from &#8216;In Transit&#8217; to &#8216;Out for Delivery&#8217;) is detected, the skill outputs a message to stdout, which OpenClaw then relays to your preferred messaging app.</p>
+<h2>Troubleshooting Common Issues</h2>
+<p>Even the best systems encounter hiccups. If you see an &#8220;API key not set&#8221; error, re-check your <code>.env</code> file. If you hit your limit of 100 registrations, you can check your usage with the <code>python scripts/cli.py quota</code> command. If a package isn&#8217;t being tracked correctly, verify the carrier. If all else fails, the <code>references/carriers.md</code> file included in the repository contains a wealth of information about how to format tracking inputs for specific providers.</p>
+<h2>Why You Should Use It</h2>
+<p>In a world where we rely heavily on global shipping, the package-tracker skill provides peace of mind. It transforms the chaotic experience of &#8220;where is my package?&#8221; into a structured, automated, and private workflow. Because it is built on the OpenClaw framework, it fits perfectly into an existing smart home or personal assistant setup. By centralizing your logistics, you gain control over your incoming shipments and ensure that you never miss a delivery again. Whether you are a casual shopper or a frequent online buyer, this skill is a must-have addition to your OpenClaw toolkit.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/joaoleitegmr/package-tracker/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/joaoleitegmr/package-tracker/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

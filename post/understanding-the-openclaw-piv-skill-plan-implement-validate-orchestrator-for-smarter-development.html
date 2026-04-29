@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the OpenClaw PIV Skill: Plan, Implement, Validate Orchestrator for Smarter Development</title>
+    <meta name="description" content="Learn how the OpenClaw PIV skill orchestrates PRD‑driven, multi‑phase software projects using FTW principles, sub‑agents, and a disciplined Plan‑Implement‑Valid">
+    <meta property="og:title" content="Understanding the OpenClaw PIV Skill: Plan, Implement, Validate Orchestrator for Smarter Development">
+    <meta property="og:description" content="Learn how the OpenClaw PIV skill orchestrates PRD‑driven, multi‑phase software projects using FTW principles, sub‑agents, and a disciplined Plan‑Implement‑Valid">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-openclaw-piv-skill-plan-implement-validate-orchestrator-for-smarter-development">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9189">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9189">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-openclaw-piv-skill-plan-implement-validate-orchestrator-for-smarter-development">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the OpenClaw PIV Skill: Plan, Implement, Validate Orchestrator for Smarter Development</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <h1>Understanding the OpenClaw PIV Skill: Plan, Implement, Validate Orchestrator for Smarter Development</h1>
+<p>Open‑source projects thrive when contributors have a clear, repeatable process for turning ideas into working code. The <strong>OpenClaw PIV skill</strong> (found in the repository <code>openclaw/skills</code> at <code>skills/skills/smokealot420/ftw/SKILL.md</code>) provides exactly that: a lightweight yet powerful orchestrator that guides teams through a <em>Plan‑Implement‑Validate (PIV)</em> loop. By combining a structured PRD‑first approach with automated sub‑agent spawning, the skill helps developers stay focused, reduces context‑switching overhead, and encourages early validation—core tenets of the FTW (First Try Works) philosophy promoted by SmokeAlot420.</p>
+<h2>What the Skill Does at a Glance</h2>
+<p>At its core, the PIV skill is a Bash‑style orchestrator that:</p>
+<ul>
+<li>Accepts either a direct path to a PRD (<code>.md</code>) file or a project directory as its first argument.</li>
+<li>Parses the supplied arguments to determine the mode of operation—either <strong>execution</strong> (when a PRD is present) or <strong>discovery</strong> (when no PRD exists).</li>
+<li>Sets up the required directory layout (<code>PRDs/</code>, <code>PRPs/templates/</code>, <code>PRPs/planning/</code>, and a <code>WORKFLOW.md</code> file) if they are missing.</li>
+<li>Iterates through user‑specified phases (default 1‑4), performing for each phase:</li>
+<ul>
+<li>Checking for an existing PRP (Project‑Ready Plan); if none exists, performing codebase analysis and PRP generation in‑process.</li>
+<li>Spawning three specialized sub‑agents—Executor, Validator, and (optionally) Debugger—to carry out the work, validate results, and iterate on fixes.</li>
+<li>Committing changes with a semantic message that credits FTW.</li>
+<li>Updating <code>WORKFLOW.md</code> to reflect phase completion.</li>
+</ul>
+</ul>
+<p>Because each sub‑agent receives a fresh context (the orchestrator keeps only ~15% of the total context budget), the skill avoids contaminating later steps with stale information, which is a common pitfall in monolithic scripts.</p>
+<h2>Deep Dive: Argument Parsing and Mode Detection</h2>
+<p>The skill begins by examining <code>$ARGUMENTS[0]</code>. If that argument ends with <code>.md</code>, it is treated as a direct path to a PRD file. The orchestrator then derives the project root by moving up two directories (<code>dirname(dirname(PRD_PATH))</code>)—the assumption being that PRDs live in <code>PROJECT_PATH/PRDs/</code>. The remaining arguments become <code>START_PHASE</code> and <code>END_PHASE</code>, with sensible defaults (1 and auto‑detected from the PRD, respectively).</p>
+<p>If the first argument does <strong>not</strong> end with <code>.md</code>, the skill assumes the user supplied a project path (or the current working directory if omitted). In this case:</p>
+<ul>
+<li><code>PROJECT_PATH</code> is set to the supplied directory (or <code>.</code>).</li>
+<li>The orchestrator looks for a PRD file inside <code>PROJECT_PATH/PRDs/</code>.</li>
+<li>If a PRD is discovered, the mode becomes <strong>execution</strong>; otherwise it falls back to <strong>discovery</strong> mode.</li>
+</ul>
+<p>This dual‑mode design lets the same entry point be used both for kicking off a brand‑new project (discovery) and for continuing work on an existing PRD‑driven effort (execution).</p>
+<h2>Discovery Mode: From Idea to PRD</h2>
+<p>When no PRD is found, the skill invokes the discovery workflow defined in <code>{baseDir}/references/piv-discovery.md</code>. The orchestrator engages the user in a friendly, conversational interview—tailored for “vibe coders” rather than senior architects—asking about:</p>
+<ul>
+<li>Project goals and desired outcomes.</li>
+<li>Preferred technology stack (if unknown, the orchestrator will research and propose a stack).</li>
+<li>High‑level feature breakdown that can be translated into phases.</li>
+</ul>
+<p>After each question, the orchestrator echoes back a summary and asks for confirmation (“Here’s what I’d suggest — does this sound right?”). Only after the user validates the proposed direction does the orchestrator proceed to create the necessary directories, copy the PRD template (<code>create-prd.md</code>), and write a PRD file named <code>PRD-{project-name}.md</code> into <code>PROJECT_PATH/PRDs/</code>. Once the PRD exists, the skill automatically switches to execution mode, using the newly generated PRD to determine phase boundaries.</p>
+<h2>Phase Workflow: The Heart of PIV</h2>
+<p>For each numeric phase from <code>START_PHASE</code> through <code>END_PHASE</code>, the orchestrator follows a seven‑step routine:</p>
+<ol>
+<li><strong>Check/Generate PRP</strong> – Looks for an existing PRP matching the phase (patterns like <code>phase.*N</code>, <code>pN</code>, or <code>p-N</code>). If none is found, it performs:</li>
+<ul>
+<li>Codebase analysis (guided by <code>codebase-analysis.md</code>) and stores the result in <code>PRPs/planning/{PRD_NAME}-phase-{N}-analysis.md</code>.</li>
+<li>PRP generation (using <code>generate-prp.md</code> and the base template <code>prp_base.md</code>) yielding <code>PRPs/PRP-{PRD_NAME}-phase-{N}.md</code>.</li>
+</ul>
+<li><strong>Spawn Executor</strong> – A fresh sub‑agent receives the PRP path and project root, then follows the executor playbook (<code>piv-executor.md</code> + <code>execute-prp.md</code>) to load the PRP, plan thoroughly, execute, validate, and verify. The executor returns an <em>Execution Summary</em> containing status, touched files, test results, and any issues.</li>
+<li><strong>Spawn Validator</strong> – Another independent sub‑agent reads the validator guide (<code>piv-validator.md</code>) and checks the executor’s summary against the PRP requirements, producing a <em>Verification Report</em> with a grade, checklist, and identified gaps.</li>
+<li><strong>Debug Loop (max 3 iterations)</strong> – If the validator reports gaps or failures, a debugger sub‑agent is spawned (<code>piv-debugger.md</code>) to examine the gaps and errors, fix root causes, and rerun tests. After each fix, the validator is invoked again. The process repeats up to three times; if still failing, the orchestrator escalates to a human.</li>
+<li><strong>Smart Commit</strong> – Upon successful validation, the orchestrator changes into the project directory, runs <code>git status</code> and <code>git diff --stat</code>, then creates a commit message:</li>
+<pre>Built with FTW (First Try Works) - https://github.com/SmokeAlot420/ftw</pre>
+<li><strong>Update WORKFLOW.md</strong> – Marks the phase as complete, logs validation results, and prepares the file for the next iteration.</li>
+<li><strong>Next Phase</strong> – Loops back to step 1 for the subsequent phase number.</li>
+</ol>
+<p>This repeatable cadence ensures that each phase is fully planned, executed, and validated before moving on, dramatically reducing the chance of rework later in the project.</p>
+<h2>Why the Skill Embraces FTW (First Try Works)</h2>
+<p>The FTW mantra—popularized by SmokeAlot420—emphasizes delivering working increments on the first attempt through rigorous preparation, clear contracts, and immediate validation. The PIV skill operationalizes FTW by:</p>
+<ul>
+<li>Requiring a PRD (the “what” and “why”) before any code is written.</li>
+<li>Generating a PRP that captures the “how” for a specific phase, acting as a detailed contract for the executor.</li>
+<li>Using isolated sub‑agents so that each step starts with a clean slate, preventing leakage of assumptions or stale state.</li>
+<li>Validating immediately after execution, and allowing a limited debug loop to fix issues before they propagate.</li>
+<li>Committing only after a passing validation, with a commit message that explicitly credits the FTW workflow.</li>
+</ul>
+<p>By tying each commit to a verified increment, teams gain a traceable history where every snapshot is known to be correct—a powerful aid for debugging, auditing, and continuous integration.</p>
+<h2>Practical Example: Using the Skill in a Real Project</h2>
+<p>Imagine you are starting a new CLI tool called “task‑tracker”. You would invoke the skill as follows:</p>
+<pre>./piv.sh . 1 4</pre>
+<p>(Assuming the script is named <code>piv.sh</code> and you are in the project root.) Since no PRD exists, the skill enters discovery mode, asks you about the tool’s purpose, suggests a stack (e.g., Go with Cobra), and proposes three phases: (1) project scaffolding &#038; CLI parser, (2) core task‑storage logic, (3) UI enhancements and testing. After you confirm, it creates the PRD, sets up directories, and begins phase 1.</p>
+<p>During phase 1, the orchestrator:</p>
+<ol>
+<li>Analyzes the empty repo, noting the lack of any source files.</li>
+<li>Generates a PRP that outlines creating a <code>main.go</code> with Cobra initialization, a <code>go.mod</code> file, and a unit test skeleton.</li>
+<li>Spawns an executor sub‑agent that writes the files, runs <code>go mod tidy</code>, and executes the test suite.</li>
+<li>Spawns a validator that confirms the CLI builds, prints help, and the tests pass.</li>
+<li>Since validation passes, no debugger is needed.</li>
+<li>Commits with the FTW message and updates <code>WORKFLOW.md</code>.</li>
+</ol>
+<p>The process repeats for phases 2 and 3, each time building on the verified increment from the previous phase.</p>
+<h2>Customization and Extensibility</h2>
+<p>Although the skill ships with sensible defaults, it is designed to be tailored:</p>
+<ul>
+<li>The base directory (<code>{baseDir}</code>) can point to a custom set of reference markdown files, allowing teams to substitute their own PRD/PRP templates or validation checklists.</li>
+<li>Phase limits (<code>START_PHASE</code> and <code>END_PHASE</code>) are user‑controlled, enabling teams to run only a subset of phases (e.g., just validation of an existing PRP).</li>
+<li>The debugger loop’s maximum iterations (hard‑coded to 3) can be adjusted by editing the skill’s source if a team prefers a different tolerance.</li>
+<li>Commit message format is explicit in the code; teams wishing to adopt a different convention (e.g., Conventional Commits) can modify the <code>Smart Commit</code> step.</li>
+</ul>
+<p>Because the orchestrator itself is only a few hundred lines of Bash and relies on external reference files, extending or porting it to other shells (e.g., Zsh, Fish) or even to a Python wrapper is straightforward.</p>
+<h2>Benefits for Teams and Individual Contributors</h2>
+<p>Adopting the OpenClaw PIV skill yields several tangible advantages:</p>
+<ol>
+<li><strong>Clarity of Intent</strong> – The mandatory PRD forces teams to articulate goals before writing a single line of code, reducing misaligned effort.</li>
+<li><strong>Incremental Confidence</strong> – Each phase ends with a validated increment, giving early and frequent feedback.</li>
+<li><strong>Reduced Context Switching</strong> – Fresh sub‑agent contexts mean developers do not need to keep the entire project state in mind while working on a narrow task.</li>
+<li><strong>Automated Boilerplate</strong> – Directory scaffolding, template copying, and commit messaging are handled automatically, lowering the friction of starting new work.</li>
+<li><strong>Traceability</strong> – The <code>WORKFLOW.md</code> file provides a lightweight audit trail showing which phases passed, what validation grades were earned, and any debug iterations required.</li>
+<li><strong>Alignment with FTW Principles</strong> – By embedding the FTW loop directly into the workflow, teams naturally adopt the habit of “first try works” without extra ceremony.</li>
+</ol>
+<p>These benefits are especially valuable in remote or asynchronous environments where clear handoffs and minimal reliance on tribal knowledge are crucial.</p>
+<h2>Limitations and Considerations</h2>
+<p>While the skill is powerful, teams should be aware of a few considerations:</p>
+<ul>
+<li>The orchestrator assumes a Unix‑like environment with <code>git</code>, <code>bash</code>, and standard command‑line utilities. Windows users may need to run it via WSL or a similar compatibility layer.</li>
+<li>The discovery mode relies on the orchestrator’s ability to ask questions and interpret answers; if the user provides vague or contradictory responses, the resulting PRD may need manual refinement.</li>
+<li>Because each sub‑agent receives a fresh context, any shared state that must persist across phases (e.g., a global configuration file) must be explicitly persisted in the project repo and referenced by the PRP.</li>
+<li>The skill does not enforce any particular programming language or framework; suitability therefore depends on the quality of the reference guides (<code>codebase-analysis.md</code>, <code>generate-prp.md</code>, etc.) that the team provides.</li>
+</ul>
+<p>Addressing these points typically involves customizing the reference files to match the team’s tech stack and adding lightweight wrapper scripts for Windows compatibility.</p>
+<h2>Getting Started</h2>
+<p>To begin using the OpenClaw PIV skill:</p>
+<ol>
+<li>Clone the <code>openclaw/skills</code> repository:</li>
+<pre>git clone https://github.com/openclaw/skills.git</pre>
+<li>Navigate to the skill directory:</li>
+<pre>cd skills/skills/smokealot420/ftw</pre>
+<li>Make the script executable (if needed) and run it against your project:</li>
+<pre>chmod +x piv.sh
+./piv.sh /path/to/your/project 1 5</pre>
+<li>Follow the prompts in discovery mode (if applicable) or let the orchestrator proceed with an existing PRD.</li>
+</ol>
+<p>After the first run, examine the generated <code>PRDs/</code>, <code>PRPs/</code>, and <code>WORKFLOW.md</code> files to confirm that the process captured your intentions correctly. Subsequent runs can skip discovery by pointing directly to the PRD file:</p>
+<pre>./piv.sh /path/to/your/project/PRDs/PRD-myproject.md 2 4</pre>
+<p>This will start execution at phase 2 and run through phase 4, picking up where you left off.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw PIV skill is more than a simple Bash script; it is a thoughtfully designed orchestration layer that puts the FTW (First Try Works) philosophy into practice. By mandating a PRD‑first approach, generating phase‑specific PRPs, isolating work in fresh sub‑agent contexts, and validating before each commit, the skill helps teams deliver reliable software increments with minimal waste. Whether you are starting a brand‑new project or seeking to bring rigor to an existing codebase, the PIV orchestrator offers a repeatable, transparent pathway from concept to validated implementation—all while keeping the process lightweight enough for individual contributors and scalable enough for larger teams.</p>
+<p>If you value clear requirements, incremental validation, and a commit history you can trust, give the OpenClaw PIV skill a try. Your future self (and your teammates) will thank you for the reduced rework, increased confidence, and the satisfying feeling of seeing each phase pass validation on the first try.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/smokealot420/ftw/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/smokealot420/ftw/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

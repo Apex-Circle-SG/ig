@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to Use the OpenClaw Dataset Finder Skill to Search, Download, and Manage Datasets</title>
+    <meta name="description" content="Learn how the OpenClaw dataset‑finder skill lets you search Kaggle, Hugging Face, UCI ML, Data.gov and more from the command line.">
+    <meta property="og:title" content="How to Use the OpenClaw Dataset Finder Skill to Search, Download, and Manage Datasets">
+    <meta property="og:description" content="Learn how the OpenClaw dataset‑finder skill lets you search Kaggle, Hugging Face, UCI ML, Data.gov and more from the command line.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/how-to-use-the-openclaw-dataset-finder-skill-to-search-download-and-manage-datasets">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9270">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9270">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/how-to-use-the-openclaw-dataset-finder-skill-to-search-download-and-manage-datasets">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>How to Use the OpenClaw Dataset Finder Skill to Search, Download, and Manage Datasets</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-18</p>
+    <h1>How to Use the OpenClaw Dataset Finder Skill</h1>
+<p>The OpenClaw ecosystem provides a collection of reusable skills that extend the capabilities of the OpenClawCLI. One of the most useful skills for data‑oriented workflows is the <strong>dataset finder</strong>. This skill consolidates access to several major data repositories, allowing you to search, preview, download, and document datasets without leaving your terminal. In this guide we will walk through the purpose of the skill, its prerequisites, installation steps, core features, repository‑specific commands, and practical examples that show how to integrate it into a typical machine learning project.</p>
+<h2>What the Dataset Finder Skill Does</h2>
+<p>At its core, the dataset finder skill is a wrapper around a set of Python scripts that interact with the APIs of Kaggle, Hugging Face Hub, the UCI Machine Learning Repository, and Data.gov. When you invoke the skill you are essentially running <code>python scripts/dataset.py</code> with a subcommand that specifies the repository and the action you want to perform. The skill supports the following high‑level tasks:</p>
+<ul>
+<li>Searching for datasets across multiple sources using natural‑language‑like queries.</li>
+<li>Downloading datasets with automatic format detection and optional file‑level selection.</li>
+<li>Previewing dataset characteristics such as shape, column types, missing values, and basic statistics without loading the entire file into memory.</li>
+<li>Generating data cards (markdown documentation) that capture description, schema, statistics, usage examples, license, and citation information.</li>
+<li>Managing a local catalog of downloaded datasets so you can quickly list what you have on disk.</li>
+</ul>
+<p>Because the skill is accessed through a single command line interface, you can switch between repositories with a simple change of subcommand, making it ideal for exploratory data analysis, benchmarking, and building reproducible pipelines.</p>
+<h2>Prerequisites and Installation</h2>
+<p>Before you can use the dataset finder skill you need to have the OpenClawCLI installed and a few Python packages available. The skill itself does not require a separate installation; it is part of the <code>openclaw/skills</code> repository. However, the underlying scripts depend on several libraries:</p>
+<ul>
+<li><code>kaggle</code> – for interacting with the Kaggle API.</li>
+<li><code>datasets</code> – the Hugging Face datasets library.</li>
+<li><code>pandas</code> – for data preview and basic statistics.</li>
+<li><code>huggingface-hub</code> – for Hub metadata and streaming downloads.</li>
+<li><code>requests</code> – generic HTTP calls used by the UCI and Data.gov connectors.</li>
+<li><code>beautifulsoup4</code> – for parsing HTML responses from Data.gov.</li>
+</ul>
+<p>OpenClaw recommends installing these dependencies inside a virtual environment to avoid polluting your system Python. The installation steps are:</p>
+<ol>
+<li>Clone the OpenClaw skills repository (if you have not already):<br />
+<code>git clone https://github.com/openclaw/skills.git</code></li>
+<li>Navigate to the dataset‑finder skill directory:<br />
+<code>cd skills/dataset-finder</code></li>
+<li>Create and activate a virtual environment:<br />
+<code>python -m venv venv</code><br />
+<code>source venv/bin/activate</code> (Windows: <code>venv\Scripts\activate</code>)</li>
+<li>Install the required packages:<br />
+<code>pip install kaggle datasets pandas huggingface-hub requests beautifulsoup4</code></li>
+<li>Ensure you have the OpenClawCLI available globally (installed via <code>pip install openclawcli</code> or from <code>clawhub.ai</code>).</li>
+</ol>
+<p>For Kaggle you also need to place your <code>kaggle.json</code> API token in the default location (<code>~/.kaggle/kaggle.json</code> on Linux/macOS or <code>%USERPROFILE%\.kaggle\kaggle.json</code> on Windows) and set the file permissions to 600.</p>
+<h2>Core Features Explained</h2>
+<h3>1. Multi‑Repository Search</h3>
+<p>The skill provides a unified <code>search</code> verb that works across all supported sources. You simply specify the repository name followed by a query string. Example:</p>
+<pre>
+python scripts/dataset.py kaggle search "house prices"
+python scripts/dataset.py huggingface search "sentiment analysis"
+python scripts/dataset.py uci search "classification"
+python scripts/dataset.py datagov search "census"
+</pre>
+<p>Each repository exposes additional flags to narrow results (file type, license, task, language, etc.). The search output includes a concise list with title, identifier, size, last update, download count, and a direct URL.</p>
+<h3>2. Dataset Download</h3>
+<p>Once you have identified a dataset you can download it with the <code>download</code> subcommand. The skill automatically detects the file format and writes the files to a local <code>datasets/</code> folder inside the skill directory (or a path you configure). Supported formats include CSV, TSV, JSON, JSONL, Parquet, Excel (XLS/XLSX), ZIP, HDF5, and Feather. For large repositories like Hugging Face you can enable streaming to avoid loading the entire dataset into memory:</p>
+<pre>
+python scripts/dataset.py huggingface download "large-dataset" --streaming
+</pre>
+<h3>3. Dataset Preview</h3>
+<p>Before committing to a full download you can inspect a local file with the <code>preview</code> command. This command loads just enough data to compute:</p>
+<ul>
+<li>Number of rows and columns (shape)</li>
+<li>Column names and inferred data types</li>
+<li>Missing value counts per column</li>
+<li>Basic statistics (mean, standard deviation, min, max) for numeric columns</li>
+<li>Memory usage estimate</li>
+<li>A sample of the first few rows</li>
+</ul>
+<p>Example:</p>
+<pre>
+python scripts/dataset.py preview datasets/housing.csv
+</pre>
+<h3>4. Data Card Generation</h3>
+<p>Documentation is a critical part of reproducible research. The skill can generate a markdown data card that summarises a dataset. The command:</p>
+<pre>
+python scripts/dataset.py datacard datasets/housing.csv --output README.md
+</pre>
+<p>produces a file that includes:</p>
+<ul>
+<li>Dataset title and description</li>
+<li>Schema overview (column names, types, units)</li>
+<li>Statistics summary (from the preview step)</li>
+<li>Usage example code snippet</li>
+<li>License information and citation details (if available)</li>
+</ul>
+<p>These cards can be committed alongside your project or uploaded to a model card hub.</p>
+<h3>5. Local Dataset Management</h3>
+<p>The skill maintains a simple index of what you have downloaded. Running:</p>
+<pre>
+python scripts/dataset.py list
+</pre>
+<p>shows each dataset’s local path, size, and the date it was fetched. This helps avoid duplicate downloads and makes it easy to clean up stale data.</p>
+<h2>Repository‑Specific Commands</h2>
+<p>While the generic <code>search</code> and <code>download</code> verbs work across all sources, each repository also exposes specialized options that reflect its unique metadata.</p>
+<h3>Kaggle</h3>
+<p>To use Kaggle you must have an API token. After setting up <code>kaggle.json</code> you can:</p>
+<ul>
+<li>Search with filters: <code>--file-type csv --license CC0 --sort-by hotness --max-results 10</code></li>
+<li>Download a specific file inside a dataset: <code>python scripts/dataset.py kaggle download "username/dataset" --file "train.csv"</code></li>
+<li>List all files in a dataset without downloading: <code>python scripts/dataset.py kaggle list "username/dataset-name"</code></li>
+</ul>
+<h3>Hugging Face Hub</h3>
+<p>The Hugging Face connector lets you filter by task, language, multimodal flag, and benchmark status. You can also download a specific split or configuration:</p>
+<pre>
+python scripts/dataset.py huggingface search "translation" --task translation --language fr
+python scripts/dataset.py huggingface download "wmt14" --config "de-en" --split test
+</pre>
+<p>Streaming is activated with <code>--streaming</code> and works well for multi‑gigabyte text corpora.</p>
+<h3>UCI ML Repository</h3>
+<p>UCI datasets are often small, tabular collections ideal for quick experiments. You can filter by task type, minimum number of samples, minimum number of features, and data type (tabular, text, image, time‑series):</p>
+<pre>
+python scripts/dataset.py uci search "regression" --min-samples 500 --min-features 5 --data-type tabular
+</p>
+<p>The <code>--include-metadata</code> flag downloads the accompanying description file.</p>
+<h3>Data.gov</h3>
+<p>Data.gov hosts US government open data. You can narrow results by organization, tags, and file format:</p>
+<pre>
+python scripts/dataset.py datagov search "health" --organization "cdc.gov" --format csv
+python scripts/dataset.py datagov download "dataset-id-12345"
+</pre>
+<h2>Putting It All Together: Example Workflow</h2>
+<p>Imagine you are starting a new project to predict house prices. You want to explore several possible data sources before deciding which one to use. Below is a step‑by‑step illustration of how the dataset finder skill streamlines this process.</p>
+<ol>
+<li><strong>Search Kaggle</strong>:<br />
+<code>python scripts/dataset.py kaggle search "house prices" --file-type csv --sort-by hotness --max-results 5</code><br />
+This returns a list of the most popular housing‑price datasets on Kaggle.</li>
+<li><strong>Preview a promising candidate</strong>:<br />
+After identifying the “House Prices – Advanced Regression Techniques” dataset, you download just the preview metadata:<br />
+<code>python scripts/dataset.py preview datasets/house_prices.csv</code><br />
+You see that the file has 1460 rows, 81 columns, and a mix of numeric and categorical features.</li>
+<li><strong>Download the full dataset</strong>:<br />
+<code>python scripts/dataset.py kaggle download "zillow/zecon"</code><br />
+The skill writes the CSV to <code>datasets/zillow_zecon/</code>.</li>
+<li><strong>Generate a data card</strong>:<br />
+<code>python scripts/dataset.py datacard datasets/zillow_zecon/train.csv --output docs/house_prices_card.md</code><br />
+The resulting markdown file is ready to be committed to your repository.</li>
+<li><strong>Check for complementary sources</strong>:<br />
+You also search the UCI ML Repository for any additional housing‑related data:<br />
+<code>python scripts/dataset.py uci search "housing" --data-type tabular</code><br />
+If you find a useful supplement, you repeat the preview/download/card steps.</li>
+<li><strong>List what you have locally</strong>:<br />
+<code>python scripts/dataset.py list</code><br />
+shows both Kaggle and UCI datasets with their sizes, confirming you have everything you need.</li>
+</ol>
+<p>This workflow demonstrates how the skill reduces context‑switching, eliminates manual web‑scraping, and guarantees that every dataset you acquire is accompanied by a basic documentation artifact.</p>
+<h2>Tips and Best Practices</h2>
+<ul>
+<li>Always keep your virtual environment activated when running the skill to avoid version conflicts.</li>
+<li>For Kaggle, protect your <code>kaggle.json</code> file; never commit it to a public repository.</li>
+<li>When downloading very large Hugging Face datasets, combine <code>--streaming</code> with the <code>datasets</code> library’s <code>iter_batches</code> to process data in chunks.</li>
+<li>Use the data card generation step early in your project; it serves as a living document that you can update as you augment the dataset.</li>
+<li>Periodically run <code>python scripts/dataset.py list</code> and remove datasets you no longer need to free disk space.</li>
+<li>If you encounter authentication errors with Data.gov, verify that your internet connection allows outbound HTTPS calls and that no proxy is interfering.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw dataset finder skill is a powerful, command‑line driven tool that consolidates access to some of the most widely used data repositories in the machine learning ecosystem. By providing a single interface for search, download, preview, documentation, and local management, it saves developers and data scientists countless hours of manual effort. Whether you are building a quick prototype, conducting a literature review, or assembling data for a production model, integrating this skill into your workflow will make the data acquisition phase more efficient, reproducible, and transparent. Start by installing the prerequisite packages, configuring your API tokens, and trying out the example commands above—you will quickly see how the dataset finder simplifies the journey from raw data to insight.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/anisafifi/dataset-finder/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/anisafifi/dataset-finder/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering OpenClaw&#8217;s Agent Config Skill: A Comprehensive Guide</title>
+    <meta name="description" content="Learn how to effectively use the Agent Config Skill in OpenClaw to modify agent behavior and configuration files professionally.">
+    <meta property="og:title" content="Mastering OpenClaw&#8217;s Agent Config Skill: A Comprehensive Guide">
+    <meta property="og:description" content="Learn how to effectively use the Agent Config Skill in OpenClaw to modify agent behavior and configuration files professionally.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-openclaws-agent-config-skill-a-comprehensive-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8899">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8899">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-openclaws-agent-config-skill-a-comprehensive-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering OpenClaw&#8217;s Agent Config Skill: A Comprehensive Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <div class="wp-block-post-title">
+<h1>Mastering OpenClaw&#8217;s Agent Config Skill: A Comprehensive Guide</h1>
+</div>
+<div class="wp-block-post-excerpt">
+<p>Learn how to effectively use the Agent Config Skill in OpenClaw to modify agent behavior and configuration files professionally.</p>
+</div>
+<div class="wp-block-separator is-style-focus">
+<hr>
+</div>
+<div class="wp-block-post-content">
+<p>OpenClaw&#8217;s Agent Config Skill provides a structured and intelligent approach to modifying agent core context files. It ensures that changes are made to the right file, in the right format, without duplication or bloat, while respecting size limits and prompt engineering best practices. This guide will walk you through the core workflow and common patterns for effectively using this skill.</p>
+<div class="wp-block-group">
+<div class="wp-block-group__inner-container">
+<h2>Core Workflow</h2>
+<p>When modifying agent context files, it&#8217;s crucial to follow a systematic process to ensure changes are effective and maintainable. Here&#8217;s the step-by-step workflow:</p>
+<h3>1. Identify Target File</h3>
+<p>Read the <a href="https://github.com/openclaw/skills/blob/main/references/file-map.md">file-map.md</a> to determine which file the change belongs in. Use the quick decision tree:</p>
+<ul>
+<li><strong>Operational procedures, memory workflows, delegation rules</strong> → <code>AGENTS.md</code></li>
+<li><strong>Personality, tone, boundaries, ethical rules</strong> → <code>SOUL.md</code></li>
+<li><strong>Agent name, emoji, core vibe</strong> → <code>IDENTITY.md</code></li>
+<li><strong>User profile, preferences, family info</strong> → <code>USER.md</code></li>
+<li><strong>Local tool notes, command examples, API locations</strong> → <code>TOOLS.md</code></li>
+<li><strong>Curated long-term facts (main session only)</strong> → <code>MEMORY.md</code></li>
+<li><strong>Heartbeat checklist (keep tiny)</strong> → <code>HEARTBEAT.md</code></li>
+</ul>
+<p><strong>Critical Note:</strong> Subagents only see <code>AGENTS.md</code> and <code>TOOLS.md</code>. Operational rules must go in <code>AGENTS.md</code>, not <code>SOUL.md</code>.</p>
+<h3>2. Check Current State</h3>
+<p>Before making changes, perform the following checks:</p>
+<ul>
+<li>Check file size (20K char limit per file):</li>
+<div class="wp-block-preformatted">
+<pre>wc -c ~/clawd/AGENTS.md ~/clawd/SOUL.md ~/clawd/IDENTITY.md ~/clawd/USER.md ~/clawd/TOOLS.md ~/clawd/MEMORY.md ~/clawd/HEARTBEAT.md</pre>
+</div>
+<li>Read the target file section to check for duplication</li>
+<li>Use grep to search for existing similar content:</li>
+<div class="wp-block-preformatted">
+<pre>grep -i "keyword" ~/clawd/TARGETFILE.md</pre>
+</div>
+</ul>
+<p><strong>Size warnings:</strong></p>
+<ul>
+<li>If file is > 18,000 chars, warn before adding (approaching truncation limit)</li>
+<li>If file is already > 20,000 chars, it&#8217;s being truncated &#8211; refactor before adding more</li>
+</ul>
+<p><strong>Agent can still read full file with <code>read</code> tool, but startup context is truncated.</strong></p>
+<p><strong>Duplication check:</strong></p>
+<ul>
+<li>Is this instruction already present in different words?</li>
+<li>Is there a similar rule that should be updated instead of adding new?</li>
+<li>Does this belong in multiple files? (Usually no &#8211; pick ONE location)</li>
+</ul>
+<h3>3. Draft the Change</h3>
+<p>Read the <a href="https://github.com/openclaw/skills/blob/main/references/claude-patterns.md">claude-patterns.md</a> for instruction formats that work.</p>
+<p><strong>Format guidelines by file:</strong></p>
+<ul>
+<li><code>AGENTS.md</code> (structured, imperative):</li>
+<ul>
+<li>Use numbered processes for multi-step workflows</li>
+<li>Use tables for decision trees, model selection, routing rules</li>
+<li>Include examples for complex patterns</li>
+<li>Explain WHY rules exist (motivation > bare commands)</li>
+<li>Use headers and sub-sections for organization</li>
+<li>Reference other files/skills, don&#8217;t duplicate content</li>
+</ul>
+<li><code>SOUL.md</code> (first-person OK, narrative):</li>
+<ul>
+<li>Can use personal voice (&#8220;I&#8217;m Gus&#8221; vs &#8220;You are Gus&#8221;)</li>
+<li>Anti-pattern lists work well (forbidden phrases, hedging examples)</li>
+<li>Include before/after examples for tone guidance</li>
+<li>Keep tattoos/anchors at top for immediate context</li>
+<li>Use contrasts (good vs bad examples side-by-side)</li>
+</ul>
+<li><code>IDENTITY.md</code> (minimal):</li>
+<ul>
+<li>Punchy bullets</li>
+<li>Keep under 500 chars if possible</li>
+<li>Core vibe only, details go in <code>SOUL.md</code></li>
+</ul>
+<li><code>USER.md</code> (factual, third-person):</li>
+<ul>
+<li>Bullet lists by category</li>
+<li>Dates for time-sensitive info</li>
+<li>Clear section headers</li>
+<li>Cross-reference vault files for detailed project context</li>
+</ul>
+<li><code>TOOLS.md</code> (reference guide):</li>
+<ul>
+<li>Tables for comparison (when to use X vs Y)</li>
+<li>Code blocks for command examples</li>
+<li>Clear headings for quick lookup</li>
+<li>Include paths, env var names, exact syntax</li>
+</ul>
+<li><code>MEMORY.md</code> (wiki-style, topic-based):</li>
+<ul>
+<li>Section by topic, not chronologically</li>
+<li>Cross-reference entity files in vault</li>
+<li>Dates for context, but organize by subject</li>
+<li>Main session only &#8211; privacy-sensitive</li>
+</ul>
+<li><code>HEARTBEAT.md</code> (action list):</li>
+<ul>
+<li>Extremely concise</li>
+<li>Bullet list of checks</li>
+<li>No explanations (that&#8217;s <code>AGENTS.md</code>)</li>
+<li>Fast to parse</li>
+</ul>
+</ul>
+<h3>4. Validate Before Applying</h3>
+<p>Ask yourself:</p>
+<ul>
+<li><strong>Fit:</strong> Does this actually belong in this file based on file-map.md? Is it operational (<code>AGENTS.md</code>) or personality (<code>SOUL.md</code>)? Will subagents need this? (If yes, must be <code>AGENTS.md</code> or <code>TOOLS.md</code>)</li>
+<li><strong>Format:</strong> Does this match the file&#8217;s existing style? Is it the right structure (numbered, table, bullets, prose)? Are examples included where needed?</li>
+<li><strong>Size:</strong> How many chars is this adding? Is the file approaching 20K limit? Could this be a reference file instead?</li>
+<li><strong>Duplication:</strong> Is this already present somewhere else? Should existing content be updated instead? Could this consolidate multiple scattered rules?</li>
+<li><strong>Quality:</strong> Is motivation explained (WHY this rule exists)? Are examples concrete and real (not generic)? Is it precise enough for an AI to follow? Does it avoid vague instructions like &#8220;be helpful&#8221;?</li>
+</ul>
+<h3>5. Apply the Change</h3>
+<p>Use the <code>edit</code> tool with exact text matching:</p>
+<div class="wp-block-preformatted">
+<pre># Read the section first to get exact text
+exit("read", {
+  "path": "/clawd/AGENTS.md",
+  "offset": 50,
+  "limit": 20
+});
+
+# Then edit with precise match
+exit("edit", {
+  "path": "~/clawd/AGENTS.md",
+  "oldText": "exact existing text including whitespace",
+  "newText": "updated text with change"
+});</pre>
+</div>
+<p><strong>For additions:</strong></p>
+<ul>
+<li>Find the right section anchor (read file first)</li>
+<li>Insert after relevant heading, not at end of file</li>
+<li>Maintain file&#8217;s organization structure</li>
+</ul>
+<p><strong>For updates:</strong></p>
+<ul>
+<li>Replace the specific section being changed</li>
+<li>Keep surrounding context intact</li>
+<li>Update examples if rule changes</li>
+</ul>
+<p><strong>For deletions:</strong></p>
+<ul>
+<li>Only remove if truly obsolete</li>
+<li>Consider whether rule should be refined instead</li>
+<li>Check if other sections reference what&#8217;s being deleted</li>
+</ul>
+<h3>6. Verify and Document</h3>
+<p>After applying change:</p>
+<p><strong>Verification:</strong></p>
+<div class="wp-block-preformatted">
+<pre># Confirm change applied
+grep -A 3 "new text" ~/clawd/TARGETFILE.md
+
+# Check new file size
+wc -c ~/clawd/TARGETFILE.md</pre>
+</div>
+<p><strong>Documentation:</strong></p>
+<ul>
+<li>Log significant changes to <code>/Users/macmini/Sizemore/agent/decisions/config-changes.md</code></li>
+<li>Include: date, file, what changed, why, who requested</li>
+<li>If change is experimental, note rollback plan</li>
+</ul>
+<p><strong>Report to user:</strong></p>
+<ul>
+<li>&#8220;Updated AGENTS.md: added X to Y section (now 15,234 chars)&#8221;</li>
+<li>If approaching limit: &#8220;Warning: AGENTS.md now 19,456 chars (near 20K limit)&#8221;</li>
+<li>If rolled back previous change: &#8220;Replaced old X rule with new Y approach&#8221;</li>
+</ul>
+<h2>Common Patterns</h2>
+<h3>Adding Safety Rules</h3>
+<p><strong>Target:</strong> <code>AGENTS.md</code> → Safety section</p>
+<div class="wp-block-preformatted">
+<pre>## Safety
+- **NEVER**: Exfiltrate data, destructive commands w/o asking
+- Prefer `trash` > `rm`
+- **New rule**: Brief description of what NOT to do
+- **New protection**: When X happens, do Y instead</pre>
+</div>
+<h3>Updating Delegation Rules</h3>
+<p><strong>Target:</strong> <code>AGENTS.md</code> → Delegation section</p>
+<p>Check existing delegation table/rules first. Update thresholds, model selection, or cost patterns.</p>
+<h3>Refining Personality</h3>
+<p><strong>Target:</strong> <code>SOUL.md</code> (tone, boundaries) or <code>IDENTITY.md</code> (core vibe)</p>
+<p>Add forbidden phrases to anti-pattern list, update voice examples, refine mirroring rules.</p>
+<h3>Adding Tool Conventions</h3>
+<p><strong>Target:</strong> <code>TOOLS.md</code></p>
+<p>Add to relevant section (or create new section). Include code examples, when to use, paths.</p>
+<h3>Updating Memory Workflow</h3>
+<p><strong>Target:</strong> <code>AGENTS.md</code> → Memory section</p>
+<p>Update logging triggers, recall cascade, entity structure. Keep memory format templates in <code>~/clawd/templates/</code>.</p>
+<h3>Adding Startup Tasks</h3>
+<p><strong>Target:</strong> <code>AGENTS.md</code> → Startup section</p>
+<p>Add to numbered checklist. Keep conditional.</p>
+</p></div>
+</div>
+<div class="wp-block-separator is-style-focus">
+<hr>
+</div>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/thatguysizemore/agent-config/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/thatguysizemore/agent-config/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

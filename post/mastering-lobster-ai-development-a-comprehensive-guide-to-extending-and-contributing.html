@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering Lobster AI Development: A Comprehensive Guide to Extending and Contributing</title>
+    <meta name="description" content="Dive into Lobster AI&#8217;s architecture: guide to creating agents, services, and contributing to the open-source bioinformatics platform.">
+    <meta property="og:title" content="Mastering Lobster AI Development: A Comprehensive Guide to Extending and Contributing">
+    <meta property="og:description" content="Dive into Lobster AI&#8217;s architecture: guide to creating agents, services, and contributing to the open-source bioinformatics platform.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-lobster-ai-development-a-comprehensive-guide-to-extending-and-contributing">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8941">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8941">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-lobster-ai-development-a-comprehensive-guide-to-extending-and-contributing">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering Lobster AI Development: A Comprehensive Guide to Extending and Contributing</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <h1>Mastering Lobster AI Development: A Comprehensive Guide to Extending and Controlling</h1>
+<p><strong>Lobster AI</strong> stands as a pioneering multi-agent platform revolutionizing bioinformatics analysis with its LangGraph orchestration system. This extensive guide will equip you with everything you need to effectively work with, extend, and actively contribute to the Lobster AI codebase.</p>
+<h2>Understanding the Lobster AI Ecosystem</h2>
+<p>Before we explore development, let&#8217;s comprehend what makes Lobster AIunique:</p>
+<ul>
+<li><strong>Multi-agent architecture:</strong> A sophisticated system of specialized agents collaboratively working on bioinformatics tasks</li>
+<li><strong>LangGraph orchestration:</strong> A powerful framework managing the intricate workflows between agents</li>
+<li><strong>Component-driven design:</strong> Modular services and tools enabling extensibility</li>
+</ul>
+<h2>Core Architecture and Component Structure</h2>
+<p>The Lobster AI system follows a well-organized package structure:</p>
+<pre>
+lobster/
+├── packages/
+│   ├── lobster-transcriptomics/
+│   ├── lobster-research/
+│   ├── lobster-visualization/
+│   ├── lobster-metadata/
+│   ├── lobster-structural-viz/
+│   ├── lobster-genomics/
+│   ├── lobster-proteomics/
+│   └── lobster-ml/
+└── lobster/
+    ├── agents/
+    ├── core/
+    ├── services/
+    └── tools/
+</pre>
+<h2>Setting Up Your Development Environment</h2>
+<p>To begin contributing, set up your development workspace:</p>
+<ol>
+<li>Clone the repository: <code>git clone https://github.com/openclaw/skills.git</code></li>
+<li>Install dependencies: <code>make dev-install</code> for a full editable setup</li>
+<li>Run tests to validate your environment: <code>make test</code></li>
+</ol>
+<h2>Creating Your First Agent</h2>
+<h3>Agent Registration Fundamentals</h3>
+<p>Agents in Lobster AI register through entry points in <code>pyproject.toml</code>:</p>
+<pre>
+[project.entry-points."lobster.agents"]
+my_agent = "lobster.agents.my_domain.my_agent:AGENT_CONFIG"
+</pre>
+<p>Each agent must define an <code>AGENT_CONFIG</code> at the module top containing:</p>
+<ul>
+<li>Name and description</li>
+<li>Factory function</li>
+<li>Handoff tool definitions</li>
+</ul>
+<h3>Agent Implementation Patterns</h3>
+<p>When building your agent:</p>
+<ol>
+<li>Define your <code>AGENT_CONFIG</code> immediately</li>
+<li>Import heavier dependencies afterward for faster discovery</li>
+<li>Implement tools tied to specific services</li>
+<li>Ensure consistent use of the <code>ir</code> parameter for provenance tracking</li>
+</ol>
+<h2>Building Robust Analysis Services</h2>
+<h3>The Service Pattern</h3>
+<p>All services follow a strict 3-tuple return pattern:</p>
+<pre>
+def analyze(self, adata, **params) -> Tuple[AnnData, Dict, AnalysisStep]:
+    # Your analysis logic
+    stats = {"n_cells": adata.n_obs, "status": "complete"}
+    ir = AnalysisStep(
+        activity_type="analyze",
+        inputs={"n_obs": adata.n_obs},
+        outputs=stats,
+        params=params
+    )
+    return processed_adata, stats, ir
+</pre>
+<h3>Tool Integration</h3>
+<p>When wrapping services as tools:</p>
+<ul>
+<li>Use the <code>@tool</code> decorator</li>
+<li>Always call <code>log_tool_usage()<code> with the <code>ir</code> parameter</li>
+<li>Return formatted status messages for the user</li>
+</ul>
+<h2>Advanced Development Topics</h2>
+<h3>Understanding the Data Pipeline</h3>
+<p>The complete data flow provides context for all development activities:</p>
+<pre>
+User Query → CLI → LobsterClientAdapter → AgentClient
+↓
+LangGraph (supervisor → agents)
+↓
+Services → DataManagerV2
+↓
+Results + Provenance Tracking
+</pre>
+<h3>Provenance and Reproducibility</h3>
+<p>Lobster AI employs W3C-PROV standards for tracking analyses:<br />
+The <code>AnalysisStep()<code> and <code>log_tool_usage()<code> calls ensure:</p>
+<ul>
+<li>Complete audit trails</li>
+<li>Reproducible work</li>
+<li>Proper data citation</li>
+</ul>
+<h2>Testing and Quality Assurance</h2>
+<p>Maintaining quality requires thorough testing:</p>
+<ul>
+<li><strong>Unit tests:</strong> Fast, isolated tests for specific components (<code>pytest tests/unit/ -v</code>)</li>
+<li><strong>Integration tests:</strong> Verify complete workflows and services (<code>pytest tests/integration/ -v</code>)</li>
+<li><strong>Coverage testing:</strong> Assess overall test comprehensiveness (<code>pytest --cov=lobster tests/</code>)</li>
+</ul>
+<h2>Contribution Workflow</h2>
+<ol>
+<li>Fork the repository and create a feature branch</li>
+<li>Implement changes following the established patterns</li>
+<li>Run tests and format code before committing</li>
+<li>Submit a pull request with clear documentation</li>
+</ol>
+<h2>Best Practices and Critical Rules</h2>
+<p>Remember these essential rules and patterns:</p>
+<ol>
+<li><code>ComponentRegistry</code> is the source of truth for agent discovery</li>
+<li>Rigorously use <code>log_tool_usage(..., ir=ir)</code></li>
+<li>Never create <code>lobster/__init__.py</code> - itھی a PEP 420 namespace package</li>
+<li>All agents must adhere to the 3-tuple return pattern</li>
+</ol>
+<h2>Learning Resources</h2>
+<p>Reference the official documentation for additional details:</p>
+<ul>
+<li>Architecture overview: <code>references/architecture.md</code></li>
+<li>Creating agents: <code>references/creating-agents.md</code></li>
+<li>Service creation: <code>references/creating-services.md</code></li>
+<li>Testing patterns: <code>references/testing.md</code></li>
+</ul>
+<p>Visit <a href="https://docs.omics-os.com">docs.omics-os.com</a> for online documentation and API reference.</p>
+<h2>Conclusion</h2>
+<p>Lobster AI provides endless possibilities for bioinformatics innovation. By following this guide and adhering to the established patterns, you can expand its capabilities, improve existing functionality, and contribute to a vibrant open-source ecosystem. Whether you januar building agents, implementing services, or fine-tuning the system architecture, your contributions help advance bioinformatics research through collaborative AI systems.</p>
+<p>Ready to dive in? Let this guide serve as your comprehensive roadmap to mastering Lobster AI development and becoming an integral part of its growing community.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/cewinharhar/lobster-bio-dev/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/cewinharhar/lobster-bio-dev/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

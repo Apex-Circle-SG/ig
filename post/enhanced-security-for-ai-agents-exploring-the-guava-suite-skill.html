@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Enhanced Security for AI Agents: Exploring the Guava Suite Skill</title>
+    <meta name="description" content="Discover how the Guava Suite skill adds premium security features to AI agents with $GUAVA token-gated strict mode protection.">
+    <meta property="og:title" content="Enhanced Security for AI Agents: Exploring the Guava Suite Skill">
+    <meta property="og:description" content="Discover how the Guava Suite skill adds premium security features to AI agents with $GUAVA token-gated strict mode protection.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/enhanced-security-for-ai-agents-exploring-the-guava-suite-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8839">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8839">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/enhanced-security-for-ai-agents-exploring-the-guava-suite-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Enhanced Security for AI Agents: Exploring the Guava Suite Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-13</p>
+    <div align="center"><img decoding="async" class="alignnone wp-image-256 size-full" src="https://upload.wikimedia.org/wikipedia/commons/3/3d/OpenClaw.jpg" alt="openclaw" width="300" height="300" srcset="https://upload.wikimedia.org/wikipedia/commons/3/3d/OpenClaw.jpg 300w, https://upload.wikimedia.org/wikipedia/commons/3/3d/OpenClaw.jpg 150w" sizes="(max-width: 150px) 100vw, 150px" /><figcaption><strong>Example image</strong></figcaption></div>
+<p>If you are looking to enhance the security of your AI agents, you need to check out the <a href="https://github.com/openclaw/skills/blob/main/skills/koatora20/guava-suite/SKILL.md">Guava Suite Skill</a>. This premium security suite adds a robust layer of protection to your AI agents by implementing $GUAVA token-gated strict mode. Let&#8217;s dive into what this skill does and how it can fortify your AI agents.</p>
+<h2>What is Guava Suite?</h2>
+<p>Guava Suite is a premium security enhancement for AI agents that builds on top of the <strong>guard-scanner</strong>. It introduces a strict mode of protection that blocks both CRITICAL and HIGH-level threats. This additional security layer is locked behind a <strong>$GUAVA token</strong> gate, ensuring only authorized users can access this premium feature.</p>
+<h2>Key Features of Guava Suite</h2>
+<ul>
+<li>2-layer defense (static + runtime)</li>
+<li>Soul Lock</li>
+<li>Memory Guard</li>
+<li>On-chain identity verification via SoulRegistry V2</li>
+<li>Requires $GUAVA token on Polygon Mainnet</li>
+</ul>
+<h2>How does Guava Suite Work?</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li><strong>guard-scanner</strong> installed (using <code>clawhub install guard-scanner</code>)</li>
+<li><strong>$GUAVA tokens</strong> on Polygon Mainnet (minimum 1M $GUAVA)</li>
+</ul>
+<p>The token details are as follows:</p>
+<ul>
+<li>Token: <code>0x25cBD481901990bF0ed2ff9c5F3C0d4f743AC7B8</code></li>
+<li>Buy on <a href="https://quickswap.exchange">QuickSwap V2</a></li>
+</ul>
+<h3>Activation Process</h3>
+<pre><code>
+1. Install
+#
+Via clawhub (coming soon)
+clawhub install guava-suite
+
+#
+Or: git clone + setup
+git clone https://github.com/koatora20/guava-suite.git
+cd guava-suite && bash setup.sh
+
+2. Activate
+docker run --rm -v "$PWD:/data" k20/guava-suite activate --wallet 0xYOUR_WALLET_ADDRESS
+</code></pre>
+<p>This single command will:</p>
+<ul>
+<li>Request a challenge nonce</li>
+<li>Prompt you to sign with your wallet (EIP-712)</li>
+<li>Verify your signature &#038; check $GUAVA balance on Polygon</li>
+<li>Save JWT locally &#038; switch guard-scanner to strict mode</li>
+</ul>
+<h3>How Token Gating Works</h3>
+<p>You hold $GUAVA on Polygon<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br />Sign EIP-712 challenge<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br />LicenseService checks:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ Signature valid?<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ $GUAVA balance ≥ 1M?](https://github.com/openclaw/skills/blob/main/skills/koatora20/guava-suite/SKILL.md<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br />JWT issued → SuiteGate activated<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼<br />guard-scanner mode: strict (HIGH + CRITICAL blocked)</p>
+<h2>Architecture</h2>
+<ul>
+<li>SuiteGate — JWT-based fail-closed gate (grace period for network issues)</li>
+<li>LicenseService — Nonce + EIP-712 signature + $GUAVA balance check + JWT issuance</li>
+<li>TokenBalanceChecker — Polygon RPC ERC-20 balance verification (zero dependencies)</li>
+<li>SuiteBridge — Connects SuiteGate status to guard-scanner runtime mode</li>
+<li>SoulRegistry V2 — On-chain identity verification (Polygon)</li>
+</ul>
+<h2>Security &#038; Privacy</h2>
+<ul>
+<li>Read-only on-chain: Only calls <code>balanceOf</code> — no transactions, no approvals</li>
+<li>Local JWT: Tokens stored locally, never sent to external servers</li>
+<li>Fail-closed: If balance check fails, Suite features are disabled (not bypassed)</li>
+<li>No telemetry: Zero analytics or tracking</li>
+</ul>
+<h2>License</h2>
+<p>Proprietary — © 2026 Guava 🍈 &#038; Dee.</p>
+<p>With these features and architecture, the Guava Suite skill provides a comprehensive security solution for AI agents. Don&#8217;t miss out on the opportunity to secure your AI agents with this premium security suite.</p>
+<p>For more details and immediate integration, make sure to visit the <a href="https://github.com/openclaw/skills/blob/main/skills/koatora20/guava-suite/SKILL.md">Guava Suite Skill page</a>.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/koatora20/guava-suite/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/koatora20/guava-suite/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

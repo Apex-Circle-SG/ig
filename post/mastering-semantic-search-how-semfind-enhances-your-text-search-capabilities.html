@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering Semantic Search: How semfind Enhances Your Text Search Capabilities</title>
+    <meta name="description" content="Discover how semfind revolutionizes text search by enabling semantic search over local files using embeddings.">
+    <meta property="og:title" content="Mastering Semantic Search: How semfind Enhances Your Text Search Capabilities">
+    <meta property="og:description" content="Discover how semfind revolutionizes text search by enabling semantic search over local files using embeddings.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-semantic-search-how-semfind-enhances-your-text-search-capabilities">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8867">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8867">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-semantic-search-how-semfind-enhances-your-text-search-capabilities">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering Semantic Search: How semfind Enhances Your Text Search Capabilities</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <p><strong>Introduction</strong></p>
+<p>In the world of programming and system administration, finding relevant information in logs, documents, and code can be a daunting task. Traditional search tools like <code>grep</code> and <code>ripgrep</code> are powerful but rely on exact pattern matching. This is where <code>semfind</code> comes into play. This article explores how <code>semfind</code> can enhance your search capabilities by enabling semantic search over local text files using embeddings.</p>
+<p><strong>What is semfind?</strong></p>
+<p><code>semfind</code> is a semantic search tool that allows you to search files by meaning rather than exact text. It uses local embeddings (specifically BAAI/bge-small-en-v1.5 coupled with FAISS) to understand the context of your search query. Unlike traditional search tools that require exact word matches, <code>semfind</code> can find relevant results even when you don&#8217;t know the exact wording of what you&#8217;re looking for.</p>
+<p><strong>Installation</strong></p>
+<p>Installing <code>semfind</code> is straightforward. You can use the following pip command:</p>
+<pre>&nbsp; &nbsp; &nbsp; &nbsp;pip install semfind</pre>
+<p>On the first run, <code>semfind</code> downloads a approximately 65MB model, which may take around 10-30 seconds. Subsequent runs use the cached model, making the process much faster.</p>
+<p><strong>When to Use semfind</strong></p>
+<ul>
+<li><strong>When grep or ripgrep returns no results or irrelevant results:</strong> If you&#8217;re not sure about the exact wording of what you&#8217;re looking for, <code>semfind</code> can be a game-changer.</li>
+<li><strong>When you want to search by concept/meaning rather than exact text:</strong> For example, searching logs for &#8220;deployment issue&#8221; when the actual text says &#8220;container build failed&#8221;.</li>
+<li><strong>When you need to find relevant results in a large corpus of text:</strong> <code>semfind</code> can help you sift through large amounts of text data efficiently.</li>
+</ul>
+<p>However, it&#8217;s important to note that you should still use traditional tools like <code>grep</code> when they work, as they are instant and have zero overhead.</p>
+<p><strong>Usage Examples</strong></p>
+<p>Here are some practical examples of how you can use <code>semfind</code>:</p>
+<ul>
+<li>
+<p><strong>Basic search:</strong></p>
+<pre>semfind "deployment issue" logs.md</pre>
+</li>
+<li>
+<p><strong>Search multiple files, top 3 results:</strong></p>
+<pre>semfind "permission error" memory/* .md -k 3</pre>
+</li>
+<li>
+<p><strong>With context lines:</strong></p>
+<pre>semfind "database migration" notes.md -n 2</pre>
+</li>
+<li>
+<p><strong>Force re-index after file changes:</strong></p>
+<pre>semfind "query" file.md --reindex</pre>
+</li>
+<li>
+<p><strong>Minimum similarity threshold:</strong></p>
+<pre>semfind "auth bug" * .md -m 0.5</pre>
+</li>
+</ul>
+<p><strong>Options</strong></p>
+<p><code>semfind</code> comes with several options to customize your search:</p>
+<ul>
+<li><code>-k, --top-k</code>: Number of results. Default is 5.</li>
+<li><code>-n, --context</code>: Context lines before/after. Default is 0.</li>
+<li><code>-m, --max-distance</code>: Minimum similarity score. Default is none.</li>
+<li><code>--reindex</code>: Force re-embed. Default is false.</li>
+<li><code>--no-cache</code>: Skip embedding cache. Default is false.</li>
+</ul>
+<p><strong>Output Format</strong></p>
+<p>The output of <code>semfind</code> is grep-like with similarity scores:</p>
+<pre>file.md:9: [2026-01-15] Fixed docker build with missing env vars (0.796)
+file.md:3: [2026-01-17] Agent couldn't write to /var/log (0.689)</pre>
+<p>Higher scores (closer to 1.0) mean a stronger semantic match.</p>
+<p><strong>Resource Usage</strong></p>
+<p>Here are some key resource usage metrics for <code>semfind</code>:</p>
+<ul>
+<li>~250MB RAM while running, freed immediately on exit</li>
+<li>~65MB model cached in <code>/tmp/fastembed_cache/</code></li>
+<li>~2s first query (model load), ~14ms cached queries</li>
+<li>Embedding cache in <code>~/.cache/semfind/</code>, auto-invalidates on file changes</li>
+</ul>
+<p><strong>Workflow Pattern</strong></p>
+<p>A typical workflow pattern when using <code>semfind</code> involves trying traditional tools first, and then using <code>semfind</code> if needed:</p>
+<ul>
+<li>Step 1: Try <code>grep</code> first
+<pre>grep "deployment" memory/* .md</pre>
+</li>
+<li>Step 2: If <code>grep</code> fails, use <code>semfind</code>
+<pre>semfind "something went wrong with the deployment" memory/*.md -k 5</pre>
+</li>
+</ul>
+<p><strong>Conclusion</strong></p>
+<p><code>semfind</code> is a powerful tool that can significantly enhance your text search capabilities by enabling semantic search over local text files using embeddings. Whether you&#8217;re a developer, system administrator, or data scientist, <code>semfind</code> can help you find relevant information more efficiently. Give it a try and see how it can improve your workflow!</p>
+<p><strong>Further Reading</strong></p>
+<p>For more information and to stay updated on the latest developments, you can visit the <a href="https://github.com/openclaw/skills/tree/main/skills/paperboardofficial/semfind">official GitHub repository</a>.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/paperboardofficial/semfind/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/paperboardofficial/semfind/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GHIN Golf Tracker: Comprehensive Golf Handicap Analysis with OpenClaw</title>
+    <meta name="description" content="The GHIN Golf Tracker OpenClaw skill analyzes golf handicap data from GHIN (Golf Handicap and Information Network) to provide detailed statistics, trends, and p">
+    <meta property="og:title" content="GHIN Golf Tracker: Comprehensive Golf Handicap Analysis with OpenClaw">
+    <meta property="og:description" content="The GHIN Golf Tracker OpenClaw skill analyzes golf handicap data from GHIN (Golf Handicap and Information Network) to provide detailed statistics, trends, and p">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/ghin-golf-tracker-comprehensive-golf-handicap-analysis-with-openclaw">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8932">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8932">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/ghin-golf-tracker-comprehensive-golf-handicap-analysis-with-openclaw">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>GHIN Golf Tracker: Comprehensive Golf Handicap Analysis with OpenClaw</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <h2>What is the GHIN Golf Tracker OpenClaw Skill?</h2>
+<p>The GHIN Golf Tracker is a specialized OpenClaw skill designed to analyze golf statistics from GHIN (Golf Handicap and Information Network) data. This powerful tool provides golfers with comprehensive insights into their handicap trends, scoring patterns, course performance, and historical breakdowns.</p>
+<h3>Core Functionality</h3>
+<p>This skill reads pre-collected GHIN data from a JSON file and computes detailed statistics in both human-readable and machine-readable formats. It&#8217;s specifically built for data analysis and does not connect to external services or perform web scraping.</p>
+<h3>Key Features and Capabilities</h3>
+<p>The GHIN Golf Tracker offers an extensive range of analytical features that help golfers understand their game better:</p>
+<h4>Current Handicap Analysis</h4>
+<p>The skill calculates your current handicap index and provides trend analysis to determine if you&#8217;re improving, declining, or maintaining stability. This helps golfers track their progress over time and identify patterns in their performance.</p>
+<h4>Lifetime Performance Metrics</h4>
+<p>Get comprehensive lifetime totals including round counts, best scores, worst scores, and overall scoring distribution. These metrics provide a complete picture of your golfing journey and help identify areas for improvement.</p>
+<h4>Best Differentials Tracking</h4>
+<p>The skill identifies and ranks your best five differentials, complete with course names and dates. This feature is particularly useful for understanding which courses bring out your best performance and tracking your improvement over time.</p>
+<h4>Course Performance Analysis</h4>
+<p>Discover your most frequently played courses with detailed round counts and average scores. This analysis helps identify home course advantages or challenges and can inform practice strategies.</p>
+<h4>Year-by-Year Breakdown</h4>
+<p>Track your performance across different seasons with yearly breakdowns showing round counts and average scores. This feature helps identify seasonal patterns and long-term improvement trends.</p>
+<h4>Advanced Scoring Statistics</h4>
+<p>When available, the skill provides detailed scoring averages by par (3, 4, and 5), GIR% (Greens in Regulation), fairways%, and putts per round. These advanced metrics offer deeper insights into specific aspects of your game.</p>
+<h4>Handicap Range Analysis</h4>
+<p>Understand how your handicap has fluctuated over time with detailed range analysis and corresponding dates. This helps identify periods of significant improvement or decline.</p>
+<h3>System Requirements and Access</h3>
+<p>The GHIN Golf Tracker is designed with security and privacy in mind. It requires only file system read access to a single GHIN data JSON file, with no network access, subprocess execution, or credential handling.</p>
+<h4>Technical Specifications</h4>
+<p>The skill is built using Python 3.8+ and relies on the standard library only, including modules for JSON processing, system operations, date handling, and statistical calculations. This ensures broad compatibility and eliminates external dependencies.</p>
+<h3>Data Format and Input Requirements</h3>
+<p>The script expects a specifically structured JSON file containing comprehensive golf data:</p>
+<pre><code>{
+  "handicap_index": 18.0,
+  "lifetime_rounds": 83,
+  "handicap_history": [
+    {"date": "2026-02-02", "index": 18.0},
+    {"date": "2026-01-15", "index": 17.8}
+  ],
+  "stats": {
+    "par3_avg": 4.06,
+    "par4_avg": 4.94,
+    "par5_avg": 5.73,
+    "gir_pct": 50,
+    "fairways_pct": 65,
+    "putts_avg": 31.2
+  },
+  "scores": [
+    {
+      "date": "2026-02-01",
+      "score": "82A",
+      "course": "Las Vegas Golf Club",
+      "cr_slope": "68.0/117",
+      "differential": 13.5
+    }
+  ]
+}
+</code></pre>
+<h3>Installation and Usage</h3>
+<p>The skill can be installed via ClawHub with a simple command or manually by cloning the repository. Once installed, usage is straightforward:</p>
+<pre><code>python3 scripts/ghin_stats.py /path/to/ghin-data.json
+</code></pre>
+<p>For machine-readable output, add the &#8211;format json flag:</p>
+<pre><code>python3 scripts/ghin_stats.py /path/to/ghin-data.json --format json
+</code></pre>
+<h3>Privacy and Security Features</h3>
+<p>All processing is done locally on the provided data file with no external network connections. The skill doesn&#8217;t store credentials or sensitive data, and all information is processed in memory only without persistent storage. This approach ensures complete privacy and security for your golf data.</p>
+<h3>Output Formats</h3>
+<p>The skill provides two output formats to suit different needs:</p>
+<ul>
+<li><strong>Text Format</strong>: Human-readable formatted report with clear sections and visual indicators</li>
+<li><strong>JSON Format</strong>: Machine-readable structured data for further processing or integration with other tools</li>
+</ul>
+<h3>Error Handling and Reliability</h3>
+<p>The script includes comprehensive error handling for common issues like missing files, malformed JSON, and missing data fields. This ensures reliable operation even with incomplete or imperfect data.</p>
+<h3>Data Collection Considerations</h3>
+<p>Since GHIN doesn&#8217;t offer a public API for score history, data collection requires separate browser automation tooling (not included in this skill). The skill focuses purely on analysis of already-collected data, making it a valuable tool for golfers who have already gathered their historical information.</p>
+<h3>Who Should Use This Skill?</h3>
+<p>The GHIN Golf Tracker is ideal for:</p>
+<ul>
+<li>Golfers who want to track their handicap progress over time</li>
+<li>Players looking to identify strengths and weaknesses in their game</li>
+<li>Golf enthusiasts who enjoy statistical analysis of their performance</li>
+<li>Coaches and instructors who want to provide data-driven feedback to students</li>
+<li>Anyone interested in understanding their golf performance patterns</li>
+</ul>
+<h3>Benefits of Using GHIN Golf Tracker</h3>
+<p>By using this skill, golfers can gain valuable insights that lead to improved performance. The detailed analysis helps identify which aspects of the game need attention, track improvement over time, and make informed decisions about practice focus and course strategy.</p>
+<p>The skill transforms raw GHIN data into actionable insights, making it an essential tool for serious golfers who want to take their game to the next level through data-driven improvement.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/pfrederiksen/ghin-golf-tracker/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/pfrederiksen/ghin-golf-tracker/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

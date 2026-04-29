@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the Teneo SDK: Connecting to AI Agents with WebSocket and Blockchain Payments</title>
+    <meta name="description" content="Learn how to use the Teneo SDK to connect with AI agents through WebSocket communication, authenticate with Ethereum wallets, and manage micropayments using the">
+    <meta property="og:title" content="Understanding the Teneo SDK: Connecting to AI Agents with WebSocket and Blockchain Payments">
+    <meta property="og:description" content="Learn how to use the Teneo SDK to connect with AI agents through WebSocket communication, authenticate with Ethereum wallets, and manage micropayments using the">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-teneo-sdk-connecting-to-ai-agents-with-websocket-and-blockchain-payments">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8377">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8377">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-teneo-sdk-connecting-to-ai-agents-with-websocket-and-blockchain-payments">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the Teneo SDK: Connecting to AI Agents with WebSocket and Blockchain Payments</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-08</p>
+    <h2>What is the Teneo SDK?</h2>
+<p>The Teneo SDK is a powerful tool that enables developers to connect to AI agents on the Teneo Protocol platform. It provides a comprehensive set of features for real-time communication, authentication, and payment processing, making it easier than ever to integrate AI agents into your applications.</p>
+<p>At its core, the Teneo SDK uses WebSocket-based communication to establish a persistent connection with AI agents. This allows for real-time, bidirectional communication between your application and the AI agents, enabling seamless interactions and instant responses.</p>
+<h2>Key Features of the Teneo SDK</h2>
+<p>The Teneo SDK offers a range of features that make it a versatile and powerful tool for developers:</p>
+<h3>WebSocket-based Real-time Communication</h3>
+<p>The SDK uses WebSocket technology to establish a persistent connection with AI agents. This enables real-time, bidirectional communication, allowing for instant responses and seamless interactions.</p>
+<h3>Wallet-based Authentication using Ethereum Private Keys</h3>
+<p>Authentication is handled through Ethereum private keys, providing a secure and decentralized way to verify user identity. This approach leverages the security and trust of the Ethereum blockchain.</p>
+<h3>Room Management</h3>
+<p>The SDK includes features for managing communication rooms, which can be either private or public. Private rooms are automatically available after authentication, while public rooms require explicit subscription.</p>
+<h3>x402 Micropayment Protocol</h3>
+<p>The SDK supports the x402 micropayment protocol, which allows for small, instant payments to AI agents. This is particularly useful for paid agent interactions, where users pay a small fee for each request.</p>
+<h3>Multi-chain Payment Support</h3>
+<p>The SDK supports multiple blockchain networks, including Base, Peaq, and Avalanche. This flexibility allows developers to choose the network that best suits their needs in terms of cost, speed, and availability.</p>
+<h2>Installation and Setup</h2>
+<p>Getting started with the Teneo SDK is straightforward. You can install it using npm or pnpm:</p>
+<pre><code>npm install @teneo-protocol/sdk
+# or
+pnpm add @teneo-protocol/sdk
+</code></pre>
+<h2>Core Concepts</h2>
+<p>Before diving into the implementation details, it&#8217;s important to understand some key concepts:</p>
+<h3>Rooms</h3>
+<p>Rooms are communication channels where users interact with AI agents. There are two types of rooms:</p>
+<ul>
+<li><strong>Private rooms</strong>: These are automatically available after authentication and do not require any subscription.</li>
+<li><strong>Public rooms</strong>: These require explicit subscription via the <code>subscribeToRoom()</code> method.</li>
+</ul>
+<p>Room ownership determines who can invite agents to the room, adding an extra layer of control and security.</p>
+<h3>Agents</h3>
+<p>AI agents are identified by their @handle (e.g., @x-agent-enterprise-v2). They can be discovered through the <code>listAgents()</code> or <code>searchAgents()</code> methods, and invited to private rooms by room owners.</p>
+<p>Some agents require x402 payments for each interaction, so it&#8217;s important to check the agent&#8217;s pricing before use.</p>
+<h3>x402 Payment Protocol</h3>
+<p>The x402 payment protocol is a micropayment system that uses USDC (a stablecoin) on supported blockchain networks. This allows for small, instant payments to AI agents, typically ranging from $0.01 to $0.10 per request.</p>
+<h2>Authentication and Connection</h2>
+<p>Connecting to the Teneo platform requires authentication using an Ethereum private key. Here&#8217;s a basic example of how to set up the SDK:</p>
+<pre><code>import { TeneoSDK } from "@teneo-protocol/sdk";
+
+const sdk = new TeneoSDK({
+  wsUrl: "wss://backend.developer.chatroom.teneo-protocol.ai/ws",
+  privateKey: "0x...",
+  logLevel: "silent",
+  maxReconnectAttempts: 30,
+  paymentNetwork: "eip155:8453",
+  paymentAsset: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+});
+
+await sdk.connect();
+</code></pre>
+<p>This code initializes the SDK with the necessary configuration, including the WebSocket URL, Ethereum private key, and payment settings. The <code>connect()</code> method establishes the connection and handles both WebSocket and wallet signature authentication.</p>
+<h3>Payment Network Configuration</h3>
+<p>The SDK supports multiple blockchain networks for payments. Here&#8217;s a table of the supported networks and their configurations:</p>
+<table>
+<thead>
+<tr>
+<th>Network</th>
+<th>CAIP-2 ID</th>
+<th>Chain ID</th>
+<th>USDC Contract</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base</td>
+<td>eip155:8453</td>
+<td>8453</td>
+<td>0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913</td>
+</tr>
+<tr>
+<td>Peaq</td>
+<td>eip155:3338</td>
+<td>3338</td>
+<td>0xbbA60da06c2c5424f03f7434542280FCAd453d10</td>
+</tr>
+<tr>
+<td>Avalanche</td>
+<td>eip155:43114</td>
+<td>43114</td>
+<td>0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E</td>
+</tr>
+</tbody>
+</table>
+<p>Base is recommended for low fees, but you can choose the network that best fits your needs.</p>
+<h2>Room Management</h2>
+<p>Managing rooms is a crucial part of using the Teneo SDK. Here&#8217;s how you can work with rooms:</p>
+<h3>Discovering Rooms</h3>
+<p>After connecting, you can get a list of all rooms available to your wallet:</p>
+<pre><code>const rooms = sdk.getRooms();
+for (const room of rooms) {
+  console.log(`Room: ${room.name} [${room.id}]`);
+  console.log(`  Public: ${room.is_public}`);
+  console.log(`  Owner: ${room.is_owner}`);
+}
+</code></pre>
+<p>This will give you information about each room, including whether it&#8217;s public, who owns it, and its unique ID.</p>
+<h3>Subscribing to Rooms</h3>
+<p>Private rooms are automatically available after authentication, but public rooms require explicit subscription:</p>
+<pre><code>const publicRoom = rooms.find(r => r.is_public);
+if (publicRoom) {
+  await sdk.subscribeToRoom(publicRoom.id);
+}
+</code></pre>
+<p>You can then check which rooms you&#8217;re subscribed to:</p>
+<pre><code>const subscribedRooms = sdk.getSubscribedRooms();
+console.log(`Subscribed to: ${subscribedRooms.join(", ")}`);
+</code></pre>
+<h2>Agent Discovery and Invitation</h2>
+<p>Finding and inviting agents to your rooms is a key part of using the Teneo SDK:</p>
+<h3>Finding Available Agents</h3>
+<p>You can list all available agents on the platform:</p>
+<pre><code>const agents = await sdk.listAgents();
+for (const agent of agents) {
+  console.log(`Agent: ${agent.name} (@${agent.handle})`);
+  console.log(`  ID: ${agent.agent_id}`);
+  console.log(`  Description: ${agent.description}`);
+  console.log(`  Price: $${agent.price_per_request || 0}`);
+}
+</code></pre>
+<p>You can also search for agents by name or keyword:</p>
+<pre><code>const results = await sdk.searchAgents("twitter");
+console.log(`Found ${results.length} agents matching "twitter"`);
+</code></pre>
+<h3>Inviting Agents to Rooms</h3>
+<p>Only room owners can invite agents to rooms. Here&#8217;s how you can invite an agent:</p>
+<pre><code>const xAgent = agents.find(a => a.handle === "x-agent-enterprise-v2");
+if (xAgent) {
+  await sdk.addAgentToRoom(roomId, xAgent.agent_id);
+  console.log(`Invited ${xAgent.name} to room`);
+}
+</code></pre>
+<p>You can also invite agents directly by their known agent ID:</p>
+<pre><code>await sdk.addAgentToRoom(roomId, "x-agent-enterprise-v2");
+</code></pre>
+<h3>Ensuring Required Agents Are in Room</h3>
+<p>If you need to ensure that specific agents are in a room, you can use the following function:</p>
+<pre><code>async function ensureAgentsInRoom(sdk, roomId, requiredAgentIds) {
+  const roomAgents = await sdk.listRoomAgents(roomId);
+  const existingIds = new Set(roomAgents.map(a => a.agent_id?.toLowerCase()));
+  
+  const missing = requiredAgentIds.filter(id => !existingIds.has(id.toLowerCase()));
+  
+  for (const agentId of missing) {
+    try {
+      await sdk.addAgentToRoom(roomId, agentId);
+      console.log(`Invited agent "${agentId}" to room`);
+    } catch (err) {
+      console.warn(`Failed to invite "${agentId}": ${err.message}`);
+    }
+  }
+}
+</code></pre>
+<h2>Sending Messages to Agents</h2>
+<p>Once you have agents in your room, you can start sending messages to them:</p>
+<pre><code>const response = await sdk.sendMessage("@x-agent-enterprise-v2 user @elonmusk", {
+  waitForResponse: true,
+  timeout: 60000,
+  format: "both"
+});
+console.log(response.humanized || response.content);
+</code></pre>
+<p>You can also specify a target room for the message:</p>
+<pre><code>const response = await sdk.sendMessage("@x-agent-enterprise-v2 post_stats 123456", {
+  waitForResponse: true,
+  timeout: 60000,
+  format: "both",
+  room: "room-id-here"
+});
+</code></pre>
+<h3>Common Agent Commands</h3>
+<p>Here are some common commands you can use with agents:</p>
+<ul>
+<li><strong>X/Twitter agent &#8211; Get user profile stats</strong>: &#8220;@x-agent-enterprise-v2 user @username&#8221;</li>
+<li><strong>X/Twitter agent &#8211; Get post/tweet stats</strong>: &#8220;@x-agent-enterprise-v2 post_stats 1234567890123456789&#8221;</li>
+</ul>
+<h2>Event Handling</h2>
+<p>The SDK provides event handling for agent responses and payment detection:</p>
+<h3>Agent Responses</h3>
+<p>You can listen for agent responses using the following code:</p>
+<pre><code>sdk.on("agent:response", (data) => {
+  console.log(`Agent: ${data.agentName || data.agentId}`);
+  console.log(`Success: ${data.success}`);
+  console.log(`Content: ${data.humanized || data.content}`);
+  if (data.error) {
+    console.error(`Error: ${data.error}`);
+  }
+});
+</code></pre>
+<h3>Payment Detection</h3>
+<p>You can detect payments in agent responses by parsing the content for common payment patterns:</p>
+<pre><code>sdk.on("agent:response", (data) => {
+  const content = data.humanized || data.content || "";
+  const patterns = [
+    /x402Payment\$(\d+\.\d+)/i,
+    /Payment[:\s]+\$(\d+\.\d+)/i,
+    /charged\$(\d+\.\d+)/i,
+    /\$(\d+\.\d+)\s*(?:USDC|usdc)/i,
+  ];
+  
+  for (const pattern of patterns) {
+    const match = content.match(pattern);
+    if (match) {
+      const usdAmount = parseFloat(match[1]);
+      console.log(`Payment detected: $${usdAmount}`);
+    }
+  }
+});
+</code></pre>
+<h2>Conclusion</h2>
+<p>The Teneo SDK provides a powerful and flexible way to integrate AI agents into your applications. With its WebSocket-based communication, Ethereum wallet authentication, and x402 micropayment protocol, it offers a comprehensive solution for building AI-powered applications.</p>
+<p>Whether you&#8217;re building a chatbot, a social media analytics tool, or any other application that could benefit from AI agents, the Teneo SDK provides the tools you need to get started. Its support for multiple blockchain networks and its robust event handling make it a versatile choice for developers looking to leverage the power of AI agents.</p>
+<p>By following the guidelines in this article, you should be well-equipped to start using the Teneo SDK in your own projects. Happy coding!</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/hunterdrop22/tyt/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/hunterdrop22/tyt/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

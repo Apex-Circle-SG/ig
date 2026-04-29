@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the OpenClaw Atlassian CLI Skill: A Comprehensive Guide</title>
+    <meta name="description" content="Explore the OpenClaw Atlassian CLI skill for Jira Cloud operations, organization administration, and workflow automation from the terminal.">
+    <meta property="og:title" content="Understanding the OpenClaw Atlassian CLI Skill: A Comprehensive Guide">
+    <meta property="og:description" content="Explore the OpenClaw Atlassian CLI skill for Jira Cloud operations, organization administration, and workflow automation from the terminal.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-openclaw-atlassian-cli-skill-a-comprehensive-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8432">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8432">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-openclaw-atlassian-cli-skill-a-comprehensive-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the OpenClaw Atlassian CLI Skill: A Comprehensive Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <article>
+<header>
+<h1>Understanding the OpenClaw Atlassian CLI Skill: A Comprehensive Guide</h1>
+<p>Last updated: March 2024</p>
+</header>
+<section>
+<h2>Introduction to the OpenClaw Atlassian CLI Skill</h2>
+<p>The OpenClaw Atlassian CLI skill is a powerful tool designed to interact with Jira Cloud and perform Atlassian organization administration tasks directly from the command line. This skill is particularly useful for developers, project managers, and system administrators who need to automate workflows, manage projects, and handle various Jira operations efficiently.</p>
+</section>
+<section>
+<h2>What the OpenClaw Atlassian CLI Skill Does</h2>
+<p>The OpenClaw Atlassian CLI skill leverages the Atlassian CLI (acli) to perform a wide range of operations, including:</p>
+<ul>
+<li><strong>Jira Work Item Management:</strong> Create, edit, search, assign, transition, comment, clone, link, archive, attach files, and manage watchers for work items.</li>
+<li><strong>Project Management:</strong> Create, list, update, and archive projects. Manage project settings, custom fields, and schemes.</li>
+<li><strong>Board and Sprint Management:</strong> Search and manage boards, list and manage sprints, and view work items within sprints.</li>
+<li><strong>Filter and Dashboard Management:</strong> Create, edit, and manage filters and dashboards.</li>
+<li><strong>Organization Administration:</strong> Manage user accounts, authentication, and organization settings.</li>
+<li><strong>Automation and Integration:</strong> Automate workflows and integrate with other tools and systems.</li>
+<li><strong>AI Agent Interaction:</strong> Interact with the Rovo Dev AI agent for advanced coding and development tasks.</li>
+</ul>
+</section>
+<section>
+<h2>Prerequisites and Authentication</h2>
+<p>Before using the OpenClaw Atlassian CLI skill, ensure that the Atlassian CLI (acli) is installed and authenticated on your system. The binary is not bundled with this skill, so you will need to install it separately.</p>
+<p>To verify the availability of acli, run the following command in your terminal:</p>
+<pre>
+<code>acli --help</code>
+    </pre>
+<p>Authentication is crucial for performing operations with the Atlassian CLI. You can check your authentication status with the following commands:</p>
+<pre>
+<code>acli jira auth status
+acli admin auth status</code>
+    </pre>
+<p>If you are not authenticated, you can use one of the following methods:</p>
+<ul>
+<li><strong>OAuth (Interactive):</strong> Recommended for users as it is interactive and secure.</li>
+<ul>
+<li>
+<pre>
+<code>acli jira auth login --web</code>
+          </pre>
+</li>
+</ul>
+<li><strong>API Token (Non-Interactive):</strong> Recommended for CI/automation as it is non-interactive and secure.</li>
+<ul>
+<li>
+<pre>
+<code>echo "$API_TOKEN" | acli jira auth login --site "mysite.atlassian.net" --email "user@atlassian.com" --token</code>
+          </pre>
+</li>
+</ul>
+<li><strong>Admin API Key:</strong> Required for admin commands only.</li>
+<ul>
+<li>
+<pre>
+<code>echo "$API_KEY" | acli admin auth login --email "admin@atlassian.com" --token</code>
+          </pre>
+</li>
+</ul>
+<li><strong>Switching Between Accounts:</strong> Manage multiple accounts efficiently.</li>
+<ul>
+<li>
+<pre>
+<code>acli jira auth switch --site mysite.atlassian.net --email user@atlassian.com
+acli admin auth switch --org myorgname</code>
+          </pre>
+</li>
+</ul>
+</ul>
+</section>
+<section>
+<h2>Security Best Practices</h2>
+<p>When using the OpenClaw Atlassian CLI skill, it is essential to follow security best practices to protect sensitive information and prevent unauthorized access.</p>
+<h3>Secret Handling</h3>
+<p>Never hardcode tokens or API keys in commands. Always use environment variables or file-based input to ensure the security of sensitive information.</p>
+<ul>
+<li>
+<pre>
+<code>acli jira workitem create --summary "Fix login bug" --project "TEAM" --type "Bug" --from-json template.json</code>
+        </pre>
+</li>
+</ul>
+<p>Never log, echo, or display tokens in the output. Avoid piping secrets through intermediate files that persist on disk.</p>
+<p>Prefer OAuth for interactive use and only use token-based auth for CI/automation where OAuth is not feasible. Do not store tokens in shell history.</p>
+<p>If using environment variables, ensure they are set in the environment rather than inlined as literal values.</p>
+<h3>Destructive Operations</h3>
+<p>Some commands are destructive or irreversible. Always confirm with the user before executing these commands:</p>
+<ul>
+<li>
+<pre>
+<code>acli jira workitem delete
+acli jira project delete
+acli admin user delete
+acli admin user deactivate
+acli jira field delete</code>
+        </pre>
+</li>
+</ul>
+<p>These commands are impactful but reversible:</p>
+<ul>
+<li>
+<pre>
+<code>acli jira workitem archive / unarchive
+acli jira project archive / restore
+acli admin user cancel-delete
+acli jira field cancel-delete</code>
+        </pre>
+</li>
+</ul>
+<p>Agent safety rules:</p>
+<ul>
+<li>Never run destructive commands without explicit user confirmation, even if &#8211;yes is available.</li>
+<li>When bulk-targeting via &#8211;jql or &#8211;filter, first run a search with the same query to show the user what will be affected.</li>
+<li>Prefer &#8211;json output to verify targets before applying destructive changes.</li>
+<li>Do not combine &#8211;yes with destructive bulk operations unless the user explicitly requests unattended execution.</li>
+</ul>
+</section>
+<section>
+<h2>Command Structure and Common Patterns</h2>
+<p>The command structure for acli follows the pattern:</p>
+<pre>
+<code>acli &lt;command&gt; [&lt;subcommand&gt; ...] {MANDATORY FLAGS} [OPTIONAL FLAGS]</code>
+    </pre>
+<p>There are four top-level command groups:</p>
+<ul>
+<li><strong>acli jira:</strong> Jira Cloud operations (work items, projects, boards, sprints, filters, dashboards, fields).</li>
+<li><strong>acli admin:</strong> Organization administration (user management, auth).</li>
+<li><strong>acli rovodev:</strong> Rovo Dev AI coding agent (Beta).</li>
+<li><strong>acli feedback:</strong> Submit feedback and bug reports.</li>
+</ul>
+<h3>Output Formats</h3>
+<p>Most list/search commands support &#8211;json, &#8211;csv, and default table output for flexible data handling.</p>
+<h3>Bulk Operations</h3>
+<p>Target multiple items via:</p>
+<ul>
+<li>
+<pre>
+<code>--key "KEY-1,KEY-2,KEY-3":</code>
+        </pre>
+<p>        Comma-separated keys.</li>
+<li>
+<pre>
+<code>--jql "project = TEAM AND status = 'To Do'":</code>
+        </pre>
+<p>        JQL query.</li>
+<li>
+<pre>
+<code>--filter 10001:</code>
+        </pre>
+<p>        Saved filter ID.</li>
+<li>
+<pre>
+<code>--from-file "items.txt":</code>
+        </pre>
+<p>        File with keys/IDs (comma/whitespace/newline separated).</li>
+</ul>
+<p>Use &#8211;ignore-errors to continue past failures in bulk operations and &#8211;yes or -y to skip confirmation prompts, which is useful for automation.</p>
+<h3>Pagination</h3>
+<p>Manage result sets with:</p>
+<ul>
+<li>
+<pre>
+<code>--limit N:</code>
+        </pre>
+<p>        Maximum items to return (defaults vary: 30-50).</li>
+<li>
+<pre>
+<code>--paginate:</code>
+        </pre>
+<p>        Fetch all pages automatically (overrides &#8211;limit).</li>
+</ul>
+<h3>JSON Templates</h3>
+<p>Many create/edit commands support &#8211;generate-json to produce a template and &#8211;from-json to consume it:</p>
+<pre>
+<code>acli jira workitem create --generate-json > template.json
+# edit template.json
+acli jira workitem create --from-json template.json</code>
+    </pre>
+</section>
+<section>
+<h2>Quick Reference: Most Common Operations</h2>
+<h3>Work Items</h3>
+<p>Create, search, view, edit, transition, assign, comment, and bulk create work items with these common operations:</p>
+<pre>
+<code># Create
+acli jira workitem create --summary "Fix login bug" --project "TEAM" --type "Bug"
+acli jira workitem create --summary "New feature" --project "TEAM" --type "Story" --assignee "@me" --label "frontend,p1"
+
+# Search
+acli jira workitem search --jql "project = TEAM AND assignee = currentUser()" --json
+acli jira workitem search --jql "project = TEAM AND status = 'In Progress'" --fields "key,summary,assignee" --csv
+
+# View
+acli jira workitem view KEY-123
+acli jira workitem view KEY-123 --json --fields "*all"
+
+# Edit
+acli jira workitem edit --key "KEY-123" --summary "Updated title" --assignee "user@atlassian.com"
+
+# Transition
+acli jira workitem transition --key "KEY-123" --status "Done"
+acli jira workitem transition --jql "project = TEAM AND sprint in openSprints()" --status "In Progress"
+
+# Assign
+acli jira workitem assign --key "KEY-123" --assignee "@me"
+
+# Comment
+acli jira workitem comment create --key "KEY-123" --body "Work completed"
+
+# Bulk Create
+acli jira workitem create-bulk --from-csv issues.csv</code>
+    </pre>
+<h3>Projects</h3>
+<p>List, view, and create projects with these commands:</p>
+<pre>
+<code>acli jira project list --paginate --json
+acli jira project view --key "TEAM" --json
+acli jira project create --from-project "TEAM" --key "NEW" --name "New Project"</code>
+    </pre>
+<h3>Boards &#038; Sprints</h3>
+<p>Search, list, and manage boards and sprints with these operations:</p>
+<pre>
+<code>acli jira board search --project "TEAM"
+acli jira board list-sprints --id 123 --state active
+acli jira sprint list-workitems --sprint 1 --board 6</code>
+    </pre>
+</section>
+<section>
+<h2>Detailed Command Reference</h2>
+<p>For complete details on every command, including flag parameters and examples, refer to the detailed reference guides:</p>
+<ul>
+<li>
+        <a href="https://github.com/openclaw/skills/blob/main/references/jira-workitem-commands.md" target="_blank" rel="noopener noreferrer">Jira Work Item Commands</a>: Create, edit, search, assign, transition, comment, clone, link, archive, attach files, manage watchers.
+      </li>
+<li>
+        <a href="https://github.com/openclaw/skills/blob/main/references/other-commands.md" target="_blank" rel="noopener noreferrer">Other Commands</a>: Jira project, board, sprint, filter, dashboard, field. Admin, rovodev, feedback.
+      </li>
+</ul>
+<p>These references provide comprehensive information to help you maximize the potential of the OpenClaw Atlassian CLI skill.</p>
+</section>
+<section>
+<h2>Conclusion</h2>
+<p>The OpenClaw Atlassian CLI skill is an invaluable tool for anyone working with Jira Cloud and Atlassian organizations. By leveraging the power of the Atlassian CLI, you can streamline workflows, automate tasks, and enhance productivity. Always follow security best practices and confirm with users before executing destructive operations to ensure a safe and efficient working environment.</p>
+</section>
+</article>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/peetzweg/atlassian-cli/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/peetzweg/atlassian-cli/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

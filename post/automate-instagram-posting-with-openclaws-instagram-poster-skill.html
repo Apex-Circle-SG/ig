@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Automate Instagram Posting with OpenClaw&#8217;s Instagram Poster Skill</title>
+    <meta name="description" content="The Instagram Poster skill lets AI agents post images to Instagram automatically using residential proxies to bypass bot detection. Learn how to set up and use ">
+    <meta property="og:title" content="Automate Instagram Posting with OpenClaw&#8217;s Instagram Poster Skill">
+    <meta property="og:description" content="The Instagram Poster skill lets AI agents post images to Instagram automatically using residential proxies to bypass bot detection. Learn how to set up and use ">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/automate-instagram-posting-with-openclaws-instagram-poster-skill">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8877">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8877">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/automate-instagram-posting-with-openclaws-instagram-poster-skill">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Automate Instagram Posting with OpenClaw&#8217;s Instagram Poster Skill</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <h2>What is the Instagram Poster Skill?</h2>
+<p>The Instagram Poster skill is an OpenClaw automation tool that enables AI agents to post images directly to Instagram without triggering bot detection systems. This skill leverages residential proxies through the human-browser skill to appear as legitimate human activity on the platform.</p>
+<h2>Core Functionality</h2>
+<p>This skill provides several key capabilities:</p>
+<ul>
+<li>Automatic image posting to Instagram from AI agents</li>
+<li>Bypasses Instagram&#8217;s bot detection using residential IP addresses</li>
+<li>Generates images using WaveSpeed or accepts custom images</li>
+<li>Schedules and publishes posts with captions</li>
+<li>Maintains session persistence to avoid repeated logins</li>
+</ul>
+<h2>Technical Requirements</h2>
+<p>To use the Instagram Poster skill, you need:</p>
+<ul>
+<li>IG_USERNAME and IG_PASSWORD environment variables or saved session</li>
+<li>The human-browser skill installed for residential proxy functionality</li>
+<li>Human Browser subscription for residential IP access</li>
+<li>Valid Instagram account credentials</li>
+</ul>
+<h2>Quick Start Guide</h2>
+<p>Here&#8217;s how to get started with the Instagram Poster skill:</p>
+<h3>Basic Image Posting</h3>
+<pre><code>node {baseDir}/scripts/post.js \
+--image ./photo.jpg \
+--caption "Good morning 🌅 #photography" \
+--user YOUR_USERNAME \
+--pass YOUR_PASSWORD
+</code></pre>
+<h3>Posting WaveSpeed-Generated Images</h3>
+<pre><code># 1. Generate image
+node /workspace/.agents/skills/wavespeed/scripts/wavespeed.js generate \
+--model flux-schnell --prompt "sunset over mountains" --output /tmp/post.png
+
+# 2. Post to Instagram
+node {baseDir}/scripts/post.js \
+--image /tmp/post.png \
+--caption "Golden hour 🌍 #nature #photography"
+</code></pre>
+<h2>Configuration Options</h2>
+<p>The skill supports several command-line flags and environment variables:</p>
+<table>
+<tr>
+<th>Flag</th>
+<th>Env Variable</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>&#8211;image</td>
+<td>IG_IMAGE</td>
+<td>Local file path or HTTPS URL</td>
+</tr>
+<tr>
+<td>&#8211;caption</td>
+<td>IG_CAPTION</td>
+<td>Post caption (optional)</td>
+</tr>
+<tr>
+<td>&#8211;user</td>
+<td>IG_USERNAME</td>
+<td>Instagram username</td>
+</tr>
+<tr>
+<td>&#8211;pass</td>
+<td>IG_PASSWORD</td>
+<td>Instagram password</td>
+</tr>
+<tr>
+<td>&#8211;session</td>
+<td>IG_SESSION_PATH</td>
+<td>Cookie session file (default: ~/.openclaw/ig-session.json)</td>
+</tr>
+</table>
+<h2>Session Management</h2>
+<p>The skill implements intelligent session caching:</p>
+<ul>
+<li>First run: logs in and saves cookies to ~/.openclaw/ig-session.json</li>
+<li>Subsequent runs: reuses the session, eliminating the need to log in again</li>
+<li>Session persistence reduces login friction and maintains account security</li>
+</ul>
+<h2>Configuration in openclaw.json</h2>
+<p>You can configure the skill through your openclaw.json file:</p>
+<pre><code>{
+  "skills": {
+    "entries": {
+      "instagram-poster": {
+        "env": {
+          "IG_USERNAME": "your_username",
+          "IG_PASSWORD": "your_password"
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<h2>How It Works</h2>
+<p>The Instagram Poster skill operates through a sophisticated process:</p>
+<ol>
+<li>Launches a stealth browser with Romanian residential IP via human-browser</li>
+<li>Logs into Instagram as a real iPhone user, passing all bot detection checks</li>
+<li>Uploads your image and submits the caption</li>
+<li>Saves session cookies for future use</li>
+</ol>
+<h2>Agent Usage Example</h2>
+<p>Here&#8217;s how an AI agent might use this skill:</p>
+<pre><code>User: Post this sunset photo to Instagram with caption "Golden hour 🌅"
+Agent: node {baseDir}/scripts/post.js --image /tmp/sunset.jpg --caption "Golden hour 🌅"
+</code></pre>
+<h2>Requirements Summary</h2>
+<p>To successfully use the Instagram Poster skill, ensure you have:</p>
+<ul>
+<li>human-browser skill installed</li>
+<li>Active Human Browser subscription for residential proxy access</li>
+<li>Valid Instagram account credentials</li>
+<li>Appropriate image files or WaveSpeed integration</li>
+</ul>
+<h2>Benefits</h2>
+<p>This skill offers several advantages:</p>
+<ul>
+<li>Automated Instagram posting without manual intervention</li>
+<li>High success rate due to residential IP bypassing</li>
+<li>Session persistence reduces login requirements</li>
+<li>Integration with WaveSpeed for AI-generated content</li>
+<li>Flexible configuration options for different use cases</li>
+</ul>
+<h2>Limitations</h2>
+<p>Consider these limitations:</p>
+<ul>
+<li>Requires Human Browser subscription (paid service)</li>
+<li>Depends on external residential proxy service</li>
+<li>Instagram&#8217;s terms of service should be reviewed</li>
+<li>May require periodic session refresh</li>
+</ul>
+<h2>Best Practices</h2>
+<p>For optimal results:</p>
+<ul>
+<li>Use high-quality images that comply with Instagram&#8217;s guidelines</li>
+<li>Include relevant hashtags in captions</li>
+<li>Monitor account activity for any unusual behavior</li>
+<li>Keep credentials secure and updated</li>
+<li>Test with non-critical accounts first</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The Instagram Poster skill provides a powerful automation solution for AI agents needing to interact with Instagram programmatically. By leveraging residential proxies and intelligent session management, it offers a reliable way to post content while avoiding common bot detection triggers. Whether you&#8217;re building social media management tools or automated content distribution systems, this skill provides the foundation for seamless Instagram integration.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/al1enjesus/instagram-poster/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/al1enjesus/instagram-poster/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

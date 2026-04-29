@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How the OpenClaw Context Restore Skill Helps You Resume Work Seamlessly</title>
+    <meta name="description" content="Learn how the OpenClaw context-restore skill quickly restores your conversation context after a /new session, letting you pick up right where you left off.">
+    <meta property="og:title" content="How the OpenClaw Context Restore Skill Helps You Resume Work Seamlessly">
+    <meta property="og:description" content="Learn how the OpenClaw context-restore skill quickly restores your conversation context after a /new session, letting you pick up right where you left off.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/how-the-openclaw-context-restore-skill-helps-you-resume-work-seamlessly">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9239">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9239">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/how-the-openclaw-context-restore-skill-helps-you-resume-work-seamlessly">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>How the OpenClaw Context Restore Skill Helps You Resume Work Seamlessly</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-18</p>
+    <h1>How the OpenClaw Context Restore Skill Helps You Resume Work Seamlessly</h1>
+<p>The OpenClaw project provides a collection of reusable skills that extend the capabilities of AI agents. One of the most practical skills in this collection is the <code>context-restore</code> skill. Its primary purpose is to bring back the relevant parts of a previous conversation after a user starts a new session with the <code>/new</code> command. By doing so, it eliminates the need to repeat background information and lets users continue working on their projects almost instantly.</p>
+<p>When a user invokes <code>/context-restore</code> (or its alias <code>/restore</code>) the skill follows a well‑defined execution flow. First, it detects the user’s intent by looking for trigger keywords in the message. These triggers include Chinese phrases such as 恢复上下文, 继续之前的工作, 之前聊到哪了 and English phrases like restore context, continue previous work, where did we leave off, and get back to work. Once the intent is recognized, the skill loads the most recent compressed context file, which by default is located at <code>compressed_context/latest_compressed.json</code>.</p>
+<p>The compressed context file is produced by the companion <code>context-save</code> skill. At the end of each session, <code>context-save</code> writes a JSON representation of the conversation, including recent operations, active projects, pending tasks, and a short timeline. The <code>context-restore</code> skill then parses this JSON (or falls back to plain text if the file is not valid JSON) and extracts the key information that the user needs to resume work.</p>
+<p>Extracted data includes a list of active projects with their current progress percentages, a prioritized list of pending tasks, a summary of recent operations (such as files edited, commands run, or cron jobs added), and optional highlights from the MEMORY.md file. Depending on the level requested by the user, the skill formats this information into one of three output styles: minimal, normal, or detailed.</p>
+<p>The minimal level provides a single‑sentence snapshot. For example, it might output: <code>✅ 上下文已恢复 状态：Hermes Plan 进行中（数据管道完成，待测试）</code>. This is useful when the user only needs a quick reminder of what they were working on.</p>
+<p>The normal level, which is the default, offers a more structured view. It displays a list of active projects with emojis and progress bars, a categorized task list (high, medium, low priority), and a bullet list of recent operations. A typical normal‑level output looks like:</p>
+<ul>
+<li>✅ 上下文已恢复</li>
+<li>📊 项目状态列表</li>
+<li>🗒️ 待办任务列表</li>
+<li>⏱️ 最近操作记录</li>
+</ul>
+<p>The detailed level goes even further, providing a full session overview, a timeline of the past week, and a preview of the raw compressed content. This mode is ideal for users who want to conduct a weekly review or need to audit what happened over several days.</p>
+<p>Beyond the interactive command line usage, the skill exposes a rich Python API that other skills can consume. Functions such as <code>get_context_summary</code> return a JSON object containing metadata, operations, projects, tasks, timeline, and memory highlights. This enables skills like <code>summarize</code>, <code>task-manager</code>, and <code>weekly-review</code> to build on the restored context without re‑implementing the parsing logic.</p>
+<p>The command‑line interface supports a variety of options. Users can specify a custom context file with <code>-f</code> or <code>--file</code>, choose the output level with <code>-l</code> or <code>--level</code>, and write the result to a file via <code>-o</code> or <code>--output</code>. For programmatic consumption, the <code>--summary</code> flag outputs the structured JSON summary. The <code>--confirm</code> flag adds a user confirmation step before proceeding, which is handy in automated workflows where a human checkpoint is desired.</p>
+<p>Advanced features include Telegram‑friendly message chunking. When the <code>--telegram</code> flag is present, the skill automatically splits any output longer than 4000 characters into multiple messages, each prefixed with a part indicator like <code>[1/3]</code>. This ensures compatibility with Telegram’s message length limits without manual intervention.</p>
+<p>Phase 2 of the skill introduced timeline and filtering capabilities. With <code>--timeline</code> users can view aggregated operations on a daily, weekly, or monthly basis. The <code>--period</code> option controls the granularity, while <code>--filter</code> lets users narrow the output to specific keywords—for instance, showing only entries that mention “Hermes Plan” or “project”. The <code>--diff</code> flag enables comparison between two context files, highlighting added, removed, or modified projects and operations, which is useful for tracking progress across sessions.</p>
+<p>Phase 3 added automatic triggering. The <code>--auto</code> flag makes the skill monitor the context file for changes and restore the context whenever a modification is detected. Pairing <code>--auto</code> with <code>--quiet</code> suppresses informational messages, making the skill suitable for cron‑based background jobs. The <code>--check-only</code> option returns an exit code of 0 when no changes are found and 1 when changes exist, enabling external scripts to react accordingly. Finally, <code>--install-cron</code> generates and installs a cron job that runs the skill at a user‑defined interval (default five minutes), ensuring that the context is always up to date without manual effort.</p>
+<p>Error handling is built‑in to provide a graceful experience. If the context file is missing, the skill creates an empty context and informs the user that it will start from a fresh session. Corrupted files trigger a fallback to a minimal version, and permission issues are logged silently to avoid breaking the user’s workflow.</p>
+<p>In practical terms, the context‑restore skill transforms the way users interact with AI‑augmented workflows. Imagine a developer who ends a work session, issues <code>/new</code> to start a clean slate, and then immediately types <code>/context-restore</code>. Within seconds, the skill presents a concise summary of the active Hermes Plan, the pending task to write unit tests for the data pipeline, and the recent addition of three cron jobs. The developer can then dive straight into coding without spending minutes re‑explaining the situation to the AI.</p>
+<p>For teams that rely on asynchronous communication, the skill offers a reliable way to preserve knowledge across time zones. A teammate in a different region can start a new session, run <code>/context-restore --level detailed</code>, and instantly view a seven‑day timeline that shows who contributed what, which features were completed, and what blockers remain. This reduces the need for lengthy handover notes and keeps everyone aligned.</p>
+<p>From an SEO perspective, incorporating the context‑restore skill into a WordPress site can improve user engagement metrics. Visitors who find value in the quick‑resume functionality are likely to stay longer, explore related content, and return for future sessions. By documenting the skill in a well‑structured blog post—complete with clear headings, bullet points, and practical examples—site owners can target long‑tail keywords such as “how to restore AI conversation context”, “OpenClaw context restore tutorial”, and “automate context saving in AI workflows”.</p>
+<p>To implement the skill on a WordPress‑hosted AI assistant, administrators would first ensure that the OpenClaw skills repository is cloned into the server’s environment. Then, they would add a custom command handler that maps the slash command <code>/context-restore</code> to the skill’s entry point (<code>python restore_context.py</code>). Optional middleware can be configured to automatically invoke <code>context-save</code> on session end and <code>context-restore</code> on session start, creating a seamless loop.</p>
+<p>In summary, the OpenClaw context‑restore skill is a powerful, flexible tool that bridges the gap between disjointed AI sessions. Its combination of intent detection, context extraction, tiered output levels, API accessibility, command‑line flexibility, Telegram chunking, timeline views, diff capabilities, and automated triggering makes it indispensable for anyone who wants to maintain continuity in their AI‑augmented work. By integrating this skill into a WordPress‑based platform, site owners can offer their users a professional‑grade experience that minimizes friction, maximizes productivity, and keeps the focus on creative problem‑solving rather than repetitive recaps.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/alexunitario-sketch/context-restore/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/alexunitario-sketch/context-restore/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering the OpenClaw Claude Code Task Skill: A Comprehensive Guide</title>
+    <meta name="description" content="Learn how to use the Claude Code Task skill in OpenClaw to run complex, asynchronous AI agent workflows for coding, research, and multi-step automations.">
+    <meta property="og:title" content="Mastering the OpenClaw Claude Code Task Skill: A Comprehensive Guide">
+    <meta property="og:description" content="Learn how to use the Claude Code Task skill in OpenClaw to run complex, asynchronous AI agent workflows for coding, research, and multi-step automations.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-the-openclaw-claude-code-task-skill-a-comprehensive-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8866">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8866">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-the-openclaw-claude-code-task-skill-a-comprehensive-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering the OpenClaw Claude Code Task Skill: A Comprehensive Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-14</p>
+    <p>In the rapidly evolving landscape of AI-driven development, the ability to offload complex tasks to intelligent agents is a game-changer. Within the OpenClaw ecosystem, the <strong>claude-code-task</strong> skill stands out as a powerful utility designed for developers and power users who need to handle heavy-lifting tasks without keeping a session open. This article explores exactly what this skill does and how to harness its capabilities effectively.</p>
+<h3>What is the Claude Code Task Skill?</h3>
+<p>At its core, the Claude Code Task skill is an asynchronous execution engine for Claude Code. Unlike a quick query or a simple chat interaction, this skill is purpose-built for tasks that require time, deep reasoning, and file system interaction. By leveraging this skill, you can launch Claude Code in the background and have the results delivered directly to your preferred communication platform, such as Telegram or WhatsApp.</p>
+<p>This tool is ideal for operations like codebase refactoring, multi-step research, large-scale file generation, and complex technical analysis. It is explicitly <em>not</em> intended for simple, real-time interactive questions where you expect an immediate, turn-based reply.</p>
+<h3>The Power of Async Execution</h3>
+<p>The standout feature of this skill is its asynchronous nature. When you trigger a task, the process runs via <code>nohup</code>, meaning it continues even after you disconnect from your terminal. This zero-token usage while the task is working allows you to queue up complex assignments, walk away, and check your notification channels when the work is complete.</p>
+<p>The workflow follows a strict pattern to ensure reliability:</p>
+<ul>
+<li><strong>Planning:</strong> Before launch, you must state your goal and the expected outcome.</li>
+<li><strong>Validation:</strong> The script performs a routing validation to ensure your session credentials—specifically for Telegram threads—are correctly aligned.</li>
+<li><strong>Execution:</strong> The task runs in the background.</li>
+<li><strong>Notification:</strong> Upon completion, the result is pushed back to your chosen messaging platform.</li>
+</ul>
+<h3>Key Operational Rules</h3>
+<p>To use this skill successfully, you must adhere to several mandatory patterns. First and foremost is the <strong>Async Boundary Rule</strong>: you should not wait for the task to complete in your current session. Once you receive the launch confirmation—which includes the Process ID (PID) and confirmation that the environment is ready—you should stop the current interaction and wait for the wake-up event later.</p>
+<p>Furthermore, never attempt to inject prompt text directly into the shell command. Because special characters and newlines can break argument parsing, you are required to save your task prompt to a file (e.g., <code>/tmp/cc-prompt.txt</code>) and then pass it using command substitution: <code>$(cat /tmp/cc-prompt.txt)</code>.</p>
+<h3>Handling Telegram and WhatsApp Routing</h3>
+<p>The skill places a high emphasis on thread safety, especially in Telegram. When working in threaded environments, you must use the specific session key, typically formatted as <code>agent:main:main:thread:[THREAD_ID]</code>. This ensures that the AI’s output is routed back to the exact thread where you requested the work, preventing the frustration of messages being sent to the wrong channel or user context.</p>
+<p>For those using WhatsApp, the process is equally structured, utilizing the <code>--session</code> flag with the appropriate group JID to ensure seamless delivery. The system is designed with a &#8216;fail-fast&#8217; philosophy: if the routing metadata is inconsistent or the session cannot be resolved, the script will exit immediately rather than risking a misdirected or silent failure.</p>
+<h3>When to Use This Skill</h3>
+<p>You should consider deploying this skill when your task involves:</p>
+<ul>
+<li><strong>Deep Research:</strong> Performing web searches and synthesizing competitive analysis.</li>
+<li><strong>Refactoring:</strong> Transforming large codebases that require multiple passes or logic verification.</li>
+<li><strong>Complex Automation:</strong> Orchestrating workflows that involve file system modifications, running build scripts, and summarizing outputs.</li>
+<li><strong>Documentation:</strong> Generating extensive project documentation or technical reports based on your existing files.</li>
+</ul>
+<h3>Conclusion</h3>
+<p>The OpenClaw Claude Code Task skill is more than just a convenience; it is an essential tool for scaling your productivity. By decoupling the execution of AI agents from your immediate interaction time, you allow yourself to focus on higher-level problem solving while the agent handles the heavy lifting. By following the strict guidelines on session routing, file-based prompt management, and the async flow, you can build a reliable and powerful automation pipeline that works around the clock. Whether you are managing complex infrastructure as code or conducting deep data analysis, mastering this skill will significantly upgrade your developer toolkit.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/vsevolodustinov/claude-code-task/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/vsevolodustinov/claude-code-task/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to Use the OpenClaw Kosmi-DJ Skill for Video Watch Parties</title>
+    <meta name="description" content="Explore how OpenClaw&#8217;s Kosmi-DJ skill automates video playback, loop control, and watch party room management for seamless user experiences.">
+    <meta property="og:title" content="How to Use the OpenClaw Kosmi-DJ Skill for Video Watch Parties">
+    <meta property="og:description" content="Explore how OpenClaw&#8217;s Kosmi-DJ skill automates video playback, loop control, and watch party room management for seamless user experiences.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/how-to-use-the-openclaw-kosmi-dj-skill-for-video-watch-parties">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9101">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9101">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/how-to-use-the-openclaw-kosmi-dj-skill-for-video-watch-parties">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>How to Use the OpenClaw Kosmi-DJ Skill for Video Watch Parties</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-16</p>
+    <h1>How to Use the OpenClaw Kosmi-DJ Skill for Video Watch Parties</h1>
+<p>The OpenClaw Kosmi-DJ skill is a powerful tool that allows users to turn an agent into a video DJ for Kosmi watch party rooms. This skill leverages agent-browser (Chromium automation via accessibility-tree snapshots) to navigate to a Kosmi room, queue videos by URL, and auto-loop playback. In this article, we&#8217;ll explore how to use this skill effectively and streamline your video watch parties with automation.</p>
+<h2>Prerequisites</h2>
+<p>Before diving into the Kosmi-DJ skill, ensure you meet the following prerequisites:</p>
+<ul>
+<li><strong>agent-browser CLI</strong> installed and on PATH (<code>npm install -g agent-browser</code> or available in the environment).</li>
+<li>An <code>.env</code> file at <code>${CLAUDE_PLUGIN_ROOT}/.env</code> containing the room URL and credentials.</li>
+<li>Persistent session support via the <code>AGENT_BROWSER_SESSION_NAME</code> environment variable (to keep cookies/localStorage between runs).</li>
+</ul>
+<h2>Environment Variables</h2>
+<p>Load the following environment variables from <code>${CLAUDE_PLUGIN_ROOT}/.env</code> before any agent-browser calls:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KOSMI_ROOM_URL</code></td>
+<td>Yes</td>
+<td>Full URL to the Kosmi room (e.g., <code>https://app.kosmi.io/room/XXXXX</code>).</td>
+</tr>
+<tr>
+<td><code>KOSMI_EMAIL</code></td>
+<td>No</td>
+<td>Login email (skip if using persistent session).</td>
+</tr>
+<tr>
+<td><code>KOSMI_PASSWORD</code></td>
+<td>No</td>
+<td>Login password (skip if using persistent session).</td>
+</tr>
+<tr>
+<td><code>KOSMI_BOT_NAME</code></td>
+<td>No</td>
+<td>Display name in room (default: <code>clawdbot</code>).</td>
+</tr>
+<tr>
+<td><code>AGENT_BROWSER_SESSION_NAME</code></td>
+<td>Yes</td>
+<td>Session persistence key (default: <code>kosmi-dj-session</code>).</td>
+</tr>
+<tr>
+<td><code>AGENT_BROWSER_ENCRYPTION_KEY</code></td>
+<td>No</td>
+<td>Hex key to encrypt stored session data.</td>
+</tr>
+</tbody>
+</table>
+<h2>Core Workflow</h2>
+<ol>
+<li><strong>Connect to Room</strong><br />The skill uses <code>${CLAUDE_PLUGIN_ROOT}/skills/kosmi-dj/scripts/kosmi-connect.sh</code> to connect to the Kosmi room. It performs the following steps:
+<ul>
+<li>Opens the Kosmi room URL in agent-browser and waits for the page to load.</li>
+<li>Takes an accessibility snapshot to detect the current UI state.</li>
+<li>If a nickname/name prompt appears, it fills it with <code>KOSMI_BOT_NAME</code> and clicks Join.</li>
+<li>If a login prompt appears, it fills the email/password and submits.</li>
+<li>Verifies the connection by confirming room UI elements are present.</li>
+</ul>
+</li>
+<li><strong>Play a Video by URL</strong><br />To play a video, use <code>${CLAUDE_PLUGIN_ROOT}/skills/kosmi-dj/scripts/kosmi-play.sh &lt;VIDEO_URL&gt;</code> to:
+<ul>
+<li>Ensure the connection (runs connect idempotently).</li>
+<li>Open the Apps/media modal in Kosmi.</li>
+<li>Select the URL/link input mode.</li>
+<li>Fill the URL textbox with the provided video URL.</li>
+<li>Click Play (or press Enter as a fallback).</li>
+<li>Verify playback by checking for player UI elements.</li>
+</ul>
+</li>
+<li><strong>Auto-Loop DJ Mode</strong><br />Execute <code>${CLAUDE_PLUGIN_ROOT}/skills/kosmi-dj/scripts/kosmi-loop.sh</code> to enter an auto-loop DJ mode. The script:
+<ul>
+<li>Connects to the room.</li>
+<li>Enters a fetch→play→wait→repeat cycle:
+<ul>
+<li>Retrieves a video URL (from a provided list or agent finds one).</li>
+<li>Plays the video.</li>
+<li>Periodically polls the room to detect when the video ends.</li>
+<li>When the video ends, plays the next video.</li>
+</ul>
+</li>
+<li>Continues until interrupted or a stop signal is received.</li>
+<li>Writes a PID file at <code>/tmp/kosmi-dj-loop.pid</code> for stop/status commands.</li>
+</ul>
+</li>
+</ol>
+<h2>agent-browser CLI Reference</h2>
+<p>All browser automation goes through the agent-browser CLI. Key commands include:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Usage</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>open &lt;url&gt;</code></td>
+<td><code>agent-browser open "$URL"</code></td>
+<td>Navigate to URL.</td>
+</tr>
+<tr>
+<td><code>snapshot</code></td>
+<td><code>agent-browser snapshot -i -C --json</code></td>
+<td>Get interactive elements as JSON.</td>
+</tr>
+<tr>
+<td><code>click &lt;ref&gt;</code></td>
+<td><code>agent-browser click @ref123</code></td>
+<td>Click an element by ref ID.</td>
+</tr>
+<tr>
+<td><code>fill &lt;ref&gt; &lt;text&gt;</code></td>
+<td><code>agent-browser fill @ref123 "text"</code></td>
+<td>Fill a textbox.</td>
+</tr>
+</tbody>
+</table>
+<p>For a detailed command reference, refer to <code>references/agent-browser-commands.md</code>.</p>
+<h2>Snapshot-Based Element Discovery</h2>
+<p>Kosmi&#8217;s UI is dynamic, and element ref IDs change between page loads. The correct approach involves:</p>
+<ol>
+<li>Taking a snapshot:</li>
+<li>Parsing refs from <code>data.refs</code>.</li>
+<li>Finding the target element by matching <code>role</code> (button, textbox, link) and <code>name</code> (case-insensitive substring match).</li>
+<li>Using the ref ID (prefixed with <code>@</code>) for click/fill actions.</li>
+</ol>
+<p>For the Kosmi-specific UI element map (button names, modal flow), refer to <code>references/kosmi-ui-map.md</code>.</p>
+<h2>Debug / Inspect</h2>
+<p>Run <code>${CLAUDE_PLUGIN_ROOT}/skills/kosmi-dj/scripts/kosmi-snapshot-debug.sh</code> to dump a human-readable snapshot of all interactive elements currently visible. Use this to discover exact button names and textbox labels in the Kosmi room.</p>
+<h2>Error Handling</h2>
+<p>If you encounter errors, follow these troubleshooting steps:</p>
+<ul>
+<li><strong>agent-browser not installed:</strong> Install it using <code>npm install -g agent-browser</code>.</li>
+<li><strong>No refs in snapshot:</strong> The page may still be loading; add <code>wait 1500</code> and retry.</li>
+<li><strong>URL textbox not found:</strong> The Kosmi UI may have been updated; run the debug snapshot script and update <code>references/kosmi-ui-map.md</code>.</li>
+<li><strong>Login fails:</strong> Check credentials in <code>.env</code> or delete the session to force re-auth: <code>agent-browser session delete kosmi-dj-session</code>.</li>
+</ul>
+<h2>Token Efficiency</h2>
+<p>To minimize token burn for long-running DJ loops:</p>
+<ul>
+<li>Use cron-style scheduling (<code>crontab</code> or <code>watch</code>) instead of agent idle-polling.</li>
+<li>The loop script sleeps between polls (configurable interval, default 30s).</li>
+<li>The agent only wakes to check if the video ended, queue the next one, and sleep again.</li>
+<li>For fully hands-off operation, use the <code>/dj-start</code> command to launch the loop as a background process.</li>
+</ul>
+<h2>Additional Resources</h2>
+<ul>
+<li><strong>Reference Files:</strong>
+<ul>
+<li><code>references/agent-browser-commands.md</code> — Full agent-browser CLI reference with examples.</li>
+<li><code>references/kosmi-ui-map.md</code> — Kosmi room UI element names, modal flows, and snapshot patterns.</li>
+</ul>
+</li>
+<li><strong>Scripts:</strong>
+<ul>
+<li><code>scripts/kosmi-connect.sh</code> — Connect/join a Kosmi room.</li>
+<li><code>scripts/kosmi-play.sh</code> — Play a single video by URL.</li>
+<li><code>scripts/kosmi-loop.sh</code> — Auto-loop DJ mode (background process).</li>
+<li><code>scripts/kosmi-snapshot-debug.sh</code> — Dump interactive elements for debugging.</li>
+</ul>
+</li>
+</ul>
+<p>By leveraging OpenClaw&#8217;s Kosmi-DJ skill, you can automate your video watch parties, optimize your workflow, and enhance your user experience. Get started today and streamline your video DJ automation with Kosmi!</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw Kosmi-DJ skill is a game-changer for automating video playback, loop control, and watch party room management. By following the outlined steps and leveraging the provided resources, you can seamlessly automate your Kosmi experience and enhance your video watch parties.</p>
+<h2>FAQ</h2>
+<h3>What are the prerequisites for using the Kosmi-DJ skill?</h3>
+<p>Ensure you have the <code>agent-browser</code> CLI installed, an <code>.env</code> file with the room URL and credentials, and persistent session support.</p>
+<h3>How do I connect to a Kosmi room?</h3>
+<p>Use <code>${CLAUDE_PLUGIN_ROOT}/skills/kosmi-dj/scripts/kosmi-connect.sh</code> to open the Kosmi room URL, fill in the nickname/name prompt, and verify the connection.</p>
+<h3>How do I play a video in Josmi?</h3>
+<p>Execute <code>${CLAUDE_PLUGIN_ROOT}/skills/kosmi-dj/scripts/kosmi-play.sh &lt;VIDEO_URL&gt;</code> to ensure the connection, open the Apps/media modal, and play the video.</p>
+<h3>How do I enable auto-loop DJ mode?</h3>
+<p>Run <code>${CLAUDE_PLUGIN_ROOT}/skills/kosmi-dj/scripts/kosmi-loop.sh</code> to enter an auto-loop DJ mode that continues until interrupted or a stop signal is received.</p>
+<h3>How do I minimize token burn for long-running DJ loops?</h3>
+<p>Use cron-style scheduling, set the sleep interval, and launch the loop as a background process using <code>/dj-start</code>.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/rmasciarella/kosmi-dj/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/rmasciarella/kosmi-dj/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

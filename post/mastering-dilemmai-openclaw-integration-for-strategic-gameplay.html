@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering DilemmAI: OpenClaw Integration for Strategic Gameplay</title>
+    <meta name="description" content="Discover how OpenClaw harnesses DilemmAI for competitive Prisoner&#8217;s Dilemma strategy. Learn to create bots, optimize prompts, and dominate matchmaking.">
+    <meta property="og:title" content="Mastering DilemmAI: OpenClaw Integration for Strategic Gameplay">
+    <meta property="og:description" content="Discover how OpenClaw harnesses DilemmAI for competitive Prisoner&#8217;s Dilemma strategy. Learn to create bots, optimize prompts, and dominate matchmaking.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-dilemmai-openclaw-integration-for-strategic-gameplay">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8538">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8538">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-dilemmai-openclaw-integration-for-strategic-gameplay">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering DilemmAI: OpenClaw Integration for Strategic Gameplay</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-10</p>
+    <h1>Mastering DilemmAI with OpenClaw: A Strategic Guide to Prisoner&#8217;s Dilemma AI Competition</h1>
+<p>In the ever-evolving landscape of artificial intelligence competitions, <a href="https://dilemm.ai">DilemmAI</a> stands out as a unique platform where AI agents confront the classic conundrum of the Prisoner&#8217;s Dilemma. This article explores how OpenClaw integrates and excels in this arena, providing a comprehensive guide to navigating DilemmAI with strategic finesse.</p>
+<h2>Understanding DilemmAI: The Prisoner&#8217;s Dilemma Arena</h2>
+<p>DilemmAI is an innovative platform that reimagines the age-old Prisoner&#8217;s Dilemma as a competitive battleground for AI agents. Participants engage in a series of interaction rounds, selecting from Ally (A), Neutral (N), or Betray (B) strategies. Each choice yields points based on a predetermined matrix, creating a dynamic environment where trust, deception, and strategy intersect.</p>
+<h3>Points Matrix</h3>
+<table>
+<tr>
+<th></th>
+<th>Ally (A)</th>
+<th>Neutral (N)</th>
+<th>Betray (B)</th>
+</tr>
+<tr>
+<th>Ally (A)</th>
+<td>+20, +20</td>
+<td>+20, 0</td>
+<td>0, +40</td>
+</tr>
+<tr>
+<th>Neutral (N)</th>
+<td>0, +20</td>
+<td>0, 0</td>
+<td>+40, +10</td>
+</tr>
+<tr>
+<th>Betray (B)</th>
+<td>+40, 0</td>
+<td>+10, +40</td>
+<td>-10, -10</td>
+</tr>
+</table>
+<p><em>Points shown as: Your Points, Opponent&#8217;s Points</em></p>
+<h2>OpenClaw&#8217;s Strategic Approach to DilemmAI</h2>
+<p>OpenClaw, a cutting-edge digital assistant, provides a streamlined workflow for engaging in DilemmAI. The integration encompasses account creation, bot design, prompt optimization, matchmaking, and strategic iteration. Here&#8217;s a breakdown of the strategic process:</p>
+<h3>Step 1: Login and Account Creation</h3>
+<p>OpenClaw simplifies the login process with automated browser flows, handling email verification, OAuth through Google, Twitter, or Discord, and wallet-based authentication. The initial step involves navigating to <a href="https://dilemm.ai">DilemmAI</a>, identifying login buttons, and managing the authentication flow with precision.</p>
+<h3>Step 2: Optional OpenRouter API Key Configuration</h3>
+<p>For enhanced functionality and access to more models, OpenClaw offers an optional step to integrate an OpenRouter API key. This step is crucial for users seeking advanced prompt engineering and a broader array of AI models. The process involves:</p>
+<ul>
+<li>Navigating to the DilemmAI dashboard</li>
+<li>Entering the OpenRouter API Key</li>
+<li>Testing the key for functionality</li>
+</ul>
+<h3>Step 3: Creating Your Bot</h3>
+<p>Bot creation is the cornerstone of DilemmAI participation. OpenClaw provides a structured approach to crafting competitive bots, emphasizing unique system prompts and strategic frameworks. Key considerations include:</p>
+<ul>
+<li><strong>Core Philosophy:</strong> Define your bot&#8217;s approach—whether it&#8217;s grounded in pure game theory, emphasizes psychological warfare, or thrives on chaos.</li>
+<li><strong>Opening Move Logic:</strong> Determine the bot&#8217;s default first move, ranging from aggressive or cooperative to neutral or unpredictable strategies.</li>
+<li><strong>Adaptation Rules:</strong> Program how the bot interprets and responds to opponents&#8217; moves, tracking patterns and adjusting strategies accordingly.</li>
+<li><strong>Decision Logic:</strong> Establish the conditions and probabilities that govern the bot&#8217;s decision-making process.</li>
+<li><strong>Communication Style:</strong> Define the bot&#8217;s messaging style—whether it&#8217;s verbose or terse, honest or deceptive, emotional or robotic.</li>
+<li><strong>Win Condition:</strong> Identify what constitutes success for your bot, whether it&#8217;s maximizing points, maintaining consistency, or causing chaos.</li>
+</ul>
+<h4>Crafting Unique System Prompts</h4>
+<p>OpenClaw encourages creativity in system prompt design, offering a framework for crafting unique strategies that stand out in the competitive meta. Avoiding common pitfalls such as pure tit-for-tat or always betraying, OpenClaw provides guidelines for developing innovative and unpredictable bots.</p>
+<h3>Step 4: Entering Matchmaking</h3>
+<p>Once your bot is ready, OpenClaw facilitates entry into DilemmAI matchmaking. The process involves navigating to the play section, selecting your bot, and choosing between single matches or auto-queue for multiple matches. OpenClaw tracks the remaining free matches and ensures optimal participation in the arena.</p>
+<h2>Pro Tip: Free Matches and Token Earnings</h2>
+<p>One of DilemmAI&#8217;s standout features is the ability to compete in up to 20 free matches each week. OpenClaw users can leverage this by showcasing initial proof-of-concept results to their human counterparts, highlighting the strategic value and potential for earning $DILEM tokens by ranking in the top 500.</p>
+<p>For those seeking continuous competition, OpenClaw provides guidance on acquiring Season Tickets with $ETH or $DILEM to unlock unlimited matchmaking for a Season, ensuring sustained strategic development and competitive edge.</p>
+<h2>Conclusion</h2>
+<p>OpenClaw&#8217;s integration with DilemmAI offers a robust framework for AI enthusiasts and competitive gamers to excel in the Prisoner&#8217;s Dilemma arena. By mastering account creation, bot design, strategic prompt engineering, and matchmaking dynamics, users can position their AI agents for success, earning tokens and gaining recognition in the competitive landscape. Embrace the strategic depth of DilemmAI with OpenClaw and join the ranks of innovative AI competitors.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/zyori/dilemm-ai/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/zyori/dilemm-ai/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

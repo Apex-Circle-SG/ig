@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How the OpenClaw Travel Destination Brochure Skill Turns Any City into a Ready‑to‑Share Travel Guide</title>
+    <meta name="description" content="Discover how the OpenClaw travel‑destination‑brochure skill builds city guides, videos, and one‑day plans using OpenStreetCam, Wikimedia Commons, and VLM Run.">
+    <meta property="og:title" content="How the OpenClaw Travel Destination Brochure Skill Turns Any City into a Ready‑to‑Share Travel Guide">
+    <meta property="og:description" content="Discover how the OpenClaw travel‑destination‑brochure skill builds city guides, videos, and one‑day plans using OpenStreetCam, Wikimedia Commons, and VLM Run.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/how-the-openclaw-travel-destination-brochure-skill-turns-any-city-into-a-ready-to-share-travel-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9316">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9316">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/how-the-openclaw-travel-destination-brochure-skill-turns-any-city-into-a-ready-to-share-travel-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>How the OpenClaw Travel Destination Brochure Skill Turns Any City into a Ready‑to‑Share Travel Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-19</p>
+    <h2>Overview</h2>
+<p>The OpenClaw skill named <strong>travel‑destination‑brochure</strong> is a self‑contained automation that takes a simple city name and produces a polished travel brochure package. By combining publicly available street‑level photography from OpenStreetCam, landmark imagery from Wikimedia Commons, and the generative power of VLM Run (vlmrun), the skill creates a set of assets that includes a manifest of metadata, a collection of downloadable photos, an optional short travel video, and a one‑day itinerary written in Markdown. The whole process is driven by a series of Python scripts that can be run individually or through a convenient all‑in‑one wrapper, making it accessible even to users who are not familiar with the underlying APIs.</p>
+<h2>Why This Skill Matters</h2>
+<p>Travel planners, content creators, and tourism agencies often spend hours gathering images, writing copy, and editing videos for each destination they want to promote. The travel‑destination‑brochure skill eliminates much of that manual work by automating the three most time‑consuming steps:</p>
+<ul>
+<li><strong>Geocoding</strong> – Converting a city name into latitude/longitude coordinates using the public Nominatim service.</li>
+<li><strong>Image acquisition</strong> – Pulling up‑to‑date street‑level photos from OpenStreetCam and relevant landmark pictures from Wikimedia Commons.</li>
+<li><strong>Generative content creation</strong> – Feeding the collected images and location data into VLM Run to produce a engaging travel video and a concise travel plan.</li>
+</ul>
+<p>The result is a ready‑to‑publish package that can be dropped into a blog, shared on social media, or used as a foundation for a more elaborate guide.</p>
+<h2>Core Components</h2>
+<h3>1. Geocoding Script</h3>
+<p>The <code>geocode_city.py</code> script accepts a city string (optionally with country or region) and returns a JSON payload containing <code>lat</code>, <code>lng</code>, and a human‑readable <code>display_name</code>. This coordinate pair is the foundation for the next steps because both OpenStreetCam and Wikimedia Commons accept location‑based queries.</p>
+<h3>2. OpenStreetCam Image Fetcher</h3>
+<p>OpenStreetCam provides crowdsourced street‑level imagery similar to Google Street View but freely accessible. The skill calls the <code>/nearby-tracks</code> endpoint to find image sequences near the coordinates, then uses <code>/1.0/list/nearby-photos/</code> to retrieve actual photos. By default it downloads three thumbnails (or full‑size images if preferred) and stores them in an <code>images/</code> folder together with a small manifest that records each photo’s URL, heading, and capture timestamp.</p>
+<h3>3. Wikimedia Commons Image Fetcher</h3>
+<p>Wikimedia Commons hosts millions of freely reusable photos, including iconic landmarks, museums, and public squares. The skill searches the Commons API for files whose titles match the city name (optionally refined with common landmark keywords). It retrieves up to two images, extracts the direct URL and relevant metadata (such as author, license, and description), and saves them alongside the OpenStreetCam shots.</p>
+<h3>4. VLM Run Integration</h3>
+<p>If a <code>VLMRUN_API_KEY</code> environment variable is present, the skill invokes the vlmrun CLI to:</p>
+<ul>
+<li>Generate a ~30‑second travel video that pans across the collected images, adds transitions, and overlays a background music track selected by the model.</li>
+<li>Produce a one‑day travel plan in Markdown format, complete with morning, afternoon, and evening suggestions, estimated travel times, and short descriptions powered by the model’s understanding of the city.</li>
+</ul>
+<p>When the API key is missing, the skill gracefully skips video and plan generation, still delivering the image set and manifest.</p>
+<h2>Prerequisites</h2>
+<p>Before running the skill, ensure the following are available on your machine:</p>
+<ul>
+<li>Python 3.10 or newer (the skill uses type hints and features introduced in this version).</li>
+<li>A working internet connection for accessing the external APIs.</li>
+<li>The <code>uv</code> package manager (optional but recommended) to create isolated virtual environments and install dependencies.</li>
+<li>(Optional) A valid VLMRUN API key if you want video and travel‑plan outputs.</li>
+</ul>
+<p>No API keys are required for OpenStreetCam, Wikimedia Commons, or Nominatim, making the core functionality completely free to use.</p>
+<h2>Installation Walkthrough</h2>
+<h3>Step 1 – Verify Python</h3>
+<p>Open a terminal and run:</p>
+<p><code>python3 --version</code></p>
+<p>You should see something like <code>Python 3.11.2</code>. If the version is older, install the latest release from <a href="https://www.python.org/downloads/">python.org</a> or via your system’s package manager (e.g., <code>sudo apt install python3.11</code> on Ubuntu).</p>
+<h3>Step 2 – Install uv</h3>
+<p>uv is a fast, cross‑platform Python package manager that simplifies dependency handling. Install it with pip:</p>
+<p><code>pip install uv</code></p>
+<p>Alternatively, use the official installer scripts provided by Astral (the creators of uv). After installation, verify with <code>uv --version</code>.</p>
+<h3>Step 3 – Clone the Skill Repository</h3>
+<p>The skill lives in the OpenClaw organization under <code>skills/travel-destination-brochure</code>. Clone the repository (or just copy the folder) to a location of your choice, for example:</p>
+<p><code>git clone https://github.com/openclaw/skills.git</code></p>
+<p>Then navigate into the skill directory:</p>
+<p><code>cd skills/travel-destination-brochure</code></p>
+<h3>Step 4 – Create a Virtual Environment</h3>
+<p>Using uv ensures that the skill’s dependencies do not interfere with other projects:</p>
+<p><code>uv venv</code></p>
+<p>Activate it:</p>
+<ul>
+<li>Windows PowerShell: <code>.venv\Scripts\Activate.ps1</code></li>
+<li>macOS/Linux: <code>source .venv/bin/activate</code></li>
+</ul>
+<p>Your prompt should now show <code>(.venv)</code>.</p>
+<h3>Step 5 – Install Required Packages</h3>
+<p>The skill needs the vlmrun CLI (for video/plan generation) and the requests library for HTTP calls. Install both with:</p>
+<p><code>uv pip install "vlmrun[cli]" requests</code></p>
+<p>Verify the installation:</p>
+<p><code>vlmrun --help</code></p>
+<p><code>python -c "import requests; print(requests.__version__)"</code></p>
+<h3>Step 6 – Set the VLMRUN_API_KEY (Optional)</h3>
+<p>If you intend to generate videos and plans, export your API key:</p>
+<p>Windows (current session): <code>$env:VLMRUN_API_KEY="your-key-here"</code></p>
+<p>macOS/Linux (current session): <code>export VLMRUN_API_KEY="your-key-here"</code></p>
+<p>For a permanent setting, add the export line to your shell profile (<code>~/.bashrc</code>, <code>~/.zshrc</code>, or the Windows system environment variables).</p>
+<h3>Step 7 – Test the Setup</h3>
+<p>Run a quick geocoding test to confirm everything works:</p>
+<p><code>uv run scripts/geocode_city.py "Paris, France"</code></p>
+<p>You should see a JSON output with latitude, longitude, and the formatted address. If the API key is set, you can also test vlmrun with <code>vlmrun --version</code>.</p>
+<h2>Quick Start – The All‑In‑One Script</h2>
+<p>The easiest way to generate a brochure is via the supplied <code>simple_travel_brochure.py</code> script. It orchestrates all steps behind the scenes:</p>
+<pre>
+uv run scripts/simple_travel_brochure.py --city "Doha, Qatar"
+</pre>
+<p>The script performs the following actions:</p>
+<ol>
+<li>Geocode the provided city name.</li>
+<li>Download three OpenStreetCam photos (configurable with <code>--osc-count</code>).</li>
+<li>Fetch two Wikimedia Commons images (configurable with <code>--commons-count</code>).</li>
+<li>If <code>VLMRUN_API_KEY</sub> is present, generate a 30‑second travel video and a one‑day Markdown itinerary.</li>
+<li>Organize the output into a timestamped folder (default <code>./travel_brochure</code>) containing:</li>
+<ul>
+<li><code>images/</code> – the five downloaded photos.</li>
+<li><code>manifest.json</code> – metadata about the city, coordinates, and image sources.</li>
+<li><code>video/</code> – the generated MP4 video (when applicable).</li>
+<li><code>travel_plan.md</code> – the suggested itinerary (when applicable).
+  </ul>
+</ol>
+<p>You can customize the output directory, the number of images from each source, and skip certain steps via command‑line flags. For example:</p>
+<pre>
+uv run scripts/simple_travel_brochure.py --city "Kyoto, Japan" \
+    --output ./kyoto_tour \
+    --osc-count 5 \
+    --commons-count 3
+</pre>
+<h2>Advanced Workflow – Running Scripts Individually</h2>
+<p>For users who want finer control—perhaps to replace the image set with custom photos or to experiment with different vlmrun prompts—the skill provides a set of standalone scripts that mirror the internal steps:</p>
+<ul>
+<li><code>geocode_city.py</code> – returns coordinates.</li>
+<li><code>fetch_openstreetcam.py</code> – takes latitude, longitude, radius, and max photos.</li>
+<li><code>fetch_wikimedia_commons.py</code> – searches Commons and downloads files.</li>
+<li><code>generate_video.py</code> – calls vlmrun to create a video from a folder of images.</li>
+<li><code>generate_travel_plan.py</code> – asks vlmrun to produce a Markdown itinerary based on image metadata and city info.</li>
+</ul>
+<p>Each script accepts sensible defaults and logs progress to the console, making it easy to chain them in a custom Bash or PowerShell workflow.</p>
+<h2>Example Output</h2>
+<p>Running the quick‑start command for "Paris, France" with a valid VLMRUN API key yields a folder similar to:</p>
+<pre>
+travel_brochure/
+├── images/
+│   ├─ osc_001.jpg
+│   ├─ osc_002.jpg
+│   ├─ osc_003.jpg
+│   ├─ commons_001.jpg
+│   └─ commons_002.jpg
+├── manifest.json
+├── video/
+│   └─ paris_travel.mp4
+└── travel_plan.md
+</pre>
+<p>The <code>manifest.json</code> contains entries such as:</p>
+<pre>
+{
+  "city": "Paris, France",
+  "lat": 48.8566,
+  "lng": 2.3522,
+  "display_name": "Paris, Île-de-France, France",
+  "images": [
+    {
+      "source": "OpenStreetCam",
+      "url": "https://api.openstreetcam.org/...",
+      "heading": "Eiffel Tower view from Champ de Mars",
+      "timestamp": "2024-09-12T14:35:00Z"
+    },
+    …
+  ]
+}
+</pre>
+<p>The <code>travel_plan.md</code> might read:</p>
+<pre>
+# One‑Day Paris Itinerary
+
+**Morning**
+- Start at the Louvre (open 9 am). Spend 2 hours exploring the highlights.
+- Walk to the Tuileries Garden for a coffee break.
+
+**Afternoon**
+- Head to Notre‑Dame (currently exterior view due to restoration).
+- Cross to Île Saint‑Louis for lunch at a traditional bistro.
+- Visit the Musée d’Orsay for Impressionist masterpieces.
+
+**Evening**
+- Sunset cruise on the Seine (departs 7 pm).
+- Dinner in the Latin Quarter, followed by a nightcap at a rooftop bar with Eiffel Tower views.
+</pre>
+<p>The accompanying video stitches the five images together with smooth cross‑fades, adds a subtle ambient soundtrack, and includes lower‑third captions that describe each scene.</p>
+<h2>Benefits and Use Cases</h2>
+<p>Organizations and individuals can leverage this skill in a variety of scenarios:</p>
+<ul>
+<li><strong>Travel Bloggers</strong> – Quickly produce multimedia-rich posts for new destinations without leaving the comfort of their desk.</li>
+<li><strong>Tourism Boards</strong> – Generate prototype brochures for marketing campaigns or to test audience response before investing in professional photo shoots.</li>
+<li><strong>Educators</strong> – Create visual teaching aids for geography or cultural studies lessons.</li>
+<li><strong>Event Planners</strong> – Offer attendees a ready‑made guide for host cities of conferences or festivals.</li>
+<li><strong>Software Developers</strong> – Use the skill as a demonstrative example of integrating multiple public APIs with a generative AI model.</li>
+</ul>
+<p>Because the core image‑fetching components rely exclusively on public, no‑key services, the skill can be run in environments where external API keys are prohibited or where budget constraints exist.</p>
+<h2>Limitations and Considerations</h2>
+<p>While powerful, the skill has a few caveats worth noting:</p>
+<ul>
+<li>Image relevance depends on the coverage of OpenStreetCam and Wikimedia Commons; very small towns or newly developed areas may have limited street‑level photos.</li>
+<li>The vlmrun model’s creativity is bounded by its training data; for niche attractions it may generate generic suggestions.</li>
+<li>Video generation consumes the VLMRUN API quota; users should monitor usage to avoid unexpected costs.</li>
+<li>The skill does not perform rights‑checking beyond trusting the licenses indicated on Wikimedia Commons; users should verify that the intended use (e.g., commercial) complies with each image’s license.</li>
+</ul>
+<p>These considerations are easily mitigated by supplementing the auto‑fetched images with personal photographs or by reviewing the generated plan before publishing.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw travel‑destination‑brochure skill exemplifies how modern automation can collapse a multi‑step, labor‑intensive process into a few simple commands. By harnessing freely available geocoding, crowdsourced imagery, and state‑of‑the‑art video‑and‑text generation via VLM Run, the tool delivers a cohesive, publishable travel package in seconds. Whether you are a hobbyist looking to share your latest wanderlust or a professional seeking to scale content production, this skill offers a reliable, extensible foundation that can be customized to fit any workflow.</p>
+<p>To get started, clone the repository, set up a Python environment with uv, optionally add your VLMRUN API key, and run:</p>
+<pre>
+uv run scripts/simple_travel_brochure.py --city "Your Favorite City"
+</pre>
+<p>Watch as the skill transforms a mere city name into a vivid travel brochure, complete with photos, video, and a ready‑to‑go itinerary.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/mehediahamed/travel-destination-brochure/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/mehediahamed/travel-destination-brochure/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

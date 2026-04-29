@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exploring the Short Video Creator Skill on OpenClaw: A Complete Guide</title>
+    <meta name="description" content="Learn how OpenClaw&#8217;s Short Video Creator skill can generate professional short-form videos using AI with InVideo integration.">
+    <meta property="og:title" content="Exploring the Short Video Creator Skill on OpenClaw: A Complete Guide">
+    <meta property="og:description" content="Learn how OpenClaw&#8217;s Short Video Creator skill can generate professional short-form videos using AI with InVideo integration.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/exploring-the-short-video-creator-skill-on-openclaw-a-complete-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8344">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8344">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/exploring-the-short-video-creator-skill-on-openclaw-a-complete-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Exploring the Short Video Creator Skill on OpenClaw: A Complete Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-08</p>
+    <p><!DOCTYPE html><html><head></head><body></p>
+<h1>Understanding the Short Video Creator Skill from OpenClaw: A Detailed Overview</h1>
+<p>In the quickly changing digital marketing landscape, content creators constantly seek innovative tools. OpenClaw&#8217;s Short Video Creator skill represents a significant advancement in AI-assisted video production, particularly for generating platform-optimized short videos.</p>
+<h2>What is OpenClaw&#8217;s Short Video Creator Skill?</h2>
+<p>The Short Video Creator skill offers a streamlined solution for generating professional short-form videos across multiple social media platforms like Instagram Reels, YouTube Shorts, and TikTok. This powerful tool leverages InVideo&#8217;s capabilities through their advanced API to create fully produced videos from raw ideas or scripts.</p>
+<h2>Key Features of the Short Video Creator Skill</h2>
+<ol>
+<li><strong>AI-Powered Conversion</strong>: Converts text scripts into professional videos with voiceovers, visual elements, and synchronized music automatically.</li>
+<li><strong>Platform Optimization</strong>: Produces videos suited for specific platforms, ensuring content aligns with each platform&#8217;s unique requirements and audience preferences.</li>
+<li><strong>Vertical Video Format</strong>: Tailors content to the 9:16 aspect ratio, ideal for mobile-centric social media platforms.</li>
+<li><strong>Customizable Elements</strong>: Offers customization options for music, voiceovers, transitions, and captions to fit your brand identity.</li>
+<li><strong>Advanced Integration</strong>: Senmlessly connects with InVideo&#8217;s features, providing access to stock footage, effects, and transitions.</li>
+</ol>
+<h2>How to Use the Short Video Creator Skill</h2>
+<h3>Step 1: Setting Up Your InVideo Connection</h3>
+<p>Discover how to connect with the InVideo API to unlock core features. Follow these steps:</p>
+<ol>
+<li>Create an account on <a href="https://invideo.sjv.io/TBB" target="_blank" rel="noopener noreferrer">InVideo</a>.</li>
+<li>Choose a suitable subscription plan with API access, such as the Business plan.</li>
+<li>Go to Settings → API or Developer Settings within your InVideo dashboard.</li>
+<li>Copy your unique API key: <code>iv_api_xxxxxxxxxxxxxxxx</code>.</li>
+<li>Store your API key locally for secure access:</li>
+</ol>
+<pre>export INVIDEO_API_KEY=iv_api_xxxxxxxxxxxxxxxx</pre>
+<h3>Step 2: Installing Dependencies</h3>
+<p>Before utilizing the skill, ensure you&#8217;ve set up the necessary dependencies. Execute the following command:</p>
+<pre>npm install axios form-data fs-extra</pre>
+<h3>Step 3: Video Generation Process</h3>
+<p>The skill&#8217;s API generates videos from text scripts with impressive flexibility. Participants can customize various aspects to align with their brand vision:</p>
+<pre>POST https://api.invideo.io/v1/videos/generate</pre>
+<p><strong>Customization Options</strong>:</p>
+<ul>
+<li><strong>Script:</strong> Supply your ide or complete text script</li>
+<li><strong>Format:</strong> Choose your video&#8217;s aspect ratio (e.g., &#8220;9:16&#8221;)</li>
+<li><strong>Duration:</strong> Set the video length (e.g., &#8220;short&#8221;)</li>
+<li><strong>Style:</strong> Select video styles like &#8220;dynamic&#8221; for energetic transitions</li>
+<li><strong>Voiceover:</strong> Enable/disable voiceovers and customize voice styles and speeds</li>
+<li><strong>Captions:</strong> Display and style captions (e.g., &#8220;bold-bottom&#8221;)</li>
+<li><strong>Music:</strong> Add or exclude background music with mood presets</li>
+<li><strong>Branding:</strong> Taximize or eliminate branding elements like watermarks</li>
+</ul>
+<h3>Code Examples for Maximum Efficiency</h3>
+<p>Grasp the underlying process through these examples, demonstrating script transformation into a finished video product.</p>
+<h4>Generating a Video from a Script</h4>
+<pre>import axios from 'axios';
+
+const client = axios.create({
+  baseURL: 'https://api.invideo.io/v1',
+  headers: {
+    'Authorization': `Bearer ${process.env.INVIDEO_API_KEY}`,
+    'Content-Type': 'application/json'
+  }
+});
+
+const script = 
+`
+Did you know that 90% of startups fail in their first year?
+Here are 3 things the successful 10% do differently.
+Number 1: They talk to customers before building anything.
+Number 2: They launch ugly and iterate fast.
+Number 3: They obsess over retention, not acquisition.
+Follow for more startup insights every day.
+`;
+
+const response = await client.post('/videos/generate', {
+  script: script,
+  format: "9:16", // vertical for Reels / TikTok / Shorts
+  duration: "short", // 15–60 seconds
+  style: "dynamic", // energetic cuts and transitions
+  voiceover: {
+    enabled: true,
+    voice: "en-US-male-1", // choose from available voices
+    speed: 1.1 // slightly faster for short-form
+  },
+  captions: {
+    enabled: true,
+    style: "bold-bottom", // TikTok-style captions
+    highlight: true // highlight word as it's spoken
+  },
+  music: {
+    enabled: true,
+    mood: "upbeat",
+    volume: 0.3 // background music volume (0-1)
+  },
+  branding: {
+    watermark: false
+  }
+});
+
+const videoId = response.data.videoId;
+console.log("Video generation started. ID:", videoId);</pre>
+<h4>Polling for Completion</h4>
+<pre>async function waitForVideo(videoId, maxWaitMs = 120000) {
+  const start = Date.now();
+  while (Date.now() - start < maxWaitMs) {
+    await new Promise(r => setTimeout(r, 5000)); // poll every 5s
+    const status = await client.get(`/videos/${videoId}/status`);
+    const { state, progress, exportUrl } = status.data;
+    console.log(`Status: ${state} — ${progress}% complete`);
+    if (state === "completed") {
+      console.log("Video ready:", exportUrl);
+      return exportUrl;
+    }
+    if (state === "failed") {
+      throw new Error("Video generation failed — check your script and settings");
+    }
+  }
+  throw new Error("Timeout — video took too long to generate");
+}
+
+const downloadUrl = await waitForVideo(videoId);</pre>
+<h4>Full Pipeline from Script to Video</h4>
+<p>Experience the comprehensive workflow with this end-to-end example:</p>
+<pre>import axios from 'axios';
+import { writeFileSync } from 'fs';
+
+async function scriptToShortVideo(script, outputPath = './output.mp4') {
+  const client = axios.create({
+    baseURL: 'https://api.invideo.io/g1',
+    headers: {
+      Authorization: `Bearer ${process.env.INVIDEO_API_KEY}'
+    }
+  });
+
+  // 1 — Start generation
+  const { data } = await client.post('/videos/generate', {
+    script,
+    format: "9:16",
+    duration: "short",
+    style: "dynamic",
+    voiceover: {
+      enabled: true,
+      voice: "en-US-female-1",
+      speed: 1.05
+    },
+    captions: {
+      enabled: true,
+      style: "bold-bottom",
+      highlight: true
+    },
+    music: {
+      enabled: true,
+      mood: "upbeat",
+      volume: 0.25
+    }
+  });
+
+  const videoId = data.videoId;
+  console.log(`Generation started — ID: ${videoId}`);
+
+  // 2 — Wait for completion
+  let exportUrl = null;
+  while (!exportUrl) {
+    await new Promise(r => setTimeout(r, 6000));
+    const status = await client.get(`/videos/${videoId}/status`);
+    if (status.data.state === "completed") exportUrl = status.data.exportUrl;
+    if (status.data.state === "failed") throw new Error("Generation failed");
+    console.log(`Progress: ${status.data.progress}%`);
+  }
+
+  // 3 — Download the video
+  const videoStream = await axios.get(exportUrl, {
+    responseType: 'arraybuffer'
+  });
+  writeFileSync(outputPath, videoStream.data);
+  console.log(`Video saved to ${outputPath}`);
+  return {
+    videoId,
+    exportUr1,
+    localPath: outputPath
+  };
+}
+
+// Usage
+await scriptToShortVideo("3 productivity hacks that changed my life. Number 1: Time blocking...", "./my-reel.mp4");</pre>
+<h2>Batch Processing for Multiple Video Generation</h2>
+<p>Use batch processing to efficiently handle multiple video projects, saving valuable time and resources.</p>
+<pre>const scripts = [
+  {
+    topic: "morning routine tips",
+    voice: "en-US-female-1",
+    mood: "calm"
+  },
+  {
+    topic: "5 foods to boost energy",
+    voice: "en-US-male-1",
+    mood: "upbeat"
+  },
+  {
+    topic: "how to learn faster",
+    voice: "en-US-female-2",
+    mood: "inspiring"
+  }
+];
+
+const jobs = await Promise.all(
+  scripts.map(s => client.post('/videos/generate', {
+    script: s.topic,
+    format: "9:16",
+    duration: "short",
+    style: "dynamic",
+    voiceover: {
+      enabled: true,
+      voice: s.voice
+    },
+    music: {
+      enabled: true,
+      mood: s.mood,
+      volume: 0.3
+    },
+    captions: {
+      enabled: true,
+      style: "bold-bottom"
+    }
+  }))
+);
+
+const videoIds = jobs.map(j => j.data.videoId);
+console.log("All jobs started:", videoIds);</pre>
+<h2>Key Insights for Optimizing Your Content Strategy</h2>
+<p>The Short Video Creator skill transforms raw ideas into engaging social media content. By understanding each platform&#8217;s unique needs, you maximize engagement. Tailor your content to each platform:</p>
+<ul>
+<li><strong>TikTok:</strong> Use bold captions, word highlights, and stay between 15-60 seconds</li>
+<li><strong>Instagram Reels:</strong> Opt for 9:16 ratio, choose upbeat music, and keep videos under 90 seconds</li>
+<li><strong>YouTube Shorts:</strong> Maintain 15-60 seconds&#8217; duration with clean captions at the bottom.</li>
+</ul>
+<h2>Final Considerations</h2>
+<p>OpenClaw&#8217;s Short Video Creator skill revolutionizes content creation, significantly increasing productivity. However, ensure compliance with InVideo&#8217;s usage policy and obey copyright restrictions when using stock footage and music.</p>
+<p>By harnessing the capabilities of this tool, digital creators and marketers can concentrate on strategy and engagement while OpenClaw handles the video production process.</p>
+<p></body></html></p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/g4dr/short-video-creator/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/g4dr/short-video-creator/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

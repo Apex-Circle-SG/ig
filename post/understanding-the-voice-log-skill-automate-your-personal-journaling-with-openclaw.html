@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the Voice-Log Skill: Automate Your Personal Journaling with OpenClaw</title>
+    <meta name="description" content="Discover how the OpenClaw Voice-Log skill uses Soniox speech-to-text to turn your conversations into searchable, time-stamped personal journals.">
+    <meta property="og:title" content="Understanding the Voice-Log Skill: Automate Your Personal Journaling with OpenClaw">
+    <meta property="og:description" content="Discover how the OpenClaw Voice-Log skill uses Soniox speech-to-text to turn your conversations into searchable, time-stamped personal journals.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-voice-log-skill-automate-your-personal-journaling-with-openclaw">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8594">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8594">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-voice-log-skill-automate-your-personal-journaling-with-openclaw">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the Voice-Log Skill: Automate Your Personal Journaling with OpenClaw</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-11</p>
+    <h1>Mastering the OpenClaw Voice-Log Skill: Your Personal AI Transcription Assistant</h1>
+<p>In the rapidly evolving landscape of personal automation and open-source AI, OpenClaw stands out as a versatile framework for building highly customizable digital assistants. One of its most powerful yet accessible features is the <strong>voice-log skill</strong>. If you are looking to turn your verbal thoughts, meeting discussions, or casual brainstorming sessions into a structured, searchable digital record, this is the tool you need.</p>
+<h2>What is the OpenClaw Voice-Log Skill?</h2>
+<p>At its core, the Voice-Log skill is an background daemon designed to capture microphone audio and convert it into text using the Soniox real-time speech-to-text (STT) engine. It acts as an ambient journaling system, constantly monitoring the room, processing speech, and bucketing that information into minute-by-minute text logs. It effectively provides a window into your recent conversations, allowing you to recall details without needing to manually take notes.</p>
+<h2>How It Works: Under the Hood</h2>
+<p>The system is elegantly simple. By integrating with the Soniox API, it streams your microphone&#8217;s audio input in real-time. Crucially, it manages privacy and storage by maintaining only the latest 60 minutes of conversation. This rolling window ensures you have access to recent context while maintaining a manageable footprint on your machine. All logs are stored within the skill&#8217;s own local data directory, ensuring your transcriptions remain on your device.</p>
+<h2>The Core Features</h2>
+<ul>
+<li><strong>Real-time Transcription:</strong> Utilizing the high-performance <code>stt-rt-v4</code> model, it provides near-instant conversion of speech to text.</li>
+<li><strong>Automated Bucketing:</strong> It organizes transcripts by the minute, making it easier to review the timeline of a discussion.</li>
+<li><strong>Command-Based Control:</strong> Whether you want to start, stop, or query your logs, the system responds to simple natural language commands within the OpenClaw interface.</li>
+<li><strong>Language Flexibility:</strong> The system supports language hints, allowing it to adapt to your specific linguistic needs (e.g., providing hints for English or German).</li>
+</ul>
+<h2>Getting Started: Installation and Setup</h2>
+<p>To deploy this, you will need a <strong>Soniox API Key</strong>. Once you have acquired your key from the official Soniox website, the setup is straightforward. You will need to ensure that your system has the necessary audio capture utilities installed—typically <code>arecord</code> for Linux users or <code>sox</code> for macOS users. These tools handle the raw audio stream before it is handed off to the STT engine.</p>
+<p>Installation is managed via <code>npm</code>, meaning once you have cloned the repository, a quick <code>npm install</code> in the skill directory will prepare your environment. The system&#8217;s architecture is built to be robust, using environment-specific forwarding for the API key while keeping the rest of your system&#8217;s environment variables isolated.</p>
+<h2>Interacting with Your Voice-Log</h2>
+<p>The true magic of the Voice-Log skill lies in how you interact with it. You don&#8217;t need to fiddle with complex software interfaces. Instead, you simply speak to your OpenClaw-powered device:</p>
+<ul>
+<li><strong>Starting a session:</strong> Just say &#8220;Start voice journal&#8221; or &#8220;Start voice log&#8221; to initiate the background capture.</li>
+<li><strong>Ending a session:</strong> Simply say &#8220;End voice journal&#8221; to stop the daemon safely.</li>
+<li><strong>Summarization:</strong> If you&#8217;ve been talking for a while, you can ask, &#8220;Summarize what we talked about for the last 10 minutes.&#8221; The system will then process the relevant logs and provide you with a coherent summary.</li>
+</ul>
+<h2>Privacy and Performance Considerations</h2>
+<p>In an age where data privacy is paramount, the Voice-Log skill respects your boundaries by design. The audio capture is only active when the journal is explicitly running. Furthermore, because it utilizes a rolling 60-minute window, it does not store your entire life history indefinitely—it keeps what is relevant to your recent interaction and discards the rest. By relying on your locally hosted environment, the data flow remains strictly between your microphone and the Soniox endpoint, providing a cleaner experience than cloud-first alternatives.</p>
+<h2>Best Practices for Success</h2>
+<p>To get the best results, ensure your microphone is positioned appropriately to pick up your voice clearly without excess background noise. Since the skill uses raw audio streams, high-quality input will directly translate into higher-quality transcripts. If you find the summarization feature occasionally requires more depth, remember that you can adjust the output limits via command-line arguments, though the default settings are optimized for most common use cases.</p>
+<h2>Why You Need This</h2>
+<p>We often forget the golden nuggets of information that occur during casual conversation. Whether it is an innovative idea for a new product, a key action item from a team meeting, or just a reminder of what you discussed with a colleague, the Voice-Log skill acts as your second brain. By leveraging the power of OpenClaw and Soniox, you are no longer relying on your fallible human memory. You have an automated, searchable record of your verbal world, ready to be queried whenever you need it.</p>
+<p>As you continue to build your OpenClaw ecosystem, the Voice-Log skill stands out as one of the most practical additions for anyone looking to increase their productivity and ensure no great idea goes unrecorded. Start your session today and never lose a thought again.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/easwee/voice-log/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/easwee/voice-log/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

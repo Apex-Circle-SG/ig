@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenClaw Skill: Clawboard Integration and Setup</title>
+    <meta name="description" content="Learn how to install and operate Clawboard with OpenClaw, including scripted/manual/agentic install, token setup, Docker startup, logger plugin wiring, and vali">
+    <meta property="og:title" content="OpenClaw Skill: Clawboard Integration and Setup">
+    <meta property="og:description" content="Learn how to install and operate Clawboard with OpenClaw, including scripted/manual/agentic install, token setup, Docker startup, logger plugin wiring, and vali">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/openclaw-skill-clawboard-integration-and-setup">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8829">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8829">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/openclaw-skill-clawboard-integration-and-setup">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>OpenClaw Skill: Clawboard Integration and Setup</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-13</p>
+    <h1>OpenClaw Skill: Clawboard Integration and Setup</h1>
+<p>This OpenClaw skill provides comprehensive functionality for installing, configuring, and operating Clawboard within the OpenClaw ecosystem. It handles everything from initial installation to token setup, Docker service management, and plugin integration.</p>
+<h2>Skill Overview</h2>
+<p>The Clawboard skill is designed to help users quickly get a fully functional Clawboard installation running with OpenClaw. It supports multiple installation methods and ensures all components are properly configured and communicating with each other.</p>
+<h3>Current Architecture</h3>
+<p>The Clawboard architecture consists of several interconnected services:</p>
+<ul>
+<li><strong>Web Interface</strong> (Next.js): Accessible at http://localhost:3010</li>
+<li><strong>API Service</strong> (FastAPI + SQLite): Running at http://localhost:8010</li>
+<li><strong>Classifier</strong> (async stage-2 worker): Handles topic/task classification</li>
+<li><strong>Qdrant</strong> (vector index): Dense retrieval backend using internal Docker network</li>
+<li><strong>Clawboard Logger Plugin</strong>: Stage-1 firehose logging with response-time context extension</li>
+</ul>
+<p>The retrieval/search stack combines dense vectors, BM25, and lexical matching with reciprocal rank fusion and reranking. Qdrant serves as the primary vector database, with SQLite as an embeddings mirror/fallback.</p>
+<h2>Installation Modes</h2>
+<h3>1. Quick Scripted Install (Recommended)</h3>
+<p>The fastest way to get started is using the automated bootstrap script:</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/sirouk/clawboard/main/scripts/bootstrap_openclaw.sh | bash
+</code></pre>
+<p>This script automatically:</p>
+<ul>
+<li>Detects your OpenClaw workspace and installs Clawboard in the appropriate location</li>
+<li>Generates a security token if one doesn&#8217;t exist</li>
+<li>Configures environment variables for browser access</li>
+<li>Builds and starts all Docker services</li>
+<li>Installs the skill in OpenClaw (default: symlink mode)</li>
+<li>Installs and enables the clawboard-logger plugin</li>
+<li>Configures plugin settings and restarts OpenClaw gateway</li>
+</ul>
+<p>Useful flags include:</p>
+<pre><code class="language-bash">--integration-level full|write|manual
+--no-backfill
+--api-url http://localhost:8010
+--web-url http://localhost:3010
+--web-hot-reload
+--public-api-base https://api.example.com
+--public-web-url https://clawboard.example.com
+--token &lt;token&gt;
+--title "&lt;name&gt;"
+--skill-symlink (default)
+--skill-copy (fallback)
+--update
+</code></pre>
+<h3>2. Manual Installation</h3>
+<p>For users who prefer manual control, follow these steps:</p>
+<pre><code class="language-bash"># Clone the repository
+CLAWBOARD_DIR="${CLAWBOARD_DIR:-$HOME/clawboard}"
+git clone https://github.com/sirouk/clawboard "$CLAWBOARD_DIR"
+cd "$CLAWBOARD_DIR"
+
+# Create token and environment
+cp .env.example .env
+openssl rand -hex 32
+# Set CLAWBOARD_TOKEN=&lt;value&gt; in $CLAWBOARD_DIR/.env
+# Set CLAWBOARD_PUBLIC_API_BASE=&lt;browser-reachable-api-url&gt;
+# Optional: Set CLAWBOARD_PUBLIC_WEB_URL=&lt;browser-reachable-ui-url&gt;
+
+# Start Clawboard services
+docker compose up -d --build
+
+# Install skill in OpenClaw
+mkdir -p "$HOME/.openclaw/skills"
+rm -rf "$HOME/.openclaw/skills/clawboard"
+ln -s "$CLAWBOARD_DIR/skills/clawboard" "$HOME/.openclaw/skills/clawboard"
+
+# Install and enable logger plugin
+openclaw plugins install -l "$CLAWBOARD_DIR/extensions/clawboard-logger"
+openclaw plugins enable clawboard-logger
+
+# Configure plugin
+openclaw config set plugins.entries.clawboard-logger.config --json '
+{
+  "baseUrl":"http://localhost:8010",
+  "token":"YOUR_TOKEN",
+  "enabled":true,
+  "contextMode":"auto",
+  "contextFallbackMode":"cheap",
+  "contextFetchTimeoutMs":1200
+}'
+
+# Restart OpenClaw gateway
+openclaw restart
+</code></pre>
+<h2>Skill Path Management</h2>
+<p>The skill supports two operational modes:</p>
+<h3>Symlink Mode (Default)</h3>
+<p>In symlink mode, the skill at <code>$HOME/.openclaw/skills/clawboard</code> is a symbolic link to the repository copy. This means any changes made in the repository are immediately visible to OpenClaw without additional steps.</p>
+<h3>Copy Mode</h3>
+<p>In copy mode, the skill is copied to <code>$HOME/.openclaw/skills/clawboard</code>. Changes made in the repository won&#8217;t affect OpenClaw until you explicitly sync them using:</p>
+<pre><code class="language-bash">cd "$CLAWBOARD_DIR"
+bash scripts/sync_openclaw_skill.sh --to-openclaw --apply --force
+</code></pre>
+<p>To sync changes from OpenClaw back to the repository:</p>
+<pre><code class="language-bash">bash scripts/sync_openclaw_skill.sh --to-repo --apply
+</code></pre>
+<h2>Workspace and Runtime Assumptions</h2>
+<p>When working on Clawboard components, the skill assumes typical repository locations:</p>
+<ul>
+<li><code>~/[agent_name]/clawboard</code></li>
+<li><code>~/[agent_name]/projects/clawboard</code></li>
+</ul>
+<p>The scripted installer auto-detects these conventions. For runtime validation, you can check:</p>
+<pre><code class="language-bash">docker compose ps
+echo "$CLAWBOARD_WEB_HOT_RELOAD"
+curl -s http://localhost:8010/api/health
+</code></pre>
+<h2>Plugin Configuration</h2>
+<p>The clawboard-logger plugin requires proper configuration for optimal operation:</p>
+<ul>
+<li><strong>baseUrl</strong>: The Clawboard API endpoint</li>
+<li><strong>token</strong>: Security token for authentication</li>
+<li><strong>enabled</strong>: Whether the plugin is active</li>
+<li><strong>contextMode</strong>: Options include auto, cheap, full, or patient</li>
+<li><strong>contextFallbackMode</strong>: Fallback behavior when primary context retrieval fails</li>
+<li><strong>contextFetchTimeoutMs</strong>: Timeout for context fetching operations</li>
+</ul>
+<h2>Validation and Troubleshooting</h2>
+<p>After installation, validate your setup by:</p>
+<ol>
+<li>Checking that all Docker services are running: <code>docker compose ps</code></li>
+<li>Verifying the API is responsive: <code>curl -s http://localhost:8010/api/health</code></li>
+<li>Ensuring the skill is properly installed: <code>test -L ~/.openclaw/skills/clawboard</code></li>
+<li>Confirming the logger plugin is enabled and configured</li>
+<li>Restarting OpenClaw gateway to ensure all changes take effect</li>
+</ol>
+<p>If you encounter issues, check the Docker logs for each service, verify your environment variables, and ensure your security token is correctly configured.</p>
+<h2>Integration with OpenClaw</h2>
+<p>The Clawboard skill integrates deeply with OpenClaw by:</p>
+<ul>
+<li>Providing a user interface for managing OpenClaw operations</li>
+<li>Logging all interactions through the clawboard-logger plugin</li>
+<li>Enabling token-based authentication for secure operations</li>
+<li>Exposing OpenResponses endpoints for attachments and file handling</li>
+<li>Configuring the /api/config endpoint with appropriate title and integration level</li>
+</ul>
+<p>This comprehensive integration ensures that Clawboard serves as a powerful companion tool for OpenClaw users, providing visibility, control, and enhanced functionality for managing AI operations.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/sirouk/ralphie/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/sirouk/ralphie/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

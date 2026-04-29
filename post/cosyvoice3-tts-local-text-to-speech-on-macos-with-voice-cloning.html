@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CosyVoice3 TTS: Local Text-to-Speech on macOS with Voice Cloning</title>
+    <meta name="description" content="CosyVoice3 is an advanced local TTS system for macOS that supports 9 languages, 18+ Chinese dialects, voice cloning, and cross-lingual synthesis using Alibaba&#">
+    <meta property="og:title" content="CosyVoice3 TTS: Local Text-to-Speech on macOS with Voice Cloning">
+    <meta property="og:description" content="CosyVoice3 is an advanced local TTS system for macOS that supports 9 languages, 18+ Chinese dialects, voice cloning, and cross-lingual synthesis using Alibaba&#">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/cosyvoice3-tts-local-text-to-speech-on-macos-with-voice-cloning">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8486">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8486">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/cosyvoice3-tts-local-text-to-speech-on-macos-with-voice-cloning">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>CosyVoice3 TTS: Local Text-to-Speech on macOS with Voice Cloning</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <h2>What is CosyVoice3?</h2>
+<p>CosyVoice3 is an advanced local text-to-speech (TTS) system that brings powerful voice synthesis capabilities to macOS devices with Apple Silicon. Built on large language models, it offers high-quality speech generation with support for multiple languages, dialects, and voice cloning features.</p>
+<h3>Key Features</h3>
+<ul>
+<li><strong>Multi-language Support</strong>: Chinese, English, Japanese, Korean, German, Spanish, French, Italian, Russian</li>
+<li><strong>Dialect Support</strong>: 18+ Chinese dialects including Cantonese, Sichuan, Dongbei, Shanghai</li>
+<li><strong>Voice Cloning</strong>: Clone any voice from just 3-10 seconds of reference audio</li>
+<li><strong>Cross-lingual Synthesis</strong>: Speak Chinese with an English voice or vice versa</li>
+<li><strong>Fine-grained Control</strong>: Emotions, speed, volume control through text tags</li>
+<li><strong>Local Processing</strong>: Runs entirely on your Mac without cloud dependency</li>
+</ul>
+<h2>Prerequisites</h2>
+<p>Before installing CosyVoice3, ensure your system meets these requirements:</p>
+<ul>
+<li><strong>macOS with Apple Silicon</strong>: M1, M2, or M3 chip required</li>
+<li><strong>Python 3.10</strong>: The system is tested with this version</li>
+<li><strong>Conda</strong>: Package management system installed</li>
+<li><strong>Disk Space</strong>: Approximately 5GB available for models and dependencies</li>
+</ul>
+<h2>Installation</h2>
+<p>Follow these steps to install CosyVoice3 on your macOS system:</p>
+<h3>Step 1: Navigate to the Scripts Directory</h3>
+<pre><code>cd /Users/lhz/.openclaw/workspace/skills/cosyvoice3/scripts
+</code></pre>
+<h3>Step 2: Run the Installation Script</h3>
+<pre><code>bash install.sh
+</code></pre>
+<p>This script will automatically:</p>
+<ul>
+<li>Create a conda environment named <code>cosyvoice</code></li>
+<li>Install PyTorch (CPU version optimized for Apple Silicon)</li>
+<li>Install all CosyVoice3 dependencies</li>
+<li>Download the Fun-CosyVoice3-0.5B model (approximately 2GB)</li>
+</ul>
+<h2>Basic Usage</h2>
+<h3>Quick Start Example</h3>
+<pre><code>cd /Users/lhz/.openclaw/workspace/cosyvoice3-repo
+export PATH="$HOME/miniconda3/bin:$PATH"
+conda activate cosyvoice
+python -c "
+import sys
+sys.path.append('third_party/Matcha-TTS')
+from cosyvoice.cli.cosyvoice import AutoModel
+import torchaudio
+cosyvoice = AutoModel(model_dir='pretrained_models/Fun-CosyVoice3-0.5B')
+for i, j in enumerate(cosyvoice.inference_zero_shot(
+'你好，这是CosyVoice3语音合成测试。',
+'希望你以后能够做的比我还好呦。<|endofprompt|',  # Important: This tag is required!
+'asset/zero_shot_prompt.wav'
+)):
+    torchaudio.save('output.wav', j['tts_speech'], cosyvoice.sample_rate)
+    print('Generated: output.wav')
+"
+</code></pre>
+<h3>Using the TTS Script</h3>
+<p>The <code>tts.py</code> script provides a convenient command-line interface for text-to-speech conversion.</p>
+<h4>Basic TTS with Default Voice</h4>
+<pre><code>cd /Users/lhz/.openclaw/workspace/skills/cosyvoice3/scripts
+conda activate cosyvoice
+python tts.py "你好，这是一个测试。"
+</code></pre>
+<h4>Voice Cloning with Reference Audio</h4>
+<pre><code>python tts.py "你好，这是克隆的声音。" --reference /path/to/reference.wav
+</code></pre>
+<h4>Cross-lingual Synthesis</h4>
+<pre><code>python tts.py "Hello, this is cross-lingual synthesis." --reference asset/zero_shot_prompt.wav --lang en
+</code></pre>
+<h4>Speed Control</h4>
+<pre><code>python tts.py "这是一段快速的语音。" --speed 1.5
+</code></pre>
+<h4>Save to Specific Path</h4>
+<pre><code>python tts.py "你好。" --output ~/Desktop/greeting.wav
+</code></pre>
+<h2>Advanced Features</h2>
+<h3>Voice Cloning</h3>
+<p>Clone voices from short audio samples (3-10 seconds):</p>
+<pre><code>from cosyvoice.cli.cosyvoice import AutoModel
+import torchaudio
+cosyvoice = AutoModel(model_dir='pretrained_models/Fun-CosyVoice3-0.5B')
+# Clone voice and generate
+for i, j in enumerate(cosyvoice.inference_zero_shot(
+'这是克隆后的声音在说话。',
+'Reference text transcription',
+'/path/to/reference.wav'
+)):
+    torchaudio.save('cloned.wav', j['tts_speech'], cosyvoice.sample_rate)
+</code></pre>
+<h3>Fine-Grained Control with Text Tags</h3>
+<p>CosyVoice3 supports special tags for controlling prosody:</p>
+<ul>
+<li><strong>Laughter</strong>: "他突然[laughter]笑了起来[laughter]。"</li>
+<li><strong>Breathing</strong>: "他说完这句话[breath]，深吸一口气。"</li>
+<li><strong>Strong Emphasis</strong>: "这是<strong>非常重要</strong>的。"</li>
+<li><strong>Combined Effects</strong>: "在面对挑战时，他展现了非凡的<strong>勇气</strong>与<strong>智慧</strong>[breath]。"</li>
+</ul>
+<h3>Dialect Support</h3>
+<p>Use instruct mode for dialect synthesis:</p>
+<pre><code>cosyvoice = AutoModel(model_dir='pretrained_models/CosyVoice-300M-Instruct')
+for i, j in enumerate(cosyvoice.inference_instruct(
+'你好，这是测试语音。',
+'中文男',
+'用四川话说这句话<|endofprompt|>'
+)):
+    torchaudio.save('sichuan.wav', j['tts_speech'], cosyvoice.sample_rate)
+</code></pre>
+<h2>Available Assets</h2>
+<p>The repository includes several reference audio files in the <code>cosyvoice3-repo/asset/</code> directory:</p>
+<ul>
+<li><code>zero_shot_prompt.wav</code>: Default Chinese female voice</li>
+<li><code>cross_lingual_prompt.wav</code>: English prompt for cross-lingual synthesis</li>
+</ul>
+<h2>Troubleshooting</h2>
+<h3>Model Not Found</h3>
+<p>If you encounter "model not found" errors, download the models manually:</p>
+<pre><code>cd /Users/lhz/.openclaw/workspace/cosyvoice3-repo
+export PATH="$HOME/miniconda3/bin:$PATH"
+conda activate cosyvoice
+python -c "
+from modelscope import snapshot_download
+snapshot_download('FunAudioLLM/Fun-CosyVoice3-0.5B-2512', local_dir='pretrained_models/Fun-CosyVoice3-0.5B')
+"
+</code></pre>
+<h3>Memory Issues</h3>
+<p>For long texts, split them into sentences:</p>
+<pre><code>text = "很长的文本..."
+sentences = text.split('。')
+for sent in sentences:
+    if sent.strip():
+        # Process each sentence
+</code></pre>
+<h3>Audio Format Requirements</h3>
+<p>Reference audio should meet these specifications:</p>
+<ul>
+<li><strong>Format</strong>: WAV or MP3</li>
+<li><strong>Sample Rate</strong>: 16kHz or higher (automatically resampled)</li>
+<li><strong>Duration</strong>: 3-10 seconds optimal</li>
+<li><strong>Content</strong>: Clear speech with minimal background noise</li>
+</ul>
+<h2>Model Files</h2>
+<p>Available models are located in <code>cosyvoice3-repo/pretrained_models/</code>:</p>
+<ul>
+<li><code>Fun-CosyVoice3-0.5B/</code>: Main model (recommended)</li>
+<li><code>CosyVoice2-0.5B/</code>: Previous version</li>
+<li><code>CosyVoice-300M/</code>: Lighter model</li>
+<li><code>CosyVoice-300M-SFT/</code>: SFT version</li>
+<li><code>CosyVoice-300M-Instruct/</code>: Instruct version</li>
+</ul>
+<h2>Performance Notes</h2>
+<ul>
+<li>First inference takes approximately 30 seconds due to model warmup</li>
+<li>Subsequent inferences are significantly faster</li>
+<li>Apple Silicon uses CPU mode (no CUDA support)</li>
+<li>Real-time factor (RTF) is approximately 0.3-0.5 on M-series chips</li>
+<li>Model files are cached locally after first download</li>
+</ul>
+<h2>Resources</h2>
+<ul>
+<li><strong>Installation Script</strong>: <code>install.sh</code> - Sets up the environment</li>
+<li><strong>Main TTS Script</strong>: <code>tts.py</code> - Command-line interface</li>
+<li><strong>Model Downloader</strong>: <code>download_models.py</code> - Downloads pretrained models</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://github.com/openclaw/skills/tree/main/skills/lhuaizhong/cosyvoice3-macos">CosyVoice GitHub Repository</a></li>
+<li><a href="https://github.com/FunAudioLLM/CosyVoice">Fun-CosyVoice3 Demo</a></li>
+</ul>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/lhuaizhong/cosyvoice3-macos/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/lhuaizhong/cosyvoice3-macos/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

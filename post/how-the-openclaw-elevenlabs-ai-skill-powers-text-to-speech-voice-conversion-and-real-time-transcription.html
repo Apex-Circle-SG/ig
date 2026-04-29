@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How the OpenClaw ElevenLabs‑AI Skill Powers Text‑to‑Speech, Voice Conversion and Real‑Time Transcription</title>
+    <meta name="description" content="Discover what the OpenClaw ElevenLabs‑AI skill does, how it wraps ElevenLabs APIs for TTS, speech‑to‑speech, realtime STT and dialogue workflows, and why develo">
+    <meta property="og:title" content="How the OpenClaw ElevenLabs‑AI Skill Powers Text‑to‑Speech, Voice Conversion and Real‑Time Transcription">
+    <meta property="og:description" content="Discover what the OpenClaw ElevenLabs‑AI skill does, how it wraps ElevenLabs APIs for TTS, speech‑to‑speech, realtime STT and dialogue workflows, and why develo">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/how-the-openclaw-elevenlabs-ai-skill-powers-text-to-speech-voice-conversion-and-real-time-transcription">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9327">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9327">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/how-the-openclaw-elevenlabs-ai-skill-powers-text-to-speech-voice-conversion-and-real-time-transcription">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>How the OpenClaw ElevenLabs‑AI Skill Powers Text‑to‑Speech, Voice Conversion and Real‑Time Transcription</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-19</p>
+    <h2>Introduction</h2>
+<p>The OpenClaw repository hosts a collection of reusable skills that simplify integration with popular AI services. One of the most frequently used skills is the ElevenLabs‑AI skill, which provides a thin, production‑ready wrapper around the ElevenLabs HTTP APIs. Rather than relying on a heavyweight SDK, the skill shows developers how to call ElevenLabs endpoints directly using HTTPS, manage authentication, handle payloads, and observe safety and privacy best practices. This article explains in detail what the skill does, walks through its core components, and highlights the scenarios where it shines.</p>
+<h2>Core Purpose of the Skill</h2>
+<p>The primary goal of the OpenClaw ElevenLabs‑AI skill is to give developers a clear, step‑by‑step guide for using ElevenLabs’ powerful voice technologies without the overhead of installing and learning a dedicated SDK. The skill focuses on four main capabilities:</p>
+<ul>
+<li>Text‑to‑speech (TTS) synthesis</li>
+<li>Speech‑to‑speech voice conversion</li>
+<li>Realtime speech‑to‑text transcription via WebSocket</li>
+<li>Multi‑voice dialogue generation for interactive applications</li>
+</ul>
+<p>Each capability is documented in a separate reference file that shows the exact HTTP method, endpoint URL, required headers, request body format, and expected response structure. By following these references, a developer can implement production‑grade voice features in any language that can make HTTPS requests.</p>
+<h2>Authentication and Token Management</h2>
+<p>Before any API call can succeed, the skill requires a valid ElevenLabs API key (the <code>xi‑api‑key</code> header) or, for client‑side scenarios, a single‑use token obtained through the authentication endpoint. The skill’s authentication reference (<code>references/elevenlabs-authentication.md</code>) explains:</p>
+<ul>
+<li>How to store the API key securely on a server (environment variable, secret manager)</li>
+<li>How to generate a short‑lived token for browsers or mobile apps, reducing exposure of the secret key</li>
+<li>Best practices for rotating keys and auditing usage</li>
+</ul>
+<p>The guidance emphasizes never logging the API key or token, and recommends using HTTP only over TLS to protect credentials in transit.</p>
+<h2>Text‑to‑Speech (TTS) Workflow</h2>
+<p>The TTS reference (<code>references/elevenlabs-text-to-speech.md</code>) outlines the simplest path from text to audible audio:</p>
+<ol>
+<li>Choose a voice ID (obtained from the voices/models reference)</li>
+<li>Select a model ID that balances quality and latency (e.g., <code>eleven_multilingual_v2</code> for multilingual output)</li>
+<li>Determine the output format: codec (<code>mp3</code>, <code>opus</code>), sample rate (<code>44100</code> Hz), and bitrate (<code>128k</code>)</li>
+<li>Build a JSON payload containing <code>text</code>, <code>voice_settings</code> (stability, similarity boost), and <code>output_format</code></li>
+<li>Send a POST request to <code>https://api.elevenlabs.io/v1/text-to-speech/{voice_id}</code> with the <code>xi‑api‑key</code> header</li>
+<li>Receive a binary audio stream in the response body; save it as a file or stream it directly to the user</li>
+</ol>
+<p>The skill also notes optional parameters such as <code>optimize_streaming_latency</code> for low‑latency use cases and <code>voice_settings</code> to fine‑tune the speaker’s style.</p>
+<h2>Speech‑to‑Speech Voice Conversion</h2>
+<p>For scenarios where an existing recording needs to be re‑voiced (e.g., dubbing, character voice swaps), the skill points to the speech‑to‑speech reference (<code>references/elevenlabs-speech-to-speech.md</code>). The workflow mirrors TTS but adds an audio input:</p>
+<ol>
+<li>Upload the source audio file (supported formats: wav, mp3, ogg) to a temporary storage accessible by your server</li>
+<li>Obtain a pre‑signed URL or directly POST the binary to the ElevenLabs upload endpoint if required</li>
+<li>Specify the target voice ID and model ID</li>
+<li>Call the <code>POST /v1/speech-to-speech/{voice_id}</code> endpoint with the audio as multipart/form‑data</li>
+<li>Receive the converted audio in the desired format</li>
+</ol>
+<p>The skill highlights that voice conversion preserves prosody and timing while swapping the vocal timbre, making it ideal for localization pipelines.</p>
+<h2>Realtime Speech‑to‑Text via WebSocket</h2>
+<p>When low‑latency transcription is needed (live captioning, voice commands), the skill directs developers to the realtime STT reference (<code>references/elevenlabs-speech-to-text-realtime.md</code>). Instead of REST, ElevenLabs offers a WebSocket endpoint:</p>
+<ul>
+<li>Open a secure WebSocket connection to <code>wss://api.elevenlabs.io/v1/speech-to-text</code></li>
+<li>Authenticate by sending an initialization message containing the API key and desired output format (e.g., <code>pcm</code> at 16 kHz)</li>
+<li>Stream audio chunks (typically 20 ms PCM frames) as binary messages</li>
+<li>Receive interim and final transcription messages in JSON format</li>
+<li>Close the connection cleanly when the utterance ends</li>
+</ul>
+<p>The skill advises implementing exponential backoff on connection failures and keeping audio payloads small to avoid throttling.</p>
+<h2>Multi‑Voice Dialogue Generation</h2>
+<p>For interactive storytelling, virtual agents, or game NPCs, the skill includes a dialogue reference (<code>references/elevenlabs-text-to-dialogue.md</code>) that explains how to produce a conversation with multiple distinct voices in a single request:</p>
+<ol>
+<li>Prepare a dialogue script where each line is tagged with a speaker ID</li>
+<li>Map each speaker ID to a voice ID from the voices catalog</li>
+<li>Optionally assign different models per speaker to match language or style</li>
+<li>Send a POST request to <code>POST /v1/dialogue</code> with a JSON body containing an array of turns, each turn holding <code>text</code>, <code>voice_id</code>, and <code>model_id</code></li>
+<li>Receive a concatenated audio file (or separate tracks) that preserves turn‑taking pauses</li>
+</ol>
+<p>This approach reduces round‑trips and ensures consistent audio quality across speakers.</p>
+<h2>Voice and Model Discovery</h2>
+<p>Both TTS and speech‑to‑speech operations depend on knowing which voice and model IDs are available. The skill’s voices/models reference (<code>references/elevenlabs-voices-models.md</code>) teaches developers to:</p>
+<ul>
+<li>Call <code>GET /v1/voices</code> to retrieve a paginated list of voices, each with <code>voice_id</code>, <code>name</code>, <code>category</code>, and <code>settings</code></li>
+<li>Call <code>GET /v1/models</code> to list available models, their supported languages, and latency profiles</li>
+<li>Cache the results server‑side for a configurable TTL (e.g., 1 hour) to reduce unnecessary API calls</li>
+<li>Allow end‑users to browse voices via a UI that displays voice samples (pre‑hosted audio clips provided by ElevenLabs)</li>
+</ol>
+<p>Having a reliable lookup table prevents runtime errors caused by misspelled IDs.</p>
+<h2>Safety, Privacy, and Operational Guardrails</h2>
+<p>The skill does not ignore the ethical dimensions of voice AI. The safety and privacy reference (<code>references/elevenlabs-safety-and-privacy.md</code>) outlines:</p>
+<ul>
+<li>Zero‑retention policy: ElevenLabs does not store audio longer than necessary for processing</li>
+<li>Content moderation: Developers should screen input text for prohibited material before sending it to the API</li>
+<li>Usage limits: Respect rate limits; implement client‑side throttling and server‑side queuing</li>
+<li>Data minimization: Only transmit the minimum audio needed (e.g., downsample to 16 kHz if higher fidelity is not required)</li>
+<li>Audit logs: Keep internal logs of request metadata (timestamps, voice IDs) without capturing the API key or raw audio</li>
+</ul>
+<p>Operational notes further advise maintaining an allowlist of downstream destinations for generated audio (to prevent unintended distribution) and retrying failed requests with exponential backoff and jitter.</p>
+<h2>When to Use This Skill</h2>
+<p>The OpenClaw ElevenLabs‑AI skill is ideal for developers who:</p>
+<ul>
+<li>Need quick, reliable access to high‑quality TTS or voice conversion without installing language‑specific SDKs</li>
+<li>Prefer transparent HTTP calls that can be logged, inspected, and reproduced in CI/CD pipelines</li>
+<li>Are building server‑side services, microservices, or cloud functions where minimizing dependency size matters</li>
+<li>Want full control over request headers, payload formatting, and error handling</li>
+<li>Are comfortable handling WebSocket connections for realtime transcription</li>
+</ul>
+<p>Conversely, the skill is not the best fit if you require:</p>
+<ul>
+<li>High‑level abstractions such as built‑in audio players, automatic fallback voices, or integrated dialogue management</li>
+<li>Feature‑rich SDK utilities like automatic retries, streaming helpers, or platform‑specific UI components</li>
+<li>A full conversational agent framework that handles turn‑taking, context management, and NLU alongside audio I/O</li>
+</ul>
+<p>In those cases, wrapping the skill’s HTTP calls in a thin custom layer or opting for an official SDK may be more productive.</p>
+<h2>Putting It All Together – Example Pseudocode</h2>
+<p>Below is a language‑agnostic pseudocode snippet that demonstrates a typical TTS flow using the skill’s guidelines:</p>
+<pre>
+FUNCTION synthesizeText(text, voiceId, modelId):
+    apiKey ← getSecureEnvVar('ELEVENLABS_API_KEY')
+    url ← "https://api.elevenlabs.io/v1/text-to-speech/" + voiceId
+    headers ← {
+        "xi-api-key": apiKey,
+        "Content-Type": "application/json"
+    }
+    payload ← {
+        "text": text,
+        "model_id": modelId,
+        "voice_settings": {
+            "stability": 0.5,
+            "similarity_boost": 0.75
+        },
+        "output_format": "mp3_44100_128"
+    }
+    response ← HTTP POST url, headers, payload
+    IF response.statusCode != 200:
+        LOG ERROR response.body
+        THROW Exception("TTS request failed")
+    END IF
+    RETURN response.body   // binary MP3 audio
+END FUNCTION
+</pre>
+<p>The same pattern applies to speech‑to‑speech (multipart upload) and realtime STT (WebSocket loop), with only the endpoint, headers, and payload structure changing.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw ElevenLabs‑AI skill is a concise, production‑oriented guide that unlocks the power of ElevenLabs’ voice APIs through straightforward HTTPS calls. By following the skill’s references — authentication, TTS, speech‑to‑speech, realtime STT, dialogue generation, voice/model discovery, and safety practices — developers can integrate lifelike voice capabilities into any application while maintaining control over security, performance, and cost. Whether you are building a podcast production pipeline, a live‑captioning service, or an interactive game with dynamic NPC voices, the skill provides the essential checklist and best‑practice notes to get you up and running quickly and reliably.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/codedao12/elevenlabs-ai/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/codedao12/elevenlabs-ai/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

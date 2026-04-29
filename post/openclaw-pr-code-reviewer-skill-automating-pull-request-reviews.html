@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenClaw PR Code Reviewer Skill: Automating Pull Request Reviews</title>
+    <meta name="description" content="The PR Code Reviewer skill automatically reviews Pull Requests in Bitbucket, detecting syntax errors, security vulnerabilities, and code standard violations acr">
+    <meta property="og:title" content="OpenClaw PR Code Reviewer Skill: Automating Pull Request Reviews">
+    <meta property="og:description" content="The PR Code Reviewer skill automatically reviews Pull Requests in Bitbucket, detecting syntax errors, security vulnerabilities, and code standard violations acr">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/openclaw-pr-code-reviewer-skill-automating-pull-request-reviews">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9016">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9016">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/openclaw-pr-code-reviewer-skill-automating-pull-request-reviews">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>OpenClaw PR Code Reviewer Skill: Automating Pull Request Reviews</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <h2>What is the PR Code Reviewer Skill?</h2>
+<p>The PR Code Reviewer skill is an automated code review tool designed to analyze Pull Requests in Bitbucket repositories. It systematically examines code changes to identify syntax errors, security vulnerabilities, code smells, and violations of team coding standards before they reach the main development branches.</p>
+<h2>How It Works</h2>
+<p>This skill operates by reading the complete diff of a Pull Request before providing any feedback. It understands the context of what the PR is trying to accomplish, not just reviewing line-by-line. The skill automatically detects the programming language of each file based on its extension and applies the appropriate set of rules for that language.</p>
+<h3>Language Support</h2>
+<p>The skill supports multiple programming languages:</p>
+<ul>
+<li>JavaScript, TypeScript, Node.js (.js, .mjs, .cjs, .ts, .tsx, .jsx)</li>
+<li>PHP (.php)</li>
+<li>Python (.py)</li>
+<li>CSS, SCSS, HTML (.css, .scss, .html)</li>
+</ul>
+<h3>Severity Classification</h2>
+<p>Every finding is classified by severity level:</p>
+<ul>
+<li><strong>🔴 BLOCKER</strong> &#8211; Critical issues that prevent merging, including errors, vulnerabilities, and clear bugs</li>
+<li><strong>🟡 WARNING</strong> &#8211; Issues that should be corrected, such as bad practices and code smells</li>
+<li><strong>🔵 SUGGESTION</strong> &#8211; Optional improvements for style, readability, and optimization</li>
+<li><strong>💡 NIT</strong> &#8211; Minor details about conventions and formatting</li>
+</ul>
+<h2>Key Features</h2>
+<p>The skill provides comprehensive code review coverage by applying rules from multiple reference documents:</p>
+<ul>
+<li><strong>General rules</strong> &#8211; Always applied across all languages</li>
+<li><strong>Security rules</strong> &#8211; Always applied to identify vulnerabilities</li>
+<li><strong>Team conventions</strong> &#8211; Always applied to ensure consistency with team standards</li>
+<li><strong>Language-specific rules</strong> &#8211; Applied based on file extensions</li>
+</ul>
+<p>For each issue found, the skill not only identifies the problem but also suggests specific corrections, making it a constructive tool for improving code quality.</p>
+<h2>Output Format</h2>
+<p>The skill provides structured feedback with a summary of the review, detailed findings organized by file, and a final verdict. The verdict can be one of three options:</p>
+<ul>
+<li><strong>✅ APROBAR</strong> &#8211; Approved for merging</li>
+<li><strong>⚠️ APROBAR CON CAMBIOS</strong> &#8211; Approved with required changes</li>
+<li><strong>❌ RECHAZAR</strong> &#8211; Rejected due to critical issues</li>
+</ul>
+<h2>Benefits</h2>
+<p>By automating the initial code review process, this skill helps teams:</p>
+<ul>
+<li>Catch errors before they reach production</li>
+<li>Enforce coding standards consistently</li>
+<li>Identify security vulnerabilities early</li>
+<li>Reduce manual review time</li>
+<li>Provide constructive feedback with specific suggestions</li>
+</ul>
+<p>The PR Code Reviewer skill is an essential tool for maintaining code quality and security in collaborative development environments, particularly for teams working with Bitbucket repositories and multiple programming languages.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/nesquitmx/pr-code-reviewer/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/nesquitmx/pr-code-reviewer/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

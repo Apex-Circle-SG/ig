@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crypto Scam Detector Skill &#8211; Real-Time Cryptocurrency Fraud Prevention</title>
+    <meta name="description" content="OpenClaw skill that provides real-time cryptocurrency scam detection using database-first architecture. Protects users from phishing, honeypots, rug pulls, and ">
+    <meta property="og:title" content="Crypto Scam Detector Skill &#8211; Real-Time Cryptocurrency Fraud Prevention">
+    <meta property="og:description" content="OpenClaw skill that provides real-time cryptocurrency scam detection using database-first architecture. Protects users from phishing, honeypots, rug pulls, and ">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/crypto-scam-detector-skill-real-time-cryptocurrency-fraud-prevention">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8418">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8418">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/crypto-scam-detector-skill-real-time-cryptocurrency-fraud-prevention">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Crypto Scam Detector Skill &#8211; Real-Time Cryptocurrency Fraud Prevention</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-09</p>
+    <h2>What This Skill Does</h2>
+<p>The Crypto Scam Detector skill provides real-time protection against cryptocurrency fraud by analyzing wallet addresses for various scam indicators. It uses a database-first architecture to deliver instant results without external API calls, making it incredibly fast and reliable for OpenClaw users.</p>
+<h3>Core Functionality</h3>
+<p>This skill performs comprehensive analysis of cryptocurrency addresses to detect:</p>
+<ul>
+<li>Phishing attempts and private key scams</li>
+<li>Honeypot contracts and rug pulls</li>
+<li>Exploit group activities and hacking attempts</li>
+<li>Social engineering schemes and fake airdrops</li>
+<li>Suspicious transaction patterns and behaviors</li>
+</ul>
+<h2>How It Works</h2>
+<h3>Database-First Architecture</h3>
+<p>The skill uses a local SQLite database that stores millions of addresses and their associated risk factors. When you check an address, the system queries this database instantly &#8211; no external API calls are made during user checks, resulting in response times under 5 milliseconds.</p>
+<h3>Background Synchronization</h3>
+<p>While user checks are instantaneous, the skill maintains data freshness through a background sync worker. This separate process:</p>
+<ul>
+<li>Pulls data from Etherscan using your API key</li>
+<li>Decodes transaction messages and analyzes hex data</li>
+<li>Detects suspicious keywords and patterns</li>
+<li>Automatically queues unknown addresses for analysis</li>
+</ul>
+<h2>Detection Capabilities</h2>
+<h3>Risk Scoring System</h3>
+<p>Each address receives a risk score from 0-100 based on multiple factors:</p>
+<ul>
+<li>Suspicious transaction count (up to +50 points)</li>
+<li>Account age and creation patterns</li>
+<li>Balance anomalies and large transfers</li>
+<li>Contract verification status</li>
+<li>Keyword detection in transaction data</li>
+</ul>
+<h3>Risk Levels</h3>
+<ul>
+<li><strong>0-19</strong>: Low Risk &#8211; Safe to interact</li>
+<li><strong>20-49</strong>: Medium Risk &#8211; Exercise caution</li>
+<li><strong>50-79</strong>: High Risk &#8211; Significant red flags</li>
+<li><strong>80-100</strong>: Critical Risk &#8211; Avoid completely</li>
+</ul>
+<h2>Key Features</h2>
+<h3>Instant Results</h3>
+<p>Unlike other scam detectors that query external APIs during each check, this skill provides immediate results by querying the local database. This means no rate limits, no latency, and no dependency on third-party services during user interactions.</p>
+<h3>Comprehensive Scam Detection</h3>
+<p>The system detects sophisticated scams that basic checkers miss:</p>
+<ul>
+<li>State-sponsored hacking group references (Lazarus, etc.)</li>
+<li>Private key phishing attempts</li>
+<li>Exploit recruitment messages</li>
+<li>Advanced social engineering tactics</li>
+</ul>
+<h3>Smart Contract Analysis</h3>
+<p>For contract addresses, the skill analyzes code verification status and can detect honeypot contracts designed to trap users&#8217; funds.</p>
+<h2>Installation &#038; Setup</h2>
+<h3>Quick Installation</h3>
+<p>The skill includes an auto-installer that handles all dependencies and setup:</p>
+<pre><code>cd ~/.openclaw/workspace/skills/crypto-scam-detector
+bash install.sh
+</code></pre>
+<h3>Configuration</h3>
+<p>While basic functionality works without configuration, you&#8217;ll want to set up an Etherscan API key for background synchronization:</p>
+<ol>
+<li>Get a free API key from <a href="https://etherscan.io/myapikey">Etherscan</a></li>
+<li>Run the setup wizard: <code>./setup.sh</code></li>
+<li>Follow the prompts to encrypt and store your key</li>
+</ol>
+<h2>Usage Examples</h2>
+<h3>Basic Address Check</h3>
+<pre><code>python3 crypto_check_db.py 0x1234567890abcdef1234567890abcdef12345678
+</code></pre>
+<p>This returns a detailed analysis with risk score, detected issues, and recommendations.</p>
+<h3>JSON Output</h3>
+<pre><code>python3 crypto_check_db.py 0x1234567890abcdef1234567890abcdef12345678 --json
+</code></pre>
+<p>Get machine-readable output for integration with other tools.</p>
+<h3>Background Sync</h3>
+<p>Run the sync worker manually or set up a cron job:</p>
+<pre><code>python3 sync_worker.py --max-jobs 30
+</code></pre>
+<h2>Security Benefits</h2>
+<h3>Zero External Dependencies During Checks</h3>
+<p>The database-first approach means your OpenClaw instance can perform scam checks even when offline or when external APIs are rate-limited or unavailable.</p>
+<h3>Privacy Protection</h3>
+<p>Since all checks happen locally against your database, you don&#8217;t expose your query patterns or address checks to third-party services.</p>
+<h3>Offline Capability</h3>
+<p>Once installed and synchronized, the skill works completely offline, making it ideal for air-gapped or restricted network environments.</p>
+<h2>Technical Architecture</h2>
+<h3>Database Schema</h3>
+<p>The system uses a normalized SQLite database with tables for:</p>
+<ul>
+<li>Addresses and their metadata</li>
+<li>Transactions and analysis results</li>
+<li>Risk scores and confidence levels</li>
+<li>Sync queue for background processing</li>
+</ul>
+<h3>API Integration</h3>
+<p>When synchronization is needed, the skill uses Etherscan&#8217;s API efficiently:</p>
+<ul>
+<li>4 calls per address (balance, TX count, TX list, code)</li>
+<li>1.5-second delay between addresses (free tier safe)</li>
+<li>Automatic rate limit handling</li>
+</ul>
+<h2>Integration with OpenClaw</h2>
+<p>This skill integrates seamlessly with OpenClaw&#8217;s workflow system, providing:</p>
+<ul>
+<li>Command-line interface for manual checks</li>
+<li>API endpoints for automated workflows</li>
+<li>Webhook support for real-time alerts</li>
+<li>Configuration management through OpenClaw&#8217;s system</li>
+</ul>
+<h2>Performance Considerations</h2>
+<h3>Database Size</h3>
+<p>The database grows over time but remains performant due to proper indexing and query optimization. A typical installation with millions of addresses uses around 500MB-1GB of storage.</p>
+<h3>Sync Performance</h3>
+<p>Background sync processes addresses at approximately 30-40 per minute on a typical connection, meaning large queues are processed overnight without impacting user experience.</p>
+<h2>Support &#038; Maintenance</h2>
+<h3>Automatic Updates</h3>
+<p>The skill includes mechanisms for automatic updates to ensure you always have the latest scam detection patterns and database improvements.</p>
+<h3>Community Contributions</h3>
+<p>The detection system benefits from community contributions, with new scam patterns and indicators regularly added to improve coverage.</p>
+<h2>Best Practices</h2>
+<h3>Regular Synchronization</h3>
+<p>Set up a cron job to run the sync worker every 10-15 minutes for optimal coverage of new addresses and emerging scams.</p>
+<h3>API Key Management</h3>
+<p>Use the provided encrypted key storage to keep your Etherscan API key secure while allowing the background worker to function.</p>
+<h3>Backup Strategy</h3>
+<p>Periodically back up your database to preserve your local analysis and avoid resynchronization when moving installations.</p>
+<h2>Conclusion</h2>
+<p>The Crypto Scam Detector skill provides enterprise-grade cryptocurrency fraud protection for OpenClaw users. Its database-first architecture ensures instant, reliable results while the background synchronization keeps your data current. Whether you&#8217;re a casual crypto user or managing institutional funds, this skill provides the protection you need against the ever-evolving landscape of cryptocurrency scams.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/princedoss77/crypto-address-checker/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/princedoss77/crypto-address-checker/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

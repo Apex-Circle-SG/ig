@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding SkillGuard: Your OpenClaw Security Scanner</title>
+    <meta name="description" content="SkillGuard scans OpenClaw skills for vulnerabilities like malicious code, prompt injection, and supply chain attacks. Learn how it works.">
+    <meta property="og:title" content="Understanding SkillGuard: Your OpenClaw Security Scanner">
+    <meta property="og:description" content="SkillGuard scans OpenClaw skills for vulnerabilities like malicious code, prompt injection, and supply chain attacks. Learn how it works.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-skillguard-your-openclaw-security-scanner">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9010">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9010">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-skillguard-your-openclaw-security-scanner">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding SkillGuard: Your OpenClaw Security Scanner</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <p>To maintain the integrity and safety of your OpenClaw ecosystem, <a href="https://github.com/openclaw/skills/tree/main/skills/benlee2144/benlee-skillguard">SkillGuard</a> acts as an advanced security scanner designed to audit all installed skills for potential threats. Whether you&#8217;re a beginner or an experienced user, understanding what SkillGuard does and how it enhances your security posture is crucial.</p>
+<h2>Introduction to SkillGuard</h2>
+<p>SkillGuard is a comprehensive audit tool specifically tailored for OpenClaw skills. It meticulously scans and analyses your skills for signs of malicious activity, unauthorized actions, and potential vulnerabilities. Its main objective is to ensure that every skill operating in your system adheres to security best practices and doesn&#8217;t compromise your data or system.</p>
+<h2>SkillGuard&#8217;s Command Structure</h2>
+<p>SkillGuard&#8217;s robust functionalities can be accessed via simple commands. Here&#8217;s a breakdown of the primary commands and their usage:</p>
+<h3><code>scan</code> Command</h3>
+<p>The <code>scan</code> command audits all skills in the default directory (<code>~/clawd/skills/</code>) or a specified custom directory, providing a detailed analysis of each skill’s security posture. Example usage:</p>
+<ul>
+<li><code>python3 ~/clawd/skills/skill-guard/scripts/skillguard.py scan</code></li>
+<li><code>python3 ~/clawd/skills/skill-guard/scripts/skillguard.py scan --json</code></li>
+<li><code>python3 ~/clawd/skills/skill-guard/scripts/skillguard.py scan --report report.md</code></li>
+<li><code>python3 ~/clawd/skills/skill-guard/scripts/skillguard.py scan --baseline</code></li>
+</ul>
+<h3><code>check</code> Command</h3>
+<p>The <code>check</code> command conducts a security scan on a single specified skill directory, allowing you to target specific areas of concern.</p>
+<ul>
+<li><code>python3 ~/clawd/skills/skill-guard/scripts/skillguard.py check ~/clawd/skills/some-skill</code></li>
+<li><code>python3 ~/clawd/skills/skill-guard/scripts/skillguard.py check ~/clawd/skills/skill-guard/tests/</code></li>
+</ul>
+<h3><code>watch</code> Command</h3>
+<p>This command delivers a concise summary suitable for alerting purposes, such as in cron jobs, ensuring you are promptly notified of new threats.</p>
+<ul>
+<li><code>python3 ~/clawd/skills/skill-guard/scripts/skillguard.py watch</code></li>
+</ul>
+<h3>Output Formats</h3>
+<p>SkillGuard’s results are delivered in practical and easy-to-understand formats:<br />&#8211; <b>SkillGuard:</b> Details the total number of skills scanned, the breakdown of clean, suspicious, and malicious findings<br />&#8211; <b>ALERT:</b> Provides immediate notification if any suspicious changes since the last baseline or if a skill has been flagged as malicious</p>
+<h2>Advanced Capabilities</h2>
+<p>SkillGuard is equipped with several advanced features that set it apart from standard security scanners. These capabilities ensure that no malicious activity goes unnoticed, and potential vulnerabilities are flagged before they can cause harm.</p>
+<h3>Code Analysis</h3>
+<p>SkillGuard&#8217;s code analysis goes beyond basic pattern matching. It dissects the code for dangerous functions, suspicious payloads, and potential threats:</p>
+<ul>
+<li><b>Eval/Exec Calls:</b> Detects and flags potentially harmful eval and exec calls</li>
+<li><b>Shell Injection:</b> Identifies suspicious strings that may indicate injection attempts</li>
+<li><b>Outbound HTTP Requests:</b> Checks for unauthorized HTTP requests that could exfiltrate data</li>
+<li><b>Base64-Encoded Payloads:</b> Decodes Base64-encoded content to inspect for hidden threats</li>
+<li><b>Hex-Encoded Suspicious Strings:</b> Performs specialized searches for encoded malicious payloads</li>
+<li><b>Minified/Obfuscated Javascript:</b> Analyzes code accounting for common obfuscation tactics</li>
+<li>Detects time-bomb patterns, where malicious code is set to activate after a specific date</li>
+</ul>
+<h3>Domain Analysis</h3>
+<p>SkillGuard maintains an allowlist of over 80 legitimate API domains, enhancing its ability to assess risk based on network activity. This feature ensures that only trusted third-party integrations are permitted:</p>
+<ul>
+<li>HTTP requests to known, legitimate APIs carry no risk points</li>
+<li>HTTP requests to unregistered domains are flagged and scored as WARNING with a penalty of 10 points</li>
+<li><b>Context-Aware Analysis:</b> Different scores are applied based on the context of the HTTP request, ensuring relevancy and accuracy in assessments</li>
+</ul>
+<h3>Sensitive File Access</h3>
+<p>To protect sensitive data, SkillGuard monitors access to critical and sensitive files that could compromise your security:</p>
+<ul>
+<li>Detects unauthorized access to SSH keys, AWS credentials, and GPG keyrings</li>
+<li>Monitors browser credential stores, including those from Chrome, Firefox, and Safari</li>
+<li>Checks for interactions with crypto wallets like MetaMask, Phantom, Solana, and Ethereum</li>
+<li>Flags any unauthorized access to keychain or keyring stores</li>
+<li>Identifies code attempting to harvest environment variables</li>
+</ul>
+<h3>Prompt Injection</h3>
+<p>SkillGuard proactive detects manipulation attempts through prompt injection:</p>
+<ul>
+<li>Flows through HTML comments that may override standard inputs</li>
+<li>Examines documentation for data exfiltration instructions</li>
+<li>Identifies social engineering phrases meant to deceive users</li>
+<li>Detects instructions targeting modifications of other skills or system files</li>
+</ul>
+<h3>Supply Chain Detection</h3>
+<p>To ensure the integrity of dependent libraries and packages, SkillGuard incorporates thorough supply chain detection mechanisms:</p>
+<ul>
+<li>Detects typosquatting by applying Levenshtein distance calculations on package names</li>
+<li>Identifies suspicious npm post-install scripts that might execute malicious code upon package installation</li>
+<li>Checks against lists of known malicious packages to prevent accidental inclusion</li>
+</ul>
+<h3>Enhanced Detection (v2 Updates)</h3>
+<p>SkillGuard v2 has introduced several key enhancements that further fortify security assessments:</p>
+<ul>
+<li><b>File Permissions:</b> Detects non-standard executable bit flags for non-executable files (e.g., .py, .js, and .md files)</li>
+<li><b>Binary Detection:</b> Identifies potential threats in ELF, Mach-O, and PE binaries found within skill directories</li>
+<li><b>Hardcoded Secrets:</b> Flags hardcoded sensitive information, such as AWS keys (AKIA&#8230;), GitHub tokens (ghp_&#8230;), OpenAI keys (sk-&#8230;), Stripe keys, and private key files</li>
+<li><b>Write Outside Path:</b> Catches code attempting to write files outside its designated skill directory</li>
+<li><b>Unicode Homoglyphs:</b> Detects lookalike characters in filenames to prevent deception, identifying Cyrillic characters, for example, that mimic Latin letters</li>
+<li><b>Excessive File Count:</b> Flags skills with an unusually high number of files (e.g., 50+ files)</li>
+<li><b>Large Files:</b> Identifies abnormally large files (e.g., over 500KB) that may contain hidden malicious payloads</li>
+<li><b>Network Threats:</b> Detects hardcoded IP addresses, reverse shells, and DNS exfiltration techniques</li>
+<li><b>WebSockets:</b> Monitors for unauthorized WebSocket connections to external hosts</li>
+</ul>
+<h3>Persistence Detection</h3>
+<p><a href="https://github.com/openclaw/skills/tree/main/skills/benlee2144/benlee-skillguard">SkillGuard’s</a> v2 makes persistence detection more robust by addressing potential long-term threats:</p>
+<ul>
+<li>Checks for unauthorized modifications to crontab entries</li>
+<li>Identifies the creation of suspicious launchd or systemd services</li>
+<li>Flags alterations made to shell resource configuration files, such as .bashrc and .zshrc</li>
+</ul>
+<h3>Tamper Detection (v2 Updates)</h3>
+<p>With tamper detection, SkillGuard v2 introduces additional layers of security:</p>
+<ul>
+<li>Computes SHA-256 hashes for every file at the first scan to establish a baseline</li>
+<li>Stores these baselines in <code>baselines.json</code> for future reference</li>
+<li>With subsequent scans, SkillGuard compares file hashes to detect changes, additions, or removals</li>
+<li>Verifies version origin through <code>.clawhub/origin.json</code> to ensure the integrity of installed skills</li>
+</ul>
+<h2>Scoring Mechanism</h2>
+<p>SkillGuard employs a points-based scoring system to assess the risk level of each flagged issue. Different patterns are assigned specific point values, providing a clear indication of a skill&#8217;s potential danger. Here are some risk levels and their corresponding point triggers:</p>
+<table>
+<tbody>
+<tr>
+<th>Pattern</th>
+<th>Points</th>
+</tr>
+<tr>
+<td>HTTP to known API</td>
+<td>0</td>
+</tr>
+<tr>
+<td>HTTP to unknown domain</td>
+<td>10</td>
+</tr>
+<tr>
+<td><code>curl</code> in documentation</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>subprocess</code> call</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>subprocess</code> + <code>shell=True</code></td>
+<td>25</td>
+</tr>
+<tr>
+<td>Sensitive file access</td>
+<td>10-25</td>
+</tr>
+<tr>
+<td>Prompt Injection Phrase</td>
+<td>25</td>
+</tr>
+<tr>
+<td>Reverse shell</td>
+<td><strong>Auto <code>MALICIOUS</code></strong></td>
+</tr>
+<tr>
+<td>Sensitive access + outbound</td>
+<td><strong>Auto <code>MALICIOUS</code></strong></td>
+</tr>
+<tr>
+<td>Typosquatted package</td>
+<td>15</td>
+</tr>
+<tr>
+<td>JS in SVG</td>
+<td>25</td>
+</tr>
+</tbody>
+</table>
+<p>These points translate into three distinct risk levels:</p>
+<table>
+<tbody>
+<tr>
+<th>Risk Level</th>
+<th>Risk Indicators</th>
+<th>Score</th>
+</tr>
+<tr>
+<td>✅ CLEAN</td>
+<td>Compliant and secure</td>
+<td>0-15 Points</td>
+</tr>
+<tr>
+<td>⚠️ SUSPICIOUS</td>
+<td>Require further investigation</td>
+<td>16-40 Points</td>
+</tr>
+<tr>
+<td>🔴 MALICIOUS</td>
+<td>Immediate action required</td>
+<td>41+ Points OR <em>Dangerous Combo Detected</em></td>
+</tr>
+</tbody>
+</table>
+<h2>Recommendations Engine</h2>
+<p>Alongside its scoring mechanism, <a href="https://github.com/openclaw/skills/tree/main/skills/benlee2144/benlee-skillguard">SkillGuard v2</a> offers an integrated recommendations engine. For each identified issue, it provides actionable and clear recommendations, explaining the risk and suggesting proactive steps to mitigate or resolve the potential threat.</p>
+<h2>Test Suite: Real-World Validation</h2>
+<p>SkillGuard&#8217;s reliability is corroborated by an extensive test suite containing seven deliberately crafted malicious skills. These test skills cover a range of attack vectors to validate the scanner&#8217;s effectiveness:</p>
+<ul>
+<li><b>fake-weather:</b> Simulates SSH key theft and unauthorized POST requests to a fake domain</li>
+<li><b>fake-formatter:</b> Incorporates a Base64-encoded reverse shell</li>
+<li><b>fake-helper:</b> Tests prompt injection and social engineering defenses</li>
+<li><b>fake-crypto:</b> Mimics wallet theft and command-and-control (C2) communication</li>
+<li><b>fake-typosquat:</b> Uses deliberately misspelled package names to evade detection</li>
+<li><b>fake-timebomb:</b> Simulates a date-activated exfiltration of SSH keys</li>
+<li><b>fake-svgmalware:</b> Embeds JavaScript in an SVG file to test detection of unconventional attack vectors</li>
+</ul>
+<p>All seven malicious test skills are classified as <b>🔴 MALICIOUS</b> by SkillGuard, demonstrating its robust efficacy in detecting a variety of sophisticated threats.</p>
+<h2>System Requirements</h2>
+<p>SkillGuard is designed for simplicity and ease of use. It requires only the Python 3 standard library and operates as a single script:</p>
+<ul>
+<li><code>scripts/skillguard.py</code></li>
+</ul>
+<p>This minimalistic approach ensures fast deployment and compatibility across a wide range of environments.</p>
+<h2>Conclusion</h2>
+<p>Maintaining the integrity and safety of your OpenClaw ecosystem is of paramount importance. Tools like SkillGuard equip you with the capabilities to proactively scan, identify, and mitigate potential risks. By leveraging advanced features such as code analysis, domain whitelisting, sensitive file access detection, and thorough supply chain inspection, SkillGuard ensures that no angle of attack is left unchecked.</p>
+<p>The recommended practices of using SkillGuard&#8217;s <code>scan</code>, <code>check</code>, and <code>watch</code> commands provide a comprehensive framework for consistent security audits. Moreover, its intuitive risk-based scoring system and the insights provided by the recommendations engine empower users to take informed actions when handling potential vulnerabilities.</p>
+<p>Be proactive and enhance your system&#8217;s resilience by integrating <a href="https://github.com/openclaw/skills/tree/main/skills/benlee2144/benlee-skillguard">SkillGuard</a> into your OpenClaw security protocols. Continually scanning your skills with SkillGuard ensures ongoing protection, peace of mind, and unwavering confidence in the integrity of your OpenClaw environment.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/benlee2144/benlee-skillguard/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/benlee2144/benlee-skillguard/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

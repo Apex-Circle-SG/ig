@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the Soul Memory Skill for OpenClaw: AI Memory Management Explained</title>
+    <meta name="description" content="A deep dive into the Soul Memory skill for OpenClaw, covering its modules, features, plugin integration, installation, usage, and benefits for AI agents.">
+    <meta property="og:title" content="Understanding the Soul Memory Skill for OpenClaw: AI Memory Management Explained">
+    <meta property="og:description" content="A deep dive into the Soul Memory skill for OpenClaw, covering its modules, features, plugin integration, installation, usage, and benefits for AI agents.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-soul-memory-skill-for-openclaw-ai-memory-management-explained">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9207">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9207">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-soul-memory-skill-for-openclaw-ai-memory-management-explained">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the Soul Memory Skill for OpenClaw: AI Memory Management Explained</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-18</p>
+    <h2>Introduction</h2>
+<p>In the rapidly evolving landscape of AI agents, having a reliable long‑term memory system is crucial for maintaining context, learning from past interactions, and delivering personalized responses. The Soul Memory skill, hosted in the OpenClaw skills repository, provides an intelligent memory management framework that plugs directly into the OpenClaw ecosystem. This article explains what the Soul Memory skill does, how its components work together, and how you can leverage it to boost your AI agent’s performance.</p>
+<h2>What Is Soul Memory?</h2>
+<p>Soul Memory is a long‑term memory framework designed specifically for AI agents that operate within the OpenClaw platform. It combines priority‑based tagging, vector search, dynamic classification, version control, memory decay, auto‑trigger mechanisms, Cantonese language support, and a command‑line interface. All of these features are wrapped in a lightweight, pure‑Python implementation that requires no external dependencies beyond the standard library. The skill is released under the MIT license, making it free to use, modify, and distribute.</p>
+<h2>Core Modules Overview</h2>
+<p>The skill is organized into eight primary modules, each handling a distinct aspect of memory management:</p>
+<ul>
+<li><strong>Priority Parser (Module A)</strong>: Reads tags such as [C] for critical, [I] for important, and [N] for normal. It also performs semantic auto‑detection to assign appropriate priority levels when tags are missing.</li>
+<li><strong>Vector Search (Module B)</strong>: Implements keyword indexing with Chinese, Japanese, and Korean (CJK) segmentation, synonym expansion, and similarity scoring to retrieve the most relevant memories.</li>
+<li><strong>Dynamic Classifier (Module C)</strong>: Automatically learns categories from stored memories while falling back to preset categories like User_Identity, Tech_Config, Project, Science, History, and General.</li>
+<li><strong>Version Control (Module D)</strong>: Integrates with Git to track changes to memory files, enabling rollback and audit trails.</li>
+<li><strong>Memory Decay (Module E)</strong>: Applies time‑based decay scores and provides cleanup suggestions to keep the memory store lean and relevant.</li>
+<li><strong>Auto‑Trigger (Module F)</strong>: Executes a pre‑response search to inject relevant context and a post‑response auto‑save to store new information automatically.</li>
+<li><strong>Cantonese Branch (Module G)</strong>: Adds support for Cantonese particles, sentiment mapping, and language detection, allowing the system to understand and preserve colloquial expressions.</li>
+<li><strong>CLI Interface (Module H)</strong>: Provides a pure‑JSON output mode for easy integration with external scripts, dashboards, or other AI pipelines.</li>
+</ul>
+<h2>Key Features and Enhancements</h2>
+<p>Soul Memory ships with a suite of features that directly address common pain points in AI memory handling:</p>
+<ul>
+<li><strong>Pluggable Context Engine Integration</strong>: The skill hooks into OpenClaw’s before_prompt_build event, automatically fetching and injecting relevant memories before each model response.</li>
+<li><strong>Semantic Cache Layer</strong>: Frequently accessed memory fragments are cached, reducing lookup latency and delivering up to a 10× speed improvement.</li>
+<li><strong>Dynamic Context Window</strong>: Adjusts the amount of injected context based on token budget, ensuring the model receives the most pertinent information without overflow.</li>
+<li><strong>Multi‑Context Collaboration</strong>: Allows multiple memory engines (e.g., short‑term buffer, long‑term store) to work together, sharing updates and avoiding duplication.</li>
+<li><strong>Token Savings</strong>: Through semantic deduplication and smart pruning, the system reports roughly 40% fewer tokens sent to the language model.</li>
+<li><strong>Heartbeat Auto‑Cleanup</strong>: A cron‑driven script cleans Heartbeat reports every three hours, maintaining a high quality score (improved from 7.9 to 8.5 in recent releases).</li>
+<li><strong>Min‑Score Support</strong>: Configurable relevance threshold lets users fine‑tune how strict the memory retrieval should be.</li>
+<li><strong>CLI Dual‑Format Compatibility</strong>: The command‑line interface can output either human‑readable tables or pure JSON, facilitating both interactive use and programmatic consumption.</li>
+</ul>
+<h2>How the OpenClaw Plugin Works</h2>
+<p>The Soul Memory skill ships as an OpenClaw plugin that resides in ~/.openclaw/extensions/soul‑memory. Once installed, the plugin registers a hook that runs before each prompt is built:</p>
+<ol>
+<li>The plugin extracts the current user query from event.prompt (ignoring the conversation history to avoid bias).</li>
+<li>It calls the SoulMemorySystem’s search method with a configurable topK (default 5) and minScore (default 0.0).</li>
+<li>The returned memories are formatted into a concise context block.</li>
+<li>This block is injected into the prompt via the prependContext mechanism, ensuring the language model sees the relevant memories as part of its input.</li>
+</ol>
+<p>Configuration is straightforward: edit ~/.openclaw/openclaw.json and add the soul‑memory entry under the plugins section, specifying desired topK and minScore values.</p>
+<h2>Installation and Setup</h2>
+<p>Getting Soul Memory up and running involves a few simple steps:</p>
+<ol>
+<li>Clone the repository: <code>git clone https://github.com/kingofqin2026/Soul-Memory-.git</code></li>
+<li>Navigate into the directory: <code>cd Soul-Memory-</code></li>
+<li>Run the installer: <code>bash install.sh</code> (add <code>--clean</code> for a fresh install).</li>
+<li>The script copies the core files, creates the cache directory, and installs the OpenClaw plugin automatically.</li>
+<li>Restart the OpenClaw gateway to activate the plugin: <code>openclaw gateway restart</code>.</li>
+</ol>
+<p>Uninstallation is equally simple with the provided uninstall.sh script, which removes plugin configuration, heartbeat auto‑trigger files, and any generated caches.</p>
+<h2>Basic Usage Examples</h2>
+<p>Once the system is initialized, you can interact with Soul Memory programmatically or via the CLI.</p>
+<h3>Programmatic Access</h3>
+<pre><code>from soul_memory.core import SoulMemorySystem
+system = SoulMemorySystem()
+system.initialize()
+# Search for memories related to user preferences
+results = system.search("user preferences", top_k=5)
+# Add a new critical memory
+memory_id = system.add_memory("[C] User prefers dark mode interface")
+# Trigger pre‑response search automatically
+context = system.pre_response_trigger("What are the user’s UI preferences?")
+</code></pre>
+<h3>Command‑Line Interface</h3>
+<pre><code># Pure JSON output for external consumption<br />
+python3 cli.py search "QST physics" --format json<br />
+# Retrieve system statistics<br />
+python3 cli.py stats --format json<br />
+</code></p>
+<p>The CLI’s JSON mode makes it trivial to pipe results into monitoring tools, custom dashboards, or other automation pipelines.</p>
+<h2>Configuration Options</h2>
+<p>Soul Memory exposes several tunable parameters through the OpenClaw plugin configuration block:</p>
+<ul>
+<li><strong>topK</strong>: Number of memories to retrieve and inject (default 5).</li>
+<li><strong>minScore</strong>: Minimum relevance score required for a memory to be considered (default 0.0). Increasing this value reduces noise but may omit useful marginal memories.</li>
+<li><strong>enableHeartbeatCleanup</strong>: Toggle the automatic Heartbeat report cleanup cron job.</li>
+<li><strong>cantoneseMode</strong>: Activate or deactivate the Cantonese‑specific particle grading and sentiment mapping.</li>
+</ul>
+<p>All settings are stored in ~/.openclaw/openclaw.json and take effect after restarting the gateway.</p>
+<h2>Benefits for AI Agents</h2>
+<p>Integrating Soul Memory yields measurable advantages:</p>
+<ul>
+<li><strong>Improved Contextual Relevance</strong>: By surfacing the most pertinent past interactions, the agent delivers answers that are more consistent with user history and preferences.</li>
+<li><strong>Reduced Token Consumption</strong>: The semantic cache and deduplication lower the number of tokens sent to the language model, cutting costs and latency.</li>
+<li><strong>Long‑Term Personalization</strong>: Critical facts tagged with [C] persist across sessions, enabling the agent to remember user‑specific settings, project details, or recurring topics.</li>
+<li><strong>Language Inclusivity</strong>: Built‑in CJK segmentation and Cantonese support broaden the agent’s usability across diverse linguistic communities.</li>
+<li><strong>Operational Transparency</strong>: Version control integration provides an audit trail of memory changes, facilitating debugging and compliance.</li>
+</ul>
+<h2>Privacy and Security</h2>
+<p>Soul Memory is designed with privacy as a core principle:</p>
+<ul>
+<li>All memory data resides locally in JSON files; no external API calls are made.</li>
+<li>The system has no cloud dependencies, ensuring complete data sovereignty.</li>
+<li>Cross‑domain isolation prevents memory leakage between different agents or projects.</li>
+<li>The MIT license guarantees openness and the ability to audit the source code.</li>
+</ul>
+<h2>Version History Highlights</h2>
+<p>Recent releases have introduced significant refinements:</p>
+<ul>
+<li><strong>v3.3.4</strong>: Query filtering optimization that skips greetings and simple commands, raising the minScore threshold from 0.0 to 3.0 and saving roughly 25k tokens per day.</li>
+<li><strong>v3.3.3</strong>: Daily cache reconstruction to keep indexes up‑to‑date across day boundaries.</li>
+<li><strong>v3.3.2</strong>: Heartbeat self‑report filtering to reduce noise in automated logs.</li>
+<li><strong>v3.3.1</strong>: Introduced Heartbeat auto‑cleanup via cron, boosting memory quality score from 7.9 to 8.5.</li>
+<li><strong>v3.2.2</strong>: Added Heartbeat deduplication using MD5 hashes, OpenClaw plugin v0.2.1‑beta, and an uninstall script.</li>
+<li><strong>v3.2.0</strong>: Enabled Heartbeat active extraction and a lenient mode that preserves more conversation content.</li>
+<li><strong>v3.1.0</strong>: Launched the Cantonese grammar branch with particle grading and context mapping.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The Soul Memory skill represents a comprehensive, production‑ready solution for long‑term memory management in AI agents running on OpenClaw. Its modular design, seamless plugin integration, and rich feature set—ranging from priority‑based tagging and vector search to Cantonese language support and automated cleanup—make it a versatile tool for developers seeking to enhance their agents’ contextual awareness, reduce operational costs, and maintain high standards of privacy and security. By following the straightforward installation steps and configuring the plugin to match your use case, you can unlock the full potential of persistent, intelligent memory in your AI workflows.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/kingofqin2026/soul-memory/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/kingofqin2026/soul-memory/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

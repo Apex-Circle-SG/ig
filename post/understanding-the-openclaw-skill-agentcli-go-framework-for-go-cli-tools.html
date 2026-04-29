@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding the OpenClaw Skill: agentcli-go Framework for Go CLI Tools</title>
+    <meta name="description" content="Learn how to use the agentcli-go framework for building Go CLI tools, including scaffolding, command integration, and debugging.">
+    <meta property="og:title" content="Understanding the OpenClaw Skill: agentcli-go Framework for Go CLI Tools">
+    <meta property="og:description" content="Learn how to use the agentcli-go framework for building Go CLI tools, including scaffolding, command integration, and debugging.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-the-openclaw-skill-agentcli-go-framework-for-go-cli-tools">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8749">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8749">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-the-openclaw-skill-agentcli-go-framework-for-go-cli-tools">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding the OpenClaw Skill: agentcli-go Framework for Go CLI Tools</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-12</p>
+    <h1>Understanding the OpenClaw Skill: agentcli-go Framework for Go CLI Tools</h1>
+<p>The <strong>agentcli-go</strong> skill is a comprehensive guide to using the <strong>agentcli-go</strong> framework for building Go-based CLI (Command Line Interface) tools. Whether you&#8217;re working directly on the agentcli-go framework, scaffolding new CLI projects, adding commands, integrating the library, or debugging framework behavior, this skill provides essential information and patterns to streamline your development process.</p>
+<h2>Overview of agentcli-go</h2>
+<p>The <strong>agentcli-go</strong> framework is designed to simplify the creation of CLI tools in Go. It offers shared Go CLI helpers and framework modules, making it easier to build robust and maintainable CLI applications. The framework is versioned under a pre-1.0 release strategy (v0.x.y), indicating that it is still in active development and may undergo breaking changes.</p>
+<h2>Core Components</h2>
+<p>The agentcli-go framework provides a set of core components and utilities that are essential for building CLI tools:</p>
+<ul>
+<li><strong>log.go</strong>: Provides functions for setting up zerolog, a popular logging library, with support for verbose logging.</li>
+<li><strong>args.go</strong>: Includes functions for parsing command-line arguments, accessing arguments and flags, and validating required arguments.</li>
+<li><strong>exec.go</strong>: Offers utilities for executing shell commands, running AppleScript (osascript), checking for binary dependencies, and verifying the presence of required binaries.</li>
+<li><strong>fs.go</strong>: Provides file system utilities for checking file existence, ensuring directory creation, and extracting base names from paths.</li>
+<li><strong>core_context.go</strong>: Defines the <strong>AppContext</strong> structure, which includes metadata and configurable values for the application.</li>
+<li><strong>lifecycle.go</strong>: Introduces hooks for preflight and postflight operations, allowing you to run specific actions at different stages of the application lifecycle.</li>
+<li><strong>errors.go</strong>: Includes error handling utilities, such as <strong>CLIError</strong>, for resolving exit codes and displaying user-friendly error messages.</li>
+<li><strong>scaffold.go</strong>: Provides functions for scaffolding new projects, adding commands, and running doctor checks to ensure project health.</li>
+<li><strong>cobrax/cobrax.go</strong>: Implements the cobrax pattern, a wrapper around the Cobra library, for defining and executing commands.</li>
+<li><strong>configx/configx.go</strong>: Offers utilities for loading and decoding configuration files, normalizing environment variables, and managing configuration values.</li>
+</ul>
+<h2>Scaffold Workflows</h2>
+<p>The agentcli-go framework supports various scaffold workflows to simplify the creation and management of CLI projects:</p>
+<h3>New Project</h3>
+<p>To create a new project using the agentcli-go framework, you can use the following command:</p>
+<pre><code>agentcli new --name my-tool --module github.com/me/my-tool</code></pre>
+<p>Alternatively, you can programmatically scaffold a new project using the <strong>ScaffoldNew</strong> function:</p>
+<pre><code>agentcli.ScaffoldNew(".", "my-tool", "github.com/me/my-tool")</code></pre>
+<p>This command generates a standard project structure with essential files and directories, including:</p>
+<ul>
+<li><strong>main.go</strong>: The entry point for the CLI application.</li>
+<li><strong>cmd/root.go</strong>: The root command specification using the cobrax pattern.</li>
+<li><strong>internal/app/</strong>: Contains core application logic, including lifecycle management and error handling.</li>
+<li><strong>internal/config/</strong>: Manages configuration schemas and loading mechanisms.</li>
+<li><strong>internal/io/</strong>: Handles input/output operations.</li>
+<li><strong>internal/tools/smokecheck/</strong>: Includes tools for running smoke tests.</li>
+<li><strong>pkg/version/</strong>: Manages version information.</li>
+<li><strong>test/</strong>: Contains test files, including end-to-end (e2e) tests and smoke test schemas.</li>
+<li><strong>Taskfile.yml</strong>: Defines tasks for running CI, linting, testing, and other development operations.</li>
+<li><strong>README.md</strong>: Provides project documentation.</li>
+</ul>
+<h3>Add Command</h3>
+<p>To add a new command to an existing project, use the following command:</p>
+<pre><code>agentcli add command --name sync --preset file-sync</code></pre>
+<p>Alternatively, you can programmatically add a command using the <strong>ScaffoldAddCommand</strong> function:</p>
+<pre><code>agentcli.ScaffoldAddCommand(".", "deploy", "run deploy checks", "deploy-helper")</code></pre>
+<p>This command generates a new command file in the <strong>cmd/</strong> directory based on the specified preset. Available presets include:</p>
+<ul>
+<li><strong>file-sync</strong>: A preset for file synchronization commands.</li>
+<li><strong>http-client</strong>: A preset for HTTP client commands.</li>
+<li><strong>deploy-helper</strong>: A preset for deployment helper commands.</li>
+</ul>
+<h3>Doctor Check</h3>
+<p>To run a doctor check on your project, use the following command:</p>
+<pre><code>agentcli doctor [--dir ./my-tool]</code></pre>
+<p>This command returns a <strong>DoctorReport</strong> JSON object with findings, helping you identify and resolve potential issues in your project.</p>
+<h2>Golden Project Layout</h2>
+<p>The golden project layout recommended by the agentcli-go framework includes:</p>
+<ul>
+<li><strong>my-tool/</strong></li>
+<li><strong>├── main.go</strong>: Entry point for the CLI application.</li>
+<li><strong>├── cmd/</strong></li>
+<li><strong>│   ├── root.go</strong>: Root command specification using the cobrax pattern.</li>
+<li><strong>│   └── &lt;command&gt;.go</strong>: Command-specific implementations.</li>
+<li><strong>├── internal/</strong></li>
+<li><strong>│   ├── app/{bootstrap,lifecycle,errors}.go</strong>: Core application logic.</li>
+<li><strong>│   ├── config/{schema,load}.go</strong>: Configuration management.</li>
+<li><strong>│   ├── io/output.go</strong>: Input/output operations.</li>
+<li><strong>│   └── tools/smokecheck/main.go</strong>: Smoke test utilities.</li>
+<li><strong>├── pkg/version/version.go</strong>: Version information.</li>
+<li><strong>├── test/</strong></li>
+<li><strong>│   ├── e2e/cli_test.go</strong>: End-to-end tests.</li>
+<li><strong>│   └── smoke/version.schema.json</strong>: Smoke test schemas.</li>
+<li><strong>└── Taskfile.yml</strong>: Task definitions for development operations.</li>
+</ul>
+<h2>cobrax Pattern</h2>
+<p>The cobrax pattern is a wrapper around the Cobra library, providing a structured approach to defining and executing commands. Here&#8217;s an example of how to use the cobrax pattern in your project:</p>
+<pre><code>// cmd/root.go
+return cobrax.Execute(cobrax.RootSpec{
+  Use:   "my-tool",
+  Short: "my-tool CLI",
+  Meta:  agentcli.AppMeta{
+    Name:    "my-tool",
+    Version: version.Version,
+  },
+  Commands: []cobrax.CommandSpec{
+    {
+      Use:   "sync",
+      Short: "sync files",
+      Run:   SyncCommand().Run,
+    },
+  },
+}, args)</code></pre>
+<p>The <strong>cobrax.RootSpec</strong> structure defines the root command and its properties, including the command name, short description, metadata, and a list of commands. The <strong>cobrax.Execute</strong> function executes the root command and its subcommands.</p>
+<p>Persistent flags are auto-wired and accessible via the <strong>app.Values</strong> structure:</p>
+<ul>
+<li><strong>&#8211;verbose/-v</strong>: Enable verbose logging.</li>
+<li><strong>&#8211;config</strong>: Specify a configuration file.</li>
+<li><strong>&#8211;json</strong>: Output in JSON format.</li>
+<li><strong>&#8211;no-color</strong>: Disable colored output.</li>
+</ul>
+<h2>configx Pattern</h2>
+<p>The configx pattern provides utilities for loading and decoding configuration files. Here&#8217;s an example of how to use the configx pattern in your project:</p>
+<pre><code>raw, err := configx.Load(configx.Options{
+  Defaults: map[string]any{
+    "env": "default",
+  },
+  FilePath: configPath, // optional JSON file
+  Env:      configx.NormalizeEnv("MYTOOL_", os.Environ()),
+  Flags:    map[string]string{
+    "env": flagVal,
+  },
+})
+cfg, err := configx.Decode[config.Config](raw)</code></pre>
+<p>The <strong>configx.Load</strong> function loads configuration values from various sources, including defaults, configuration files, environment variables, and command-line flags. The <strong>configx.Decode</strong> function decodes the loaded configuration into a strongly typed structure.</p>
+<p>The precedence of configuration values is as follows:</p>
+<ul>
+<li><strong>Defaults</strong>: Lowest precedence.</li>
+<li><strong>File</strong>: Overrides defaults.</li>
+<li><strong>Env</strong>: Overrides files.</li>
+<li><strong>Flags</strong>: Highest precedence.</li>
+</ul>
+<h2>Taskfile Tasks</h2>
+<p>The <strong>Taskfile.yml</strong> file defines various tasks for development operations, including CI, linting, testing, and smoking. Here are some of the essential tasks:</p>
+<ul>
+<li><strong>task ci</strong>: Canonical CI task that includes preflight, linting, testing, building, smoking, and schema checks.</li>
+<li><strong>task verify</strong>: Local aggregate task that wraps the ci task.</li>
+<li><strong>task lint</strong>: Runs go vet and golangci-lint for code linting.</li>
+<li><strong>task smoke</strong>: Executes deterministic smoke tests.</li>
+<li><strong>task schema:check</strong>: Validates JSON contracts against schemas.</li>
+<li><strong>task docs:check</strong>: Ensures skill documentation matches CLI help signatures.</li>
+<li><strong>task fmt</strong>: Formats all Go files.</li>
+</ul>
+<h2>Rules and Best Practices</h2>
+<p>The agentcli-go framework adheres to a set of rules and best practices to ensure consistency and maintainability:</p>
+<ul>
+<li><strong>Flat package</strong>: All functions and types are defined in the <strong>agentcli</strong> package, with no sub-packages (except for <strong>cobrax</strong> and <strong>configx</strong>).</li>
+<li><strong>Exported only</strong>: All functions and types are PascalCase, making them accessible from other packages.</li>
+<li><strong>No business logic</strong>: The framework is designed to provide generic utilities and should not include project-specific logic.</li>
+<li><strong>Minimal deps</strong>: The framework uses a minimal set of dependencies, including zerolog, lo, and cobra. New dependencies must be justified.</li>
+<li><strong>log.Fatal allowed</strong>: The <strong>RequireArg</strong> and <strong>CheckDependency</strong> functions are allowed to call <strong>log.Fatal</strong> for CLI-oriented helpers.</li>
+</ul>
+<h2>Out of Scope</h2>
+<p>The agentcli-go framework has a clear scope and does not include the following:</p>
+<ul>
+<li><strong>Project-specific logic</strong>: Logic that is specific to a particular project should be included in the consuming project.</li>
+<li><strong>Single-use functions</strong>: Functions that are used by only one project are out of scope for the framework.</li>
+</ul>
+<p>The agentcli-go skill provides a comprehensive guide to using the agentcli-go framework for building Go CLI tools. By following the patterns, workflows, and best practices outlined in this skill, you can streamline your development process and create robust and maintainable CLI applications.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/gh-xj/agentcli-go/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/gh-xj/agentcli-go/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding OpenClaw&#8217;s Desktop Pet Skill: A Comprehensive Guide</title>
+    <meta name="description" content="Explore OpenClaw&#8217;s desktop pet skill (mu-pet), a cute pixel art companion that enhances user interaction on macOS.">
+    <meta property="og:title" content="Understanding OpenClaw&#8217;s Desktop Pet Skill: A Comprehensive Guide">
+    <meta property="og:description" content="Explore OpenClaw&#8217;s desktop pet skill (mu-pet), a cute pixel art companion that enhances user interaction on macOS.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-openclaws-desktop-pet-skill-a-comprehensive-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8401">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8401">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-openclaws-desktop-pet-skill-a-comprehensive-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding OpenClaw&#8217;s Desktop Pet Skill: A Comprehensive Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-08</p>
+    <article>
+<h1>Understanding OpenClaw&#8217;s Desktop Pet Skill: A Comprehensive Guide</h1>
+<p>Welcome to our comprehensive guide on OpenClaw&#8217;s Desktop Pet skill. This skill, named <em>mu-pet</em>, is a delightful pixel art desktop pet that enhances user interaction on macOS. In this article, we will delve into its features, functionalities, and how you can integrate it with your agent. We will also guide you through the customization process and the auto-launch feature.</p>
+<h2>Introduction to OpenClaw&#8217;s Desktop Pet Skill</h2>
+<p>OpenClaw&#8217;s Desktop Pet skill is a charming animated pixel art character that roams your screen as an always-on-top Electron overlay. The pet, by default a lobster, avoids the cursor and active windows, walks along screen edges, climbs walls and ceilings, and responds to agent state changes via a local HTTP API. It&#8217;s the perfect companion for those who want a desktop buddy, a virtual pet, or a visual indicator of agent activity.</p>
+<h2>Features of the Desktop Pet Skill</h2>
+<p>The Desktop Pet skill comes with a variety of features that make it an engaging and interactive addition to your desktop. Here are some highlights:</p>
+<ul>
+<li><strong>Animated Pixel Art</strong>: The pet is a cute lobster by default, drawn programmatically via Canvas pixel art.</li>
+<li><strong>Transparent Overlay</strong>: The pet roams your desktop without getting in the way, thanks to its transparent overlay feature.</li>
+<li><strong>Always-on-Top</strong>: The pet stays visible on top of all windows, making it a constant companion.</li>
+<li><strong>Click-Through</strong>: The pet allows you to click through it, except when you click on the pet itself.</li>
+<li><strong>Roams Full Desktop</strong>: The pet can move around your entire desktop, including the floor, walls, and ceiling.</li>
+<li><strong>Avoids Cursor and Active Windows</strong>: The pet maintains a safe distance from your cursor and active windows, allowing you to work without distractions.</li>
+<li><strong>Responds to Agent State Changes</strong>: The pet changes its behavior based on the agent&#8217;s state, such as idle, walking, working, thinking, sleeping, and talking.</li>
+<li><strong>Speech Bubbles</strong>: The pet can display speech bubbles with auto-sizing duration, adding a touch of realism to the interaction.</li>
+<li><strong>Right-Click Context Menu</strong>: You can manually control the pet&#8217;s state using the right-click context menu.</li>
+</ul>
+<h2>Agent Integration</h2>
+<p>Integrating the Desktop Pet skill with your agent is a straightforward process. You can use the local HTTP API to set the pet&#8217;s state and make it face the user. For instance, you can set the pet to the <em>talking</em> state at the start of responses to make the pet face the user. Here&#8217;s an example:</p>
+<pre><code>curl -s -X POST http://127.0.0.1:18891/state<br />
+-H 'Content-Type: application/json'<br />
+-d '{</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/samskrta/mu-pet/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/samskrta/mu-pet/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

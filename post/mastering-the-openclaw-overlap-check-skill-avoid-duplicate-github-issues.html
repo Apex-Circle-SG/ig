@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mastering the OpenClaw Overlap-Check Skill: Avoid Duplicate GitHub Issues</title>
+    <meta name="description" content="Learn how the OpenClaw overlap-check skill automates GitHub repository hygiene by preventing duplicate issues and pull requests before they are created.">
+    <meta property="og:title" content="Mastering the OpenClaw Overlap-Check Skill: Avoid Duplicate GitHub Issues">
+    <meta property="og:description" content="Learn how the OpenClaw overlap-check skill automates GitHub repository hygiene by preventing duplicate issues and pull requests before they are created.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/mastering-the-openclaw-overlap-check-skill-avoid-duplicate-github-issues">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8996">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8996">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/mastering-the-openclaw-overlap-check-skill-avoid-duplicate-github-issues">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Mastering the OpenClaw Overlap-Check Skill: Avoid Duplicate GitHub Issues</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <h1>Understanding the OpenClaw Overlap-Check Skill</h1>
+<p>In the world of open-source development and collaborative coding, maintaining a clean repository is paramount. One of the most common frustrations for maintainers is dealing with duplicate issues and pull requests that clutter the board and dilute technical discussions. This is where the <strong>OpenClaw overlap-check skill</strong> comes into play. As a powerful tool in the OpenClaw ecosystem, it acts as a proactive gatekeeper, ensuring that your automated agents respect existing community discussions.</p>
+<h2>What is the Overlap-Check Skill?</h2>
+<p>The overlap-check skill is an automated workflow utility designed for developers and autonomous agents interacting with GitHub repositories. Its primary function is to search a target repository for existing issues or pull requests that might cover the same topic as the one you (or your agent) are planning to create. By firing automatically when an agent intends to initiate a new thread, it provides a layer of intelligence that saves time and promotes better project management.</p>
+<h2>Why Do You Need It?</h2>
+<p>GitHub repositories often suffer from &#8220;issue fatigue.&#8221; When multiple users report the same bug or request the same feature using different phrasing, the repository owner is forced to spend valuable time consolidating these threads. By using the overlap-check skill, you effectively become a more responsible contributor. It prevents the creation of &#8220;noise,&#8221; keeping the project’s issue tracker focused and organized.</p>
+<h2>How the Skill Works: A Step-by-Step Breakdown</h2>
+<p>The skill follows a structured protocol to ensure high accuracy without slowing down your workflow:</p>
+<h3>1. Identification and Summarization</h3>
+<p>Before any action is taken, the skill identifies the target repository. It then distills your intended contribution into essential keywords. By stripping away filler words like &#8220;the,&#8221; &#8220;a,&#8221; or &#8220;this,&#8221; the tool creates a focused query that yields more relevant search results.</p>
+<h3>2. The Search Phase</h3>
+<p>The skill leverages the GitHub CLI (gh) to perform targeted searches. It runs two distinct queries: one for issues and one for pull requests. By limiting the search to the most relevant items, it keeps the feedback lightweight and performant.</p>
+<h3>3. Evaluation and Intelligence</h3>
+<p>Once the search results are retrieved, the agent evaluates the titles and activity levels of the existing threads. This is not just a keyword match; it is a contextual check to see if the topic has already been addressed, is currently being discussed, or was closed in the past.</p>
+<h3>4. The Decision Matrix</h3>
+<p>The skill provides clear actionable advice based on what it finds:</p>
+<ul>
+<li><strong>Existing open thread:</strong> It recommends commenting on the existing issue or PR rather than opening a new one.</li>
+<li><strong>Existing closed thread:</strong> It advises against reopening, suggesting instead that you link to the previous work if necessary.</li>
+<li><strong>Related but different:</strong> It gives you the green light to proceed, while suggesting that you reference the related thread for context.</li>
+<li><strong>No matches:</strong> It concludes that your contribution is unique and gives the go-ahead.</li>
+</ul>
+<h2>Best Practices for Using Overlap-Check</h2>
+<p>To get the most out of this tool, it is important to understand the &#8220;What Not To Do&#8221; section of the documentation. First, never skip the check just because you are &#8220;confident&#8221; your topic is new. Nuance in language often hides duplicates that a human might overlook. Second, do not create a new issue simply because an existing one uses slightly different terminology; consolidating information is always the goal. Finally, remember that this tool is an assistant, not a blocker. If you, as the user, are certain that a new thread is necessary, the agent will respect your decision after providing the warning.</p>
+<h2>Why This Matters for Open Source</h2>
+<p>The beauty of the OpenClaw overlap-check skill lies in its ability to foster healthier project environments. Open source maintainers are often overwhelmed. When contributors use tools that prevent unnecessary duplication, they are essentially providing a service to the maintainers, making it easier for them to review, triage, and merge high-quality code. It is an essential component for any team looking to scale their development operations through automation.</p>
+<h2>Conclusion</h2>
+<p>The overlap-check skill is more than just a search utility; it is a best-practice enforcement mechanism. Whether you are building an autonomous agent or just looking for ways to improve your own interaction with GitHub, understanding how to prevent overlap is key. By integrating this skill into your workflow, you ensure that every issue opened and every PR submitted is truly contributing to the project&#8217;s evolution rather than adding to its administrative burden.</p>
+<p>For those looking to explore the technical implementation, you can find the full documentation in the <a href="https://github.com/openclaw/skills/blob/main/skills/semmyt/overlap-check/SKILL.md">official OpenClaw repository</a>. Start using it today and keep your GitHub issues as clean as your code.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/semmyt/overlap-check/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/semmyt/overlap-check/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

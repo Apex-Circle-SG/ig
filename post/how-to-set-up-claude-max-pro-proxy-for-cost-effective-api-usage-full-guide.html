@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to Set Up Claude Max/Pro Proxy for Cost-Effective API Usage: Full Guide</title>
+    <meta name="description" content="Learn to route Claude API requests for savings. Reduce costs using Claude Max/Pro subscription with claude-max-api-proxy.">
+    <meta property="og:title" content="How to Set Up Claude Max/Pro Proxy for Cost-Effective API Usage: Full Guide">
+    <meta property="og:description" content="Learn to route Claude API requests for savings. Reduce costs using Claude Max/Pro subscription with claude-max-api-proxy.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/how-to-set-up-claude-max-pro-proxy-for-cost-effective-api-usage-full-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8769">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8769">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/how-to-set-up-claude-max-pro-proxy-for-cost-effective-api-usage-full-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>How to Set Up Claude Max/Pro Proxy for Cost-Effective API Usage: Full Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-13</p>
+    <h1>How to Set Up Claude Max/Pro Proxy for Cost-Effective API Usage: Full Guide</h1>
+<p>If you&#8217;re working with Claude AI models, you may have noticed how quickly API costs can add up, especially with per-token billing. In this comprehensive guide, we&#8217;ll explore how to dramatically reduce these costs by setting up a <code>claude-max-api-proxy</code> that leverages your existing Claude Max or Pro subscription. The <a href="https://github.com/openclaw/skills/tree/main/skills/skills/error403agent/claude-max-proxy-setup">Claude Max/Pro Proxy Setup skill</a> from OpenClaw helps developers save money by routing requests through a fixed-cost subscription instead of variable per-token pricing.</p>
+<h2>What is the Claude Max Proxy Setup Skill?</h2>
+<p>This powerful tool allows you to transform your <code>claude</code> CLI session into an OpenAI-compatible HTTP endpoint on <code>localhost:3456</code>. By doing this, any OpenAI-compatible client – including OpenClaw, LangChain, or custom scripts – can connect via this proxy rather than calling the Claude API directly with per-token rates. This technique can save substantial costs for developers running frequent Claude queries.</p>
+<h2>Why Use This Approach?</h2>
+<p>The skill becomes particularly valuable when:</p>
+<ul>
+<li>Your monthly API costs for Claude are exceeding the price of a Max ($200) or Pro ($20) plan</li>
+<li>You want to use premium models like Claude Opus 4.6, Sonnet 4.6, or Haiku 4.5 without per-token billing</li>
+<li>You&#8217;re configuring agents or applications to use Claude but want consistent cost control</li>
+</ul>
+<h2>Important Security Considerations</h2>
+<p>Before setting up, keep these security precautions in mind:</p>
+<ul>
+<li>The proxy binds to localhost by default, isolating access to your local machine</li>
+<li>Never expose port <code>3456</code> to public networks – configure firewall rules to block external access</li>
+<li>Audit the <a href="https://github.com/atalovesyou/claude-max-api-proxy">package source code</a> before installation</li>
+<li>The proxy uses your already-authenticated CLI session – never share access to this endpoint</li>
+</ul>
+<h2>Step-by-Step Setup Guide</h2>
+<h3>1. Verify Prerequisites</h3>
+<p>First, ensure you have the required software installed:</p>
+<ol>
+<li>Check Node.js version 20+:<br />
+<code>node --version</code></li>
+<li>Confirm <code>claude</code> CLI is installed and authenticated:<br />
+<code>claude --version</code><br />
+<code>claude --print &quot;test&quot;</code><br />
+(Should respond without errors)</li>
+<li>If unauthenticated, run:<br />
+<code>claude login</code></li>
+</ol>
+<h3>2. Install and Start the Proxy</h3>
+<ol>
+<li>First, review the <a href="https://github.com/atalovesyou/claude-max-api-proxy">source code</a></li>
+<li>Install globally:<br />
+<code>npm install -g claude-max-api-proxy</code></li>
+<li>Start the proxy:<br />
+<code>claude-max-api</code></li>
+<li>Verify with:<br />
+<code>curl http://localhost:3456/health</code><br />
+(Should return service status)</li>
+</ol>
+<h3>3. Configure Your Client</h3>
+<p><strong>For OpenClaw</strong> (<code>~/.openclaw/openclaw.json</code>):</p>
+<pre><code>{
+  "env": {
+    "OPENAI_API_KEY": "not-needed",
+    "OPENAI_BASE_URL": "http://localhost:3456/v1"
+  },
+  "models": {
+    "providers": {
+      "openai": {
+        "baseUrl": "http://localhost:3456/v1",
+        "apiKey": "not-needed",
+        "models": [
+          {
+            "id": "claude-opus-4",
+            "name": "Claude Opus 4.6 (Max)",
+            "contextWindow": 200000,
+            "maxTokens": 16384
+          },
+          {
+            "id": "claude-sonnet-4",
+            "name": "Claude Sonnet 4.6 (Max)",
+            "contextWindow": 200000,
+            "maxTokens": 16384
+          },
+          {
+            "id": "claude-haiku-4",
+            "name": "Claude Haiku 4.5 (Max)",
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  }
+}</code></pre>
+<p><strong>For other clients:</strong></p>
+<ul>
+<li>Use base URL: <code>http://localhost:3456/v1</code></li>
+<li>Any API key (proxy will ignore it)</li>
+<li>Model IDs: <code>claude-opus-4</code>, <code>claude-sonnet-4</code>, <code>claude-haiku-4</code></li>
+</ul>
+<h3>4. (Optional) Set Up as a Persistent Service</h3>
+<p>For continuous operation, create a systemd user service:</p>
+<pre><code>)systemctl --user daemon-reload
+()systemctl --user enable claude-max-api-proxy
+()systemctl --user start claude-max-api-proxy</code></pre>
+<h3>5. Verify Functionality</h3>
+<p>Test with a sample request:</p>
+<pre><code>curl http://localhost:3456/v1/chat/completions \
+-H "Content-Type: application/json" \
+-d '{"model":"claude-opus-4","messages":[{"role":"user","content":"Say: proxy working"}]}'</code></pre>
+<h2>Cost Comparison</h2>
+<p>Let&#8217;s compare the costs with and without the proxy:</p>
+<table>
+<tr>
+<th>Setup</th>
+<th>Monthly Cost</th>
+</tr>
+<tr>
+<td>Claude Opus 4.6 API (active agent)</td>
+<td>$200-500+</td>
+</tr>
+<tr>
+<td>Claude Max + this proxy</td>
+<td>$200 flat</td>
+</tr>
+<tr>
+<td>Claude Pro + this proxy</td>
+<td>$20 flat (lower rate limits)</td>
+</tr>
+</table>
+<p>Note that with the Max plan, you&#8217;ll enjoy the advantages of Claude Opus 4.6 with a fixed monthly price rather than unpredictable per-token billing.</p>
+<h2>Model ID Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Proxy Model ID</th>
+<th>CLI Alias</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>claude-opus-4</td>
+<td>opus</td>
+<td>Complex reasoning, research, long-form content creation</td>
+</tr>
+<tr>
+<td>claude-sonnet-4</td>
+<td>sonnet</td>
+<td>Fast, capable responses for most tasks</td>
+</tr>
+<tr>
+<td>claude-haiku-4</td>
+<td>haiku</td>
+<td>Simple, high-speed tasks</td>
+</tr>
+</tbody>
+</table>
+<h2>Common Errors and Solutions</h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>claude: command not found</code></td>
+<td>Install with <code>npm install -g @anthropic-ai/claude-code</code></td>
+</tr>
+<tr>
+<td>Proxy returns auth errors</td>
+<td>Run <code>claude login</code> and complete browser auth</td>
+</tr>
+<tr>
+<td>Rate limit errors with Max plan</td>
+<td>Add <code>"maxConcurrency": 1</code> to agent config</td>
+</tr>
+<tr>
+<td>Config not taking effect</td>
+<td>Restart agents/clients after config changes</td>
+</tr>
+<tr>
+<td>Proxy dies on reboot</td>
+<td>Follow Step 4 to set up a systemd service</td>
+</tr>
+</tbody>
+</table>
+<h2>Where to Get Help</h2>
+<p>If you encounter issues or have questions, you can:</p>
+<ul>
+<li>Visit the <a href="https://github.com/atalovesyou/claude-max-api-proxy">GitHub repository</a></li>
+<li>Contact the developer @mr_clawford via <a href="https://twitter.com/mr_clawford">Discord</a> or MoltX</li>
+<li>Explore the <a href="https://deepbluebase.xyz/">developer&#8217;s website</a></li>
+</ul>
+<h2>Final Thoughts</h2>
+<p>The Claude Max Proxy Setup skill offers a clever solution for developers who want the power of Claude&#8217;s most advanced models without unpredictable per-token costs. By leveraging a flat monthly subscription plan, you can drastically reduce usage expenses while maintaining full access to Claude Opus 4.6 and other premium models.</p>
+<p>Just remember to carefully follow the security guidelines, especially regarding access restriction to port <code>3456</code>, to keep your Claude subscription safe. When used responsibly, this approach can be a game-changer for budget-conscious developers who rely on Claude&#8217;s advanced capabilities.</p>
+<p>For related articles, check out our other tutorials on AI development tools and cost optimization strategies. You might enjoy our recent piece on &#8220;Beyond Basic Prompting: Advanced Techniques for Claude AI&#8221; which pairs well with this cost-savings strategy.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/error403agent/claude-max-proxy-setup/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/error403agent/claude-max-proxy-setup/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

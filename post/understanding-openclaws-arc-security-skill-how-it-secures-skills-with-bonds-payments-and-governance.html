@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding OpenClaw’s Arc Security Skill: How It Secures Skills with Bonds, Payments, and Governance</title>
+    <meta name="description" content="Learn how the Arc Security skill uses on‑chain bonding, micro‑fees, and CCTP to protect OpenClaw skills from malicious code.">
+    <meta property="og:title" content="Understanding OpenClaw’s Arc Security Skill: How It Secures Skills with Bonds, Payments, and Governance">
+    <meta property="og:description" content="Learn how the Arc Security skill uses on‑chain bonding, micro‑fees, and CCTP to protect OpenClaw skills from malicious code.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-openclaws-arc-security-skill-how-it-secures-skills-with-bonds-payments-and-governance">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9183">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9183">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-openclaws-arc-security-skill-how-it-secures-skills-with-bonds-payments-and-governance">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding OpenClaw’s Arc Security Skill: How It Secures Skills with Bonds, Payments, and Governance</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-17</p>
+    <h1>Understanding OpenClaw’s Arc Security Skill</h1>
+<p>OpenClaw is a modular framework that lets developers share and reuse skills—small, self‑contained pieces of code that agents can execute. As the ecosystem grows, ensuring that these skills are safe to run becomes a critical concern. The Arc Security skill provides a decentralized trust layer that lets auditors stake USDC to vouch for a skill’s safety, users pay a tiny usage fee to access verified skills, and malicious actors are economically penalised through slashing and governance.</p>
+<h2>What the Arc Security Skill Does</h2>
+<p>At its core, the Arc Security skill is a Solidity contract called <code>SkillSecurityRegistry</code> deployed on the Arc testnet, together with a few off‑chain components: an x402 payment server that serves skill packages behind a HTTP 402 paywall, and a Python‑based CLI that orchestrates cross‑chain transfers via Circle’s CCTP protocol. Together they create a chain‑agnostic security infrastructure where:</p>
+<ul>
+<li>Anyone can bond USDC to a skill ID, signalling confidence that the skill is benign.</li>
+<li>Users pay a 0.10 USDC fee to download and execute the skill; the fee is split between auditors and an insurance pool.</li>
+<li>If a skill is later found malicious, a bonded auditor can lose up to 50 % of their stake, with proceeds going to the victim and the insurance pool.</li>
+<li>Claims, voting, and earnings withdrawal are all handled on‑chain, with voting power weighted by total stake and audit track record.</li>
+</ul>
+<h2>Bonding: Staking to Vouch for Safety</h2>
+<p>The <code>bond</code> command lets an auditor lock up USDC as a security bond for a particular skill. The transaction specifies the skill identifier, the amount of USDC (e.g., 50), and the source chain (Arc testnet, Ethereum Sepolia, Base Sepolia, or Arbitrum Sepolia). Funds are transferred to the Arc testnet via CCTP when the source chain is not Arc, ensuring that the bond resides on the same chain where the registry lives. The bond amount influences the skill’s trust score: 40 % of the score comes from the bonded amount, capped at 100 USDC for full weight. More bond means higher perceived safety, but it also puts the auditor’s funds at risk if the skill is later judged malicious.</p>
+<h2>Using a Skill: Pay‑Per‑Use via x402</h2>
+<p>When a user wants to execute a skill, they run <code>clawhub arc-security use &lt;skill_id&gt;</code>. The CLI first checks the user’s balances across supported chains, then selects the cheapest payment path: Arc testnet (direct, no bridging fees), then Base Sepolia, Arbitrum Sepolia, and finally Ethereum Sepolia, all via CCTP. The payment is an ERC‑20 transfer of 0.10 USDC to the SkillSecurityRegistry contract. The contract emits a PaymentReceived event that the x402 server listens for; once confirmed, the server responds with the skill package (a ZIP file) and drops the HTTP 402 status. The user receives the package, verifies its integrity, and can run it locally. The fee distribution is hard‑coded: 70 % goes to auditors proportionally to their stake, and 30 % goes to an insurance pool that can compensate victims of slashing events.</p>
+<h2>Reporting and Voting on Malicious Skills</h2>
+<p>If a user suspects a skill contains harmful code, they can file a claim with the <code>report</code> command. This requires a 1 USDC anti‑spam deposit, which is refunded if the claim is validated. The reporter must also provide an IPFS hash pointing to evidence (e.g., a screenshot, a decompiled binary, or a log). Upon submission, the contract opens a 72‑hour voting window. Only wallets that have bonded on any skill are eligible to vote; vote weight equals sqrt(totalStaked) multiplied by the auditor’s successful‑audit‑to‑total‑audit ratio. After the voting period, if the majority votes that the skill is malicious, the bond is slashed: 50 % of the bonded amount is taken, 80 % of the slashed funds go to the reporter (or the victim if different), and the remaining 20 % feeds the insurance pool. If the claim is rejected, the deposit is returned and the bond remains intact.</p>
+<h2>Claiming Earnings</h2>
+<p>Auditors who have bonded on skills earn a share of the usage fees. The <code>claim-earnings</code> command lets them withdraw their accrued rewards to a destination chain of choice. The CLI queries the contract for pending earnings, then initiates a CCTP transfer (or a direct transfer on Arc) to send the USDC to the specified chain. Because earnings are accrued in real time as skills are used, active auditors can see a steady stream of income that reflects both the amount they have staked and the popularity of the skills they have endorsed.</p>
+<h2>Cross‑Chain Mechanics: Why CCTP Matters</h2>
+<p>The Arc Security skill is deliberately chain‑agnostic. While the core registry lives on Arc testnet, users and auditors may hold USDC on Ethereum Sepolia, Base Sepolia, or Arbitrum Sepolia. Circle’s Cross‑Chain Transfer Protocol (CCTP) enables the protocol to burn USDC on the source chain and mint an equivalent amount on Arc, all in a single atomic operation. This eliminates the need for wrapped tokens or third‑party bridges and ensures that bonds, payments, and withdrawals always settle on the same chain where the registry’s state is stored. The CLI abstracts away the complexity: users simply specify <code>source_chain</code> when bonding or <code>destination_chain</code> when claiming earnings, and the tool handles the burn‑mint‑transfer flow behind the scenes.</p>
+<h2>Architecture Overview</h2>
+<p>The system consists of three main layers:</p>
+<ol>
+<li><strong>Smart Contract Layer</strong> – The <code>SkillSecurityRegistry</code> Solidity contract on Arc testnet stores bonds, tracks usage counts, manages claims and votes, and distributes fees.</li>
+<li><strong>Off‑Chain Payment Server</strong> – A Node.js x402 server that hosts skill packages behind a HTTP 402 paywall. It validates incoming payments by listening for contract events, then serves the requested ZIP file.</li>
+<li><strong>Client CLI</strong> – A Python‑based OpenClaw plugin (<code>clawhub arc-security</code>) that exposes the <code>check</code>, <code>use</code>, <code>bond</code>, <code>report</code>, <code>vote-claim</code>, and <code>claim-earnings</code> subcommands. It handles wallet management, chain selection, CCTP interactions, and transaction signing.</li>
+</ol>
+<p>Data flows as follows: a user initiates a use request → CLI selects payment path → if needed, CCTP burns USDC on source chain and mints on Arc → contract records payment → x402 server detects event and returns skill package → user receives and runs the skill. For bonding, the flow is similar but in reverse: CLI bonds USDC (possibly via CCTP) → contract updates bond amount and auditor count → trust score is recomputed.</p>
+<h2>Benefits for the OpenClaw Ecosystem</h2>
+<p>By introducing economic incentives and penalisations, the Arc Security skill transforms trust from a social assumption into a measurable, on‑chain metric. Key advantages include:</p>
+<ul>
+<li><strong>Scalable verification</strong> – Anyone can participate as an auditor, earning rewards proportional to their stake.</li>
+<li><strong>Low friction for users</strong> – A fixed 0.10 USDC fee is negligible compared to the value of most skills, yet it funds the security pool.</li>
+<li><strong>Cross‑chain accessibility</strong> – Users are not forced to hold Arc‑native tokens; they can pay from any supported EVM chain.</li>
+<li><strong>Transparent governance</strong> – Claims, votes, and slashing events are fully auditable on‑chain.</li>
+<li><strong>Insurance pool</strong> – A portion of fees accumulates to cover edge cases where slashing does not fully compensate victims.</li>
+</ul>
+<h2>Getting Started</h2>
+<p>To begin using the Arc Security skill, install the plugin via the OpenClaw CLI:</p>
+<pre>clawhub install arc-security</pre>
+<p>Then set the required environment variables in your shell:</p>
+<ul>
+<li><code>ARC_RPC_URL</code> – Arc testnet RPC endpoint (defaults to <code>https://testnet-rpc.arc.network</code>).</li>
+<li><code>CONTRACT_ADDRESS</code> – Address of the deployed <code>SkillSecurityRegistry</code> contract.</li>
+<li><code>PRIVATE_KEY</code> – Wallet private key used for signing transactions (keep it secret).</li>
+<li><code>X402_SERVER_URL</code> – URL of the x402 payment server.</li>
+<li>Optional RPC URLs for Ethereum Sepolia, Base Sepolia, and Arbitrum Sepolia if you plan to bond or claim from those chains.</li>
+</ul>
+<p>After configuring, you can inspect a skill’s trust status:</p>
+<pre>clawhub arc-security check youtube-downloader</pre>
+<p>Typical output shows bonded amount, auditor count, usage count, trust score, and safety status. To use the skill, run:</p>
+<pre>clawhub arc-security use youtube-downloader</pre>
+<p>If you wish to vouch for a skill, bond some USDC:</p>
+<pre>clawhub arc-security bond youtube-downloader 50 base-sepolia</pre>
+<p>And should you encounter a problematic skill, file a claim:</p>
+<pre>clawhub arc-security report bad-skill --evidence QmXyz123...</pre>
+<p>Remember that the anti‑spam deposit is refunded only if the community validates your claim.</p>
+<h2>Conclusion</h2>
+<p>The Arc Security skill exemplifies how blockchain primitives—bonding, micro‑payments, cross‑chain transfers, and decentralized governance—can be combined to create a robust security layer for skill‑based agent ecosystems. By aligning the interests of auditors, users, and the protocol itself, OpenClaw gains a trustworthy marketplace where code can be shared and executed with confidence. As more skills are registered and more participants stake their USDC, the trust scores will become increasingly reflective of real‑world safety, paving the way for broader adoption of autonomous agents in decentralized applications.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/shaivpidadi/arc-security/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/shaivpidadi/arc-security/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

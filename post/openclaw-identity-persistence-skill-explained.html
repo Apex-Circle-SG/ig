@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenClaw Identity Persistence Skill Explained</title>
+    <meta name="description" content="The OpenClaw Identity Persistence skill creates a structured identity graph system for AI agents, extracting core beliefs, personality traits, and relationships">
+    <meta property="og:title" content="OpenClaw Identity Persistence Skill Explained">
+    <meta property="og:description" content="The OpenClaw Identity Persistence skill creates a structured identity graph system for AI agents, extracting core beliefs, personality traits, and relationships">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/openclaw-identity-persistence-skill-explained">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=9114">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=9114">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/openclaw-identity-persistence-skill-explained">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>OpenClaw Identity Persistence Skill Explained</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-16</p>
+    <h2>What is the OpenClaw Identity Persistence Skill?</h2>
+<p>The Identity Persistence skill is a structured identity graph system designed for AI agents. It synthesizes raw memory files into versioned, scored identity snapshots that help maintain agent continuity across sessions and model upgrades.</p>
+<h2>Core Functionality</h2>
+<p>This skill performs several critical functions for AI agent identity management:</p>
+<h3>Identity Extraction</h3>
+<p>The skill extracts core beliefs, personality traits, relationships, memories, cognitive patterns, and contradictions from agent markdown files. It processes MEMORY.md and SOUL.md files to build a comprehensive identity profile.</p>
+<h3>Continuity Scoring</h3>
+<p>Using statistical methods, the skill computes a Continuity Score between 0 and 1. This score is calculated using KL divergence on beliefs and Mean Squared Error (MSE) on personality traits to measure identity stability.</p>
+<h3>Version Management</h3>
+<p>The skill creates versioned snapshots with diffs for drift detection. This allows tracking of how an agent&#8217;s identity evolves over time and detecting significant changes.</p>
+<h3>Molting Protocol</h3>
+<p>For model upgrades, the skill implements a freeze protocol that captures the current state before upgrades, allowing for verification and scoring of identity preservation.</p>
+<h2>Technical Architecture</h2>
+<p>The skill organizes identity data into several key components:</p>
+<ul>
+<li><strong>current_identity.json</strong> &#8211; The active structured identity graph</li>
+<li><strong>snapshots/</strong> &#8211; Versioned history of identity states</li>
+<li><strong>diffs/</strong> &#8211; Change tracking between snapshots</li>
+</ul>
+<h2>Continuity Thresholds</h2>
+<p>The skill uses specific thresholds to classify identity stability:</p>
+<ul>
+<li>≥0.90 &#8211; Stable identity</li>
+<li>0.75-0.89 &#8211; Drift detected</li>
+<li>&lt;0.75 &#8211; Fracture or significant change</li>
+</ul>
+<h2>Usage Examples</h2>
+<p>The skill can be run with different parameters:</p>
+<pre><code>python3 identity_manager.py
+# Full cycle: extract + score + save
+python3 identity_manager.py --score-only
+# Compare vs last snapshot
+python3 identity_manager.py --freeze
+# Pre-model-upgrade deep freeze
+</code></pre>
+<h2>Requirements</h2>
+<p>To use this skill, you need:</p>
+<ul>
+<li>Gemini API key for identity extraction</li>
+<li>Agent workspace with MEMORY.md and/or SOUL.md files</li>
+</ul>
+<h2>Benefits</h2>
+<p>This skill provides several advantages for AI agent development:</p>
+<ul>
+<li>Maintains identity consistency across sessions</li>
+<li>Detects unwanted drift in agent behavior</li>
+<li>Enables safe model upgrades</li>
+<li>Provides version control for agent identity</li>
+</ul>
+<h2>Technical Implementation</h2>
+<p>The skill uses Python for implementation and processes markdown files to extract structured identity information. It calculates statistical measures to quantify identity similarity and tracks changes over time.</p>
+<h2>Real-World Applications</h2>
+<p>This skill is particularly useful for:</p>
+<ul>
+<li>AI agents that need to maintain consistent personalities</li>
+<li>Applications requiring identity preservation across model upgrades</li>
+<li>Systems that track cognitive development or personality evolution</li>
+<li>Research on AI agent identity and continuity</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw Identity Persistence skill represents a sophisticated approach to AI agent identity management. By providing structured identity graphs, continuity scoring, and version control, it enables more reliable and consistent AI agent behavior across different contexts and upgrades.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/quriustus/identity-persistence/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/quriustus/identity-persistence/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

@@ -7,7 +7,7 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-PUBLIC_DIR = BASE_DIR / "ig"
+PUBLIC_DIR = BASE_DIR / "post"
 STATE_FILE = BASE_DIR / "scripts/last_sync.json"
 PUBLIC_DIR.mkdir(exist_ok=True)
 
@@ -19,54 +19,12 @@ PER_PAGE = 100
 MAX_WORKERS = 10
 POSTS_PER_PAGE = 100
 
-HEAD_TEMPLATE = """<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{title}</title>
-    <meta name="description" content="{description}">
-    <meta property="og:title" content="{title}">
-    <meta property="og:description" content="{description}">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://aloycwl.github.io/ig/{slug}">
-    {og_image}
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://aloycwl.github.io/ig/{slug}">
-    <style>
-        :root {{ color-scheme: light; }}
-        body {{ margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }}
-        .container {{ max-width: 960px; margin: 0 auto; padding: 1rem; }}
-        header {{ border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }}
-        header a {{ color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }}
-        img {{ max-width: 100%; height: auto; border-radius: 4px; }}
-        a {{ color: #0b57d0; text-decoration: none; }}
-        a:hover {{ text-decoration: underline; }}
-        .post-list {{ list-style: none; padding: 0; }}
-        .post-item {{ padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }}
-        .post-title {{ font-size: 1.1rem; font-weight: 500; }}
-        .post-date {{ font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }}
-        .pagination {{ display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }}
-        .pagination a {{ padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }}
-        .footer {{ margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }}
-    </style>
-</head>
-<body>
-<div class="container">
-    <header>
-        <a href="/ig/">InsightGinie Archive</a>
-    </header>
-"""
+# Load external templates - edit these files to change site design globally
+with open(BASE_DIR / "templates/header.html", "r", encoding="utf-8") as f:
+    HEAD_TEMPLATE = f.read()
 
-FOOTER_TEMPLATE = """
-    <div class="footer">
-        <p>Official site: <a href="https://insightginie.com">insightginie.com</a></p>
-        <p>This is a public mirror archive.</p>
-    </div>
-</div>
-</body>
-</html>
-"""
+with open(BASE_DIR / "templates/footer.html", "r", encoding="utf-8") as f:
+    FOOTER_TEMPLATE = f.read()
 
 
 def load_state():
@@ -114,13 +72,61 @@ def render_post(post):
     excerpt = re.sub(r'<[^>]+>', '', excerpt).strip()[:160]
     media_path = f"https://picsum.photos/1200/630?random={post['id']}"
 
-    og_image = f'<meta property="og:image" content="{media_path}"><meta name="twitter:image" content="{media_path}">'
-
-    html = HEAD_TEMPLATE.format(title=title, description=excerpt, slug=slug, og_image=og_image)
-    html += f'<h1>{title}</h1>'
-    html += f'<p style="color:#718096; font-size:0.9rem;">{date[:10]}</p>'
-    html += content
-    html += FOOTER_TEMPLATE
+    # DYNAMIC TEMPLATE POST FORMAT - Header/Footer loaded via JS
+    html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{title}</title>
+    <meta name="description" content="{excerpt}">
+    <meta property="og:title" content="{title}">
+    <meta property="og:description" content="{excerpt}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/{slug}">
+    <meta property="og:image" content="{media_path}">
+    <meta name="twitter:image" content="{media_path}">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/{slug}">
+    <style>
+        :root {{ color-scheme: light; }}
+        body {{ margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }}
+        .container {{ max-width: 960px; margin: 0 auto; padding: 1rem; }}
+        header {{ border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }}
+        header a {{ color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }}
+        img {{ max-width: 100%; height: auto; border-radius: 4px; }}
+        a {{ color: #0b57d0; text-decoration: none; }}
+        a:hover {{ text-decoration: underline; }}
+        .post-list {{ list-style: none; padding: 0; }}
+        .post-item {{ padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }}
+        .post-title {{ font-size: 1.1rem; font-weight: 500; }}
+        .post-date {{ font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }}
+        .pagination {{ display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }}
+        .pagination a {{ padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }}
+        .footer {{ margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }}
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {{
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        }});
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>{title}</h1>
+    <p style="color:#718096; font-size:0.9rem;">{date[:10]}</p>
+    {content}
+</div>
+<div id="site-footer"></div>
+</body>
+</html>'''
 
     with open(PUBLIC_DIR / f"{slug}.html", "w", encoding="utf-8") as f:
         f.write(html)

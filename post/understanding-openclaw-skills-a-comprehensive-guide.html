@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding OpenClaw Skills: A Comprehensive Guide</title>
+    <meta name="description" content="Learn how OpenClaw skills extend agent capabilities through specialized knowledge, workflows, and tool integrations. Discover the anatomy of effective skills an">
+    <meta property="og:title" content="Understanding OpenClaw Skills: A Comprehensive Guide">
+    <meta property="og:description" content="Learn how OpenClaw skills extend agent capabilities through specialized knowledge, workflows, and tool integrations. Discover the anatomy of effective skills an">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-openclaw-skills-a-comprehensive-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8837">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8837">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-openclaw-skills-a-comprehensive-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding OpenClaw Skills: A Comprehensive Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-13</p>
+    <h2>What is an OpenClaw Skill?</h2>
+<p>An OpenClaw skill is a modular, self-contained package that extends agent capabilities by providing specialized knowledge, workflows, and tools. Think of skills as &#8220;onboarding guides&#8221; for specific domains or tasks—they transform a general-purpose agent into a specialized agent equipped with procedural knowledge and domain expertise.</p>
+<h2>Skill Location and Structure</h2>
+<p>In the Deepagents CLI, skills are stored in <code>~/.deepagents/&lt;agent&gt;/skills/</code> where <code>&lt;agent&gt;</code> is your agent configuration name (default is <code>agent</code>). Each skill consists of a required <code>SKILL.md</code> file and optional bundled resources:</p>
+<pre><code>skill-name/
+├── SKILL.md (required)
+│   ├── YAML frontmatter metadata (required)
+│   │   ├── name: (required)
+│   │   └── description: (required)
+│   └── Markdown instructions (required)
+└── Bundled Resources (optional)
+    ├── scripts/          - Executable code (Python/Bash/etc.)
+    ├── references/       - Documentation intended to be loaded into context as needed
+    └── assets/           - Files used in output (templates, icons, fonts, etc.)
+</code></pre>
+<h3>SKILL.md Requirements</h3>
+<p>Every <code>SKILL.md</code> file must contain:</p>
+<ol>
+<li><strong>Frontmatter</strong>: YAML metadata with <code>name</code> and <code>description</code> fields. These fields determine when the skill gets triggered.</li>
+<li><strong>Body</strong>: Markdown instructions and guidance for using the skill. Only loaded AFTER the skill triggers.</li>
+</ol>
+<h2>Core Principles of Skill Design</h2>
+<h3>Concise is Key</h3>
+<p>The context window is a public good. Skills share the context window with everything else the agent needs: system prompt, conversation history, other skills&#8217; metadata, and the actual user request. Default assumption: The agent is already very capable.</p>
+<p>Only add context the agent doesn&#8217;t already have. Challenge each piece of information: &#8220;Does the agent really need this explanation?&#8221; and &#8220;Does this paragraph justify its token cost?&#8221; Prefer concise examples over verbose explanations.</p>
+<h3>Set Appropriate Degrees of Freedom</h3>
+<p>Match the level of specificity to the task&#8217;s fragility and variability:</p>
+<ul>
+<li><strong>High freedom</strong> (text-based instructions): Use when multiple approaches are valid, decisions depend on context, or heuristics guide the approach.</li>
+<li><strong>Medium freedom</strong> (pseudocode or scripts with parameters): Use when a preferred pattern exists, some variation is acceptable, or configuration affects behavior.</li>
+<li><strong>Low freedom</strong> (specific scripts, few parameters): Use when operations are fragile and error-prone, consistency is critical, or a specific sequence must be followed.</li>
+</ol>
+<h2>Bundled Resources</h2>
+<h3>Scripts</h3>
+<p>Executable code (Python/Bash/etc.) for tasks that require deterministic reliability or are repeatedly rewritten. Include scripts when the same code is being rewritten repeatedly or deterministic reliability is needed.</p>
+<p><strong>Example</strong>: <code>scripts/rotate_pdf.py</code> for PDF rotation tasks</p>
+<p><strong>Benefits</strong>: Token efficient, deterministic, may be executed without loading into context</p>
+<p><strong>Note</strong>: Scripts may still need to be read by the agent for patching or environment-specific adjustments</p>
+<h3>References</h3>
+<p>Documentation and reference material intended to be loaded as needed into context to inform the agent&#8217;s process and thinking. Include references for documentation that the agent should reference while working.</p>
+<p><strong>Examples</strong>: <code>references/finance.md</code> for financial schemas, <code>references/mnda.md</code> for company NDA template, <code>references/policies.md</code> for company policies, <code>references/api_docs.md</code> for API specifications</p>
+<p><strong>Use cases</strong>: Database schemas, API documentation, domain knowledge, company policies, detailed workflow guides</p>
+<p><strong>Benefits</strong>: Keeps <code>SKILL.md</code> lean, loaded only when the agent determines it&#8217;s needed</p>
+<p><strong>Best practice</strong>: If files are large (&gt;10k words), include search patterns in <code>SKILL.md</code></p>
+<p><strong>Avoid duplication</strong>: Information should live in either <code>SKILL.md</code> or references files, not both. Prefer references files for detailed information unless it&#8217;s truly core to the skill—this keeps <code>SKILL.md</code> lean while making information discoverable without hogging the context window.</p>
+<h3>Assets</h3>
+<p>Files not intended to be loaded into context, but rather used within the output the agent produces. Include assets when the skill needs files that will be used in the final output.</p>
+<p><strong>Examples</strong>: <code>assets/logo.png</code> for brand assets, <code>assets/slides.pptx</code> for PowerPoint templates, <code>assets/frontend-template/</code> for HTML/React boilerplate, <code>assets/font.ttf</code> for typography</p>
+<p><strong>Use cases</strong>: Templates, images, icons, boilerplate code, fonts, sample documents that get copied or modified</p>
+<p><strong>Benefits</strong>: Separates output resources from documentation, enables the agent to use files without loading them into context</p>
+<h2>What to Not Include in a Skill</h2>
+<p>A skill should only contain essential files that directly support its functionality. Do NOT create extraneous documentation or auxiliary files, including:</p>
+<ul>
+<li><code>README.md</code></li>
+<li><code>INSTALLATION_GUIDE.md</code></li>
+<li><code>QUICK_REFERENCE.md</code></li>
+<li><code>CHANGELOG.md</code></li>
+<li>etc.</li>
+</ul>
+<p>The skill should only contain the information needed for an AI agent to do the job at hand. It should not contain auxiliary context about the process that went into creating it, setup and testing procedures, user-facing documentation, etc. Creating additional documentation files just adds clutter and confusion.</p>
+<h2>Progressive Disclosure Design Principle</h2>
+<p>Skills use a three-level loading system to manage context efficiently:</p>
+<ol>
+<li><strong>Metadata</strong> (<code>name</code> + <code>description</code>): Always in context (~100 words)</li>
+<li><strong><code>SKILL.md</code> body</strong>: When skill triggers (&lt;5k words)</li>
+<li><strong>Bundled resources</strong>: As needed by the agent (Unlimited because scripts can be executed without reading into context window)</li>
+</ol>
+<p>This progressive disclosure pattern ensures skills remain lightweight and efficient while providing comprehensive functionality when needed.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/chengxindl/skills-ttt/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/chengxindl/skills-ttt/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

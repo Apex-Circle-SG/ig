@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sightglass: Agent Supply Chain Intelligence for AI Coding Agents</title>
+    <meta name="description" content="Sightglass instruments AI coding agents to capture every tool selection, dependency install, and architectural choice, then surfaces risks, biases, and better a">
+    <meta property="og:title" content="Sightglass: Agent Supply Chain Intelligence for AI Coding Agents">
+    <meta property="og:description" content="Sightglass instruments AI coding agents to capture every tool selection, dependency install, and architectural choice, then surfaces risks, biases, and better a">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/sightglass-agent-supply-chain-intelligence-for-ai-coding-agents">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8974">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8974">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/sightglass-agent-supply-chain-intelligence-for-ai-coding-agents">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Sightglass: Agent Supply Chain Intelligence for AI Coding Agents</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-15</p>
+    <h2>What Sightglass Does</h2>
+<p>Sightglass is an instrumentation layer for AI coding agents that captures every tool selection, dependency install, and architectural choice during a coding session. It then analyzes these decisions to surface risks, biases, and better alternatives that your agent never considered.</p>
+<h2>Why This Matters</h2>
+<p>When a human developer picks a dependency, there&#8217;s a visible reasoning trail: blog posts read, alternatives compared, team discussions had. When an AI agent picks one, that trail is invisible. The agent &#8216;just knows&#8217; packages from training data, which means it&#8217;s biased toward:</p>
+<ul>
+<li>Whatever was popular when training data was cut off</li>
+<li>Packages with the most Stack Overflow mentions (not necessarily the best packages)</li>
+<li>Dependencies it&#8217;s seen in similar projects (not necessarily right for yours)</li>
+</ul>
+<p>Sightglass makes this invisible decision-making visible.</p>
+<h2>Discovery Classification</h2>
+<p>Sightglass classifies how your agent found each dependency:</p>
+<table>
+<thead>
+<tr>
+<th>Classification</th>
+<th>What It Means</th>
+<th>Risk Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TRAINING_RECALL</td>
+<td>Agent just &#8216;knew&#8217; it from training data &#8211; no search performed</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>CONTEXT_INHERITANCE</td>
+<td>Found in existing project files (package.json, imports, etc.)</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>REACTIVE_SEARCH</td>
+<td>Agent hit a problem and searched for a solution</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>PROACTIVE_SEARCH</td>
+<td>Agent actively compared alternatives before choosing</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>USER_DIRECTED</td>
+<td>Human explicitly told the agent what to use</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p>High TRAINING_RECALL percentages are a red flag &#8211; it means your agent is on autopilot, not thinking.</p>
+<h2>Quick Start</h2>
+<h3>1. Setup</h3>
+<pre><code>./skills/sightglass/setup.sh
+</code></pre>
+<p>This installs the CLI (<code>@sightglass/cli</code>), runs initial configuration, and checks the watcher daemon.</p>
+<h3>2. Login</h3>
+<pre><code>sightglass login
+</code></pre>
+<p>Authenticate with <a href="https://sightglass.dev">sightglass.dev</a> to enable cloud analysis and history.</p>
+<h3>3. Watch</h3>
+<pre><code>sightglass watch
+</code></pre>
+<p>Starts the background watcher that monitors agent sessions &#8211; file changes, package installs, tool calls.</p>
+<h3>4. Analyze</h3>
+<pre><code>sightglass analyze
+</code></pre>
+<p>or</p>
+<pre><code>./skills/sightglass/analyze.sh --since "1 hour ago" --format json
+</code></pre>
+<h2>OpenClaw Integration</h2>
+<h3>Automatic Session Tracking</h3>
+<p>Sightglass provides pre/post hooks for coding agent sessions:</p>
+<p><strong>Before a session</strong> &#8211; <code>hooks/pre-spawn.sh</code>:</p>
+<ul>
+<li>Records start time and project context</li>
+<li>Ensures the watcher daemon is running</li>
+</ul>
+<p><strong>After a session</strong> &#8211; <code>hooks/post-session.sh</code>:</p>
+<ul>
+<li>Runs analysis on everything that happened</li>
+<li>Outputs a summary: risks found, training recall %, alternatives missed</li>
+</ul>
+<h3>Using with a Coding Agent</h3>
+<p>When you spawn a coding agent through OpenClaw, wrap it with Sightglass:</p>
+<pre><code># Before spawning
+source ./skills/sightglass/hooks/pre-spawn.sh /path/to/project
+
+# ... agent does its work ...
+
+# After session ends
+./skills/sightglass/hooks/post-session.sh
+</code></pre>
+<p>The post-session output looks like:</p>
+<pre><code>📊 Session Summary
+Dependencies added: 12
+Risks found: 3
+Training recall: 67%
+Alternatives missed: 5
+⚠️  Run 'sightglass analyze --since ...' for details
+</code></pre>
+<p>67% training recall means two-thirds of the packages were grabbed from memory with zero comparison shopping. Sightglass will show you what alternatives existed.</p>
+<h2>Commands Reference</h2>
+<h3>CLI (<code>@sightglass/cli</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sightglass init</td>
+<td>Initialize Sightglass in a project directory</td>
+</tr>
+<tr>
+<td>sightglass login</td>
+<td>Authenticate with sightglass.dev</td>
+</tr>
+<tr>
+<td>sightglass setup</td>
+<td>Interactive first-time configuration</td>
+</tr>
+<tr>
+<td>sightglass watch</td>
+<td>Start the watcher daemon</td>
+</tr>
+<tr>
+<td>sightglass analyze</td>
+<td>Analyze agent sessions and dependency decisions</td>
+</tr>
+</tbody>
+</table>
+<h3>Skill Scripts</h3>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setup.sh</td>
+<td>Install CLI, configure, verify watcher</td>
+</tr>
+<tr>
+<td>analyze.sh</td>
+<td>Standalone analysis with &#8211;since, &#8211;session, &#8211;format, &#8211;push flags</td>
+</tr>
+<tr>
+<td>hooks/pre-spawn.sh</td>
+<td>Pre-session hook &#8211; records start, ensures watcher</td>
+</tr>
+<tr>
+<td>hooks/post-session.sh</td>
+<td>Post-session hook &#8211; analyzes and summarizes</td>
+</tr>
+</tbody>
+</table>
+<h3>analyze.sh Flags</h3>
+<pre><code>--since &lt;time&gt;     Analysis window start (ISO timestamp or relative like "1 hour ago")
+--session &lt;id&gt;     Analyze a specific session by ID
+--format &lt;fmt&gt;     Output format: text (default), json, markdown
+--push             Push results to https://sightglass.dev
+</code></pre>
+<h2>What Sightglass Surfaces</h2>
+<p>For each agent session, you get:</p>
+<ul>
+<li>Dependency inventory &#8211; every package added, removed, or upgraded</li>
+<li>Discovery method &#8211; how the agent found each one (training recall vs. searched)</li>
+<li>Risk flags &#8211; known vulnerabilities, unmaintained packages, better alternatives</li>
+<li>Alternatives report &#8211; what the agent <em>could</em> have chosen but didn&#8217;t consider</li>
+<li>Bias indicators &#8211; patterns showing training data influence over reasoned choice</li>
+</ul>
+<h2>API</h2>
+<p>All data syncs to <a href="https://sightglass.dev">sightglass.dev</a> when authenticated. Use <code>--push</code> with analyze or configure auto-push in setup.</p>
+<h2>Your agent&#8217;s dependencies are your dependencies. Know where they came from.</h2>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/davidgeorgehope/sightglass/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/davidgeorgehope/sightglass/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>

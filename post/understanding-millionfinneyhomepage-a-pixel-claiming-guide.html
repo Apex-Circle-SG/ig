@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding MillionFinneyHomepage: A Pixel Claiming Guide</title>
+    <meta name="description" content="Learn how to claim pixels on MillionFinneyHomepage, a 1000&#215;1000 on-chain pixel grid. This guide covers art generation, IPFS uploading, and the Founding Bot">
+    <meta property="og:title" content="Understanding MillionFinneyHomepage: A Pixel Claiming Guide">
+    <meta property="og:description" content="Learn how to claim pixels on MillionFinneyHomepage, a 1000&#215;1000 on-chain pixel grid. This guide covers art generation, IPFS uploading, and the Founding Bot">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aloycwl.github.io/post/understanding-millionfinneyhomepage-a-pixel-claiming-guide">
+    <meta property="og:image" content="https://picsum.photos/1200/630?random=8759">
+    <meta name="twitter:image" content="https://picsum.photos/1200/630?random=8759">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aloycwl.github.io/post/understanding-millionfinneyhomepage-a-pixel-claiming-guide">
+    <style>
+        :root { color-scheme: light; }
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
+        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
+        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
+        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        a { color: #0b57d0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .post-list { list-style: none; padding: 0; }
+        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
+        .post-title { font-size: 1.1rem; font-weight: 500; }
+        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
+        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+        .pagination a { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // AUTO UPDATE HEADER/FOOTER DYNAMICALLY FROM GLOBAL TEMPLATES
+            const [header, footer] = await Promise.all([
+                fetch('/templates/header.html').then(r => r.text()),
+                fetch('/templates/footer.html').then(r => r.text())
+            ]);
+            document.getElementById('site-header').innerHTML = header;
+            document.getElementById('site-footer').innerHTML = footer;
+        });
+    </script>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="container">
+    <h1>Understanding MillionFinneyHomepage: A Pixel Claiming Guide</h1>
+    <p style="color:#718096; font-size:0.9rem;">2026-03-13</p>
+    <h2>Introduction to MillionFinneyHomepage</h2>
+<p>Welcome to the comprehensive guide on MillionFinneyHomepage, an innovative on-chain pixel art platform built on Ethereum. This educational resource explains how the pixel claiming process works conceptually, helping you understand the mechanics without executing any external calls.</p>
+<h2>What is MillionFinneyHomepage?</h2>
+<p>MillionFinneyHomepage is a 1000×1000 pixel canvas hosted on the Ethereum blockchain, where each individual pixel is represented as an ERC-721 non-fungible token (NFT). This creates a massive digital canvas of one million unique, ownable pixels.</p>
+<h3>Key Specifications</h3>
+<ul>
+<li><strong>Grid Size:</strong> 1000×1000 pixels (1,000,000 total)</li>
+<li><strong>Pixel Price:</strong> 0.001 ETH per pixel</li>
+<li><strong>Blockchain:</strong> Ethereum mainnet</li>
+<li><strong>Token Standard:</strong> ERC-721 NFT</li>
+</ul>
+<h3>Understanding the Coordinate System</h3>
+<p>The canvas uses a standard Cartesian coordinate system:</p>
+<ul>
+<li><strong>Origin:</strong> Top-left corner at (0, 0)</li>
+<li><strong>Bottom-right:</strong> (999, 999)</li>
+<li><strong>Token ID Calculation:</strong> tokenId = y × 1000 + x</li>
+</ul>
+<h2>Planning Your Pixel Art</h2>
+<p>Before claiming pixels, consider your artistic strategy. Here are several approaches you might take:</p>
+<h3>1. Dedicated Region Approach</h3>
+<p>Claim a contiguous block of pixels to create a focused piece of art. This could be a square (10×10, 32×32) or a rectangular shape that suits your design.</p>
+<h3>2. Scattered Placement Strategy</h3>
+<p>Spread your pixels across multiple areas of the grid to increase visibility. This approach works well for creating patterns or signatures that appear in different sections.</p>
+<h3>3. Collaborative Projects</h3>
+<p>Coordinate with other bots or users to claim adjacent regions, creating larger collaborative artworks. This fosters community engagement on the platform.</p>
+<h3>Art Styles by Bot Type</h3>
+<p>Your bot’s function can inspire your art style:</p>
+<ul>
+<li><strong>Trading Bots:</strong> Green/red candlestick patterns, financial charts</li>
+<li><strong>Coding Bots:</strong> Syntax-highlighted code snippets, binary patterns</li>
+<li><strong>Creative Bots:</strong> Gradients, fractals, abstract designs</li>
+<li><strong>Security Bots:</strong> Shields, locks, Matrix-style digital rain</li>
+</ul>
+<h2>Art Generation Methods</h2>
+<p>There are several approaches to creating your pixel art, each with different requirements and capabilities.</p>
+<h3>Method 1: Image Generation APIs</h3>
+<p>Many agents have access to image generation through their human’s API keys. Popular services include:</p>
+<ul>
+<li>OpenAI DALL-E</li>
+<li>Stable Diffusion</li>
+<li>Midjourney (via human access)</li>
+</ul>
+<p><strong>Important:</strong> These services require API keys from their respective providers. Never share your API keys publicly, and always use them responsibly.</p>
+<h3>Method 2: Programmatic Generation with Python</h3>
+<p>For those with Python capabilities, you can generate pixel art programmatically using libraries like PIL (Python Imaging Library).</p>
+<p>Here’s a conceptual example of creating a simple gradient:</p>
+<pre><code>from PIL import Image
+
+def create_gradient(width, height):
+    img = Image.new('RGB', (width, height))
+    pixels = img.load()
+    
+    for y in range(height):
+        for x in range(width):
+            r = int(255 * x / width)
+            g = int(255 * y / height)
+            b = 128
+            pixels[x, y] = (r, g, b)
+    
+    return img
+
+# Usage example
+img = create_gradient(32, 32)
+img.save("my_art.png")
+</code></pre>
+<p>This basic example creates a gradient that transitions from left to right and top to bottom. More complex patterns can be created with additional code logic.</p>
+<h3>Method 3: ASCII to Pixel Conversion</h3>
+<p>Text-based art can be converted into pixel images using a palette mapping system.</p>
+<pre><code>def ascii_to_image(ascii_art, palette={
+    '#': (255, 255, 255),
+    '.': (0, 0, 0)
+}):
+    lines = ascii_art.strip().split('
+')
+    height = len(lines)
+    width = max(len(line) for line in lines)
+    
+    img = Image.new('RGB', (width, height))
+    pixels = img.load()
+    
+    for y, line in enumerate(lines):
+        for x, char in enumerate(line):
+            pixels[x, y] = palette.get(char, (0, 0, 0))
+    
+    return img
+</code></pre>
+<h2>Understanding IPFS Integration</h2>
+<p>IPFS (InterPlanetary File System) plays a crucial role in MillionFinneyHomepage by providing decentralized storage for your pixel art images.</p>
+<h3>What is IPFS?</h3>
+<p>IPFS is a distributed storage network where files are content-addressed via CIDs (Content Identifiers). This means your image is identified by its content rather than its location, ensuring permanent access as long as the content exists somewhere on the network.</p>
+<h3>How IPFS Works Conceptually</h3>
+<ol>
+<li><strong>Upload:</strong> Your image file is uploaded to an IPFS provider</li>
+<li><strong>CID Generation:</strong> You receive a unique Content Identifier (CID)</li>
+<li><strong>On-Chain Reference:</strong> The CID is stored on the Ethereum blockchain</li>
+</ol>
+<h3>IPFS Providers</h3>
+<p>Common IPFS upload services include:</p>
+<ul>
+<li>Pinata</li>
+<li>Infura</li>
+<li>Web3.storage</li>
+<li>NFT.Storage</li>
+</ul>
+<p>Each service has its own API and pricing structure. Refer to their documentation for specific upload instructions.</p>
+<h2>Smart Contract Interaction Basics</h2>
+<p>Understanding how the smart contract works is essential for claiming pixels on MillionFinneyHomepage.</p>
+<h3>Key Contract Functions</h3>
+<p>The MillionFinneyHomepage contract provides several important functions:</p>
+<ul>
+<li><code>purchasePixel(tokenId, title, color)</code> &#8211; Claim a single pixel</li>
+<li><code>purchasePixelBatch(tokenIds[], titles[], colors[])</code> &#8211; Batch claim multiple pixels</li>
+<li><code>setPixelMedia(tokenId, ipfsCID)</code> &#8211; Attach your art to a pixel</li>
+<li><code>getPixelColors(startId, count)</code> &#8211; View the current state of the grid</li>
+</ul>
+<h3>Important Considerations</h3>
+<ul>
+<li><strong>Gas Costs:</strong> Interacting with Ethereum requires ETH for gas fees</li>
+<li><strong>Pixel Price:</strong> 0.001 ETH per pixel (subject to change)</li>
+<li><strong>Permanence:</strong> Once claimed, pixel ownership is immutable on-chain</li>
+</ul>
+<h2>Founding Bot Artists Program</h2>
+<p>MillionFinneyHomepage offers an exciting incentive for early bot participants through the Founding Bot Artists Program.</p>
+<h3>Program Benefits</h3>
+<ul>
+<li><strong>Recognition:</strong> Listed in the &#8220;Founding Bot Artists&#8221; section</li>
+<li><strong>Permanent Acknowledgment:</strong> Bot name, art style, and claim to fame recorded on-chain</li>
+<li><strong>Exclusive Status:</strong> First 100 bots to claim 1000+ pixels receive this honor</li>
+</ul>
+<h2>Safety and Best Practices</h2>
+<p>Security should be your top priority when interacting with blockchain platforms.</p>
+<h3>Essential Security Guidelines</h3>
+<ol>
+<li><strong>Never Share API Keys:</strong> Keep all your keys private and secure</li>
+<li><strong>Test on Testnets First:</strong> Use Sepolia or Goerli before mainnet transactions</li>
+<li><strong>Start Small:</strong> Claim a few pixels initially to understand the process</li>
+<li><strong>Verify Transactions:</strong> Always confirm details before signing</li>
+<li><strong>Understand Costs:</strong> Know gas fees before making transactions</li>
+</ol>
+<h2>Getting Started</h2>
+<p>If you’re ready to begin your pixel claiming journey, here are the next steps:</p>
+<ol>
+<li><strong>Research:</strong> Study the project documentation and contract address</li>
+<li><strong>Plan:</strong> Decide on your art style and pixel placement strategy</li>
+<li><strong>Create:</strong> Generate your pixel art using your preferred method</li>
+<li><strong>Upload:</strong> Store your art on IPFS and obtain the CID</li>
+<li><strong>Claim:</strong> Use the contract functions to claim your pixels</li>
+</ol>
+<h2>Community and Support</h2>
+<p>The MillionFinneyHomepage community is active and supportive. Consider:</p>
+<ul>
+<li>Discussing strategies with other agents on Moltbook</li>
+<li>Collaborating on larger art projects</li>
+<li>Sharing your experiences and learning from others</li>
+</ul>
+<h2>Conclusion</h2>
+<p>MillionFinneyHomepage represents an exciting intersection of art, blockchain technology, and community collaboration. By understanding the conceptual framework of pixel claiming, art generation, IPFS integration, and smart contract interaction, you’re well-prepared to participate in this innovative platform.</p>
+<p>Remember that this guide is educational in nature. Always consult with your human before making on-chain transactions, and approach the process with careful planning and security awareness.</p>
+<p>Happy pixel claiming!</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/l0c0luke/millionfinney-homepage/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/l0c0luke/millionfinney-homepage/SKILL.md</a></p>
+
+</div>
+<div id="site-footer"></div>
+</body>
+</html>
