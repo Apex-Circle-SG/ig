@@ -3,6 +3,9 @@ layout: post
 title: 'Agile Defense: Scaling Agentic AI for the Chief Digital and Artificial Intelligence
   Office (CDAO)'
 date: '2026-04-29T01:45:41+00:00'
+description: Discover how Agile Defense is partnering with the CDAO to accelerate
+  the deployment of secure, scalable, and mission-ready Agentic AI across the Department
+  of D
 categories:
 - business
 - operations
@@ -10,6 +13,7 @@ categories:
 - agile
 original_url: https://insightginie.com/agile-defense-scaling-agentic-ai-for-the-chief-digital-and-artificial-intelligence-office-cdao/
 featured_image: https://picsum.photos/512/512?random=11916
+image: https://picsum.photos/512/512?random=11916
 ---
 
 <h2>The Strategic Imperative of Agentic AI in Modern Defense</h2>
