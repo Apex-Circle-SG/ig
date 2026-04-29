@@ -139,13 +139,18 @@ def save_post(post, categories, executor):
 
     path = os.path.join(POST_DIR, filename)
 
+    excerpt = post.get("excerpt", {}).get("rendered", "")
+    excerpt = re.sub(r'<[^>]+>', '', excerpt).strip()[:160]
+    
     frontmatter = {
         "layout": "post",
         "title": title,
         "date": date,
+        "description": excerpt,
         "categories": cat_path,
         "original_url": original_url,
-        "featured_image": media_path
+        "featured_image": media_path,
+        "image": media_path
     }
 
     fm = yaml.dump(frontmatter, sort_keys=False)
