@@ -334,10 +334,9 @@ def sync(max_posts=None):
     render_index(all_posts)
     generate_sitemap(all_posts)
 
-    if max_posts is None:
-        state["last_id"] = max_id
-        state["posts"] = processed_posts
-        save_state(state)
+    state["last_id"] = max_id
+    state["posts"] = processed_posts
+    save_state(state)
 
     print(f"\nDone. Processed {processed} new posts. Total posts: {len(processed_posts)}")
 
