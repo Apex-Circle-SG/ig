@@ -151,7 +151,7 @@ async function renderPost(slug) {
                 const bucketRes = await fetch(base + `/data/${i}.json.full`);
                 if (bucketRes.ok) {
                     const bucket = await bucketRes.json();
-                    post = bucket.find(p => p.slug === slug);
+                    post = bucket.posts.find(p => p.slug === slug);
                     if (post) break;
                 }
             } catch(e) {
