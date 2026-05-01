@@ -146,17 +146,22 @@ async function renderPost(slug) {
     
     // If not found in pending check sealed buckets
     if (!post) {
-        for (let i = 1; i <= totalPages; i++) {
-            try {
-                const bucketRes = await fetch(base + `/data/${i}.json.full`);
-                if (bucketRes.ok) {
-                    const bucket = await bucketRes.json();
-                    post = bucket.posts.find(p => p.slug === slug);
-                    if (post) break;
+        // Look up correct bucket number from slugmap first
+        try {
+            const slugmapRes = await fetch(base + '/data/slugmap.json');
+            if (slugmapRes.ok) {
+                const slugmap = await slugmapRes.json();
+                if (slugmap[slug]) {
+                    const bucketNum = slugmap[slug].toString().padStart(4, '0');
+                    const bucketRes = await fetch(base + `/data/buckets/${bucketNum}.json`);
+                    if (bucketRes.ok) {
+                        const bucket = await bucketRes.json();
+                        post = bucket.posts.find(p => p.slug === slug);
+                    }
                 }
-            } catch(e) {
-                console.warn(`Bucket ${i} fetch failed:`, e);
             }
+        } catch(e) {
+            console.warn('Slugmap lookup failed:', e);
         }
     }
 
