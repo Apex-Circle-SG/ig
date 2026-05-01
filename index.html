@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>InsightGinie</title>
     <meta name="description" content="News of Tomorrow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="InsightGinie Archive">
+    <meta property="og:title" content="InsightGinie Archive">
+    <meta property="og:description" content="News of Tomorrow">
+    <meta property="og:image" content="https://picsum.photos/id/695/1200/630">
+    <meta property="og:url" content="">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="InsightGinie Archive">
+    <meta name="twitter:description" content="News of Tomorrow">
+    <meta name="twitter:image" content="https://picsum.photos/id/695/1200/630">
+
     <link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
     <style>
         :root { color-scheme: light; }
@@ -59,10 +74,19 @@ async function init() {
 
     window.addEventListener('popstate', handleRoute);
     handleRoute();
+    document.getElementById('loading').style.display = 'none';
 }
 
 async function handleRoute() {
-    const path = window.location.pathname.slice(1);
+    let path = window.location.pathname;
+    // Remove base path prefix if present
+    if (path.startsWith(base)) {
+        path = path.slice(base.length);
+    }
+    // Remove leading slashes
+    while (path.startsWith('/')) {
+        path = path.slice(1);
+    }
 
     if (!path || path === 'index.html') {
         renderPage(currentPage);
@@ -74,6 +98,15 @@ async function handleRoute() {
 async function renderPage(pageNum) {
     currentPage = pageNum;
     const posts = await fetch(base + `/data/${pageNum}.json`).then(r => r.json());
+    
+    // Reset meta tags to site defaults
+    document.title = 'InsightGinie Archive';
+    document.querySelector('meta[name="description"]').content = 'News of Tomorrow';
+    
+    document.querySelector('meta[property="og:title"]').content = 'InsightGinie Archive';
+    document.querySelector('meta[property="og:description"]').content = 'News of Tomorrow';
+    document.querySelector('meta[property="og:image"]').content = 'https://picsum.photos/id/695/1200/630';
+    document.querySelector('meta[property="og:url"]').content = window.location.origin + base + '/';
 
     let html = '<h1>InsightGinie Archive</h1><p style="color:#718096;">News of Tomorrow</p><ul class="post-list">';
 
@@ -98,19 +131,67 @@ async function renderPost(slug) {
     const postMeta = allPosts.find(p => p.slug === slug);
     if (!postMeta) { renderPage(totalPages); return; }
 
-    const posts = await fetch(`/data/${postMeta.page}.json`).then(r => r.json());
-    const post = posts.find(p => p.slug === slug);
+    // Load full post from bucket storage
+    let post;
+    // First check pending bucket
+    try {
+        const pending = await fetch(base + '/data/pending/current.json').then(r => r.json());
+        post = pending.find(p => p.slug === slug);
+    } catch(e) {}
+    
+    // If not found in pending check sealed buckets
+    if (!post) {
+        for (let i = 1; i <= totalPages; i++) {
+            try {
+                const bucket = await fetch(base + `/data/${i}.json.full`).then(r => r.json());
+                post = bucket.find(p => p.slug === slug);
+                if (post) break;
+            } catch(e) {}
+        }
+    }
 
+    // Fallback to page listing if full content not found
+    if (!post) {
+        const posts = await fetch(base + `/data/${postMeta.page}.json`).then(r => r.json());
+        post = posts.find(p => p.slug === slug);
+    }
+
+    // Update document title and meta tags
+    document.title = post.title + ' | InsightGinie Archive';
+    document.querySelector('meta[name="description"]').content = post.description;
+    
+    // Update Open Graph meta tags
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    let ogImage = document.querySelector('meta[property="og:image"]');
+    let ogUrl = document.querySelector('meta[property="og:url"]');
+    
+    if (ogTitle) ogTitle.content = post.title;
+    if (ogDesc) ogDesc.content = post.description;
+    if (ogImage) ogImage.content = `https://picsum.photos/id/${post.id}/1200/630`;
+    if (ogUrl) ogUrl.content = window.location.href;
+
+    // Update Twitter Card meta tags
+    let twTitle = document.querySelector('meta[name="twitter:title"]');
+    let twDesc = document.querySelector('meta[name="twitter:description"]');
+    let twImage = document.querySelector('meta[name="twitter:image"]');
+    
+    if (twTitle) twTitle.content = post.title;
+    if (twDesc) twDesc.content = post.description;
+    if (twImage) twImage.content = `https://picsum.photos/id/${post.id}/1200/630`;
+
+    // Render post
     document.getElementById('content').innerHTML = `
         <h1>${post.title}</h1>
         <p style="color:#718096; font-size:0.9rem;">${post.date.slice(0,10)}</p>
-        ${post.content}
+        <img src="https://picsum.photos/id/${post.id}/960/500" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="">
+        ${post.content || post.description}
     `;
     document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
 }
 
 function navigate(slug) {
-    const url = '/' + slug;
+    const url = slug ? base + '/' + slug : base + '/';
     history.pushState(null, '', url);
     handleRoute();
 }
