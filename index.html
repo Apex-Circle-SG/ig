@@ -135,25 +135,43 @@ async function renderPost(slug) {
     let post;
     // First check pending bucket
     try {
-        const pending = await fetch(base + '/data/pending/current.json').then(r => r.json());
-        post = pending.find(p => p.slug === slug);
-    } catch(e) {}
+        const pendingRes = await fetch(base + '/data/pending/current.json');
+        if (pendingRes.ok) {
+            const pending = await pendingRes.json();
+            post = pending.find(p => p.slug === slug);
+        }
+    } catch(e) {
+        console.warn('Pending bucket fetch failed, proceeding to sealed buckets:', e);
+    }
     
     // If not found in pending check sealed buckets
     if (!post) {
         for (let i = 1; i <= totalPages; i++) {
             try {
-                const bucket = await fetch(base + `/data/${i}.json.full`).then(r => r.json());
-                post = bucket.find(p => p.slug === slug);
-                if (post) break;
-            } catch(e) {}
+                const bucketRes = await fetch(base + `/data/${i}.json.full`);
+                if (bucketRes.ok) {
+                    const bucket = await bucketRes.json();
+                    post = bucket.find(p => p.slug === slug);
+                    if (post) break;
+                }
+            } catch(e) {
+                console.warn(`Bucket ${i} fetch failed:`, e);
+            }
         }
     }
 
-    // Fallback to page listing if full content not found
+    // Do NOT fallback to truncated excerpt - show error if full content unavailable
     if (!post) {
-        const posts = await fetch(base + `/data/${postMeta.page}.json`).then(r => r.json());
-        post = posts.find(p => p.slug === slug);
+        console.error(`Full content for post "${slug}" not found`);
+        document.getElementById('content').innerHTML = `
+            <h1>${postMeta.title}</h1>
+            <p style="color:#718096; font-size:0.9rem;">${postMeta.date.slice(0,10)}</p>
+            <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 1rem; border-radius: 4px; margin: 2rem 0;">
+                <strong>Loading Error:</strong> Full post content is temporarily unavailable. Please try again later.
+            </div>
+        `;
+        document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
+        return;
     }
 
     // Update document title and meta tags
@@ -185,7 +203,7 @@ async function renderPost(slug) {
         <h1>${post.title}</h1>
         <p style="color:#718096; font-size:0.9rem;">${post.date.slice(0,10)}</p>
         <img src="https://picsum.photos/id/${post.id}/960/500" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="">
-        ${post.content || post.description}
+        ${post.content}
     `;
     document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
 }
