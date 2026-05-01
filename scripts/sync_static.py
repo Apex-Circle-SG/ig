@@ -187,12 +187,13 @@ def render_index(all_posts):
 let allPosts = [];
 let currentPage = 1;
 let totalPages = 1;
+let base = '';
 const POSTS_PER_PAGE = 100;
 
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
-    const base = window.location.pathname.split('/').slice(0, -1).join('/');
+    base = window.location.pathname.split('/').slice(0, -1).join('/');
     allPosts = await fetch(base + '/posts.json').then(r => r.json());
     totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
     currentPage = totalPages; // Always start on newest page
