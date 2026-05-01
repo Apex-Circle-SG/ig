@@ -28,9 +28,12 @@ with open(BASE_DIR / "templates/footer.html", "r", encoding="utf-8") as f:
 
 
 def load_state():
-    if os.path.exists(STATE_FILE):
-        with open(STATE_FILE) as f:
-            return json.load(f)
+    if os.path.exists(STATE_FILE) and os.path.getsize(STATE_FILE) > 0:
+        try:
+            with open(STATE_FILE) as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            pass
     return {"last_id": 0, "posts": {}}
 
 
@@ -115,7 +118,22 @@ def render_index(all_posts):
         page_posts = all_posts[start:end]
 
         # Write json data
+        # First prepare truncated version for archive listings
+        listing_posts = []
+        for post in page_posts:
+            listing_posts.append({
+                'id': post['id'],
+                'slug': post['slug'],
+                'title': post['title'],
+                'date': post['date'],
+                'description': post['description']
+            })
+
         with open(data_dir / f"{page_num}.json", "w", encoding="utf-8") as f:
+            json.dump(listing_posts, f)
+        
+        # Write full unmodified content version for detail pages
+        with open(data_dir / f"{page_num}.json.full", "w", encoding="utf-8") as f:
             json.dump(page_posts, f)
         
         # Create static page directory (SEO permanent paths)
