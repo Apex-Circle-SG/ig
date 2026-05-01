@@ -63,13 +63,23 @@ def get_active_bucket():
     index = get_index()
     active = get_bucket(index["active_bucket"])
 
+    # If bucket is already sealed, skip pending file
+    if active and active["sealed"]:
+        active = None
+    
+    # Load pending only if bucket is not sealed yet
     if not active:
-        active = {
-            "id": index["active_bucket"],
-            "sealed": False,
-            "created": datetime.now().strftime("%Y-%m-%d"),
-            "posts": []
-        }
+        pending_path = PENDING_DIR / "current.json"
+        if pending_path.exists():
+            active = load_json(pending_path)
+        
+        if not active:
+            active = {
+                "id": index["active_bucket"],
+                "sealed": False,
+                "created": datetime.now().strftime("%Y-%m-%d"),
+                "posts": []
+            }
 
     return active
 
@@ -77,6 +87,10 @@ def get_active_bucket():
 def save_active_bucket(bucket):
     if bucket["sealed"]:
         save_bucket(bucket)
+        # Delete pending file when bucket is sealed
+        pending_file = PENDING_DIR / "current.json"
+        if pending_file.exists():
+            pending_file.unlink()
     else:
         save_json(PENDING_DIR / "current.json", bucket)
 
