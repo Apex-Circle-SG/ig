@@ -192,13 +192,14 @@ const POSTS_PER_PAGE = 100;
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
-    allPosts = await fetch('/posts.json').then(r => r.json());
+    const base = window.location.pathname.split('/').slice(0, -1).join('/');
+    allPosts = await fetch(base + '/posts.json').then(r => r.json());
     totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
     currentPage = totalPages; // Always start on newest page
 
     const [header, footer] = await Promise.all([
-        fetch('/templates/header.html').then(r => r.text()),
-        fetch('/templates/footer.html').then(r => r.text())
+        fetch(base + '/templates/header.html').then(r => r.text()),
+        fetch(base + '/templates/footer.html').then(r => r.text())
     ]);
     document.getElementById('site-header').innerHTML = header;
     document.getElementById('site-footer').innerHTML = footer;
@@ -219,7 +220,7 @@ async function handleRoute() {
 
 async function renderPage(pageNum) {
     currentPage = pageNum;
-    const posts = await fetch(`/data/${pageNum}.json`).then(r => r.json());
+    const posts = await fetch(base + `/data/${pageNum}.json`).then(r => r.json());
 
     let html = '<h1>InsightGinie Archive</h1><p style="color:#718096;">News of Tomorrow</p><ul class="post-list">';
 
