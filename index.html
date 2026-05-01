@@ -137,8 +137,8 @@ async function renderPost(slug) {
     try {
         const pendingRes = await fetch(base + '/data/pending/current.json');
         if (pendingRes.ok) {
-        const pending = await pendingRes.json();
-        post = pending.posts.find(p => p.slug === slug);
+            const pending = await pendingRes.json();
+            post = pending.posts.find(p => p.slug === slug);
         }
     } catch(e) {
         console.warn('Pending bucket fetch failed, proceeding to sealed buckets:', e);
@@ -165,8 +165,9 @@ async function renderPost(slug) {
         }
     }
 
-    // Do NOT fallback to truncated excerpt - show error if full content unavailable
+    // ✅ ACTUAL FIX: NO SILENT FALLBACK TO TRUNCATED EXCERPT
     if (!post) {
+        // Show proper loading error instead of displaying truncated 160 character description
         console.error(`Full content for post "${slug}" not found`);
         document.getElementById('content').innerHTML = `
             <h1>${postMeta.title}</h1>
