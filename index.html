@@ -137,8 +137,8 @@ async function renderPost(slug) {
     try {
         const pendingRes = await fetch(base + '/data/pending/current.json');
         if (pendingRes.ok) {
-            const pending = await pendingRes.json();
-            post = pending.find(p => p.slug === slug);
+        const pending = await pendingRes.json();
+        post = pending.posts.find(p => p.slug === slug);
         }
     } catch(e) {
         console.warn('Pending bucket fetch failed, proceeding to sealed buckets:', e);
