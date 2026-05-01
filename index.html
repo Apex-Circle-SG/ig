@@ -62,7 +62,15 @@ async function init() {
 }
 
 async function handleRoute() {
-    const path = window.location.pathname.slice(1);
+    let path = window.location.pathname;
+    // Remove base path prefix if present
+    if (path.startsWith(base)) {
+        path = path.slice(base.length);
+    }
+    // Remove leading slashes
+    while (path.startsWith('/')) {
+        path = path.slice(1);
+    }
 
     if (!path || path === 'index.html') {
         renderPage(currentPage);
@@ -98,11 +106,12 @@ async function renderPost(slug) {
     const postMeta = allPosts.find(p => p.slug === slug);
     if (!postMeta) { renderPage(totalPages); return; }
 
-    const posts = await fetch(`/data/${postMeta.page}.json`).then(r => r.json());
+    const posts = await fetch(base + `/data/${postMeta.page}.json`).then(r => r.json());
     const post = posts.find(p => p.slug === slug);
 
     document.getElementById('content').innerHTML = `
-        <h1>${post.title}</h1>
+        <h1>InsightGinie Archive</h1><p style="color:#718096;">News of Tomorrow</p>
+        <h2>${post.title}</h2>
         <p style="color:#718096; font-size:0.9rem;">${post.date.slice(0,10)}</p>
         ${post.content}
     `;
@@ -110,7 +119,7 @@ async function renderPost(slug) {
 }
 
 function navigate(slug) {
-    const url = '/' + slug;
+    const url = slug ? base + '/' + slug : base + '/';
     history.pushState(null, '', url);
     handleRoute();
 }
