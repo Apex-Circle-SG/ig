@@ -89,6 +89,10 @@ async function handleRoute() {
     while (path.startsWith('/')) {
         path = path.slice(1);
     }
+    // Normalize accidental trailing slash on post routes
+    while (path.endsWith('/')) {
+        path = path.slice(0, -1);
+    }
 
     if (!path || path === 'index.html') {
         renderPage(currentPage);
@@ -110,7 +114,7 @@ async function renderPage(pageNum) {
     document.querySelector('meta[property="og:image"]').content = DEFAULT_IMAGE;
     document.querySelector('meta[property="og:url"]').content = window.location.origin + base + '/';
 
-    let html = '<h1>InsightGinie Archive</h1><p style="color:#718096;">News of Tomorrow</p><ul class="post-list">';
+    let html = '<ul class="post-list">';
 
     for (const post of posts) {
         html += `<li class="post-item">
@@ -130,6 +134,7 @@ async function renderPage(pageNum) {
 }
 
 async function renderPost(slug) {
+    slug = decodeURIComponent((slug || '').replace(/^\/+|\/+$/g, ''));
     const postMeta = allPosts.find(p => p.slug === slug);
     if (!postMeta) { renderPage(totalPages); return; }
 
@@ -164,6 +169,42 @@ async function renderPost(slug) {
             }
         } catch(e) {
             console.warn('Slugmap lookup failed:', e);
+        }
+    }
+
+    // Final fallback: legacy full-content page file used by older sync output.
+    if (!post && postMeta.page) {
+        try {
+            const fullRes = await fetch(base + `/data/${postMeta.page}.json.full`);
+            if (fullRes.ok) {
+                const fullPosts = await fullRes.json();
+                post = fullPosts.find(p => p.slug === slug);
+            }
+        } catch (e) {
+            console.warn('Legacy full page lookup failed:', e);
+        }
+    }
+
+    // Last-resort fallback: fetch from live WordPress API by slug.
+    if (!post) {
+        try {
+            const wpRes = await fetch(`https://insightginie.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&status=publish`);
+            if (wpRes.ok) {
+                const wpPosts = await wpRes.json();
+                if (wpPosts.length) {
+                    const wp = wpPosts[0];
+                    post = {
+                        slug,
+                        title: wp.title?.rendered || postMeta.title,
+                        date: (wp.date_gmt || postMeta.date || '').slice(0, 10),
+                        content: wp.content?.rendered || '',
+                        image: postMeta.image || DEFAULT_IMAGE,
+                        description: postMeta.description || 'News of Tomorrow'
+                    };
+                }
+            }
+        } catch (e) {
+            console.warn('WordPress fallback lookup failed:', e);
         }
     }
 
