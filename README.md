@@ -59,3 +59,11 @@ This will:
 ## License
 
 Content copyright respective authors.
+## Project Memory (Important)
+
+- `manifest.json` must remain minimal and only contain:
+  - `latest_page`
+  - `last_synced_post_id`
+- Archive listing metadata (`slug`, `title`, `date`, `excerpt`) must be sourced from `posts.json`.
+- Frontend (`assets/app.js`) should paginate `posts.json` at 100 posts per page and use `manifest.json` only for sync/page bounds.
+- Keep this contract stable across future refactors to avoid reworking pagination/sync behavior in new containers.
