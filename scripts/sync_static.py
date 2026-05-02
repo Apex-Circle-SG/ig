@@ -7,6 +7,7 @@ from sitemap import regenerate_full_sitemap
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MANIFEST_FILE = BASE_DIR / "manifest.json"
+POSTS_FILE = BASE_DIR / "posts.json"
 
 SITE = "https://insightginie.com"
 POST_API = f"{SITE}/wp-json/wp/v2/posts"
@@ -27,32 +28,24 @@ def load_manifest():
             pass
     return {"latest_page": 0, "last_synced_post_id": 0}
 
-def load_existing_posts_from_pages():
-    page_dir = BASE_DIR / "page"
-    if not page_dir.exists():
-        return {}
-
-    posts_by_slug = {}
-    for file in sorted(page_dir.glob("*.json")):
+def load_posts_index():
+    if POSTS_FILE.exists() and POSTS_FILE.stat().st_size > 0:
         try:
-            with open(file, encoding="utf-8") as f:
-                page_data = json.load(f)
-                if isinstance(page_data, dict):
-                    for slug, post in page_data.items():
-                        if isinstance(post, dict):
-                            posts_by_slug[slug] = {
-                                "slug": slug,
-                                "title": post.get("title", ""),
-                                "date": post.get("date", ""),
-                                "excerpt": post.get("excerpt", ""),
-                            }
+            with open(POSTS_FILE, encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, list):
+                    return data
         except json.JSONDecodeError:
-            continue
-    return posts_by_slug
+            pass
+    return []
 
 def save_manifest(manifest):
     with open(MANIFEST_FILE, "w", encoding="utf-8") as f:
         json.dump(manifest, f)
+
+def save_posts_index(posts):
+    with open(POSTS_FILE, "w", encoding="utf-8") as f:
+        json.dump(posts, f)
 
 def sanitize(content):
     content = re.sub(r"<script.*?>.*?</script>", "", content, flags=re.DOTALL)
@@ -73,27 +66,6 @@ def generate_sitemap(all_posts):
         url_list.append({"url": f"https://aloycwl.github.io/page/{page_num}/", "lastmod": all_posts[0]["date"][:10]})
     regenerate_full_sitemap(url_list)
 
-def render_page_files(all_posts):
-    page_dir = BASE_DIR / "page"
-    page_dir.mkdir(exist_ok=True)
-    for child in page_dir.glob("*.json"):
-        child.unlink()
-
-    total_pages = (len(all_posts) + POSTS_PER_PAGE - 1) // POSTS_PER_PAGE
-    for page_num in range(1, total_pages + 1):
-        start = (page_num - 1) * POSTS_PER_PAGE
-        page_posts = all_posts[start:start + POSTS_PER_PAGE]
-        listing_posts = {
-            post["slug"]: {
-                "title": post["title"],
-                "date": post["date"][:10] if len(post["date"]) > 10 else post["date"],
-                "excerpt": post["excerpt"],
-            }
-            for post in page_posts
-        }
-        with open(page_dir / f"{page_num}.json", "w", encoding="utf-8") as f:
-            json.dump(listing_posts, f)
-
 def reset_sync_state():
     for folder in [BASE_DIR / "data", BASE_DIR / "page"]:
         folder.mkdir(exist_ok=True)
@@ -103,8 +75,9 @@ def reset_sync_state():
                 shutil.rmtree(child)
             else:
                 child.unlink()
-    if MANIFEST_FILE.exists():
-        MANIFEST_FILE.unlink()
+    for file in [MANIFEST_FILE, POSTS_FILE]:
+        if file.exists():
+            file.unlink()
 
 def sync(max_posts=None, full_resync=False):
     if full_resync:
@@ -113,7 +86,8 @@ def sync(max_posts=None, full_resync=False):
 
     manifest = load_manifest()
     last_id = manifest.get("last_synced_post_id", 0)
-    posts_by_slug = load_existing_posts_from_pages()
+    all_posts = load_posts_index()
+    posts_by_id = {str(post["id"]): post for post in all_posts if isinstance(post, dict) and "id" in post}
 
     page = 1
     processed = 0
@@ -145,7 +119,13 @@ def sync(max_posts=None, full_resync=False):
             excerpt = re.sub(r'<[^>]+>', '', post.get("excerpt", {}).get("rendered", "")).strip()[:160]
             image = f"https://picsum.photos/seed/{slug}/800/400"
 
-            posts_by_slug[slug] = {"slug": slug, "title": title, "date": date, "excerpt": excerpt}
+            posts_by_id[str(post["id"])] = {
+                "id": post["id"],
+                "slug": slug,
+                "title": title,
+                "date": date,
+                "excerpt": excerpt,
+            }
             with open(BASE_DIR / "data" / f"{slug}.json", "w", encoding="utf-8") as f:
                 json.dump({"content": content, "img": image, "date": date[:10], "excerpt": excerpt, "title": title, "slug": slug}, f)
 
@@ -155,10 +135,10 @@ def sync(max_posts=None, full_resync=False):
             break
         page += 1
 
-    all_posts = sorted(posts_by_slug.values(), key=lambda x: x["date"], reverse=True)
+    all_posts = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
     latest_page = (len(all_posts) + POSTS_PER_PAGE - 1) // POSTS_PER_PAGE
 
-    render_page_files(all_posts)
+    save_posts_index(all_posts)
     generate_sitemap(all_posts)
     save_manifest({"latest_page": latest_page, "last_synced_post_id": max_id})
 
