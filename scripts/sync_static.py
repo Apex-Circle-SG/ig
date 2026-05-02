@@ -3,6 +3,7 @@ import sys
 import requests
 import json
 import re
+import shutil
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 from sitemap import append_sitemap, regenerate_full_sitemap
@@ -167,7 +168,36 @@ def render_index(all_posts):
     # ✅ All frontend changes are permanently preserved
 
 
-def sync(max_posts=None):
+def reset_sync_state():
+    """Reset local state for a full re-import from WordPress."""
+    paths_to_remove = [
+        BASE_DIR / "data" / "buckets",
+        BASE_DIR / "data" / "pending",
+        BASE_DIR / "posts.json",
+        STATE_FILE,
+    ]
+    files_to_remove = [
+        BASE_DIR / "data" / "index.json",
+        BASE_DIR / "data" / "slugmap.json",
+    ]
+
+    for p in paths_to_remove:
+        if p.exists():
+            if p.is_dir():
+                shutil.rmtree(p)
+            else:
+                p.unlink()
+
+    for f in files_to_remove:
+        if f.exists():
+            f.unlink()
+
+
+def sync(max_posts=None, full_resync=False):
+    if full_resync:
+        print("Running full resync: clearing local sync state...")
+        reset_sync_state()
+
     state = load_state()
     last_id = state.get("last_id", 0)
     processed_posts = state.get("posts", {})
@@ -182,7 +212,7 @@ def sync(max_posts=None):
     while True:
         url = f"{POST_API}?per_page={PER_PAGE}&page={page}&_embed&orderby=id&order=desc&status=publish"
         print(f"Fetching page {page}...")
-        r = requests.get(url)
+        r = requests.get(url, timeout=30)
         if r.status_code != 200:
             break
         posts = r.json()
@@ -241,7 +271,14 @@ def sync(max_posts=None):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1].isdigit():
-        sync(int(sys.argv[1]))
-    else:
-        sync()
+    args = sys.argv[1:]
+    max_posts = None
+    full_resync = False
+
+    for arg in args:
+        if arg.isdigit():
+            max_posts = int(arg)
+        elif arg in {"--full", "--reset", "full"}:
+            full_resync = True
+
+    sync(max_posts=max_posts, full_resync=full_resync)
