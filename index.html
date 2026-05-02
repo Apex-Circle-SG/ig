@@ -3,51 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>InsightGinie</title>
+    <title>InsightGinie Archive</title>
     <meta name="description" content="News of Tomorrow">
-    
-    <!-- Open Graph Meta Tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://aloycwl.github.io/ig/">
+
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="InsightGinie Archive">
     <meta property="og:title" content="InsightGinie Archive">
     <meta property="og:description" content="News of Tomorrow">
     <meta property="og:image" content="https://picsum.photos/id/695/1200/630">
-    <meta property="og:url" content="">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="InsightGinie Archive">
-    <meta name="twitter:description" content="News of Tomorrow">
-    <meta name="twitter:image" content="https://picsum.photos/id/695/1200/630">
+    <meta property="og:url" content="https://aloycwl.github.io/ig/">
 
+    <meta name="theme-color" content="#ffffff">
     <link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
-    <style>
-        :root { color-scheme: light; }
-        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
-        .container { max-width: 960px; margin: 0 auto; padding: 1rem; }
-        header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
-        header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
-        img { max-width: 100%; height: auto; border-radius: 4px; }
-        a { color: #0b57d0; text-decoration: none; cursor: pointer; }
-        a:hover { text-decoration: underline; }
-        .post-list { list-style: none; padding: 0; }
-        .post-item { padding: 0.75rem 0; border-bottom: 1px solid #f5f5f5; }
-        .post-title { font-size: 1.1rem; font-weight: 500; }
-        .post-date { font-size: 0.85rem; color: #718096; margin-top: 0.25rem; display: block; }
-        .pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
-        .pagination button { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; border: none; cursor: pointer; }
-        .pagination button:disabled { opacity: 0.4; cursor: default; }
-        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
-        #loading { text-align: center; padding: 2rem; }
-    </style>
+
+    <script type="application/ld+json" id="jsonld-site">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "InsightGinie Archive",
+      "url": "https://aloycwl.github.io/ig/",
+      "description": "News of Tomorrow"
+    }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZSFSG62B8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MZSFSG62B8');
+    </script>
+    <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
 <div id="site-header"></div>
-<div class="container">
+<main class="container" id="main-content">
     <div id="loading">Loading...</div>
     <div id="content"></div>
     <div id="pagination" class="pagination"></div>
-</div>
+</main>
 <div id="site-footer"></div>
 
 <script>
@@ -134,11 +131,5 @@ async function renderPost(slug) {
     document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
 }
 
-function navigate(slug) {
-    const url = slug ? base + '/' + slug : base + '/';
-    history.pushState(null, '', url);
-    handleRoute();
-}
-</script>
 </body>
 </html>
