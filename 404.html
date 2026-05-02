@@ -150,10 +150,23 @@ async function renderPost(slug) {
         }
     }
 
-    // Fallback to page listing if full content not found
+    // ✅ PERMANENT FIX: NO FALLBACKS, NO EXCERPT IN BODY EVER
     if (!post) {
-        const posts = await fetch(base + `/data/${postMeta.page}.json`).then(r => r.json());
-        post = posts.find(p => p.slug === slug);
+        console.error(`Full content for post "${slug}" not found`);
+        // Set correct meta tags even when content fails
+        document.title = postMeta.title + ' | InsightGinie Archive';
+        document.querySelector('meta[name="description"]').content = postMeta.description;
+        
+        // Show proper error - NEVER render description into body content
+        document.getElementById('content').innerHTML = `
+            <h1>${postMeta.title}</h1>
+            <p style="color:#718096; font-size:0.9rem;">${postMeta.date.slice(0,10)}</p>
+            <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 1rem; border-radius: 4px; margin: 2rem 0;">
+                <strong>Loading Error:</strong> Full post content is temporarily unavailable. Please try again later.
+            </div>
+        `;
+        document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
+        return;
     }
 
     // Update document title and meta tags
@@ -171,12 +184,12 @@ async function renderPost(slug) {
     if (ogImage) ogImage.content = `https://picsum.photos/id/${post.id}/1200/630`;
     if (ogUrl) ogUrl.content = window.location.href;
 
-    // Render post
+    // Render post - ONLY use full content, NO FALLBACK TO DESCRIPTION
     document.getElementById('content').innerHTML = `
         <h1>${post.title}</h1>
         <p style="color:#718096; font-size:0.9rem;">${post.date.slice(0,10)}</p>
         <img src="https://picsum.photos/id/${post.id}/960/500" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="">
-        ${post.content || post.description}
+        ${post.content}
     `;
     document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
 }
