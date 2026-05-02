@@ -51,19 +51,17 @@
 <div id="site-footer"></div>
 
 <script>
-let allPosts = [];
 let currentPage = 1;
 let totalPages = 1;
 let base = '';
-const POSTS_PER_PAGE = 100;
 const DEFAULT_IMAGE = 'https://picsum.photos/id/695/1200/630';
 
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
     base = window.location.pathname.split('/').slice(0, -1).join('/');
-    allPosts = await fetch(base + '/posts.json').then(r => r.json());
-    totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+    const manifest = await fetch(base + '/data/manifest.json').then(r => r.json());
+    totalPages = manifest.latest_page;
     const urlPage = Number(new URLSearchParams(window.location.search).get('page'));
     currentPage = Number.isFinite(urlPage) && urlPage >= 1 ? Math.min(urlPage, totalPages) : totalPages;
 
@@ -79,50 +77,31 @@ async function init() {
     document.getElementById('loading').style.display = 'none';
 }
 
-async function handleRoute() {
+function normalizePath() {
     let path = window.location.pathname;
-    // Remove base path prefix if present
-    if (path.startsWith(base)) {
-        path = path.slice(base.length);
-    }
-    // Remove leading slashes
-    while (path.startsWith('/')) {
-        path = path.slice(1);
-    }
-    // Normalize accidental trailing slash on post routes
-    while (path.endsWith('/')) {
-        path = path.slice(0, -1);
-    }
+    if (path.startsWith(base)) path = path.slice(base.length);
+    while (path.startsWith('/')) path = path.slice(1);
+    while (path.endsWith('/')) path = path.slice(0, -1);
+    return path;
+}
 
-    if (!path || path === 'index.html') {
-        renderPage(currentPage);
-    } else {
-        renderPost(path);
-    }
+async function handleRoute() {
+    const path = normalizePath();
+    if (!path || path === 'index.html') return renderPage(currentPage);
+    return renderPost(path);
 }
 
 async function renderPage(pageNum) {
     currentPage = pageNum;
-    const posts = await fetch(base + `/data/${pageNum}.json`).then(r => r.json());
-    
-    // Reset meta tags to site defaults
+    const postsMap = await fetch(base + `/page/${pageNum}/${pageNum}.json`).then(r => r.json());
+
     document.title = 'InsightGinie Archive';
     document.querySelector('meta[name="description"]').content = 'News of Tomorrow';
-    
-    document.querySelector('meta[property="og:title"]').content = 'InsightGinie Archive';
-    document.querySelector('meta[property="og:description"]').content = 'News of Tomorrow';
-    document.querySelector('meta[property="og:image"]').content = DEFAULT_IMAGE;
-    document.querySelector('meta[property="og:url"]').content = window.location.origin + base + '/';
 
     let html = '<ul class="post-list">';
-
-    for (const post of posts) {
-        html += `<li class="post-item">
-            <a onclick="navigate('${post.slug}'); return false;" class="post-title">${post.title}</a>
-            <span class="post-date">${post.date.slice(0,10)}</span>
-        </li>`;
+    for (const [slug, post] of Object.entries(postsMap)) {
+        html += `<li class="post-item"><a onclick="navigate('${slug}'); return false;" class="post-title">${post.title}</a><span class="post-date">${post.date}</span><div>${post.excerpt || ''}</div></li>`;
     }
-
     html += '</ul>';
     document.getElementById('content').innerHTML = html;
 
@@ -135,124 +114,15 @@ async function renderPage(pageNum) {
 
 async function renderPost(slug) {
     slug = decodeURIComponent((slug || '').replace(/^\/+|\/+$/g, ''));
-    const postMeta = allPosts.find(p => p.slug === slug);
-    if (!postMeta) { renderPage(totalPages); return; }
+    const post = await fetch(base + `/data/${slug}.json`).then(r => r.json());
 
-    // Load full post from bucket storage
-    let post;
-    // First check pending bucket
-    try {
-        const pendingRes = await fetch(base + '/data/pending/current.json');
-        if (pendingRes.ok) {
-            const pending = await pendingRes.json();
-            post = pending.posts.find(p => p.slug === slug);
-        }
-    } catch(e) {
-        console.warn('Pending bucket fetch failed, proceeding to sealed buckets:', e);
-    }
-    
-    // If not found in pending check sealed buckets
-    if (!post) {
-        // Look up correct bucket number from slugmap first
-        try {
-            const slugmapRes = await fetch(base + '/data/slugmap.json');
-            if (slugmapRes.ok) {
-                const slugmap = await slugmapRes.json();
-                if (slugmap[slug]) {
-                    const bucketNum = slugmap[slug].toString().padStart(4, '0');
-                    const bucketRes = await fetch(base + `/data/buckets/${bucketNum}.json`);
-                    if (bucketRes.ok) {
-                        const bucket = await bucketRes.json();
-                        post = bucket.posts.find(p => p.slug === slug);
-                    }
-                }
-            }
-        } catch(e) {
-            console.warn('Slugmap lookup failed:', e);
-        }
-    }
-
-    // Final fallback: legacy full-content page file used by older sync output.
-    if (!post && postMeta.page) {
-        try {
-            const fullRes = await fetch(base + `/data/${postMeta.page}.json.full`);
-            if (fullRes.ok) {
-                const fullPosts = await fullRes.json();
-                post = fullPosts.find(p => p.slug === slug);
-            }
-        } catch (e) {
-            console.warn('Legacy full page lookup failed:', e);
-        }
-    }
-
-    // Last-resort fallback: fetch from live WordPress API by slug.
-    if (!post) {
-        try {
-            const wpRes = await fetch(`https://insightginie.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&status=publish`);
-            if (wpRes.ok) {
-                const wpPosts = await wpRes.json();
-                if (wpPosts.length) {
-                    const wp = wpPosts[0];
-                    post = {
-                        slug,
-                        title: wp.title?.rendered || postMeta.title,
-                        date: (wp.date_gmt || postMeta.date || '').slice(0, 10),
-                        content: wp.content?.rendered || '',
-                        image: postMeta.image || DEFAULT_IMAGE,
-                        description: postMeta.description || 'News of Tomorrow'
-                    };
-                }
-            }
-        } catch (e) {
-            console.warn('WordPress fallback lookup failed:', e);
-        }
-    }
-
-    // ✅ ACTUAL FIX: NO SILENT FALLBACK TO TRUNCATED EXCERPT
-    if (!post) {
-        // Show proper loading error instead of displaying truncated 160 character description
-        console.error(`Full content for post "${slug}" not found`);
-        document.getElementById('content').innerHTML = `
-            <h1>${postMeta.title}</h1>
-            <p style="color:#718096; font-size:0.9rem;">${postMeta.date.slice(0,10)}</p>
-            <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 1rem; border-radius: 4px; margin: 2rem 0;">
-                <strong>Loading Error:</strong> Full post content is temporarily unavailable. Please try again later.
-            </div>
-        `;
-        document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
-        return;
-    }
-
-    // Update document title and meta tags
     document.title = post.title + ' | InsightGinie Archive';
-    const postDescription = post.description || postMeta.description || 'News of Tomorrow';
-    document.querySelector('meta[name="description"]').content = postDescription;
-    
-    // Update Open Graph meta tags
-    let ogTitle = document.querySelector('meta[property="og:title"]');
-    let ogDesc = document.querySelector('meta[property="og:description"]');
-    let ogImage = document.querySelector('meta[property="og:image"]');
-    let ogUrl = document.querySelector('meta[property="og:url"]');
-    
-    if (ogTitle) ogTitle.content = post.title;
-    if (ogDesc) ogDesc.content = postDescription;
-    if (ogImage) ogImage.content = post.image || DEFAULT_IMAGE;
-    if (ogUrl) ogUrl.content = window.location.href;
+    document.querySelector('meta[name="description"]').content = post.excerpt || 'News of Tomorrow';
 
-    // Update Twitter Card meta tags
-    let twTitle = document.querySelector('meta[name="twitter:title"]');
-    let twDesc = document.querySelector('meta[name="twitter:description"]');
-    let twImage = document.querySelector('meta[name="twitter:image"]');
-    
-    if (twTitle) twTitle.content = post.title;
-    if (twDesc) twDesc.content = postDescription;
-    if (twImage) twImage.content = post.image || DEFAULT_IMAGE;
-
-    // Render post
     document.getElementById('content').innerHTML = `
         <h1>${post.title}</h1>
-        <p style="color:#718096; font-size:0.9rem;">${post.date.slice(0,10)}</p>
-        <img src="${post.image || DEFAULT_IMAGE}" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="">
+        <p style="color:#718096; font-size:0.9rem;">${post.date}</p>
+        <img src="${post.img || DEFAULT_IMAGE}" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="">
         ${post.content}
     `;
     document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
