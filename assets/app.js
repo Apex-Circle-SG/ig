@@ -1,6 +1,8 @@
 let currentPage = 1;
 let totalPages = 1;
 let base = '';
+let postsIndex = [];
+const POSTS_PER_PAGE = 100;
 const DEFAULT_IMAGE = 'https://picsum.photos/id/695/1200/630';
 const SITE_NAME = 'InsightGinie Archive';
 const SITE_DESC = 'News of Tomorrow';
@@ -19,6 +21,7 @@ async function init() {
   base = window.location.pathname.split('/').slice(0, -1).join('/');
   const manifest = await fetch(base + '/manifest.json').then(r => r.json());
   totalPages = manifest.latest_page || 1;
+  postsIndex = await fetch(base + '/posts.json').then(r => r.json());
 
   const params = new URLSearchParams(window.location.search);
   const urlPage = Number(params.get('page'));
@@ -67,7 +70,8 @@ async function handleRoute() {
 
 async function renderPage(pageNum) {
   currentPage = pageNum;
-  const postsMap = await fetch(base + `/page/${pageNum}.json`).then(r => r.json());
+  const start = (pageNum - 1) * POSTS_PER_PAGE;
+  const pagePosts = postsIndex.slice(start, start + POSTS_PER_PAGE);
 
   setSeo({
     title: SITE_NAME,
@@ -84,8 +88,8 @@ async function renderPage(pageNum) {
   });
 
   let html = '<ul class="post-list">';
-  for (const [slug, post] of Object.entries(postsMap)) {
-    html += `<li class="post-item"><a href="${base}/${slug}" onclick="navigate('${slug}'); return false;" class="post-title">${post.title}</a><span class="post-date">${post.date}</span><div>${post.excerpt || ''}</div></li>`;
+  for (const post of pagePosts) {
+    html += `<li class="post-item"><a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;" class="post-title">${post.title}</a><span class="post-date">${(post.date || '').slice(0, 10)}</span><div>${post.excerpt || ''}</div></li>`;
   }
   html += '</ul>';
   document.getElementById('content').innerHTML = html;

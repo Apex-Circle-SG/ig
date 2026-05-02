@@ -67,5 +67,4 @@ Content copyright respective authors.
 - Listing data is sharded into `page/1.json`, `page/2.json`, ... with up to 100 records per file.
 - Frontend (`assets/app.js`) must fetch only the current `page/{n}.json` file for pagination (no full-site `posts.json` index).
 - Slug/file handling must preserve URL-encoded slugs (for example `%cf%83`) and use robust fallback fetch logic for encoded/decoded route variants.
-- Sync currently fetches WordPress posts in ascending ID order (`order=asc`) by default (temporary preference).
 - Keep this contract stable across future refactors to avoid reworking pagination/sync behavior in new containers.
