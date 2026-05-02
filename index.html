@@ -89,6 +89,10 @@ async function handleRoute() {
     while (path.startsWith('/')) {
         path = path.slice(1);
     }
+    // Normalize accidental trailing slash on post routes
+    while (path.endsWith('/')) {
+        path = path.slice(0, -1);
+    }
 
     if (!path || path === 'index.html') {
         renderPage(currentPage);
@@ -130,6 +134,7 @@ async function renderPage(pageNum) {
 }
 
 async function renderPost(slug) {
+    slug = decodeURIComponent((slug || '').replace(/^\/+|\/+$/g, ''));
     const postMeta = allPosts.find(p => p.slug === slug);
     if (!postMeta) { renderPage(totalPages); return; }
 
@@ -177,6 +182,29 @@ async function renderPost(slug) {
             }
         } catch (e) {
             console.warn('Legacy full page lookup failed:', e);
+        }
+    }
+
+    // Last-resort fallback: fetch from live WordPress API by slug.
+    if (!post) {
+        try {
+            const wpRes = await fetch(`https://insightginie.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&status=publish`);
+            if (wpRes.ok) {
+                const wpPosts = await wpRes.json();
+                if (wpPosts.length) {
+                    const wp = wpPosts[0];
+                    post = {
+                        slug,
+                        title: wp.title?.rendered || postMeta.title,
+                        date: (wp.date_gmt || postMeta.date || '').slice(0, 10),
+                        content: wp.content?.rendered || '',
+                        image: postMeta.image || DEFAULT_IMAGE,
+                        description: postMeta.description || 'News of Tomorrow'
+                    };
+                }
+            }
+        } catch (e) {
+            console.warn('WordPress fallback lookup failed:', e);
         }
     }
 
