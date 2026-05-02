@@ -56,6 +56,7 @@ let currentPage = 1;
 let totalPages = 1;
 let base = '';
 const POSTS_PER_PAGE = 100;
+const DEFAULT_IMAGE = 'https://picsum.photos/id/695/1200/630';
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -63,7 +64,8 @@ async function init() {
     base = window.location.pathname.split('/').slice(0, -1).join('/');
     allPosts = await fetch(base + '/posts.json').then(r => r.json());
     totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
-    currentPage = totalPages; // Always start on newest page
+    const urlPage = Number(new URLSearchParams(window.location.search).get('page'));
+    currentPage = Number.isFinite(urlPage) && urlPage >= 1 ? Math.min(urlPage, totalPages) : totalPages;
 
     const [header, footer] = await Promise.all([
         fetch(base + '/templates/header.html').then(r => r.text()),
@@ -87,6 +89,10 @@ async function handleRoute() {
     while (path.startsWith('/')) {
         path = path.slice(1);
     }
+    // Normalize accidental trailing slash on post routes
+    while (path.endsWith('/')) {
+        path = path.slice(0, -1);
+    }
 
     if (!path || path === 'index.html') {
         renderPage(currentPage);
@@ -105,10 +111,10 @@ async function renderPage(pageNum) {
     
     document.querySelector('meta[property="og:title"]').content = 'InsightGinie Archive';
     document.querySelector('meta[property="og:description"]').content = 'News of Tomorrow';
-    document.querySelector('meta[property="og:image"]').content = 'https://picsum.photos/id/695/1200/630';
+    document.querySelector('meta[property="og:image"]').content = DEFAULT_IMAGE;
     document.querySelector('meta[property="og:url"]').content = window.location.origin + base + '/';
 
-    let html = '<h1>InsightGinie Archive</h1><p style="color:#718096;">News of Tomorrow</p><ul class="post-list">';
+    let html = '<ul class="post-list">';
 
     for (const post of posts) {
         html += `<li class="post-item">
@@ -128,6 +134,7 @@ async function renderPage(pageNum) {
 }
 
 async function renderPost(slug) {
+    slug = decodeURIComponent((slug || '').replace(/^\/+|\/+$/g, ''));
     const postMeta = allPosts.find(p => p.slug === slug);
     if (!postMeta) { renderPage(totalPages); return; }
 
@@ -165,6 +172,42 @@ async function renderPost(slug) {
         }
     }
 
+    // Final fallback: legacy full-content page file used by older sync output.
+    if (!post && postMeta.page) {
+        try {
+            const fullRes = await fetch(base + `/data/${postMeta.page}.json.full`);
+            if (fullRes.ok) {
+                const fullPosts = await fullRes.json();
+                post = fullPosts.find(p => p.slug === slug);
+            }
+        } catch (e) {
+            console.warn('Legacy full page lookup failed:', e);
+        }
+    }
+
+    // Last-resort fallback: fetch from live WordPress API by slug.
+    if (!post) {
+        try {
+            const wpRes = await fetch(`https://insightginie.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&status=publish`);
+            if (wpRes.ok) {
+                const wpPosts = await wpRes.json();
+                if (wpPosts.length) {
+                    const wp = wpPosts[0];
+                    post = {
+                        slug,
+                        title: wp.title?.rendered || postMeta.title,
+                        date: (wp.date_gmt || postMeta.date || '').slice(0, 10),
+                        content: wp.content?.rendered || '',
+                        image: postMeta.image || DEFAULT_IMAGE,
+                        description: postMeta.description || 'News of Tomorrow'
+                    };
+                }
+            }
+        } catch (e) {
+            console.warn('WordPress fallback lookup failed:', e);
+        }
+    }
+
     // ✅ ACTUAL FIX: NO SILENT FALLBACK TO TRUNCATED EXCERPT
     if (!post) {
         // Show proper loading error instead of displaying truncated 160 character description
@@ -182,7 +225,8 @@ async function renderPost(slug) {
 
     // Update document title and meta tags
     document.title = post.title + ' | InsightGinie Archive';
-    document.querySelector('meta[name="description"]').content = post.description;
+    const postDescription = post.description || postMeta.description || 'News of Tomorrow';
+    document.querySelector('meta[name="description"]').content = postDescription;
     
     // Update Open Graph meta tags
     let ogTitle = document.querySelector('meta[property="og:title"]');
@@ -191,8 +235,8 @@ async function renderPost(slug) {
     let ogUrl = document.querySelector('meta[property="og:url"]');
     
     if (ogTitle) ogTitle.content = post.title;
-    if (ogDesc) ogDesc.content = post.description;
-    if (ogImage) ogImage.content = `https://picsum.photos/id/${post.id}/1200/630`;
+    if (ogDesc) ogDesc.content = postDescription;
+    if (ogImage) ogImage.content = post.image || DEFAULT_IMAGE;
     if (ogUrl) ogUrl.content = window.location.href;
 
     // Update Twitter Card meta tags
@@ -201,14 +245,14 @@ async function renderPost(slug) {
     let twImage = document.querySelector('meta[name="twitter:image"]');
     
     if (twTitle) twTitle.content = post.title;
-    if (twDesc) twDesc.content = post.description;
-    if (twImage) twImage.content = `https://picsum.photos/id/${post.id}/1200/630`;
+    if (twDesc) twDesc.content = postDescription;
+    if (twImage) twImage.content = post.image || DEFAULT_IMAGE;
 
     // Render post
     document.getElementById('content').innerHTML = `
         <h1>${post.title}</h1>
         <p style="color:#718096; font-size:0.9rem;">${post.date.slice(0,10)}</p>
-        <img src="https://picsum.photos/id/${post.id}/960/500" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="">
+        <img src="${post.image || DEFAULT_IMAGE}" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="">
         ${post.content}
     `;
     document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
