@@ -60,10 +60,16 @@ document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
     base = window.location.pathname.split('/').slice(0, -1).join('/');
-    const manifest = await fetch(base + '/data/manifest.json').then(r => r.json());
+    const manifest = await fetch(base + '/manifest.json').then(r => r.json());
     totalPages = manifest.latest_page;
-    const urlPage = Number(new URLSearchParams(window.location.search).get('page'));
+    const params = new URLSearchParams(window.location.search);
+    const urlPage = Number(params.get('page'));
     currentPage = Number.isFinite(urlPage) && urlPage >= 1 ? Math.min(urlPage, totalPages) : totalPages;
+
+    const redirectedPath = params.get('route');
+    if (redirectedPath) {
+        history.replaceState(null, '', base + '/' + redirectedPath.replace(/^\/+/, ''));
+    }
 
     const [header, footer] = await Promise.all([
         fetch(base + '/templates/header.html').then(r => r.text()),
@@ -93,7 +99,7 @@ async function handleRoute() {
 
 async function renderPage(pageNum) {
     currentPage = pageNum;
-    const postsMap = await fetch(base + `/page/${pageNum}/${pageNum}.json`).then(r => r.json());
+    const postsMap = await fetch(base + `/page/${pageNum}.json`).then(r => r.json());
 
     document.title = 'InsightGinie Archive';
     document.querySelector('meta[name="description"]').content = 'News of Tomorrow';
