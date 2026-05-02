@@ -96,7 +96,7 @@ def sync(max_posts=None, full_resync=False):
 
     print(f"Starting sync. Last synced post ID: {last_id}")
     while True:
-        url = f"{POST_API}?per_page={PER_PAGE}&page={page}&_embed&orderby=id&order=desc&status=publish"
+        url = f"{POST_API}?per_page={PER_PAGE}&page={page}&_embed&orderby=id&order=asc&status=publish"
         r = requests.get(url, timeout=30)
         if r.status_code != 200:
             break
