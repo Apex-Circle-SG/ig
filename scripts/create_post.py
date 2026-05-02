@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import hashlib
 from datetime import datetime
 from pathlib import Path
 from memory import memory
@@ -95,13 +96,18 @@ def create_post(title, slug, date, content, author=None):
             return False
 
         # New post object
+        # Stable pseudo-random image id based on slug/date so each post gets variety,
+        # while reruns remain deterministic.
+        image_seed = f"{slug}:{date[:10]}".encode("utf-8")
+        image_id = int(hashlib.sha256(image_seed).hexdigest(), 16) % 1084
+
         post = {
             "id": index["total_posts"] + 1,
             "slug": slug,
             "title": title,
             "date": date[:10],
             "content": content,
-            "image": f"https://picsum.photos/id/{index['total_posts'] % 1084}/800/400"
+            "image": f"https://picsum.photos/id/{image_id}/800/400"
         }
 
         if author:
