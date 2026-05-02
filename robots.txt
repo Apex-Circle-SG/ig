@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aloycwl.github.io/ig/sitemap.xml
