@@ -27,11 +27,6 @@ async function init() {
   const urlPage = Number(params.get('page'));
   currentPage = Number.isFinite(urlPage) && urlPage >= 1 ? Math.min(urlPage, totalPages) : totalPages;
 
-  const redirectedPath = params.get('route');
-  if (redirectedPath) {
-    history.replaceState(null, '', base + '/' + redirectedPath.replace(/^\/+/, ''));
-  }
-
   const [header, footer] = await Promise.all([
     fetch(base + '/templates/header.html').then(r => r.text()),
     fetch(base + '/templates/footer.html').then(r => r.text())
@@ -106,15 +101,38 @@ async function renderPage(pageNum) {
   document.getElementById('pagination').innerHTML = phtml;
 }
 
+async function fetchPostBySlug(slug) {
+  const clean = (slug || '').replace(/^\/+|\/+$/g, '');
+  const candidates = Array.from(new Set([
+    clean,
+    encodeURI(clean),
+    (() => {
+      try {
+        return encodeURI(decodeURIComponent(clean));
+      } catch (_) {
+        return clean;
+      }
+    })()
+  ]));
+
+  for (const candidate of candidates) {
+    const response = await fetch(base + `/data/${candidate}.json`);
+    if (response.ok) {
+      const post = await response.json();
+      return { post, resolvedSlug: candidate };
+    }
+  }
+  throw new Error(`Post not found for slug: ${slug}`);
+}
+
 async function renderPost(slug) {
-  slug = decodeURIComponent((slug || '').replace(/^\/+|\/+$/g, ''));
-  const post = await fetch(base + `/data/${slug}.json`).then(r => r.json());
+  const { post, resolvedSlug } = await fetchPostBySlug(slug);
 
   setSeo({
     title: `${post.title} | ${SITE_NAME}`,
     description: post.excerpt || SITE_DESC,
     image: post.img || DEFAULT_IMAGE,
-    url: absoluteUrl(slug),
+    url: absoluteUrl(resolvedSlug),
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Article',
@@ -123,7 +141,7 @@ async function renderPost(slug) {
       dateModified: post.date,
       image: [post.img || DEFAULT_IMAGE],
       description: post.excerpt || SITE_DESC,
-      mainEntityOfPage: absoluteUrl(slug)
+      mainEntityOfPage: absoluteUrl(resolvedSlug)
     }
   });
 
