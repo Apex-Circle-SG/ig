@@ -6,9 +6,10 @@ set +a
 
 /usr/bin/python3 /home/openclaw/insightginie/scripts/sync_wordpress.py
 /usr/bin/python3 /home/openclaw/insightginie/scripts/sync_notion.py
+/usr/bin/python3 /home/openclaw/insightginie/scripts/generate_static_pages.py
 
 cd /home/openclaw/insightginie || exit 1
 
 git add .
 git commit -m "auto sync $(date)" || true
-git push
+git push origin main

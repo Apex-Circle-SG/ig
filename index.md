@@ -67,7 +67,7 @@ layout: default
 </style>
 
 <div class="archive-header">
-  <h1>InsightGinie Archive</h1>
+  <h1>InsightGinie</h1>
   <p>News of Tomorrow</p>
 </div>
 

@@ -1,4 +1,4 @@
-# InsightGinie Archive
+# InsightGinie
 
 Public static mirror/archive of https://insightginie.com hosted on GitHub Pages.
 

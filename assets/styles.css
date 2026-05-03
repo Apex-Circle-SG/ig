@@ -1,40 +1,101 @@
-:root { color-scheme: light; }
-body { margin: 0; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #111; background: #fff; }
-.container { max-width: 960px; margin: 0 auto; padding: 1rem; }
-header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 2rem; }
-header a { color: #111; text-decoration: none; font-weight: 600; font-size: 1.25rem; }
-img { max-width: 100%; height: auto; border-radius: 4px; }
-a { color: #0b57d0; text-decoration: none; cursor: pointer; }
-a:hover { text-decoration: underline; }
-.post-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  padding: 0;
+/* We are using Tailwind CSS via CDN now.
+   This file is kept for any specific overrides that Tailwind doesn't cover easily. */
+
+:root {
+  color-scheme: light;
 }
-@media (max-width: 768px) {
-  .post-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
+
+body {
+  margin: 0;
+  /* Fallback if tailwind fails to load */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background-color: #f9fafb;
 }
-@media (max-width: 480px) {
-  .post-list {
-    grid-template-columns: 1fr; /* Optional: 1 col on very small screens, though requested 2 */
-  }
+
+/* Ensure images within markdown content are responsive */
+article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
-.post-item {
-  border: 1px solid #eaeaea;
-  border-radius: 8px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  background: #fafafa;
+
+/* Typography styles for markdown content */
+article h1, article h2, article h3, article h4, article h5, article h6 {
+  color: #111827;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.3333333;
 }
-.post-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; display: block; }
-.post-date { font-size: 0.85rem; color: #718096; margin-bottom: 0.75rem; display: block; }
-.post-excerpt { font-size: 0.95rem; color: #4a5568; flex-grow: 1; }
-.pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
-.pagination button { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; border: none; cursor: pointer; }
-.pagination button:disabled { opacity: 0.4; cursor: default; }
-.footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
-#loading { text-align: center; padding: 2rem; }
+
+article h2 { font-size: 1.5em; }
+article h3 { font-size: 1.25em; }
+
+article p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  color: #374151;
+  line-height: 1.75;
+}
+
+article a {
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+article a:hover {
+  color: #1d4ed8;
+}
+
+article ul {
+  list-style-type: disc;
+  padding-left: 1.625em;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  color: #374151;
+}
+
+article ol {
+  list-style-type: decimal;
+  padding-left: 1.625em;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  color: #374151;
+}
+
+article li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+article blockquote {
+  font-weight: 500;
+  font-style: italic;
+  color: #111827;
+  border-left-width: 0.25rem;
+  border-left-color: #e5e7eb;
+  quotes: "\201C""\201D""\2018""\2019";
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  padding-left: 1em;
+}
+
+/* Loader */
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

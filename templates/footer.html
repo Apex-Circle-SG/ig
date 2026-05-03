@@ -1,6 +1,22 @@
-<div class="container">
-  <div class="footer">
-    <p>Official site: <a href="https://insightginie.com">insightginie.com</a></p>
-    <p>This is a public mirror archive.</p>
+<footer class="bg-gray-50 border-t border-gray-200 mt-12 py-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="md:flex md:items-center md:justify-between">
+      <div class="flex justify-center md:justify-start space-x-6 md:order-2">
+        <a href="https://insightginie.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-500">
+          <span class="sr-only">Original Site</span>
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+      <div class="mt-8 md:mt-0 md:order-1">
+        <p class="text-center text-base text-gray-400">
+          &copy; <span id="current-year"></span> InsightGinie. All rights reserved.
+        </p>
+      </div>
+    </div>
   </div>
-</div>
+</footer>
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
