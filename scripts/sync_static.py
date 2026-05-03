@@ -169,16 +169,18 @@ def sync(max_posts=None, full_resync=False):
 
             max_id = max(max_id, post["id"])
             processed += 1
+
+            print(f"Synced post {post['id']}: {title}")
+
+            all_posts_current = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
+            latest_page = save_paged_posts(all_posts_current)
+            generate_sitemap(all_posts_current)
+            save_manifest({"latest_page": latest_page, "last_synced_post_id": max_id})
         if stop:
             break
         page += 1
 
-    # Sort for sitemap generation
     all_posts = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
-
-    latest_page = save_paged_posts(all_posts)
-    generate_sitemap(all_posts)
-    save_manifest({"latest_page": latest_page, "last_synced_post_id": max_id})
 
     print(f"Done. Processed {processed} new posts. Total posts: {len(all_posts)}")
 
