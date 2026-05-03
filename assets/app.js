@@ -1,7 +1,7 @@
 let currentPage = 1;
 let totalPages = 1;
 let base = '';
-let postsIndex = [];
+let pagePosts = [];
 const POSTS_PER_PAGE = 100;
 const DEFAULT_IMAGE = 'https://picsum.photos/id/695/1200/630';
 const SITE_NAME = 'InsightGinie Archive';
@@ -21,7 +21,6 @@ async function init() {
   base = window.location.pathname.split('/').slice(0, -1).join('/');
   const manifest = await fetch(base + '/manifest.json').then(r => r.json());
   totalPages = manifest.latest_page || 1;
-  postsIndex = await fetch(base + '/posts.json').then(r => r.json());
 
   const params = new URLSearchParams(window.location.search);
   const urlPage = Number(params.get('page'));
@@ -64,14 +63,21 @@ function setSeo({ title, description, image, url, jsonLd }) {
 
 async function handleRoute() {
   const path = normalizePath();
+  const params = new URLSearchParams(window.location.search);
+  const urlPage = Number(params.get('page'));
+  currentPage = Number.isFinite(urlPage) && urlPage >= 1 ? Math.min(urlPage, totalPages) : totalPages;
+
   if (!path || path === 'index.html') return renderPage(currentPage);
   return renderPost(path);
 }
 
 async function renderPage(pageNum) {
   currentPage = pageNum;
-  const start = (pageNum - 1) * POSTS_PER_PAGE;
-  const pagePosts = postsIndex.slice(start, start + POSTS_PER_PAGE);
+  try {
+    pagePosts = await fetch(base + `/page/${pageNum}.json`).then(r => r.json());
+  } catch (e) {
+    pagePosts = [];
+  }
 
   setSeo({
     title: SITE_NAME,
@@ -87,17 +93,24 @@ async function renderPage(pageNum) {
     }
   });
 
-  let html = '<ul class="post-list">';
+  let html = '<div class="post-list">';
   for (const post of pagePosts) {
-    html += `<li class="post-item"><a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;" class="post-title">${post.title}</a><span class="post-date">${(post.date || '').slice(0, 10)}</span><div>${post.excerpt || ''}</div></li>`;
+    const timeAgo = dayjs(post.date).fromNow();
+    html += `<div class="post-item">
+      <a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;" class="post-title">${post.title}</a>
+      <span class="post-date">${timeAgo}</span>
+      <div class="post-excerpt">${post.excerpt || ''}</div>
+    </div>`;
   }
-  html += '</ul>';
+  html += '</div>';
   document.getElementById('content').innerHTML = html;
 
   let phtml = '';
-  if (currentPage > 1) phtml += `<button onclick="renderPage(${currentPage - 1})">&laquo; Previous</button>`;
-  phtml += `<span>Page ${currentPage} / ${totalPages}</span>`;
-  if (currentPage < totalPages) phtml += `<button onclick="renderPage(${currentPage + 1})">Next &raquo;</button>`;
+  // Since chunk N is the newest, "Previous" means going to older posts (N-1)
+  // But standard UI usually has "Older" or "Next Page" pointing to N-1
+  if (currentPage < totalPages) phtml += `<button onclick="renderPage(${currentPage + 1})">&laquo; Newer Posts</button>`;
+  phtml += `<span>Page ${totalPages - currentPage + 1} / ${totalPages}</span>`;
+  if (currentPage > 1) phtml += `<button onclick="renderPage(${currentPage - 1})">Older Posts &raquo;</button>`;
   document.getElementById('pagination').innerHTML = phtml;
 }
 
