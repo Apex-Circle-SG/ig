@@ -29,23 +29,61 @@ def load_manifest():
     return {"latest_page": 0, "last_synced_post_id": 0}
 
 def load_posts_index():
-    if POSTS_FILE.exists() and POSTS_FILE.stat().st_size > 0:
+    # Load all posts by iterating through page/*.json
+    all_posts = []
+    page_dir = BASE_DIR / "page"
+    if page_dir.exists():
+        for file in sorted(page_dir.glob("*.json"), key=lambda x: int(x.stem)):
+            try:
+                with open(file, encoding="utf-8") as f:
+                    data = json.load(f)
+                    if isinstance(data, list):
+                        all_posts.extend(data)
+            except (json.JSONDecodeError, ValueError):
+                pass
+    elif POSTS_FILE.exists() and POSTS_FILE.stat().st_size > 0:
+        # Fallback to old posts.json format if it exists during migration
         try:
             with open(POSTS_FILE, encoding="utf-8") as f:
                 data = json.load(f)
                 if isinstance(data, list):
-                    return data
+                    all_posts = data
         except json.JSONDecodeError:
             pass
-    return []
+    return all_posts
 
 def save_manifest(manifest):
     with open(MANIFEST_FILE, "w", encoding="utf-8") as f:
         json.dump(manifest, f)
 
-def save_posts_index(posts):
-    with open(POSTS_FILE, "w", encoding="utf-8") as f:
-        json.dump(posts, f)
+def save_paged_posts(all_posts):
+    page_dir = BASE_DIR / "page"
+    page_dir.mkdir(exist_ok=True)
+
+    # Sort posts chronologically (oldest first)
+    all_posts_chrono = sorted(all_posts, key=lambda x: x["date"])
+
+    total_posts = len(all_posts_chrono)
+    total_pages = (total_posts + POSTS_PER_PAGE - 1) // POSTS_PER_PAGE
+    if total_pages == 0:
+        total_pages = 1
+
+    for page_num in range(1, total_pages + 1):
+        start_idx = (page_num - 1) * POSTS_PER_PAGE
+        end_idx = start_idx + POSTS_PER_PAGE
+        chunk = all_posts_chrono[start_idx:end_idx]
+
+        # Sort newest-first inside the chunk
+        chunk.sort(key=lambda x: x["date"], reverse=True)
+
+        with open(page_dir / f"{page_num}.json", "w", encoding="utf-8") as f:
+            json.dump(chunk, f)
+
+    # Clean up old posts.json if it exists
+    if POSTS_FILE.exists():
+        POSTS_FILE.unlink()
+
+    return total_pages
 
 def sanitize(content):
     content = re.sub(r"<script.*?>.*?</script>", "", content, flags=re.DOTALL)
@@ -135,10 +173,10 @@ def sync(max_posts=None, full_resync=False):
             break
         page += 1
 
+    # Sort for sitemap generation
     all_posts = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
-    latest_page = (len(all_posts) + POSTS_PER_PAGE - 1) // POSTS_PER_PAGE
 
-    save_posts_index(all_posts)
+    latest_page = save_paged_posts(all_posts)
     generate_sitemap(all_posts)
     save_manifest({"latest_page": latest_page, "last_synced_post_id": max_id})
 
