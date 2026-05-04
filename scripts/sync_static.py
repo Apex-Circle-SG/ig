@@ -152,6 +152,7 @@ def sync(max_posts=None, full_resync=False):
                     break
 
                 title = post["title"]["rendered"]
+                print(f"Syncing post: {title}")
                 slug = post["slug"]
                 date = post["date_gmt"] + "+00:00"
                 content = sanitize(post["content"]["rendered"])
