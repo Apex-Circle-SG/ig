@@ -133,54 +133,58 @@ def sync(max_posts=None, full_resync=False):
     max_id = last_id
 
     print(f"Starting sync. Last synced post ID: {last_id}")
-    while True:
-        url = f"{POST_API}?per_page={PER_PAGE}&page={page}&_embed&orderby=id&order=asc&status=publish"
-        r = requests.get(url, timeout=30)
-        if r.status_code != 200:
-            break
-        posts = r.json()
-        if not posts:
-            break
-
-        for post in posts:
-            if max_posts is not None and processed >= max_posts:
-                stop = True
+    try:
+        while True:
+            url = f"{POST_API}?per_page={PER_PAGE}&page={page}&_embed&orderby=id&order=asc&status=publish"
+            r = requests.get(url, timeout=30)
+            if r.status_code != 200:
                 break
-            if post["id"] <= last_id:
-                stop = True
+            posts = r.json()
+            if not posts:
                 break
 
-            title = post["title"]["rendered"]
-            slug = post["slug"]
-            date = post["date_gmt"] + "+00:00"
-            content = sanitize(post["content"]["rendered"])
-            excerpt = re.sub(r'<[^>]+>', '', post.get("excerpt", {}).get("rendered", "")).strip()[:160]
-            image = f"https://picsum.photos/seed/{slug}/800/400"
+            for post in posts:
+                if max_posts is not None and processed >= max_posts:
+                    stop = True
+                    break
+                if post["id"] <= last_id:
+                    stop = True
+                    break
 
-            posts_by_id[str(post["id"])] = {
-                "id": post["id"],
-                "slug": slug,
-                "title": title,
-                "date": date,
-                "excerpt": excerpt,
-            }
-            with open(BASE_DIR / "data" / f"{slug}.json", "w", encoding="utf-8") as f:
-                json.dump({"content": content, "img": image, "date": date[:10], "excerpt": excerpt, "title": title, "slug": slug}, f)
+                title = post["title"]["rendered"]
+                slug = post["slug"]
+                date = post["date_gmt"] + "+00:00"
+                content = sanitize(post["content"]["rendered"])
+                excerpt = re.sub(r'<[^>]+>', '', post.get("excerpt", {}).get("rendered", "")).strip()[:160]
+                image = f"https://picsum.photos/seed/{slug}/800/400"
 
-            max_id = max(max_id, post["id"])
-            processed += 1
-        if stop:
-            break
-        page += 1
+                posts_by_id[str(post["id"])] = {
+                    "id": post["id"],
+                    "slug": slug,
+                    "title": title,
+                    "date": date,
+                    "excerpt": excerpt,
+                }
+                with open(BASE_DIR / "data" / f"{slug}.json", "w", encoding="utf-8") as f:
+                    json.dump({"content": content, "img": image, "date": date[:10], "excerpt": excerpt, "title": title, "slug": slug}, f)
 
-    # Sort for sitemap generation
-    all_posts = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
+                max_id = max(max_id, post["id"])
+                processed += 1
+            if stop:
+                break
+            page += 1
+    except (KeyboardInterrupt, Exception) as e:
+        print(f"\nSync interrupted or failed: {e}")
+        print("Consolidating partial progress...")
+    finally:
+        # Sort for sitemap generation
+        all_posts = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
 
-    latest_page = save_paged_posts(all_posts)
-    generate_sitemap(all_posts)
-    save_manifest({"latest_page": latest_page, "last_synced_post_id": max_id})
+        latest_page = save_paged_posts(all_posts)
+        generate_sitemap(all_posts)
+        save_manifest({"latest_page": latest_page, "last_synced_post_id": max_id})
 
-    print(f"Done. Processed {processed} new posts. Total posts: {len(all_posts)}")
+        print(f"Done. Processed {processed} new posts. Total posts: {len(all_posts)}")
 
 if __name__ == "__main__":
     args = sys.argv[1:]
