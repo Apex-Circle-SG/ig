@@ -26,6 +26,11 @@ async function init() {
   const urlPage = Number(params.get('page'));
   currentPage = Number.isFinite(urlPage) && urlPage >= 1 ? Math.min(urlPage, totalPages) : totalPages;
 
+  const routeParam = params.get('route');
+  if (routeParam) {
+    history.replaceState(null, '', base + '/' + routeParam);
+  }
+
   const [header, footer] = await Promise.all([
     fetch(base + '/templates/header.html').then(r => r.text()),
     fetch(base + '/templates/footer.html').then(r => r.text())
@@ -96,13 +101,19 @@ async function renderPage(pageNum) {
   let html = '<div class="post-list">';
   for (const post of pagePosts) {
     const timeAgo = dayjs(post.date).fromNow();
+    let displayExcerpt = post.excerpt || '';
+    if (displayExcerpt.length > 3) {
+      displayExcerpt = displayExcerpt.slice(0, -3) + '...';
+    } else if (displayExcerpt.length > 0) {
+      displayExcerpt = displayExcerpt + '...';
+    }
     html += `<div class="post-item">
       <a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;">
         <img src="https://picsum.photos/seed/${post.slug}/200/100" class="post-thumb" alt="${post.title}" loading="lazy">
       </a>
       <a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;" class="post-title">${post.title}</a>
       <span class="post-date">${timeAgo}</span>
-      <div class="post-excerpt">${post.excerpt || ''}</div>
+      <div class="post-excerpt">${displayExcerpt}</div>
     </div>`;
   }
   html += '</div>';
