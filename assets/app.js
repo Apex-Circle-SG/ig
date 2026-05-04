@@ -97,6 +97,9 @@ async function renderPage(pageNum) {
   for (const post of pagePosts) {
     const timeAgo = dayjs(post.date).fromNow();
     html += `<div class="post-item">
+      <a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;">
+        <img src="https://picsum.photos/seed/${post.slug}/200/100" class="post-thumb" alt="${post.title}" loading="lazy">
+      </a>
       <a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;" class="post-title">${post.title}</a>
       <span class="post-date">${timeAgo}</span>
       <div class="post-excerpt">${post.excerpt || ''}</div>
@@ -141,10 +144,12 @@ async function fetchPostBySlug(slug) {
 async function renderPost(slug) {
   const { post, resolvedSlug } = await fetchPostBySlug(slug);
 
+  const postImageUrl = `https://picsum.photos/seed/${resolvedSlug}/800/400`;
+
   setSeo({
     title: `${post.title} | ${SITE_NAME}`,
     description: post.excerpt || SITE_DESC,
-    image: post.img || DEFAULT_IMAGE,
+    image: postImageUrl,
     url: absoluteUrl(resolvedSlug),
     jsonLd: {
       '@context': 'https://schema.org',
@@ -152,7 +157,7 @@ async function renderPost(slug) {
       headline: post.title,
       datePublished: post.date,
       dateModified: post.date,
-      image: [post.img || DEFAULT_IMAGE],
+      image: [postImageUrl],
       description: post.excerpt || SITE_DESC,
       mainEntityOfPage: absoluteUrl(resolvedSlug)
     }
@@ -162,7 +167,7 @@ async function renderPost(slug) {
         <article>
             <h1>${post.title}</h1>
             <p style="color:#718096; font-size:0.9rem;">${post.date}</p>
-            <img src="${post.img || DEFAULT_IMAGE}" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="${post.title}">
+            <img src="${postImageUrl}" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="${post.title}">
             ${post.content}
         </article>
     `;
