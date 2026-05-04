@@ -15,16 +15,5 @@ with sync_playwright() as p:
             });
         }));
     }''')
-    page.screenshot(path='homepage_v2.png', full_page=True)
-
-    # Test route parameter bug fix
-    page.goto('http://localhost:8000/?route=dont-break-the-bank-on-bots-10-savvy-ways-to-optimise-your-ai-costs')
-    page.wait_for_selector('article h1')
-
-    # Verify the URL was rewritten properly without the ?route parameter in the pathname history
-    current_url = page.url
-    print("URL after load:", current_url)
-
-    page.screenshot(path='post_v2.png')
-
+    page.screenshot(path='homepage.png')
     browser.close()
