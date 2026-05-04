@@ -109,7 +109,7 @@ async function renderPage(pageNum) {
     }
     html += `<div class="post-item">
       <a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;">
-        <img src="https://picsum.photos/seed/${post.slug}/200/100" class="post-thumb" alt="${post.title}" loading="lazy">
+        <img src="https://picsum.photos/seed/${post.slug}/100/50" class="post-thumb" alt="${post.title}" loading="lazy">
       </a>
       <a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;" class="post-title">${post.title}</a>
       <span class="post-date">${timeAgo}</span>

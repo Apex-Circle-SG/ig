@@ -17,7 +17,7 @@ body {
   background: var(--bg-color);
   -webkit-font-smoothing: antialiased;
 }
-.container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
 header { border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 3rem; display: flex; align-items: center; justify-content: space-between; }
 header a { color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 1.5rem; letter-spacing: -0.5px; }
 img { max-width: 100%; height: auto; border-radius: 6px; }
@@ -26,7 +26,7 @@ a:hover { color: #1a365d; text-decoration: none; }
 
 .post-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
   padding: 0;
 }
