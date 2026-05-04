@@ -8,7 +8,7 @@
   <script>
     (function () {
       var r = location.hostname.includes('github.io') ? '/ig' : '/',
-        p = window.location.pname,
+        p = window.location.pathname || '',
         t = r.endsWith('/') ? r : r + '/';
       if (p.startsWith(r)) p = p.slice(r.length);
       p = p.replace(/^\/+|\/+$/g, '');
