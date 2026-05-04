@@ -1,24 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://aloycwl.github.io/a-deep-dive-into-very-large-language-models-vllms</loc>
-    <lastmod>2025-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://aloycwl.github.io/top-10-open-source-ai-projects-shaping-2025</loc>
-    <lastmod>2025-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://aloycwl.github.io/a-deep-dive-into-ai-inference-time-compute</loc>
-    <lastmod>2025-04-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://aloycwl.github.io/dont-break-the-bank-on-bots-10-savvy-ways-to-optimise-your-ai-costs</loc>
     <lastmod>2025-04-21</lastmod>
     <changefreq>weekly</changefreq>
