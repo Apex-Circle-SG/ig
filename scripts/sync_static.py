@@ -148,12 +148,11 @@ def sync(max_posts=None, full_resync=False):
                     stop = True
                     break
                 if post["id"] <= last_id:
-                    stop = True
-                    break
+                    continue
 
                 title = post["title"]["rendered"]
-                print(f"Syncing post: {title}")
                 slug = post["slug"]
+                print(f"synced: [{slug}] {title}")
                 date = post["date_gmt"] + "+00:00"
                 content = sanitize(post["content"]["rendered"])
                 excerpt = re.sub(r'<[^>]+>', '', post.get("excerpt", {}).get("rendered", "")).strip()[:160]
@@ -171,6 +170,13 @@ def sync(max_posts=None, full_resync=False):
 
                 max_id = max(max_id, post["id"])
                 processed += 1
+
+                # Persist progress per post
+                all_posts_current = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
+                latest_page = save_paged_posts(all_posts_current)
+                generate_sitemap(all_posts_current)
+                save_manifest({"latest_page": latest_page, "last_synced_post_id": max_id})
+
             if stop:
                 break
             page += 1
@@ -178,14 +184,14 @@ def sync(max_posts=None, full_resync=False):
         print(f"\nSync interrupted or failed: {e}")
         print("Consolidating partial progress...")
     finally:
-        # Sort for sitemap generation
-        all_posts = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
+        # Final update to ensure everything is sorted and saved correctly
+        all_posts_final = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
 
-        latest_page = save_paged_posts(all_posts)
-        generate_sitemap(all_posts)
+        latest_page = save_paged_posts(all_posts_final)
+        generate_sitemap(all_posts_final)
         save_manifest({"latest_page": latest_page, "last_synced_post_id": max_id})
 
-        print(f"Done. Processed {processed} new posts. Total posts: {len(all_posts)}")
+        print(f"Done. Processed {processed} new posts. Total posts: {len(all_posts_final)}")
 
 if __name__ == "__main__":
     args = sys.argv[1:]
