@@ -13,7 +13,7 @@
         path = path.slice(repoBase.length);
       }
       path = path.replace(/^\/+|\/+$/g, '');
-      var target = repoBase + '/';
+      var target = repoBase.endsWith('/') ? repoBase : repoBase + '/';
       if (path) {
         target += '?route=' + encodeURIComponent(path);
       }
