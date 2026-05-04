@@ -82,8 +82,9 @@ a:hover { color: #1a365d; text-decoration: none; }
   flex-grow: 1;
   line-height: 1.5;
 }
-.pagination { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
-.pagination button { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; border: none; cursor: pointer; }
-.pagination button:disabled { opacity: 0.4; cursor: default; }
+.pagination { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 2rem; padding: 1rem; }
+.pagination button, .pagination a.button { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; border: none; cursor: pointer; text-decoration: none; display: inline-block; }
+.pagination button:disabled, .pagination a.button:disabled { opacity: 0.4; cursor: default; pointer-events: none; }
+.pagination a.button:hover { background: #e2e8f0; color: #1a202c; text-decoration: none; }
 .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
 #loading { text-align: center; padding: 2rem; }

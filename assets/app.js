@@ -70,6 +70,16 @@ async function handleRoute() {
   const path = normalizePath();
   const params = new URLSearchParams(window.location.search);
   const urlPage = Number(params.get('page'));
+
+  if (path.startsWith('page/')) {
+    const pageMatch = path.match(/^page\/(\d+)$/);
+    if (pageMatch) {
+      currentPage = Number(pageMatch[1]);
+      currentPage = Number.isFinite(currentPage) && currentPage >= 1 ? Math.min(currentPage, totalPages) : totalPages;
+      return renderPage(currentPage);
+    }
+  }
+
   currentPage = Number.isFinite(urlPage) && urlPage >= 1 ? Math.min(urlPage, totalPages) : totalPages;
 
   if (!path || path === 'index.html') return renderPage(currentPage);
@@ -88,13 +98,13 @@ async function renderPage(pageNum) {
     title: SITE_NAME,
     description: SITE_DESC,
     image: DEFAULT_IMAGE,
-    url: absoluteUrl(pageNum === totalPages ? '' : `?page=${pageNum}`),
+    url: absoluteUrl(pageNum === totalPages ? '' : `page/${pageNum}`),
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
       name: SITE_NAME,
       description: SITE_DESC,
-      url: absoluteUrl(pageNum === totalPages ? '' : `?page=${pageNum}`)
+      url: absoluteUrl(pageNum === totalPages ? '' : `page/${pageNum}`)
     }
   });
 
@@ -108,10 +118,10 @@ async function renderPage(pageNum) {
       displayExcerpt = displayExcerpt + '...';
     }
     html += `<div class="post-item">
-      <a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;">
+      <a href="${base}/${post.slug}">
         <img src="https://picsum.photos/seed/${post.slug}/100/50" class="post-thumb" alt="${post.title}" loading="lazy">
       </a>
-      <a href="${base}/${post.slug}" onclick="navigate('${post.slug}'); return false;" class="post-title">${post.title}</a>
+      <a href="${base}/${post.slug}" class="post-title">${post.title}</a>
       <span class="post-date">${timeAgo}</span>
       <div class="post-excerpt">${displayExcerpt}</div>
     </div>`;
@@ -122,9 +132,9 @@ async function renderPage(pageNum) {
   let phtml = '';
   // Since chunk N is the newest, "Previous" means going to older posts (N-1)
   // But standard UI usually has "Older" or "Next Page" pointing to N-1
-  if (currentPage < totalPages) phtml += `<button onclick="renderPage(${currentPage + 1})">&laquo; Newer Posts</button>`;
-  phtml += `<span>Page ${totalPages - currentPage + 1} / ${totalPages}</span>`;
-  if (currentPage > 1) phtml += `<button onclick="renderPage(${currentPage - 1})">Older Posts &raquo;</button>`;
+  if (currentPage < totalPages) phtml += `<a href="${base}/page/${currentPage + 1}" class="button">&laquo; Newer Posts</a>`;
+  phtml += `<span>Page ${currentPage} / ${totalPages}</span>`;
+  if (currentPage > 1) phtml += `<a href="${base}/page/${currentPage - 1}" class="button">Older Posts &raquo;</a>`;
   document.getElementById('pagination').innerHTML = phtml;
 }
 
@@ -182,11 +192,5 @@ async function renderPost(slug) {
             ${post.content}
         </article>
     `;
-  document.getElementById('pagination').innerHTML = `<button onclick="navigate(''); return false;">&laquo; Back to archive</button>`;
-}
-
-function navigate(slug) {
-  const url = slug ? base + '/' + slug : base + '/';
-  history.pushState(null, '', url);
-  handleRoute();
+  document.getElementById('pagination').innerHTML = `<a href="${base}/" class="button">&laquo; Back to archive</a>`;
 }
