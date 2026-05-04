@@ -7,17 +7,15 @@
   <title>Redirecting…</title>
   <script>
     (function () {
-      var path = window.location.pathname;
-      var target = repoBase.endsWith('/') ? repoBase : repoBase + '/';
-      if (path.startsWith(repoBase)) {
-        path = path.slice(repoBase.length);
-      }
-      path = path.replace(/^\/+|\/+$/g, '');
-      var target = repoBase + '/';
-      if (path) {
-        target += '?route=' + encodeURIComponent(path);
-      }
-      window.location.replace(target + window.location.search + window.location.hash);
+      var r = location.hostname.includes('github.io') ? '/ig' : '/',
+        p = window.location.pname,
+        t = r.endsWith('/') ? r : r + '/';
+      if (p.startsWith(r)) p = p.slice(r.length);
+      p = p.replace(/^\/+|\/+$/g, '');
+      if (p) t += '?route=' + encodeURIComponent(p);
+      window.location.replace(
+        t + window.location.search + window.location.hash
+      );
     })();
   </script>
 </head>
