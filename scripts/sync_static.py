@@ -123,7 +123,7 @@ def sync(max_posts=None, full_resync=False):
     last_id = manifest.get("last_synced_post_id", 0)
     latest_page = manifest.get("latest_page", 0)
     
-    # Check how many posts are in the latest page
+# Check how many posts are in the latest page
     current_page_count = count_posts_in_page(latest_page) if latest_page > 0 else 0
     
     page = 1
@@ -131,10 +131,30 @@ def sync(max_posts=None, full_resync=False):
     stop = False
     max_id = last_id
     
+    # First, find which API page contains the last synced post
+    # The manifest saves the last synced post ID, we need to find its page in the WP API
+    # API pages are ordered by ID ascending: page 1 has oldest posts, higher pages have newer
+    # Simply start from latest_page since new posts would be on later local pages
+    page = latest_page  # Start from where local pages left off
+    print(f"DEBUG: Starting API page: {page}, latest_page: {latest_page}")
+    
     # Track posts for the current page being filled
     posts_for_current_page = []
     current_page_num = latest_page if latest_page > 0 else 1
     current_page_post_count = current_page_count
+    
+    # CRITICAL FIX: If resuming and the current page is already full, move to next page
+    # This prevents overwriting existing full pages when resuming sync
+    if current_page_post_count >= POSTS_PER_PAGE and not full_resync:
+        print(f"Page {current_page_num} is full ({current_page_post_count} posts). Moving to next page.")
+        current_page_num += 1
+        current_page_post_count = count_posts_in_page(current_page_num)
+        # Keep incrementing until we find a page with space
+        while current_page_post_count >= POSTS_PER_PAGE:
+            print(f"Page {current_page_num} is also full. Moving to next page.")
+            current_page_num += 1
+            current_page_post_count = count_posts_in_page(current_page_num)
+        latest_page = current_page_num - 1
     
     print(f"Starting sync. Last synced post ID: {last_id}, Current page: {current_page_num}, Current page has {current_page_post_count} posts")
 
@@ -153,11 +173,12 @@ def sync(max_posts=None, full_resync=False):
                     stop = True
                     break
                     
-                # CRITICAL OPTIMIZATION: Stop if we've reached posts we've already synced
-                # This prevents scanning through all 7k+ existing posts
+                # CRITICAL FIX: Skip already-synced posts, don't stop entirely
+                # The same page can contain both old and new posts in ascending order
                 if post["id"] <= last_id:
-                    stop = True
-                    break
+                    # Skip this post but continue checking next post in same page
+                    # print(f"Skipping post {post['id']} (already synced)")
+                    continue
 
                 title = post["title"]["rendered"]
                 slug = post["slug"]
