@@ -3,11 +3,12 @@ import requests
 import json
 import re
 from pathlib import Path
-from sitemap import regenerate_full_sitemap
+from sitemap import append_sitemap
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MANIFEST_FILE = BASE_DIR / "manifest.json"
-POSTS_FILE = BASE_DIR / "posts.json"
+DATA_DIR = BASE_DIR / "data"
+PAGE_DIR = BASE_DIR / "page"
 
 SITE = "https://insightginie.com"
 POST_API = f"{SITE}/wp-json/wp/v2/posts"
@@ -28,62 +29,38 @@ def load_manifest():
             pass
     return {"latest_page": 0, "last_synced_post_id": 0}
 
-def load_posts_index():
-    # Load all posts by iterating through page/*.json
-    all_posts = []
-    page_dir = BASE_DIR / "page"
-    if page_dir.exists():
-        for file in sorted(page_dir.glob("*.json"), key=lambda x: int(x.stem)):
-            try:
-                with open(file, encoding="utf-8") as f:
-                    data = json.load(f)
-                    if isinstance(data, list):
-                        all_posts.extend(data)
-            except (json.JSONDecodeError, ValueError):
-                pass
-    elif POSTS_FILE.exists() and POSTS_FILE.stat().st_size > 0:
-        # Fallback to old posts.json format if it exists during migration
+def load_latest_page(latest_page_num):
+    """Load only the latest page file to check how many posts it has."""
+    if latest_page_num <= 0:
+        return []
+    page_file = PAGE_DIR / f"{latest_page_num}.json"
+    if page_file.exists():
         try:
-            with open(POSTS_FILE, encoding="utf-8") as f:
-                data = json.load(f)
-                if isinstance(data, list):
-                    all_posts = data
-        except json.JSONDecodeError:
+            with open(page_file, encoding="utf-8") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, ValueError):
             pass
-    return all_posts
+    return []
+
+def count_posts_in_page(page_num):
+    """Quickly count posts in a page file without loading all data."""
+    if page_num <= 0:
+        return 0
+    page_file = PAGE_DIR / f"{page_num}.json"
+    if not page_file.exists():
+        return 0
+    try:
+        with open(page_file, encoding="utf-8") as f:
+            data = json.load(f)
+            if isinstance(data, list):
+                return len(data)
+    except (json.JSONDecodeError, ValueError):
+        pass
+    return 0
 
 def save_manifest(manifest):
     with open(MANIFEST_FILE, "w", encoding="utf-8") as f:
         json.dump(manifest, f)
-
-def save_paged_posts(all_posts):
-    page_dir = BASE_DIR / "page"
-    page_dir.mkdir(exist_ok=True)
-
-    # Sort posts chronologically (oldest first)
-    all_posts_chrono = sorted(all_posts, key=lambda x: x["date"])
-
-    total_posts = len(all_posts_chrono)
-    total_pages = (total_posts + POSTS_PER_PAGE - 1) // POSTS_PER_PAGE
-    if total_pages == 0:
-        total_pages = 1
-
-    for page_num in range(1, total_pages + 1):
-        start_idx = (page_num - 1) * POSTS_PER_PAGE
-        end_idx = start_idx + POSTS_PER_PAGE
-        chunk = all_posts_chrono[start_idx:end_idx]
-
-        # Sort newest-first inside the chunk
-        chunk.sort(key=lambda x: x["date"], reverse=True)
-
-        with open(page_dir / f"{page_num}.json", "w", encoding="utf-8") as f:
-            json.dump(chunk, f)
-
-    # Clean up old posts.json if it exists
-    if POSTS_FILE.exists():
-        POSTS_FILE.unlink()
-
-    return total_pages
 
 def sanitize(content):
     content = re.sub(r"<script.*?>.*?</script>", "", content, flags=re.DOTALL)
@@ -91,48 +68,76 @@ def sanitize(content):
     content = content.replace("%}", "%}{% endraw %}")
     return content
 
-def generate_sitemap(all_posts):
-    if not all_posts:
-        regenerate_full_sitemap([])
-        return
+def append_to_existing_page(page_num, new_posts):
+    """Append new posts to an existing page file."""
+    PAGE_DIR.mkdir(exist_ok=True)
+    page_file = PAGE_DIR / f"{page_num}.json"
+    
+    # Load existing posts
+    existing = []
+    if page_file.exists():
+        try:
+            with open(page_file, encoding="utf-8") as f:
+                existing = json.load(f)
+                if not isinstance(existing, list):
+                    existing = []
+        except (json.JSONDecodeError, ValueError):
+            existing = []
+    
+    # Append new posts and sort by date (newest first)
+    combined = existing + new_posts
+    combined.sort(key=lambda x: x["date"], reverse=True)
+    
+    with open(page_file, "w", encoding="utf-8") as f:
+        json.dump(combined, f)
+    
+    return len(combined)
 
-    url_list = []
-    for post in all_posts:
-        url_list.append({"url": f"https://aloycwl.github.io/{post['slug']}", "lastmod": post["date"][:10]})
-    total_pages = (len(all_posts) + POSTS_PER_PAGE - 1) // POSTS_PER_PAGE
-    for page_num in range(1, total_pages + 1):
-        url_list.append({"url": f"https://aloycwl.github.io/page/{page_num}/", "lastmod": all_posts[0]["date"][:10]})
-    regenerate_full_sitemap(url_list)
-
-def reset_sync_state():
-    for folder in [BASE_DIR / "data", BASE_DIR / "page"]:
-        folder.mkdir(exist_ok=True)
-        for child in folder.iterdir():
-            if child.is_dir():
-                import shutil
-                shutil.rmtree(child)
-            else:
-                child.unlink()
-    for file in [MANIFEST_FILE, POSTS_FILE]:
-        if file.exists():
-            file.unlink()
+def create_new_page(page_num, posts):
+    """Create a new page file."""
+    PAGE_DIR.mkdir(exist_ok=True)
+    page_file = PAGE_DIR / f"{page_num}.json"
+    
+    # Sort by date (newest first)
+    sorted_posts = sorted(posts, key=lambda x: x["date"], reverse=True)
+    
+    with open(page_file, "w", encoding="utf-8") as f:
+        json.dump(sorted_posts, f)
 
 def sync(max_posts=None, full_resync=False):
     if full_resync:
         print("Running full resync: clearing local sync state...")
-        reset_sync_state()
+        import shutil
+        for folder in [DATA_DIR, PAGE_DIR]:
+            if folder.exists():
+                shutil.rmtree(folder)
+            folder.mkdir(exist_ok=True)
+        # Clear sitemap too
+        sitemap_file = BASE_DIR / "sitemap.xml"
+        if sitemap_file.exists():
+            sitemap_file.unlink()
+        if MANIFEST_FILE.exists():
+            MANIFEST_FILE.unlink()
 
     manifest = load_manifest()
     last_id = manifest.get("last_synced_post_id", 0)
-    all_posts = load_posts_index()
-    posts_by_id = {str(post["id"]): post for post in all_posts if isinstance(post, dict) and "id" in post}
-
+    latest_page = manifest.get("latest_page", 0)
+    
+    # Check how many posts are in the latest page
+    current_page_count = count_posts_in_page(latest_page) if latest_page > 0 else 0
+    
     page = 1
     processed = 0
     stop = False
     max_id = last_id
+    
+    # Track posts for the current page being filled
+    posts_for_current_page = []
+    current_page_num = latest_page if latest_page > 0 else 1
+    current_page_post_count = current_page_count
+    
+    print(f"Starting sync. Last synced post ID: {last_id}, Current page: {current_page_num}, Current page has {current_page_post_count} posts")
 
-    print(f"Starting sync. Last synced post ID: {last_id}")
     try:
         while True:
             url = f"{POST_API}?per_page={PER_PAGE}&page={page}&_embed&orderby=id&order=asc&status=publish"
@@ -147,8 +152,12 @@ def sync(max_posts=None, full_resync=False):
                 if max_posts is not None and processed >= max_posts:
                     stop = True
                     break
+                    
+                # CRITICAL OPTIMIZATION: Stop if we've reached posts we've already synced
+                # This prevents scanning through all 7k+ existing posts
                 if post["id"] <= last_id:
-                    continue
+                    stop = True
+                    break
 
                 title = post["title"]["rendered"]
                 slug = post["slug"]
@@ -158,40 +167,77 @@ def sync(max_posts=None, full_resync=False):
                 excerpt = re.sub(r'<[^>]+>', '', post.get("excerpt", {}).get("rendered", "")).strip()[:160]
                 image = f"https://picsum.photos/seed/{slug}/800/400"
 
-                posts_by_id[str(post["id"])] = {
+                # Save individual post data file
+                DATA_DIR.mkdir(exist_ok=True)
+                with open(DATA_DIR / f"{slug}.json", "w", encoding="utf-8") as f:
+                    json.dump({"content": content, "img": image, "date": date[:10], "excerpt": excerpt, "title": title, "slug": slug}, f)
+
+                # Append to sitemap immediately (O(1) operation using existing append_sitemap function)
+                append_sitemap(f"https://aloycwl.github.io/{slug}", lastmod=date[:10])
+
+                # Prepare post data for page
+                post_data = {
                     "id": post["id"],
                     "slug": slug,
                     "title": title,
                     "date": date,
                     "excerpt": excerpt,
                 }
-                with open(BASE_DIR / "data" / f"{slug}.json", "w", encoding="utf-8") as f:
-                    json.dump({"content": content, "img": image, "date": date[:10], "excerpt": excerpt, "title": title, "slug": slug}, f)
+
+                # Add to current page being built
+                posts_for_current_page.append(post_data)
+                current_page_post_count += 1
+                
+                # Check if current page is now full
+                if current_page_post_count >= POSTS_PER_PAGE:
+                    # Save the full page
+                    if current_page_num == latest_page and not full_resync:
+                        # If we're filling the existing latest page (not new), use append mode
+                        # But since we just filled it completely, we can just overwrite
+                        create_new_page(current_page_num, posts_for_current_page)
+                    else:
+                        create_new_page(current_page_num, posts_for_current_page)
+                    
+                    print(f"Saved page {current_page_num} with {len(posts_for_current_page)} posts")
+                    
+                    # Move to next page
+                    current_page_num += 1
+                    posts_for_current_page = []
+                    current_page_post_count = 0
+                    
+                    # Update latest_page tracking
+                    latest_page = current_page_num - 1
+                    
+                    # Save manifest after each page file write (as requested for safety)
+                    save_manifest({"latest_page": latest_page, "last_synced_post_id": post["id"]})
+                else:
+                    # Page not full yet, just update manifest with progress
+                    # (still save manifest for resume capability)
+                    save_manifest({"latest_page": current_page_num, "last_synced_post_id": post["id"]})
 
                 max_id = max(max_id, post["id"])
                 processed += 1
 
-                # Persist progress per post
-                all_posts_current = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
-                latest_page = save_paged_posts(all_posts_current)
-                generate_sitemap(all_posts_current)
-                save_manifest({"latest_page": latest_page, "last_synced_post_id": max_id})
-
             if stop:
                 break
             page += 1
+            
     except (KeyboardInterrupt, Exception) as e:
         print(f"\nSync interrupted or failed: {e}")
-        print("Consolidating partial progress...")
+        print("Saving partial progress...")
     finally:
-        # Final update to ensure everything is sorted and saved correctly
-        all_posts_final = sorted(posts_by_id.values(), key=lambda x: x["date"], reverse=True)
-
-        latest_page = save_paged_posts(all_posts_final)
-        generate_sitemap(all_posts_final)
-        save_manifest({"latest_page": latest_page, "last_synced_post_id": max_id})
-
-        print(f"Done. Processed {processed} new posts. Total posts: {len(all_posts_final)}")
+        # Save any remaining posts in the current page (partial page)
+        if posts_for_current_page:
+            if current_page_num == latest_page and not full_resync:
+                # Append to existing latest page
+                append_to_existing_page(current_page_num, posts_for_current_page)
+            else:
+                create_new_page(current_page_num, posts_for_current_page)
+            print(f"Saved final partial page {current_page_num} with {len(posts_for_current_page)} posts")
+        
+        # Final manifest save
+        save_manifest({"latest_page": current_page_num if posts_for_current_page else current_page_num - 1, "last_synced_post_id": max_id})
+        print(f"Done. Processed {processed} new posts. Latest page: {current_page_num}")
 
 if __name__ == "__main__":
     args = sys.argv[1:]
