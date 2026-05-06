@@ -4,6 +4,12 @@ import json
 import re
 from pathlib import Path
 from sitemap import append_sitemap
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+session = requests.Session()
+retries = Retry(total=3, backoff_factor=2, status_forcelist=[500, 502, 503, 504])
+session.mount('https://', HTTPAdapter(max_retries=retries))
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MANIFEST_FILE = BASE_DIR / "manifest.json"
@@ -135,7 +141,7 @@ def sync(max_posts=None, full_resync=False):
     # The manifest saves the last synced post ID, we need to find its page in the WP API
     # API pages are ordered by ID ascending: page 1 has oldest posts, higher pages have newer
     # Simply start from latest_page since new posts would be on later local pages
-    page = latest_page  # Start from where local pages left off
+    page = 1  # Always start from API page 1, the slug check will skip already-synced posts
     print(f"DEBUG: Starting API page: {page}, latest_page: {latest_page}")
     
     # Track posts for the current page being filled
@@ -161,7 +167,7 @@ def sync(max_posts=None, full_resync=False):
     try:
         while True:
             url = f"{POST_API}?per_page={PER_PAGE}&page={page}&_embed&orderby=id&order=asc&status=publish"
-            r = requests.get(url, timeout=30)
+            r = session.get(url, timeout=60)
             if r.status_code != 200:
                 break
             posts = r.json()
@@ -172,16 +178,12 @@ def sync(max_posts=None, full_resync=False):
                 if max_posts is not None and processed >= max_posts:
                     stop = True
                     break
-                    
-                # CRITICAL FIX: Skip already-synced posts, don't stop entirely
-                # The same page can contain both old and new posts in ascending order
-                if post["id"] <= last_id:
-                    # Skip this post but continue checking next post in same page
-                    # print(f"Skipping post {post['id']} (already synced)")
+
+                slug = post["slug"]
+                if (DATA_DIR / f"{slug}.json").exists():
                     continue
 
                 title = post["title"]["rendered"]
-                slug = post["slug"]
                 print(f"synced: [{slug}] {title}")
                 date = post["date_gmt"] + "+00:00"
                 content = sanitize(post["content"]["rendered"])
