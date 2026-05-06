@@ -3,7 +3,7 @@ import requests
 import json
 import re
 from pathlib import Path
-from sitemap import append_sitemap
+from sitemap import batch_append_sitemap
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -149,6 +149,9 @@ def sync(max_posts=None, full_resync=False):
     current_page_num = latest_page if latest_page > 0 else 1
     current_page_post_count = current_page_count
     
+    # Collect sitemap entries for batch update at the end
+    sitemap_entries = []
+    
     # CRITICAL FIX: If resuming and the current page is already full, move to next page
     # This prevents overwriting existing full pages when resuming sync
     if current_page_post_count >= POSTS_PER_PAGE and not full_resync:
@@ -195,8 +198,11 @@ def sync(max_posts=None, full_resync=False):
                 with open(DATA_DIR / f"{slug}.json", "w", encoding="utf-8") as f:
                     json.dump({"content": content, "img": image, "date": date[:10], "excerpt": excerpt, "title": title, "slug": slug}, f)
 
-                # Append to sitemap immediately (O(1) operation using existing append_sitemap function)
-                append_sitemap(f"https://aloycwl.github.io/{slug}", lastmod=date[:10])
+                # Collect sitemap entry for batch update at the end
+                sitemap_entries.append({
+                    'url': f"https://aloycwl.github.io/{slug}",
+                    'lastmod': date[:10]
+                })
 
                 # Prepare post data for page
                 post_data = {
@@ -257,6 +263,11 @@ def sync(max_posts=None, full_resync=False):
             else:
                 create_new_page(current_page_num, posts_for_current_page)
             print(f"Saved final partial page {current_page_num} with {len(posts_for_current_page)} posts")
+        
+        # Batch update sitemap with all new entries at once (much faster than per-post updates)
+        if sitemap_entries:
+            print(f"Updating sitemap with {len(sitemap_entries)} new entries...")
+            batch_append_sitemap(sitemap_entries)
         
         # Final manifest save
         save_manifest({"latest_page": current_page_num if posts_for_current_page else current_page_num - 1, "last_synced_post_id": max_id})
