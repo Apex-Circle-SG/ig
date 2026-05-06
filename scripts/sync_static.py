@@ -30,10 +30,11 @@ def load_manifest():
                 return {
                     "latest_page": int(manifest.get("latest_page", 0)),
                     "last_synced_post_id": int(manifest.get("last_synced_post_id", 0)),
+                    "last_api_page": int(manifest.get("last_api_page", 1)),
                 }
         except (json.JSONDecodeError, ValueError, TypeError):
             pass
-    return {"latest_page": 0, "last_synced_post_id": 0}
+    return {"latest_page": 0, "last_synced_post_id": 0, "last_api_page": 1}
 
 def load_latest_page(latest_page_num):
     """Load only the latest page file to check how many posts it has."""
@@ -128,21 +129,19 @@ def sync(max_posts=None, full_resync=False):
     manifest = load_manifest()
     last_id = manifest.get("last_synced_post_id", 0)
     latest_page = manifest.get("latest_page", 0)
+    last_api_page = manifest.get("last_api_page", 1)
     
-# Check how many posts are in the latest page
     current_page_count = count_posts_in_page(latest_page) if latest_page > 0 else 0
     
-    page = 1
     processed = 0
     stop = False
     max_id = last_id
     
-    # First, find which API page contains the last synced post
-    # The manifest saves the last synced post ID, we need to find its page in the WP API
-    # API pages are ordered by ID ascending: page 1 has oldest posts, higher pages have newer
-    # Simply start from latest_page since new posts would be on later local pages
-    page = 1  # Always start from API page 1, the slug check will skip already-synced posts
-    print(f"DEBUG: Starting API page: {page}, latest_page: {latest_page}")
+    if full_resync:
+        page = 1
+    else:
+        page = max(1, last_api_page - 1)
+    print(f"Starting API page: {page}, last_api_page: {last_api_page}, latest_page: {latest_page}")
     
     # Track posts for the current page being filled
     posts_for_current_page = []
@@ -177,6 +176,7 @@ def sync(max_posts=None, full_resync=False):
             if not posts:
                 break
 
+            new_in_page = 0
             for post in posts:
                 if max_posts is not None and processed >= max_posts:
                     stop = True
@@ -185,6 +185,7 @@ def sync(max_posts=None, full_resync=False):
                 slug = post["slug"]
                 if (DATA_DIR / f"{slug}.json").exists():
                     continue
+                new_in_page += 1
 
                 title = post["title"]["rendered"]
                 print(f"synced: [{slug}] {title}")
@@ -238,16 +239,22 @@ def sync(max_posts=None, full_resync=False):
                     latest_page = current_page_num - 1
                     
                     # Save manifest after each page file write (as requested for safety)
-                    save_manifest({"latest_page": latest_page, "last_synced_post_id": post["id"]})
+                    save_manifest({"latest_page": latest_page, "last_synced_post_id": post["id"], "last_api_page": page})
                 else:
                     # Page not full yet, just update manifest with progress
                     # (still save manifest for resume capability)
-                    save_manifest({"latest_page": current_page_num, "last_synced_post_id": post["id"]})
+                    save_manifest({"latest_page": current_page_num, "last_synced_post_id": post["id"], "last_api_page": page})
 
                 max_id = max(max_id, post["id"])
                 processed += 1
 
             if stop:
+                break
+            
+            # Early exit: if we're past the last known API page and got zero new posts,
+            # we've caught up — no need to fetch more pages
+            if new_in_page == 0 and page > last_api_page:
+                print(f"No new posts on API page {page} (past last_api_page {last_api_page}). Stopping.")
                 break
             page += 1
             
@@ -270,7 +277,7 @@ def sync(max_posts=None, full_resync=False):
             batch_append_sitemap(sitemap_entries)
         
         # Final manifest save
-        save_manifest({"latest_page": current_page_num if posts_for_current_page else current_page_num - 1, "last_synced_post_id": max_id})
+        save_manifest({"latest_page": current_page_num if posts_for_current_page else current_page_num - 1, "last_synced_post_id": max_id, "last_api_page": page})
         print(f"Done. Processed {processed} new posts. Latest page: {current_page_num}")
 
 if __name__ == "__main__":
