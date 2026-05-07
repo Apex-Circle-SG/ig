@@ -1,4 +1,5 @@
 import sys
+import html as html_mod
 import requests
 import json
 import re
@@ -13,11 +14,15 @@ session.mount('https://', HTTPAdapter(max_retries=retries))
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MANIFEST_FILE = BASE_DIR / "manifest.json"
-DATA_DIR = BASE_DIR / "data"
+POSTS_DIR = BASE_DIR / "posts"
 PAGE_DIR = BASE_DIR / "page"
+DATA_DIR = BASE_DIR / "data"
 
-SITE = "https://insightginie.com"
-POST_API = f"{SITE}/wp-json/wp/v2/posts"
+WP_SITE = "https://insightginie.com"
+SITE_URL = "https://github.insightginie.com"
+SITE_NAME = "InsightGinie Archive"
+SITE_DESC = "News of Tomorrow"
+POST_API = f"{WP_SITE}/wp-json/wp/v2/posts"
 
 PER_PAGE = 100
 POSTS_PER_PAGE = 100
@@ -75,6 +80,84 @@ def sanitize(content):
     content = content.replace("%}", "%}{% endraw %}")
     return content
 
+def generate_post_html(title, slug, date, excerpt, content, image):
+    date_iso = date[:10]
+    post_url = f"{SITE_URL}/posts/{slug}/"
+    og_image = image.replace("/800/400", "/1200/630") if "/800/400" in image else image
+    esc = html_mod.escape
+    clean_excerpt = re.sub(r'<[^>]+>', '', excerpt).strip()
+    jsonld_article = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": title,
+        "datePublished": date_iso,
+        "dateModified": date_iso,
+        "image": [og_image],
+        "description": clean_excerpt or SITE_DESC,
+        "mainEntityOfPage": post_url,
+        "publisher": {
+            "@type": "Organization",
+            "name": SITE_NAME,
+            "url": SITE_URL
+        }
+    }, ensure_ascii=False)
+    jsonld_breadcrumb = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL + "/"},
+            {"@type": "ListItem", "position": 2, "name": title, "item": post_url}
+        ]
+    }, ensure_ascii=False)
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{esc(title)} | {SITE_NAME}</title>
+<meta name="description" content="{esc(clean_excerpt or SITE_DESC)}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="{post_url}">
+<meta name="author" content="{SITE_NAME}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{SITE_NAME}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(clean_excerpt or SITE_DESC)}">
+<meta property="og:image" content="{og_image}">
+<meta property="og:url" content="{post_url}">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="{date_iso}">
+<meta property="article:modified_time" content="{date_iso}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{esc(clean_excerpt or SITE_DESC)}">
+<meta name="twitter:image" content="{og_image}">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{jsonld_article}</script>
+<script type="application/ld+json">{jsonld_breadcrumb}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>{title}</h1>
+<time datetime="{date_iso}" style="color:#718096; font-size:0.9rem;">{date_iso}</time>
+<img src="{image}" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="{esc(title)}">
+{content}
+</article>
+<div class="pagination"><a href="../../" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>
+'''
+
 def append_to_existing_page(page_num, new_posts):
     """Append new posts to an existing page file."""
     PAGE_DIR.mkdir(exist_ok=True)
@@ -115,11 +198,10 @@ def sync(max_posts=None, full_resync=False):
     if full_resync:
         print("Running full resync: clearing local sync state...")
         import shutil
-        for folder in [DATA_DIR, PAGE_DIR]:
+        for folder in [POSTS_DIR, PAGE_DIR, DATA_DIR]:
             if folder.exists():
                 shutil.rmtree(folder)
             folder.mkdir(exist_ok=True)
-        # Clear sitemap too
         sitemap_file = BASE_DIR / "sitemap.xml"
         if sitemap_file.exists():
             sitemap_file.unlink()
@@ -183,7 +265,8 @@ def sync(max_posts=None, full_resync=False):
                     break
 
                 slug = post["slug"]
-                if (DATA_DIR / f"{slug}.json").exists():
+                post_dir = POSTS_DIR / slug
+                if (post_dir / "index.html").exists():
                     continue
                 new_in_page += 1
 
@@ -194,15 +277,15 @@ def sync(max_posts=None, full_resync=False):
                 excerpt = re.sub(r'<[^>]+>', '', post.get("excerpt", {}).get("rendered", "")).strip()[:160]
                 image = f"https://picsum.photos/seed/{slug}/800/400"
 
-                # Save individual post data file
-                DATA_DIR.mkdir(exist_ok=True)
-                with open(DATA_DIR / f"{slug}.json", "w", encoding="utf-8") as f:
-                    json.dump({"content": content, "img": image, "date": date[:10], "excerpt": excerpt, "title": title, "slug": slug}, f)
+                POSTS_DIR.mkdir(exist_ok=True)
+                post_dir.mkdir(exist_ok=True)
+                with open(post_dir / "index.html", "w", encoding="utf-8") as f:
+                    f.write(generate_post_html(title, slug, date, excerpt, content, image))
 
-                # Collect sitemap entry for batch update at the end
                 sitemap_entries.append({
-                    'url': f"https://aloycwl.github.io/{slug}",
-                    'lastmod': date[:10]
+                    'url': f"{SITE_URL}/posts/{slug}/",
+                    'lastmod': date[:10],
+                    'priority': '0.8'
                 })
 
                 # Prepare post data for page

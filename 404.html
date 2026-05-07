@@ -1,25 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Redirecting…</title>
   <script>
-    (function () {
-      var r = location.hostname.includes('github.io') ? '/ig' : '/',
-        p = window.location.pathname || '',
-        t = r.endsWith('/') ? r : r + '/';
-      if (p.startsWith(r)) p = p.slice(r.length);
-      p = p.replace(/^\/+|\/+$/g, '');
-      if (p) t += '?route=' + encodeURIComponent(p);
-      window.location.replace(
-        t + window.location.search + window.location.hash
-      );
-    })();
+    window.location.replace('/' + window.location.search + window.location.hash);
   </script>
 </head>
-
 <body>Redirecting…</body>
-
 </html>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aloycwl.github.io/ig/sitemap.xml
+Sitemap: https://github.insightginie.com/sitemap.xml
