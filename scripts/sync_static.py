@@ -3,6 +3,7 @@ import html as html_mod
 import requests
 import json
 import re
+from datetime import datetime
 from pathlib import Path
 from sitemap import batch_append_sitemap
 from requests.adapters import HTTPAdapter
@@ -139,6 +140,9 @@ def generate_post_html(title, slug, date, excerpt, content, image):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/relativeTime.js"></script>
+<script>dayjs.extend(window.dayjs_plugin_relativeTime)</script>
 <link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body>
@@ -146,11 +150,11 @@ def generate_post_html(title, slug, date, excerpt, content, image):
 <main class="container">
 <article>
 <h1>{title}</h1>
-<time datetime="{date_iso}" style="color:#718096; font-size:0.9rem;">{date_iso}</time>
-<img src="{image}" style="width:100%; margin: 1rem 0; border-radius: 4px;" alt="{esc(title)}">
+<time datetime="{date_iso}" class="post-date" data-date="{date}">{date_iso}</time>
+<img src="{image}" class="post-hero" alt="{esc(title)}">
 {content}
 </article>
-<div class="pagination"><a href="../../" class="button">&laquo; Back to archive</a></div>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
 </main>
 <div id="site-footer"></div>
 <script src="../../assets/app.js"></script>
@@ -158,12 +162,95 @@ def generate_post_html(title, slug, date, excerpt, content, image):
 </html>
 '''
 
-def append_to_existing_page(page_num, new_posts):
+def generate_page_html(page_num, posts, total_pages):
+    esc = html_mod.escape
+    page_url = f"{SITE_URL}/page/{page_num}/"
+    jsonld = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": SITE_NAME,
+        "description": SITE_DESC,
+        "url": page_url
+    }, ensure_ascii=False)
+
+    posts_html = ""
+    for post in posts:
+        slug = post["slug"]
+        posts_html += f'''<div class="post-item">
+<a href="/posts/{slug}/"><img src="https://picsum.photos/seed/{slug}/100/50" class="post-thumb" alt="{esc(post['title'])}" loading="lazy"></a>
+<a href="/posts/{slug}/" class="post-title">{esc(post['title'])}</a>
+<span class="post-date" data-date="{post['date']}">{post['date'][:10]}</span>
+<div class="post-excerpt">{esc(post.get('excerpt', ''))}</div>
+</div>
+'''
+
+    pag_html = ""
+    if page_num < total_pages:
+        pag_html += f'<a href="/page/{page_num + 1}/" class="button">&laquo; Newer Posts</a>'
+    pag_html += f'<span>Page {page_num} / {total_pages}</span>'
+    if page_num > 1:
+        pag_html += f'<a href="/page/{page_num - 1}/" class="button">Older Posts &raquo;</a>'
+
+    html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{SITE_NAME} - Page {page_num}</title>
+<meta name="description" content="{SITE_DESC}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="{page_url}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{SITE_NAME}">
+<meta property="og:title" content="{SITE_NAME} - Page {page_num}">
+<meta property="og:description" content="{SITE_DESC}">
+<meta property="og:image" content="https://picsum.photos/id/695/1200/630">
+<meta property="og:url" content="{page_url}">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{SITE_NAME} - Page {page_num}">
+<meta name="twitter:description" content="{SITE_DESC}">
+<meta name="twitter:image" content="https://picsum.photos/id/695/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{jsonld}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MZSFSG62B8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+  gtag('config', 'G-MZSFSG62B8');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/relativeTime.js"></script>
+<script>dayjs.extend(window.dayjs_plugin_relativeTime)</script>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<div class="post-list">
+{posts_html}</div>
+<div class="pagination">{pag_html}</div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>
+'''
+    page_dir = PAGE_DIR / str(page_num)
+    page_dir.mkdir(parents=True, exist_ok=True)
+    with open(page_dir / "index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+
+def append_to_existing_page(page_num, new_posts, total_pages=None):
     """Append new posts to an existing page file."""
     PAGE_DIR.mkdir(exist_ok=True)
     page_file = PAGE_DIR / f"{page_num}.json"
     
-    # Load existing posts
     existing = []
     if page_file.exists():
         try:
@@ -174,25 +261,29 @@ def append_to_existing_page(page_num, new_posts):
         except (json.JSONDecodeError, ValueError):
             existing = []
     
-    # Append new posts and sort by date (newest first)
     combined = existing + new_posts
     combined.sort(key=lambda x: x["date"], reverse=True)
     
     with open(page_file, "w", encoding="utf-8") as f:
         json.dump(combined, f)
     
+    tp = total_pages or page_num
+    generate_page_html(page_num, combined, tp)
+    
     return len(combined)
 
-def create_new_page(page_num, posts):
+def create_new_page(page_num, posts, total_pages=None):
     """Create a new page file."""
     PAGE_DIR.mkdir(exist_ok=True)
     page_file = PAGE_DIR / f"{page_num}.json"
     
-    # Sort by date (newest first)
     sorted_posts = sorted(posts, key=lambda x: x["date"], reverse=True)
     
     with open(page_file, "w", encoding="utf-8") as f:
         json.dump(sorted_posts, f)
+    
+    tp = total_pages or page_num
+    generate_page_html(page_num, sorted_posts, tp)
 
 def sync(max_posts=None, full_resync=False):
     if full_resync:
@@ -303,23 +394,21 @@ def sync(max_posts=None, full_resync=False):
                 
                 # Check if current page is now full
                 if current_page_post_count >= POSTS_PER_PAGE:
-                    # Save the full page
-                    if current_page_num == latest_page and not full_resync:
-                        # If we're filling the existing latest page (not new), use append mode
-                        # But since we just filled it completely, we can just overwrite
-                        create_new_page(current_page_num, posts_for_current_page)
-                    else:
-                        create_new_page(current_page_num, posts_for_current_page)
+                    latest_page = current_page_num
+                    create_new_page(current_page_num, posts_for_current_page, latest_page)
+                    
+                    sitemap_entries.append({
+                        'url': f"{SITE_URL}/page/{current_page_num}/",
+                        'lastmod': date[:10],
+                        'changefreq': 'daily',
+                        'priority': '0.6'
+                    })
                     
                     print(f"Saved page {current_page_num} with {len(posts_for_current_page)} posts")
                     
-                    # Move to next page
                     current_page_num += 1
                     posts_for_current_page = []
                     current_page_post_count = 0
-                    
-                    # Update latest_page tracking
-                    latest_page = current_page_num - 1
                     
                     # Save manifest after each page file write (as requested for safety)
                     save_manifest({"latest_page": latest_page, "last_synced_post_id": post["id"], "last_api_page": page})
@@ -345,23 +434,33 @@ def sync(max_posts=None, full_resync=False):
         print(f"\nSync interrupted or failed: {e}")
         print("Saving partial progress...")
     finally:
-        # Save any remaining posts in the current page (partial page)
+        final_latest = current_page_num if posts_for_current_page else current_page_num - 1
+        
         if posts_for_current_page:
             if current_page_num == latest_page and not full_resync:
-                # Append to existing latest page
-                append_to_existing_page(current_page_num, posts_for_current_page)
+                append_to_existing_page(current_page_num, posts_for_current_page, final_latest)
             else:
-                create_new_page(current_page_num, posts_for_current_page)
+                create_new_page(current_page_num, posts_for_current_page, final_latest)
             print(f"Saved final partial page {current_page_num} with {len(posts_for_current_page)} posts")
         
-        # Batch update sitemap with all new entries at once (much faster than per-post updates)
         if sitemap_entries:
+            sitemap_entries.append({
+                'url': f"{SITE_URL}/page/{final_latest}/",
+                'lastmod': datetime.now().strftime("%Y-%m-%d"),
+                'changefreq': 'daily',
+                'priority': '0.6'
+            })
+            sitemap_entries.append({
+                'url': SITE_URL + "/",
+                'lastmod': datetime.now().strftime("%Y-%m-%d"),
+                'changefreq': 'daily',
+                'priority': '1.0'
+            })
             print(f"Updating sitemap with {len(sitemap_entries)} new entries...")
             batch_append_sitemap(sitemap_entries)
         
-        # Final manifest save
-        save_manifest({"latest_page": current_page_num if posts_for_current_page else current_page_num - 1, "last_synced_post_id": max_id, "last_api_page": page})
-        print(f"Done. Processed {processed} new posts. Latest page: {current_page_num}")
+        save_manifest({"latest_page": final_latest, "last_synced_post_id": max_id, "last_api_page": page})
+        print(f"Done. Processed {processed} new posts. Latest page: {final_latest}")
 
 if __name__ == "__main__":
     args = sys.argv[1:]

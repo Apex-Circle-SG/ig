@@ -86,5 +86,7 @@ a:hover { color: #1a365d; text-decoration: none; }
 .pagination button, .pagination a.button { padding: 0.5rem 1rem; border-radius: 4px; background: #edf2f7; color: #2d3748; border: none; cursor: pointer; text-decoration: none; display: inline-block; }
 .pagination button:disabled, .pagination a.button:disabled { opacity: 0.4; cursor: default; pointer-events: none; }
 .pagination a.button:hover { background: #e2e8f0; color: #1a202c; text-decoration: none; }
+.post-date { color: var(--text-muted); font-size: 0.85rem; }
+.post-hero { width: 100%; margin: 1rem 0; border-radius: 4px; }
 .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee; text-align: center; color: #718096; font-size: 0.9rem; }
 #loading { text-align: center; padding: 2rem; }
