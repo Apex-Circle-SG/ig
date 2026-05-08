@@ -21,7 +21,7 @@ DATA_DIR = BASE_DIR / "data"
 
 WP_SITE = "https://insightginie.com"
 SITE_URL = "https://github.insightginie.com"
-SITE_NAME = "InsightGinie Archive"
+SITE_NAME = "News of Tomorrow"
 SITE_DESC = "News of Tomorrow"
 POST_API = f"{WP_SITE}/wp-json/wp/v2/posts"
 
@@ -137,13 +137,6 @@ def generate_post_html(title, slug, date, excerpt, content, image):
 <link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
 <script type="application/ld+json">{jsonld_article}</script>
 <script type="application/ld+json">{jsonld_breadcrumb}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/relativeTime.js"></script>
-<script>dayjs.extend(window.dayjs_plugin_relativeTime)</script>
-<link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body>
 <div id="site-header"></div>
@@ -214,20 +207,6 @@ def generate_page_html(page_num, posts, total_pages):
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
 <script type="application/ld+json">{jsonld}</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MZSFSG62B8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-  gtag('config', 'G-MZSFSG62B8');
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/relativeTime.js"></script>
-<script>dayjs.extend(window.dayjs_plugin_relativeTime)</script>
-<link rel="stylesheet" href="../../assets/styles.css">
 </head>
 <body>
 <div id="site-header"></div>
