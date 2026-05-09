@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C/C++ Language Server Integration with clangd LSP | News of Tomorrow</title>
+<meta name="description" content="clangd LSP provides comprehensive code intelligence for C/C++ development including autocomplete, error detection, and refactoring support through the LLVM-base">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/c-c-language-server-integration-with-clangd-lsp/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="C/C++ Language Server Integration with clangd LSP">
+<meta property="og:description" content="clangd LSP provides comprehensive code intelligence for C/C++ development including autocomplete, error detection, and refactoring support through the LLVM-base">
+<meta property="og:image" content="https://picsum.photos/seed/c-c-language-server-integration-with-clangd-lsp/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/c-c-language-server-integration-with-clangd-lsp/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-12">
+<meta property="article:modified_time" content="2026-03-12">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="C/C++ Language Server Integration with clangd LSP">
+<meta name="twitter:description" content="clangd LSP provides comprehensive code intelligence for C/C++ development including autocomplete, error detection, and refactoring support through the LLVM-base">
+<meta name="twitter:image" content="https://picsum.photos/seed/c-c-language-server-integration-with-clangd-lsp/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "C/C++ Language Server Integration with clangd LSP", "datePublished": "2026-03-12", "dateModified": "2026-03-12", "image": ["https://picsum.photos/seed/c-c-language-server-integration-with-clangd-lsp/1200/630"], "description": "clangd LSP provides comprehensive code intelligence for C/C++ development including autocomplete, error detection, and refactoring support through the LLVM-base", "mainEntityOfPage": "https://github.insightginie.com/posts/c-c-language-server-integration-with-clangd-lsp/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "C/C++ Language Server Integration with clangd LSP", "item": "https://github.insightginie.com/posts/c-c-language-server-integration-with-clangd-lsp/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>C/C++ Language Server Integration with clangd LSP</h1>
+<time datetime="2026-03-12" class="post-date" data-date="2026-03-12T20:15:46+00:00">2026-03-12</time>
+<img src="https://picsum.photos/seed/c-c-language-server-integration-with-clangd-lsp/800/400" class="post-hero" alt="C/C++ Language Server Integration with clangd LSP">
+<p>clangd LSP is a powerful C/C++ language server integration that provides comprehensive code intelligence through the clangd tool, which is part of the LLVM project. This skill enhances the development experience for C and C++ programmers by offering advanced features like autocomplete, go-to-definition, find references, error detection, formatting, and refactoring capabilities.</p>
+<h2>Core Capabilities</h2>
+<p>The clangd LSP skill delivers several essential features that streamline C/C++ development:</p>
+<h3>Code Intelligence</h3>
+<p>The language server provides intelligent code assistance including autocomplete suggestions, go-to-definition navigation, and find references functionality. These features help developers write code more efficiently and navigate large codebases with ease.</p>
+<h3>Error Detection</h3>
+<p>Real-time diagnostics are a key feature, providing immediate feedback on compilation errors as you type. This helps catch issues early in the development process, reducing debugging time and improving code quality.</p>
+<h3>Code Formatting</h3>
+<p>clangd integrates with clang-format to provide consistent code formatting across your projects. This ensures that code adheres to style guidelines and maintains readability.</p>
+<h3>Refactoring Support</h3>
+<p>The skill includes refactoring capabilities such as renaming symbols and extracting functions, making it easier to restructure and improve existing code.</p>
+<h2>Installation and Setup</h2>
+<p>Installing clangd depends on your operating system:</p>
+<h3>macOS via Homebrew</h3>
+<pre><code>brew install llvm
+# Add to PATH
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+</code></pre>
+<h3>Linux Distributions</h3>
+<p>For Ubuntu/Debian systems:</p>
+<pre><code>sudo apt install clangd
+</code></pre>
+<p>For Fedora:</p>
+<pre><code>sudo dnf install clang-tools-extra
+</code></pre>
+<p>For Arch Linux:</p>
+<pre><code>sudo pacman -S clang
+</code></pre>
+<h3>Windows</h3>
+<p>Windows users can install via winget:</p>
+<pre><code>winget install LLVM.LLVM
+</code></pre>
+<p>Alternatively, download directly from LLVM releases.</p>
+<p>Verify installation with:</p>
+<pre><code>clangd --version
+</code></pre>
+<h2>Usage Patterns</h2>
+<p>Once installed, the language server runs automatically in LSP-compatible editors. For manual operations, you can compile code using:</p>
+<pre><code>gcc file.c -o output    # C
+g++ file.cpp -o output   # C++
+clang file.c -o output   # with clang
+</code></pre>
+<p>Format code with:</p>
+<pre><code>clang-format -i file.cpp
+</code></pre>
+<p>Perform static analysis using:</p>
+<pre><code>clang-tidy file.cpp -- -std=c++17
+</code></pre>
+<h2>Configuration Options</h2>
+<p>Project configuration can be done through a <code>.clangd</code> file in the project root:</p>
+<pre><code>CompileFlags:
+  Add: [-std=c++17, -Wall, -Wextra]
+  Remove: [-W*]
+Diagnostics:
+  UnusedIncludes:
+    Strict
+  MissingIncludes:
+    Strict
+</code></pre>
+<p>For complex projects, <code>compile_commands.json</code> provides more comprehensive configuration:</p>
+<pre><code>cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
+# or
+bear -- make
+</code></pre>
+<h2>Common Compilation Flags</h2>
+<p>When working with clangd, several compilation flags are commonly used:</p>
+<ul>
+<li><code>-std=c++17</code>: Sets the C++ standard to C++17</li>
+<li><code>-Wall -Wextra</code>: Enables comprehensive warnings</li>
+<li><code>-O2</code>: Optimization level 2</li>
+<li><code>-g</code>: Includes debug symbols</li>
+<li><code>-I&lt;path&gt;</code>: Specifies include paths</li>
+<li><code>-L&lt;path&gt;</code>: Specifies library paths</li>
+</ul>
+<h2>Integration Pattern</h2>
+<p>The typical workflow when using clangd involves:</p>
+<ol>
+<li>clangd uses <code>compile_commands.json</code> to understand project structure</li>
+<li>clang-format is run to format code according to style guidelines</li>
+<li>clang-tidy performs static analysis to identify potential issues</li>
+<li>Code is compiled with warnings enabled to catch issues early</li>
+</ol>
+<h2>Advanced Features</h2>
+<p>clang-tidy provides additional static analysis capabilities with various checks that can be run individually or in groups:</p>
+<pre><code>clang-tidy file.cpp --checks="*" --
+clang-tidy file.cpp --fix --
+</code></pre>
+<p>The <code>--fix</code> flag automatically applies fixes to issues that can be resolved automatically.</p>
+<h2>Resources and Further Information</h2>
+<p>For more detailed information about clangd and its capabilities, visit:</p>
+<ul>
+<li><a href="https://clangd.llvm.org/">clangd Website</a></li>
+<li><a href="https://clangd.llvm.org/get_started">Getting Started Guide</a></li>
+<li><a href="https://llvm.org/">LLVM Project</a></li>
+</ul>
+<p>This skill represents a significant improvement in the C/C++ development workflow, bringing modern IDE features to any text editor that supports LSP, making development more efficient and less error-prone.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bowen31337/clangd-lsp/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bowen31337/clangd-lsp/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

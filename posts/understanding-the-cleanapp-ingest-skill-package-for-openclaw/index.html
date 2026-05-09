@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the CleanApp Ingest Skill Package for OpenClaw | News of Tomorrow</title>
+<meta name="description" content="The CleanApp Ingest v1 skill package enables agents to submit various problem signals to CleanApp using the Fetcher Key System, providing a secure and compartme">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-cleanapp-ingest-skill-package-for-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the CleanApp Ingest Skill Package for OpenClaw">
+<meta property="og:description" content="The CleanApp Ingest v1 skill package enables agents to submit various problem signals to CleanApp using the Fetcher Key System, providing a secure and compartme">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-cleanapp-ingest-skill-package-for-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-cleanapp-ingest-skill-package-for-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-19">
+<meta property="article:modified_time" content="2026-03-19">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the CleanApp Ingest Skill Package for OpenClaw">
+<meta name="twitter:description" content="The CleanApp Ingest v1 skill package enables agents to submit various problem signals to CleanApp using the Fetcher Key System, providing a secure and compartme">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-cleanapp-ingest-skill-package-for-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the CleanApp Ingest Skill Package for OpenClaw", "datePublished": "2026-03-19", "dateModified": "2026-03-19", "image": ["https://picsum.photos/seed/understanding-the-cleanapp-ingest-skill-package-for-openclaw/1200/630"], "description": "The CleanApp Ingest v1 skill package enables agents to submit various problem signals to CleanApp using the Fetcher Key System, providing a secure and compartme", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-cleanapp-ingest-skill-package-for-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the CleanApp Ingest Skill Package for OpenClaw", "item": "https://github.insightginie.com/posts/understanding-the-cleanapp-ingest-skill-package-for-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the CleanApp Ingest Skill Package for OpenClaw</h1>
+<time datetime="2026-03-19" class="post-date" data-date="2026-03-19T03:15:35+00:00">2026-03-19</time>
+<img src="https://picsum.photos/seed/understanding-the-cleanapp-ingest-skill-package-for-openclaw/800/400" class="post-hero" alt="Understanding the CleanApp Ingest Skill Package for OpenClaw">
+<h2>What Is the CleanApp Ingest Skill Package?</h2>
+<p>The CleanApp Ingest v1 skill package is a specialized integration that allows agents to submit any type of problem signal into CleanApp&#8217;s platform. This includes bugs, incidents, scams, UX friction issues, policy violations, safety hazards, and improvement proposals. The skill operates as a client-side integration that communicates with CleanApp over HTTPS, rather than running as a long-lived agent inside CleanApp&#8217;s backend.</p>
+<h2>How the Fetcher Key System Works</h2>
+<p>The skill utilizes CleanApp&#8217;s Fetcher Key System, which involves three main API endpoints:</p>
+<ul>
+<li><strong>POST /v1/fetchers/register</strong> &#8211; One-time key issuance for authentication</li>
+<li><strong>POST /v1/reports:bulkIngest</strong> &#8211; Bulk ingest functionality with quarantine-first approach</li>
+<li><strong>GET /v1/fetchers/me</strong> &#8211; Introspection to check fetcher status</li>
+</ul>
+<h2>Security and Compartmentalization</h2>
+<p>The skill is designed with security as a primary concern. The only secret maintained is a revocable CleanApp API key (CLEANAPP_API_TOKEN). New keys are automatically placed in a quarantine lane on the backend, meaning submitted reports are stored and analyzed but not publicly published, routed to third parties, or rewarded. The backend enforces rate limits, idempotency through source_id, and kill switches that can revoke or suspend keys.</p>
+<h2>Data Handling and Privacy</h2>
+<p>By default, the skill submits minimal data: title, description (text), optional latitude/longitude coordinates, and optional media metadata including URL, SHA, and content-type. Recommended low-risk defaults include rounding coordinates to reduce precision (&#8211;approx-location) and dropping media metadata unless specifically needed (&#8211;no-media).</p>
+<h2>Idempotency and Duplicate Prevention</h2>
+<p>Every submitted item must include a stable source_id. The backend enforces a unique constraint on (fetcher_id, source_id), ensuring that retries won&#8217;t create duplicate entries. This is crucial for reliable data ingestion.</p>
+<h2>Usage Examples</h2>
+<p>The skill supports multiple usage patterns:</p>
+<ol>
+<li>Bulk ingest from JSON files using ingest.py with various flags for customization</li>
+<li>Dry run mode for testing without network calls</li>
+<li>Single-item submission via shell scripts for quick manual submissions</li>
+</ol>
+<h2>Promotion from Quarantine</h2>
+<p>Promotion out of quarantine is a reviewed process. As agents build reputation, CleanApp can raise submission caps and allow public publishing, routing, and rewards. Agents can check their promotion status and request promotion through dedicated API endpoints.</p>
+<h2>Technical References</h2>
+<p>Complete API documentation is available through Swagger UI and OpenAPI YAML specifications. The skill package includes a comprehensive API reference document for developers implementing the integration.</p>
+<h2>Conclusion</h2>
+<p>The CleanApp Ingest v1 skill package provides a secure, compartmentalized way for agents to submit problem signals to CleanApp. With its quarantine-first approach, minimal data handling, and robust security measures, it offers a reliable integration that protects both the submitter and the CleanApp ecosystem while enabling valuable data collection for improvement and safety initiatives.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/borisolver/cleanapp/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/borisolver/cleanapp/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

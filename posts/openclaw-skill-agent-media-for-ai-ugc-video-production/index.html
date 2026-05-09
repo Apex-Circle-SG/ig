@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill: Agent Media for AI UGC Video Production | News of Tomorrow</title>
+<meta name="description" content="Learn how to use the Agent Media skill in OpenClaw to create AI-powered UGC videos with talking heads, B-roll, and automated subtitles from the terminal.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-agent-media-for-ai-ugc-video-production/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill: Agent Media for AI UGC Video Production">
+<meta property="og:description" content="Learn how to use the Agent Media skill in OpenClaw to create AI-powered UGC videos with talking heads, B-roll, and automated subtitles from the terminal.">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-agent-media-for-ai-ugc-video-production/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-agent-media-for-ai-ugc-video-production/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-14">
+<meta property="article:modified_time" content="2026-03-14">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill: Agent Media for AI UGC Video Production">
+<meta name="twitter:description" content="Learn how to use the Agent Media skill in OpenClaw to create AI-powered UGC videos with talking heads, B-roll, and automated subtitles from the terminal.">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-agent-media-for-ai-ugc-video-production/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill: Agent Media for AI UGC Video Production", "datePublished": "2026-03-14", "dateModified": "2026-03-14", "image": ["https://picsum.photos/seed/openclaw-skill-agent-media-for-ai-ugc-video-production/1200/630"], "description": "Learn how to use the Agent Media skill in OpenClaw to create AI-powered UGC videos with talking heads, B-roll, and automated subtitles from the terminal.", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-agent-media-for-ai-ugc-video-production/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill: Agent Media for AI UGC Video Production", "item": "https://github.insightginie.com/posts/openclaw-skill-agent-media-for-ai-ugc-video-production/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill: Agent Media for AI UGC Video Production</h1>
+<time datetime="2026-03-14" class="post-date" data-date="2026-03-14T10:16:02+00:00">2026-03-14</time>
+<img src="https://picsum.photos/seed/openclaw-skill-agent-media-for-ai-ugc-video-production/800/400" class="post-hero" alt="OpenClaw Skill: Agent Media for AI UGC Video Production">
+<h2>What is the Agent Media Skill?</h2>
+<p>The Agent Media skill in OpenClaw is a powerful tool for creating AI-powered user-generated content (UGC) videos directly from your terminal. This skill leverages the agent-media CLI to produce complete videos with talking heads, B-roll footage, voiceover, and animated subtitles.</p>
+<h2>Core Functionality</h2>
+<p>The skill transforms scripts into professional videos by combining several AI technologies:</p>
+<ul>
+<li><strong>AI Talking Heads</strong> &#8211; Create videos with realistic lip-synced avatars</li>
+<li><strong>B-roll Integration</strong> &#8211; Add contextual cutaway scenes to enhance storytelling</li>
+<li><strong>Automated Subtitles</strong> &#8211; Generate animated captions with various styling options</li>
+<li><strong>Voice Synthesis</strong> &#8211; Convert text to natural-sounding speech</li>
+<li><strong>Background Music</strong> &#8211; Add appropriate audio tracks to match video tone</li>
+</ul>
+<h2>Mandatory Rules for Video Creation</h2>
+<p>The skill enforces several critical rules to ensure video quality:</p>
+<ol>
+<li><strong>Always use &#8211;actor</strong> &#8211; Every video must include a talking head for lip sync; otherwise, you&#8217;ll just get a static image with voiceover</li>
+<li><strong>Word count matters</strong> &#8211; Natural speech is 2.5 words per second; scripts must match target duration (5s = ~12 words, 10s = ~25 words, 15s = ~37 words)</li>
+<li><strong>SaaS reviews need screenshots</strong> &#8211; Product reviews must include 1-3 screenshots via &#8211;broll-images for context</li>
+<li><strong>Product name required</strong> &#8211; SaaS reviews must specify the product name for subtitles</li>
+<li><strong>Always use &#8211;sync</strong> &#8211; Wait for completion and get the output URL</li>
+<li><strong>Descriptive filenames</strong> &#8211; B-roll images should have descriptive names for semantic matching</li>
+</ol>
+<h2>Installation and Setup</h2>
+<p>Before using the skill, you need to install and authenticate the agent-media CLI:</p>
+<pre><code>npm install -g agent-media-cli
+agent-media login
+agent-media whoami
+</code></pre>
+<h2>UGC Video Pipeline</h2>
+<p>The flagship feature transforms scripts through this workflow:</p>
+<ol>
+<li>Script → Scene splitting</li>
+<li>TTS voiceover generation</li>
+<li>AI talking heads + B-roll integration</li>
+<li>Crossfade assembly</li>
+<li>Animated subtitles</li>
+<li>Background music addition</li>
+<li>End screen CTA</li>
+</ol>
+<h2>Basic Usage Examples</h2>
+<h3>Simple UGC Video</h3>
+<pre><code>agent-media ugc "Ever wonder why some videos go viral? Here's the secret..." --actor sofia --sync
+</code></pre>
+<h3>From Script File</h3>
+<pre><code>agent-media ugc ./script.txt --actor naomi --sync
+</code></pre>
+<h3>AI-Generated Script</h3>
+<pre><code>agent-media ugc -g "A fitness tracker that monitors sleep quality" --actor marcus --sync
+</code></pre>
+<h3>With B-roll</h3>
+<pre><code>agent-media ugc "Your script here..." --actor marcus --broll --sync
+</code></pre>
+<h3>SaaS Review with Screenshots</h3>
+<pre><code>agent-media ugc "Your script here..." --actor sofia --broll --broll-images https://example.com/screenshot1.png,https://example.com/screenshot2.png --sync
+</code></pre>
+<h2>Available Flags</h2>
+<p>The skill supports numerous customization options:</p>
+<ul>
+<li><code>--actor &lt;slug&gt;</code> &#8211; Library actor for talking heads</li>
+<li><code>--persona &lt;slug&gt;</code> &#8211; Custom persona (cloned voice + face)</li>
+<li><code>--face-url &lt;url&gt;</code> &#8211; Direct face photo URL or local file</li>
+<li><code>--voice &lt;name&gt;</code> &#8211; TTS voice selection</li>
+<li><code>--tone &lt;name&gt;</code> &#8211; Voice tone (energetic, calm, confident, dramatic)</li>
+<li><code>--style &lt;name&gt;</code> &#8211; Subtitle style (hormozi, minimal, bold, etc.)</li>
+<li><code>-d, --duration &lt;s&gt;</code> &#8211; Target duration (5, 10, or 15 seconds)</li>
+<li><code>--aspect &lt;ratio&gt;</code> &#8211; Aspect ratio (9:16, 16:9, 1:1)</li>
+<li><code>--music &lt;genre&gt;</code> &#8211; Background music genre</li>
+<li><code>--cta &lt;text&gt;</code> &#8211; End screen call-to-action</li>
+<li><code>--broll</code> &#8211; Enable B-roll cutaway scenes</li>
+<li><code>--broll-images &lt;urls&gt;</code> &#8211; Comma-separated screenshot/image URLs</li>
+<li><code>--template &lt;slug&gt;</code> &#8211; Script template selection</li>
+<li><code>-g, --generate-script &lt;prompt&gt;</code> &#8211; AI-generate script from description</li>
+<li><code>--product-url &lt;url&gt;</code> &#8211; Product URL for script generation context</li>
+<li><code>-s, --sync</code> &#8211; Wait for completion and print output URL</li>
+</ul>
+<h2>Script Templates</h2>
+<p>The skill offers various templates for different video types:</p>
+<ul>
+<li><strong>monologue</strong> &#8211; Hook → Body → CTA (direct-to-camera talking)</li>
+<li><strong>testimonial</strong> &#8211; Problem → Solution → Result → CTA (customer stories)</li>
+<li><strong>product-review</strong> &#8211; Intro → Experience → Verdict → CTA (product reviews)</li>
+<li><strong>problem-solution</strong> &#8211; Hook → Pain → Solution → CTA (before/after pain points)</li>
+<li><strong>saas-review</strong> &#8211; Hook → Walkthrough → Opinion → CTA (SaaS/app reviews)</li>
+<li><strong>before-after</strong> &#8211; Hook → Before → After → CTA (transformations)</li>
+<li><strong>listicle</strong> &#8211; Hook → Tip 1 → Tip 2 → Tip 3 + CTA (tips and lists)</li>
+<li><strong>product-demo</strong> &#8211; Intro → Demo → Recap → CTA (product walkthroughs)</li>
+</ul>
+<h2>Subtitle Styles</h2>
+<p>Available subtitle styles include:</p>
+<ul>
+<li><strong>hormozi</strong> &#8211; Yellow karaoke highlight (default)</li>
+<li><strong>minimal</strong> &#8211; Clean, simple styling</li>
+<li><strong>bold</strong> &#8211; Neon cyan styling</li>
+<li><strong>karaoke</strong> &#8211; Green pop highlight</li>
+<li><strong>clean</strong> &#8211; White on dark background</li>
+<li><strong>tiktok</strong> &#8211; Popular social media style</li>
+<li><strong>neon</strong> &#8211; Bright neon effects</li>
+</ul>
+<h2>SaaS Review Video Workflow</h2>
+<p>For SaaS reviews, follow this exact process:</p>
+<ol>
+<li>Get product name &#8211; Ask user if not provided</li>
+<li>Get 1-3 screenshot URLs &#8211; Visit product site if needed</li>
+<li>Pick an actor &#8211; Default to naomi or sofia if unspecified</li>
+<li>Write script &#8211; Match word count to duration (2.5 words/sec)</li>
+<li>Run command &#8211; Include all required flags</li>
+</ol>
+<h2>Benefits of Using This Skill</h2>
+<p>The Agent Media skill streamlines video production by:</p>
+<ul>
+<li><strong>Saving time</strong> &#8211; Create professional videos in minutes instead of hours</li>
+<li><strong>Ensuring consistency</strong> &#8211; Standardized formatting and quality across videos</li>
+<li><strong>Reducing complexity</strong> &#8211; No need for video editing expertise</li>
+<li><strong>Scaling content</strong> &#8211; Produce multiple videos quickly for different products or topics</li>
+<li><strong>Maintaining quality</strong> &#8211; Built-in rules prevent common video production mistakes</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The Agent Media skill in OpenClaw is an essential tool for anyone needing to create professional UGC videos quickly and efficiently. By following the mandatory rules and using the various customization options, you can produce high-quality videos that engage viewers and effectively communicate your message.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/nevo-david/agent-media/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/nevo-david/agent-media/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

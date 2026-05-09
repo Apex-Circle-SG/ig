@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill Authoring Guide for Clawbot Agents: Creating Effective Skills for AI Agents | News of Tomorrow</title>
+<meta name="description" content="Learn how to create effective SKILL.md files for Clawbot agents following the agentskills.io standard. This comprehensive guide covers principles, structure, an">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/skill-authoring-guide-for-clawbot-agents-creating-effective-skills-for-ai-agents/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Skill Authoring Guide for Clawbot Agents: Creating Effective Skills for AI Agents">
+<meta property="og:description" content="Learn how to create effective SKILL.md files for Clawbot agents following the agentskills.io standard. This comprehensive guide covers principles, structure, an">
+<meta property="og:image" content="https://picsum.photos/seed/skill-authoring-guide-for-clawbot-agents-creating-effective-skills-for-ai-agents/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/skill-authoring-guide-for-clawbot-agents-creating-effective-skills-for-ai-agents/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-05">
+<meta property="article:modified_time" content="2026-03-05">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Skill Authoring Guide for Clawbot Agents: Creating Effective Skills for AI Agents">
+<meta name="twitter:description" content="Learn how to create effective SKILL.md files for Clawbot agents following the agentskills.io standard. This comprehensive guide covers principles, structure, an">
+<meta name="twitter:image" content="https://picsum.photos/seed/skill-authoring-guide-for-clawbot-agents-creating-effective-skills-for-ai-agents/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Skill Authoring Guide for Clawbot Agents: Creating Effective Skills for AI Agents", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "image": ["https://picsum.photos/seed/skill-authoring-guide-for-clawbot-agents-creating-effective-skills-for-ai-agents/1200/630"], "description": "Learn how to create effective SKILL.md files for Clawbot agents following the agentskills.io standard. This comprehensive guide covers principles, structure, an", "mainEntityOfPage": "https://github.insightginie.com/posts/skill-authoring-guide-for-clawbot-agents-creating-effective-skills-for-ai-agents/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Skill Authoring Guide for Clawbot Agents: Creating Effective Skills for AI Agents", "item": "https://github.insightginie.com/posts/skill-authoring-guide-for-clawbot-agents-creating-effective-skills-for-ai-agents/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Skill Authoring Guide for Clawbot Agents: Creating Effective Skills for AI Agents</h1>
+<time datetime="2026-03-05" class="post-date" data-date="2026-03-05T07:01:42+00:00">2026-03-05</time>
+<img src="https://picsum.photos/seed/skill-authoring-guide-for-clawbot-agents-creating-effective-skills-for-ai-agents/800/400" class="post-hero" alt="Skill Authoring Guide for Clawbot Agents: Creating Effective Skills for AI Agents">
+<h2>What is the Skill Authoring Guide?</h2>
+<p>The Skill Authoring Guide is a comprehensive framework for creating effective SKILL.md files that extend the capabilities of Clawbot agents. This guide provides developers and AI practitioners with standardized approaches to enhance agent functionality through well-structured skill definitions.</p>
+<h2>How Does It Work?</h2>
+<p>The guide operates on several core principles that ensure efficient and effective skill creation:</p>
+<h3>Core Principles</h3>
+<p><strong>1. Brevity is King</strong></p>
+<p>The context window is a shared resource among all skills. Since agents are already highly capable, the guide emphasizes adding only what the agent doesn&#8217;t know. Before writing any explanation, ask:</p>
+<ul>
+<li>&#8220;Is this explanation really necessary?&#8221;</li>
+<li>&#8220;Does this paragraph justify the token cost?&#8221;</li>
+</ul>
+<p>Prefer concise examples over lengthy explanations.</p>
+<p><strong>2. Matching Degrees of Freedom</strong></p>
+<p>The guide categorizes tasks by their required precision:</p>
+<p><strong>High Freedom</strong> &#8211; Multiple valid approaches exist, context-dependent decisions are needed. Format: Text instructions.</p>
+<p><strong>Medium Freedom</strong> &#8211; Preferred patterns exist with some variation allowed. Format: Pseudocode or parameterized scripts.</p>
+<p><strong>Low Freedom</strong> &#8211; Fragile tasks requiring consistency. Format: Specific scripts with minimal parameters.</p>
+<p>Think of it as: narrow bridges near cliffs need guardrails (low freedom), while wide plains allow various paths (high freedom).</p>
+<h2>SKILL.md Structure</h2>
+<p>The guide provides a standardized structure for SKILL.md files:</p>
+<pre><code>---
+name: my-skill-name # Required, lowercase-hyphen, 1-64 characters
+description: > # Required, 1-1024 characters
+  What it does + when to use it + relevant keywords
+license: Apache-2.0 # Optional
+metadata: # Optional
+author: misskim
+version: "1.0"
+---
+# Skill Title
+[Instructions for the agent - free-form markdown]</code></pre>
+<p><strong>Required Fields:</strong></p>
+<ul>
+<li>name: Must match directory name, lowercase-hyphen only</li>
+<li>description: Acts as skill activation trigger, should be keyword-rich</li>
+</ul>
+<h2>Directory Structure</h2>
+<p>Skills follow a standardized directory layout:</p>
+<pre><code>skill-name/
+├── SKILL.md          # Required
+├── scripts/          # Executable code (Python/Bash/JS)
+├── references/       # Detailed documentation (load when needed)
+└── assets/           # Static resources (templates, images, data)</code></pre>
+<h2>Environment-Specific Considerations</h2>
+<p>The guide includes specific considerations for the Clawbot environment:</p>
+<ul>
+<li>Clawbot Agents: Skills are placed in skills/ or ~/.clawdbot/skills/</li>
+<li>MiniPC Integration: Can delegate external tasks via nodes.run commands</li>
+<li>Sub-agents: Skills can be designed to spawn sub-agents</li>
+<li>Security: Only trusted code should be included in scripts/</li>
+<li>Maintainability: Keep SKILL.md under 500 lines, move detailed content to references/</li>
+</ul>
+<h2>Good vs Bad Skill Examples</h2>
+<p><strong>Bad:</strong> &#8220;Processes PDFs&#8221; (description too short)</p>
+<p><strong>Good:</strong> &#8220;Extracts text/tables from PDF files, fills forms, and merges multiple PDFs. Use when working with PDF documents or document extraction.&#8221;</p>
+<p><strong>Bad:</strong> Explaining Python syntax the agent already knows</p>
+<p><strong>Good:</strong> Providing domain-specific knowledge/workflows the agent doesn&#8217;t know</p>
+<h2>Benefits and Use Cases</h2>
+<p>The Skill Authoring Guide offers numerous benefits:</p>
+<h3>For Developers</h3>
+<ul>
+<li>Standardized approach reduces learning curve</li>
+<li>Clear structure improves maintainability</li>
+<li>Security guidelines protect systems</li>
+<li>Efficiency principles optimize token usage</li>
+</ul>
+<h3>For Organizations</h3>
+<ul>
+<li>Consistent skill quality across teams</li>
+<li>Easier skill sharing and collaboration</li>
+<li>Better resource management</li>
+<li>Improved agent performance</li>
+</ul>
+<h3>For End Users</h3>
+<ul>
+<li>More reliable agent behavior</li>
+<li>Faster response times</li>
+<li>Better handling of specialized tasks</li>
+<li>Consistent user experience</li>
+</ul>
+<h2>Real-World Applications</h2>
+<p>The guide enables various practical applications:</p>
+<h3>Document Processing</h3>
+<p>Skills can handle specialized document formats, extract structured data, and automate document workflows that would be tedious for standard agents.</p>
+<h3>Data Analysis</h3>
+<p>Domain-specific analysis skills can provide tailored insights for industries like finance, healthcare, or scientific research.</p>
+<h3>Integration Tasks</h3>
+<p>Skills can bridge gaps between different systems, APIs, or data formats that agents typically struggle with.</p>
+<h3>Creative Workflows</h3>
+<p>Specialized creative skills can assist with design, writing, or multimedia tasks that require specific tools or knowledge.</p>
+<h2>Getting Started</h2>
+<p>To begin creating skills using this guide:</p>
+<ol>
+<li>Review the agentskills.io standard documentation</li>
+<li>Identify gaps in your agent&#8217;s current capabilities</li>
+<li>Design your skill following the structure and principles outlined</li>
+<li>Test thoroughly in your Clawbot environment</li>
+<li>Iterate based on performance and feedback</li>
+</ol>
+<h2>Conclusion</h2>
+<p>The Skill Authoring Guide provides a comprehensive framework for extending AI agent capabilities in a structured, efficient, and secure manner. By following these guidelines, developers can create powerful skills that enhance agent functionality while maintaining optimal performance and reliability.</p>
+<p>Whether you&#8217;re building skills for document processing, data analysis, system integration, or creative workflows, this guide ensures your skills are well-designed, maintainable, and effective in real-world applications.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/kjaylee/skill-authoring/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/kjaylee/skill-authoring/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

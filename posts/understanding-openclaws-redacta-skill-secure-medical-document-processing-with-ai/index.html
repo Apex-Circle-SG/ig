@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding OpenClaw&amp;#8217;s Redacta Skill: Secure Medical Document Processing with AI | News of Tomorrow</title>
+<meta name="description" content="Learn how Redacta skill pseudonymises medical documents by replacing patient identifiers with tokens for safe AI processing.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-openclaws-redacta-skill-secure-medical-document-processing-with-ai/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding OpenClaw&amp;#8217;s Redacta Skill: Secure Medical Document Processing with AI">
+<meta property="og:description" content="Learn how Redacta skill pseudonymises medical documents by replacing patient identifiers with tokens for safe AI processing.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-openclaws-redacta-skill-secure-medical-document-processing-with-ai/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-openclaws-redacta-skill-secure-medical-document-processing-with-ai/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-15">
+<meta property="article:modified_time" content="2026-03-15">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding OpenClaw&amp;#8217;s Redacta Skill: Secure Medical Document Processing with AI">
+<meta name="twitter:description" content="Learn how Redacta skill pseudonymises medical documents by replacing patient identifiers with tokens for safe AI processing.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-openclaws-redacta-skill-secure-medical-document-processing-with-ai/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding OpenClaw&#8217;s Redacta Skill: Secure Medical Document Processing with AI", "datePublished": "2026-03-15", "dateModified": "2026-03-15", "image": ["https://picsum.photos/seed/understanding-openclaws-redacta-skill-secure-medical-document-processing-with-ai/1200/630"], "description": "Learn how Redacta skill pseudonymises medical documents by replacing patient identifiers with tokens for safe AI processing.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-openclaws-redacta-skill-secure-medical-document-processing-with-ai/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding OpenClaw&#8217;s Redacta Skill: Secure Medical Document Processing with AI", "item": "https://github.insightginie.com/posts/understanding-openclaws-redacta-skill-secure-medical-document-processing-with-ai/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding OpenClaw&#8217;s Redacta Skill: Secure Medical Document Processing with AI</h1>
+<time datetime="2026-03-15" class="post-date" data-date="2026-03-15T05:45:57+00:00">2026-03-15</time>
+<img src="https://picsum.photos/seed/understanding-openclaws-redacta-skill-secure-medical-document-processing-with-ai/800/400" class="post-hero" alt="Understanding OpenClaw&amp;#8217;s Redacta Skill: Secure Medical Document Processing with AI">
+<p>In the rapidly evolving landscape of healthcare technology, ensuring patient privacy while leveraging the power of artificial intelligence (AI) is paramount. The <strong>OpenClaw</strong> platform&#8217;s <strong>Redacta</strong> skill, developed by <a href="https://pharmatools.ai" target="_blank" rel="noopener noreferrer">PharmaTools.AI</a>, addresses this critical need by pseudonymizing medical documents before they are processed by AI systems. This comprehensive guide will delve into what the Redacta skill does, how it works, and its significance in the healthcare industry.</p>
+<h2>What is the Redacta Skill?</h2>
+<p>The Redacta skill is designed to <strong>detect and replace patient identifiers</strong> in medical documents with <strong>labelled tokens</strong>. This process ensures that clinical content can be safely processed by AI, protecting patient privacy while preserving the essential clinical information. The skill is part of the <a href="https://github.com/openclaw/skills" target="_blank" rel="noopener noreferrer">OpenClaw</a> ecosystem, which provides a set of tools and skills for secure data processing.</p>
+<p>When a user shares medical text with an AI system, the Redacta skill scans the document for patient identifiers and replaces them with pseudonymised tokens. The output is clinically readable but devoid of real patient data, making it ideal for AI analysis, research, and other applications that require secure handling of sensitive information.</p>
+<h2>What Gets Detected and Replaced</h2>
+<p>The Redacta skill is equipped to detect various types of patient identifiers using a combination of regular expression (regex)-based pattern matching and contextual reasoning. Here&#8217;s a breakdown of what it can identify and replace:</p>
+<h3>Structured Identifiers (Regex-Based)</h3>
+<ul>
+<li><strong>NHS Numbers (UK)</strong>: Formatted as 3-3-4 digits (e.g., 943 476 5919) or 10 consecutive digits, replaced with [NHS_NUMBER].</li>
+<li><strong>Dates of Birth / Dates</strong>: Recognized in various formats (e.g., DD/MM/YYYY, DD-MM-YYYY, DD.MM.YYYY, YYYY-MM-DD) and contextual keywords like &#8220;DOB&#8221;, &#8220;born&#8221;, &#8220;date of birth&#8221;, &#8220;age&#8221;, &#8220;d.o.b&#8221;. Replaced with [DATE_OF_BIRTH] or [DATE], depending on context.</li>
+<li><strong>UK Postcodes</strong>: Recognized in formats like A9 9AA, A99 9AA, A9A 9AA, etc., replaced with [POSTCODE].</li>
+<li><strong>Phone Numbers</strong>: Recognized in UK (e.g., 07xxx, 01xxx, 02xxx, +44) and US formats (e.g., (xxx) xxx-xxxx, xxx-xxx-xxxx, +1), replaced with [PHONE_NUMBER].</li>
+<li><strong>Email Addresses</strong>: Recognized by standard email patterns, replaced with [EMAIL].</li>
+<li><strong>Hospital / MRN Numbers</strong>: Recognized by contextual keywords like &#8220;hospital number&#8221;, &#8220;MRN&#8221;, &#8220;patient ID&#8221;, etc., replaced with [HOSPITAL_NUMBER].</li>
+<li><strong>UK National Insurance Numbers</strong>: Recognized by the format of 2 letters + 6 digits + 1 letter (e.g., AB123456C), replaced with [NI_NUMBER].</li>
+</ul>
+<h3>Contextual Identifiers (Agent Reasoning)</h3>
+<ul>
+<li><strong>Patient Names</strong>: Detected in salutations, headers, and body text, replaced with [PATIENT_NAME]. Multiple patients can be labelled as [PATIENT_NAME_1], [PATIENT_NAME_2], etc. Clinician names are distinguished and preserved.</li>
+<li><strong>Patient Addresses</strong>: Recognized as full or partial addresses, replaced with [ADDRESS].</li>
+<li><strong>Ages</strong>: Specific ages that could identify patients are replaced with [AGE], considering context to avoid general ages.</li>
+</ul>
+<h2>Output Format and Report</h2>
+<p>The Redacta skill generates two key outputs for each processed document:</p>
+<ol>
+<li><strong>Pseudonymised Document</strong>: The full document with all identifiers replaced by tokens, preserving all formatting, paragraph breaks, and clinical content.</li>
+<li><strong>Redaction Report</strong>: A summary of what was found and replaced, providing transparency and accountability. Example:</li>
+</ol>
+<pre><code>Redaction Report
+================
+Items pseudonymised: 7
+- [NHS_NUMBER] × 1 (line 3)
+- [PATIENT_NAME] × 2 (lines 1, 5)
+- [DATE_OF_BIRTH] × 1 (line 2)
+- [POSTCODE] × 1 (line 8)
+- [PHONE_NUMBER] × 1 (line 9)
+- [AGE] × 1 (line 4)
+Clinical content preserved: ✓
+Clinician names preserved: Dr. Sarah Chen, Mr. James Wright
+</code></pre>
+<h2>Rules and Guidelines</h2>
+<p>To ensure consistency and reliability, the Redacta skill adheres to specific rules and guidelines:</p>
+<ul>
+<li><strong>Never output original patient identifiers</strong>: The pseudonymised version is the only output.</li>
+<li><strong>Preserve clinical content</strong>: Medications, diagnoses, procedures, test results, and clinical observations remain intact.</li>
+<li><strong>Preserve clinician names</strong>: Only redact clinician names upon explicit user request.</li>
+<li><strong>Preserve hospital/practice names</strong>: These are institutional and not patient-specific.</li>
+<li><strong>Consistency</strong>: The same identifier is replaced with the same token throughout the document.</li>
+<li><strong>When uncertain</strong>: Err on the side of redacting to avoid false negatives.</li>
+</ul>
+<p>It is also important to note what the Redacta skill does <strong>not</strong> do:</p>
+<ul>
+<li><strong>Store or transmit patient data</strong>: All processing is done locally within the AI agent session.</li>
+<li><strong>Guarantee 100% detection</strong>: Always review the output for accuracy.</li>
+<li><strong>Replace formal data protection processes</strong>: Complement existing workflows, not replace them.</li>
+<li><strong>Provide legal compliance certification</strong>: Check with legal and compliance teams for data handling requirements.</li>
+<li><strong>Process images or PDFs</strong>: Currently text input only (v1).</li>
+</ul>
+<h2>Privacy and Security</h2>
+<p>The Redacta skill processes text locally within the AI agent session, ensuring that no patient data is sent to external services. However, the text is still processed by the underlying language model, so it’s essential to ensure that your model provider&#8217;s data handling meets your organization&#8217;s requirements.</p>
+<p>Built by <a href="https://pharmatools.ai" target="_blank" rel="noopener noreferrer">PharmaTools.AI</a>, the Redacta skill exemplifies a commitment to applied AI in pharma and healthcare, balancing innovation with patient privacy.</p>
+<h2>Conclusion</h2>
+<p>In summary, the Redacta skill from OpenClaw, developed by PharmaTools.AI, is a groundbreaking tool for pseudonymising medical documents. By detecting and replacing patient identifiers with labelled tokens, it enables safe AI processing of clinical content while safeguarding patient privacy. Whether for research, analysis, or other applications, Redacta ensures that healthcare data is handled with the utmost care and security.</p>
+<p>For more information or to explore the Redacta skill further, visit the <a href="https://github.com/openclaw/skills" target="_blank" rel="noopener noreferrer">OpenClaw GitHub repository</a> or the <a href="https://pharmatools.ai" target="_blank" rel="noopener noreferrer">PharmaTools.AI website</a>.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/nickjlamb/redacta/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/nickjlamb/redacta/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

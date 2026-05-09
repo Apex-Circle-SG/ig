@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mastering AI Multimedia Content Creation with MuleRouter and MuleRun APIs | News of Tomorrow</title>
+<meta name="description" content="Learn how to generate and edit images/videos with MuleRouter&amp;#8217;s multimodal AI APIs using Python 3.10+">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/mastering-ai-multimedia-content-creation-with-mulerouter-and-mulerun-apis/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Mastering AI Multimedia Content Creation with MuleRouter and MuleRun APIs">
+<meta property="og:description" content="Learn how to generate and edit images/videos with MuleRouter&amp;#8217;s multimodal AI APIs using Python 3.10+">
+<meta property="og:image" content="https://picsum.photos/seed/mastering-ai-multimedia-content-creation-with-mulerouter-and-mulerun-apis/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/mastering-ai-multimedia-content-creation-with-mulerouter-and-mulerun-apis/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-10">
+<meta property="article:modified_time" content="2026-03-10">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mastering AI Multimedia Content Creation with MuleRouter and MuleRun APIs">
+<meta name="twitter:description" content="Learn how to generate and edit images/videos with MuleRouter&amp;#8217;s multimodal AI APIs using Python 3.10+">
+<meta name="twitter:image" content="https://picsum.photos/seed/mastering-ai-multimedia-content-creation-with-mulerouter-and-mulerun-apis/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Mastering AI Multimedia Content Creation with MuleRouter and MuleRun APIs", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "image": ["https://picsum.photos/seed/mastering-ai-multimedia-content-creation-with-mulerouter-and-mulerun-apis/1200/630"], "description": "Learn how to generate and edit images/videos with MuleRouter&#8217;s multimodal AI APIs using Python 3.10+", "mainEntityOfPage": "https://github.insightginie.com/posts/mastering-ai-multimedia-content-creation-with-mulerouter-and-mulerun-apis/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Mastering AI Multimedia Content Creation with MuleRouter and MuleRun APIs", "item": "https://github.insightginie.com/posts/mastering-ai-multimedia-content-creation-with-mulerouter-and-mulerun-apis/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Mastering AI Multimedia Content Creation with MuleRouter and MuleRun APIs</h1>
+<time datetime="2026-03-10" class="post-date" data-date="2026-03-10T06:45:35+00:00">2026-03-10</time>
+<img src="https://picsum.photos/seed/mastering-ai-multimedia-content-creation-with-mulerouter-and-mulerun-apis/800/400" class="post-hero" alt="Mastering AI Multimedia Content Creation with MuleRouter and MuleRun APIs">
+<section class="post-content">
+<h2>Understanding the MuleRouter Skill</h2>
+<p>The MuleRouter skill is a powerful tool that allows users to create and manipulate multimedia content using advanced AI models through MuleRouter or MuleRun APIs. This skill opens up possibilities for generating images and videos from text prompts, transforming existing images into videos, and editing videos with AI-powered tools. It&#8217;s designed to work seamlessly with Python 3.10 or later, requiring either the uv package manager or pip, along with internet access to the MuleRouter or MuleRun API endpoints.</p>
+<h2>Key Features of the MuleRouter Skill</h2>
+<ol>
+<li><strong>Multimodal Content Generation</strong>: Create images and videos from text prompts</li>
+<li><strong>Image-to-Video Conversion</strong>: Transform static images into dynamic videos</li>
+<li><strong>Advanced Video Editing</strong>: Utilize AI for video editing tasks</li>
+<li><strong>Wide Model Support</strong>: Access various AI models like Wan2.6, Veo3, and Sora2</li>
+<li><strong>MuleRouter API Integration</strong>: Leverage the power of MuleRouter&#8217;s multimodal APIs</li>
+</ol>
+<h2>Setting Up the MuleRouter Skill</h2>
+<p>Before using the skill, you need to configure your environment properly:</p>
+<h3>Step 1: Environment Variables</h3>
+<p>You can set environment variables to configure your API connection:</p>
+<pre>export MULEROUTER_BASE_URL="https://api.mulerouter.ai"<br>export MULEROUTER_API_KEY="your-api-key"</pre>
+<p>Or alternatively, if you prefer to use MuleRun:</p>
+<pre>export MULEROUTER_SITE="mulerun"<br>export MULEROUTER_API_KEY="your-api-key"
+</pre>
+<h3>Step 2: Local Configuration</h3>
+<p>Alternatively, you can create a .env file in your working directory with the same configurations. Remember that the MULEROUTER_BASE_URL takes priority over MULEROUTER_SITE if both are set.</p>
+<h2>Using the MuleRouter Skill</h2>
+<h3>Quick Start Guide</h3>
+<p>Here&#8217;s a simple walkthrough of how to use the skill:</p>
+<ol>
+<li><strong>List Available Models</strong>: Run <code>uv run python scripts/list_models.py</code> to see what models you can work with</li>
+<li><strong>Check Model Parameters</strong>: Use <code>uv run python models/alibaba/wan2.6-t2v/generation.py --list-params</code> to understand the parameters for a specific model</li>
+<li><strong>Generate Content</strong>:
+<ul>
+<li>Text-to-Video: <code>uv run python models/alibaba/wan2.6-t2v/generation.py --prompt "A cat walking through a garden"</code></li>
+<li>Text-to-Image: <code>uv run python models/alibaba/wan2.6-t2i/generation.py --prompt "A serene mountain lake"</code></li>
+<li>Image-to-Video: <code>uv run python models/alibaba/wan2.6-i2v/generation.py --prompt "Gentle zoom in" --image "https://example.com/photo.jpg"</code></li>
+</ul>
+</li>
+<li><strong>Important Note on Image Input</strong>: When working with images, it&#8217;s preferred to use local file paths rather than base64 encoded images. The skill automatically converts local file paths to base64.</li>
+</ol>
+<h2>Advanced Usage Tips</h2>
+<p>For optimal performance, consider the following:</p>
+<ul>
+<li>For image generation models, a suggested timeout is 5 minutes, while video generation models might need up to 15 minutes.</li>
+<li>When working with video models, setting the fps parameter to values above 15 can lead to out-of-memory errors.</li>
+<li>The &#8211;stream parameter is available for models that support streaming responses.</li>
+<li>
+</ul>
+<h2>Conclusion</h2>
+<p>The MuleRouter skill empowers users to create and manipulate multimedia content using state-of-the-art AI models. By following the setup instructions and utilizing the provided commands, you can unlock a world of creative possibilities for image and video generation, transformation, and editing. With its support for various AI models and integration with MuleRouter APIs, this skill is a valuable tool for content creators and developers alike.</p>
+<p>Remember to consult the referenced documentation for more detailed information about API configuration, CLI options, and complete model specifications to get the most out of the MuleRouter skill.</p>
+</section>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/misaka43fd/mulerouter-skills/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/misaka43fd/mulerouter-skills/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

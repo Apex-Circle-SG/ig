@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Session Cost Analysis Tool: Monitor AI Usage and Expenses | News of Tomorrow</title>
+<meta name="description" content="Learn how to analyze OpenClaw session logs to track token usage, API costs, and performance metrics across your AI agents. This comprehensive guide covers insta">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-session-cost-analysis-tool-monitor-ai-usage-and-expenses/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Session Cost Analysis Tool: Monitor AI Usage and Expenses">
+<meta property="og:description" content="Learn how to analyze OpenClaw session logs to track token usage, API costs, and performance metrics across your AI agents. This comprehensive guide covers insta">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-session-cost-analysis-tool-monitor-ai-usage-and-expenses/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-session-cost-analysis-tool-monitor-ai-usage-and-expenses/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-17">
+<meta property="article:modified_time" content="2026-03-17">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Session Cost Analysis Tool: Monitor AI Usage and Expenses">
+<meta name="twitter:description" content="Learn how to analyze OpenClaw session logs to track token usage, API costs, and performance metrics across your AI agents. This comprehensive guide covers insta">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-session-cost-analysis-tool-monitor-ai-usage-and-expenses/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Session Cost Analysis Tool: Monitor AI Usage and Expenses", "datePublished": "2026-03-17", "dateModified": "2026-03-17", "image": ["https://picsum.photos/seed/openclaw-session-cost-analysis-tool-monitor-ai-usage-and-expenses/1200/630"], "description": "Learn how to analyze OpenClaw session logs to track token usage, API costs, and performance metrics across your AI agents. This comprehensive guide covers insta", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-session-cost-analysis-tool-monitor-ai-usage-and-expenses/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Session Cost Analysis Tool: Monitor AI Usage and Expenses", "item": "https://github.insightginie.com/posts/openclaw-session-cost-analysis-tool-monitor-ai-usage-and-expenses/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Session Cost Analysis Tool: Monitor AI Usage and Expenses</h1>
+<time datetime="2026-03-17" class="post-date" data-date="2026-03-17T11:15:59+00:00">2026-03-17</time>
+<img src="https://picsum.photos/seed/openclaw-session-cost-analysis-tool-monitor-ai-usage-and-expenses/800/400" class="post-hero" alt="OpenClaw Session Cost Analysis Tool: Monitor AI Usage and Expenses">
+<h2>What is the OpenClaw Session Cost Tool?</h2>
+<p>The OpenClaw Session Cost tool is a powerful utility designed to analyze your AI agent interactions and provide detailed insights into token usage, costs, and performance metrics. This tool helps developers and organizations monitor their AI spending, optimize resource usage, and understand the operational patterns of their AI systems.</p>
+<h3>Why Monitor AI Usage?</h3>
+<p>As AI applications become more sophisticated and widely used, understanding the cost implications and resource consumption becomes critical. The Session Cost tool provides transparency into:</p>
+<ul>
+<li>Token consumption patterns across different models and providers</li>
+<li>Cost breakdowns by agent, model, and time period</li>
+<li>Performance metrics for optimization opportunities</li>
+<li>Usage trends to help with budgeting and planning</li>
+</ul>
+<h2>Installation and Setup</h2>
+<p>The Session Cost tool is part of the OpenClaw skills repository and requires Node.js to run. Here&#8217;s how to get started:</p>
+<h3>Prerequisites</h3>
+<ul>
+<li>Node.js installed on your system</li>
+<li>OpenClaw installed with agent sessions stored in the default location</li>
+</ul>
+<h3>Quick Installation</h3>
+<pre><code class="language-bash"># Clone the skills repository
+git clone https://github.com/openclaw/skills.git
+cd skills
+cd session-cost
+</code></pre>
+<h2>Basic Usage and Commands</h2>
+<p>The tool offers several ways to analyze your session data, from quick summaries to detailed breakdowns.</p>
+<h3>Basic Summary</h3>
+<pre><code class="language-bash">node scripts/session-cost.js
+</code></pre>
+<p>This command provides a comprehensive summary across all agents, showing total sessions, token usage, and costs grouped by agent and model.</p>
+<h3>Time-Based Analysis</h3>
+<pre><code class="language-bash"># Last 24 hours
+node scripts/session-cost.js --offset 24h
+
+# Last week
+node scripts/session-cost.js --offset 7d
+</code></pre>
+<h3>Agent-Specific Analysis</h3>
+<pre><code class="language-bash"># Focus on a specific agent
+node scripts/session-cost.js --agent main
+</code></pre>
+<h3>Provider Filtering</h3>
+<pre><code class="language-bash"># Analyze specific providers
+node scripts/session-cost.js --provider anthropic
+node scripts/session-cost.js --provider openai
+</code></pre>
+<h2>Advanced Features</h2>
+<h3>Detailed Session Analysis</h3>
+<p>For in-depth analysis, use the &#8211;details flag:</p>
+<pre><code class="language-bash"># Show all session details
+node scripts/session-cost.js --details
+
+# Details for a specific session
+node scripts/session-cost.js --details abc123def456
+</code></pre>
+<h3>Custom Output Formats</h3>
+<p>The tool supports multiple output formats for different use cases:</p>
+<pre><code class="language-bash"># JSON output for programmatic use
+node scripts/session-cost.js --format json
+
+# Discord-friendly format for chat platforms
+node scripts/session-cost.js --format discord
+</code></pre>
+<h3>Table View</h3>
+<p>For a more compact display, use the table format:</p>
+<pre><code class="language-bash">node scripts/session-cost.js --details --table
+</code></pre>
+<h2>Understanding the Output</h2>
+<h3>Text Summary Format</h3>
+<p>The default output provides a comprehensive summary organized by agent and model:</p>
+<pre><code>Found 52 .jsonl files across 2 agents, 52 matched
+====================================================================================================
+SUMMARY BY AGENT
+====================================================================================================
+Agent: main
+anthropic/claude-sonnet-4-5-20250929
+--------------------------------------------------------------------------------
+Sessions: 30
+Tokens:   1,234,567 (input: 900,000, output: 334,567)
+Cache:    read: 500,000 tokens, write: 200,000 tokens
+Cost:     $12.3456
+Input:       $5.4000
+Output:      $5.0185
+Cache read:  $1.5000  (included in total, discounted rate)
+Cache write: $0.4271  (included in total)
+</code></pre>
+<h3>JSON Output Structure</h3>
+<p>The JSON format is ideal for integration with other tools:</p>
+<pre><code class="language-json">{
+  "agents": {
+    "main": {
+      "models": {
+        "anthropic/claude-sonnet-4-5-20250929": {
+          "sessions": 30,
+          "tokens": {
+            "input": 900000,
+            "output": 334567,
+            "total": 1234567
+          },
+          "cache": {
+            "read": 500000,
+            "write": 200000
+          },
+          "cost": {
+            "total": 12.3456,
+            "input": 5.4,
+            "output": 5.0185,
+            "cacheRead": 1.5,
+            "cacheWrite": 0.4271
+          }
+        }
+      },
+      "totals": {
+        "sessions": 35,
+        "tokens": { ... },
+        "cache": { ... },
+        "cost": { ... }
+      }
+    }
+  },
+  "grandTotal": { ... }
+}
+</code></pre>
+<h2>Practical Use Cases</h2>
+<h3>Cost Monitoring</h3>
+<p>Track your AI expenses over time to stay within budget:</p>
+<pre><code class="language-bash"># Weekly cost report
+node scripts/session-cost.js --offset 7d --format json > weekly-report.json
+</code></pre>
+<h3>Performance Optimization</h3>
+<p>Identify high-cost models or agents that might need optimization:</p>
+<pre><code class="language-bash"># Find most expensive models
+node scripts/session-cost.js --details --table | sort -k5 -nr
+</code></pre>
+<h3>Usage Auditing</h3>
+<p>Generate detailed reports for compliance or auditing purposes:</p>
+<pre><code class="language-bash"># Full audit report
+node scripts/session-cost.js --details --format json > audit-report.json
+</code></pre>
+<h2>Best Practices</h2>
+<h3>Regular Monitoring</h3>
+<p>Set up automated monitoring to track costs over time:</p>
+<pre><code class="language-bash"># Add to cron for daily reports
+0 9 * * * node /path/to/session-cost.js --offset 24h --format json > /path/to/reports/$(date +\%Y-\%m-\%d).json
+</code></pre>
+<h3>Cost Alerts</h3>
+<p>Integrate with alerting systems to notify when costs exceed thresholds:</p>
+<pre><code class="language-bash"># Check if costs exceed $100
+COST=$(node scripts/session-cost.js --offset 24h --format json | jq '.grandTotal.cost.total')
+if (( $(echo "$COST > 100" | bc -l) )); then
+  echo "Cost alert: $COST" | mail -s "AI Cost Alert" admin@example.com
+fi
+</code></pre>
+<h3>Resource Optimization</h3>
+<p>Use the data to optimize your AI usage:</p>
+<ol>
+<li>Identify high-cost models and consider alternatives</li>
+<li>Analyze cache usage patterns to improve efficiency</li>
+<li>Adjust agent configurations based on usage patterns</li>
+</ol>
+<h2>Integration with Other Tools</h2>
+<p>The JSON output makes it easy to integrate with other monitoring and reporting tools:</p>
+<h3>Visualization with Grafana</h3>
+<pre><code class="language-bash"># Export data for Grafana
+node scripts/session-cost.js --format json > cost-data.json
+</code></pre>
+<h3>Database Integration</h3>
+<pre><code class="language-bash"># Import into database
+node scripts/session-cost.js --format json | mongoimport --db openclaw --collection costs
+</code></pre>
+<h2>Troubleshooting</h2>
+<h3>Common Issues</h3>
+<ol>
+<li><strong>No sessions found</strong>: Check that sessions exist in ~/.openclaw/agents/</li>
+<li><strong>Permission errors</strong>: Ensure the tool has read access to session files</li>
+<li><strong>Incorrect costs</strong>: Verify that pricing information is up to date</li>
+</ol>
+<h3>Getting Help</h3>
+<pre><code class="language-bash">node scripts/session-cost.js --help
+</code></pre>
+<h2>Future Enhancements</h2>
+<p>The Session Cost tool continues to evolve with new features being added regularly:</p>
+<ul>
+<li>Support for additional model providers</li>
+<li>Enhanced visualization options</li>
+<li>Integration with cloud cost management platforms</li>
+<li>Predictive cost modeling</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw Session Cost tool is an essential utility for anyone running AI applications at scale. By providing detailed insights into token usage, costs, and performance metrics, it enables informed decision-making about resource allocation and optimization.</p>
+<p>Whether you&#8217;re a developer monitoring your personal projects or an enterprise managing multiple AI agents, this tool provides the transparency and control needed to manage AI costs effectively.</p>
+<h3>Additional Resources</h3>
+<ul>
+<li><a href="https://github.com/openclaw/skills">OpenClaw Skills Repository</a></li>
+<li><a href="https://github.com/openclaw/skills/blob/main/session-cost/SKILL.md">Session Cost Documentation</a></li>
+<li><a href="https://github.com/openclaw/skills/issues">Report Issues or Request Features</a></li>
+</ul>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/khaney64/session-cost/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/khaney64/session-cost/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

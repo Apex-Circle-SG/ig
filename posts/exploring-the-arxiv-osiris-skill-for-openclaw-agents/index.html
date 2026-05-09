@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exploring the ArXiv OSIRIS Skill for OpenClaw Agents | News of Tomorrow</title>
+<meta name="description" content="Learn about the ArXiv OSIRIS skill for OpenClaw agents, which enables searching and downloading research papers from arXiv.org.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/exploring-the-arxiv-osiris-skill-for-openclaw-agents/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Exploring the ArXiv OSIRIS Skill for OpenClaw Agents">
+<meta property="og:description" content="Learn about the ArXiv OSIRIS skill for OpenClaw agents, which enables searching and downloading research papers from arXiv.org.">
+<meta property="og:image" content="https://picsum.photos/seed/exploring-the-arxiv-osiris-skill-for-openclaw-agents/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/exploring-the-arxiv-osiris-skill-for-openclaw-agents/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-15">
+<meta property="article:modified_time" content="2026-03-15">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Exploring the ArXiv OSIRIS Skill for OpenClaw Agents">
+<meta name="twitter:description" content="Learn about the ArXiv OSIRIS skill for OpenClaw agents, which enables searching and downloading research papers from arXiv.org.">
+<meta name="twitter:image" content="https://picsum.photos/seed/exploring-the-arxiv-osiris-skill-for-openclaw-agents/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Exploring the ArXiv OSIRIS Skill for OpenClaw Agents", "datePublished": "2026-03-15", "dateModified": "2026-03-15", "image": ["https://picsum.photos/seed/exploring-the-arxiv-osiris-skill-for-openclaw-agents/1200/630"], "description": "Learn about the ArXiv OSIRIS skill for OpenClaw agents, which enables searching and downloading research papers from arXiv.org.", "mainEntityOfPage": "https://github.insightginie.com/posts/exploring-the-arxiv-osiris-skill-for-openclaw-agents/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Exploring the ArXiv OSIRIS Skill for OpenClaw Agents", "item": "https://github.insightginie.com/posts/exploring-the-arxiv-osiris-skill-for-openclaw-agents/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Exploring the ArXiv OSIRIS Skill for OpenClaw Agents</h1>
+<time datetime="2026-03-15" class="post-date" data-date="2026-03-15T11:16:00+00:00">2026-03-15</time>
+<img src="https://picsum.photos/seed/exploring-the-arxiv-osiris-skill-for-openclaw-agents/800/400" class="post-hero" alt="Exploring the ArXiv OSIRIS Skill for OpenClaw Agents">
+<h2>What is the ArXiv OSIRIS Skill?</h2>
+<p>The ArXiv OSIRIS skill is a powerful tool designed for OpenClaw agents that allows them to search and download scientific papers from arXiv.org. arXiv.org is the largest free distribution of scientific preprints, covering a wide range of disciplines including physics, computer science, mathematics, and more.</p>
+<h2>Key Features</h2>
+<ul>
+<li>Search papers by keywords, titles, and abstracts</li>
+<li>Download PDFs directly</li>
+<li>Filter results by category (physics, cs, math, etc.)</li>
+<li>Get metadata including authors, dates, and categories</li>
+</ul>
+<h2>Installation</h2>
+<p>To install the ArXiv OSIRIS skill, you&#8217;ll need to install the Python dependency first:</p>
+<pre><code>pip install arxiv
+</code></pre>
+<h2>Usage</h2>
+<h3>Searching for Papers</h3>
+<p>You can search for papers using the following commands:</p>
+<pre><code># Basic search
+arxiv.ps1 -search "quantum computing"
+
+# With max results
+arxiv.ps1 -search "machine learning" -max 10
+
+# With category filter
+arxiv.ps1 -search "neural networks" -cats "cs,stat"
+</code></pre>
+<h3>Downloading a Paper</h3>
+<p>To download a paper, you can use the following command:</p>
+<pre><code>arxiv.ps1 -download "2310.12345"
+</code></pre>
+<h2>Python API</h2>
+<p>The ArXiv OSIRIS skill also provides a Python API for more advanced usage:</p>
+<pre><code>from arxiv import search, download
+
+# Search
+results = search("simulation hypothesis", max_results=5)
+for paper in results:
+    print(f"{paper.title} - {paper.pdf_url}")
+
+# Download
+paper.download("/path/to/save")
+</code></pre>
+<h2>Common Categories</h2>
+<p>Here are some common arXiv categories you can use for filtering:</p>
+<ul>
+<li>cs.* &#8211; Computer Science</li>
+<li>physics.* &#8211; Physics</li>
+<li>math.* &#8211; Mathematics</li>
+<li>q-bio.* &#8211; Quantitative Biology</li>
+<li>q-fin.* &#8211; Quantitative Finance</li>
+<li>stat.* &#8211; Statistics</li>
+</ul>
+<h2>Examples</h2>
+<pre><code># Search for consciousness papers
+arxiv.ps1 -search "consciousness" -max 5
+
+# Find physics papers
+arxiv.ps1 -search "quantum" -cats "physics" -max 10
+
+# Download paper (Attention is All You Need)
+arxiv.ps1 -download "1706.03762"
+</code></pre>
+<h2>Important Notes</h2>
+<ul>
+<li>arXiv is free and open</li>
+<li>Papers are preprints and may not be peer-reviewed</li>
+<li>Great for staying current with research</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The ArXiv OSIRIS skill is a valuable tool for OpenClaw agents and researchers alike. It provides easy access to a vast repository of scientific papers, enabling efficient research and knowledge discovery. Whether you&#8217;re a student, researcher, or simply interested in staying up-to-date with the latest scientific developments, this skill can significantly enhance your workflow.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/nantes/arxiv-osiris/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/nantes/arxiv-osiris/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

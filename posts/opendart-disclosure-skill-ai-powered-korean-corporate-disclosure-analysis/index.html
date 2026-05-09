@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenDART Disclosure Skill: AI-Powered Korean Corporate Disclosure Analysis | News of Tomorrow</title>
+<meta name="description" content="The OpenDART Disclosure skill leverages Korea&amp;#8217;s OpenDART API to fetch, analyze, and summarize corporate disclosures. Learn how this AI-powered tool helps">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/opendart-disclosure-skill-ai-powered-korean-corporate-disclosure-analysis/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenDART Disclosure Skill: AI-Powered Korean Corporate Disclosure Analysis">
+<meta property="og:description" content="The OpenDART Disclosure skill leverages Korea&amp;#8217;s OpenDART API to fetch, analyze, and summarize corporate disclosures. Learn how this AI-powered tool helps">
+<meta property="og:image" content="https://picsum.photos/seed/opendart-disclosure-skill-ai-powered-korean-corporate-disclosure-analysis/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/opendart-disclosure-skill-ai-powered-korean-corporate-disclosure-analysis/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-05">
+<meta property="article:modified_time" content="2026-03-05">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenDART Disclosure Skill: AI-Powered Korean Corporate Disclosure Analysis">
+<meta name="twitter:description" content="The OpenDART Disclosure skill leverages Korea&amp;#8217;s OpenDART API to fetch, analyze, and summarize corporate disclosures. Learn how this AI-powered tool helps">
+<meta name="twitter:image" content="https://picsum.photos/seed/opendart-disclosure-skill-ai-powered-korean-corporate-disclosure-analysis/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenDART Disclosure Skill: AI-Powered Korean Corporate Disclosure Analysis", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "image": ["https://picsum.photos/seed/opendart-disclosure-skill-ai-powered-korean-corporate-disclosure-analysis/1200/630"], "description": "The OpenDART Disclosure skill leverages Korea&#8217;s OpenDART API to fetch, analyze, and summarize corporate disclosures. Learn how this AI-powered tool helps", "mainEntityOfPage": "https://github.insightginie.com/posts/opendart-disclosure-skill-ai-powered-korean-corporate-disclosure-analysis/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenDART Disclosure Skill: AI-Powered Korean Corporate Disclosure Analysis", "item": "https://github.insightginie.com/posts/opendart-disclosure-skill-ai-powered-korean-corporate-disclosure-analysis/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenDART Disclosure Skill: AI-Powered Korean Corporate Disclosure Analysis</h1>
+<time datetime="2026-03-05" class="post-date" data-date="2026-03-05T16:02:30+00:00">2026-03-05</time>
+<img src="https://picsum.photos/seed/opendart-disclosure-skill-ai-powered-korean-corporate-disclosure-analysis/800/400" class="post-hero" alt="OpenDART Disclosure Skill: AI-Powered Korean Corporate Disclosure Analysis">
+<h2>What is the OpenDART Disclosure Skill?</h2>
+<p>The OpenDART Disclosure skill is an advanced AI-powered tool designed to access, analyze, and summarize corporate disclosures from Korea&#8217;s Electronic Disclosure System (DART). This skill leverages the OpenDART API to provide users with real-time access to financial reports, regulatory filings, and corporate announcements from Korean companies.</p>
+<p>OpenDART (Open Data Analysis &amp; Retrieval of Transparency) is the official public data portal operated by the Financial Supervisory Service of Korea. It provides comprehensive access to corporate disclosures, financial statements, and regulatory reports filed by companies listed on Korean stock exchanges.</p>
+<h2>How the OpenDART Disclosure Skill Works</h2>
+<p>The skill operates through a streamlined workflow that combines AI capabilities with direct API integration. Here&#8217;s a breakdown of its functionality:</p>
+<h3>Input Collection and Processing</p>
+<p>The skill begins by collecting essential inputs from users:</p>
+<ul>
+<li><strong>Company Identifier</strong>: Users can provide either a corp_code (preferred) or company name</li>
+<li><strong>Date Range</strong>: Specified using bgn_de and end_de parameters in YYYYMMDD format</li>
+<li><strong>Filing Type Filters</strong>: Optional filters for regular reports (A), major issues (B), shares (C), etc.</li>
+<li><strong>Desired Output</strong>: Users can request latest N items, only links, or short summaries</li>
+</ul>
+<h3>Company Identity Resolution</h3>
+<p>The skill employs a sophisticated company identification process:</p>
+<ol>
+<li>If users provide a corp_code, it&#8217;s used directly for API queries</li>
+<li>If only a company name is given, the skill runs the search-corp script to find matching companies</li>
+<li>The system handles fuzzy matching and can show multiple candidates if several companies have similar names</li>
+</ol>
+<h3>Data Retrieval and Processing</h3>
+<p>Once the company is identified, the skill:</p>
+<ol>
+<li>Pulls disclosures using the recent command</li>
+<li>Sorts results by latest filing date</li>
+<li>Applies user-specified filters and limits</li>
+<li>Extracts key information including filing date, report name, receipt number, and OpenDART link</li>
+</ol>
+<h3>AI-Powered Analysis and Summarization</h3>
+<p>The skill&#8217;s AI capabilities shine in its ability to:</p>
+<ul>
+<li>Generate concise Korean summaries of key points from lengthy disclosures</li>
+<li>Extract relevant information and present it in a structured format</li>
+<li>Provide contextual analysis based on filing types and historical data</li>
+</ul>
+<h2>Key Features and Capabilities</h2>
+<h3>Comprehensive Filing Type Support</p>
+<p>The skill supports various filing types including:</p>
+<ul>
+<li>Regular reports (A)</li>
+<li>Major issue reports (B)</li>
+<li>Share-related filings (C)</li>
+<li>Business reports</li>
+<li>Financial statements</li>
+<li>Investor relations materials</li>
+</ul>
+<h3>Flexible Search Options</h3>
+<p>Users can search using multiple approaches:</p>
+<ul>
+<li>Direct corp_code lookup for precise results</li>
+<li>Company name search with fuzzy matching</li>
+<li>Date range filtering for specific time periods</li>
+<li>Recent filings within specified days or for current date</li>
+</ul>
+<h3>Multiple Output Formats</h3>
+<p>The skill provides results in various formats:</p>
+<ul>
+<li>Detailed disclosure information with direct OpenDART links</li>
+<li>Concise summaries for quick understanding</li>
+<li>Structured data for further analysis</li>
+<li>Customizable result counts</li>
+</ul>
+<h2>Practical Use Cases</h2>
+<h3>Investment Research and Analysis</p>
+<p>Investors and financial analysts can use the skill to:</p>
+<ul>
+<li>Monitor recent filings from target companies</li>
+<li>Track changes in financial performance over time</li>
+<li>Identify potential investment opportunities based on regulatory disclosures</li>
+<li>Compare filings across multiple companies in the same sector</li>
+</ul>
+<h3>Corporate Compliance and Due Diligence</p>
+<p>Companies can leverage the skill for:</p>
+<ul>
+<li>Monitoring competitor disclosures</li>
+<li>Ensuring regulatory compliance</li>
+<li>Conducting due diligence on potential business partners</li>
+<li>Tracking industry trends and regulatory changes</li>
+</ul>
+<h3>Academic and Market Research</p>
+<p>Researchers and academics can benefit from:</p>
+<ul>
+<li>Accessing historical disclosure data for longitudinal studies</li>
+<li>Analyzing corporate governance patterns</li>
+<li>Studying market reactions to specific types of disclosures</li>
+<li>Conducting empirical research on Korean corporate behavior</li>
+</ul>
+<h2>Technical Implementation</h2>
+<h3>API Integration</p>
+<p>The skill integrates directly with the OpenDART API, utilizing:</p>
+<ul>
+<li>RESTful API endpoints for data retrieval</li>
+<li>JSON response parsing for structured data extraction</li>
+<li>Authentication via API key or environment variables</li>
+</ul>
+<h3>Command Structure</h3>
+<p>The skill supports several commands:</p>
+<ul>
+<li><code>search-corp</code>: Find company information by name</li>
+<li><code>recent</code>: Retrieve recent disclosures by corp_code</li>
+<li><code>recent-by-name</code>: Retrieve recent disclosures by company name</li>
+</ul>
+<h3>Error Handling and Validation</h3>
+<p>Robust error handling includes:</p>
+<ul>
+<li>API status code validation (treating non-000 as API-level failure)</li>
+<li>Input validation for date formats and company identifiers</li>
+<li>Fallback mechanisms for ambiguous company name matches</li>
+</ul>
+<h2>Benefits of Using the OpenDART Disclosure Skill</h2>
+<h3>Time Efficiency</p>
+<p>The skill dramatically reduces the time required to:</p>
+<ul>
+<li>Search for specific company disclosures</li>
+<li>Analyze large volumes of regulatory filings</li>
+<li>Extract key information from lengthy documents</li>
+</ul>
+<h3>Accuracy and Reliability</p>
+<p>By directly accessing official OpenDART data:</p>
+<ul>
+<li>Users receive verified, up-to-date information</li>
+<li>AI-powered analysis reduces human error in interpretation</li>
+<li>Consistent formatting and presentation of results</li>
+</ul>
+<h3>Accessibility and Usability</p>
+<p>The skill makes complex regulatory data accessible through:</p>
+<ul>
+<li>Natural language queries</li>
+<li>Intuitive command structure</li>
+<li>Multi-language support (Korean and English)</li>
+<li>Mobile-friendly interfaces</li>
+</ul>
+<h3>Comprehensive Coverage</p>
+<p>Users gain access to:</p>
+<ul>
+<li>All types of corporate disclosures</li>
+<li>Historical data for trend analysis</li>
+<li>Cross-company comparisons</li>
+<li>Industry-wide insights</li>
+</ul>
+<h2>Getting Started with the OpenDART Disclosure Skill</h2>
+<h3>Prerequisites</p>
+<p>To use the skill, you&#8217;ll need:</p>
+<ul>
+<li>An OpenDART API key (available through the OpenDART portal)</li>
+<li>Basic understanding of corporate disclosure types</li>
+<li>Python environment for script execution</li>
+</ul>
+<h3>Basic Usage Examples</p>
+<p>Here are some common usage patterns:</p>
+<pre><code># Search for a company by name
+python3 scripts/opendart.py search-corp --name "삼성전자"
+
+# Get recent disclosures for a company by corp_code
+python3 scripts/opendart.py recent --corp-code 00126380 --from 20260101 --to 20261231 --limit 10
+
+# Get recent disclosures by company name
+python3 scripts/opendart.py recent-by-name --name "삼성전자" --from 20260101 --to 20261231 --limit 10
+
+# Shortcut: Get last 7 days of disclosures
+python3 scripts/opendart.py recent-by-name --name "삼성전자" --days 7 --limit 10
+
+# Shortcut: Get today's disclosures
+python3 scripts/opendart.py recent-by-name --name "삼성전자" --today
+</code></pre>
+<h3>Best Practices</p>
+<p>To maximize the skill&#8217;s effectiveness:</p>
+<ul>
+<li>Use corp_code whenever possible for precise results</li>
+<li>Combine date filters with filing type filters for targeted searches</li>
+<li>Review the references/opendart-endpoints.md for detailed API behavior</li>
+<li>Always cite the direct DART filing URL in your analysis</li>
+</ul>
+<h2>Future Developments and Enhancements</h2>
+<p>The OpenDART Disclosure skill continues to evolve with potential enhancements including:</p>
+<ul>
+<li>Advanced natural language processing for deeper document analysis</li>
+<li>Predictive analytics for identifying emerging trends</li>
+<li>Integration with other financial data sources</li>
+<li>Real-time alerting for specific filing types or keywords</li>
+<li>Enhanced visualization capabilities for complex data sets</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenDART Disclosure skill represents a powerful tool for anyone working with Korean corporate disclosures. By combining direct API access with AI-powered analysis, it transforms complex regulatory data into actionable insights. Whether you&#8217;re an investor conducting due diligence, a researcher analyzing corporate behavior, or a compliance officer monitoring regulatory filings, this skill provides the tools you need to work efficiently and effectively with OpenDART data.</p>
+<p>As the Korean financial market continues to grow in importance on the global stage, tools like the OpenDART Disclosure skill will become increasingly valuable for making informed decisions based on accurate, timely corporate information.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/kim-dongchul/opendart-disclosure/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/kim-dongchul/opendart-disclosure/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

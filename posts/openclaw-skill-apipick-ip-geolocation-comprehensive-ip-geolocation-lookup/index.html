@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill: apipick-ip-geolocation &amp;#8211; Comprehensive IP Geolocation Lookup | News of Tomorrow</title>
+<meta name="description" content="The apipick-ip-geolocation skill provides detailed geographic and network information for any IPv4 or IPv6 address using the apipick IP Geolocation API. This co">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-apipick-ip-geolocation-comprehensive-ip-geolocation-lookup/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill: apipick-ip-geolocation &amp;#8211; Comprehensive IP Geolocation Lookup">
+<meta property="og:description" content="The apipick-ip-geolocation skill provides detailed geographic and network information for any IPv4 or IPv6 address using the apipick IP Geolocation API. This co">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-apipick-ip-geolocation-comprehensive-ip-geolocation-lookup/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-apipick-ip-geolocation-comprehensive-ip-geolocation-lookup/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-07">
+<meta property="article:modified_time" content="2026-03-07">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill: apipick-ip-geolocation &amp;#8211; Comprehensive IP Geolocation Lookup">
+<meta name="twitter:description" content="The apipick-ip-geolocation skill provides detailed geographic and network information for any IPv4 or IPv6 address using the apipick IP Geolocation API. This co">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-apipick-ip-geolocation-comprehensive-ip-geolocation-lookup/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill: apipick-ip-geolocation &#8211; Comprehensive IP Geolocation Lookup", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "image": ["https://picsum.photos/seed/openclaw-skill-apipick-ip-geolocation-comprehensive-ip-geolocation-lookup/1200/630"], "description": "The apipick-ip-geolocation skill provides detailed geographic and network information for any IPv4 or IPv6 address using the apipick IP Geolocation API. This co", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-apipick-ip-geolocation-comprehensive-ip-geolocation-lookup/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill: apipick-ip-geolocation &#8211; Comprehensive IP Geolocation Lookup", "item": "https://github.insightginie.com/posts/openclaw-skill-apipick-ip-geolocation-comprehensive-ip-geolocation-lookup/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill: apipick-ip-geolocation &#8211; Comprehensive IP Geolocation Lookup</h1>
+<time datetime="2026-03-07" class="post-date" data-date="2026-03-07T20:18:53+00:00">2026-03-07</time>
+<img src="https://picsum.photos/seed/openclaw-skill-apipick-ip-geolocation-comprehensive-ip-geolocation-lookup/800/400" class="post-hero" alt="OpenClaw Skill: apipick-ip-geolocation &amp;#8211; Comprehensive IP Geolocation Lookup">
+<h2>Introduction to IP Geolocation</h2>
+<p>IP geolocation has become an essential tool for businesses, developers, and security professionals who need to understand the geographic origin and network details of internet traffic. The <strong>apipick-ip-geolocation</strong> skill within the OpenClaw framework provides a powerful, reliable solution for looking up comprehensive information about any public IP address.</p>
+<h2>What This Skill Does</h2>
+<p>The apipick-ip-geolocation skill allows you to query the apipick IP Geolocation API to retrieve detailed information about IPv4 and IPv6 addresses. When invoked, this skill can provide you with:</p>
+<ul>
+<li><strong>Geographic Information</strong>: Country, continent, city, latitude, and longitude</li>
+<li><strong>Time Zone Data</strong>: The local time zone for the IP address</li>
+<li><strong>Currency Information</strong>: The primary currency used in the location</li>
+<li><strong>Network Details</strong>: Internet Service Provider (ISP) and Autonomous System Number (ASN)</li>
+<li><strong>Public IP Lookup</strong>: Automatically determine your own public IP location</li>
+</ul>
+<h2>Core Functionality</h2>
+<p>The skill operates by making HTTP GET requests to the apipick API endpoint at <code>https://www.apipick.com/api/ip-geolocation</code>. It requires authentication through an API key, which must be provided either through the <code>APIPICK_API_KEY</code> environment variable or by prompting the user for their key.</p>
+<h3>Basic Usage Scenarios</h3>
+<p>The skill is designed to handle various use cases, including:</p>
+<ul>
+<li>Looking up the geographic location of a specific IP address</li>
+<li>Finding the country or city associated with an IP</li>
+<li>Identifying the ISP or ASN responsible for an IP address</li>
+<li>Determining the time zone or currency for a given IP</li>
+<li>Checking your own public IP location and details</li>
+</ul>
+<h3>API Endpoint and Authentication</h3>
+<p>The skill communicates with the apipick API using the following endpoint:</p>
+<pre><code>GET https://www.apipick.com/api/ip-geolocation
+</code></pre>
+<p>Authentication is handled through the <code>x-api-key</code> header, which must contain your valid apipick API key. You can obtain a free API key by registering at <a href="https://www.apipick.com/dashboard/api-keys">apipick&#8217;s website</a>.</p>
+<h2>Request and Response Format</h2>
+<h3>Making Requests</h3>
+<p>The skill supports two types of requests:</p>
+<ol>
+<li><strong>Specific IP Lookup</strong>: Include the <code>ip</code> query parameter with the target IP address
+<pre><code>GET /api/ip-geolocation?ip=8.8.8.8
+</code></pre>
+</li>
+<li><strong>Self-IP Lookup</strong>: Omit the <code>ip</code> parameter to look up the caller&#8217;s own public IP
+<pre><code>GET /api/ip-geolocation
+</code></pre>
+</li>
+</ol>
+<h3>Response Structure</h3>
+<p>The API returns a JSON response with the following structure:</p>
+<pre><code>{
+  "success": true,
+  "code": 200,
+  "message": "ok",
+  "data": {
+    "ip": "8.8.8.8",
+    "country_code": "US",
+    "country_name": "United States",
+    "continent": "North America",
+    "continent_code": "NA",
+    "city": "Mountain View",
+    "latitude": 37.4056,
+    "longitude": -122.0775,
+    "timezone": "America/Los_Angeles",
+    "currency": "USD",
+    "isp": "Google LLC",
+    "asn": 15169
+  },
+  "credits_used": 1,
+  "remaining_credits": 99
+}
+</code></pre>
+<p>Key fields in the response include:</p>
+<ul>
+<li><strong>ip</strong>: The queried IP address</li>
+<li><strong>country_code</strong>: ISO 3166-1 alpha-2 country code</li>
+<li><strong>country_name</strong>: Full country name</li>
+<li><strong>continent</strong>: Continent name</li>
+<li><strong>city</strong>: City name (may be null for some IPs)</li>
+<li><strong>latitude/longitude</strong>: Geographic coordinates</li>
+<li><strong>timezone</strong>: IANA time zone identifier</li>
+<li><strong>currency</strong>: ISO 4217 currency code</li>
+<li><strong>isp</strong>: Internet Service Provider name</li>
+<li><strong>asn</strong>: Autonomous System Number</li>
+</ul>
+<h2>Usage Pattern and Implementation</h2>
+<p>The skill follows a standardized implementation pattern:</p>
+<ol>
+<li><strong>API Key Retrieval</strong>: First, it attempts to use the <code>APIPICK_API_KEY</code> environment variable. If this is not set, the skill will prompt the user to provide their API key.</li>
+<li><strong>Request Construction</strong>: The skill constructs the appropriate GET request, including the IP parameter if specified.</li>
+<li><strong>API Call</strong>: The request is sent to the apipick API endpoint with proper authentication headers.</li>
+<li><strong>Response Processing</strong>: The JSON response is parsed and relevant data is extracted.</li>
+<li><strong>Output Formatting</strong>: The information is presented in a user-friendly, readable format.</li>
+</ol>
+<h3>Cost and Credits</h3>
+<p>Each API request costs 1 credit from your apipick account. The response includes information about credits used and remaining credits, allowing you to monitor your usage:</p>
+<pre><code>"credits_used": 1,
+"remaining_credits": 99
+</code></pre>
+<h2>Error Handling and Status Codes</h2>
+<p>The skill is designed to handle various error scenarios gracefully:</p>
+<ul>
+<li><strong>400</strong>: Invalid or private/reserved IP address</li>
+<li><strong>401</strong>: Missing or invalid API key</li>
+<li><strong>402</strong>: Insufficient credits</li>
+<li><strong>404</strong>: No geolocation data available for this IP</li>
+<li><strong>503</strong>: Geolocation database temporarily unavailable</li>
+</ul>
+<p>These error codes help users understand what went wrong and how to resolve the issue.</p>
+<h2>Practical Applications</h2>
+<p>The apipick-ip-geolocation skill has numerous practical applications:</p>
+<h3>Security and Fraud Prevention</h3>
+<p>Identify suspicious login attempts from unexpected geographic locations, verify the legitimacy of transactions based on IP location, and detect potential VPN or proxy usage.</p>
+<h3>Content Localization</h3>
+<p>Automatically adjust content, pricing, and language based on the user&#8217;s geographic location, providing a more personalized experience.</p>
+<h3>Analytics and Reporting</h3>
+<p>Track the geographic distribution of your users, understand traffic patterns, and make data-driven decisions about market expansion.</p>
+<h3>Network Administration</h3>
+<p>Monitor network traffic, identify potential security threats, and troubleshoot connectivity issues by understanding the origin of network requests.</p>
+<h2>Integration and Customization</h2>
+<p>The skill is designed to integrate seamlessly with other OpenClaw skills and can be customized for specific use cases. The <code>references/api_reference.md</code> file provides comprehensive documentation of all response fields and their meanings, allowing developers to extract exactly the information they need.</p>
+<h3>Environment Variables</h3>
+<p>The skill uses the following environment variable:</p>
+<ul>
+<li><strong>APIPICK_API_KEY</strong>: Your apipick API key for authentication</li>
+</ul>
+<h2>Best Practices</h2>
+<p>When using the apipick-ip-geolocation skill, consider the following best practices:</p>
+<ol>
+<li><strong>Cache Results</strong>: For frequently queried IPs, implement caching to reduce API calls and costs.</li>
+<li><strong>Handle Rate Limits</strong>: Be aware of any rate limits imposed by the apipick service.</li>
+<li><strong>Respect Privacy</strong>: Only collect and store IP geolocation data when necessary and in compliance with privacy regulations.</li>
+<li><strong>Implement Fallbacks</strong>: Have backup methods for obtaining location information if the API is unavailable.</li>
+<li><strong>Monitor Credits</strong>: Keep track of your remaining credits to avoid service interruptions.</li>
+</ol>
+<h2>Conclusion</h2>
+<p>The apipick-ip-geolocation skill provides a robust, easy-to-use solution for IP geolocation within the OpenClaw framework. With its comprehensive data coverage, reliable API integration, and straightforward implementation, it&#8217;s an excellent choice for developers who need accurate geographic and network information for IP addresses. Whether you&#8217;re building security tools, analytics platforms, or user-facing applications, this skill can provide the IP geolocation capabilities you need.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/javainthinking/apipick-ip-geolocation/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/javainthinking/apipick-ip-geolocation/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

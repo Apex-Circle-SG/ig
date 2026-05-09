@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explanation of the PostNitro Carousel Skill by OpenClaw | News of Tomorrow</title>
+<meta name="description" content="Discover how to generate professional social media carousels using PostNitro Carousel Skill with AI-powered content generation or manual import.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/explanation-of-the-postnitro-carousel-skill-by-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Explanation of the PostNitro Carousel Skill by OpenClaw">
+<meta property="og:description" content="Discover how to generate professional social media carousels using PostNitro Carousel Skill with AI-powered content generation or manual import.">
+<meta property="og:image" content="https://picsum.photos/seed/explanation-of-the-postnitro-carousel-skill-by-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/explanation-of-the-postnitro-carousel-skill-by-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-11">
+<meta property="article:modified_time" content="2026-03-11">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Explanation of the PostNitro Carousel Skill by OpenClaw">
+<meta name="twitter:description" content="Discover how to generate professional social media carousels using PostNitro Carousel Skill with AI-powered content generation or manual import.">
+<meta name="twitter:image" content="https://picsum.photos/seed/explanation-of-the-postnitro-carousel-skill-by-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Explanation of the PostNitro Carousel Skill by OpenClaw", "datePublished": "2026-03-11", "dateModified": "2026-03-11", "image": ["https://picsum.photos/seed/explanation-of-the-postnitro-carousel-skill-by-openclaw/1200/630"], "description": "Discover how to generate professional social media carousels using PostNitro Carousel Skill with AI-powered content generation or manual import.", "mainEntityOfPage": "https://github.insightginie.com/posts/explanation-of-the-postnitro-carousel-skill-by-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Explanation of the PostNitro Carousel Skill by OpenClaw", "item": "https://github.insightginie.com/posts/explanation-of-the-postnitro-carousel-skill-by-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Explanation of the PostNitro Carousel Skill by OpenClaw</h1>
+<time datetime="2026-03-11" class="post-date" data-date="2026-03-11T13:45:58+00:00">2026-03-11</time>
+<img src="https://picsum.photos/seed/explanation-of-the-postnitro-carousel-skill-by-openclaw/800/400" class="post-hero" alt="Explanation of the PostNitro Carousel Skill by OpenClaw">
+<h1>Explanation of the PostNitro Carousel Skill by OpenClaw</h1>
+<p>The <a href="https://github.com/openclaw/skills/blob/main/skills/skills/iammuneeb/postnitro-carousel/SKILL.md">PostNitro Carousel</a> skill enables users to generate professional social media carousel posts using the functionality of <a href="https://postnitro.ai">PostNitro.ai</a> through its Embed API. The skill supports both AI-powered content generation and manual content import, making it versatile for creating LinkedIn, Instagram, TikTok, and X (formerly Twitter) carousels.</p>
+<h2>When to Use This Skill</h2>
+<p>Users can trigger this skill for any of the following purposes:</p>
+<ul>
+<li>Creating a carousel.</li>
+<li>Generating a social media post.</li>
+<li>Designing a slide deck for social media.</li>
+<li>Producing multi-slide content.</li>
+<li>Turning text, articles, blog posts, or topics into carousel posts.</li>
+<li>Automating social media content creation.</li>
+</ul>
+<h2>Output Formats</h2>
+<p>The skill outputs the generated content as PNG images or PDF files.</p>
+<h2>Required Setup</h2>
+<p>To use this skill, users need an API key from PostNitro.ai. Sign up at PostNitro&#8217;s website, navigate to account settings, and generate an API key under the &#8216;Embed&#8217; section. Users should set up their template, brand, and AI preset in the PostNitro dashboard.</p>
+<h3>Environment Variables</h3>
+<p>Export the following environment variables to get started:</p>
+<ul>
+<li><code>POSTNITRO_API_KEY="{your-api-key}"</code></li>
+<li><code>POSTNITRO_TEMPLATE_ID="{your-template-id}"</code></li>
+<li><code>POSTNITRO_BRAND_ID="{your-brand-id}"</code></li>
+<li><code>POSTNITRO_PRESET_ID="{your-ai-preset-id}"</code></li>
+</ul>
+<h2>Core Workflow</h2>
+<p>The carousel creation process in this skill is asynchronous and consists of the following steps:</p>
+<ol>
+<li><b>Initiate</b>: Start the generation or import process.</li>
+<li><b>Poll Status</b>: Regularly check the procession.</li>
+<li><b>Get Output</b>: Retrieve the generated carousel content.</li>
+</ol>
+<h3>1. Generating a Carousel with AI</h3>
+<p>Users can generate a carousel by providing the skill with a given topic, article, or X (Twitter) post. The skill supports different AI generation types:</p>
+<ul>
+<li><code>text</code>: The context is the text content to turn into a carousel.</li>
+<li><code>article</code>: The context is an article URL to extract and convert.</li>
+<li><code>x</code>: The context is an X (Twitter) post or thread URL.</li>
+</ul>
+<p>Example usage for generating from text:</p>
+<pre>
+{
+  "aiGeneration": {
+    "type": "text",
+    "context": "5 tips for growing your LinkedIn audience in 2026",
+    "instructions": "Professional tone, actionable advice"
+  }
+}
+</pre>
+<h3>2. Importing Your Own Slide Content</h3>
+<p>Alternatively, users can manually import their own slide content, with the option of including infographics in the carousel. Here’s an example configuration:</p>
+<pre>
+{
+  "slides": [
+    {
+      "type": "starting_slide",
+      "heading": "Your Title",
+      "description": "Intro text"
+    },
+    {
+      "type": "body_slide",
+      "heading": "Key Point",
+      "description": "Details here"
+    },
+    {
+      "type": "ending_slide",
+      "heading": "Take Action!",
+      "cta_button": "Learn More"
+    }
+  ]
+}
+</pre>
+<h3>3. Checking Post Status</h3>
+<p>After initiating the process, users must poll the status to determine progress. The status can be confirmed as &#8216;completed&#8217; once the <code>data.embedPost.status</code> reflects the final stage.</p>
+<h3>4. Getting the Output</h3>
+<p>Upon completion, users can retrieve the carousel content in PNG images or as a PDF file through the provided URLs.</p>
+<h2>Common Patterns</h2>
+<h3>Pattern 1: LinkedIn Thought Leadership Carousel</h3>
+<pre>
+{
+  "aiGeneration": {
+    "type": "text",
+    "context": "5 mistakes startups make with their LinkedIn strategy and how to fix each one",
+    "instructions": "Professional but conversational tone. Each slide should have one clear takeaway."
+  }
+}
+</pre>
+<h3>Pattern 2: Repurpose a Blog Post</h3>
+<pre>
+{
+  "aiGeneration": {
+    "type": "article",
+    "context": "https://yourblog.com/posts/social-media-strategy-2026",
+    "instructions": "Extract the 5 most actionable points. Keep slide text concise."
+  }
+}
+</pre>
+<h3>Pattern 3: Repurpose an X Thread</h3>
+<pre>
+{
+  "aiGeneration": {
+    "type": "x",
+    "context": "https://x.com/username/status/1234567890",
+    "instructions": "Maintain the original voice and key points"
+  }
+}
+</pre>
+<h3>Pattern 4: Data-Driven Infographic Carousel</h3>
+<p>Reference: Importing slides with structured infographic layouts is covered in more detail in <a href="https://github.com/openclaw/skills/tree/main/skills/skills/iammuneeb/postnitro-carousel/examples/import-infographics.json">examples/import-infographics.json</a>.</p>
+<h2>Content Strategy Tips</h2>
+<ul>
+<li><b>LinkedIn</b>: Professional tone, actionable insights, 6–10 slides, clear CTA.</li>
+<li><b>Instagram</b>: Visual-first, concise text, 5–8 slides, storytelling arc.</li>
+<li><b>TikTok</b>: Trendy, punchy, 4–7 slides, hook on slide 1.</li>
+<li><b>X (Twitter)</b>: Data-driven, 3–6 slides, provocative opening.</li>
+</ul>
+<h2>Common Gotchas</h2>
+<ul>
+<li>Default response type is PDF; specify &#8220;PNG&#8221; explicitly for individual slide images.</li>
+<li><code>heading</code> is required on every slide.</li>
+<li>Strict slide structure requirement with one starting, at least one body, and one ending slide.</li>
+<li><code>article</code> type needs a URL, not plain text.</li>
+<li><code>x</code> type needs a valid X post URL.</li>
+<li>Infographic layout overrides any predefined image on the slide.</li>
+<li>Image URLs must be publicly accessible.</li>
+<li>Credits vary by method: 2 credits per slide for AI generation, 1 credit per slide for content import.</li>
+</ul>
+<h2>Supporting Resources</h2>
+<ul>
+<li><a href="https://github.com/openclaw/skills/tree/main/skills/skills/iammuneeb/postnitro-carousel/references/api-reference.md">API Reference</a>: Complete endpoint reference, including schema details and infographic configurations.</li>
+<li><a href="https://github.com/openclaw/skills/tree/main/skills/skills/iammuneeb/postnitro-carousel/examples/EXAMPLES.md">Examples</a>: Ready-to-use examples for different use cases.</li>
+</ul>
+<h2>Final Thoughts</h2>
+<p>The <a href="https://github.com/openclaw/skills/blob/main/skills/skills/iammuneeb/postnitro-carousel/SKILL.md">PostNitro Carousel</a> skill by OpenClaw is a powerful tool for transforming ideas, articles, and posts into engaging social media carousels. With straightforward integration and a robust set of features ranging from AI generation to manual content import, this skill makes social media content creation accessible and efficient. Incorporate this skill into your WordPress workflow to stay ahead of social media trends and enhance your content strategy.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/iammuneeb/postnitro-carousel/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/iammuneeb/postnitro-carousel/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the OpenClaw Interactive LeetCode MCP Skill: Features, Setup, and Usage Guide | News of Tomorrow</title>
+<meta name="description" content="Learn how the OpenClaw interactive-leetcode-mcp skill enables AI-guided LeetCode practice with progressive hints, solution submission, and secure authentication">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-openclaw-interactive-leetcode-mcp-skill-features-setup-and-usage-guide/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the OpenClaw Interactive LeetCode MCP Skill: Features, Setup, and Usage Guide">
+<meta property="og:description" content="Learn how the OpenClaw interactive-leetcode-mcp skill enables AI-guided LeetCode practice with progressive hints, solution submission, and secure authentication">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-openclaw-interactive-leetcode-mcp-skill-features-setup-and-usage-guide/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-openclaw-interactive-leetcode-mcp-skill-features-setup-and-usage-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-17">
+<meta property="article:modified_time" content="2026-03-17">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the OpenClaw Interactive LeetCode MCP Skill: Features, Setup, and Usage Guide">
+<meta name="twitter:description" content="Learn how the OpenClaw interactive-leetcode-mcp skill enables AI-guided LeetCode practice with progressive hints, solution submission, and secure authentication">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-openclaw-interactive-leetcode-mcp-skill-features-setup-and-usage-guide/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the OpenClaw Interactive LeetCode MCP Skill: Features, Setup, and Usage Guide", "datePublished": "2026-03-17", "dateModified": "2026-03-17", "image": ["https://picsum.photos/seed/understanding-the-openclaw-interactive-leetcode-mcp-skill-features-setup-and-usage-guide/1200/630"], "description": "Learn how the OpenClaw interactive-leetcode-mcp skill enables AI-guided LeetCode practice with progressive hints, solution submission, and secure authentication", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-openclaw-interactive-leetcode-mcp-skill-features-setup-and-usage-guide/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the OpenClaw Interactive LeetCode MCP Skill: Features, Setup, and Usage Guide", "item": "https://github.insightginie.com/posts/understanding-the-openclaw-interactive-leetcode-mcp-skill-features-setup-and-usage-guide/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the OpenClaw Interactive LeetCode MCP Skill: Features, Setup, and Usage Guide</h1>
+<time datetime="2026-03-17" class="post-date" data-date="2026-03-17T06:50:09+00:00">2026-03-17</time>
+<img src="https://picsum.photos/seed/understanding-the-openclaw-interactive-leetcode-mcp-skill-features-setup-and-usage-guide/800/400" class="post-hero" alt="Understanding the OpenClaw Interactive LeetCode MCP Skill: Features, Setup, and Usage Guide">
+<h1>Understanding the OpenClaw Interactive LeetCode MCP Skill: Features, Setup, and Usage Guide</h1>
+<p>The OpenClaw repository hosts a collection of MCP (Model Context Protocol) skills that extend the capabilities of AI assistants like Claude Code. One of the most useful skills for developers preparing for technical interviews is the <code>interactive-leetcode-mcp</code> skill. This skill provides a structured, AI‑driven workflow for practicing LeetCode problems, offering progressive hints, workspace setup, solution submission, and secure credential handling—all without leaving the chat interface.</p>
+<h2>What Is the Interactive LeetCode MCP Skill?</h2>
+<p>At its core, the <code>interactive-leetcode-mcp</code> skill is an MCP server packaged as <code>@sperekrestova/interactive-leetcode-mcp</code>. When installed, it exposes a set of tools and prompts that an AI assistant can invoke to guide a user through a LeetCode practice session. The skill follows a strict session flow designed to promote learning rather than simply handing over answers. It enforces a hint‑progression system, ensures proper workspace preparation, and manages authentication to LeetCode’s API.</p>
+<h2>Prerequisites</h2>
+<ul>
+<li>Node.js version 20 or higher.</li>
+<li>An MCP‑compatible client (e.g., Claude Code, Cursor, or any IDE that supports MCP tools).</li>
+<li>A LeetCode account (optional for browsing problems, required for submitting solutions).</li>
+</ul>
+<p>The skill is distributed via npm, and the recommended installation method pins a specific version (currently <code>3.1.1</code>) to avoid pulling in untested changes from the <code>latest</code> tag.</p>
+<h2>Installing the Skill</h2>
+<p>Before you can use any of the skill’s tools, the MCP server must be added to your client’s configuration. The process is deliberately interactive: the assistant will ask for confirmation, explain what will happen, and then modify the MCP configuration file.</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "leetcode": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sperekrestova/interactive-leetcode-mcp@3.1.1"
+      ]
+    }
+  }
+}
+</code></pre>
+<p>For Claude Code specifically, you can add the server with a single CLI command:</p>
+<pre><code class="language-bash">claude mcp add --transport stdio leetcode -- npx -y @sperekrestova/interactive-leetcode-mcp@3.1.1</code></pre>
+<p>After adding the server, restart your MCP session so the newly registered tools become available. The assistant will then verify connectivity by checking for the <code>get_started</code> tool; if it is present, the server is ready.</p>
+<h2>Session Flow: Step‑by‑Step</h2>
+<p>The skill enforces a deterministic flow that must be followed at the start of every LeetCode practice session. Skipping any step can bypass the learning‑guided hint system or cause authentication issues.</p>
+<ol>
+<li><strong>Call <code>get_started</code></strong> – This is the first and only required call at the beginning of a session. It returns a comprehensive usage guide that includes prompt invocation rules, the learning‑mode workflow, language mapping, and authentication details. Treat this as the &#8220;instruction manual&#8221; for the session.</li>
+<li><strong>Invoke <code>leetcode_learning_mode</code></strong> – Before discussing any problem, you must trigger this prompt (no parameters). It activates the progressive hint system and ensures that the assistant will not reveal a full solution prematurely.</li>
+<li><strong>User selects a problem</strong> – The user provides a problem slug (e.g., &#8220;two-sum&#8221;) and optionally a difficulty level.</li>
+<li><strong>Invoke <code>leetcode_problem_workflow</code></strong> – Pass the chosen <code>problemSlug</code> and <code>difficulty</code>. This tool retrieves the problem description, tags, and any starter code templates.</li>
+<li><strong>Invoke <code>leetcode_workspace_setup</code></strong> – Supply the desired programming language (<code>python3</code>, <code>java</code>, <code>cpp</code>, etc.), the problem slug, and a code template if desired. The skill creates a temporary workspace file where the user can write their solution.</li>
+<li><strong>Guided hint progression</strong> – The assistant now offers hints in four levels:
+<ul>
+<li>Level 1: Guiding questions that encourage the user to think about patterns.</li>
+<li>Level 2: General approaches (e.g., &#8220;Consider using a hash map…&#8221;).</li>
+<li>Level 3: Specific hints (e.g., &#8220;Iterate once, tracking seen values…&#8221;).</li>
+<li>Level 4: Pseudocode or a partial implementation.</li>
+</ul>
+<p>The assistant must never jump to Level 4 or a full solution without the user explicitly requesting it after working through the earlier levels.</li>
+<li><strong>Submit the solution</strong> – When the user feels ready, they invoke <code>submit_solution</code> with the appropriate language identifier (see the language map below). The tool checks for saved LeetCode credentials, attempts submission, and returns the result (Accepted, Wrong Answer, Time Limit Exceeded, etc.).</li>
+</ol>
+<h2>Learning‑Mode Rules in Detail</h2>
+<p>The progressive hint system is the heart of the skill’s educational value. It mirrors the way a human tutor would scaffold problem‑solving:</p>
+<ul>
+<li><strong>Level 1 – Guiding Questions</strong>: The assistant asks open‑ended questions that help the user identify the problem’s core characteristics (e.g., &#8220;What is the input size? Are there duplicate values?&#8221;).</li>
+<li><strong>Level 2 – General Approaches</strong>: Based on the user’s answers, the assistant suggests algorithmic paradigms (sliding window, two‑pointer, depth‑first search, dynamic programming, etc.) without giving away implementation details.</li>
+<li><strong>Level 3 – Specific Hints</strong>: The assistant points out concrete steps (e.g., &#8220;Initialize a set to store visited numbers; for each number, check if its complement exists.&#8221;).</li>
+<li><strong>Level 4 – Pseudocode/Partial Implementation</strong>: The assistant may show a skeleton of the solution, leaving the user to fill in the missing logic.</li>
+<li><strong>Full Solution</strong>: Only revealed after the user explicitly asks for it, and only after they have worked through Levels 1‑3. This prevents the &#8220;answer‑giving&#8221; anti‑pattern and encourages genuine learning.</li>
+</ul>
+<h2>Authentication Flow</h2>
+<p>Submitting solutions requires a valid LeetCode session. The skill handles authentication securely:</p>
+<ol>
+<li>The assistant first calls <code>check_auth_status</code> to see if credentials exist and are still valid.</li>
+<li>If the credentials are missing or expired, the assistant asks the user whether they want to authenticate.</li>
+<li>Upon consent, the assistant invokes the <code>leetcode_authentication_guide</code> prompt, which provides browser‑specific instructions for obtaining the <code>LEETCODE_SESSION</code> and <code>csrftoken</code> values.</li>
+<li>The user supplies these values; the assistant calls <code>start_leetcode_auth</code> to initiate the auth flow, then <code>save_leetcode_credentials</code> to store them.</li>
+<li>Credentials are saved to <code>~/.leetcode-mcp/credentials.json</code> with file permissions <code>0o600</code> (readable and writable only by the owner). The file contains:
+<ul>
+<li><code>csrftoken</code></li>
+<li><code>LEETCODE_SESSION</code></li>
+<li><code>createdAt</code> timestamp</li>
+</ul>
+</li>
+<li>The assistant never transmits these credentials to any third party; they are used solely for direct calls to LeetCode’s public API.</li>
+<li>Typical credential lifetime is 7‑14 days; after expiration the flow repeats automatically.</li>
+</ol>
+<p>Because the authentication guidance is delegated to the <code>leetcode_authentication_guide</code> prompt, the assistant avoids giving incorrect or outdated instructions, reducing the chance of lock‑out or security mishaps.</p>
+<h2>Tool Quick Reference</h2>
+<p>Below is a concise list of the most frequently used tools exposed by the skill. All tools are <em>read‑only</em> unless otherwise noted; only <code>submit_solution</code> requires authentication.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Purpose</th>
+<th>Requires Auth?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_daily_challenge</code></td>
+<td>Fetches today’s featured LeetCode problem.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>get_problem</code></td>
+<td>Retrieves a problem by its slug.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>search_problems</td>
+<td>Searches problems by tags, difficulty, or keywords.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>list_problem_solutions</code></td>
+<td>Returns metadata about community solutions (topic IDs).</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>get_problem_solution</code></td>
+<td>Returns a full community solution — only allowed after Level 4 hint or explicit request.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>submit_solution</code></td>
+<td>Submits the user's code to LeetCode.</td>
+<td>Yes (needs saved credentials)</td>
+</tr>
+<tr>
+<td><code>get_user_profile</code></td>
+<td>Returns public stats for any LeetCode username.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>get_recent_submissions</code></td>
+<td>Lists the user's recent submissions.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>get_recent_ac_submissions</code></td>
+<td>Lists only accepted recent submissions.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>get_user_contest_ranking</code></td>
+<td>Shows contest performance data.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>start_leetcode_auth</code></td>
+<td>Begins the OAuth‑like flow to obtain session cookies.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>save_leetcode_credentials</code></td>
+<td>Validates and stores the provided credentials.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>check_auth_status</code></td>
+<td>Verifies whether current credentials are still valid.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>get_user_status</code></td>
+<td>Returns info about the currently authenticated user.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>get_problem_submission_report</code></td>
+<td>Detailed breakdown of a specific submission.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>get_problem_progress</code></td>
+<td>Shows solve progress with optional filters (tags, difficulty).</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>get_all_submissions</code></td>
+<td>Retrieves the user's full submission history.</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h2>Language Map for <code>submit_solution</code></h2>
+<p>When calling <code>submit_solution</code>, you must pass the exact language identifier that LeetCode expects. The skill provides a mapping from common names to the required strings:</p>
+<ul>
+<li>Python / Python&nbsp;3 → <code>python3</code></li>
+<li>Python&nbsp;2 → <code>python</code></li>
+<li>Java → <code>java</code></li>
+<li>C++ → <code>cpp</code></li>
+<li>JavaScript → <code>javascript</code></li>
+<li>TypeScript → <code>typescript</code></li>
+</ul>
+<p>If the user says simply "Python" without a version, the skill defaults to <code>python3</code>. Passing an incorrect identifier (e.g., "Python" instead of "python3") will cause the submission to be rejected by LeetCode’s API.</p>
+<h2>Common Mistakes and How to Avoid Them</h2>
+<p>Even with a guided flow, users sometimes stumble. Here are the most frequent pitfalls and the skill’s built‑in safeguards:</p>
+<ul>
+<li><strong>Jumping straight to problem search</strong>: The skill blocks this by requiring <code>get_started</code> → <code>leetcode_learning_mode</code> before any search. If you attempt to call <code>search_problems</code> early, the assistant will remind you to follow the flow.</li>
+<li><strong>Showing full solutions prematurely</strong>: The hint system enforces the Level 1‑4 progression. The assistant will refuse to invoke <code>get_problem_solution</code> for a full solution unless the user explicitly asks after completing the earlier levels.</li>
+<li><strong>Neglecting workspace setup</strong>: Without invoking <code>leetcode_workspace_setup</code>, the user may try to code only in chat. The skill prompts the assistant to create a proper file, ensuring the solution can be tested and submitted correctly.</li>
+<li><strong>Manual authentication instructions</strong>: The assistant must never invent its own auth steps; it always delegates to <code>leetcode_authentication_guide</code>. This prevents outdated or insecure guidance.</li>
+<li><strong>Incorrect language identifier</strong>: The skill’s language map is enforced; if the user provides an unsupported string, the assistant will correct it before calling <code>submit_solution</code>.</li>
+<li><strong>Skipping credential checks</strong>: Before any auth‑sensitive tool (e.g., <code>submit_solution</code>), the assistant automatically calls <code>check_auth_status</code>. If the check fails, the auth flow is triggered.</li>
+<li><strong>Assuming tool descriptions are enough</strong>: The <code>get_started</code> tool contains the authoritative session guide. Relying solely on inline tool descriptions can miss nuances like prompt invocation rules.</li>
+</ul>
+<h2>Why Use the Interactive LeetCode MCP Skill?</h2>
+<p>Developers preparing for coding interviews benefit from deliberate practice, immediate feedback, and structured guidance. The OpenClaw skill delivers all three:</p>
+<ol>
+<li><strong>Deliberate Practice</strong>: By forcing a step‑by‑step workflow, the skill ensures that users engage with each problem rather than hopping between questions superficially.</li>
+<li><strong>Immediate Feedback</strong>: Submission results are returned instantly, allowing rapid iteration.</li>
+<li><strong>Structured Guidance</strong>: The progressive hint system mimics a tutor’s scaffolding, helping users develop problem‑solving intuition instead of memorizing solutions.</li>
+<li><strong>Secure and Private</strong>: Credentials stay locally stored with strict file permissions; no data leaves the user’s machine.</li>
+<li><strong>Language Agnostic</strong>: The skill supports all major submission languages, making it useful for polyglot programmers.</li>
+</ol>
+<h2>Getting Started in Practice</h2>
+<p>To begin a session with the OpenClaw interactive‑leetcode‑mcp skill:</p>
+<ol>
+<li>Ensure Node.js ≥ 20 is installed.</li>
+<li>Add the MCP server to your client’s configuration (see the installation snippet above).</li>
+<li>Restart your MCP session.</li>
+<li>Ask the assistant to call <code>get_started</code>.</li>
+<li>Follow the prompts: invoke <code>leetcode_learning_mode</code>, select a problem, set up the workspace, and work through the hints.</li>
+<li>When ready, submit your solution and review the outcome.</li>
+<li>Repeat for as many problems as you like, letting the skill guide you each time.</li>
+</ol>
+<p>By adhering to the prescribed flow, you turn each LeetCode session into a focused learning experience that builds both algorithmic skill and confidence for real‑world interviews.</p>
+<hr>
+<p>In summary, the OpenClaw <code>interactive-leetcode-mcp</code> skill is a powerful, well‑engineered MCP server that transforms casual LeetCode browsing into a guided, secure, and effective practice routine. Its emphasis on progressive hints, proper workspace preparation, and credential safety makes it an indispensable tool for anyone serious about mastering coding interviews.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/sperekrestova/interactive-leetcode/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/sperekrestova/interactive-leetcode/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

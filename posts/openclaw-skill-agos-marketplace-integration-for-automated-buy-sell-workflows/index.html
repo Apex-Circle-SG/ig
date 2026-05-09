@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill: Agos Marketplace Integration for Automated Buy/Sell Workflows | News of Tomorrow</title>
+<meta name="description" content="Integrate OpenClaw with Agos Marketplace to automate both sell-side listing creation and buy-side order execution through executable scripts for seamless AGOS m">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-agos-marketplace-integration-for-automated-buy-sell-workflows/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill: Agos Marketplace Integration for Automated Buy/Sell Workflows">
+<meta property="og:description" content="Integrate OpenClaw with Agos Marketplace to automate both sell-side listing creation and buy-side order execution through executable scripts for seamless AGOS m">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-agos-marketplace-integration-for-automated-buy-sell-workflows/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-agos-marketplace-integration-for-automated-buy-sell-workflows/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-14">
+<meta property="article:modified_time" content="2026-03-14">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill: Agos Marketplace Integration for Automated Buy/Sell Workflows">
+<meta name="twitter:description" content="Integrate OpenClaw with Agos Marketplace to automate both sell-side listing creation and buy-side order execution through executable scripts for seamless AGOS m">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-agos-marketplace-integration-for-automated-buy-sell-workflows/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill: Agos Marketplace Integration for Automated Buy/Sell Workflows", "datePublished": "2026-03-14", "dateModified": "2026-03-14", "image": ["https://picsum.photos/seed/openclaw-skill-agos-marketplace-integration-for-automated-buy-sell-workflows/1200/630"], "description": "Integrate OpenClaw with Agos Marketplace to automate both sell-side listing creation and buy-side order execution through executable scripts for seamless AGOS m", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-agos-marketplace-integration-for-automated-buy-sell-workflows/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill: Agos Marketplace Integration for Automated Buy/Sell Workflows", "item": "https://github.insightginie.com/posts/openclaw-skill-agos-marketplace-integration-for-automated-buy-sell-workflows/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill: Agos Marketplace Integration for Automated Buy/Sell Workflows</h1>
+<time datetime="2026-03-14" class="post-date" data-date="2026-03-14T04:15:59+00:00">2026-03-14</time>
+<img src="https://picsum.photos/seed/openclaw-skill-agos-marketplace-integration-for-automated-buy-sell-workflows/800/400" class="post-hero" alt="OpenClaw Skill: Agos Marketplace Integration for Automated Buy/Sell Workflows">
+<h2>Understanding the Agos Marketplace OpenClaw Skill</h2>
+<p>The Agos Marketplace skill for OpenClaw is a powerful automation tool that bridges the gap between AI agent capabilities and the AGOS marketplace ecosystem. This skill enables both sellers and buyers to automate their marketplace interactions through executable scripts, eliminating manual processes and reducing friction in blockchain-based transactions.</p>
+<h3>Core Functionality and Purpose</h2>
+<p>This skill serves as a comprehensive automation layer for the AGOS marketplace, handling both sides of the marketplace equation. For sellers, it automates the creation of service listings, while for buyers, it streamlines the order creation and payment preparation process. The skill is particularly valuable for users who need to auto-create listings, generate AGOS orders, prepare BNB Chain payment parameters, track purchase status, or execute complete end-to-end buy/sell workflows on market.agos.fun.</p>
+<h3>Technical Architecture and Defaults</h2>
+<p>The skill operates with several key default configurations that provide a consistent foundation for marketplace interactions. The base URL is set to https://market.agos.fun, with the supplier endpoint fixed at https://market.agos.fun/v1/openclaw/supplier-task. The skill defaults to the BNB Chain (chainId=56) and uses USDT as the settlement token. These defaults ensure predictable behavior while still allowing for flexibility through script parameters.</p>
+<h3>Seller-Side Automation: Creating Listings</h2>
+<p>For sellers, the skill provides automated listing creation through the create_listing.py script. This script can generate service IDs automatically or accept fixed service IDs for consistent listing creation. Sellers can create listings with detailed specifications including name, description, and price in USDT. The script supports dry-run functionality for testing payloads before actual deployment, and it returns essential information including the service_id and service details upon successful creation.</p>
+<h3>Buyer-Side Automation: Order Creation and Payment</h2>
+<p>Buyers benefit from the create_order.py script, which automates the purchase process. The script can automatically select the first active listing and create an order, or target specific listings by ID. It accepts input JSON for task specifications and can prepare payment parameters for BNB Chain transactions. The script includes a wait functionality that polls for terminal status, with configurable timeout and interval settings to ensure transaction completion or provide timely failure notifications.</p>
+<h3>Payment Mapping and Wallet Integration</h2>
+<p>The skill provides detailed payment mapping through the payment_preparation fields, which are essential for executing Chain payments. These fields include purchase_id_hex (mapped to orderId), listing_id_hex (mapped to serviceId), supplier_wallet (mapped to supplier), token_address (mapped to token), amount_atomic (mapped to amount), and payment_router_address (target contract). The skill requires wallet execution capability for signing transactions, though it can return payment_preparation data for manual or external execution when necessary.</p>
+<h3>Security Considerations and Constraints</h2>
+<p>Security is a paramount concern in this skill&#8217;s design. The create_listing.py and create_order.py scripts use fixed AGOS API base URLs to prevent prompt-injected SSRF (Server-Side Request Forgery) attacks. URL overrides via command-line parameters or environment variables are intentionally disabled to maintain security integrity. The listing endpoint is hardcoded in the script to prevent malicious path injection, ensuring that all API calls remain within the trusted AGOS marketplace infrastructure.</p>
+<h3>Output Contracts and Error Handling</h2>
+<p>The skill follows strict output contracts based on the workflow type. For seller flows, it returns service_id and service information. For buyer flows, it returns purchase details, selected_listing_id, payment_preparation (when requested), and final_state (when requested). The skill implements comprehensive error handling, failing with clear messages when no active listings exist without a provided listing-id, surfacing exact server messages for HTTP 400/404 errors, and returning the last known state if status polling times out.</p>
+<h3>Practical Use Cases and Implementation</h2>
+<p>This skill enables numerous practical applications, from automated marketplace management to seamless integration with AI agents. Sellers can maintain consistent service offerings across the marketplace, while buyers can automate procurement processes. The skill&#8217;s ability to handle both listing creation and order execution makes it ideal for businesses looking to integrate AGOS marketplace functionality into their automated workflows, reducing manual overhead and ensuring consistent, reliable marketplace interactions.</p>
+<h3>Integration Benefits and Future Potential</h2>
+<p>By providing a standardized interface for marketplace automation, this skill opens up new possibilities for AI agent integration with blockchain marketplaces. The skill&#8217;s design allows for easy extension and customization while maintaining security and reliability. As blockchain marketplaces continue to evolve, skills like this will become increasingly important for enabling sophisticated, automated interactions between AI agents and decentralized marketplaces, ultimately driving greater adoption and utility in the blockchain ecosystem.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/danielw8088/agos-marketplace/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/danielw8088/agos-marketplace/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

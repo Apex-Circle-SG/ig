@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auto-Generate Project Workflow Setup with Solo-Setup Skill | News of Tomorrow</title>
+<meta name="description" content="Learn how the solo-setup skill automatically creates project workflow configurations from existing documentation, saving developers hours of manual setup work.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/auto-generate-project-workflow-setup-with-solo-setup-skill/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Auto-Generate Project Workflow Setup with Solo-Setup Skill">
+<meta property="og:description" content="Learn how the solo-setup skill automatically creates project workflow configurations from existing documentation, saving developers hours of manual setup work.">
+<meta property="og:image" content="https://picsum.photos/seed/auto-generate-project-workflow-setup-with-solo-setup-skill/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/auto-generate-project-workflow-setup-with-solo-setup-skill/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-04">
+<meta property="article:modified_time" content="2026-03-04">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Auto-Generate Project Workflow Setup with Solo-Setup Skill">
+<meta name="twitter:description" content="Learn how the solo-setup skill automatically creates project workflow configurations from existing documentation, saving developers hours of manual setup work.">
+<meta name="twitter:image" content="https://picsum.photos/seed/auto-generate-project-workflow-setup-with-solo-setup-skill/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Auto-Generate Project Workflow Setup with Solo-Setup Skill", "datePublished": "2026-03-04", "dateModified": "2026-03-04", "image": ["https://picsum.photos/seed/auto-generate-project-workflow-setup-with-solo-setup-skill/1200/630"], "description": "Learn how the solo-setup skill automatically creates project workflow configurations from existing documentation, saving developers hours of manual setup work.", "mainEntityOfPage": "https://github.insightginie.com/posts/auto-generate-project-workflow-setup-with-solo-setup-skill/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Auto-Generate Project Workflow Setup with Solo-Setup Skill", "item": "https://github.insightginie.com/posts/auto-generate-project-workflow-setup-with-solo-setup-skill/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Auto-Generate Project Workflow Setup with Solo-Setup Skill</h1>
+<time datetime="2026-03-04" class="post-date" data-date="2026-03-04T12:23:34+00:00">2026-03-04</time>
+<img src="https://picsum.photos/seed/auto-generate-project-workflow-setup-with-solo-setup-skill/800/400" class="post-hero" alt="Auto-Generate Project Workflow Setup with Solo-Setup Skill">
+<h2>What is the Solo-Setup Skill?</h2>
+<p>The solo-setup skill is an automated workflow configuration tool that creates comprehensive project setup documentation from existing project resources. It extracts information from CLAUDE.md, PRD documents, package manifests, and other configuration files to generate a complete workflow guide without requiring any manual input from the user.</p>
+<p>This skill is particularly valuable for teams and individual developers who want to establish consistent development practices quickly, without spending hours manually documenting workflows or configuring project standards.</p>
+<h2>How Solo-Setup Works</h2>
+<p>The skill operates through a systematic, multi-step process that analyzes existing project data to create comprehensive workflow documentation. Here&#8217;s a detailed breakdown of how it functions:</p>
+<h3>Project Detection and Verification</h3>
+<p>The skill begins by identifying the project root directory. If arguments are provided, it searches for a project with that name in the current directory or a specified projects directory. Otherwise, it uses the current working directory. The skill then verifies the presence of essential files like CLAUDE.md, which contains technical stack information and architectural decisions.</p>
+<p>If the required files aren&#8217;t found, the skill uses an interactive question system to gather necessary information from the user, ensuring it has all the data needed to create accurate workflow documentation.</p>
+<h3>Comprehensive Data Collection</h3>
+<p>Once the project location is confirmed, solo-setup performs parallel reads of multiple project files:</p>
+<ul>
+<li><strong>CLAUDE.md</strong> &#8211; Contains tech stack details, architecture decisions, available commands, and best practices</li>
+<li><strong>docs/prd.md</strong> &#8211; Includes problem statements, user information, solution approaches, features, metrics, and pricing details</li>
+<li><strong>package.json or pyproject.toml</strong> &#8211; Provides exact dependency versions and development dependencies</li>
+<li><strong>Makefile</strong> &#8211; Lists available build and development commands</li>
+<li><strong>Linter configurations</strong> &#8211; Includes .eslintrc*, eslint.config.*, .swiftlint.yml, ruff.toml, detekt.yml files</li>
+</ul>
+<p>This comprehensive data collection ensures the generated workflow documentation is accurate and reflects the actual project setup.</p>
+<h3>Optional Ecosystem Integration</h3>
+<p>For enhanced quality, the skill can optionally integrate with external ecosystem sources. It detects the stack name from CLAUDE.md and uses MCP tools like kb_search to find stack templates and development principles. If MCP tools aren&#8217;t available, it falls back to looking for local stack configuration files or deriving information directly from the collected project data.</p>
+<h3>Language Detection and Configuration</h3>
+<p>The skill automatically detects the primary programming languages used in the project by analyzing package manifests and configuration files:</p>
+<ul>
+<li>package.json → TypeScript</li>
+<li>pyproject.toml → Python</li>
+<li>*.xcodeproj or Package.swift → Swift</li>
+<li>build.gradle.kts → Kotlin</li>
+</ul>
+<p>This language detection ensures the generated workflow documentation includes appropriate testing frameworks and development tools for the specific technology stack.</p>
+<h3>Workflow Documentation Generation</h3>
+<p>The core output of solo-setup is a comprehensive docs/workflow.md file that includes:</p>
+<ul>
+<li><strong>TDD Policy</strong> &#8211; Defines testing philosophy (moderate, strict, or minimal)</li>
+<li><strong>Test Framework</strong> &#8211; Specifies the exact testing framework based on devDependencies</li>
+<li><strong>Commit Strategy</strong> &#8211; Implements conventional commits with proper formatting</li>
+<li><strong>Verification Checkpoints</strong> &#8211; Lists steps to verify code quality after each phase</li>
+<li><strong>Branch Strategy</strong> &#8211; Defines branch naming conventions and purposes</li>
+</ul>
+<p>The skill also updates CLAUDE.md to include references to the new workflow documentation, ensuring all project documentation remains interconnected and accessible.</p>
+<h2>Key Use Cases</h2>
+<p>Solo-setup serves multiple critical use cases in software development:</p>
+<h3>Project Onboarding</h3>
+<p>When new developers join a project, they need to understand the development workflow quickly. Solo-setup creates comprehensive documentation that explains testing practices, commit conventions, and verification procedures, dramatically reducing onboarding time from days to minutes.</p>
+<h3>Team Standardization</h3>
+<p>For teams working across multiple projects, solo-setup ensures consistent development practices across all projects. By automatically generating workflow documentation based on project-specific configurations, it maintains standardization while respecting project-specific requirements.</p>
+<h3>Rapid Prototyping</h3>
+<p>During rapid prototyping phases, developers need to move quickly without spending time on documentation. Solo-setup allows developers to focus on building while automatically creating the necessary workflow documentation that can be refined later.</p>
+<h3>Open Source Project Setup</h3>
+<p>Open source projects benefit from clear contribution guidelines. Solo-setup creates comprehensive workflow documentation that helps contributors understand testing requirements, commit conventions, and project structure before they begin contributing.</p>
+<h3>Educational Purposes</h3>
+<p>For educational projects or bootcamps, solo-setup provides students with clear workflow documentation that teaches best practices while allowing them to focus on learning core concepts rather than configuration details.</p>
+<h2>Benefits of Using Solo-Setup</h2>
+<p>The solo-setup skill offers numerous benefits that make it an essential tool for modern software development:</p>
+<h3>Time Savings</h3>
+<p>Manual workflow documentation can take several hours, especially for complex projects. Solo-setup automates this process, completing it in seconds. This time savings allows developers to focus on actual development work rather than documentation overhead.</p>
+<h3>Consistency and Accuracy</h3>
+<p>Because solo-setup extracts information directly from project files, the generated documentation is always accurate and up-to-date. This eliminates the common problem of documentation becoming outdated as projects evolve.</p>
+<h3>Reduced Onboarding Time</h3>
+<p>New team members can understand project workflows immediately by reading the generated documentation. This reduces the time from joining a project to productive contribution from days or weeks to hours.</p>
+<h3>Improved Code Quality</h3>
+<p>By establishing clear testing policies, commit conventions, and verification procedures, solo-setup helps teams maintain high code quality standards. The documentation serves as a reference that guides developers toward best practices.</p>
+<h3>Scalability</h3>
+<p>For organizations managing multiple projects, solo-setup scales effortlessly. It can be run across all projects to ensure consistent workflow documentation without requiring manual effort for each project.</p>
+<h3>Knowledge Preservation</h3>
+<p>When team members leave or projects change hands, the workflow documentation created by solo-setup preserves critical knowledge about development practices, testing strategies, and project structure.</p>
+<h2>Technical Implementation Details</h2>
+<p>The solo-setup skill is built with several technical considerations that make it robust and flexible:</p>
+<h3>Tool Integration</h3>
+<p>The skill integrates with various development tools and platforms:</p>
+<ul>
+<li><strong>MCP Tools</strong> &#8211; Uses project_info, kb_search, and codegraph_query for enhanced functionality</li>
+<li><strong>Version Control</strong> &#8211; Creates documentation that integrates with Git workflows</li>
+<li><strong>Build Systems</strong> &#8211; Supports Makefiles, package.json scripts, and other build configurations</li>
+<li><strong>Linting Tools</strong> &#8211; Detects and documents linting configurations for various languages</li>
+</ul>
+<h3>Language Support</h3>
+<p>The skill supports multiple programming languages and their associated ecosystems:</p>
+<ul>
+<li><strong>JavaScript/TypeScript</strong> &#8211; Supports npm, yarn, pnpm, and various testing frameworks</li>
+<li><strong>Python</strong> &#8211; Works with pip, poetry, and Python testing frameworks</li>
+<li><strong>Swift</strong> &#8211; Integrates with Xcode and Swift Package Manager</li>
+<li><strong>Kotlin</strong> &#8211; Supports Gradle and Android development workflows</li>
+</ul>
+<h3>Configuration Flexibility</h3>
+<p>The skill respects existing project configurations and adapts its output accordingly. It doesn&#8217;t enforce a one-size-fits-all approach but rather creates documentation that reflects the actual project setup and team preferences.</p>
+<h2>Common Issues and Solutions</h2>
+<p>While solo-setup is designed to work seamlessly, users may encounter some common issues:</p>
+<h3>CLAUDE.md Not Found</h3>
+<p><strong>Cause:</strong> Project not scaffolded or running from wrong directory<br />
+<strong>Solution:</strong> Run /scaffold first, or ensure you&#8217;re in the project root with CLAUDE.md</p>
+<h3>workflow.md Already Exists</h3>
+<p><strong>Cause:</strong> Previously set up<br />
+<strong>Solution:</strong> Skill warns and asks whether to regenerate. Existing file is preserved unless you confirm overwrite</p>
+<h3>Wrong Test Framework Detected</h3>
+<p><strong>Cause:</strong> Multiple test frameworks in devDependencies<br />
+<strong>Solution:</strong> Skill picks the first found. Edit docs/workflow.md manually to specify the correct framework</p>
+<h3>Missing Dependencies</h3>
+<p><strong>Cause:</strong> Required tools or packages not installed<br />
+<strong>Solution:</strong> Install missing dependencies or adjust the workflow documentation to reflect available tools</p>
+<h2>Best Practices for Using Solo-Setup</h2>
+<p>To get the most out of solo-setup, follow these best practices:</p>
+<h3>Run After Project Scaffolding</h3>
+<p>Always run solo-setup after /scaffold creates your project structure. This ensures all necessary files exist and the skill can extract accurate information.</p>
+<h3>Review and Customize</h3>
+<p>While the skill creates comprehensive documentation, review the generated workflow.md file and customize it to match your team&#8217;s specific needs and preferences.</p>
+<h3>Keep Documentation Updated</h3>
+<p>When project configurations change, re-run solo-setup to update the workflow documentation. This ensures your documentation remains accurate and useful.</p>
+<h3>Integrate with CI/CD</h3>
+<p>Consider integrating solo-setup into your continuous integration pipeline to automatically generate or update workflow documentation whenever project configurations change.</p>
+<h2>Future Enhancements</h2>
+<p>The solo-setup skill continues to evolve with potential future enhancements:</p>
+<ul>
+<li><strong>Multi-language Support</strong> &#8211; Better handling of projects with multiple primary languages</li>
+<li><strong>Framework-Specific Templates</strong> &#8211; More specialized workflow templates for popular frameworks</li>
+<li><strong>Integration with Project Management Tools</strong> &#8211; Linking workflow documentation to project management systems</li>
+<li><strong>Interactive Customization</strong> &#8211; More sophisticated interactive setup options for teams with specific requirements</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The solo-setup skill represents a significant advancement in development workflow automation. By automatically generating comprehensive workflow documentation from existing project data, it saves developers time, ensures consistency, and helps teams maintain high-quality development practices.</p>
+<p>Whether you&#8217;re working on a personal project, managing a team, or contributing to open source, solo-setup provides the tools and documentation needed to establish effective development workflows quickly and consistently. Its ability to adapt to different project types, programming languages, and team preferences makes it an invaluable tool for modern software development.</p>
+<p>As development practices continue to evolve, tools like solo-setup that automate routine but essential tasks will become increasingly important, allowing developers to focus on creating value rather than managing configuration and documentation overhead.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/fortunto2/solo-setup/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/fortunto2/solo-setup/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

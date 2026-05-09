@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding PII Detection with OpenClaw Skill | News of Tomorrow</title>
+<meta name="description" content="Learn how the OpenClaw PII detection skill helps identify personally identifiable information in text using Expanso Edge technology and MCP integration.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-pii-detection-with-openclaw-skill/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding PII Detection with OpenClaw Skill">
+<meta property="og:description" content="Learn how the OpenClaw PII detection skill helps identify personally identifiable information in text using Expanso Edge technology and MCP integration.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-pii-detection-with-openclaw-skill/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-pii-detection-with-openclaw-skill/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-18">
+<meta property="article:modified_time" content="2026-03-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding PII Detection with OpenClaw Skill">
+<meta name="twitter:description" content="Learn how the OpenClaw PII detection skill helps identify personally identifiable information in text using Expanso Edge technology and MCP integration.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-pii-detection-with-openclaw-skill/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding PII Detection with OpenClaw Skill", "datePublished": "2026-03-18", "dateModified": "2026-03-18", "image": ["https://picsum.photos/seed/understanding-pii-detection-with-openclaw-skill/1200/630"], "description": "Learn how the OpenClaw PII detection skill helps identify personally identifiable information in text using Expanso Edge technology and MCP integration.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-pii-detection-with-openclaw-skill/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding PII Detection with OpenClaw Skill", "item": "https://github.insightginie.com/posts/understanding-pii-detection-with-openclaw-skill/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding PII Detection with OpenClaw Skill</h1>
+<time datetime="2026-03-18" class="post-date" data-date="2026-03-18T23:16:29+00:00">2026-03-18</time>
+<img src="https://picsum.photos/seed/understanding-pii-detection-with-openclaw-skill/800/400" class="post-hero" alt="Understanding PII Detection with OpenClaw Skill">
+<h2>What is the PII Detection Skill?</h2>
+<p>The PII detection skill is a specialized tool designed to identify personally identifiable information (PII) within text content. This skill leverages advanced natural language processing capabilities to scan through text and flag sensitive data that could be used to identify individuals.</p>
+<h2>Core Functionality</h2>
+<p>At its core, this skill performs pattern recognition and contextual analysis to detect various types of PII including:</p>
+<ul>
+<li>Names and personal identifiers</li>
+<li>Email addresses and phone numbers</li>
+<li>Physical addresses and locations</li>
+<li>Social security numbers and identification numbers</li>
+<li>Financial information such as credit card numbers</li>
+<li>Medical record identifiers</li>
+</ul>
+<h2>Technical Requirements</h2>
+<p>To utilize this skill effectively, you need the Expanso Edge runtime installed on your system. The skill requires the <code>expanso-edge</code> binary to be accessible in your system PATH. This dependency ensures that the skill can leverage the powerful processing capabilities of the Expanso framework.</p>
+<h2>Installation Process</h2>
+<p>The installation is streamlined through the ClawHub package manager. Simply run:</p>
+<pre><code>clawhub install expanso-edge
+</code></pre>
+<p>This command handles all necessary dependencies and configurations, making the skill ready for immediate use.</p>
+<h2>Usage Methods</h2>
+<p>The PII detection skill offers multiple deployment options to suit different use cases:</p>
+<h3>CLI Pipeline Usage</h3>
+<p>For standalone operation, you can use the skill through the command line interface. This method is ideal for quick testing or when you need to process text on demand. The process involves piping input text through the skill:</p>
+<pre><code>echo '&lt;input&gt;' | expanso-edge run pipeline-cli.yaml
+</code></pre>
+<p>This approach provides immediate feedback on detected PII within the provided text.</p>
+<h3>MCP Server Integration</h3>
+<p>For more sophisticated applications, the skill can be deployed as an MCP (Model Context Protocol) server. This enables integration with various MCP-compatible applications and services:</p>
+<pre><code>expanso-edge run pipeline-mcp.yaml
+</code></pre>
+<p>The MCP server mode allows for real-time PII detection within larger application workflows.</p>
+<h3>Cloud Deployment</h3>
+<p>For scalable and accessible deployment, the skill can be deployed to Expanso Cloud:</p>
+<pre><code>expanso-cli job deploy https://skills.expanso.io/pii-detect/pipeline-cli.yaml
+</code></pre>
+<p>This option provides cloud-based processing capabilities with enhanced performance and availability.</p>
+<h2>Skill Architecture</h2>
+<p>The skill consists of several key components that work together to provide comprehensive PII detection:</p>
+<ul>
+<li><strong>skill.yaml</strong>: Contains metadata including input and output specifications, as well as any required credentials</li>
+<li><strong>pipeline-cli.yaml</strong>: Defines the standalone CLI pipeline configuration</li>
+<li><strong>pipeline-mcp.yaml</strong>: Configures the MCP server pipeline</li>
+</ul>
+<h2>Practical Applications</h2>
+<p>The PII detection skill has numerous practical applications across various industries:</p>
+<ul>
+<li>Data Privacy Compliance: Helping organizations meet GDPR, CCPA, and other privacy regulations</li>
+<li>Content Moderation: Automatically flagging sensitive information in user-generated content</li>
+<li>Document Processing: Scanning documents for sensitive data before sharing or archiving</li>
+<li>Security Auditing: Identifying potential data exposure in systems and communications</li>
+<li>Customer Support: Ensuring customer data isn&#8217;t inadvertently shared in support interactions</li>
+</ul>
+<h2>Benefits of Using This Skill</h2>
+<p>Implementing this PII detection skill offers several advantages:</p>
+<ul>
+<li><strong>Automated Detection</strong>: Eliminates manual review processes for identifying sensitive information</li>
+<li><strong>Consistent Results</strong>: Provides reliable and repeatable detection across different text samples</li>
+<li><strong>Customizable Configuration</strong>: Can be tailored to specific organizational needs and compliance requirements</li>
+<li><strong>Scalable Processing</strong>: Handles large volumes of text efficiently through both local and cloud deployments</li>
+<li><strong>Integration Capabilities</strong>: Works seamlessly with existing workflows through CLI, MCP, or cloud interfaces</li>
+</ul>
+<h2>Getting Started</h2>
+<p>To begin using the PII detection skill, ensure you have the Expanso Edge runtime installed, then follow the installation steps outlined above. Once installed, you can test the skill with sample text to understand its capabilities and configure it according to your specific requirements.</p>
+<p>The skill represents a powerful tool in the data privacy and security toolkit, providing organizations with the ability to automatically identify and handle sensitive personal information across their text-based data assets.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/aronchick/expanso-pii-detect/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/aronchick/expanso-pii-detect/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

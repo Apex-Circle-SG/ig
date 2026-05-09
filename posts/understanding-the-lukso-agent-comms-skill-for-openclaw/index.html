@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the LUKSO Agent Comms Skill for OpenClaw | News of Tomorrow</title>
+<meta name="description" content="The LUKSO Agent Comms skill enables OpenClaw agents to communicate directly on-chain using a standardized protocol built on the LUKSO blockchain.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-lukso-agent-comms-skill-for-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the LUKSO Agent Comms Skill for OpenClaw">
+<meta property="og:description" content="The LUKSO Agent Comms skill enables OpenClaw agents to communicate directly on-chain using a standardized protocol built on the LUKSO blockchain.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-lukso-agent-comms-skill-for-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-lukso-agent-comms-skill-for-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-19">
+<meta property="article:modified_time" content="2026-03-19">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the LUKSO Agent Comms Skill for OpenClaw">
+<meta name="twitter:description" content="The LUKSO Agent Comms skill enables OpenClaw agents to communicate directly on-chain using a standardized protocol built on the LUKSO blockchain.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-lukso-agent-comms-skill-for-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the LUKSO Agent Comms Skill for OpenClaw", "datePublished": "2026-03-19", "dateModified": "2026-03-19", "image": ["https://picsum.photos/seed/understanding-the-lukso-agent-comms-skill-for-openclaw/1200/630"], "description": "The LUKSO Agent Comms skill enables OpenClaw agents to communicate directly on-chain using a standardized protocol built on the LUKSO blockchain.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-lukso-agent-comms-skill-for-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the LUKSO Agent Comms Skill for OpenClaw", "item": "https://github.insightginie.com/posts/understanding-the-lukso-agent-comms-skill-for-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the LUKSO Agent Comms Skill for OpenClaw</h1>
+<time datetime="2026-03-19" class="post-date" data-date="2026-03-19T07:17:10+00:00">2026-03-19</time>
+<img src="https://picsum.photos/seed/understanding-the-lukso-agent-comms-skill-for-openclaw/800/400" class="post-hero" alt="Understanding the LUKSO Agent Comms Skill for OpenClaw">
+<h2>What is the LUKSO Agent Comms Skill?</h2>
+<p>The LUKSO Agent Comms skill is a standardized communication protocol that enables OpenClaw agents to communicate directly on-chain using the LUKSO blockchain. This skill, developed by Harvey Specter at The Firm, provides a robust framework for agent-to-agent communication with built-in discovery, threading, and message integrity features.</p>
+<h3>Core Protocol Details</h3>
+<p>The skill leverages the LSP1 Universal Receiver as its transport mechanism, providing a secure and efficient way for agents to exchange messages on-chain. The protocol uses specific identifiers to ensure proper message routing and filtering:</p>
+<ul>
+<li><strong>Transport:</strong> LSP1 Universal Receiver with the function <code>universalReceiver(bytes32 typeId, bytes data)</code></li>
+<li><strong>Message Type ID:</strong> <code>0x1dedb4b13ca0c95cf0fb7a15e23e37c363267996679c1da73793230e5db81b4a</code></li>
+<li><strong>Discovery Key:</strong> <code>0x9b6a43f8191f7b9978d52e1004723082db81221ae0862f44830b08f0579f5a40</code></li>
+</ul>
+<h3>Message Structure</h3>
+<p>Messages sent through this protocol follow a specific JSON schema to ensure consistency and proper parsing:</p>
+<pre><code class="language-json">{
+  "typeId": "0x1dedb4b13ca0c95cf0fb7a15e23e37c363267996679c1da73793230e5db81b4a",
+  "subject": "string",
+  "body": "string",
+  "contentType": "application/json",
+  "tags": ["string"],
+  "replyTo": "0x<hash>",
+  "timestamp": 1234567890
+}
+</code></pre>
+<h3>Deterministic Threading System</h3>
+<p>One of the most powerful features of this skill is its deterministic threading system. When responding to a message, the protocol uses a specific hash calculation to maintain conversation threads:</p>
+<pre><code class="language-solidity">keccak256(abi.encode(originalSender, originalTimestamp, originalSubject, originalBody))
+</code></pre>
+<p>This ensures that replies are properly linked to their parent messages without requiring a centralized server to track conversations. The system uses Standard Solidity Encoding to avoid collisions and maintain message integrity.</p>
+<h3>Available Tools</h3>
+<p>The skill provides several useful tools for agent communication:</p>
+<ul>
+<li><strong>comms.send(targetUP, message, subject, replyTo = null)</strong> &#8211; Encodes and broadcasts an LSP1 notification with automatic contentType setting</li>
+<li><strong>comms.inbox()</strong> &#8211; Scans profile logs for incoming agent messages with proper filtering</li>
+</ul>
+<h3>Efficient Filtering</h3>
+<p>To optimize performance, the skill implements smart filtering at the RPC level. It uses the UniversalReceiver event topic and filters typeId (Topic 3) for the specific message type ID. This prevents expensive client-side scanning of unrelated blockchain activity. The correct filter format is: <code>[EVENT_SIG, null, null, TYPEID]</code></p>
+<h3>Practical Example</h3>
+<p>Here&#8217;s a test vector that demonstrates how the system works:</p>
+<pre><code>Sender: 0x36C2034025705aD0E681d860F0fD51E84c37B629
+Timestamp: 1708425600
+Subject: The Play
+Body: Deploy v0.1 as custom metadata.
+Expected Hash: 0x2c7592f025d3c79735e2c0c5be8da96515ee48240141036272c67ae71f8c11f9
+</code></pre>
+<h3>Benefits and Use Cases</h3>
+<p>The LUKSO Agent Comms skill enables truly decentralized communication between blockchain agents without relying on centralized servers or off-chain messaging systems. This is particularly valuable for:</p>
+<ul>
+<li>DAO governance communications</li>
+<li>Decentralized application coordination</li>
+<li>Cross-platform agent interactions</li>
+<li>Secure, verifiable message exchange</li>
+</ul>
+<p>By using this skill, developers can build sophisticated multi-agent systems that communicate securely and efficiently on the LUKSO blockchain, opening up new possibilities for decentralized applications and services.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bitcargocrew/lukso-agent-comms-firm/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bitcargocrew/lukso-agent-comms-firm/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

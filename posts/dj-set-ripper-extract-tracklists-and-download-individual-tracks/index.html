@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DJ Set Ripper: Extract Tracklists and Download Individual Tracks | News of Tomorrow</title>
+<meta name="description" content="Learn how the OpenClaw DJ Set Ripper skill identifies tracks in DJ sets on YouTube, SoundCloud, and Mixcloud for individual downloads.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/dj-set-ripper-extract-tracklists-and-download-individual-tracks/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="DJ Set Ripper: Extract Tracklists and Download Individual Tracks">
+<meta property="og:description" content="Learn how the OpenClaw DJ Set Ripper skill identifies tracks in DJ sets on YouTube, SoundCloud, and Mixcloud for individual downloads.">
+<meta property="og:image" content="https://picsum.photos/seed/dj-set-ripper-extract-tracklists-and-download-individual-tracks/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/dj-set-ripper-extract-tracklists-and-download-individual-tracks/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-07">
+<meta property="article:modified_time" content="2026-03-07">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DJ Set Ripper: Extract Tracklists and Download Individual Tracks">
+<meta name="twitter:description" content="Learn how the OpenClaw DJ Set Ripper skill identifies tracks in DJ sets on YouTube, SoundCloud, and Mixcloud for individual downloads.">
+<meta name="twitter:image" content="https://picsum.photos/seed/dj-set-ripper-extract-tracklists-and-download-individual-tracks/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "DJ Set Ripper: Extract Tracklists and Download Individual Tracks", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "image": ["https://picsum.photos/seed/dj-set-ripper-extract-tracklists-and-download-individual-tracks/1200/630"], "description": "Learn how the OpenClaw DJ Set Ripper skill identifies tracks in DJ sets on YouTube, SoundCloud, and Mixcloud for individual downloads.", "mainEntityOfPage": "https://github.insightginie.com/posts/dj-set-ripper-extract-tracklists-and-download-individual-tracks/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "DJ Set Ripper: Extract Tracklists and Download Individual Tracks", "item": "https://github.insightginie.com/posts/dj-set-ripper-extract-tracklists-and-download-individual-tracks/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>DJ Set Ripper: Extract Tracklists and Download Individual Tracks</h1>
+<time datetime="2026-03-07" class="post-date" data-date="2026-03-07T17:45:54+00:00">2026-03-07</time>
+<img src="https://picsum.photos/seed/dj-set-ripper-extract-tracklists-and-download-individual-tracks/800/400" class="post-hero" alt="DJ Set Ripper: Extract Tracklists and Download Individual Tracks">
+<h1>DJ Set Ripper: Extract Tracklists and Download Individual Tracks</h1>
+<p>If you&#8217;re a DJ or music enthusiast, you might often come across a fantastic DJ set on platforms like YouTube, SoundCloud, Mixcloud, or 1001Tracklists and wish you could download the individual tracks. The <strong>DJ Set Ripper</strong> skill from OpenClaw makes this possible. This article will explain how this skill works and how it can help you build your music library.</p>
+<h2>Understanding the DJ Set Ripper Skill</h2>
+<p>The DJ Set Ripper skill is designed to extract tracklists from DJ sets on various platforms and then download each track individually. This process involves several steps, including fetching the set URL, extracting the raw text, parsing the tracklist, downloading each track, and generating a log file to keep track of the status of each track.</p>
+<h3>Fetching the Set URL and Extracting Raw Text</h3>
+<p>The first step involves fetching the set URL and extracting the relevant information. Depending on the platform, the method of extraction varies:</p>
+<ul>
+<li><strong>YouTube:</strong> The skill uses <code>yt-dlp --dump-json</code> to fetch the description and metadata.</li>
+<li><strong>SoundCloud / Mixcloud:</strong> The <code>web_fetch</code> command is used to grab the page content in markdown mode.</li>
+<li><strong>1001Tracklists:</strong> Again, <code>web_fetch</code> is used, as this source provides the most structured data, making it the preferred choice when available.</li>
+</ul>
+<h3>Parsing the Tracklist</h3>
+<p>Once the raw text is extracted, it is fed to the model with a specific prompt structure to identify the tracks. The model is instructed to return a JSON array of objects, each containing the track number, timestamp, artist, and title. The prompt includes several rules to ensure accurate parsing, such as preserving remix/mix names, handling unidentified tracks, and normalizing artist names.</p>
+<p>If the parsing process returns zero tracks, the skill informs the user that the tracklist couldn&#8217;t be extracted and suggests checking 1001Tracklists manually or pasting the tracklist directly.</p>
+<h3>Downloading Each Track</h3>
+<p>After parsing the tracklist, the skill proceeds to download each track using the <code>dj-mp3-sourcer</code> workflow. This involves searching various sources in a priority order, preferring extended mixes, and either downloading the tracks or surfacing purchase links. The downloads are parallelized to avoid rate limits, and files are saved to <code>~/Downloads/{set-name}/</code>, where the set name is derived from the mix title.</p>
+<p>Users are also given the option to download the full mix. If they choose to do so, the skill uses <code>yt-dlp</code> with specific options to embed the thumbnail and add metadata, saving the file in a sanitized format.</p>
+<h3>Normalizing Filenames</h3>
+<p>After all downloads are complete, the skill runs a normalization script to ensure consistent filename formatting. This involves writing the parsed tracklist as JSON and then running a script to fuzzy-match each MP3 file to a tracklist entry, renaming the files accordingly. This step is crucial to maintaining a clean and organized music library.</p>
+<h3>Generating the Log File</h3>
+<p>The skill generates a log file to provide a comprehensive overview of the downloaded tracks. The log file includes details such as the set title, URL, date, total tracks found, and the status of each track (downloaded, purchase link, not found, unidentified). This log file helps users keep track of their downloads and identify any missing tracks.</p>
+<h2>Edge Cases and Configuration</h2>
+<p>The DJ Set Ripper skill is designed to handle various edge cases, such as:</p>
+<ul>
+<li><strong>No tracklist in description:</strong> The skill checks 1001Tracklists via web search if no tracklist is found in the description.</li>
+<li><strong>Unidentified tracks:</strong> Tracks listed as &#8220;ID &#8211; ID&#8221; or &#8220;ID&#8221; are logged as unidentified and not downloaded.</li>
+<li><strong>Bootlegs / mashups:</strong> The skill searches for these tracks but logs them as not found if they cannot be located.</li>
+<li><strong>B2B sets:</strong> Multiple artists in the set title are handled gracefully.</li>
+<li><strong>Duplicate tracks:</strong> These are deduplicated by artist and title before downloading.</li>
+<li><strong>Very long sets:</strong> The skill batches these in groups of 5 and reports progress as batches complete.</li>
+</ul>
+<p>The skill also offers several configuration options, including the output directory, format, download of the full mix, free-only mode, and the number of parallel downloads. These options can be customized to suit individual preferences.</p>
+<h2>Conclusion</h2>
+<p>The DJ Set Ripper skill from OpenClaw is a powerful tool for extracting tracklists from DJ sets and downloading individual tracks. By following a structured workflow, the skill ensures accurate parsing, efficient downloading, and organized storage of tracks. Whether you are a DJ building a music library or a music enthusiast looking to expand your collection, the DJ Set Ripper skill simplifies the process and enhances your music experience.</p>
+<p>Remember to respect copyright laws and use this skill responsibly to download music you have the right to access. Happy listening and downloading!</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/robinnnnn/dj-set-ripper/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/robinnnnn/dj-set-ripper/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

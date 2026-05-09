@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the SecureVibes Scanner Skill in OpenClaw | News of Tomorrow</title>
+<meta name="description" content="Explore the SecureVibes Scanner skill for AI-powered application security scans in OpenClaw. Learn how it works and its features.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-securevibes-scanner-skill-in-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the SecureVibes Scanner Skill in OpenClaw">
+<meta property="og:description" content="Explore the SecureVibes Scanner skill for AI-powered application security scans in OpenClaw. Learn how it works and its features.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-securevibes-scanner-skill-in-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-securevibes-scanner-skill-in-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-12">
+<meta property="article:modified_time" content="2026-03-12">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the SecureVibes Scanner Skill in OpenClaw">
+<meta name="twitter:description" content="Explore the SecureVibes Scanner skill for AI-powered application security scans in OpenClaw. Learn how it works and its features.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-securevibes-scanner-skill-in-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the SecureVibes Scanner Skill in OpenClaw", "datePublished": "2026-03-12", "dateModified": "2026-03-12", "image": ["https://picsum.photos/seed/understanding-the-securevibes-scanner-skill-in-openclaw/1200/630"], "description": "Explore the SecureVibes Scanner skill for AI-powered application security scans in OpenClaw. Learn how it works and its features.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-securevibes-scanner-skill-in-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the SecureVibes Scanner Skill in OpenClaw", "item": "https://github.insightginie.com/posts/understanding-the-securevibes-scanner-skill-in-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the SecureVibes Scanner Skill in OpenClaw</h1>
+<time datetime="2026-03-12" class="post-date" data-date="2026-03-12T02:45:54+00:00">2026-03-12</time>
+<img src="https://picsum.photos/seed/understanding-the-securevibes-scanner-skill-in-openclaw/800/400" class="post-hero" alt="Understanding the SecureVibes Scanner Skill in OpenClaw">
+<h1>Understanding the SecureVibes Scanner Skill in OpenClaw</h1>
+<p>The SecureVibes Scanner is a powerful skill within the OpenClaw ecosystem, designed to enhance application security through AI-driven scans. This article delves into its functionality, prerequisites, execution model, and how to implement it effectively.</p>
+<h2>Introduction to SecureVibes Scanner</h2>
+<p>The SecureVibes Scanner is an AI-native security platform that leverages Claude AI to detect vulnerabilities. It operates through a multi-subagent pipeline, comprising assessment, threat modeling, code review, report generation, and optional Dynamic Application Security Testing (DAST). This skill supports both full scans and incremental scans, making it ideal for continuous security monitoring.</p>
+<h2>Prerequisites</h2>
+<p>Before diving into using the SecureVibes Scanner, ensure you have the following prerequisites:</p>
+<ul>
+<li><strong>Install the CLI</strong>: You can install SecureVibes using either <code>pipx install securevibes</code> or <code>uv tool install securevibes</code>. It is recommended to avoid <code>pip install</code> as it can create stale shims if you have multiple Python environments.</li>
+<li><strong>Authenticate with Anthropic</strong>: You can authenticate using either a Max/Pro subscription or an API key. For a Max/Pro subscription, if you&#8217;re authenticated via Claude Code or Claude CLI OAuth, no API key is needed. For an API key, export it using <code>export ANTHROPIC_API_KEY=your-key-here</code>.</li>
+</ul>
+<h2>Security Notes</h2>
+<p>Security is paramount when using the SecureVibes Scanner. Here are some critical security notes:</p>
+<ul>
+<li><strong>Use the Wrapper Script</strong>: Always use the <code>scripts/scan.sh</code> wrapper for full scans. It validates paths and rejects shell metacharacters before invoking SecureVibes.</li>
+<li><strong>Avoid Unsanitized Input</strong>: Never interpolate unsanitized user input into shell commands. The wrapper uses <code>realpath</code> to resolve paths safely and rejects any path containing potentially harmful metacharacters.</li>
+<li><strong>Local Directories</strong>: Scan targets must be local directories. Clone remote repos to a known safe location first, then pass the resolved path to the wrapper.</li>
+<li><strong>DAST Scans</strong>: DAST scans make network requests to the <code>--target-url</code> you provide. Only use against apps you own or have permission to test.</li>
+</ul>
+<h2>Execution Model</h2>
+<p>The SecureVibes Scanner operates in two primary modes: full scans and incremental scans.</p>
+<h3>Full Scans</h3>
+<p>Full scans take 10-30 minutes across 4 phases and are recommended to be run as background jobs rather than inline.</p>
+<h4>Running a Scan</h4>
+<p>To run a full scan, follow these steps:</p>
+<ol>
+<li><strong>Clone the Target Repo</strong>: Clone the repository you want to scan to a local directory.</li>
+<li><strong>Run the Wrapper Script</strong>: Execute the wrapper script with the appropriate parameters: <code>bash scripts/scan.sh /path/to/repo --force --debug</code>. Results will appear in <code>/path/to/repo/.securevibes/</code>.</li>
+</ol>
+<h4>Background Execution</h4>
+<p>For OpenClaw users, schedule scans as cron jobs with the following parameters:</p>
+<ul>
+<li><code>sessionTarget: "isolated"</code> with <code>payload.kind: "agentTurn"</code></li>
+<li>Set <code>payload.timeoutSeconds: 2700</code> (45 minutes) to allow all phases to complete</li>
+<li>Use <code>delivery.mode: "announce"</code> to get notified when done</li>
+</ul>
+<p>The agentTurn message should instruct the subagent to:</p>
+<ul>
+<li>CD into the repo and <code>git pull</code> for the latest code</li>
+<li>Clean previous <code>.securevibes/</code> artifacts</li>
+<li>Run <code>securevibes scan . --force</code> via the wrapper script</li>
+<li>Read and summarize the results from <code>.securevibes/scan_report.md</code></li>
+</ul>
+<h3>Incremental Scans</h3>
+<p>Incremental scans are designed for continuous security monitoring and take 2-10 minutes. They only scan new commits since the last run.</p>
+<h4>How It Works</h4>
+<p>The incremental scanner tracks the last-scanned commit in <code>.securevibes/incremental_state.json</code>. On each run, it fetches remote changes, compares HEAD to the anchor, and runs a scan on new commits if they exist. After a successful scan, it updates the anchor to the new HEAD.</p>
+<h4>Setup</h4>
+<p>To set up incremental scans, follow these steps:</p>
+<ol>
+<li><strong>Run an Initial Full Scan</strong>: Ensure the repo has a <code>.securevibes/</code> directory with necessary files: <code>securevibes scan &lt;repo-path&gt; --model sonnet</code>. Skip this step if the directory already exists.</li>
+<li><strong>Bootstrap Incremental State</strong>: Run the wrapper once to seed the anchor commit: <code>python3 ops/incremental_scan.py --repo &lt;repo-path&gt; --remote origin --branch main</code>. This creates <code>.securevibes/incremental_state.json</code> with <code>status: "bootstrap"</code>.</li>
+<li><strong>Configure the Cron Job</strong>: For OpenClaw users, create a cron job with parameters like <code>--name "securevibes-incremental"</code>, <code>--cron "*/30 * * * *"</code>, and appropriate time zone and timeout settings.</li>
+<li><strong>Verify</strong>: Check the state, logs, and findings to ensure everything is set up correctly.</li>
+</ol>
+<h4>Incremental Scanner Options</h4>
+<p>The incremental scanner supports various options, such as repository path, branch, remote, model, severity, timeout settings, and rewrite policy for handling history rewrites.</p>
+<h2>Operational Guarantees</h2>
+<p>The SecureVibes Scanner provides several operational guarantees:</p>
+<ul>
+<li><strong>File Lock</strong>: At <code>.securevibes/.incremental_scan.lock</code>, it prevents overlapping runs.</li>
+<li><strong>Atomic State Writes</strong>: Uses <code>fsync + os.replace</code> to prevent corruption.</li>
+<li><strong>Structured Logging</strong>: At <code>.securevibes/incremental_scan.log</code>, it ensures detailed logging.</li>
+<li><strong>Run Records</strong>: Saved to <code>.securevibes/incremental_runs/</code> (one JSON per run).</li>
+</ul>
+<h2>Rewrite Policy</h2>
+<p>The rewrite policy determines how the scanner handles cases where the last seen commit is not an ancestor of the new remote HEAD. Policies include:</p>
+<ul>
+<li><strong>reset_warn</strong>: Reset anchor to new HEAD and continue.</li>
+<li><strong>strict_fail</strong>: Fail and keep the current anchor.</li>
+<li><strong>since_date</strong>: Run a <code>--since &lt;today&gt;</code> scan for visibility and keep the previous anchor.</li>
+</ul>
+<h2>Full Scan Commands Reference</h2>
+<p>The SecureVibes Scanner supports various commands for full scans, including options for format, output, severity, model, subagent, resume from specific phases, DAST, and more.</p>
+<h2>Mapping Requests to Actions</h2>
+<p>Here’s how different user requests map to specific actions:</p>
+<ul>
+<li><strong>&#8220;Scan this for security issues&#8221;</strong>: Run a full scan using the wrapper script.</li>
+<li><strong>&#8220;Quick security check&#8221;</strong>: Run a full scan with the Haiku model.</li>
+<li><strong>&#8220;Threat model this project&#8221;</strong>: Run a subagent for threat modeling.</li>
+<li><strong>&#8220;Just review the code&#8221;</strong>: Run a subagent for code review.</li>
+<li><strong>&#8220;Show only critical/high findings&#8221;</strong>: Run a full scan with high severity filtering.</li>
+<li><strong>&#8220;Full audit with DAST&#8221;</strong>: Run a full scan with DAST enabled.</li>
+</ul>
+<p>In conclusion, the SecureVibes Scanner skill in OpenClaw is a robust tool for enhancing application security through AI-driven scans. By understanding its prerequisites, security notes, execution model, and setup processes, you can effectively implement it for both full and incremental scans, ensuring continuous security monitoring and vulnerability detection.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/anshumanbh/securevibes-scanner/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/anshumanbh/securevibes-scanner/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

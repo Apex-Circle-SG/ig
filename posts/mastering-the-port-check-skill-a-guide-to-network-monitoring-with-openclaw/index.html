@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mastering the Port Check Skill: A Guide to Network Monitoring with OpenClaw | News of Tomorrow</title>
+<meta name="description" content="Learn how the OpenClaw Port Check skill simplifies service monitoring, network debugging, and health checks for your infrastructure.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/mastering-the-port-check-skill-a-guide-to-network-monitoring-with-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Mastering the Port Check Skill: A Guide to Network Monitoring with OpenClaw">
+<meta property="og:description" content="Learn how the OpenClaw Port Check skill simplifies service monitoring, network debugging, and health checks for your infrastructure.">
+<meta property="og:image" content="https://picsum.photos/seed/mastering-the-port-check-skill-a-guide-to-network-monitoring-with-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/mastering-the-port-check-skill-a-guide-to-network-monitoring-with-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-16">
+<meta property="article:modified_time" content="2026-03-16">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mastering the Port Check Skill: A Guide to Network Monitoring with OpenClaw">
+<meta name="twitter:description" content="Learn how the OpenClaw Port Check skill simplifies service monitoring, network debugging, and health checks for your infrastructure.">
+<meta name="twitter:image" content="https://picsum.photos/seed/mastering-the-port-check-skill-a-guide-to-network-monitoring-with-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Mastering the Port Check Skill: A Guide to Network Monitoring with OpenClaw", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "image": ["https://picsum.photos/seed/mastering-the-port-check-skill-a-guide-to-network-monitoring-with-openclaw/1200/630"], "description": "Learn how the OpenClaw Port Check skill simplifies service monitoring, network debugging, and health checks for your infrastructure.", "mainEntityOfPage": "https://github.insightginie.com/posts/mastering-the-port-check-skill-a-guide-to-network-monitoring-with-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Mastering the Port Check Skill: A Guide to Network Monitoring with OpenClaw", "item": "https://github.insightginie.com/posts/mastering-the-port-check-skill-a-guide-to-network-monitoring-with-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Mastering the Port Check Skill: A Guide to Network Monitoring with OpenClaw</h1>
+<time datetime="2026-03-16" class="post-date" data-date="2026-03-16T04:00:28+00:00">2026-03-16</time>
+<img src="https://picsum.photos/seed/mastering-the-port-check-skill-a-guide-to-network-monitoring-with-openclaw/800/400" class="post-hero" alt="Mastering the Port Check Skill: A Guide to Network Monitoring with OpenClaw">
+<h1>Introduction to the OpenClaw Port Check Skill</h1>
+<p>In the fast-paced world of DevOps and system administration, maintaining service availability is paramount. Whether you are managing a complex microservices architecture, a home lab, or a simple web server, knowing whether your services are up and running is the first line of defense against downtime. Enter the <strong>OpenClaw Port Check skill</strong>—a lightweight, versatile tool designed to streamline the process of monitoring network ports and verifying service health.</p>
+<h2>What is the Port Check Skill?</h2>
+<p>The Port Check skill (part of the <code>rogue-agent1</code> suite within the OpenClaw ecosystem) is a utility script that allows users to quickly verify if services are actively listening and responding on specific host:port pairs. By leveraging industry-standard tools like <code>nc</code> (netcat) and <code>curl</code>, it provides a unified interface for both basic TCP connectivity tests and advanced HTTP response validation.</p>
+<h2>Why You Need It in Your Toolbox</h2>
+<p>Modern infrastructure is prone to silent failures. A server might appear to be running, but the application service might be hung, or a firewall rule might be blocking traffic. The Port Check skill helps you diagnose these issues instantly. Here is why it stands out:</p>
+<ul>
+<li><strong>Efficiency:</strong> Instead of manually typing complex <code>curl</code> commands or piping outputs from netcat, this skill encapsulates the logic into a clean, repeatable command-line interface.</li>
+<li><strong>Flexibility:</strong> It supports both raw TCP checks and sophisticated HTTP checks, making it ideal for checking everything from database ports (like 5432 or 6379) to web application endpoints.</li>
+<li><strong>Automation-Ready:</strong> With its clear exit code system (0 for success, 1 for failure), it is perfectly suited for integration into CI/CD pipelines, cron jobs, or monitoring dashboards.</li>
+</ul>
+<h2>Getting Started: Usage Scenarios</h2>
+<p>The beauty of this tool lies in its simplicity. After installing the necessary dependencies (<code>nc</code> and <code>curl</code>), you can start monitoring your services immediately.</p>
+<h3>1. Basic TCP Connectivity</h3>
+<p>If you just need to know if a port is open and accepting connections, the basic syntax is all you need:</p>
+<p><code>bash scripts/port-check.sh localhost:8080 localhost:5432</code></p>
+<p>This will check both ports and inform you if they are reachable.</p>
+<h3>2. Validating HTTP Services</h3>
+<p>Sometimes a port might be open, but the application behind it is returning errors. By using the <code>--http</code> flag, the Port Check skill validates that the server returns a successful HTTP status code:</p>
+<p><code>bash scripts/port-check.sh api.example.com:443 --http</code></p>
+<p>This is crucial for identifying &#8216;zombie&#8217; services—processes that are running but failing to serve requests.</p>
+<h3>3. Tuning Timeouts</h3>
+<p>Network latency varies significantly between local development and cloud production environments. The <code>--timeout</code> parameter allows you to adjust how long the script waits for a response, preventing your scripts from hanging on slow connections or unresponsive firewalls.</p>
+<h2>Understanding the Output</h2>
+<p>The OpenClaw Port Check skill provides clear, color-coded, and intuitive feedback, making it easy for human operators to understand the network state at a glance:</p>
+<ul>
+<li><strong>✅ host:port — open:</strong> The connection was successful, and the service is behaving as expected.</li>
+<li><strong>✅ host:port — open (HTTP 200):</strong> The HTTP handshake was completed successfully.</li>
+<li><strong>⚠️ host:port — open but HTTP 500:</strong> The port is open, but the application is throwing a server error.</li>
+<li><strong>❌ host:port — closed/timeout:</strong> The service is either down, or the connection is being dropped.</li>
+</ul>
+<h2>Integrating into Your Workflow</h2>
+<p>The true power of this skill is realized when you integrate it into your existing workflows. Here are three professional use cases:</p>
+<h3>Monitoring the OpenClaw Gateway</h3>
+<p>If you are running the OpenClaw infrastructure, you can use a simple cron job running the port check script to ensure your gateway is always alive. If the exit code is 1, trigger a notification alert or a self-healing restart sequence.</p>
+<h3>Database and Web Stack Verification</h3>
+<p>Before running your automated integration tests, use the port check script as a pre-flight checklist. Ensure that PostgreSQL, Redis, and your application container are all online before initiating the test suite, preventing flaky build failures.</p>
+<h3>Home Lab Diagnostics</h3>
+<p>If you manage local devices like Raspberry Pis or NAS units, you can create a simple dashboard that queries these devices at regular intervals, keeping tabs on your home network health without needing expensive enterprise software.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw Port Check skill is a testament to the idea that tools do not need to be bloated to be powerful. By focusing on a single, well-defined problem—port reachability and service health—it provides developers and system administrators with a reliable way to ensure that the backbone of their digital environment remains solid. Whether you are debugging a production outage or setting up a new server cluster, this utility is an essential addition to your command-line toolkit. Download it from the OpenClaw repository today and take control of your network connectivity.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/rogue-agent1/port-check/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/rogue-agent1/port-check/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

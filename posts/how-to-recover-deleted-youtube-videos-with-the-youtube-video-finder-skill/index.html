@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Recover Deleted YouTube Videos with the YouTube Video Finder Skill | News of Tomorrow</title>
+<meta name="description" content="Learn how to use the YouTube Video Finder skill to recover deleted YouTube videos, metadata, and comments using video IDs and multiple online archives.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/how-to-recover-deleted-youtube-videos-with-the-youtube-video-finder-skill/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="How to Recover Deleted YouTube Videos with the YouTube Video Finder Skill">
+<meta property="og:description" content="Learn how to use the YouTube Video Finder skill to recover deleted YouTube videos, metadata, and comments using video IDs and multiple online archives.">
+<meta property="og:image" content="https://picsum.photos/seed/how-to-recover-deleted-youtube-videos-with-the-youtube-video-finder-skill/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/how-to-recover-deleted-youtube-videos-with-the-youtube-video-finder-skill/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-17">
+<meta property="article:modified_time" content="2026-03-17">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Recover Deleted YouTube Videos with the YouTube Video Finder Skill">
+<meta name="twitter:description" content="Learn how to use the YouTube Video Finder skill to recover deleted YouTube videos, metadata, and comments using video IDs and multiple online archives.">
+<meta name="twitter:image" content="https://picsum.photos/seed/how-to-recover-deleted-youtube-videos-with-the-youtube-video-finder-skill/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to Recover Deleted YouTube Videos with the YouTube Video Finder Skill", "datePublished": "2026-03-17", "dateModified": "2026-03-17", "image": ["https://picsum.photos/seed/how-to-recover-deleted-youtube-videos-with-the-youtube-video-finder-skill/1200/630"], "description": "Learn how to use the YouTube Video Finder skill to recover deleted YouTube videos, metadata, and comments using video IDs and multiple online archives.", "mainEntityOfPage": "https://github.insightginie.com/posts/how-to-recover-deleted-youtube-videos-with-the-youtube-video-finder-skill/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "How to Recover Deleted YouTube Videos with the YouTube Video Finder Skill", "item": "https://github.insightginie.com/posts/how-to-recover-deleted-youtube-videos-with-the-youtube-video-finder-skill/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>How to Recover Deleted YouTube Videos with the YouTube Video Finder Skill</h1>
+<time datetime="2026-03-17" class="post-date" data-date="2026-03-17T07:16:29+00:00">2026-03-17</time>
+<img src="https://picsum.photos/seed/how-to-recover-deleted-youtube-videos-with-the-youtube-video-finder-skill/800/400" class="post-hero" alt="How to Recover Deleted YouTube Videos with the YouTube Video Finder Skill">
+<h2>What is the YouTube Video Finder Skill?</h2>
+<p>The YouTube Video Finder skill is a specialized tool designed to search multiple online archives and recover deleted YouTube videos, their metadata, and comments using just the video ID. This skill is particularly useful when you encounter broken links, deleted content, or private videos that you need to access.</p>
+<h2>How Does It Work?</h2>
+<p>The skill operates by taking a YouTube video ID (the 11-character identifier) and querying various archival services like GhostArchive and the Wayback Machine. It then returns detailed information about whether the video, its metadata, or comments have been archived.</p>
+<h3>Key Features:</h3>
+<ul>
+<li>Recovers deleted YouTube videos using archival services</li>
+<li>Extracts video metadata and comments when available</li>
+<li>Provides direct links to archived content</li>
+<li>Offers detailed status reports about recovery success</li>
+</ul>
+<h2>Using the YouTube Video Finder Skill</h2>
+<h3>Step 1: Extract the Video ID</h3>
+<p>Start by isolating the 11-character YouTube video ID from the URL or text. For example:</p>
+<pre><code>youtube.com/watch?v=dQw4w9WgXcQ
+</code></pre>
+<p>The video ID is: <code>dQw4w9WgXcQ</code></p>
+<h3>Step 2: Make the API Request</h3>
+<p>The skill uses a simple GET request to the API endpoint:</p>
+<pre><code>https://findyoutubevideo.thetechrobo.ca/api/v5/{videoid}
+</code></pre>
+<p>Where <code>{videoid}</code> is replaced with your extracted video ID.</p>
+<h3>Step 3: Understanding the Response</h3>
+<p>The API returns a structured response with several key elements:</p>
+<h4>Status Check</h4>
+<p>First, check the <code>status</code> field. If it returns <code>bad.id</code>, the video ID is invalid and you should inform the user accordingly.</p>
+<h4>The Verdict</h4>
+<p>The <code>verdict</code> object provides a human-friendly summary of the recovery results, including boolean flags for:</p>
+<ul>
+<li><code>video</code> &#8211; whether the video file was recovered</li>
+<li><code>metaonly</code> &#8211; whether only metadata was archived</li>
+<li><code>comments</code> &#8211; whether comments were recovered</li>
+</ul>
+<h4>Finding Available Links</h4>
+<p>Review the <code>keys</code> array, which contains service objects. For each service where <code>archived: true</code>, examine the <code>available</code> list to find direct URLs to the archived content.</p>
+<h2>Interpreting Results</h2>
+<h3>Full Recovery</h3>
+<p>When the video is fully recovered, you&#8217;ll receive direct links to the archived video along with metadata and comments.</p>
+<h3>Partial Recovery</h3>
+<p>If only metadata or comments were archived, the skill will clearly indicate this in the verdict. You can still provide valuable information to users even when the video file itself isn&#8217;t available.</p>
+<h3>Service Information</h3>
+<p>Each service result may include notes about accessibility, such as whether content might be paywalled or require special access methods.</p>
+<h2>Best Practices</h2>
+<ol>
+<li>Always verify the video ID is exactly 11 characters before making a request</li>
+<li>Use the human-friendly verdict for user-facing responses</li>
+<li>Provide context about which archival service successfully recovered the content</li>
+<li>Be transparent about limitations, such as paywalled content or incomplete recoveries</li>
+</ol>
+<h2>Advanced Options</h2>
+<p>The skill includes optional parameters for advanced users:</p>
+<ul>
+<li><code>includeRaw</code> &#8211; Set to true for debugging and raw metadata</li>
+<li><code>stream</code> &#8211; Set to true for JSONL streaming for large datasets</li>
+</ul>
+<h2>Common Use Cases</h2>
+<ul>
+<li>Recovering lost educational content</li>
+<li>Accessing deleted entertainment videos</li>
+<li>Researching historical YouTube content</li>
+<li>Finding alternative sources for broken video links</li>
+</ul>
+<h2>Limitations</h2>
+<p>While the YouTube Video Finder skill is powerful, it has some limitations:</p>
+<ul>
+<li>Success depends on whether the video was archived by third-party services</li>
+<li>Some content may be paywalled or require special access</li>
+<li>Very recent deletions might not yet be archived</li>
+<li>Private videos that were never public cannot be recovered</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The YouTube Video Finder skill provides a valuable service for recovering deleted YouTube content. By understanding how to properly use the API and interpret its responses, you can help users access valuable video content that would otherwise be lost to the digital void.</p>
+<h3>Quick Reference</h3>
+<pre><code>1. Extract 11-character video ID
+2. Make GET request to API
+3. Check status for validity
+4. Read verdict for summary
+5. Provide archived links to user
+</code></pre>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/upintheairsheep/youtube-video-finder/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/upintheairsheep/youtube-video-finder/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

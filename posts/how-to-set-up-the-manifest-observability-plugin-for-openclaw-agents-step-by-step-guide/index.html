@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Set Up the Manifest Observability Plugin for OpenClaw Agents – Step‑by‑Step Guide | News of Tomorrow</title>
+<meta name="description" content="Learn how to install, configure, and verify the Manifest plugin in OpenClaw to enable telemetry and observability for your agents.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/how-to-set-up-the-manifest-observability-plugin-for-openclaw-agents-step-by-step-guide/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="How to Set Up the Manifest Observability Plugin for OpenClaw Agents – Step‑by‑Step Guide">
+<meta property="og:description" content="Learn how to install, configure, and verify the Manifest plugin in OpenClaw to enable telemetry and observability for your agents.">
+<meta property="og:image" content="https://picsum.photos/seed/how-to-set-up-the-manifest-observability-plugin-for-openclaw-agents-step-by-step-guide/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/how-to-set-up-the-manifest-observability-plugin-for-openclaw-agents-step-by-step-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-18">
+<meta property="article:modified_time" content="2026-03-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Set Up the Manifest Observability Plugin for OpenClaw Agents – Step‑by‑Step Guide">
+<meta name="twitter:description" content="Learn how to install, configure, and verify the Manifest plugin in OpenClaw to enable telemetry and observability for your agents.">
+<meta name="twitter:image" content="https://picsum.photos/seed/how-to-set-up-the-manifest-observability-plugin-for-openclaw-agents-step-by-step-guide/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to Set Up the Manifest Observability Plugin for OpenClaw Agents – Step‑by‑Step Guide", "datePublished": "2026-03-18", "dateModified": "2026-03-18", "image": ["https://picsum.photos/seed/how-to-set-up-the-manifest-observability-plugin-for-openclaw-agents-step-by-step-guide/1200/630"], "description": "Learn how to install, configure, and verify the Manifest plugin in OpenClaw to enable telemetry and observability for your agents.", "mainEntityOfPage": "https://github.insightginie.com/posts/how-to-set-up-the-manifest-observability-plugin-for-openclaw-agents-step-by-step-guide/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "How to Set Up the Manifest Observability Plugin for OpenClaw Agents – Step‑by‑Step Guide", "item": "https://github.insightginie.com/posts/how-to-set-up-the-manifest-observability-plugin-for-openclaw-agents-step-by-step-guide/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>How to Set Up the Manifest Observability Plugin for OpenClaw Agents – Step‑by‑Step Guide</h1>
+<time datetime="2026-03-18" class="post-date" data-date="2026-03-18T12:48:20+00:00">2026-03-18</time>
+<img src="https://picsum.photos/seed/how-to-set-up-the-manifest-observability-plugin-for-openclaw-agents-step-by-step-guide/800/400" class="post-hero" alt="How to Set Up the Manifest Observability Plugin for OpenClaw Agents – Step‑by‑Step Guide">
+<h1>How to Set Up the Manifest Observability Plugin for OpenClaw Agents – Step‑by‑Step Guide</h1>
+<p>OpenClaw is a flexible agent framework that lets you extend functionality through plugins. One of the most useful plugins is the Manifest observability plugin, which enables you to send telemetry data from your agents to the Manifest platform. This guide walks you through the entire process of installing, configuring, and verifying the Manifest plugin, so you can start monitoring your OpenClaw deployments with confidence.</p>
+<h2>What Is the Manifest Plugin?</h2>
+<p>The Manifest plugin is an OpenClaw extension that integrates the OpenTelemetry (OTel) SDK with the Manifest backend. Once installed, the plugin collects metrics, traces, and logs from the agent and forwards them to a Manifest endpoint using the OTLP protocol. This gives you visibility into agent performance, error rates, and resource usage without writing custom instrumentation code.</p>
+<p>Key capabilities of the Manifest plugin include:</p>
+<ul>
+<li>Automatic collection of process and runtime metrics</li>
+<li>Trace propagation for distributed systems</li>
+<li>Log forwarding with structured fields</li>
+<li>Configurable API key and endpoint for self‑hosted Manifest instances</li>
+<li>Health checks that confirm the plugin is active</li>
+</ul>
+<h2>Prerequisites</h2>
+<p>Before you begin, make sure you have the following:</p>
+<ul>
+<li>OpenClaw CLI installed and available in your PATH</li>
+<li>Access to a Manifest account (you can sign up at <a href='https://app.manifest.build'>https://app.manifest.build</a>)</li>
+<li>Basic familiarity with terminal commands</li>
+</ul>
+<h2>Step 1 – Stop the Gateway</h2>
+<p>Changing plugin configuration while the gateway is running can cause hot‑reload issues. To avoid problems, stop the gateway first.</p>
+<p>Run the command below and confirm you want to proceed:</p>
+<pre><code>openclaw gateway stop</code></pre>
+<p>You should see output indicating the gateway has stopped. If you receive an error, verify that the OpenClaw service is actually running by checking <code>openclaw gateway status</code>.</p>
+<h2>Step 2 – Install the Manifest Plugin</h2>
+<p>With the gateway stopped, install the plugin from the official OpenClaw plugin repository.</p>
+<p>Execute the following command and confirm:</p>
+<pre><code>openclaw plugins install manifest</code></pre>
+<p>The CLI will download the plugin package, place it in the appropriate plugins directory, and register it in your <code>~/.openclaw/openclaw.json</code> configuration file. If the installation fails, ensure that:</p>
+<ul>
+<li>OpenClaw is correctly installed</li>
+<li>The <code>openclaw</code> command is in your system PATH</li>
+<li>You have network access to the plugin registry</li>
+</ul>
+<h2>Step 3 – Obtain a Manifest API Key</h2>
+<p>The Manifest plugin authenticates with the Manifest backend using an API key. You need to create one in the Manifest UI.</p>
+<ol>
+<li>Navigate to <a href='https://app.manifest.build'>https://app.manifest.build</a> and log in (or create a new account).</li>
+<li>Once logged in, click the &#8220;Connect Agent&#8221; button.</li>
+<li>Manifest will generate a new API key that starts with the prefix <code>mnfst_</code>.</li>
+<li>Copy the key to your clipboard.</li>
+</ol>
+<p>When you return to the terminal, paste the key when prompted. The system will validate that the key begins with <code>mnfst_</code>. If the format looks incorrect, you will be asked to try again.</p>
+<p><strong>Note:</strong> The API key is stored securely in <code>~/.openclaw/openclaw.json</code> under the path <code>plugins.entries.manifest.config.apiKey</code>. It persists on disk until you manually remove it.</p>
+<h2>Step 4 – Configure the Plugin with Your API Key</h2>
+<p>Now that you have the key, configure the plugin to use it.</p>
+<p>Run the following command, replacing <code>USER_API_KEY</code> with the actual key you copied:</p>
+<pre><code>openclaw config set plugins.entries.manifest.config.apiKey 'USER_API_KEY'</code></pre>
+<p>Confirm the change when prompted.</p>
+<p>Optional: If you are using a self‑hosted Manifest instance or a custom endpoint, you can override the default URL. The default endpoint is <code>https://app.manifest.build/api/v1/otlp</code>. To set a custom endpoint, execute:</p>
+<pre><code>openclaw config set plugins.entries.manifest.config.endpoint 'YOUR_ENDPOINT_URL'</code></pre>
+<p>Again, confirm the change. If you do not specify an endpoint, the plugin will automatically use the default Manifest cloud URL.</p>
+<h2>Step 5 – Restart the Gateway</h2>
+<p>With the configuration saved, restart the OpenClaw gateway to load the new plugin settings.</p>
+<p>Run the command and confirm:</p>
+<pre><code>openclaw gateway restart</code></pre>
+<p>The gateway will shut down, load the Manifest plugin, and start up again. This process usually takes a few seconds.</p>
+<h2>Step 6 – Verify the Installation</h2>
+<p>After the gateway has restarted, give it a moment to fully initialize (about three seconds). Then check the gateway logs for signs that the Manifest plugin is active.</p>
+<p>Execute the following command to filter the log for Manifest entries:</p>
+<pre><code>grep 'manifest' ~/.openclaw/logs/gateway.log | tail -5</code></pre>
+<p>Look for a line similar to:</p>
+<pre>[manifest] Observability pipeline active</pre>
+<p>If you see this message, the plugin has successfully connected to Manifest and is ready to receive telemetry.</p>
+<p>If the line does not appear, examine the preceding log lines for error messages. Common issues include:</p>
+<ul>
+<li><strong>Missing apiKey</strong> – Return to Step 4 and ensure the API key is set correctly.</li>
+<li><strong>Invalid apiKey format</strong> – The key must start with <code>mnfst_</code>. Re‑obtain a valid key from the Manifest UI.</li>
+<li><strong>Connection refused</strong> – The endpoint URL is unreachable. Verify your network connectivity and that the Manifest service is reachable.</li>
+<li><strong>Duplicate OTel registration</strong> – Another plugin (such as the built‑in diagnostics‑otel) may be registering the same OTel components. Disable the conflicting plugin with:</li>
+</ul>
+<pre><code>openclaw plugins disable diagnostics-otel</code></pre>
+<p>After making any necessary changes, repeat Step 5 and Step 6.</p>
+<h2>Troubleshooting Tips</h2>
+<p>Here are some additional tips to help you resolve common problems:</p>
+<ul>
+<li>Ensure your system clock is synchronized; significant time drift can cause authentication failures with Manifest.</li>
+<li>If you are behind a proxy, configure the <code>HTTPS_PROXY</code> environment variable before running the OpenClaw CLI.</li>
+<li>For detailed debug output, run the gateway with increased verbosity: <code>openclaw gateway start --verbose</code>.</li>
+<li>Check the Manifest dashboard for incoming spans and metrics; if nothing appears, double‑check that your agent is actually generating telemetry (e.g., by making a request that triggers internal instrumentation).</li>
+</ul>
+<h2>Why Use the Manifest Plugin?</h2>
+<p>Integrating Manifest with OpenClaw brings several advantages:</p>
+<ul>
+<li>Unified observability: Metrics, traces, and logs are all sent to a single backend, simplifying correlation.</li>
+<li>Zero‑code instrumentation: The plugin automatically instruments common libraries and runtime components.</li>
+<li>Scalable backend: Manifest is designed to handle high volumes of telemetry data, making it suitable for production workloads.</li>
+<li>OpenTelemetry compatibility: Because Manifest accepts OTLP, you can later switch to other OTel‑compatible backends without changing your agent code.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>Setting up the Manifest observability plugin for OpenClaw is a straightforward process that yields powerful insights into your agents’ behavior. By following the six steps outlined above—stopping the gateway, installing the plugin, obtaining and configuring an API key, optionally setting a custom endpoint, restarting the gateway, and verifying the activation—you can have telemetry flowing to Manifest in just a few minutes.</p>
+<p>Once the plugin is active, you can leverage Manifest’s dashboards, alerts, and query capabilities to monitor performance, detect anomalies, and improve the reliability of your OpenClaw‑based services. Should you encounter any issues, refer to the troubleshooting section or consult the OpenClaw and Manifest documentation for further guidance.</p>
+<p>Start observing your agents today and take full advantage of the observability stack that Manifest provides.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/sebconejo/manifest/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/sebconejo/manifest/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

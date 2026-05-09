@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill: Claude Team &amp;#8211; Orchestrating Parallel Development with AI Workers | News of Tomorrow</title>
+<meta name="description" content="Learn how to use the Claude Team skill to orchestrate multiple Claude Code workers via iTerm2, enabling parallel development, context isolation, and efficient t">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-claude-team-orchestrating-parallel-development-with-ai-workers/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill: Claude Team &amp;#8211; Orchestrating Parallel Development with AI Workers">
+<meta property="og:description" content="Learn how to use the Claude Team skill to orchestrate multiple Claude Code workers via iTerm2, enabling parallel development, context isolation, and efficient t">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-claude-team-orchestrating-parallel-development-with-ai-workers/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-claude-team-orchestrating-parallel-development-with-ai-workers/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-18">
+<meta property="article:modified_time" content="2026-03-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill: Claude Team &amp;#8211; Orchestrating Parallel Development with AI Workers">
+<meta name="twitter:description" content="Learn how to use the Claude Team skill to orchestrate multiple Claude Code workers via iTerm2, enabling parallel development, context isolation, and efficient t">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-claude-team-orchestrating-parallel-development-with-ai-workers/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill: Claude Team &#8211; Orchestrating Parallel Development with AI Workers", "datePublished": "2026-03-18", "dateModified": "2026-03-18", "image": ["https://picsum.photos/seed/openclaw-skill-claude-team-orchestrating-parallel-development-with-ai-workers/1200/630"], "description": "Learn how to use the Claude Team skill to orchestrate multiple Claude Code workers via iTerm2, enabling parallel development, context isolation, and efficient t", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-claude-team-orchestrating-parallel-development-with-ai-workers/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill: Claude Team &#8211; Orchestrating Parallel Development with AI Workers", "item": "https://github.insightginie.com/posts/openclaw-skill-claude-team-orchestrating-parallel-development-with-ai-workers/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill: Claude Team &#8211; Orchestrating Parallel Development with AI Workers</h1>
+<time datetime="2026-03-18" class="post-date" data-date="2026-03-18T04:18:39+00:00">2026-03-18</time>
+<img src="https://picsum.photos/seed/openclaw-skill-claude-team-orchestrating-parallel-development-with-ai-workers/800/400" class="post-hero" alt="OpenClaw Skill: Claude Team &amp;#8211; Orchestrating Parallel Development with AI Workers">
+<h2>What is the Claude Team Skill?</h2>
+<p>The Claude Team skill is an MCP (Model Context Protocol) server that enables you to spawn and manage teams of Claude Code sessions through iTerm2. This powerful tool allows you to orchestrate multiple AI workers simultaneously, each with their own terminal pane, optional git worktree, and the ability to be assigned specific tasks or beads issues.</p>
+<h2>Why Use Claude Team for Development?</h2>
+<p>Claude Team offers several compelling advantages for modern development workflows:</p>
+<ul>
+<li><strong>Parallelism</strong>: Fan out work to multiple agents working simultaneously on different tasks</li>
+<li><strong>Context Isolation</strong>: Each worker maintains fresh context, keeping your coordinator session clean</li>
+<li><strong>Visibility</strong>: Real Claude Code sessions you can watch, interrupt, or take over as needed</li>
+<li><strong>Git Worktrees</strong>: Each worker can operate in an isolated branch, enabling safe parallel development</li>
+</ul>
+<h2>Important Usage Rule</h2>
+<p><strong>NEVER make code changes directly</strong>. Always spawn workers for code changes. This ensures your context remains clean and provides proper git workflow with worktrees.</p>
+<h2>Prerequisites</h2>
+<p>Before using Claude Team, ensure you have:</p>
+<ul>
+<li>macOS with iTerm2 (Python API enabled: Preferences → General → Magic → Enable Python API)</li>
+<li>claude-team MCP server configured in ~/.claude.json</li>
+</ul>
+<h2>Core Tools and Commands</h2>
+<h3>Spawning Workers</h3>
+<p>The primary function is spawning workers with specific configurations:</p>
+<pre><code>mcporter call claude-team.spawn_workers \
+workers=\
+'
+[{
+"project_path": "/path/to/repo",
+"bead": "cp-123",
+"annotation": "Fix auth bug",
+"use_worktree": true,
+"skip_permissions": true
+}]
+'
+\
+layout="
+auto
+"
+</code></pre>
+<p>Key worker configuration fields:</p>
+<ul>
+<li><code>project_path</code>: Required. Path to repository or &#8220;auto&#8221; (uses CLAUDE_TEAM_PROJECT_DIR)</li>
+<li><code>bead</code>: Optional beads issue ID — worker follows beads workflow</li>
+<li><code>annotation</code>: Task description shown on badge, used in branch name</li>
+<li><code>prompt</code>: Additional instructions if no bead assigned</li>
+<li><code>use_worktree</code>: Create isolated git worktree (default: true)</li>
+<li><code>skip_permissions</code>: Start with &#8211;dangerously-skip-permissions (default: false)</li>
+</ul>
+<h3>Layout Options</h3>
+<ul>
+<li><code>"auto"</code>: Reuse existing claude-team windows, split into available space</li>
+<li><code>"new"</code>: Always create fresh window (1-4 workers in grid layout)</li>
+</ul>
+<h2>Managing Workers</h2>
+<h3>Listing Workers</h3>
+<pre><code>mcporter call claude-team.list_workers
+mcporter call claude-team.list_workers status_filter="
+ready
+"
+</code></pre>
+<p>Status values include: spawning, ready, busy, closed.</p>
+<h3>Messaging Workers</h3>
+<pre><code>mcporter call claude-team.message_workers \
+session_ids='[
+"Groucho"
+]'
+\
+message="
+Please also add unit tests
+"
+\
+wait_mode="
+none
+"
+</code></pre>
+<p>Wait modes: &#8220;none&#8221; (fire and forget), &#8220;any&#8221; (wait for any worker idle), &#8220;all&#8221; (wait for all workers idle).</p>
+<h3>Checking and Waiting for Completion</h3>
+<pre><code># Quick poll
+mcporter call claude-team.check_idle_workers session_ids='[
+"Groucho","Harpo"
+]'
+
+# Blocking wait
+mcporter call claude-team.wait_idle_workers \
+session_ids='[
+"Groucho","Harpo"
+]'
+\
+mode="
+all
+"
+\
+timeout=600
+</code></pre>
+<h3>Reading Worker Logs</h3>
+<pre><code>mcporter call claude-team.read_worker_logs \
+session_id="
+Groucho
+"
+\
+pages=2
+</code></pre>
+<h3>Examining Worker Status</h3>
+<pre><code>mcporter call claude-team.examine_worker session_id="
+Groucho
+"
+</code></pre>
+<h3>Closing Workers</h3>
+<pre><code>mcporter call claude-team.close_workers session_ids='[
+"Groucho","Harpo"
+]'
+</code></pre>
+<h2>Workflow Examples</h2>
+<h3>Assigning a Beads Issue</h3>
+<pre><code># 1. Spawn worker with bead assignment
+mcporter call claude-team.spawn_workers \
+workers='[
+{
+"project_path": "/Users/phaedrus/Projects/myrepo",
+"bead": "proj-abc",
+"annotation": "Implement config schemas",
+"use_worktree": true,
+"skip_permissions": true
+}]
+'
+
+# 2. Worker automatically:
+# - Creates worktree with branch named after bead
+# - Runs `bd show proj-abc` to understand the task
+# - Marks issue in_progress
+# - Implements the work
+# - Closes the issue
+# - Commits with issue reference
+
+# 3. Monitor progress
+mcporter call claude-team.check_idle_workers session_ids='[
+"Groucho"
+]'
+mcporter call claude-team.read_worker_logs session_id="
+Groucho
+"
+
+# 4. When done, close and merge
+mcporter call claude-team.close_workers session_ids='[
+"Groucho"
+]'
+# Then: git merge or cherry-pick from worker's branch
+</code></pre>
+<h3>Parallel Fan-Out</h3>
+<pre><code># Spawn multiple workers for parallel tasks
+mcporter call claude-team.spawn_workers \
+workers='[
+{"project_path": "auto", "bead": "cp-123", "annotation": "Auth module"},
+{"project_path": "auto", "bead": "cp-124", "annotation": "API routes"},
+{"project_path": "auto", "bead": "cp-125", "annotation": "Unit tests"}
+]'
+\
+layout="
+new
+"
+
+# Wait for all to complete
+mcporter call claude-team.wait_idle_workers \
+session_ids='[
+"Groucho","Harpo","Chico"
+]'
+\
+mode="
+all
+"
+
+# Review and close
+mcporter call claude-team.close_workers \
+session_ids='[
+"Groucho","Harpo","Chico"
+]'
+</code></pre>
+<h2>Best Practices</h2>
+<ol>
+<li><strong>Use beads</strong>: Assign bead IDs so workers follow proper issue workflow</li>
+<li><strong>Use worktrees</strong>: Keeps work isolated, enables parallel commits</li>
+<li><strong>Skip permissions</strong>: Workers need skip_permissions: true to write files</li>
+<li><strong>Monitor, don&#8217;t micromanage</strong>: Let workers complete, then review</li>
+<li><strong>Merge carefully</strong>: Review worker branches before merging to main</li>
+<li><strong>Close workers</strong>: Always close when done to clean up worktrees</li>
+</ol>
+<h2>HTTP Mode for Persistent Operation</h2>
+<p>For persistent server operation, claude-team can run as an HTTP server. This keeps the MCP server running continuously with persistent state, avoiding cold starts.</p>
+<h3>Starting the HTTP Server</h3>
+<pre><code># From the claude-team directory
+uv run python -m claude_team_mcp --http --port 8766
+
+# Or specify the directory explicitly
+uv run --directory /path/to/claude-team python -m claude_team_mcp --http --port 8766
+</code></pre>
+<h3>mcporter.json Configuration</h3>
+<p>Create ~/.mcporter/mcporter.json:</p>
+<pre><code>{
+"mcpServers": {
+"claude-team": {
+"transport": "
+streamable-http
+",
+"url": "
+http://127.0.0.1:8766/mcp
+",
+"lifecycle": "
+keep-alive
+"
+}
+}
+}
+</code></pre>
+<h3>Benefits of HTTP Mode</h3>
+<ul>
+<li><strong>Persistent state</strong>: Worker registry survives across CLI invocations</li>
+<li><strong>Faster responses</strong>: No Python environment startup on each call</li>
+<li><strong>External access</strong>: Can be accessed by cron jobs, scripts, or other tools</li>
+<li><strong>Session recovery</strong>: Server tracks sessions even if coordinator disconnects</li>
+</ul>
+<h2>Connecting from Claude Code</h2>
+<p>Update your .mcp.json to use HTTP transport:</p>
+<pre><code>{
+"mcpServers": {
+"claude-team": {
+"transport": "
+streamable-http
+",
+"url": "
+http://127.0.0.1:8766/mcp
+"
+}
+}
+}
+</code></pre>
+<h2>Worker Identification</h2>
+<p>Workers can be referenced by any of:</p>
+<ul>
+<li><strong>Internal ID</strong>: Short hex string (e.g., 3962c5c4)</li>
+<li><strong>Terminal ID</strong>: iterm:UUID format</li>
+<li><strong>Worker name</strong>: Human-friendly name (e.g., Groucho, Aragorn)</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The Claude Team skill transforms how you can approach development by enabling true parallel AI-assisted coding. By orchestrating multiple workers, each with their own context and worktree, you can dramatically accelerate development workflows while maintaining code quality and proper git practices. Whether you&#8217;re tackling a single complex issue or fanning out to multiple parallel tasks, Claude Team provides the infrastructure to make AI-assisted development more efficient and manageable.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/jalehman/claude-team/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/jalehman/claude-team/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

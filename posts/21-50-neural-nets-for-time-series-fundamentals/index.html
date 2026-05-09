@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>(21/50) Neural nets for time series: fundamentals | News of Tomorrow</title>
+<meta name="description" content="Unlock time series forecasting with neural networks. Explore MLPs vs. sequence models, master input shapes, lag stacking, normalization &amp;#038; combat overfittin">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/21-50-neural-nets-for-time-series-fundamentals/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="(21/50) Neural nets for time series: fundamentals">
+<meta property="og:description" content="Unlock time series forecasting with neural networks. Explore MLPs vs. sequence models, master input shapes, lag stacking, normalization &amp;#038; combat overfittin">
+<meta property="og:image" content="https://picsum.photos/seed/21-50-neural-nets-for-time-series-fundamentals/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/21-50-neural-nets-for-time-series-fundamentals/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-08">
+<meta property="article:modified_time" content="2025-10-08">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="(21/50) Neural nets for time series: fundamentals">
+<meta name="twitter:description" content="Unlock time series forecasting with neural networks. Explore MLPs vs. sequence models, master input shapes, lag stacking, normalization &amp;#038; combat overfittin">
+<meta name="twitter:image" content="https://picsum.photos/seed/21-50-neural-nets-for-time-series-fundamentals/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "(21/50) Neural nets for time series: fundamentals", "datePublished": "2025-10-08", "dateModified": "2025-10-08", "image": ["https://picsum.photos/seed/21-50-neural-nets-for-time-series-fundamentals/1200/630"], "description": "Unlock time series forecasting with neural networks. Explore MLPs vs. sequence models, master input shapes, lag stacking, normalization &#038; combat overfittin", "mainEntityOfPage": "https://github.insightginie.com/posts/21-50-neural-nets-for-time-series-fundamentals/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "(21/50) Neural nets for time series: fundamentals", "item": "https://github.insightginie.com/posts/21-50-neural-nets-for-time-series-fundamentals/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>(21/50) Neural nets for time series: fundamentals</h1>
+<time datetime="2025-10-08" class="post-date" data-date="2025-10-08T14:21:51+00:00">2025-10-08</time>
+<img src="https://picsum.photos/seed/21-50-neural-nets-for-time-series-fundamentals/800/400" class="post-hero" alt="(21/50) Neural nets for time series: fundamentals">
+<h2>Unlock the Power of Neural Networks for Time Series Forecasting</h2>
+<p>Time series data is ubiquitous, from financial markets and weather patterns to sensor readings and sales figures. Predicting future values or understanding underlying patterns in this sequential data is a critical task across many industries. While traditional statistical methods have long been the go-to, the rise of deep learning has introduced powerful new tools: neural networks. But how do you effectively apply these complex models to the unique challenges of time series?</p>
+<p>This article dives into the fundamentals of using neural networks for time series, comparing the capabilities of simple Multi-Layer Perceptrons (MLPs) with more advanced sequence models. We&#8217;ll explore crucial data preparation techniques like understanding input shapes, lag stacking, and normalization, and critically examine the significant risks of overfitting inherent in time series analysis. By the end, you&#8217;ll be equipped to build a robust baseline for your time series predictions.</p>
+<h2>MLPs vs. Sequence Models: A Fundamental Divide</h2>
+<p>When approaching time series with neural networks, one of the first decisions is whether to use a Multi-Layer Perceptron (MLP) or a specialized sequence model like a Recurrent Neural Network (RNN), Long Short-Term Memory (LSTM), or Transformer.</p>
+<h3>Multi-Layer Perceptrons (MLPs) for Time Series</h3>
+<p>An MLP, or a feedforward neural network, is the simplest form of deep learning architecture. It consists of an input layer, one or more hidden layers, and an output layer. Each neuron in one layer connects to every neuron in the next layer. While incredibly versatile for tabular data, MLPs inherently treat each input as independent. This poses a challenge for time series, where the order and temporal dependencies are paramount.</p>
+<ul>
+<li><strong>How MLPs Adapt:</strong> To use an MLP for time series, you must explicitly engineer features that capture past information. This is typically done through <em>lag stacking</em>, which transforms sequential data into a fixed-size input vector, effectively converting a time series problem into a supervised learning problem that an MLP can handle.</li>
+<li><strong>Advantages:</strong> Simplicity, faster training for small datasets, good baseline performance for short-term dependencies or when the lagged features are highly informative.</li>
+<li><strong>Limitations:</strong> Lack of inherent memory, struggles with long-term dependencies, requires manual feature engineering (lag stacking), less efficient for very long sequences.</li>
+</ul>
+<h3>Sequence Models: Capturing Temporal Dynamics</h3>
+<p>Sequence models are designed specifically to process sequential data, maintaining an internal &#8216;memory&#8217; that allows them to learn from past inputs and influence future predictions.</p>
+<ul>
+<li><strong>Recurrent Neural Networks (RNNs):</strong> The foundational sequence model, RNNs have loops that allow information to persist. They pass a hidden state from one time step to the next, theoretically capturing sequential dependencies. However, basic RNNs suffer from the vanishing/exploding gradient problem, making them ineffective for long sequences.</li>
+<li><strong>Long Short-Term Memory (LSTMs) &amp; Gated Recurrent Units (GRUs):</strong> These are advanced types of RNNs that solve the vanishing gradient problem using &#8216;gates&#8217; (input, forget, output gates for LSTMs) that regulate the flow of information. They can effectively learn and remember long-term dependencies, making them highly suitable for complex time series tasks.</li>
+<li><strong>Transformers:</strong> While initially designed for natural language processing, Transformers, with their self-attention mechanisms, have shown remarkable success in time series. They can process all elements of a sequence in parallel and capture long-range dependencies more efficiently than RNNs/LSTMs in some cases.</li>
+<li><strong>Advantages:</strong> Inherent memory, automatic feature learning of temporal dependencies, superior for complex patterns and long sequences.</li>
+<li><strong>Limitations:</strong> More complex to train, computationally intensive, can still be prone to overfitting if not properly regularized.</li>
+</ul>
+<p><strong>When to Choose Which:</strong> For a simple baseline or short-term, clearly defined dependencies, an MLP with effective lag stacking can be a great starting point. For complex, non-linear, or long-term dependencies, sequence models like LSTMs are generally preferred.</p>
+<h2>Preparing Time Series Data for Neural Networks</h2>
+<p>Proper data preparation is paramount for any machine learning task, but it holds unique importance for time series. Incorrect handling can lead to poor performance or even data leakage.</p>
+<h3>Understanding Input Shapes</h3>
+<p>The shape of your input data must match what your neural network expects:</p>
+<ul>
+<li><strong>For MLPs:</strong> Data is typically 2D: <code>(samples, features)</code>. Each row is an independent observation, and columns are features. When using lag stacking, each &#8216;sample&#8217; will contain multiple lagged values as its features.</li>
+<li><strong>For Sequence Models (RNNs, LSTMs):</strong> Data is typically 3D: <code>(samples, timesteps, features)</code>.
+<ul>
+<li><code>samples</code>: The number of independent sequences or windows.</li>
+<li><code>timesteps</code>: The length of each sequence (the number of past observations considered).</li>
+<li><code>features</code>: The number of variables at each timestep (e.g., price, volume, indicator).</li>
+</ul>
+</li>
+</ul>
+<p>Incorrect input shapes are a common source of errors when building neural network models for time series.</p>
+<h3>Lag Stacking (Windowing)</h3>
+<p>Lag stacking is the process of creating a &#8216;window&#8217; of past observations that serve as input features for predicting a future value. This technique is crucial for MLPs to infer temporal relationships.</p>
+<p><strong>Example:</strong> If you have a time series <code>[t1, t2, t3, t4, t5, t6]</code> and want to predict <code>t_next</code> using the previous 3 values (lag=3):</p>
+<ul>
+<li>Input: <code>[t1, t2, t3]</code>, Output: <code>t4</code></li>
+<li>Input: <code>[t2, t3, t4]</code>, Output: <code>t5</code></li>
+<li>Input: <code>[t3, t4, t5]</code>, Output: <code>t6</code></li>
+</ul>
+<p>Each <code>[t_i, t_i+1, t_i+2]</code> becomes a single <em>sample</em> for the MLP, with <code>t_i+3</code> as its target. The choice of window size (number of lags) is a hyperparameter that often requires experimentation.</p>
+<h3>Normalization and Scaling</h3>
+<p>Neural networks, especially those with activation functions like sigmoid or tanh, perform best when input features are scaled to a consistent range. This helps prevent exploding/vanishing gradients, speeds up convergence, and improves model stability.</p>
+<ul>
+<li><strong>Min-Max Scaling:</strong> Scales data to a fixed range, typically <code>[0, 1]</code>. Formula: <code>(x - min(x)) / (max(x) - min(x))</code>.</li>
+<li><strong>Standardization (Z-score Normalization):</strong> Scales data to have a mean of 0 and a standard deviation of 1. Formula: <code>(x - mean(x)) / std(x)</code>.</li>
+</ul>
+<p><strong>Crucial Point:</strong> Always fit your scaler (e.g., <code>MinMaxScaler</code> or <code>StandardScaler</code>) ONLY on your training data. Then, use this fitted scaler to transform both your training and test/validation data. Applying the scaler to the entire dataset before splitting or refitting on the test set leads to <em>data leakage</em>, where your model implicitly learns from future information.</p>
+<h2>Navigating Overfitting Risks in Time Series Neural Networks</h2>
+<p>Overfitting is a common problem in machine learning, but it takes on particular significance and presents unique challenges in time series analysis due to the inherent temporal dependence of the data.</p>
+<h3>Why Time Series Overfitting is Unique</h3>
+<ol>
+<li><strong>Temporal Dependence:</strong> Unlike i.i.d. (independent and identically distributed) data, time series observations are not independent. Shuffling data randomly for train-test splits (a common practice for i.i.d. data) will lead to data leakage, as future information can subtly influence the training set.</li>
+<li><strong>Non-Stationarity:</strong> Many real-world time series are non-stationary, meaning their statistical properties (mean, variance, autocorrelation) change over time. A model that performs well on past data might fail catastrophically on future data if the underlying data generation process has shifted.</li>
+<li><strong>Small Datasets:</strong> Time series datasets can sometimes be relatively small (e.g., daily data for a few years), making it easier for complex models like deep neural networks to memorize noise rather than learn generalizable patterns.</li>
+</ol>
+<h3>Mitigation Strategies</h3>
+<ul>
+<li><strong>Strict Time-Based Validation:</strong> Always split your data chronologically. Train on an earlier period, validate on a subsequent period, and test on a period even further in the future. This simulates real-world deployment.</li>
+<li><strong>Walk-Forward Validation:</strong> For robust evaluation, especially with non-stationary data, use walk-forward validation. Train on data up to <code>t</code>, predict <code>t+1</code>, then retrain on data up to <code>t+1</code>, predict <code>t+2</code>, and so on. This closely mimics how models are used in practice and provides a more realistic performance estimate.</li>
+<li><strong>Regularization Techniques:</strong>
+<ul>
+<li><strong>Dropout:</strong> Randomly sets a fraction of input units to 0 at each update during training, preventing complex co-adaptations on training data.</li>
+<li><strong>L1/L2 Regularization:</strong> Adds a penalty to the loss function based on the magnitude of the model&#8217;s weights, encouraging simpler models.</li>
+</ul>
+</li>
+<li><strong>Early Stopping:</strong> Monitor a validation metric (e.g., validation loss) during training. Stop training when the validation performance starts to degrade, even if training loss is still decreasing. This prevents the model from learning too much from the training noise.</li>
+<li><strong>Simpler Models:</strong> Sometimes, a simpler model (like a linear regression, an ARIMA model, or even a basic MLP) performs better than a complex deep learning architecture if the underlying patterns are not highly intricate or if data is scarce. Start simple and add complexity only if necessary.</li>
+<li><strong>Feature Engineering:</strong> Carefully engineered features (e.g., moving averages, seasonality indicators, trend components) can make the problem easier for simpler models to learn, reducing the need for highly complex neural networks.</li>
+</ul>
+<h2>Lab: Implement an MLP Baseline Predicting Next-Step Return</h2>
+<p>To solidify your understanding, let&#8217;s consider the objective of a practical lab: implementing an MLP to predict the next-step return of a financial asset. This is a classic time series problem and an excellent starting point for several reasons:</p>
+<ul>
+<li><strong>Simplicity of MLP:</strong> An MLP, despite its lack of inherent memory, can serve as a strong baseline. If an MLP performs poorly, it suggests the problem might require more sophisticated sequence modeling or that the features aren&#8217;t sufficiently capturing the necessary information.</li>
+<li><strong>Clear Objective:</strong> Predicting a single future value (the next return) is a straightforward regression task.</li>
+<li><strong>Practical Application:</strong> Next-step return prediction is a fundamental component of quantitative finance and trading strategies.</li>
+</ul>
+<p><strong>Key Steps in the Lab:</strong></p>
+<ol>
+<li><strong>Data Loading:</strong> Load historical price data for a chosen asset.</li>
+<li><strong>Feature Engineering:</strong> Calculate daily returns. Create lagged features using <em>lag stacking</em> (e.g., use the past 5 days&#8217; returns to predict the next day&#8217;s return).</li>
+<li><strong>Normalization:</strong> Apply a scaler (e.g., <code>MinMaxScaler</code> or <code>StandardScaler</code>) to your lagged features and target variable. Remember to fit on training data only!</li>
+<li><strong>Train-Test Split:</strong> Perform a <em>time-based split</em>, ensuring your training data precedes your test data.</li>
+<li><strong>MLP Model Definition:</strong> Construct a simple MLP with a few dense layers (e.g., <code>Dense(units, activation='relu')</code>) and an output layer appropriate for regression (e.g., <code>Dense(1, activation='linear')</code>).</li>
+<li><strong>Compilation:</strong> Choose an optimizer (e.g., Adam), a loss function (e.g., Mean Squared Error for regression), and metrics (e.g., MAE).</li>
+<li><strong>Training:</strong> Fit the model to your training data, possibly incorporating <em>early stopping</em> with a validation set.</li>
+<li><strong>Evaluation:</strong> Evaluate the model&#8217;s performance on the unseen test set using relevant metrics. Analyze predictions against actual values.</li>
+</ol>
+<p>This lab provides hands-on experience with all the fundamental concepts discussed: preparing time series data, understanding input shapes, handling lags, normalizing features, and building a basic neural network while being mindful of overfitting.</p>
+<h2>Conclusion</h2>
+<p>Applying neural networks to time series data opens up a world of possibilities for advanced forecasting and pattern recognition. Whether you start with the simplicity of an MLP enhanced by lag stacking or dive into the power of sequence models like LSTMs, a solid understanding of fundamentals is key. Mastering input shapes, meticulous data normalization, and vigilant prevention of overfitting through time-aware validation strategies are not just best practices—they are necessities for building high-performing, reliable time series models. Begin with a strong MLP baseline, learn from its performance, and then strategically introduce complexity as your problem demands.</p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

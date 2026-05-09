@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the OpenClaw Near CLI Tools Skill: A Complete Guide to Installing and Using near-cli-rs | News of Tomorrow</title>
+<meta name="description" content="Learn how the OpenClaw Near CLI Tools skill simplifies NEAR Protocol CLI installation, setup, and usage across platforms.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-openclaw-near-cli-tools-skill-a-complete-guide-to-installing-and-using-near-cli-rs/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the OpenClaw Near CLI Tools Skill: A Complete Guide to Installing and Using near-cli-rs">
+<meta property="og:description" content="Learn how the OpenClaw Near CLI Tools skill simplifies NEAR Protocol CLI installation, setup, and usage across platforms.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-openclaw-near-cli-tools-skill-a-complete-guide-to-installing-and-using-near-cli-rs/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-openclaw-near-cli-tools-skill-a-complete-guide-to-installing-and-using-near-cli-rs/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-17">
+<meta property="article:modified_time" content="2026-03-17">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the OpenClaw Near CLI Tools Skill: A Complete Guide to Installing and Using near-cli-rs">
+<meta name="twitter:description" content="Learn how the OpenClaw Near CLI Tools skill simplifies NEAR Protocol CLI installation, setup, and usage across platforms.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-openclaw-near-cli-tools-skill-a-complete-guide-to-installing-and-using-near-cli-rs/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the OpenClaw Near CLI Tools Skill: A Complete Guide to Installing and Using near-cli-rs", "datePublished": "2026-03-17", "dateModified": "2026-03-17", "image": ["https://picsum.photos/seed/understanding-the-openclaw-near-cli-tools-skill-a-complete-guide-to-installing-and-using-near-cli-rs/1200/630"], "description": "Learn how the OpenClaw Near CLI Tools skill simplifies NEAR Protocol CLI installation, setup, and usage across platforms.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-openclaw-near-cli-tools-skill-a-complete-guide-to-installing-and-using-near-cli-rs/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the OpenClaw Near CLI Tools Skill: A Complete Guide to Installing and Using near-cli-rs", "item": "https://github.insightginie.com/posts/understanding-the-openclaw-near-cli-tools-skill-a-complete-guide-to-installing-and-using-near-cli-rs/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the OpenClaw Near CLI Tools Skill: A Complete Guide to Installing and Using near-cli-rs</h1>
+<time datetime="2026-03-17" class="post-date" data-date="2026-03-17T21:47:48+00:00">2026-03-17</time>
+<img src="https://picsum.photos/seed/understanding-the-openclaw-near-cli-tools-skill-a-complete-guide-to-installing-and-using-near-cli-rs/800/400" class="post-hero" alt="Understanding the OpenClaw Near CLI Tools Skill: A Complete Guide to Installing and Using near-cli-rs">
+<h1>Understanding the OpenClaw Near CLI Tools Skill</h1>
+<p>The OpenClaw Near CLI Tools skill is a ready‑to‑use knowledge module that explains how to install, configure, and work with the NEAR Protocol command‑line interface, specifically the <code>near-cli-rs</code> binary.  When a user asks about setting up NEAR CLI, importing accounts, deploying contracts, or checking balances, the skill provides step‑by‑step instructions, troubleshooting tips, and best‑practice recommendations.  By following the guidance in this skill, developers and blockchain enthusiasts can get a functional NEAR CLI environment on Linux, macOS, Windows, or any system that supports Node.js, Rust, or a simple shell script.</p>
+<h2>What the Skill Covers</h2>
+<p>The skill is organized into clear sections that mirror the typical workflow of a NEAR developer.  It begins with an overview of why the NEAR CLI is essential, then presents four distinct installation methods: a portable shell script, npm/npx for JavaScript developers, a Windows MSI installer, and a Cargo‑based Rust installation.  Each method includes prerequisites, exact commands, and notes on adding the binary to the system PATH.  After installation, the skill shows how to verify the binary, view configuration locations, explore available command groups, and perform first‑time actions such as viewing an account summary, importing an existing account, or creating a new one.</p>
+<p>Beyond the basics, the skill contains a troubleshooting table that addresses common errors like &#8220;command not found,&#8221; permission problems, missing installer files, and slow downloads.  It also points to additional resources such as the official GitHub repository, NEAR documentation, Stack Overflow tags, and the NEAR Discord community.  Finally, a quick‑reference cheat sheet condenses the most useful commands into a compact format for rapid recall.</p>
+<h2>Installation Method 1: Portable Shell Script</h2>
+<p>The shell script method is recommended for most Linux and macOS users, as well as those working inside Windows Subsystem for Linux (WSL).  The script downloads the latest release of <code>near-cli-rs</code> from GitHub and executes it in one line.  Because the script installs the binary into <code>$HOME/.cargo/bin</code>, users must ensure that this directory is part of their PATH.  The skill explains how to temporarily add the path for the current session with <code>export PATH="$HOME/.cargo/bin:$PATH"</code> and how to make the change permanent by appending the same line to <code>~/.bashrc</code> or <code>~/.zshrc</code>.  If the binary is not found after installation, the skill advises using <code>which near</code> or <code>whereis near</code> to locate the absolute path before running any NEAR command.</p>
+<h2>Installation Method 2: npm/npx</h2>
+<p>For developers who already work with Node.js, the skill shows how to use <code>npx</code> to run <code>near-cli-rs</code> without a global install, or how to install it globally with <code>npm install -g near-cli-rs</code>.  The npm approach works on any platform that supports Node.js, making it a convenient option for Windows users who prefer not to deal with Rust or shell scripts.  After a global npm install, the skill reminds users to verify that the npm bin directory (typically <code>$(npm config get prefix)/bin</code>) is in the PATH, and provides the appropriate export command to add it if necessary.</p>
+<h2>Installation Method 3: Windows MSI Installer</h2>
+<p>Windows users who do not have Node.js or Rust installed can take advantage of the pre‑built MSI installer available on the NEAR CLI‑RS releases page.  The skill walks through downloading the latest <code>near-cli-rs-installer-x64.msi</code>, double‑clicking the file, and following the wizard.  The installer automatically adds the NEAR CLI binary to the system PATH, so no manual configuration is required.  After installation, users can open a new Command Prompt or PowerShell window and run <code>near --version</code> to confirm success.</p>
+<h2>Installation Method 4: Cargo (Rust)</h2>
+<p>Rust enthusiasts can install <code>near-cli-rs</code> directly with Cargo, either from crates.io or from the Git repository.  The skill lists the prerequisite of having Rust installed via <a href='https://rustup.rs/'>rustup.rs</a> and notes that certain Linux distributions may need the <code>libudev-dev</code> or <code>libudev-devel</code> package for USB device support.  The installation command is <code>cargo install near-cli-rs</code> or, to track the latest master branch, <code>cargo install --git https://github.com/near/near-cli-rs</code>.  As with the other methods, the skill emphasizes checking that <code>$HOME/.cargo/bin</code> is in the PATH and reloading the shell configuration if needed.</p>
+<h2>Verification</h2>
+<p>Once the installation method of choice has been completed, the skill instructs users to run <code>near --version</code>.  The expected output shows something like <code>near-cli-rs 0.23.6</code> (or a newer version).  If the command is not found, the skill provides a checklist: confirm the installation directory, verify that the directory is in PATH, and, if necessary, export the path manually.  The skill also shows how to inspect the PATH variable with <code>echo $PATH</code> and grep for <code>cargo</code> or the npm prefix to ensure the binary location is present.</p>
+<h2>Configuration and Help</h2>
+<p>The NEAR CLI stores its configuration in a TOML file located by default at <code>~/.config/near-cli/config.toml</code>.  Users can view this path by running <code>near --help</code>, which also prints a summary of all available command groups.  The skill breaks down each group: <code>account</code> for account management, <code>tokens</code> for fungible and non‑fungible tokens, <code>staking</code> for validator operations, <code>contract</code> for deploying and calling smart contracts, <code>transaction</code> for raw transaction handling, and <code>config</code> for managing network endpoints.  By invoking <code>near <group> --help</code> (e.g., <code>near account --help</code>), users can see the specific subcommands and options available for each area.</p>
+<h2>First Steps with the CLI</h2>
+<p>After verification, the skill guides users through common introductory tasks.  To view an existing account’s summary, the command is <code>near account view-account-summary <your-account-id> network-config mainnet now</code>.  The skill explains that the <code>network-config</code> flag selects the target network (mainnet, testnet, or a custom RPC) and that <code>now</code> requests the latest block data.  Importing an account from a seed phrase or key pair is done with <code>near account import-account</code>, which launches an interactive prompts flow.  Creating a brand‑new account requires an existing funded account to pay for the new account’s creation; the skill walks through the <code>near account create-account</code> command and notes the need to provide a creator account ID and optionally a reference to a faucet or funder.</p>
+<h2>Troubleshooting Common Issues</h2>
+<p>The skill includes a dedicated troubleshooting section that maps symptoms to causes and solutions.  For the classic &#8220;near: command not found&#8221; error, the remedy is to locate the binary with <code>which near</code> or <code>whereis near</code> and then add its directory to PATH, either temporarily or permanently.  If a &#8220;Permission denied&#8221; message appears when running the shell script installer, the skill advises making the script executable with <code>chmod +x near-cli-rs-installer.sh</code> before executing it.  When the installer file seems missing, the skill suggests checking the GitHub releases page manually and using the API to fetch the exact download URL for the installer script.  For slow or hanging downloads, the recommendation is to add timeout flags to curl, such as <code>--connect-timeout 30 --max-time 300</code>, to avoid indefinite waiting.</p>
+<h2>Additional Resources</h2>
+<p>To deepen understanding, the skill points learners to the official NEAR CLI‑RS GitHub repository (<a href='https://github.com/near/near-cli-rs'>github.com/near/near-cli-rs</a>) where they can read the source code, inspect release notes, and contribute issues.  The NEAR Protocol documentation (<a href='https://docs.near.org/'>docs.near.org</a>) offers comprehensive guides on accounts, smart contracts, and token standards.  For community‑driven help, the NEAR Stack Overflow tag (<a href='https://stackoverflow.com/questions/tagged/nearprotocol'>stackoverflow.com/questions/tagged/nearprotocol</a>) and the NEAR Discord (<a href='https://discord.gg/near'>discord.gg/near</a>) are highlighted as places to ask questions, share experiences, and stay up‑to‑date with ecosystem news.</p>
+<h2>Quick Reference Cheat Sheet</h2>
+<ul>
+<li>Install via shell script: <code>curl https://github.com/near/near-cli-rs/releases/latest/download/near-cli-rs-installer.sh | sh</code></li>
+<li>Install via npm: <code>npm install -g near-cli-rs</code></li>
+<li>Run without install: <code>npx near-cli-rs</code></li>
+<li>Verify: <code>near --version</code></li>
+<li>View account: <code>near account view-account-summary <account-id> network-config mainnet now</code></li>
+<li>Import account: <code>near account import-account</code></li>
+<li>Create account: <code>near account create-account</code></li>
+<li>Help: <code>near --help</code> and <code>near <group> --help</code></li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw Near CLI Tools skill consolidates everything a developer needs to get started with the NEAR Protocol command‑line interface.  By presenting multiple installation pathways, clear verification steps, detailed command groups, and practical first‑time actions, the skill reduces the friction associated with setting up a blockchain development environment.  Whether you prefer a simple shell script, the familiarity of npm, the convenience of a Windows installer, or the control of Cargo, the skill provides the exact commands and explanations required.  With the troubleshooting tips and quick‑reference cheat sheet, users can quickly resolve issues and continue building on NEAR with confidence.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/cuongdcdev/near-cli-tools/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/cuongdcdev/near-cli-tools/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>node-transfer: High-Speed File Transfer Between OpenClaw Nodes | News of Tomorrow</title>
+<meta name="description" content="node-transfer enables memory-efficient, high-speed file transfers between OpenClaw nodes using native Node.js streams, eliminating Base64 overhead and memory ex">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/node-transfer-high-speed-file-transfer-between-openclaw-nodes/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="node-transfer: High-Speed File Transfer Between OpenClaw Nodes">
+<meta property="og:description" content="node-transfer enables memory-efficient, high-speed file transfers between OpenClaw nodes using native Node.js streams, eliminating Base64 overhead and memory ex">
+<meta property="og:image" content="https://picsum.photos/seed/node-transfer-high-speed-file-transfer-between-openclaw-nodes/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/node-transfer-high-speed-file-transfer-between-openclaw-nodes/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-06">
+<meta property="article:modified_time" content="2026-03-06">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="node-transfer: High-Speed File Transfer Between OpenClaw Nodes">
+<meta name="twitter:description" content="node-transfer enables memory-efficient, high-speed file transfers between OpenClaw nodes using native Node.js streams, eliminating Base64 overhead and memory ex">
+<meta name="twitter:image" content="https://picsum.photos/seed/node-transfer-high-speed-file-transfer-between-openclaw-nodes/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "node-transfer: High-Speed File Transfer Between OpenClaw Nodes", "datePublished": "2026-03-06", "dateModified": "2026-03-06", "image": ["https://picsum.photos/seed/node-transfer-high-speed-file-transfer-between-openclaw-nodes/1200/630"], "description": "node-transfer enables memory-efficient, high-speed file transfers between OpenClaw nodes using native Node.js streams, eliminating Base64 overhead and memory ex", "mainEntityOfPage": "https://github.insightginie.com/posts/node-transfer-high-speed-file-transfer-between-openclaw-nodes/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "node-transfer: High-Speed File Transfer Between OpenClaw Nodes", "item": "https://github.insightginie.com/posts/node-transfer-high-speed-file-transfer-between-openclaw-nodes/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>node-transfer: High-Speed File Transfer Between OpenClaw Nodes</h1>
+<time datetime="2026-03-06" class="post-date" data-date="2026-03-06T13:17:09+00:00">2026-03-06</time>
+<img src="https://picsum.photos/seed/node-transfer-high-speed-file-transfer-between-openclaw-nodes/800/400" class="post-hero" alt="node-transfer: High-Speed File Transfer Between OpenClaw Nodes">
+<h2>Introduction</h2>
+<p>The <code>node-transfer</code> skill solves critical performance and memory issues when transferring large files between OpenClaw nodes. Traditional methods using <code>nodes.invoke</code> with Base64 encoding create significant overhead, consume excessive memory, and result in painfully slow transfers.</p>
+<p>This skill implements native HTTP streaming with Node.js streams, providing zero memory overhead, no Base64 encoding, and transfer speeds limited only by network bandwidth.</p>
+<h2>Problem Solved</h2>
+<p>Before <code>node-transfer</code>, transferring large files between OpenClaw nodes faced several critical issues:</p>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base64 Encoding Overhead</td>
+<td>33% larger payload, slower transfers</td>
+</tr>
+<tr>
+<td>Memory Exhaustion (OOM)</td>
+<td>Loading multi-GB files into memory crashes the process</td>
+</tr>
+<tr>
+<td>Transfer Latency</td>
+<td>JSON serialization/deserialization adds significant delay</td>
+</tr>
+<tr>
+<td>9-Minute Deployments</td>
+<td>Re-deploying scripts on every transfer</td>
+</tr>
+</tbody>
+</table>
+<p><code>node-transfer</code> eliminates these issues through native HTTP streaming, achieving up to 200x faster transfers with 99% less memory usage.</p>
+<h2>Architecture</h2>
+<p>The skill uses a simple yet effective architecture:</p>
+<pre><code>┌──────────────┐     HTTP Stream      ┌──────────────┐
+│  send.js     │ ◄──────────────────► │ receive.js   │
+│  (Source)    │   (Token-protected)  │ (Destination)│
+└──────────────┘                      └──────────────┘
+   │                                     │
+   ▼                                     ▼
+┌──────────────┐                      ┌──────────────┐
+│  Read Stream │                      │ Write Stream │
+│  (fs.create  │                      │ (fs.create   │
+│   ReadStream)│                      │  WriteStream)│
+└──────────────┘                      └──────────────┘
+   │                                     │
+   ▼                                     ▼
+┌──────────────┐                      ┌──────────────┐
+│  File on     │                      │  File on     │
+│  Disk        │                      │  Disk        │
+└──────────────┘                      └──────────────┘
+</code></pre>
+<h3>Security Model</h3>
+<ul>
+<li><strong>One-time Token</strong>: 256-bit cryptographically random token (64 hex chars)</li>
+<li><strong>Single Connection</strong>: Only one download allowed per token</li>
+<li><strong>Auto-shutdown</strong>: Server closes after transfer completes or disconnects</li>
+<li><strong>Token Validation</strong>: Every request must include the correct token</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li><strong>Node.js</strong>: 14.0.0 or higher</li>
+<li><strong>Network</strong>: TCP connectivity between nodes (any port 1024-65535)</li>
+<li><strong>Firewall</strong>: Must allow outbound connections and inbound on ephemeral ports</li>
+<li><strong>Disk Space</strong>: Sufficient space on destination for received files</li>
+</ul>
+<h2>Installation</h2>
+<p>The &#8220;Install Once&#8221; pattern ensures scripts are deployed once per node and persist for future use.</p>
+<h3>Method 1: Using deploy.js (Recommended)</h3>
+<pre><code># Generate deployment script for a target node
+node deploy.js E3V3
+
+# This outputs a PowerShell script that you can execute via nodes.invoke()
+</code></pre>
+<h3>Method 2: Manual Deployment</h3>
+<pre><code># Create directory
+mkdir C:/openclaw/skills/node-transfer/scripts -Force
+
+# Copy these files (ensure UTF-8 without BOM encoding):
+# - send.js
+# - receive.js
+# - ensure-installed.js
+# - version.js
+</code></pre>
+<h3>Method 3: Via OpenClaw Agent</h3>
+<pre><code>// 1. Check if already installed (&lt; 100ms)
+const check = await nodes.invoke({
+  node: 'E3V3',
+  command: ['node', 'C:/openclaw/skills/node-transfer/scripts/ensure-installed.js', 'C:/openclaw/skills/node-transfer/scripts']
+});
+const checkResult = JSON.parse(check.output);
+if (!checkResult.installed) {
+  // 2. Deploy if needed (one-time, ~30 seconds)
+  console.log('Deploying node-transfer to E3V3...');
+  // ... deployment code ...
+}
+</code></pre>
+<h2>Usage</h2>
+<h3>Basic Transfer Workflow</h3>
+<pre><code>const INSTALL_DIR = 'C:/openclaw/skills/node-transfer/scripts';
+const SOURCE_NODE = 'E3V3';
+const DEST_NODE = 'E3V3-Docker';
+
+// Step 1: Check installation on both nodes (fast!)
+const [sourceCheck, destCheck] = await Promise.all([
+  nodes.invoke({
+    node: SOURCE_NODE,
+    command: ['node', `${INSTALL_DIR}/ensure-installed.js`, INSTALL_DIR]
+  }),
+  nodes.invoke({
+    node: DEST_NODE,
+    command: ['node', `${INSTALL_DIR}/ensure-installed.js`, INSTALL_DIR]
+  })
+]);
+
+// Deploy if needed (usually only once per node ever)
+// ... deployment code if not installed ...
+
+// Step 2: Start sender on source node
+const sendResult = await nodes.invoke({
+  node: SOURCE_NODE,
+  command: ['node', `${INSTALL_DIR}/send.js`, 'C:/data/large-file.zip']
+});
+const { url, token, fileSize, fileName } = JSON.parse(sendResult.output);
+
+// Step 3: Start receiver on destination node
+const receiveResult = await nodes.invoke({
+  node: DEST_NODE,
+  command: ['node', `${INSTALL_DIR}/receive.js`, url, token, '/incoming/file.zip']
+});
+const result = JSON.parse(receiveResult.output);
+
+console.log(`Transferred ${result.bytesReceived} bytes in ${result.duration}s at ${result.speedMBps}MB/s`);
+</code></pre>
+<h3>Command Line Usage</h3>
+<h4>Sender</h4>
+<pre><code>node send.js /path/to/file.zip
+</code></pre>
+<p>Output:</p>
+<pre><code>{
+  "url": "http://192.168.1.10:54321/transfer",
+  "token": "a1b2c3d4e5f6789...",
+  "fileSize": 1073741824,
+  "fileName": "file.zip",
+  "sourceIp": "192.168.1.10",
+  "port": 54321,
+  "version": "1.0.0"
+}
+</code></pre>
+<p>Options:</p>
+<pre><code>node send.js /path/to/file.zip --port 8080 --timeout 10
+node send.js --help
+node send.js --version
+</code></pre>
+<h4>Receiver</h4>
+<pre><code>node receive.js "http://192.168.1.10:54321/transfer" "token-here..." /path/to/save.zip
+</code></pre>
+<p>Output:</p>
+<pre><code>{
+  "success": true,
+  "bytesReceived": 1073741824,
+  "totalBytes": 1073741824,
+  "duration": 8.42,
+  "speedMBps": 121.5,
+  "outputPath": "/path/to/save.zip"
+}
+</code></pre>
+<p>Options:</p>
+<pre><code>node receive.js <url> <token> <output> --timeout 60 --no-progress
+node receive.js --help
+node receive.js --version
+</code></pre>
+<h2>API Reference</h2>
+<h3>send.js</h3>
+<p>Starts an HTTP server to stream a file.</p>
+<h4>Usage:</h4>
+<pre><code>node send.js <filePath> [options]
+</code></pre>
+<h4>Arguments:</h4>
+<ul>
+<li><code>filePath</code> (required): Path to the file to send</li>
+</ul>
+<h4>Options:</h4>
+<ul>
+<li><code>--port &lt;n&gt;</code>: Use specific port (default: random ephemeral)</li>
+<li><code>--timeout &lt;n&gt;</code>: Timeout in minutes (default: 5)</li>
+</ul>
+<h4>Output (JSON):</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>HTTP URL for receiver to connect to</td>
+</tr>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>Security token (64 hex chars)</td>
+</tr>
+<tr>
+<td>fileSize</td>
+<td>number</td>
+<td>File size in bytes</td>
+</tr>
+<tr>
+<td>fileName</td>
+<td>string</td>
+<td>Original filename</td>
+</tr>
+<tr>
+<td>sourceIp</td>
+<td>string</td>
+<td>IP address of sender</td>
+</tr>
+<tr>
+<td>port</td>
+<td>number</td>
+<td>TCP port used</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>Version of send.js</td>
+</tr>
+</tbody>
+</table>
+<h4>Exit Codes:</h4>
+<ul>
+<li><code>0</code>: Success (transfer completed or info displayed)</li>
+<li><code>1</code>: Error (check stderr for JSON error details)</li>
+</ul>
+<h4>Error Output (JSON):</h4>
+<pre><code>{
+  "error": "ERROR_CODE",
+  "message": "Human-readable error message"
+}
+</code></pre>
+<h3>receive.js</h3>
+<p>Connects to a sender and streams the file to disk.</p>
+<h4>Usage:</h4>
+<pre><code>node receive.js &lt;url&gt; &lt;token&gt; &lt;output&gt; [options]
+</code></pre>
+<h4>Arguments:</h4>
+<ul>
+<li><code>url</code> (required): Sender URL from send.js output</li>
+<li><code>token</code> (required): Security token from send.js output</li>
+<li><code>output</code> (required): Path to save the received file</li>
+</ul>
+<h4>Options:</h4>
+<ul>
+<li><code>--timeout &lt;n&gt;</code>: Timeout in minutes (default: 5)</li>
+<li><code>--no-progress</code>: Disable progress output</li>
+</ul>
+<h4>Output (JSON):</h4>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>success</td>
+<td>boolean</td>
+<td>Whether transfer completed successfully</td>
+</tr>
+<tr>
+<td>bytesReceived</td>
+<td>number</td>
+<td>Number of bytes received</td>
+</tr>
+<tr>
+<td>totalBytes</td>
+<td>number</td>
+<td>Total bytes expected (from sender)</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>number</td>
+<td>Transfer duration in seconds</td>
+</tr>
+<tr>
+<td>speedMBps</td>
+<td>number</td>
+<td>Average transfer speed in MB/s</td>
+</tr>
+<tr>
+<td>outputPath</td>
+<td>string</td>
+<td>Path where file was saved</td>
+</tr>
+</tbody>
+</table>
+<h4>Exit Codes:</h4>
+<ul>
+<li><code>0</code>: Success (transfer completed)</li>
+<li><code>1</code>: Error (check stderr for JSON error details)</li>
+</ul>
+<h4>Error Output (JSON):</h4>
+<pre><code>{
+  "error": "ERROR_CODE",
+  "message": "Human-readable error message"
+}
+</code></pre>
+<h2>Troubleshooting</h2>
+<h3>Common Issues</h3>
+<ol>
+<li><strong>Connection Refused</strong>: Check firewall settings and ensure TCP connectivity between nodes</li>
+<li><strong>Timeout Errors</strong>: Increase timeout value if transferring very large files</li>
+<li><strong>Permission Denied</strong>: Ensure the script has read access to source files and write access to destination directories</li>
+<li><strong>Invalid Token</strong>: Verify the token matches exactly between sender and receiver</li>
+</ol>
+<h3>Performance Tips</h3>
+<ol>
+<li>Use wired connections instead of WiFi for faster transfers</li>
+<li>Close unnecessary applications to free up system resources</li>
+<li>For extremely large files (&gt;10GB), consider increasing timeout values</li>
+<li>Ensure both nodes have sufficient disk space for the transfer</li>
+</ol>
+<h2>Conclusion</h2>
+<p>The <code>node-transfer</code> skill provides a robust, high-performance solution for file transfers between OpenClaw nodes. By leveraging native Node.js streams and HTTP streaming, it eliminates the memory and performance bottlenecks of traditional Base64 encoding methods.</p>
+<p>With its simple API, secure token-based authentication, and impressive performance improvements (up to 200x faster with 99% less memory), <code>node-transfer</code> is the recommended approach for any file transfer needs in OpenClaw environments.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/eisonme/node-transfer/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/eisonme/node-transfer/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

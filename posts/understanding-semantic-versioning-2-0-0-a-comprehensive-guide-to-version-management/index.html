@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding Semantic Versioning 2.0.0: A Comprehensive Guide to Version Management | News of Tomorrow</title>
+<meta name="description" content="Learn the essential principles of Semantic Versioning 2.0.0 with practical decision trees, real-world examples, and quick reference guides for managing software">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-semantic-versioning-2-0-0-a-comprehensive-guide-to-version-management/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding Semantic Versioning 2.0.0: A Comprehensive Guide to Version Management">
+<meta property="og:description" content="Learn the essential principles of Semantic Versioning 2.0.0 with practical decision trees, real-world examples, and quick reference guides for managing software">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-semantic-versioning-2-0-0-a-comprehensive-guide-to-version-management/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-semantic-versioning-2-0-0-a-comprehensive-guide-to-version-management/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-13">
+<meta property="article:modified_time" content="2026-03-13">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding Semantic Versioning 2.0.0: A Comprehensive Guide to Version Management">
+<meta name="twitter:description" content="Learn the essential principles of Semantic Versioning 2.0.0 with practical decision trees, real-world examples, and quick reference guides for managing software">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-semantic-versioning-2-0-0-a-comprehensive-guide-to-version-management/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding Semantic Versioning 2.0.0: A Comprehensive Guide to Version Management", "datePublished": "2026-03-13", "dateModified": "2026-03-13", "image": ["https://picsum.photos/seed/understanding-semantic-versioning-2-0-0-a-comprehensive-guide-to-version-management/1200/630"], "description": "Learn the essential principles of Semantic Versioning 2.0.0 with practical decision trees, real-world examples, and quick reference guides for managing software", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-semantic-versioning-2-0-0-a-comprehensive-guide-to-version-management/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding Semantic Versioning 2.0.0: A Comprehensive Guide to Version Management", "item": "https://github.insightginie.com/posts/understanding-semantic-versioning-2-0-0-a-comprehensive-guide-to-version-management/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding Semantic Versioning 2.0.0: A Comprehensive Guide to Version Management</h1>
+<time datetime="2026-03-13" class="post-date" data-date="2026-03-13T08:19:10+00:00">2026-03-13</time>
+<img src="https://picsum.photos/seed/understanding-semantic-versioning-2-0-0-a-comprehensive-guide-to-version-management/800/400" class="post-hero" alt="Understanding Semantic Versioning 2.0.0: A Comprehensive Guide to Version Management">
+<h2>What Is Semantic Versioning 2.0.0?</h2>
+<p>Semantic Versioning (SemVer) is a standardized approach to versioning software that helps developers communicate changes clearly and predictably. The format follows MAJOR.MINOR.PATCH numbering where each position indicates the type of changes introduced in a release.</p>
+<h2>The Golden Rule of Semantic Versioning</h2>
+<p>Given a version number MAJOR.MINOR.PATCH, increment the:</p>
+<ul>
+<li><strong>MAJOR</strong> version when you make incompatible API changes (reset MINOR and PATCH to 0)</li>
+<li><strong>MINOR</strong> version when you add functionality in a backwards-compatible manner (reset PATCH to 0)</li>
+<li><strong>PATCH</strong> version when you make backwards-compatible bug fixes</li>
+</ul>
+<h2>Quick Decision Tree for Version Bumps</h2>
+<p>Did you change anything users depend on?</p>
+<ul>
+<li>No (internal only) → <strong>PATCH</strong></li>
+<li>Yes
+<ul>
+<li>Did you remove/change existing behavior? → <strong>MAJOR</strong></li>
+<li>No (only added new stuff)
+<ul>
+<li>Is the new stuff visible to users? → <strong>MINOR</strong></li>
+<li>No → <strong>PATCH</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Real-World Examples by Category</h2>
+<h3>🔴 MAJOR (Breaking Changes)</h3>
+<p>These changes break existing user code and require version bumps:</p>
+<ul>
+<li>Remove a function, endpoint, or CLI flag</li>
+<li>Change the return type of a function</li>
+<li>Require a new mandatory parameter</li>
+<li>Change default behavior significantly</li>
+<li>Rename something users depend on</li>
+<li>Upgrade a dependency that forces downstream changes</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<ul>
+<li>removeUser() → deleteUser()</li>
+<li>API response format changed from {id: 1} to {data: {id: 1}}</li>
+<li>Dropping support for Node 16 (if users must upgrade)</li>
+</ul>
+<h3>🟡 MINOR (New Features)</h3>
+<p>Add functionality without breaking existing code:</p>
+<ul>
+<li>Add new functionality</li>
+<li>Add optional parameters</li>
+<li>Add new exports</li>
+<li>Deprecate old features (warn, don&#8217;t remove)</li>
+<li>Performance improvements (no API change)</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<ul>
+<li>Add createUser() alongside existing user functions</li>
+<li>Add &#8211;format json flag to CLI</li>
+<li>Add new event listeners/hooks</li>
+<li>Mark old method as deprecated (still works)</li>
+</ul>
+<h3>🟢 PATCH (Bug Fixes)</h3>
+<p>Fix issues without changing intended behavior:</p>
+<ul>
+<li>Fix bugs without changing intended behavior</li>
+<li>Documentation updates</li>
+<li>Internal refactoring (no visible change)</li>
+<li>Dependency updates (no API change)</li>
+<li>Test additions</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<ul>
+<li>Fix null pointer exception</li>
+<li>Correct typo in error message</li>
+<li>Fix race condition</li>
+<li>Update README</li>
+</ul>
+<h2>Version Progression Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Changes</th>
+<th>Version Bump</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fix: null pointer</td>
+<td>1.2.3 → 1.2.4</td>
+</tr>
+<tr>
+<td>feat: add auth</td>
+<td>1.2.3 → 1.3.0</td>
+</tr>
+<tr>
+<td>breaking: remove old API</td>
+<td>1.2.3 → 2.0.0</td>
+</tr>
+<tr>
+<td>fix: bug + feat: new thing</td>
+<td>1.2.3 → 1.3.0 (MINOR wins)</td>
+</tr>
+<tr>
+<td>fix: bug + breaking: remove API</td>
+<td>1.2.3 → 2.0.0 (MAJOR wins)</td>
+</tr>
+</tbody>
+</table>
+<h2>Pre-release Versions</h2>
+<p>Use suffixes for testing before stable releases:</p>
+<ul>
+<li>2.0.0-alpha.1 — Very early, unstable</li>
+<li>2.0.0-beta.2 — Feature complete, testing</li>
+<li>2.0.0-rc.1 — Release candidate, final testing</li>
+</ul>
+<p>Pre-releases sort before their stable version: 1.0.0-alpha < 1.0.0-beta < 1.0.0-rc < 1.0.0</p>
+<h2>Common Edge Cases</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Bump</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fix a bug that was introduced this version</td>
+<td>PATCH</td>
+<td>Still a fix</td>
+</tr>
+<tr>
+<td>Deprecate a feature (but keep it working)</td>
+<td>MINOR</td>
+<td>New &#8220;deprecated&#8221; state is info</td>
+</tr>
+<tr>
+<td>Change undocumented/internal behavior</td>
+<td>PATCH</td>
+<td>Users shouldn&#8217;t depend on it</td>
+</tr>
+<tr>
+<td>Security fix that requires API change</td>
+<td>MAJOR</td>
+<td>Breaking for security</td>
+</tr>
+<tr>
+<td>Rewriting internals, same behavior</td>
+<td>PATCH</td>
+<td>Invisible to users</td>
+</tr>
+<tr>
+<td>Adding tests/docs only</td>
+<td>PATCH</td>
+<td>No code change</td>
+</tr>
+</tbody>
+</table>
+<h2>Anti-Patterns to Avoid</h2>
+<ul>
+<li>❌ Don&#8217;t bump MAJOR for big new features (unless breaking)</li>
+<li>❌ Don&#8217;t bump MINOR for bug fixes</li>
+<li>❌ Don&#8217;t bump PATCH for new functionality</li>
+<li>❌ Don&#8217;t keep old numbers when bumping: 1.2.3 → 2.2.3 is wrong</li>
+</ul>
+<h2>Quick Reference Cheat Sheet</h2>
+<p>Users&#8217; code breaks? → <strong>MAJOR</strong><br />Users get new toys? → <strong>MINOR</strong><br />Users get fixes? → <strong>PATCH</strong></p>
+<h2>Why Semantic Versioning Matters</h2>
+<p>Semantic Versioning provides a common language for developers to communicate the impact of changes. It helps users understand whether they can safely upgrade, what breaking changes to expect, and when new features become available. This standardization reduces confusion, prevents unexpected breakages, and makes dependency management more predictable across the software ecosystem.</p>
+<p>By following these guidelines consistently, you create a more reliable experience for your users and make your project more maintainable over time.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/avegancafe/semver-helper/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/avegancafe/semver-helper/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

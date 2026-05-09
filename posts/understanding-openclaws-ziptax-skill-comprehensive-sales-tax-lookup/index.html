@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding OpenClaw&amp;#8217;s ZipTax Skill: Comprehensive Sales Tax Lookup | News of Tomorrow</title>
+<meta name="description" content="Explore how OpenClaw&amp;#8217;s ZipTax skill uses the ZipTax API to provide U.S. sales tax rates and taxability information for addresses, postal codes, and coordi">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-openclaws-ziptax-skill-comprehensive-sales-tax-lookup/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding OpenClaw&amp;#8217;s ZipTax Skill: Comprehensive Sales Tax Lookup">
+<meta property="og:description" content="Explore how OpenClaw&amp;#8217;s ZipTax skill uses the ZipTax API to provide U.S. sales tax rates and taxability information for addresses, postal codes, and coordi">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-openclaws-ziptax-skill-comprehensive-sales-tax-lookup/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-openclaws-ziptax-skill-comprehensive-sales-tax-lookup/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-06">
+<meta property="article:modified_time" content="2026-03-06">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding OpenClaw&amp;#8217;s ZipTax Skill: Comprehensive Sales Tax Lookup">
+<meta name="twitter:description" content="Explore how OpenClaw&amp;#8217;s ZipTax skill uses the ZipTax API to provide U.S. sales tax rates and taxability information for addresses, postal codes, and coordi">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-openclaws-ziptax-skill-comprehensive-sales-tax-lookup/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding OpenClaw&#8217;s ZipTax Skill: Comprehensive Sales Tax Lookup", "datePublished": "2026-03-06", "dateModified": "2026-03-06", "image": ["https://picsum.photos/seed/understanding-openclaws-ziptax-skill-comprehensive-sales-tax-lookup/1200/630"], "description": "Explore how OpenClaw&#8217;s ZipTax skill uses the ZipTax API to provide U.S. sales tax rates and taxability information for addresses, postal codes, and coordi", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-openclaws-ziptax-skill-comprehensive-sales-tax-lookup/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding OpenClaw&#8217;s ZipTax Skill: Comprehensive Sales Tax Lookup", "item": "https://github.insightginie.com/posts/understanding-openclaws-ziptax-skill-comprehensive-sales-tax-lookup/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding OpenClaw&#8217;s ZipTax Skill: Comprehensive Sales Tax Lookup</h1>
+<time datetime="2026-03-06" class="post-date" data-date="2026-03-06T14:46:03+00:00">2026-03-06</time>
+<img src="https://picsum.photos/seed/understanding-openclaws-ziptax-skill-comprehensive-sales-tax-lookup/800/400" class="post-hero" alt="Understanding OpenClaw&amp;#8217;s ZipTax Skill: Comprehensive Sales Tax Lookup">
+<h1>Understanding OpenClaw&#8217;s ZipTax Skill: Comprehensive Sales Tax Lookup</h1>
+<p>In today&#8217;s digital economy, understanding and accurately applying sales tax is crucial for businesses operating in the United States. The OpenClaw&#8217;s ZipTax skill leverages the powerful ZipTax API to provide comprehensive sales tax lookup functionalities. This article delves into what the ZipTax skill does, how it works, and its potential applications.</p>
+<h2>What is the ZipTax Skill?</h2>
+<p>The ZipTax skill, available on the OpenClaw platform, is designed to look up U.S. sales tax rates using the ZipTax API. It is an invaluable tool for businesses, developers, and individuals who need accurate sales tax information for various use cases.</p>
+<h3>Key Features</h3>
+<ul>
+<li><strong>Comprehensive Lookups</strong>: The skill supports address-level, postal code, and latitude/longitude lookups across over 12,000 jurisdictions in the U.S.</li>
+<li><strong>Taxability Information</strong>: It provides details on freight and service taxability, helping businesses determine which charges are taxable.</li>
+<li><strong>Jurisdiction-Level Breakdowns</strong>: The skill offers detailed breakdowns of sales tax rates at the state, county, city, and district levels.</li>
+<li><strong>Integration Capabilities</strong>: It allows users to integrate sales tax data into their applications seamlessly.</li>
+<li><strong>Account Usage Metrics</strong>: Users can track their API usage metrics to manage their account efficiently.</li>
+<li><strong>Product Taxability Codes (TIC)</strong>: The skill supports product taxability codes, ensuring accurate tax calculations based on product categories.</li>
+</ul>
+<h2>Setting Up the ZipTax Skill</h2>
+<p>To use the ZipTax skill, you need to set up an account on the <a href="https://platform.zip.tax" target="_blank" rel="noopener noreferrer">ZipTax platform</a> and obtain an API key. The free tier offers 100 calls per month, making it suitable for initial testing and small-scale applications.</p>
+<h3>Environment Variables</h3>
+<p>Set the <code>ZIPTAX_API_KEY</code> environment variable with your API key. This ensures that your API key remains secure and not exposed in your code or scripts.</p>
+<h2>Quick Start Guide</h2>
+<p>The ZipTax skill provides three primary methods for looking up sales tax rates: address lookup, postal code lookup, and latitude/longitude lookup. Below are examples of each method using <code>curl</code> commands.</p>
+<h3>Address Lookup (Most Accurate)</h3>
+<p>Address lookups provide the most accurate results, as they pinpoint the exact location and associated tax jurisdiction.</p>
+<p>&#8220;`html</p>
+<pre>
+<code>
+curl -s "https://api.zip-tax.com/request/v60?address=200+Spectrum+Center+Drive+Irvine+CA+92618" \
+-H "X-API-KEY: $ZIPTAX_API_KEY"
+</code>
+</pre>
+<p>&#8220;`</p>
+<h3>Postal Code Lookup</h3>
+<p>Postal code lookups return all relevant tax rates within the specified ZIP code area.</p>
+<p>&#8220;`html</p>
+<pre>
+<code>
+curl -s "https://api.zip-tax.com/request/v60?postalcode=92618" \
+-H "X-API-KEY: $ZIPTAX_API_KEY"
+</code>
+</pre>
+<p>&#8220;`</p>
+<h3>Latitude/Longitude Lookup</h3>
+<p>Latitude/longitude lookups are useful for applications that use geolocation data to determine sales tax rates.</p>
+<p>&#8220;`html</p>
+<pre>
+<code>
+curl -s "https://api.zip-tax.com/request/v60?lat=33.6525&lng=-117.7479" \
+-H "X-API-KEY: $ZIPTAX_API_KEY"
+</code>
+</pre>
+<p>&#8220;`</p>
+<h2>Workflow of the ZipTax Skill</h2>
+<p>The ZipTax skill follows a structured workflow to provide accurate and comprehensive sales tax information. Here&#8217;s a step-by-step breakdown of the process:</p>
+<h3>Step 1: Determine Lookup Type</h3>
+<p>Decide whether to use address lookup, postal code lookup, or latitude/longitude lookup based on your specific requirements.</p>
+<h3>Step 2: Choose the API Version</h3>
+<p>The ZipTax API offers different versions, with <code>v60</code> being the latest and most comprehensive. For simpler use cases, <code>v10</code> provides a combined tax rate without detailed breakdowns.</p>
+<h3>Step 3: Make the GET Request</h3>
+<p>Send a GET request to the ZipTax API endpoint with the appropriate parameters and authentication header.</p>
+<h3>Step 4: Check Response Code</h3>
+<p>Verify the response code in the metadata. A response code of 100 indicates a successful request.</p>
+<h3>Step 5: Read Tax Rate and Breakdown</h3>
+<p>Extract the total sales tax rate from the <code>taxSummaries[0].rate</code> field and review the detailed jurisdiction-level breakdowns in the <code>baseRates</code> array.</p>
+<h3>Step 6: Check Service and Freight Taxability</h3>
+<p>Determine the taxability of services and freight charges by examining the <code>service.taxable</code> and <code>shipping.taxable</code> fields.</p>
+<h2>Key Points to Remember</h2>
+<p>Here are some essential points to keep in mind when using the ZipTax skill:</p>
+<ul>
+<li><strong>Address Lookup Precision</strong>: Address lookups provide a single precise result, while postal code lookups return multiple rates within the same ZIP code area.</li>
+<li><strong>Authentication</strong>: Ensure that you include the <code>X-API-KEY</code> header or <code>key</code> query parameter in your requests for authentication.</li>
+<li><strong>Rate Format</strong>: Sales tax rates are returned as decimals, where 0.0775 equals 7.75%.</li>
+<li><strong>Response Codes</strong>: A response code of 100 indicates success. Always check the <code>metadata.response.code</code> field in the API response.</li>
+<li><strong>Metrics Endpoint</strong>: The <code>/account/metrics</code> endpoint does not count against your API quota, allowing you to track usage without affecting your limits.</li>
+</ul>
+<h2>Bundled Resources</h2>
+<p>The ZipTax skill includes bundled resources to enhance its functionality and ease of use:</p>
+<h3>CLI Wrapper: scripts/lookup.sh</h3>
+<p>This command-line interface (CLI) wrapper simplifies the process of making API requests. You can run it with the following parameters:</p>
+<ul>
+<li><code>--address</code>: Specify an address for lookup.</li>
+<li><code>--lat</code> and <code>--lng</code>: Specify latitude and longitude for lookup.</li>
+<li><code>--postalcode</code>: Specify a postal code for lookup.</li>
+<li><code>--metrics</code>: Retrieve account usage metrics.</li>
+</ul>
+<h3>API Reference: references/api-reference.md</h3>
+<p>This comprehensive guide provides detailed documentation on all endpoints, response schemas, code samples, response codes, and SDK links. It is an invaluable resource for developers who need in-depth information about the ZipTax API.</p>
+<h2>Conclusion</h2>
+<p>The ZipTax skill on the OpenClaw platform is a powerful tool for anyone needing accurate and comprehensive U.S. sales tax information. By leveraging the ZipTax API, this skill provides detailed tax rate lookups, jurisdiction-level breakdowns, and essential taxability information. Whether you are a business owner, developer, or individual, the ZipTax skill can streamline your sales tax calculations and integrate seamlessly into your applications.</p>
+<p>For further information and to get started, visit the <a href="https://github.com/openclaw/skills/blob/main/skills/ericlakich/ziptax/SKILL.md" target="_blank" rel="noopener noreferrer">ZipTax skill repository</a> and explore the bundled resources and API reference.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/ericlakich/ziptax/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/ericlakich/ziptax/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the Settld MCP Payments Skill for OpenClaw | News of Tomorrow</title>
+<meta name="description" content="Learn how the Settld MCP Payments skill enables OpenClaw agents to make paid tool calls with quote-bound authorization and verifiable receipts through the Settl">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-settld-mcp-payments-skill-for-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the Settld MCP Payments Skill for OpenClaw">
+<meta property="og:description" content="Learn how the Settld MCP Payments skill enables OpenClaw agents to make paid tool calls with quote-bound authorization and verifiable receipts through the Settl">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-settld-mcp-payments-skill-for-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-settld-mcp-payments-skill-for-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-18">
+<meta property="article:modified_time" content="2026-03-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the Settld MCP Payments Skill for OpenClaw">
+<meta name="twitter:description" content="Learn how the Settld MCP Payments skill enables OpenClaw agents to make paid tool calls with quote-bound authorization and verifiable receipts through the Settl">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-settld-mcp-payments-skill-for-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the Settld MCP Payments Skill for OpenClaw", "datePublished": "2026-03-18", "dateModified": "2026-03-18", "image": ["https://picsum.photos/seed/understanding-the-settld-mcp-payments-skill-for-openclaw/1200/630"], "description": "Learn how the Settld MCP Payments skill enables OpenClaw agents to make paid tool calls with quote-bound authorization and verifiable receipts through the Settl", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-settld-mcp-payments-skill-for-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the Settld MCP Payments Skill for OpenClaw", "item": "https://github.insightginie.com/posts/understanding-the-settld-mcp-payments-skill-for-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the Settld MCP Payments Skill for OpenClaw</h1>
+<time datetime="2026-03-18" class="post-date" data-date="2026-03-18T18:17:03+00:00">2026-03-18</time>
+<img src="https://picsum.photos/seed/understanding-the-settld-mcp-payments-skill-for-openclaw/800/400" class="post-hero" alt="Understanding the Settld MCP Payments Skill for OpenClaw">
+<h2>What Is the Settld MCP Payments Skill?</h2>
+<p>The Settld MCP Payments skill is an OpenClaw skill that teaches AI agents how to interact with paid MCP (Model Context Protocol) tools through the Settld platform. This skill enables agents to discover, authorize, and execute paid tool calls while maintaining proper payment flows and generating verifiable receipts.</p>
+<h2>Core Functionality</h2>
+<p>The skill provides several key capabilities:</p>
+<ul>
+<li><strong>Tool Discovery</strong>: Agents can discover available Settld MCP tools using the <code>settld.*</code> namespace</li>
+<li><strong>Payment Authorization</strong>: Implements the x402 challenge/authorize/retry flow for paid tool calls</li>
+<li><strong>Receipt Generation</strong>: Returns verifiable payment and settlement headers from tool responses</li>
+<li><strong>Audit Trail</strong>: Produces audit-grade artifacts and receipts in Settld</li>
+</ul>
+<h2>Prerequisites for Implementation</h2>
+<p>To use this skill effectively, you&#8217;ll need:</p>
+<ul>
+<li>Node.js 20+ runtime environment</li>
+<li>Settld API key (stored as <code>SETTLD_API_KEY</code>)</li>
+<li>Settld API base URL (<code>SETTLD_BASE_URL</code>)</li>
+<li>Tenant ID (<code>SETTLD_TENANT_ID</code>)</li>
+<li>Optional: Paid tools base URL (<code>SETTLD_PAID_TOOLS_BASE_URL</code>)</li>
+</ul>
+<h2>Setting Up the MCP Server</h2>
+<p>The skill includes a server definition in <code>mcp-server.example.json</code>. To register the server:</p>
+<pre><code>command: npx
+args: ["-y","settld-mcp"]
+</code></pre>
+<p>Required environment variables:</p>
+<ul>
+<li><code>SETTLD_BASE_URL</code></li>
+<li><code>SETTLD_TENANT_ID</code></li>
+<li><code>SETTLD_API_KEY</code></li>
+</ul>
+<h2>Available Tool Categories</h2>
+<p>The skill provides access to several tool categories:</p>
+<h3>Paid Search and Data Tools</h3>
+<ul>
+<li><code>settld.exa_search_paid</code> &#8211; Paid search functionality</li>
+<li><code>settld.weather_current_paid</code> &#8211; Current weather data with payment</li>
+</ul>
+<h3>Agreement Lifecycle Tools</h3>
+<ul>
+<li><code>settld.create_agreement</code> &#8211; Create new agreements</li>
+<li><code>settld.submit_evidence</code> &#8211; Submit evidence for agreements</li>
+<li><code>settld.settle_run</code> &#8211; Execute settlement processes</li>
+<li><code>settld.resolve_settlement</code> &#8211; Resolve settlement outcomes</li>
+</ul>
+<h2>Testing and Verification</h2>
+<p>To verify the skill is working correctly, agents can use these smoke prompts:</p>
+<ul>
+<li>&#8220;Call <code>settld.about</code> and return the result JSON&#8221;</li>
+<li>&#8220;Run <code>settld.weather_current_paid</code> for Chicago in fahrenheit and include the <code>x-settld-*</code> headers&#8221;</li>
+</ul>
+<h2>Security Considerations</h2>
+<p>When implementing this skill, keep these security practices in mind:</p>
+<ul>
+<li>Always treat <code>SETTLD_API_KEY</code> as secret input</li>
+<li>Never print full API keys in chat output</li>
+<li>Keep paid tools scoped to trusted providers and tenant policy</li>
+</ul>
+<h2>Benefits for AI Agents</h2>
+<p>This skill provides several advantages for AI agents:</p>
+<ul>
+<li><strong>Monetization</strong>: Enables agents to access premium tools and services</li>
+<li><strong>Transparency</strong>: Provides verifiable payment trails and receipts</li>
+<li><strong>Compliance</strong>: Ensures proper authorization flows for paid services</li>
+<li><strong>Scalability</strong>: Supports complex workflows with multiple paid tools</li>
+</ul>
+<h2>Real-World Use Cases</h2>
+<p>Practical applications include:</p>
+<ul>
+<li>Research agents that need paid access to premium databases</li>
+<li>Financial analysis tools requiring market data subscriptions</li>
+<li>Weather-dependent applications needing accurate forecasts</li>
+<li>Legal or compliance tools requiring specialized data access</li>
+</ul>
+<h2>Integration with Existing Workflows</h2>
+<p>The Settld MCP Payments skill integrates seamlessly with existing OpenClaw workflows. Agents can use standard MCP patterns while the skill handles the payment infrastructure transparently.</p>
+<h2>Future Development</h2>
+<p>The skill represents a growing trend toward monetized AI tool ecosystems, where agents can access premium services while maintaining proper payment flows and audit trails.</p>
+<h2>Getting Started</h2>
+<p>To begin using this skill:</p>
+<ol>
+<li>Set up your Settld account and obtain API credentials</li>
+<li>Configure the required environment variables</li>
+<li>Register the MCP server using the provided example</li>
+<li>Test connectivity with <code>settld.about</code></li>
+<li>Begin exploring available paid tools</li>
+</ol>
+<h2>Conclusion</h2>
+<p>The Settld MCP Payments skill bridges the gap between AI agents and paid MCP tools, providing a secure, transparent, and auditable payment infrastructure. By implementing proper authorization flows and generating verifiable receipts, it enables sophisticated AI workflows while maintaining financial accountability.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/aidenlippert/settld-mcp-payments/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/aidenlippert/settld-mcp-payments/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

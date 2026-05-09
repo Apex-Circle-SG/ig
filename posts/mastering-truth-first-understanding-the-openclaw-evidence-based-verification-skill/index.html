@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mastering Truth-First: Understanding the OpenClaw Evidence-Based Verification Skill | News of Tomorrow</title>
+<meta name="description" content="Discover how the OpenClaw Truth-First skill mandates evidence-based verification for AI, preventing hallucinations and ensuring system accuracy.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/mastering-truth-first-understanding-the-openclaw-evidence-based-verification-skill/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Mastering Truth-First: Understanding the OpenClaw Evidence-Based Verification Skill">
+<meta property="og:description" content="Discover how the OpenClaw Truth-First skill mandates evidence-based verification for AI, preventing hallucinations and ensuring system accuracy.">
+<meta property="og:image" content="https://picsum.photos/seed/mastering-truth-first-understanding-the-openclaw-evidence-based-verification-skill/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/mastering-truth-first-understanding-the-openclaw-evidence-based-verification-skill/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-16">
+<meta property="article:modified_time" content="2026-03-16">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mastering Truth-First: Understanding the OpenClaw Evidence-Based Verification Skill">
+<meta name="twitter:description" content="Discover how the OpenClaw Truth-First skill mandates evidence-based verification for AI, preventing hallucinations and ensuring system accuracy.">
+<meta name="twitter:image" content="https://picsum.photos/seed/mastering-truth-first-understanding-the-openclaw-evidence-based-verification-skill/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Mastering Truth-First: Understanding the OpenClaw Evidence-Based Verification Skill", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "image": ["https://picsum.photos/seed/mastering-truth-first-understanding-the-openclaw-evidence-based-verification-skill/1200/630"], "description": "Discover how the OpenClaw Truth-First skill mandates evidence-based verification for AI, preventing hallucinations and ensuring system accuracy.", "mainEntityOfPage": "https://github.insightginie.com/posts/mastering-truth-first-understanding-the-openclaw-evidence-based-verification-skill/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Mastering Truth-First: Understanding the OpenClaw Evidence-Based Verification Skill", "item": "https://github.insightginie.com/posts/mastering-truth-first-understanding-the-openclaw-evidence-based-verification-skill/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Mastering Truth-First: Understanding the OpenClaw Evidence-Based Verification Skill</h1>
+<time datetime="2026-03-16" class="post-date" data-date="2026-03-16T09:30:29+00:00">2026-03-16</time>
+<img src="https://picsum.photos/seed/mastering-truth-first-understanding-the-openclaw-evidence-based-verification-skill/800/400" class="post-hero" alt="Mastering Truth-First: Understanding the OpenClaw Evidence-Based Verification Skill">
+<h1>Introduction to the Truth-First Skill</h1>
+<p>In the rapidly evolving landscape of AI-driven automation, the reliability of information remains the biggest hurdle for developers and system architects. When we entrust AI agents with administrative or diagnostic tasks, the risk of hallucinations—where an AI confidently asserts false information—can lead to disastrous outcomes. Enter the <strong>Truth-First</strong> skill from the OpenClaw framework. This specialized skill is designed to flip the traditional AI workflow on its head, replacing assumptions with empirical, evidence-based verification.</p>
+<h2>The Core Philosophy of Truth-First</h2>
+<p>The philosophy behind the Truth-First skill is simple yet profound: <strong>Require evidence before answering.</strong> In many standard AI implementations, the model relies on its pre-trained memory to provide answers about system states, file configurations, or service statuses. While this works for general knowledge, it is dangerous for technical operations. The Truth-First skill explicitly forbids the agent from relying on memory or assumptions when dealing with sensitive infrastructure claims.</p>
+<p>By forcing the AI to pause and investigate, this skill acts as a safeguard. Whether the user asks about a service&#8217;s running status, a specific file&#8217;s content, or the current model configuration, the agent must treat every statement of fact as a hypothesis that requires proof.</p>
+<h2>The Response Framework: A Strict Workflow</h2>
+<p>The strength of the Truth-First skill lies in its rigid, structured response framework. When an agent is triggered, it follows a strict protocol that ensures no detail is overlooked:</p>
+<ol>
+<li><strong>Claim Extraction:</strong> The agent parses the user request to identify every factual claim that could alter the outcome of the response.</li>
+<li><strong>Evidence Gathering:</strong> Before drafting a conclusion, the agent must utilize available tools—such as <code>read</code>, <code>status</code>, <code>rg</code> (ripgrep), and <code>logs</code>—to fetch primary data.</li>
+<li><strong>Classification:</strong> Every claim is categorized as <em>Verified</em>, <em>Inferred</em>, or <em>Unknown</em>. This classification transparency allows the user to understand exactly what the AI knows versus what it has deduced.</li>
+<li><strong>Next Steps for Unknowns:</strong> If a claim remains unverified, the agent is required to provide the specific commands needed to resolve the uncertainty.</li>
+<li><strong>Citation:</strong> All findings must include citations, referencing exact file paths, specific lines of code, or command outputs.</li>
+</ol>
+<h2>Why Primary Evidence Matters</h2>
+<p>In the OpenClaw ecosystem, primary evidence is king. The Truth-First skill emphasizes that the AI must prefer direct source inspection over indirect signals. For example, instead of guessing if a service is running based on a configuration file, the agent is instructed to use <code>status</code> tools. If a file&#8217;s contents are in question, the agent uses <code>rg</code> or <code>cat</code> to read the live file on the disk rather than relying on its internal weight-based memory. This distinction is the difference between a system that acts based on outdated training data and one that acts based on the reality of the current environment.</p>
+<h2>Common Claim Types and Verification Methods</h2>
+<p>The Truth-First skill covers several critical areas of system administration. Understanding these helps users better prompt the system for the information they need:</p>
+<ul>
+<li><strong>Status Checks:</strong> Verification of whether a service is active, a gateway is connected, or a mount is correctly mounted.</li>
+<li><strong>Configuration Audits:</strong> Checking exact values in environment variables or configuration files.</li>
+<li><strong>File Contents:</strong> Determining if a file exists, contains a specific string, or when it was last modified.</li>
+<li><strong>Action History:</strong> Confirming if a previously requested command executed successfully or if a unit test passed.</li>
+<li><strong>Model Selection:</strong> Identifying which AI model is currently controlling the session.</li>
+</ul>
+<p>By categorizing these as <em>Verified</em>, the agent builds trust. If a claim is <em>Inferred</em>, the agent must explain the logic behind the inference. If it is <em>Unknown</em>, the agent stops and asks for instructions or suggests the command to run next. This prevents the &#8216;confident incorrect&#8217; behavior common in standard language models.</p>
+<h2>Implementing Truth-First for Better Security</h2>
+<p>For DevOps engineers and SREs, Truth-First is an essential security layer. It prevents the AI from accidentally &#8216;fixing&#8217; a system based on a false premise. For example, if a user asks to clear a log file, an agent without Truth-First might assume the file is empty or unnecessary. With the Truth-First skill enabled, the agent will first check the file&#8217;s size, its role in the current system context, and its permissions. It validates the claim—that the file is safe to delete—against the current reality of the system logs.</p>
+<h2>Limitations and Graceful Failure</h2>
+<p>One of the most important aspects of this skill is how it handles the inability to gather data. If permissions are missing, tools are unavailable, or files have been moved, the Truth-First skill mandates that the AI stop short of a definitive answer. It explicitly states the limitation. This is a massive improvement over traditional models that might try to &#8216;hallucinate&#8217; a way through the error. A graceful failure is far superior to a confident, incorrect action.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw Truth-First skill is not just a coding convention; it is a paradigm shift in how we interact with autonomous systems. By forcing AI to operate with the rigor of a forensic investigator, it brings a new level of accountability and predictability to software development and system management. If you are building with OpenClaw, integrating the Truth-First methodology is the single most effective way to ensure your agents are not just intelligent, but also accurate and reliable. As we move toward more autonomous operations, the requirement for evidence-based logic will become the standard, and Truth-First is already leading the way.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/royhk920/truth-frist/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/royhk920/truth-frist/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

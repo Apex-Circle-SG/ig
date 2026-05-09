@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Markdown Editor with Chat: A Lightweight Filesystem-Based Tool | News of Tomorrow</title>
+<meta name="description" content="Discover Markdown Editor with Chat, a self-contained Node.js tool for editing markdown files locally with optional AI assistance via OpenClaw gateway integratio">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/markdown-editor-with-chat-a-lightweight-filesystem-based-tool/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Markdown Editor with Chat: A Lightweight Filesystem-Based Tool">
+<meta property="og:description" content="Discover Markdown Editor with Chat, a self-contained Node.js tool for editing markdown files locally with optional AI assistance via OpenClaw gateway integratio">
+<meta property="og:image" content="https://picsum.photos/seed/markdown-editor-with-chat-a-lightweight-filesystem-based-tool/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/markdown-editor-with-chat-a-lightweight-filesystem-based-tool/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-16">
+<meta property="article:modified_time" content="2026-03-16">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Markdown Editor with Chat: A Lightweight Filesystem-Based Tool">
+<meta name="twitter:description" content="Discover Markdown Editor with Chat, a self-contained Node.js tool for editing markdown files locally with optional AI assistance via OpenClaw gateway integratio">
+<meta name="twitter:image" content="https://picsum.photos/seed/markdown-editor-with-chat-a-lightweight-filesystem-based-tool/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Markdown Editor with Chat: A Lightweight Filesystem-Based Tool", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "image": ["https://picsum.photos/seed/markdown-editor-with-chat-a-lightweight-filesystem-based-tool/1200/630"], "description": "Discover Markdown Editor with Chat, a self-contained Node.js tool for editing markdown files locally with optional AI assistance via OpenClaw gateway integratio", "mainEntityOfPage": "https://github.insightginie.com/posts/markdown-editor-with-chat-a-lightweight-filesystem-based-tool/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Markdown Editor with Chat: A Lightweight Filesystem-Based Tool", "item": "https://github.insightginie.com/posts/markdown-editor-with-chat-a-lightweight-filesystem-based-tool/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Markdown Editor with Chat: A Lightweight Filesystem-Based Tool</h1>
+<time datetime="2026-03-16" class="post-date" data-date="2026-03-16T14:16:43+00:00">2026-03-16</time>
+<img src="https://picsum.photos/seed/markdown-editor-with-chat-a-lightweight-filesystem-based-tool/800/400" class="post-hero" alt="Markdown Editor with Chat: A Lightweight Filesystem-Based Tool">
+<h2>What is Markdown Editor with Chat?</h2>
+<p>Markdown Editor with Chat is a lightweight, self-contained markdown editor that serves files from a local directory with optional OpenClaw gateway chat integration. This tool provides a filesystem-based approach to markdown editing without requiring any database setup.</p>
+<h2>Key Features</h2>
+<ul>
+<li><strong>Filesystem-based</strong>: Point to any directory containing markdown files</li>
+<li><strong>No database</strong>: Files are the source of truth</li>
+<li><strong>Folder navigation</strong>: Browse nested directories</li>
+<li><strong>Live preview</strong>: See rendered markdown as you type</li>
+<li><strong>Optional chat</strong>: Connect to OpenClaw gateway for AI assistance</li>
+<li><strong>Zero external dependencies</strong>: Pure Node.js, self-contained HTML</li>
+</ul>
+<h2>Quick Start Guide</h2>
+<h3>Using CLI Arguments</h3>
+<pre><code>node scripts/server.mjs --folder /path/to/markdown --port 3333
+# Or short form
+node scripts/server.mjs -f /path/to/markdown -p 3333
+</code></pre>
+<h3>With Gateway Chat Enabled</h3>
+<pre><code>export OPENCLAW_GATEWAY_URL=http://127.0.0.1:18789
+export OPENCLAW_GATEWAY_TOKEN=your-token
+node scripts/server.mjs -f /path/to/markdown
+</code></pre>
+<p>Then open <a href="http://localhost:3333">http://localhost:3333</a> in your browser.</p>
+<h2>Configuration Options</h2>
+<h3>CLI Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Short</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#8211;folder</td>
+<td>-f</td>
+<td>Yes*</td>
+<td>&#8211;</td>
+<td>Directory containing markdown files</td>
+</tr>
+<tr>
+<td>&#8211;port</td>
+<td>-p</td>
+<td>No</td>
+<td>3333</td>
+<td>Server port</td>
+</tr>
+<tr>
+<td>&#8211;host</td>
+<td>-h</td>
+<td>No</td>
+<td>127.0.0.1</td>
+<td>Server host (localhost only by default)</td>
+</tr>
+<tr>
+<td>&#8211;help</td>
+<td></td>
+<td>No</td>
+<td></td>
+<td>Show help message</td>
+</tr>
+</tbody>
+</table>
+<p>*Required unless MARKDOWN_DIR env var is set.</p>
+<h3>Environment Variables</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MARKDOWN_DIR</td>
+<td>Yes*</td>
+<td>&#8211;</td>
+<td>Directory containing markdown files</td>
+</tr>
+<tr>
+<td>PORT</td>
+<td>No</td>
+<td>3333</td>
+<td>Server port</td>
+</tr>
+<tr>
+<td>HOST</td>
+<td>No</td>
+<td>127.0.0.1</td>
+<td>Server host</td>
+</tr>
+<tr>
+<td>OPENCLAW_GATEWAY_URL</td>
+<td>No</td>
+<td>&#8211;</td>
+<td>Gateway URL for chat feature</td>
+</tr>
+<tr>
+<td>OPENCLAW_GATEWAY_TOKEN</td>
+<td>No</td>
+<td>&#8211;</td>
+<td>Gateway auth token</td>
+</tr>
+</tbody>
+</table>
+<p>CLI arguments take precedence over environment variables.</p>
+<h2>Security Features</h2>
+<ul>
+<li><strong>Localhost only by default</strong>: Server binds to 127.0.0.1, rejects public IPs</li>
+<li><strong>Same-origin only</strong>: No CORS headers, browser enforces same-origin policy</li>
+<li><strong>Path traversal protection</strong>: Cannot access files outside MARKDOWN_DIR</li>
+<li><strong>No credentials in code</strong>: All secrets via environment variables</li>
+<li><strong>Gateway proxy</strong>: Tokens never exposed to browser</li>
+</ul>
+<p>This is a local development tool. The API is intentionally simple (no auth) because it&#8217;s designed for localhost use on directories you control.</p>
+<h2>API Endpoints</h2>
+<ul>
+<li>GET / &#8211; Serves the editor UI</li>
+<li>GET /api/files &#8211; List files and folders</li>
+<li>GET /api/files/:path &#8211; Get file content</li>
+<li>PUT /api/files/:path &#8211; Save file content</li>
+<li>POST /api/files/:path &#8211; Create new file</li>
+<li>POST /api/chat &#8211; Proxy chat to gateway (if configured)</li>
+</ul>
+<h2>Use Cases</h2>
+<ul>
+<li>Browse and edit OpenClaw pearls</li>
+<li>Personal markdown wiki</li>
+<li>Note-taking with AI assistance</li>
+<li>Documentation browser</li>
+</ul>
+<h2>Why Choose This Tool?</h2>
+<p>Markdown Editor with Chat offers a unique combination of simplicity and functionality. Unlike traditional markdown editors that require complex setup or cloud services, this tool works entirely offline with your local files. The optional OpenClaw gateway integration provides AI assistance when needed, while the core functionality remains completely self-contained.</p>
+<p>The filesystem-based approach means you&#8217;re always working with your actual files, not a database copy. This makes it perfect for managing documentation, personal notes, or any collection of markdown files where you want to maintain direct control over your content.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/musketyr/markdown-editor-with-chat/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/musketyr/markdown-editor-with-chat/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding GatewayStack Governance in OpenClaw: A Comprehensive Guide | News of Tomorrow</title>
+<meta name="description" content="Learn about the GatewayStack Governance skill in OpenClaw, a tool for managing tool calls with identity, scope, rate limiting, and more.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-gatewaystack-governance-in-openclaw-a-comprehensive-guide/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding GatewayStack Governance in OpenClaw: A Comprehensive Guide">
+<meta property="og:description" content="Learn about the GatewayStack Governance skill in OpenClaw, a tool for managing tool calls with identity, scope, rate limiting, and more.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-gatewaystack-governance-in-openclaw-a-comprehensive-guide/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-gatewaystack-governance-in-openclaw-a-comprehensive-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-08">
+<meta property="article:modified_time" content="2026-03-08">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding GatewayStack Governance in OpenClaw: A Comprehensive Guide">
+<meta name="twitter:description" content="Learn about the GatewayStack Governance skill in OpenClaw, a tool for managing tool calls with identity, scope, rate limiting, and more.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-gatewaystack-governance-in-openclaw-a-comprehensive-guide/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding GatewayStack Governance in OpenClaw: A Comprehensive Guide", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "image": ["https://picsum.photos/seed/understanding-gatewaystack-governance-in-openclaw-a-comprehensive-guide/1200/630"], "description": "Learn about the GatewayStack Governance skill in OpenClaw, a tool for managing tool calls with identity, scope, rate limiting, and more.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-gatewaystack-governance-in-openclaw-a-comprehensive-guide/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding GatewayStack Governance in OpenClaw: A Comprehensive Guide", "item": "https://github.insightginie.com/posts/understanding-gatewaystack-governance-in-openclaw-a-comprehensive-guide/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding GatewayStack Governance in OpenClaw: A Comprehensive Guide</h1>
+<time datetime="2026-03-08" class="post-date" data-date="2026-03-08T17:45:50+00:00">2026-03-08</time>
+<img src="https://picsum.photos/seed/understanding-gatewaystack-governance-in-openclaw-a-comprehensive-guide/800/400" class="post-hero" alt="Understanding GatewayStack Governance in OpenClaw: A Comprehensive Guide">
+<p>The <a href="https://github.com/openclaw/skills/tree/main/skills/davidcrowe/gatewaystack-governance"><strong>GatewayStack Governance</strong></a> skill in OpenClaw is a powerful tool designed to provide &quot;deny-by-default&quot; governance for every tool call. It integrates into the OpenClaw process level, ensuring that the agent cannot bypass it. In this guide, we will explore what this skill does, its core features, and how it can be installed and customized.</p>
+<p><strong>GatewayStack Governance</strong> is primarily focused on ensuring secure and controlled tool usage. It achieves this through five core checks that run automatically on every invocation:</p>
+<ol>
+<li><strong>Identity</strong> &#8211; Maps the agent to a policy role. Agents that are not recognized are automatically denied.</li>
+<li><strong>Scope</strong> &#8211; A deny-by-default tool allowlist that blocks any unlisted tools.</li>
+<li><strong>Rate Limiting</strong> &#8211; Implements per-user and per-session sliding window limits to control tool usage.</li>
+<li><strong>Injection Detection</strong> &#8211; Uses 40+ patterns from Cisco, Snyk, and Kaspersky research to identify and prevent potential injection attacks.</li>
+<li><strong>Audit Logging</strong> &#8211; Logs every decision in an append-only JSONL format for thorough record-keeping.</li>
+</ol>
+<p>Additionally, <strong>GatewayStack Governance</strong> offers three opt-in features that further extend governance:</p>
+<ol>
+<li><strong>Output DLP</strong> &#8211; Scans tool output for Personally Identifiable Information (PII) using the @gatewaystack/transformabl-core package. This feature allows for the logging or redacting of sensitive information.</li>
+<li><strong>Escalation</strong> &#8211; Provides human-in-the-loop review for medium-severity detections and first-time tool use, ensuring human oversight when necessary.</li>
+<li><strong>Behavioral Monitoring</strong> &#8211; Uses the @gatewaystack/limitabl-core package to detect anomalous tool usage patterns.</li>
+</ol>
+<p>To get started with <strong>GatewayStack Governance</strong>, installation is simple. You can install it with a single command:</p>
+<pre>openclaw plugins install @gatewaystack/gatewaystack-governance</pre>
+<p>This command enables the core five checks on every tool call immediately, with zero configuration required. The plugin hooks into the before_tool_call process level, preventing agents from bypassing or circumnavigating the checks.</p>
+<p>Customizing the plugin is also straightforward. To override the default settings, create a policy file:</p>
+<pre>cp ~/openclaw/plugins/gatewaystack-governance/policy.example.json ~/openclaw/plugins/gatewaystack-governance/policy.json</pre>
+<p>Here, you can configure which tools are allowed, who can use them, rate limits, injection detection sensitivity, and the optional features (DLP, escalation, behavioral monitoring). Note that these optional features are disabled by default.</p>
+<p><strong>GatewayStack Governance</strong> offers three optional packages via lazy import, allowing you to install only what you need:</p>
+<ul>
+<li>npm install @gatewaystack/transformabl-core for output Data Loss Prevention (DLP).</li>
+<li>npm install @gatewaystack/limitabl-core for behavioral monitoring.</li>
+</ul>
+<p>The core five checks have zero external dependencies and can operate without these packages, making the plugin highly modular and adaptable to your needs.</p>
+<p>The GatewayStack Governance skill is licensed under the MIT License. You can find additional resources and documentation on the <a href="https://github.com/davidcrowe/openclaw-gatewaystack-governance"><strong>GitHub</strong></a> page, as well as the <a href="https://www.npmjs.com/package/@gatewaystack/gatewaystack-governance"><strong>npm</strong></a> package registry.</p>
+<p>In summary, <strong>GatewayStack Governance</strong> in OpenClaw offers a robust solution for managing tool calls, providing automatic and configurable checks to ensure secure and controlled usage. By understanding and utilizing the features it offers, you can enhance the security and governance of your tools effectively.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/davidcrowe/gatewaystack-governance/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/davidcrowe/gatewaystack-governance/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

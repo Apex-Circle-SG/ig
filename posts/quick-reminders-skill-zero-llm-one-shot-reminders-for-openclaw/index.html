@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick Reminders Skill: Zero-LLM One-Shot Reminders for OpenClaw | News of Tomorrow</title>
+<meta name="description" content="The Quick Reminders skill provides efficient one-shot reminders for tasks within 48 hours using nohup sleep commands. Learn how this zero-LLM solution works, it">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/quick-reminders-skill-zero-llm-one-shot-reminders-for-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Quick Reminders Skill: Zero-LLM One-Shot Reminders for OpenClaw">
+<meta property="og:description" content="The Quick Reminders skill provides efficient one-shot reminders for tasks within 48 hours using nohup sleep commands. Learn how this zero-LLM solution works, it">
+<meta property="og:image" content="https://picsum.photos/seed/quick-reminders-skill-zero-llm-one-shot-reminders-for-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/quick-reminders-skill-zero-llm-one-shot-reminders-for-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-05">
+<meta property="article:modified_time" content="2026-03-05">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quick Reminders Skill: Zero-LLM One-Shot Reminders for OpenClaw">
+<meta name="twitter:description" content="The Quick Reminders skill provides efficient one-shot reminders for tasks within 48 hours using nohup sleep commands. Learn how this zero-LLM solution works, it">
+<meta name="twitter:image" content="https://picsum.photos/seed/quick-reminders-skill-zero-llm-one-shot-reminders-for-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Quick Reminders Skill: Zero-LLM One-Shot Reminders for OpenClaw", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "image": ["https://picsum.photos/seed/quick-reminders-skill-zero-llm-one-shot-reminders-for-openclaw/1200/630"], "description": "The Quick Reminders skill provides efficient one-shot reminders for tasks within 48 hours using nohup sleep commands. Learn how this zero-LLM solution works, it", "mainEntityOfPage": "https://github.insightginie.com/posts/quick-reminders-skill-zero-llm-one-shot-reminders-for-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Quick Reminders Skill: Zero-LLM One-Shot Reminders for OpenClaw", "item": "https://github.insightginie.com/posts/quick-reminders-skill-zero-llm-one-shot-reminders-for-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Quick Reminders Skill: Zero-LLM One-Shot Reminders for OpenClaw</h1>
+<time datetime="2026-03-05" class="post-date" data-date="2026-03-05T08:02:15+00:00">2026-03-05</time>
+<img src="https://picsum.photos/seed/quick-reminders-skill-zero-llm-one-shot-reminders-for-openclaw/800/400" class="post-hero" alt="Quick Reminders Skill: Zero-LLM One-Shot Reminders for OpenClaw">
+<h2>What Are Quick Reminders and How Do They Work?</h2>
+<p>The Quick Reminders skill is a specialized OpenClaw capability designed to handle one-shot reminders for tasks that need to be completed within 48 hours. Unlike traditional reminder systems that might rely on continuous background processes or complex scheduling algorithms, this skill takes a minimalist approach using Unix&#8217;s built-in <code>nohup</code> and <code>sleep</code> commands to create lightweight, efficient reminders that execute exactly when needed.</p>
+<p>The core philosophy behind Quick Reminders is <strong>zero-LLM operation</strong>. When a reminder fires, it doesn&#8217;t trigger any AI processing or language model calls—it simply sends a pre-composed message through the appropriate channel. This makes the system incredibly fast, reliable, and resource-efficient, perfect for simple time-based notifications where you don&#8217;t need AI to generate the content at delivery time.</p>
+<h3>The Technical Architecture</h3>
+<p>At its heart, Quick Reminders operates through a simple bash script located at <code>{baseDir}/scripts/nohup-reminder.sh</code>. This script accepts various commands and arguments to manage reminders throughout their lifecycle. The use of <code>nohup</code> ensures that reminders continue to run even if the user logs out or the terminal session ends, while <code>sleep</code> handles the timing aspect with precision.</p>
+<p>The system supports multiple delivery channels including Telegram (default), WhatsApp, Discord, Signal, and iMessage. Each channel requires specific formatting for the target parameter—for instance, WhatsApp uses E.164 phone number format, while Telegram uses chat IDs. The script automatically handles the appropriate formatting and delivery method based on the channel specified.</p>
+<h2>Key Features and Capabilities</h2>
+<h3>Flexible Time Specifications</h3>
+<p>Quick Reminders supports both relative and absolute time specifications. For relative times, you can use formats like <code>30s</code> (30 seconds), <code>20m</code> (20 minutes), <code>2h</code> (2 hours), <code>1d</code> (1 day), or combinations like <code>1h30m</code>. For absolute times, the system accepts ISO-8601 format such as <code>2026-02-07T16:00:00+03:00</code>, with optional timezone specification using IANA timezone names.</p>
+<h3>Multi-Channel Support</h3>
+<p>The skill seamlessly integrates with various communication platforms. By default, it uses Telegram, but you can easily switch channels using the <code>--channel</code> parameter. This flexibility means you can receive reminders wherever you&#8217;re most active—whether that&#8217;s through instant messaging apps, SMS, or other supported platforms.</p>
+<h3>Comprehensive Management Commands</h3>
+<p>The skill provides a full suite of management commands:</p>
+<ul>
+<li><strong>Add</strong>: Create new reminders with custom messages and timing</li>
+<li><strong>List</strong>: View all active reminders, with automatic pruning of fired entries</li>
+<li><strong>Remove</strong>: Delete specific reminders by ID or clear all reminders at once</li>
+</ul>
+<h2>Best Practices for Using Quick Reminders</h2>
+<h3>Composing Effective Reminder Messages</h3>
+<p>The key to effective reminders is crafting messages that feel natural and human. The system explicitly advises against robotic phrasing like &#8220;Reminder: call John&#8221; or &#8220;This is your reminder to&#8230;&#8221; Instead, think about how a friend would text you. Use casual openers like &#8220;Hey,&#8221; &#8220;So&#8230;,&#8221; &#8220;Heads up,&#8221; or simply dive into the message.</p>
+<p>Good examples include:
+</p>
+<ul>
+<li>&#8220;Hey, you wanted to call John&#8221;</li>
+<li>&#8220;Time to call John back&#8221;</li>
+<li>&#8220;So&#8230; dishwasher time&#8221;</li>
+<li>&#8220;I know you hate it, but the dishwasher won&#8217;t load itself&#8221;</li>
+<li>&#8220;Package is waiting — go grab it&#8221;</li>
+</ul>
+<p>The goal is to create messages that make sense even when read out of context hours later. Keep them short, one line, and avoid formalities. Light humor or empathy can be appropriate when it fits the context.</p>
+<h3>Understanding the Guardrails</h3>
+<p>Quick Reminders has a specific limitation: it&#8217;s designed for tasks within 48 hours. For anything beyond that timeframe, the system recommends using calendar integration instead. This guardrail exists because longer-term reminders benefit from more robust scheduling systems with recurring options and better long-term reliability.</p>
+<p>When users request reminders beyond the 48-hour window, the appropriate response is: &#8220;I&#8217;ll add it to your calendar with a reminder so it won&#8217;t be lost.&#8221; This ensures users get the right tool for their needs while maintaining the efficiency of the Quick Reminders system for its intended use case.</p>
+<h2>Practical Use Cases</h2>
+<h3>Daily Task Management</h3>
+<p>Quick Reminders excels at handling daily tasks that need timely attention. Whether it&#8217;s remembering to take medication, start dinner, or call someone back, the system provides just enough notification without being intrusive. The casual tone of the messages makes them feel like helpful nudges rather than nagging alerts.</p>
+<h3>Time-Sensitive Activities</h3>
+<p>For activities with specific timing requirements—like picking up a package when it arrives, checking the oven at a certain time, or remembering to move laundry from washer to dryer—Quick Reminders provides perfect timing without the complexity of full calendar integration.</p>
+<h3>Social and Professional Reminders</h3>
+<p>The system works well for both personal and professional contexts. You might use it to remember to follow up with a colleague, send a birthday message, or prepare for an upcoming meeting. The ability to choose different delivery channels means you can match the reminder method to the context and urgency of the task.</p>
+<h2>Benefits of the Quick Reminders Approach</h2>
+<h3>Resource Efficiency</h3>
+<p>By using <code>nohup</code> and <code>sleep</code> instead of continuous background processes, Quick Reminders minimizes system resource usage. Each reminder is a lightweight process that only consumes resources while actively waiting to fire, then exits cleanly after delivery.</p>
+<h3>Reliability</h3>
+<p>The simple architecture means fewer points of failure. There&#8217;s no complex scheduling system to maintain, no database of reminders to manage, and no AI processing that could introduce delays or errors. The system either works perfectly or doesn&#8217;t work at all—there&#8217;s no middle ground of partial functionality.</p>
+<h3>Speed and Responsiveness</h3>
+<p>Since reminders are pre-composed at creation time, there&#8217;s zero latency when they fire. The message is sent immediately through the appropriate channel without any processing delay. This makes Quick Reminders ideal for time-sensitive notifications where every second counts.</p>
+<h3>Privacy and Security</h3>
+<p>With zero-LLM operation, there&#8217;s no need to send reminder content to external AI services. All processing happens locally, and messages are sent directly to the specified delivery target. This approach minimizes data exposure and maintains user privacy.</p>
+<h2>Implementation Details</h2>
+<h3>Setting Up the Skill</h3>
+<p>The skill requires minimal setup. The primary dependency is the <code>jq</code> utility for JSON processing, along with the OpenClaw framework itself. The script automatically handles path resolution, using either the resolved <code>{baseDir}</code> or falling back to workspace-relative paths if needed.</p>
+<h3>Channel Configuration</h3>
+<p>Each delivery channel requires specific configuration. For Telegram, you&#8217;ll need the chat ID where reminders should be sent. For WhatsApp, you&#8217;ll use E.164 formatted phone numbers (e.g., <code>+15551234567</code>). Discord uses channel IDs, while Signal and iMessage have their own specific requirements.</p>
+<p>The system automatically detects and uses the appropriate delivery context from the session status tool, making setup as seamless as possible. If a channel isn&#8217;t documented in TOOLS.md, the system guides you through discovering and saving the correct format.</p>
+<h2>Getting the Most Out of Quick Reminders</h2>
+<h3>Creating Effective Reminders</h3>
+<p>When creating reminders, focus on clarity and actionability. The message should tell the user exactly what needs to be done and create a sense of urgency or importance. Use the casual, friendly tone that the system recommends, and keep messages concise enough to be read and understood quickly.</p>
+<h3>Managing Your Reminder Queue</h3>
+<p>Regularly review your active reminders using the list command. This helps prevent reminder overload and ensures you&#8217;re only tracking tasks that still need attention. Don&#8217;t hesitate to remove reminders that are no longer relevant or have been handled through other means.</p>
+<h3>Combining with Other Tools</h3>
+<p>While Quick Reminders is excellent for short-term tasks, it works best as part of a broader productivity system. Use it for immediate, time-sensitive tasks while relying on calendar systems for longer-term planning and more complex scheduling needs.</p>
+<h2>Conclusion</h2>
+<p>The Quick Reminders skill represents a perfect example of doing one thing exceptionally well. By focusing exclusively on short-term, one-shot reminders and using a minimalist technical approach, it provides a reliable, efficient solution for a common productivity need. Whether you&#8217;re managing daily tasks, remembering time-sensitive activities, or just need a friendly nudge to stay on track, Quick Reminders delivers exactly what you need without the complexity or overhead of more comprehensive systems.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/lstpsche/quick-reminders/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/lstpsche/quick-reminders/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

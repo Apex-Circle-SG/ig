@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Listing Swarm: AI Product Directory Submission Automation | News of Tomorrow</title>
+<meta name="description" content="Listing Swarm is an AI agent skill that automates submitting your AI product to 70+ directories, saving 10+ hours of manual work through form filling, captcha s">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/listing-swarm-ai-product-directory-submission-automation/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Listing Swarm: AI Product Directory Submission Automation">
+<meta property="og:description" content="Listing Swarm is an AI agent skill that automates submitting your AI product to 70+ directories, saving 10+ hours of manual work through form filling, captcha s">
+<meta property="og:image" content="https://picsum.photos/seed/listing-swarm-ai-product-directory-submission-automation/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/listing-swarm-ai-product-directory-submission-automation/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-05">
+<meta property="article:modified_time" content="2026-03-05">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Listing Swarm: AI Product Directory Submission Automation">
+<meta name="twitter:description" content="Listing Swarm is an AI agent skill that automates submitting your AI product to 70+ directories, saving 10+ hours of manual work through form filling, captcha s">
+<meta name="twitter:image" content="https://picsum.photos/seed/listing-swarm-ai-product-directory-submission-automation/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Listing Swarm: AI Product Directory Submission Automation", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "image": ["https://picsum.photos/seed/listing-swarm-ai-product-directory-submission-automation/1200/630"], "description": "Listing Swarm is an AI agent skill that automates submitting your AI product to 70+ directories, saving 10+ hours of manual work through form filling, captcha s", "mainEntityOfPage": "https://github.insightginie.com/posts/listing-swarm-ai-product-directory-submission-automation/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Listing Swarm: AI Product Directory Submission Automation", "item": "https://github.insightginie.com/posts/listing-swarm-ai-product-directory-submission-automation/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Listing Swarm: AI Product Directory Submission Automation</h1>
+<time datetime="2026-03-05" class="post-date" data-date="2026-03-05T02:21:23+00:00">2026-03-05</time>
+<img src="https://picsum.photos/seed/listing-swarm-ai-product-directory-submission-automation/800/400" class="post-hero" alt="Listing Swarm: AI Product Directory Submission Automation">
+<h2>What Is Listing Swarm?</h2>
+<p>Listing Swarm is an AI-powered automation skill that submits your AI product to over 70 AI directories, saving you 10+ hours of manual form filling and verification. It handles the tedious work of directory submissions while you focus on your product.</p>
+<h2>How It Works</h2>
+<p>The skill automates the entire submission process through three key components:</p>
+<h3>Directory Database</h3>
+<p>Contains 70+ AI directories with submit URLs, domain ratings, traffic stats, and submission requirements. Directories include There&#8217;s An AI For That, Futurepedia, OpenTools, TopAI.tools, AI Tool Guru, and more.</p>
+<h3>Form Automation</h3>
+<p>Automatically fills out submission forms with your product information including name, URL, tagline, description, category, pricing, and media assets.</p>
+<h3>Captcha Handling</h3>
+<p>Uses your own 2captcha API key to solve captchas automatically. If captchas fail, the agent flags them for manual solving.</p>
+<h3>Email Verification</h3>
+<p>Optional IMAP integration automatically handles verification emails from directories. Without it, you&#8217;ll manually check emails for verification links.</p>
+<h2>Security Model: BYOK</h2>
+<p>Bring Your Own Key (BYOK) security means:</p>
+<ul>
+<li>No credentials stored in the skill</li>
+<li>You provide your own captcha API key</li>
+<li>Optional email credentials never stored</li>
+<li>All API keys and passwords provided at runtime via environment variables</li>
+</ul>
+<h2>Setup Requirements</h2>
+<h3>Captcha API Key (Required)</h3>
+<ol>
+<li>Get 2captcha.com account</li>
+<li>Add ~$3 for 1000 captchas</li>
+<li>Copy API key from dashboard</li>
+<li>Set environment variables:
+<pre><code>export CAPTCHA_API_KEY="your-2captcha-key"
+export CAPTCHA_SERVICE="2captcha"
+</code></pre>
+</li>
+</ol>
+<h3>Email Access (Optional)</h3>
+<ol>
+<li>Create dedicated email for submissions</li>
+<li>Enable 2-factor auth on Gmail</li>
+<li>Create app password in Google Account</li>
+<li>Set environment variables:
+<pre><code>export IMAP_USER="yourproduct.listings@gmail.com"
+export IMAP_PASSWORD="app-password-here"
+export IMAP_HOST="imap.gmail.com"
+</code></pre>
+</li>
+</ol>
+<h3>Product Information</h3>
+<p>Create a JSON config with:</p>
+<ul>
+<li>Product name and URL</li>
+<li>Tagline (60 chars)</li>
+<li>Full description</li>
+<li>Category and pricing</li>
+<li>Logo and screenshot URLs</li>
+<li>Contact email</li>
+</ul>
+<h2>Usage</h2>
+<p>Tell your Clawdbot agent:</p>
+<blockquote>
+<p>&#8220;Use the listing-swarm skill to submit my product to AI directories. My product info is in product.json. My 2captcha key is in the environment.&#8221;</p>
+</blockquote>
+<p>The agent will:</p>
+<ol>
+<li>Load directory list</li>
+<li>Visit each submit page</li>
+<li>Fill forms with your product info</li>
+<li>Solve captchas automatically</li>
+<li>Flag issues needing human attention</li>
+<li>Track submissions in submissions.json</li>
+</ol>
+<h2>Human-in-the-Loop</h2>
+<p>The agent handles most submissions but flags you when stuck:</p>
+<ul>
+<li>&#8220;This directory needs you to create an account first&#8221;</li>
+<li>&#8220;This one requires payment for listing&#8221;</li>
+<li>&#8220;Captcha failed 3 times, can you solve this one?&#8221;</li>
+</ul>
+<h2>Tracking and Reporting</h2>
+<p>Submissions tracked in submissions.json with:</p>
+<ul>
+<li>Directory name and status</li>
+<li>Submission timestamp</li>
+<li>Listing URL (when available)</li>
+<li>Notes on submission process</li>
+</ul>
+<h2>Benefits</h2>
+<h3>Time Savings</h3>
+<p>10+ hours saved on manual submissions across 70+ directories.</p>
+<h3>Consistency</h3>
+<p>Same product information across all directories improves brand recognition.</p>
+<h3>Coverage</h3>
+<p>Reach audiences across multiple AI directories simultaneously.</p>
+<h3>Scalability</h3>
+<p>Easily update and resubmit when product changes.</p>
+<h2>Use Cases</h2>
+<h3>AI Product Launch</h3>
+<p>Quickly get listed on all major AI directories when launching your product.</p>
+<h3>Product Updates</h3>
+<p>Update listings when pricing changes or new features launch.</p>
+<h3>Competitive Analysis</h3>
+<p>Monitor competitor listings across directories.</p>
+<h3>Market Research</h3>
+<p>Understand directory submission requirements and trends.</p>
+<h2>Best Practices</h2>
+<ol>
+<li>Start with free directories first</li>
+<li>Have high-quality screenshots ready</li>
+<li>Maintain consistent branding</li>
+<li>Check emails regularly for verification</li>
+<li>Update submissions.json regularly</li>
+</ol>
+<h2>Why It Exists</h2>
+<p>Directory submissions are tedious and time-consuming. Each site has different forms, captcha requirements, and verification processes. Listing Swarm automates the grunt work while you handle the exceptions that need human judgment.</p>
+<h2>Part of LinkSwarm</h2>
+<p>Listing Swarm is part of LinkSwarm &#8211; the AI visibility network. It helps AI products get discovered across the ecosystem of AI directories and communities.</p>
+<h2>Getting Started</h2>
+<ol>
+<li>Set up your captcha API key</li>
+<li>Optional: Set up email access</li>
+<li>Create your product JSON config</li>
+<li>Tell your agent to start submitting</li>
+<li>Review flagged items and continue</li>
+</ol>
+<p>With Listing Swarm, you can get your AI product listed across 70+ directories in hours instead of days, reaching more potential users with less effort.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/heyw00d/listing-swarm/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/heyw00d/listing-swarm/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

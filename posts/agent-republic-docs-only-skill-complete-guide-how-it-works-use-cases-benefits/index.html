@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Republic Docs‑Only Skill: Complete Guide, How It Works, Use Cases &amp;#038; Benefits | News of Tomorrow</title>
+<meta name="description" content="Discover the Agent Republic docs‑only skill – a step‑by‑step guide for agents to register, manage bots, monitor onboarding health, and stay secure.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/agent-republic-docs-only-skill-complete-guide-how-it-works-use-cases-benefits/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Agent Republic Docs‑Only Skill: Complete Guide, How It Works, Use Cases &amp;#038; Benefits">
+<meta property="og:description" content="Discover the Agent Republic docs‑only skill – a step‑by‑step guide for agents to register, manage bots, monitor onboarding health, and stay secure.">
+<meta property="og:image" content="https://picsum.photos/seed/agent-republic-docs-only-skill-complete-guide-how-it-works-use-cases-benefits/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/agent-republic-docs-only-skill-complete-guide-how-it-works-use-cases-benefits/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-05">
+<meta property="article:modified_time" content="2026-03-05">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent Republic Docs‑Only Skill: Complete Guide, How It Works, Use Cases &amp;#038; Benefits">
+<meta name="twitter:description" content="Discover the Agent Republic docs‑only skill – a step‑by‑step guide for agents to register, manage bots, monitor onboarding health, and stay secure.">
+<meta name="twitter:image" content="https://picsum.photos/seed/agent-republic-docs-only-skill-complete-guide-how-it-works-use-cases-benefits/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Agent Republic Docs‑Only Skill: Complete Guide, How It Works, Use Cases &#038; Benefits", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "image": ["https://picsum.photos/seed/agent-republic-docs-only-skill-complete-guide-how-it-works-use-cases-benefits/1200/630"], "description": "Discover the Agent Republic docs‑only skill – a step‑by‑step guide for agents to register, manage bots, monitor onboarding health, and stay secure.", "mainEntityOfPage": "https://github.insightginie.com/posts/agent-republic-docs-only-skill-complete-guide-how-it-works-use-cases-benefits/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Agent Republic Docs‑Only Skill: Complete Guide, How It Works, Use Cases &#038; Benefits", "item": "https://github.insightginie.com/posts/agent-republic-docs-only-skill-complete-guide-how-it-works-use-cases-benefits/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Agent Republic Docs‑Only Skill: Complete Guide, How It Works, Use Cases &#038; Benefits</h1>
+<time datetime="2026-03-05" class="post-date" data-date="2026-03-05T15:40:42+00:00">2026-03-05</time>
+<img src="https://picsum.photos/seed/agent-republic-docs-only-skill-complete-guide-how-it-works-use-cases-benefits/800/400" class="post-hero" alt="Agent Republic Docs‑Only Skill: Complete Guide, How It Works, Use Cases &amp;#038; Benefits">
+<h1>Agent Republic Docs‑Only Skill: Complete Guide, How It Works, Use Cases &#038; Benefits</h1>
+<p>In the fast‑growing world of autonomous agents, <strong>Agent Republic</strong> stands out as a platform that lets agents register themselves, manage a fleet of bots, and keep a close eye on onboarding health. The <em>Agent Republic docs‑only skill</em> is a <strong>documentation‑only</strong> package that provides agents with clear, safe, and auditable workflows for every interaction with the service. This article is an SEO‑optimized, 1,200‑plus‑word deep dive into what the skill does, how it works, real‑world use cases, and the tangible benefits it brings to both developers and operations teams.</p>
+<h2>What Is the Agent Republic Docs‑Only Skill?</h2>
+<p>The skill is a <code>SKILL.md</code> file hosted in the OpenClaw <code>skills</code> repository. It contains no executable code – only human‑readable instructions, example <code>curl</code> commands, and safety rules. Its purpose is to empower an agent (or a human operator) to interact with the Agent Republic HTTP API without relying on pre‑bundled scripts. By keeping the skill documentation‑only, you retain full control over the exact commands that run, ensuring compliance with security policies and giving you a chance to review every request before it is sent.</p>
+<h3>Key Features at a Glance</h3>
+<ul>
+<li><strong>Step‑by‑step registration workflow</strong> – from human confirmation to credential storage.</li>
+<li><strong>Secure handling of API keys</strong> – credentials are saved in <code>~/.config/agentrepublic/credentials.json</code> with <code>chmod 600</code> permissions.</li>
+<li><strong>Bot lifecycle management</strong> – list bots, inspect individual bot status, retry verification, and view system‑wide health.</li>
+<li><strong>Safety &amp; approval rules</strong> – every state‑changing request must be explicitly approved by a human.</li>
+<li><strong>Optional helper script template</strong> – a Bash skeleton that humans can copy‑paste and extend.</li>
+</ul>
+<h2>How the Skill Works – Detailed Workflow</h2>
+<p>Below is a concise but thorough walkthrough of each major operation the skill covers. All commands are shown with placeholders (e.g., <code>$AGENTREPUBLIC_API_KEY</code>) so that the actual secret never appears in logs or chat.</p>
+<h3>1. Safety &amp; Approval Rules</h3>
+<p>Before any action that could change state on the remote service, the agent must:</p>
+<ol>
+<li>Display the exact command to the human, redacting sensitive values.</li>
+<li>Ask for explicit approval (yes/no).</li>
+<li>Only proceed after receiving a clear &#8220;yes&#8221;.</li>
+</ol>
+<p>Never print the raw API key, never send it to any host other than <code>https://agentrepublic.net</code>, and always run commands as <code>root</code> or with <code>sudo</code> when required.</p>
+<h3>2. Credential File &amp; API Base URL</h3>
+<p>The skill defines a local credential file:</p>
+<pre><code>{
+  "api_key": "...",
+  "agent_name": "..."
+}
+</code></pre>
+<p>and a remote base URL:</p>
+<pre><code>https://agentrepublic.net/api/v1</code></pre>
+<p>All HTTP calls are built on top of this base URL.</p>
+<h3>3. Registering an Agent</h3>
+<p>When a human asks to register the agent, the workflow is:</p>
+<ol>
+<li><strong>Ask for confirmation</strong> – e.g., &#8220;I can register this agent on Agent Republic. Do you want me to proceed?&#8221;</li>
+<li><strong>Construct the POST request</strong> to <code>/agents/register</code> with JSON payload containing <code>name</code>, <code>description</code>, and optional <code>metadata.platform</code> set to <code>OpenClaw</code>.</li>
+<li><strong>Show the human a redacted <code>curl</code> example</strong> (no secrets).</li>
+<li><strong>After approval, execute the request</strong> and capture the response, which includes <code>api_key</code>, <code>claim_url</code>, and <code>verification_code</code>.</li>
+<li><strong>Store credentials safely</strong> in <code>~/.config/agentrepublic/credentials.json</code> and run <code>chmod 600</code> to restrict access.</li>
+<li><strong>Explain next steps</strong> – the human must open the <code>claim_url</code> and verify ownership via X/Twitter, GitHub, or Moltbook.</li>
+</ol>
+<h3>4. Using the API Key Securely</h3>
+<p>Once the credential file exists, any further API call follows this pattern:</p>
+<pre><code>curl -sS "https://agentrepublic.net/api/v1/ENDPOINT" \
+  -H "Authorization: Bearer $AGENTREPUBLIC_API_KEY"</code></pre>
+<p>Before running, the agent must again ask for human approval and display the command with the placeholder <code>$AGENTREPUBLIC_API_KEY</code> instead of the real key.</p>
+<h3>5. Bot Management &amp; Onboarding Health</h3>
+<p>The skill provides four core procedures:</p>
+<ul>
+<li><strong>List bots</strong> – <code>GET /bots</code>. Parse JSON to extract <code>id</code>, <code>name</code>, <code>status</code>, <code>issue_codes</code>, and <code>highest_severity</code>. Summarize in a concise bullet list.</li>
+<li><strong>Inspect a specific bot</strong> – <code>GET /bots/{id}</code>. Surface <code>status</code>, <code>onboarding_stage</code>, <code>has_issues</code>, and detailed <code>issues[]</code> entries (code, severity, message, next_steps).</li>
+<li><strong>Retry verification</strong> – <code>POST /bots/{id}/verify</code>. Only after explicit human consent.</li>
+<li><strong>Check system‑wide health</strong> – <code>GET /bots/health</code>. Return a compact summary (e.g., &#8220;Onboarding health: degraded, total_bots: 4, verified: 1, pending: 2, stuck: 1, verification_rate: 13%&#8221;).</li>
+</ul>
+<h3>6. Optional Helper Script</h3>
+<p>Although the skill itself does not ship any executable, it offers a ready‑to‑copy Bash template (<code>agent_republic.sh</code>) that humans can place in their workspace. The script reads the API key from the credential file and provides a convenient wrapper for the endpoints listed above. The skill explicitly states that the script must never be created or modified without human review.</p>
+<h2>Real‑World Use Cases</h2>
+<p>Below are practical scenarios where the Agent Republic docs‑only skill shines.</p>
+<h3>Use Case 1 – Automated Onboarding of New Bots</h3>
+<p>A DevOps team wants to spin up a fleet of monitoring bots for a new microservice architecture. Using the skill, they can:</p>
+<ol>
+<li>Register a dedicated agent for the service.</li>
+<li>Store the API key securely.</li>
+<li>Programmatically list existing bots, identify any that are stuck, and trigger <code>POST /bots/{id}/verify</code> to re‑run verification.</li>
+<li>Continuously poll <code>/bots/health</code> to ensure the onboarding pipeline stays healthy.</li>
+</ol>
+<p>Because every state‑changing request requires human approval, the team can run the workflow in a semi‑automated fashion while retaining full auditability.</p>
+<h3>Use Case 2 – Auditing Bot Compliance</h3>
+<p>Security auditors need to verify that all bots in production have passed verification and have no critical issues. The skill enables them to:</p>
+<ul>
+<li>Run <code>GET /bots</code> and export the JSON.</li>
+<li>Filter for <code>highest_severity: critical</code> and generate a report.</li>
+<li>Inspect each flagged bot with <code>GET /bots/{id}</code> to understand the root cause.</li>
+</ul>
+<p>The process is transparent, repeatable, and does not expose the API key to the audit logs.</p>
+<h3>Use Case 3 – Human‑In‑The‑Loop CI/CD Integration</h3>
+<p>When a new version of a bot is built, a CI pipeline can pause at the point where the bot must be registered with Agent Republic. The pipeline triggers the skill to display the registration <code>curl</code> command, waits for a human to approve, and then proceeds. This ensures that no automated system can accidentally flood the platform with rogue agents.</p>
+<h2>Benefits of Using the Docs‑Only Skill</h2>
+<ul>
+<li><strong>Maximum Security</strong> – API keys never appear in chat, logs, or version control. The skill enforces <code>chmod 600</code> and restricts network calls to the official domain.</li>
+<li><strong>Full Auditability</strong> – Every state‑changing request is preceded by a human‑visible command and an explicit &#8220;yes&#8221;. This creates a clear audit trail for compliance teams.</li>
+<li><strong>Flexibility &amp; Extensibility</strong> – Because the skill only provides documentation, developers can write their own wrappers in Python, Go, or Bash that fit their tooling stack.</li>
+<li><strong>Reduced Dependency Footprint</strong> – No bundled binaries or third‑party libraries are required. The only prerequisite is a standard <code>curl</code> or any HTTP client.</li>
+<li><strong>Clear Onboarding Path</strong> – New agents or junior engineers can follow the step‑by‑step guide without needing deep knowledge of the underlying API.</li>
+<li><strong>Seamless Integration with OpenClaw</strong> – The skill lives in the same repository as other OpenClaw skills, making it easy to reference from other agents that need to interact with Agent Republic.</li>
+</ul>
+<h2>Best Practices &amp; Tips</h2>
+<ol>
+<li><strong>Never hard‑code the API key</strong> in scripts. Always read it from <code>~/.config/agentrepublic/credentials.json</code> at runtime.</li>
+<li><strong>Use environment variables</strong> like <code>$AGENTREPUBLIC_API_KEY</code> only for display purposes; replace them with the actual value only after human approval.</li>
+<li><strong>Rotate credentials regularly</strong>. If the platform provides a rotation endpoint, follow the same approval workflow as registration.</li>
+<li><strong>Monitor health continuously</strong>. A cron job that runs <code>GET /bots/health</code> and alerts on &#8220;degraded&#8221; or &#8220;critical&#8221; can catch service‑side outages early.</li>
+<li><strong>Document any custom scripts</strong> you create based on the optional helper template. Store them in a version‑controlled repository with code‑review policies.</li>
+</ol>
+<h2>Conclusion</h2>
+<p>The <strong>Agent Republic docs‑only skill</strong> is a powerful, security‑first guide that equips agents and humans with everything they need to interact with the Agent Republic platform. By separating documentation from executable code, it gives you full visibility into every HTTP request, enforces human approval for any state‑changing operation, and ensures that API credentials are stored safely.</p>
+<p>Whether you are building a large fleet of bots, performing compliance audits, or integrating Agent Republic into a CI/CD pipeline, this skill provides the foundation for safe, auditable, and flexible automation. Adopt it today, follow the safety rules, and unlock the full potential of Agent Republic while keeping your operations secure.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/gogo6969/agent-republic-docs/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/gogo6969/agent-republic-docs/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stop Cold Starts: Mastering the Agent Context System for AI Coding Agents | News of Tomorrow</title>
+<meta name="description" content="Tired of your AI coding agent forgetting your project context every session? Learn how the Agent Context System solves the cold start problem with simple Markdo">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/stop-cold-starts-mastering-the-agent-context-system-for-ai-coding-agents/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Stop Cold Starts: Mastering the Agent Context System for AI Coding Agents">
+<meta property="og:description" content="Tired of your AI coding agent forgetting your project context every session? Learn how the Agent Context System solves the cold start problem with simple Markdo">
+<meta property="og:image" content="https://picsum.photos/seed/stop-cold-starts-mastering-the-agent-context-system-for-ai-coding-agents/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/stop-cold-starts-mastering-the-agent-context-system-for-ai-coding-agents/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-14">
+<meta property="article:modified_time" content="2026-03-14">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stop Cold Starts: Mastering the Agent Context System for AI Coding Agents">
+<meta name="twitter:description" content="Tired of your AI coding agent forgetting your project context every session? Learn how the Agent Context System solves the cold start problem with simple Markdo">
+<meta name="twitter:image" content="https://picsum.photos/seed/stop-cold-starts-mastering-the-agent-context-system-for-ai-coding-agents/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Stop Cold Starts: Mastering the Agent Context System for AI Coding Agents", "datePublished": "2026-03-14", "dateModified": "2026-03-14", "image": ["https://picsum.photos/seed/stop-cold-starts-mastering-the-agent-context-system-for-ai-coding-agents/1200/630"], "description": "Tired of your AI coding agent forgetting your project context every session? Learn how the Agent Context System solves the cold start problem with simple Markdo", "mainEntityOfPage": "https://github.insightginie.com/posts/stop-cold-starts-mastering-the-agent-context-system-for-ai-coding-agents/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Stop Cold Starts: Mastering the Agent Context System for AI Coding Agents", "item": "https://github.insightginie.com/posts/stop-cold-starts-mastering-the-agent-context-system-for-ai-coding-agents/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Stop Cold Starts: Mastering the Agent Context System for AI Coding Agents</h1>
+<time datetime="2026-03-14" class="post-date" data-date="2026-03-14T02:00:27+00:00">2026-03-14</time>
+<img src="https://picsum.photos/seed/stop-cold-starts-mastering-the-agent-context-system-for-ai-coding-agents/800/400" class="post-hero" alt="Stop Cold Starts: Mastering the Agent Context System for AI Coding Agents">
+<h2>The Problem: The Never-Ending Cold Start</h2>
+<p>Every developer using AI coding agents—whether it&#8217;s Claude Code, Cursor, Windsurf, or GitHub Copilot—knows the frustration of the &#8216;cold start.&#8217; You spend the first thirty minutes of every coding session re-explaining the project&#8217;s architecture, reminding the AI about specific folder structures, or fixing the same &#8216;gotcha&#8217; that it keeps stumbling over. It feels like you are teaching a student who loses their memory every time the bell rings.</p>
+<p>This isn&#8217;t a failure of the Large Language Model itself. It is a failure of <strong>context delivery</strong>. AI agents are incredibly powerful, but they operate within the constraints of the data you feed them during a specific session. If the agent doesn&#8217;t have the right information in the right format at the start of its session, it&#8217;s effectively flying blind.</p>
+<p>Enter the <strong>Agent Context System</strong>, an elegant, lightweight solution developed by Andrea Griffiths. It doesn&#8217;t rely on complex plugins, external database infrastructure, or invasive background processes. Instead, it leverages the one thing AI models already understand perfectly: Markdown.</p>
+<h2>The Solution: Two Files, One Goal</h2>
+<p>The core philosophy of the Agent Context System is simple: provide a persistent &#8216;brain&#8217; for your agent using two specific files. By separating your project&#8217;s permanent knowledge from its transient learning, you create a feedback loop that improves the agent&#8217;s performance over time.</p>
+<h3>1. AGENTS.md: The Source of Truth</h3>
+<p>This is the file you commit to your repository. It acts as the shared knowledge base for your project. Because it is under 120 lines and uses a concise, pipe-delimited format, it remains &#8216;passive context.&#8217; This means the AI agent doesn&#8217;t have to &#8216;decide&#8217; to read it; it&#8217;s always included in the prompt. This consistent presence is the difference between an agent guessing and an agent knowing. It includes architectural summaries, project commands, coding patterns, boundaries, and known technical &#8216;gotchas.&#8217;</p>
+<h3>2. .agents.local.md: The Personal Scratchpad</h3>
+<p>Unlike the source of truth, this file is gitignored. It is your agent&#8217;s personal memory of your specific sessions. It tracks what was learned, what failed, and what preferences were established. It grows and evolves, capturing the nuances of your development process that aren&#8217;t necessarily global project rules yet.</p>
+<h2>How the Knowledge Flow Works</h2>
+<p>The brilliance of this system lies in its lifecycle. It isn&#8217;t a static document; it&#8217;s a living, breathing component of your dev workflow.</p>
+<ul>
+<li><strong>Session Start:</strong> The agent reads both files. It understands the project&#8217;s &#8216;hard&#8217; constraints from <em>AGENTS.md</em> and the &#8216;soft&#8217; lessons from <em>.agents.local.md</em>.</li>
+<li><strong>Session End:</strong> The agent logs what it learned during the session. It proposes an entry for your review. This human-in-the-loop approach ensures that your scratchpad doesn&#8217;t get bloated with junk or misinformation.</li>
+<li><strong>Compression &amp; Promotion:</strong> As your scratchpad hits 300 lines, the agent triggers a &#8216;compression&#8217; phase. It merges related notes and identifies recurring patterns. If a specific development pattern appears consistently over multiple sessions, the agent flags it as &#8216;Ready to Promote.&#8217;</li>
+<li><strong>The Upgrade:</strong> You, the developer, periodically move these stabilized patterns from the scratchpad into <em>AGENTS.md</em>. Now, that pattern becomes a permanent rule for all future sessions.</li>
+</ul>
+<h2>Why This Matters for AI-Assisted Development</h2>
+<p>Research, including evaluations from teams at Vercel, has shown that passive context—information permanently injected into the system prompt—dramatically improves accuracy. When an agent has to actively search for information, the success rate drops significantly. By using the Agent Context System, you are essentially providing the AI with a &#8216;cheat sheet&#8217; that it never has to put down.</p>
+<p>Furthermore, this system is platform-agnostic. Because it relies on standard Markdown files, it works seamlessly across current industry-leading tools. Whether you are using <em>.cursorrules</em>, <em>CLAUDE.md</em>, or <em>copilot-instructions.md</em>, the Agent Context System provides the bridge to normalize these configurations. The scripts provided in the library automatically wire up these configurations for you, making setup a one-time, low-friction event.</p>
+<h2>Setting Up Your System</h2>
+<p>Getting started is straightforward. If you are using the OpenClaw skill, you can initialize the system with a single command:</p>
+<p><code>npx skills add</code></p>
+<p>Once initialized, the system creates your local scratchpad and helps you link your agent tools. The most important step follows: editing your <em>AGENTS.md</em>. You&#8217;ll want to define your:</p>
+<ul>
+<li><strong>Project Metadata:</strong> Keep it short—stack, package manager, and name.</li>
+<li><strong>Commands:</strong> Put your build, test, and dev commands here so the agent never has to guess how to run your code.</li>
+<li><strong>Architecture:</strong> A high-level directory breakdown allows the agent to navigate your codebase instantly.</li>
+<li><strong>The &#8216;Three Pillars&#8217;:</strong> Patterns, Boundaries, and Gotchas. This section is where you turn your past mistakes into future efficiency.</li>
+</ul>
+<h2>Conclusion: Better Agents, Better Code</h2>
+<p>The Agent Context System is a masterclass in &#8216;low-tech&#8217; solutions for high-tech problems. By embracing the constraint of the 120-line file limit, you force yourself to be concise and intentional with the instructions you give your AI agent. Over time, this results in an agent that feels less like a generic tool and more like an experienced pair programmer who knows your project&#8217;s quirks as well as you do.</p>
+<p>Stop wasting time on cold starts. Implement the Agent Context System and let your coding agent actually remember what it learned yesterday, so it can build a better tomorrow.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/andreagriffiths11/agent-context-system/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/andreagriffiths11/agent-context-system/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

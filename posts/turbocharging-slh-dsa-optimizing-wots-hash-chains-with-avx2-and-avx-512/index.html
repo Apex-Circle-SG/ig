@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turbocharging SLH-DSA: Optimizing WOTS+ Hash Chains with AVX2 and AVX-512 | News of Tomorrow</title>
+<meta name="description" content="SLH-DSA is secure but computationally heavy. Learn how utilizing AVX2 and AVX-512 SIMD instructions can accelerate WOTS+ hash chains and drastically improve sig">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/turbocharging-slh-dsa-optimizing-wots-hash-chains-with-avx2-and-avx-512/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Turbocharging SLH-DSA: Optimizing WOTS+ Hash Chains with AVX2 and AVX-512">
+<meta property="og:description" content="SLH-DSA is secure but computationally heavy. Learn how utilizing AVX2 and AVX-512 SIMD instructions can accelerate WOTS+ hash chains and drastically improve sig">
+<meta property="og:image" content="https://picsum.photos/seed/turbocharging-slh-dsa-optimizing-wots-hash-chains-with-avx2-and-avx-512/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/turbocharging-slh-dsa-optimizing-wots-hash-chains-with-avx2-and-avx-512/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-18">
+<meta property="article:modified_time" content="2025-12-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Turbocharging SLH-DSA: Optimizing WOTS+ Hash Chains with AVX2 and AVX-512">
+<meta name="twitter:description" content="SLH-DSA is secure but computationally heavy. Learn how utilizing AVX2 and AVX-512 SIMD instructions can accelerate WOTS+ hash chains and drastically improve sig">
+<meta name="twitter:image" content="https://picsum.photos/seed/turbocharging-slh-dsa-optimizing-wots-hash-chains-with-avx2-and-avx-512/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Turbocharging SLH-DSA: Optimizing WOTS+ Hash Chains with AVX2 and AVX-512", "datePublished": "2025-12-18", "dateModified": "2025-12-18", "image": ["https://picsum.photos/seed/turbocharging-slh-dsa-optimizing-wots-hash-chains-with-avx2-and-avx-512/1200/630"], "description": "SLH-DSA is secure but computationally heavy. Learn how utilizing AVX2 and AVX-512 SIMD instructions can accelerate WOTS+ hash chains and drastically improve sig", "mainEntityOfPage": "https://github.insightginie.com/posts/turbocharging-slh-dsa-optimizing-wots-hash-chains-with-avx2-and-avx-512/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Turbocharging SLH-DSA: Optimizing WOTS+ Hash Chains with AVX2 and AVX-512", "item": "https://github.insightginie.com/posts/turbocharging-slh-dsa-optimizing-wots-hash-chains-with-avx2-and-avx-512/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Turbocharging SLH-DSA: Optimizing WOTS+ Hash Chains with AVX2 and AVX-512</h1>
+<time datetime="2025-12-18" class="post-date" data-date="2025-12-18T04:25:54+00:00">2025-12-18</time>
+<img src="https://picsum.photos/seed/turbocharging-slh-dsa-optimizing-wots-hash-chains-with-avx2-and-avx-512/800/400" class="post-hero" alt="Turbocharging SLH-DSA: Optimizing WOTS+ Hash Chains with AVX2 and AVX-512">
+
+<p>The arrival of FIPS 205 and the standardization of&nbsp;<strong>SLH-DSA</strong>&nbsp;(Stateless Hash-Based Digital Signature Algorithm) has provided the cybersecurity world with a robust safety net against the quantum threat. However, this safety comes with a tangible cost: performance.</p>
+
+
+
+<p>Compared to lattice-based alternatives like ML-DSA (Dilithium), SLH-DSA is computationally expensive. The algorithm requires millions of hash operations to generate keys and sign messages. In high-throughput environments—such as TLS termination proxies or certificate authorities—this latency can be a dealbreaker.</p>
+
+
+
+<p>The primary bottleneck in SLH-DSA is the&nbsp;<strong>Winternitz One-Time Signature Plus (WOTS+)</strong>. This component requires generating and iterating through thousands of hash chains. Fortunately, modern CPU architectures offer a powerful solution to this specific problem:&nbsp;<strong>SIMD (Single Instruction, Multiple Data)</strong>.</p>
+
+
+
+<p>By leveraging vector extensions like&nbsp;<strong>AVX2</strong>&nbsp;and&nbsp;<strong>AVX-512</strong>, developers can parallelize the computation of these hash chains, turning a sluggish sequential process into a high-speed parallel highway. This article explores the engineering strategy behind optimizing WOTS+ using advanced CPU instruction sets.</p>
+
+
+
+<h2 class="wp-block-heading">The WOTS+ Bottleneck: A Game of Thousands of Chains</h2>
+
+
+
+<p>To understand why SIMD is necessary, we must look at the workload of a WOTS+ signature.</p>
+
+
+
+<p>In the WOTS+ scheme, a signature is not derived from a single mathematical operation (like exponentiation in RSA). Instead, it is derived by taking a secret value and hashing it repeatedly—typically 15 or 16 times—to create a &#8220;chain.&#8221;</p>
+
+
+
+<p>Crucially, a single SLH-DSA signature involves not just one chain, but hundreds of them.</p>
+
+
+
+<ul class="wp-block-list">
+<li>The <strong>FORS</strong> (Forest of Random Subsets) component uses multiple trees, each containing leaves that are hash chains.</li>
+
+
+
+<li>The <strong>Hypertree</strong> is composed of Merkle trees, where every connection between layers is secured by a WOTS+ instance containing roughly 67 distinct hash chains (for SHA-256 parameter sets).</li>
+</ul>
+
+
+
+<p>When a CPU executes this in a standard scalar manner (one operation at a time), it computes Chain A, finishes it, then computes Chain B, and so on. This leaves a massive amount of silicon sitting idle.</p>
+
+
+
+<h2 class="wp-block-heading">The SIMD Approach: Why WOTS+ is the Perfect Candidate</h2>
+
+
+
+<p><strong>SIMD</strong>&nbsp;allows a processor to perform the same operation on multiple data points simultaneously.</p>
+
+
+
+<p>You might think:&nbsp;<em>&#8220;We can&#8217;t parallelize a hash chain because step 2 depends on step 1.&#8221;</em>&nbsp;This is correct. You cannot use SIMD to speed up a single chain because of the sequential dependency of the hash output.</p>
+
+
+
+<p><strong>However, you can compute multiple chains at once.</strong></p>
+
+
+
+<p>Because WOTS+ requires the generation of dozens of&nbsp;<em>independent</em>&nbsp;chains to form a single signature, it presents an &#8220;embarrassingly parallel&#8221; workload. Instead of asking the CPU to compute Chain A, then Chain B, then Chain C, and then Chain D, we can use AVX instructions to compute step 1 for Chains A, B, C, and D simultaneously.</p>
+
+
+
+<h2 class="wp-block-heading">Implementing with AVX2 (256-bit Vectorization)</h2>
+
+
+
+<p><strong>AVX2</strong>&nbsp;(Advanced Vector Extensions 2) is supported on almost all modern x86_64 processors (Intel Haswell and later, AMD Ryzen). It features 256-bit wide registers.</p>
+
+
+
+<h3 class="wp-block-heading">The x4 Strategy</h3>
+
+
+
+<p>Since a standard SHA-256 state is 256 bits (8 words of 32 bits), mapping it to AVX2 requires a &#8220;4-way&#8221; implementation (often called&nbsp;x4).</p>
+
+
+
+<p>Wait, if the register is 256 bits and the hash state is 256 bits, doesn&#8217;t that mean we can only fit one hash?<br>Not quite. The internal operations of SHA-256 work on 32-bit words. An AVX2 register can hold&nbsp;<strong>eight 32-bit integers</strong>.</p>
+
+
+
+<p>Therefore, we can interleave the data. We take the state variables (</p>
+
+
+
+<pre class="wp-block-code"><code>a,b,c,…,h<em>a</em>,<em>b</em>,<em>c</em>,…,<em>h</em></code></pre>
+
+
+
+<p>) for&nbsp;<strong>8 different hash instances</strong>&nbsp;and load them across the vector registers.</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Vector Register 1:</strong> Holds variable <code>a<em>a</em></code> for Chains 1 through 8.</li>
+
+
+
+<li><strong>Vector Register 2:</strong> Holds variable <code>b<em>b</em></code> for Chains 1 through 8.</li>
+</ul>
+
+
+
+<p>However, due to the complexity of the message expansion in SHA-256, a&nbsp;<strong>4-way (x4)</strong>&nbsp;implementation is often the sweet spot for AVX2 when managing register pressure and complex rotation logic. This allows the CPU to advance 4 independent WOTS+ chains in the exact same number of clock cycles it would normally take to advance one.</p>
+
+
+
+<h2 class="wp-block-heading">The Heavy Artillery: AVX-512</h2>
+
+
+
+<p><strong>AVX-512</strong>&nbsp;doubles the width of the registers to 512 bits. This instruction set is available on Intel Skylake-X, Ice Lake, and newer server-grade Xeon processors, as well as recent AMD EPYC (Genoa) chips.</p>
+
+
+
+<h3 class="wp-block-heading">The x8 and x16 Strategy</h3>
+
+
+
+<p>With 512-bit registers, we can drastically scale up the parallelism.</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>SHA-256:</strong> We can comfortably implement an <strong>8-way (x8)</strong> or even <strong>16-way (x16)</strong> parallel hashing engine.</li>
+
+
+
+<li><strong>SHAKE-256 (Keccak):</strong> Keccak uses 64-bit lanes. AVX-512 allows for highly efficient parallelization of the Keccak permutation, allowing usually 4 or 8 parallel instances depending on the internal lane mapping.</li>
+</ul>
+
+
+
+<p>In an AVX-512 implementation of WOTS+, the performance gains are massive. The CPU can process the hash chains for nearly a quarter of a WOTS+ key in a single batch.</p>
+
+
+
+<h3 class="wp-block-heading">The &#8220;Downclocking&#8221; Myth</h3>
+
+
+
+<p>Historically, developers feared AVX-512 because early Intel implementations would drastically downclock the CPU frequency to manage heat, negating the speed benefits. However, on modern processors (Ice Lake, Sapphire Rapids, and AMD Zen 4), this penalty is negligible or non-existent. For cryptographic workloads like SLH-DSA, AVX-512 is now purely a performance win.</p>
+
+
+
+<h2 class="wp-block-heading">The Engineering Challenge: Data Transposition</h2>
+
+
+
+<p>The difficulty in implementing SIMD for SLH-DSA is not the instruction set itself, but data management.</p>
+
+
+
+<p>Standard cryptographic libraries store hash states in&nbsp;<strong>Array of Structures (AoS)</strong>&nbsp;format:<br>[Chain1_State, Chain2_State, Chain3_State, &#8230;]</p>
+
+
+
+<p>SIMD requires&nbsp;<strong>Structure of Arrays (SoA)</strong>&nbsp;format. To process 8 chains at once, you need the first 32 bits of Chain 1 next to the first 32 bits of Chain 2, next to the first 32 bits of Chain 3, etc.</p>
+
+
+
+<p>This requires&nbsp;<strong>Transposition</strong>.</p>
+
+
+
+<ol class="wp-block-list">
+<li><strong>Input:</strong> You must gather the inputs for 8 different WOTS+ chains.</li>
+
+
+
+<li><strong>Transpose:</strong> You must rearrange the bits so they fit into the vector lanes.</li>
+
+
+
+<li><strong>Hash:</strong> Run the AVX rounds.</li>
+
+
+
+<li><strong>Transpose Back:</strong> Rearrange the results into standard output formats for the next step of the algorithm.</li>
+</ol>
+
+
+
+<p>While transposition adds overhead, the sheer computational cost of the SHA-2 or Keccak rounds is so high that the time saved by parallel execution dwarfs the time lost rearranging the bits.</p>
+
+
+
+<h2 class="wp-block-heading">Real-World Performance Impact</h2>
+
+
+
+<p>How much difference does this make?</p>
+
+
+
+<p>According to benchmarks from the&nbsp;<strong>Open Quantum Safe (liboqs)</strong>&nbsp;project and optimized implementations in Go (Cloudflare CIRCL) and Rust:</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Scalar vs. AVX2:</strong> Typically yields a <strong>3x to 3.5x</strong> speedup in key generation and signing.</li>
+
+
+
+<li><strong>Scalar vs. AVX-512:</strong> Can yield a <strong>5x to 8x</strong> speedup depending on the specific parameter set (SHA2 vs. SHAKE).</li>
+</ul>
+
+
+
+<p>Note that this optimization primarily benefits&nbsp;<strong>Key Generation</strong>&nbsp;and&nbsp;<strong>Signing</strong>, where the full WOTS+ public keys must be generated from scratch.&nbsp;<strong>Verification</strong>&nbsp;sees a smaller benefit because the verifier only needs to compute the specific chains revealed in the signature, not the entire tree.</p>
+
+
+
+<h2 class="wp-block-heading">Conclusion</h2>
+
+
+
+<p>SLH-DSA is often criticized for its speed, but that criticism typically assumes a naive, scalar implementation. When viewed through the lens of vectorization, the algorithm transforms.</p>
+
+
+
+<p>Because WOTS+ is composed of many independent, identical tasks, it is the ideal candidate for SIMD optimization. By utilizing AVX2 and AVX-512 to process hash chains in parallel batches, developers can reclaim the CPU cycles lost to post-quantum complexity. As FIPS 205 moves into production, the difference between a sluggish application and a responsive one will likely come down to how well the underlying library exploits these vector instructions.</p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

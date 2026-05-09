@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Integrations API: A Comprehensive Guide | News of Tomorrow</title>
+<meta name="description" content="Discover how to leverage OpenClaw&amp;#8217;s skill-based integration system to connect your MakeX apps with third-party services like Gmail, Slack, and GitHub thro">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-integrations-api-a-comprehensive-guide/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Integrations API: A Comprehensive Guide">
+<meta property="og:description" content="Discover how to leverage OpenClaw&amp;#8217;s skill-based integration system to connect your MakeX apps with third-party services like Gmail, Slack, and GitHub thro">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-integrations-api-a-comprehensive-guide/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-integrations-api-a-comprehensive-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-07">
+<meta property="article:modified_time" content="2026-03-07">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Integrations API: A Comprehensive Guide">
+<meta name="twitter:description" content="Discover how to leverage OpenClaw&amp;#8217;s skill-based integration system to connect your MakeX apps with third-party services like Gmail, Slack, and GitHub thro">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-integrations-api-a-comprehensive-guide/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Integrations API: A Comprehensive Guide", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "image": ["https://picsum.photos/seed/openclaw-integrations-api-a-comprehensive-guide/1200/630"], "description": "Discover how to leverage OpenClaw&#8217;s skill-based integration system to connect your MakeX apps with third-party services like Gmail, Slack, and GitHub thro", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-integrations-api-a-comprehensive-guide/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Integrations API: A Comprehensive Guide", "item": "https://github.insightginie.com/posts/openclaw-integrations-api-a-comprehensive-guide/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Integrations API: A Comprehensive Guide</h1>
+<time datetime="2026-03-07" class="post-date" data-date="2026-03-07T06:18:32+00:00">2026-03-07</time>
+<img src="https://picsum.photos/seed/openclaw-integrations-api-a-comprehensive-guide/800/400" class="post-hero" alt="OpenClaw Integrations API: A Comprehensive Guide">
+<h2>What is OpenClaw?</h2>
+<p>OpenClaw is a skill-based integration system that enables applications built on MakeX to discover and execute actions from third-party services such as Gmail, Slack, GitHub, and many others through Composio. This powerful system allows developers to seamlessly integrate external services into their applications without building custom integrations from scratch.</p>
+<h2>Authentication and Security</h2>
+<p>All OpenClaw API endpoints require authentication using the X-Org-Token header. This organization service token is validated against the organization database, ensuring secure server-to-server communication. Unlike traditional web applications, user session cookies are not used for these endpoints.</p>
+<p>To obtain your X-Org-Token:</p>
+<ol>
+<li>Visit <a href="https://www.makex.app/">https://www.makex.app/</a> and sign up for an account</li>
+<li>Navigate to Settings in your dashboard</li>
+<li>Copy your API key from the settings page &#8211; this is your X-Org-Token</li>
+</ol>
+<h2>Base URL and CORS Support</h2>
+<p>The base URL for all OpenClaw API endpoints follows this pattern:</p>
+<pre><code>POST /api/openclaw/integrations/&lt;endpoint&gt;
+</code></pre>
+<p>All endpoints support Cross-Origin Resource Sharing (CORS) through a preflight OPTIONS handler, making it easy to integrate with web applications hosted on different domains.</p>
+<h2>API Endpoints Overview</h2>
+<p>OpenClaw provides five main API endpoints that cover the complete integration workflow:</p>
+<h3>1. Search Actions</h3>
+<p>The search-actions endpoint allows you to discover available actions and tools across multiple integrations. This is particularly useful when you want to find what capabilities are available for connected services.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code>{
+  "integrations": ["gmail", "slack", "github"],
+  "toolkit": "gmail",
+  "search": "send"
+}
+</code></pre>
+<p>The endpoint accepts three parameters:</p>
+<ul>
+<li><strong>integrations</strong> (required): Array of integration slugs to search across</li>
+<li><strong>toolkit</strong> (optional): Overrides integrations and searches only this toolkit</li>
+<li><strong>search</strong> (optional): Filter actions by keyword</li>
+</ul>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "total": 12,
+  "actions": {
+    "gmail": [
+      {
+        "slug": "GMAIL_SEND_EMAIL",
+        "name": "Send Email"
+      },
+      {
+        "slug": "GMAIL_CREATE_DRAFT",
+        "name": "Create Draft"
+      }
+    ],
+    "slack": [
+      {
+        "slug": "SLACK_SEND_MESSAGE",
+        "name": "Send Message"
+      }
+    ]
+  }
+}
+</code></pre>
+<h3>2. Connected Account</h3>
+<p>The connected-account endpoint checks if a specific integration is connected for your organization and retrieves account details. This is essential for understanding which services are available for use.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code>{
+  "integration": "gmail"
+}
+</code></pre>
+<p><strong>Success Response:</strong></p>
+<pre><code>{
+  "accountId": "conn_abc123",
+  "userId": "org_xyz",
+  "integration": "gmail",
+  "status": "ACTIVE"
+}
+</code></pre>
+<p><strong>Error Response (404):</strong></p>
+<pre><code>{
+  "error": "No active connected account found for integration gmail",
+  "availableIntegrations": ["slack", "github"]
+}
+</code></pre>
+<h3>3. Action Details</h3>
+<p>The action-details endpoint provides comprehensive information about a specific action, including its input and output parameters. This is crucial for understanding how to properly invoke an action.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code>{
+  "action_slug": "GMAIL_SEND_EMAIL"
+}
+</code></pre>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "name": "Send Email",
+  "slug": "GMAIL_SEND_EMAIL",
+  "description": "Send an email via Gmail",
+  "inputParameters": {
+    "to": {
+      "type": "string",
+      "description": "Recipient email",
+      "required": true
+    },
+    "subject": {
+      "type": "string",
+      "description": "Email subject"
+    },
+    "body": {
+      "type": "string",
+      "description": "Email body"
+    }
+  },
+  "outputParameters": {
+    "messageId": {
+      "type": "string"
+    },
+    "threadId": {
+      "type": "string"
+    }
+  }
+}
+</code></pre>
+<h3>4. Run Action</h3>
+<p>The run-action endpoint executes a specific action on a connected account. This is where the actual integration work happens.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code>{
+  "toolName": "GMAIL_SEND_EMAIL",
+  "accountId": "conn_abc123",
+  "arguments": {
+    "to": "user@example.com",
+    "subject": "Hello",
+    "body": "Hi there"
+  }
+}
+</code></pre>
+<p>The endpoint accepts several optional parameters:</p>
+<ul>
+<li><strong>text</strong>: Natural language text input (used if arguments is not provided)</li>
+<li><strong>version</strong>: API version override</li>
+<li><strong>custom_auth_params</strong>: Custom authentication parameters</li>
+<li><strong>custom_connection_data</strong>: Custom connection data</li>
+<li><strong>allow_tracing</strong>: Enable tracing for the execution</li>
+</ul>
+<p>The response contains the raw Composio execution response, which varies depending on the action being executed.</p>
+<h3>5. Output Structure</h3>
+<p>The output-structure endpoint executes an action and returns its output structure. This is particularly useful for understanding the shape of an action&#8217;s response without processing the actual data.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code>{
+  "action_slug": "GMAIL_SEND_EMAIL",
+  "accountId": "conn_abc123",
+  "arguments": {
+    "to": "test@example.com",
+    "subject": "Test",
+    "body": "Test body"
+  }
+}
+</code></pre>
+<p><strong>Response Example:</strong></p>
+<pre><code>{
+  "successful": true,
+  "data": {
+    ...
+  }
+}
+</code></pre>
+<h2>Error Handling</h2>
+<p>All endpoints return errors in a consistent format:</p>
+<pre><code>{
+  "error": "Description of what went wrong"
+}
+</code></pre>
+<p>Common error status codes include:</p>
+<ul>
+<li><strong>400</strong>: Missing required parameters</li>
+<li><strong>401</strong>: Missing or invalid X-Org-Token</li>
+<li><strong>404</strong>: Resource not found (e.g., no connected account)</li>
+<li><strong>500</strong>: Server error or missing COMPOSIO_API_KEY</li>
+</ul>
+<h2>Typical Workflow</h2>
+<p>Here&#8217;s a typical workflow for using the OpenClaw API:</p>
+<ol>
+<li><strong>Search actions</strong> to discover what&#8217;s available for connected integrations</li>
+<li><strong>Get connected account</strong> to retrieve the accountId for a specific integration</li>
+<li><strong>Get action details</strong> to understand input/output parameters for a chosen action</li>
+<li><strong>Run action</strong> to execute the action with the required arguments</li>
+</ol>
+<h2>Benefits of Using OpenClaw</h2>
+<p>OpenClaw provides several advantages for developers:</p>
+<ul>
+<li><strong>Reduced Development Time</strong>: No need to build custom integrations for each service</li>
+<li><strong>Consistency</strong>: Standardized API across all supported services</li>
+<li><strong>Scalability</strong>: Easily add new integrations as they become available</li>
+<li><strong>Security</strong>: Centralized authentication and token management</li>
+<li><strong>Maintainability</strong>: Single point of update when services change their APIs</li>
+</ul>
+<h2>Getting Started</h2>
+<p>To start using OpenClaw in your MakeX application:</p>
+<ol>
+<li>Sign up for a MakeX account at <a href="https://www.makex.app/">https://www.makex.app/</a></li>
+<li>Obtain your X-Org-Token from the settings page</li>
+<li>Review the available integrations and their capabilities</li>
+<li>Implement the workflow described above in your application</li>
+</ol>
+<p>With OpenClaw, you can dramatically simplify the process of integrating third-party services into your applications, allowing you to focus on building core functionality rather than managing API connections.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/tkejr/makex/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/tkejr/makex/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Task Planner and Validator &amp;#8211; Secure AI Agent Task Management | News of Tomorrow</title>
+<meta name="description" content="A secure, step-by-step task management system for AI Agents with safety validation, rollback capabilities, and execution control.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/task-planner-and-validator-secure-ai-agent-task-management/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Task Planner and Validator &amp;#8211; Secure AI Agent Task Management">
+<meta property="og:description" content="A secure, step-by-step task management system for AI Agents with safety validation, rollback capabilities, and execution control.">
+<meta property="og:image" content="https://picsum.photos/seed/task-planner-and-validator-secure-ai-agent-task-management/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/task-planner-and-validator-secure-ai-agent-task-management/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-08">
+<meta property="article:modified_time" content="2026-03-08">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Task Planner and Validator &amp;#8211; Secure AI Agent Task Management">
+<meta name="twitter:description" content="A secure, step-by-step task management system for AI Agents with safety validation, rollback capabilities, and execution control.">
+<meta name="twitter:image" content="https://picsum.photos/seed/task-planner-and-validator-secure-ai-agent-task-management/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Task Planner and Validator &#8211; Secure AI Agent Task Management", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "image": ["https://picsum.photos/seed/task-planner-and-validator-secure-ai-agent-task-management/1200/630"], "description": "A secure, step-by-step task management system for AI Agents with safety validation, rollback capabilities, and execution control.", "mainEntityOfPage": "https://github.insightginie.com/posts/task-planner-and-validator-secure-ai-agent-task-management/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Task Planner and Validator &#8211; Secure AI Agent Task Management", "item": "https://github.insightginie.com/posts/task-planner-and-validator-secure-ai-agent-task-management/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Task Planner and Validator &#8211; Secure AI Agent Task Management</h1>
+<time datetime="2026-03-08" class="post-date" data-date="2026-03-08T02:18:19+00:00">2026-03-08</time>
+<img src="https://picsum.photos/seed/task-planner-and-validator-secure-ai-agent-task-management/800/400" class="post-hero" alt="Task Planner and Validator &amp;#8211; Secure AI Agent Task Management">
+<h2>Introduction to Task Planner and Validator</h2>
+<p>The Task Planner and Validator is a comprehensive skill that provides a secure, step-by-step task management system specifically designed for AI Agents. This tool ensures that automated processes execute safely, with proper validation, rollback capabilities, and execution control.</p>
+<h2>Core Features</h2>
+<h3>Safety Validation</h3>
+<p>The system automatically detects potentially dangerous operations before execution. Each step can be configured with safety checks that trigger warnings for operations like file deletion, system modifications, or access to sensitive paths. This proactive approach prevents accidental damage during automated workflows.</p>
+<h3>Step-by-Step Execution Control</h3>
+<p>Tasks are broken down into individual steps, each with its own description, action identifier, parameters, and expected output. The planner validates the entire workflow before execution, ensuring logical consistency and safety compliance.</p>
+<h3>Rollback Capabilities</h3>
+<p>For steps that support rollback, the system maintains checkpoints that can be used to revert changes if something goes wrong. This feature is crucial for operations like database migrations or system updates where reversibility is important.</p>
+<h2>Basic Usage</h2>
+<p>Getting started with the Task Planner is straightforward. First, you import and initialize the planner:</p>
+<pre class="wp-block-code"><code>from task_planner import TaskPlanner
+# Create planner
+planner = TaskPlanner(auto_approve=False)</code></pre>
+<p>Then define your executor function that contains the actual logic for each action:</p>
+<pre class="wp-block-code"><code>def my_executor(action: str, parameters: dict):
+    """Your custom execution logic"""
+    if action == "fetch_data":
+        # Fetch data from API, database, etc.
+        return {"data": [1, 2, 3]}
+    elif action == "process_data":
+        # Process the data
+        return {"processed": True}
+    else:
+        return {"status": "completed"}</code></pre>
+<p>Create a plan by defining steps with descriptions, actions, parameters, and expected outputs:</p>
+<pre class="wp-block-code"><code>steps = [
+    {
+        "description": "Fetch user data",
+        "action": "fetch_data",
+        "parameters": {"source": "database"},
+        "expected_output": "List of users"
+    },
+    {
+        "description": "Process users",
+        "action": "process_data",
+        "parameters": {"validation": True},
+        "expected_output": "Processed data"
+    }
+]
+plan = planner.create_plan(
+    title="Data Processing Pipeline",
+    description="Fetch and process user data",
+    steps=steps
+)</code></pre>
+<h2>Validation and Execution</h2>
+<p>Before executing any plan, validation is crucial:</p>
+<pre class="wp-block-code"><code># Validate
+is_valid, warnings = planner.validate_plan(plan)
+if warnings:
+    print("Warnings:", warnings)
+
+# Approve
+planner.approve_plan(plan, approved_by="admin")
+
+# Execute
+success, results = planner.execute_plan(plan, my_executor)
+
+# Get summary
+summary = planner.get_execution_summary(plan)
+print(f"Progress: {summary['progress_percentage']}%")</code></pre>
+<h2>Advanced Features</h2>
+<h3>Dry Run Mode</h3>
+<p>Test your plan without actually executing any actions:</p>
+<pre class="wp-block-code"><code>success, results = planner.execute_plan(plan, my_executor, dry_run=True)
+# Simulate only, no actual execution</code></pre>
+<h3>Persistence</h3>
+<p>Save and load plans for reuse:</p>
+<pre class="wp-block-code"><code># Save
+planner.save_plan(plan, "my_plan.json")
+# Load later
+loaded_plan = planner.load_plan("my_plan.json")
+# Verify integrity
+if loaded_plan.verify_integrity():
+    planner.execute_plan(loaded_plan, my_executor)</code></pre>
+<h3>Error Handling</h3>
+<p>Control how the system handles errors during execution:</p>
+<pre class="wp-block-code"><code>success, results = planner.execute_plan(plan, my_executor, stop_on_error=False)
+# Continue on failures
+
+# Check results
+for result in results:
+    if not result['success']:
+        print(f"Step {result['order']} failed: {result['error']}")</code></pre>
+<h2>Step Configuration</h2>
+<p>Each step supports comprehensive configuration:</p>
+<pre class="wp-block-code"><code>{
+    "description": str,
+    "action": str,
+    "parameters": dict,
+    "expected_output": str,
+    "safety_check": bool,
+    "rollback_possible": bool,
+    "max_retries": int
+}</code></pre>
+<h2>Common Use Cases</h2>
+<h3>API Orchestration</h3>
+<p>Chain multiple API calls together with proper validation:</p>
+<pre class="wp-block-code"><code>steps = [
+    {
+        "description": "Authenticate",
+        "action": "api_auth",
+        "parameters": {"service": "github"},
+        "expected_output": "Auth token"
+    },
+    {
+        "description": "Fetch data",
+        "action": "api_fetch",
+        "parameters": {"endpoint": "/repos"},
+        "expected_output": "Repository list"
+    }
+]</code></pre>
+<h3>Data Pipeline</h3>
+<p>Build ETL processes with validation at each stage:</p>
+<pre class="wp-block-code"><code>steps = [
+    {
+        "description": "Extract data",
+        "action": "extract",
+        "parameters": {"source": "database"},
+        "expected_output": "Raw data"
+    },
+    {
+        "description": "Transform data",
+        "action": "transform",
+        "parameters": {"rules": ["normalize", "validate"]},
+        "expected_output": "Clean data"
+    },
+    {
+        "description": "Load data",
+        "action": "load",
+        "parameters": {"destination": "warehouse"},
+        "expected_output": "Success confirmation"
+    }
+]</code></pre>
+<h3>System Automation</h3>
+<p>Automate system administration tasks with safety checks:</p>
+<pre class="wp-block-code"><code>steps = [
+    {
+        "description": "Backup database",
+        "action": "backup",
+        "parameters": {"target": "postgres"},
+        "expected_output": "Backup file path",
+        "rollback_possible": True
+    },
+    {
+        "description": "Update schema",
+        "action": "migrate",
+        "parameters": {"version": "2.0"},
+        "expected_output": "Migration complete",
+        "rollback_possible": True
+    },
+    {
+        "description": "Verify integrity",
+        "action": "verify",
+        "parameters": {"checks": ["all"]},
+        "expected_output": "All checks passed"
+    }
+]</code></pre>
+<h2>Best Practices</h2>
+<h3>Always Validate First</h3>
+<p>Never skip validation. Even if you plan to auto-approve, running validation helps catch configuration errors early:</p>
+<pre class="wp-block-code"><code>is_valid, warnings = planner.validate_plan(plan)
+if not is_valid:
+    print("Plan validation failed!")
+    for warning in warnings:
+        print(f"  - {warning}")
+    exit(1)</code></pre>
+<h3>Use Descriptive Names</h3>
+<p>Clear, descriptive step names prevent confusion and make debugging easier:</p>
+<pre class="wp-block-code"><code># Good ✅
+{
+    "description": "Fetch active users from PostgreSQL production database",
+    "action": "fetch_active_users_postgres_prod",
+    ...
+}
+
+# Bad ❌
+{
+    "description": "Get data",
+    "action": "get",
+    ...
+}</code></pre>
+<h3>Mark Dangerous Operations</h3>
+<p>Explicitly mark potentially dangerous operations and consider whether rollback is possible:</p>
+<pre class="wp-block-code"><code>{
+    "description": "Delete temporary files older than 30 days",
+    "action": "cleanup_temp_files",
+    "parameters": {
+        "age_days": 30,
+        "path": "/tmp"
+    },
+    "safety_check": True,
+    "rollback_possible": False
+}</code></pre>
+<h3>Test with Dry Run</h3>
+<p>Always test your plan in dry run mode before actual execution:</p>
+<pre class="wp-block-code"><code>success, results = planner.execute_plan(plan, my_executor, dry_run=True)
+if success:
+    # Now run for real
+    success, results = planner.execute_plan(plan, my_executor, dry_run=False)</code></pre>
+<h3>Handle Errors Gracefully</h3>
+<p>Implement robust error handling in your executor:</p>
+<pre class="wp-block-code"><code>def safe_executor(action: str, parameters: dict):
+    try:
+        result = execute_action(action, parameters)
+        return result
+    except Exception as e:
+        logging.error(f"Failed to execute {action}: {e}")
+        raise  # Re-raise to let planner handle it</code></pre>
+<h2>Advanced Configuration</h2>
+<h3>Auto-Approve for Automation</h3>
+<p>For fully automated workflows, enable auto-approval:</p>
+<pre class="wp-block-code"><code>planner = TaskPlanner(auto_approve=True)</code></pre>
+<h3>Checkpoint System</h3>
+<p>The system automatically creates checkpoints for rollback-capable steps. You can access checkpoint history through the executor:</p>
+<pre class="wp-block-code"><code>checkpoints = planner.executor.checkpoint_stack</code></pre>
+<h3>Execution History</h3>
+<p>Track all execution attempts:</p>
+<pre class="wp-block-code"><code>history = planner.executor.execution_history
+for entry in history:
+    print(f"{entry['timestamp']}: {entry['step_id']} - {entry['status']}")</code></pre>
+<h3>Custom Validation Rules</h3>
+<p>Add custom validation rules to the safety validator:</p>
+<pre class="wp-block-code"><code>planner.safety_validator.dangerous_operations.append('my_dangerous_op')
+planner.safety_validator.sensitive_paths.append('/my/sensitive/path')</code></pre>
+<h2>Troubleshooting</h2>
+<h3>&#8220;Plan must be approved before execution&#8221;</h3>
+<p>Solution: Approve the plan first or use auto-approve mode:</p>
+<pre class="wp-block-code"><code>planner.approve_plan(plan, approved_by="admin")
+# Or use auto-approve mode
+planner = TaskPlanner(auto_approve=True)</code></pre>
+<h3>Safety validation warnings</h3>
+<p>Review warnings and ensure operations are intentional. If operations are safe, you can approve anyway:</p>
+<pre class="wp-block-code"><code>is_valid, warnings = planner.validate_plan(plan)
+for warning in warnings:
+    print(warning)
+if is_valid:
+    # Still valid, just warnings
+    planner.approve_plan(plan)</code></pre>
+<h3>Steps executing out of order</h3>
+<p>Ensure order values are sequential and properly configured:</p>
+<pre class="wp-block-code"><code>steps[0]['order'] = 1
+steps[1]['order'] = 2
+steps[2]['order'] = 3</code></pre>
+<h2>Conclusion</h2>
+<p>The Task Planner and Validator provides a robust foundation for building safe, reliable AI Agent workflows. By combining safety validation, rollback capabilities, and comprehensive execution control, it ensures that automated processes execute predictably and can recover from failures when they occur.</p>
+<p>Whether you&#8217;re building data pipelines, API orchestrations, or system automation workflows, this skill provides the tools needed to manage complexity while maintaining safety and reliability.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/cerbug45/task-panner-validator/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/cerbug45/task-panner-validator/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

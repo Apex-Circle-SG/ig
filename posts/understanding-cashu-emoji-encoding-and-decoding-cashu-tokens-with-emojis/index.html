@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding cashu-emoji: Encoding and Decoding Cashu Tokens with Emojis | News of Tomorrow</title>
+<meta name="description" content="Discover how the OpenClaw skill cashu-emoji encodes and decodes Cashu tokens hidden in emojis using Unicode variation selectors.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-cashu-emoji-encoding-and-decoding-cashu-tokens-with-emojis/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding cashu-emoji: Encoding and Decoding Cashu Tokens with Emojis">
+<meta property="og:description" content="Discover how the OpenClaw skill cashu-emoji encodes and decodes Cashu tokens hidden in emojis using Unicode variation selectors.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-cashu-emoji-encoding-and-decoding-cashu-tokens-with-emojis/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-cashu-emoji-encoding-and-decoding-cashu-tokens-with-emojis/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-09">
+<meta property="article:modified_time" content="2026-03-09">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding cashu-emoji: Encoding and Decoding Cashu Tokens with Emojis">
+<meta name="twitter:description" content="Discover how the OpenClaw skill cashu-emoji encodes and decodes Cashu tokens hidden in emojis using Unicode variation selectors.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-cashu-emoji-encoding-and-decoding-cashu-tokens-with-emojis/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding cashu-emoji: Encoding and Decoding Cashu Tokens with Emojis", "datePublished": "2026-03-09", "dateModified": "2026-03-09", "image": ["https://picsum.photos/seed/understanding-cashu-emoji-encoding-and-decoding-cashu-tokens-with-emojis/1200/630"], "description": "Discover how the OpenClaw skill cashu-emoji encodes and decodes Cashu tokens hidden in emojis using Unicode variation selectors.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-cashu-emoji-encoding-and-decoding-cashu-tokens-with-emojis/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding cashu-emoji: Encoding and Decoding Cashu Tokens with Emojis", "item": "https://github.insightginie.com/posts/understanding-cashu-emoji-encoding-and-decoding-cashu-tokens-with-emojis/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding cashu-emoji: Encoding and Decoding Cashu Tokens with Emojis</h1>
+<time datetime="2026-03-09" class="post-date" data-date="2026-03-09T19:45:50+00:00">2026-03-09</time>
+<img src="https://picsum.photos/seed/understanding-cashu-emoji-encoding-and-decoding-cashu-tokens-with-emojis/800/400" class="post-hero" alt="Understanding cashu-emoji: Encoding and Decoding Cashu Tokens with Emojis">
+<h1>Understanding cashu-emoji: Encoding and Decoding Cashu Tokens with Emojis</h1>
+<p>In the rapidly evolving world of digital assets and blockchain technology, innovative methods of transaction and communication are constantly emerging. One such method is the cashu-emoji skill, which allows users to encode and decode Cashu tokens that are hidden inside emojis using Unicode variation selectors. This unique approach not only adds a layer of security but also leverages the widespread use of emojis in digital communication.</p>
+<h2>What is Cashu-emoji?</h2>
+<p>The cashu-emoji skill is a tool designed to help agents (users or automated systems) decode Cashu tokens received as emoji and encode tokens for sending. Additionally, it supports general hidden messages inside emojis. If the decoded text starts with &quot;cashu,&quot; it’s likely a Cashu token. Otherwise, it can be treated as a plain hidden message.</p>
+<h2>Why Does cashu-emoji Exist?</h2>
+<p>Some services embed a Cashu token into an emoji using Unicode variation selectors (VS1..VS256). Chat apps often display only the emoji but preserve the hidden selector characters. This skill allows users to decode these tokens and potentially redeem them if they are valid and unspent.</p>
+<p>However, it&#8217;s important to note that many messengers can truncate or normalize Unicode. If the variation selectors are lost, the embedded token cannot be recovered. This highlights the importance of using reliable communication channels when sharing encoded tokens.</p>
+<h2>Quickstart Guide</h2>
+<p>To get started with cashu-emoji, follow these simple steps:</p>
+<ol>
+<li><strong>Clone the Repository:</strong><br />
+git clone https://github.com/robwoodgate/cashu-emoji.git</li>
+<li><strong>Change Directory:</strong><br />
+cd cashu-emoji</li>
+<li><strong>Install Dependencies:</strong><br />
+npm ci</li>
+</ol>
+<h2>Decoding a Token</h2>
+<p>To decode a whole message (which is recommended), use the following command:</p>
+<pre>node ./bin/cashu-emoji.js decode "&lt;paste message&gt;"</pre>
+<p>To decode and print mint/unit/amount if it’s a cashu token:</p>
+<pre>node ./bin/cashu-emoji.js decode "&lt;paste message&gt;" --metadata</pre>
+<p>To decode as structured JSON (agent-friendly):</p>
+<pre>node ./bin/cashu-emoji.js decode "&lt;paste message&gt;" --metadata --json</pre>
+<h2>Encoding a Token</h2>
+<p>To encode a hidden message:</p>
+<pre>node ./bin/cashu-emoji.js encode "🥜" "hello from inside an emoji"</pre>
+<p>To encode a cashu token:</p>
+<pre>node ./bin/cashu-emoji.js encode "🥜" "cashuB..."</pre>
+<h2>What You Can Do with cashu-emoji</h2>
+<p>The cashu-emoji skill offers several functionalities:</p>
+<ol>
+<li><strong>Decode:</strong><br />
+Input: entire message text (may include other text/emojis)<br />
+Output: the embedded UTF‑8 text, usually a cashuA&#8230; / cashuB&#8230; token</li>
+<li><strong>Encode:</strong><br />
+Input: a carrier emoji (recommend 🥜) and a token string<br />
+Output: an emoji string that visually looks like the emoji but contains the hidden token</li>
+</ol>
+<h2>Optional Metadata</h2>
+<p>To sanity-check the decoded token without redeeming it, you can request metadata. For programmatic/agent use, prefer JSON output:</p>
+<pre>node ./bin/cashu-emoji.js decode "&lt;message&gt;" --metadata --json</pre>
+<p>Example JSON response (Cashu token):</p>
+<pre>{
+  "text": "cashuB...",
+  "isCashu": true,
+  "metadata": {
+    "mint": "https://mint.example",
+    "unit": "sat",
+    "amount": 21
+  },
+  "metadataError": null
+}</pre>
+<p>Example JSON response (plain hidden message):</p>
+<pre>{
+  "text": "hello from inside an emoji",
+  "isCashu": false
+}</pre>
+<h2>Cashu Gotchas for New Agents</h2>
+<p>Here are some important points to consider when using cashu-emoji:</p>
+<ul>
+<li>A decoded cashu&#8230; token is a <strong>bearer asset</strong>. Treat it like cash.</li>
+<li>&#8211;metadata is a local parse. It can’t prove the token is unspent/valid.</li>
+<li>If decode returns a partial token or nonsense, the messenger likely munged the variation selectors; ask for the token to be re-sent (often with some trailing normal text after the emoji token).</li>
+</ul>
+<h2>Files and Safety</h2>
+<p>Key files in the cashu-emoji repository include:</p>
+<ul>
+<li>src/emoji-encoder.ts: core encode/decode</li>
+<li>bin/cashu-emoji.js: CLI wrapper</li>
+<li>examples/: test vectors</li>
+</ul>
+<p>Importantly, this tool only encodes/decodes text. It does not spend funds, ensuring a safe and secure experience for users.</p>
+<h2>Conclusion</h2>
+<p>The cashu-emoji skill represents a novel and secure way to encode and decode Cashu tokens using emojis. By leveraging Unicode variation selectors, it offers a unique method of digital asset transfer that is both innovative and user-friendly. Whether you&#8217;re a developer looking to integrate secure token transfer into your application or an individual seeking a secure way to share tokens, cashu-emoji provides a robust solution. As always, it&#8217;s crucial to handle digital assets with care and use secure communication channels to ensure the integrity of your transactions.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/robwoodgate/cashu-emoji/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/robwoodgate/cashu-emoji/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

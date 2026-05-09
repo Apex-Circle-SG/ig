@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fractal Memory: Automated Hierarchical Memory Compression for OpenClaw Agents | News of Tomorrow</title>
+<meta name="description" content="Learn how the Fractal Memory skill automates memory management in OpenClaw agents, preventing context overflow through daily, weekly, monthly, and core memory c">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/fractal-memory-automated-hierarchical-memory-compression-for-openclaw-agents/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Fractal Memory: Automated Hierarchical Memory Compression for OpenClaw Agents">
+<meta property="og:description" content="Learn how the Fractal Memory skill automates memory management in OpenClaw agents, preventing context overflow through daily, weekly, monthly, and core memory c">
+<meta property="og:image" content="https://picsum.photos/seed/fractal-memory-automated-hierarchical-memory-compression-for-openclaw-agents/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/fractal-memory-automated-hierarchical-memory-compression-for-openclaw-agents/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-05">
+<meta property="article:modified_time" content="2026-03-05">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fractal Memory: Automated Hierarchical Memory Compression for OpenClaw Agents">
+<meta name="twitter:description" content="Learn how the Fractal Memory skill automates memory management in OpenClaw agents, preventing context overflow through daily, weekly, monthly, and core memory c">
+<meta name="twitter:image" content="https://picsum.photos/seed/fractal-memory-automated-hierarchical-memory-compression-for-openclaw-agents/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Fractal Memory: Automated Hierarchical Memory Compression for OpenClaw Agents", "datePublished": "2026-03-05", "dateModified": "2026-03-05", "image": ["https://picsum.photos/seed/fractal-memory-automated-hierarchical-memory-compression-for-openclaw-agents/1200/630"], "description": "Learn how the Fractal Memory skill automates memory management in OpenClaw agents, preventing context overflow through daily, weekly, monthly, and core memory c", "mainEntityOfPage": "https://github.insightginie.com/posts/fractal-memory-automated-hierarchical-memory-compression-for-openclaw-agents/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Fractal Memory: Automated Hierarchical Memory Compression for OpenClaw Agents", "item": "https://github.insightginie.com/posts/fractal-memory-automated-hierarchical-memory-compression-for-openclaw-agents/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Fractal Memory: Automated Hierarchical Memory Compression for OpenClaw Agents</h1>
+<time datetime="2026-03-05" class="post-date" data-date="2026-03-05T08:21:10+00:00">2026-03-05</time>
+<img src="https://picsum.photos/seed/fractal-memory-automated-hierarchical-memory-compression-for-openclaw-agents/800/400" class="post-hero" alt="Fractal Memory: Automated Hierarchical Memory Compression for OpenClaw Agents">
+<h1>Fractal Memory: Automated Hierarchical Memory Compression for OpenClaw Agents</h1>
+<p><strong>Fractal Memory</strong> is an advanced skill for OpenClaw agents that automates hierarchical memory compression, preventing context overflow and ensuring efficient memory management. This system mimics human sleep patterns by compressing raw experiences into patterns, which are then distilled into principles, retaining essence while managing scale.</p>
+<h2>What is Fractal Memory?</h2>
+<p>Fractal Memory is a structured approach to memory management that organizes information into a hierarchical system: daily logs, weekly summaries, monthly reviews, and core memory. This system is designed to:</p>
+<ul>
+<li>Manage long-term memory without manual curation</li>
+<li>Optimize token-efficient context loading</li>
+<li>Prevent session bloat from accumulated history</li>
+<li>Automate memory rollups via cron jobs</li>
+<li>Migrate from flat daily files to structured memory</li>
+</ul>
+<h2>How Fractal Memory Works</h2>
+<p>Fractal Memory operates through a series of automated scripts and cron jobs that compress and organize memory in a hierarchical structure. Here&#8217;s a breakdown of its components and workflow:</p>
+<h3>Directory Structure</h3>
+<p>The system uses a well-organized directory structure to store memory files:</p>
+<pre>memory/
+  ├── diary/
+  │   ├── 2026/
+  │   │   ├── daily/
+  │   │   ├── weekly/
+  │   │   └── monthly/
+  │   └── sticky-notes/
+  │       ├── workflows/
+  │       ├── apis/
+  │       ├── commands/
+  │       └── facts/
+  ├── rollup-state.json
+  └── heartbeat-state.json</pre>
+<h3>Core Scripts</h3>
+<p>The following scripts are essential for the Fractal Memory system:</p>
+<ul>
+<li><strong>ensure_daily_log.py</strong>: Creates today&#8217;s daily log if it doesn&#8217;t exist.</li>
+<li><strong>append_to_daily.py</strong>: Appends events to today&#8217;s daily log programmatically.</li>
+<li><strong>rollup-daily.py</strong>: Compresses today&#8217;s diary into this week&#8217;s summary.</li>
+<li><strong>rollup-weekly.py</strong>: Compresses this week&#8217;s summary into this month&#8217;s summary.</li>
+<li><strong>rollup-monthly.py</strong>: Distills this month&#8217;s summary into MEMORY.md.</li>
+<li><strong>verify_memory_integrity.py</strong>: Checks memory system integrity and detects anomalies.</li>
+</ul>
+<h3>Information Flow</h3>
+<p>The information flow in Fractal Memory follows a structured process:</p>
+<ol>
+<li><strong>During Conversation (Real-time)</strong>: Write to <code>memory/diary/YYYY/daily/YYYY-MM-DD.md</code> immediately.</li>
+<li><strong>Daily Rollup (23:59 every day)</strong>: Extract patterns, decisions, key events → append to <code>memory/diary/YYYY/weekly/YYYY-Wnn.md</code>.</li>
+<li><strong>Weekly Rollup (23:59 every Sunday)</strong>: Compress to themes, trajectory, milestones → append to <code>memory/diary/YYYY/monthly/YYYY-MM.md</code>.</li>
+<li><strong>Monthly Rollup (Last day of month)</strong>: Distill major themes, lessons learned → update <code>MEMORY.md</code>.</li>
+<li><strong>Timeless Facts (Anytime)</strong>: Extract facts that recur 3+ times → store in <code>memory/diary/sticky-notes/{category}/</code>.</li>
+</ol>
+<h2>Use Cases for Fractal Memory</h2>
+<p>Fractal Memory is versatile and can be applied in various scenarios to enhance memory management and context loading:</p>
+<ul>
+<li><strong>Long-term Memory Management</strong>: Ideal for agents that need to maintain long-term memory without manual curation.</li>
+<li><strong>Token-efficient Context Loading</strong>: Optimizes context loading with attention-optimized hierarchy, reducing token usage.</li>
+<li><strong>Preventing Session Bloat</strong>: Prevents session bloat from accumulated history, ensuring efficient memory usage.</li>
+<li><strong>Automated Memory Rollups</strong>: Automates memory rollups via cron jobs, reducing manual intervention.</li>
+<li><strong>Migrating from Flat Daily Files</strong>: Facilitates migration from flat daily files to structured memory, enhancing organization and retrieval.</li>
+</ul>
+<h2>Benefits of Fractal Memory</h2>
+<p>The Fractal Memory system offers numerous benefits for OpenClaw agents:</p>
+<ul>
+<li><strong>Efficient Memory Management</strong>: Automates hierarchical memory compression, reducing manual effort.</li>
+<li><strong>Context Optimization</strong>: Optimizes context loading with attention-optimized hierarchy, improving performance.</li>
+<li><strong>Prevents Context Overflow</strong>: Prevents context overflow by compressing and organizing memory effectively.</li>
+<li><strong>Automated Rollups</strong>: Automates memory rollups via cron jobs, ensuring consistent and reliable memory management.</li>
+<li><strong>Structured Memory</strong>: Facilitates migration from flat daily files to structured memory, enhancing organization and retrieval.</li>
+</ul>
+<h2>Setting Up Fractal Memory</h2>
+<p>To set up Fractal Memory, follow these steps:</p>
+<ol>
+<li><strong>Set Up Directory Structure</strong>:</li>
+<pre>mkdir -p memory/diary/{2026/{daily,weekly,monthly},sticky-notes/{workflows,apis,commands,facts}}</pre>
+<li><strong>Initialize State Files</strong>:</li>
+<pre>cp assets/rollup-state.json memory/
+cp assets/heartbeat-state.json memory/</pre>
+<li><strong>Install Scripts</strong>:</li>
+<pre>cp scripts/*.py ~/openclaw/workspace/scripts/
+chmod +x ~/openclaw/workspace/scripts/*.py</pre>
+<li><strong>Set Up Cron Jobs</strong>:</li>
+<pre>See references/cron-setup.md for detailed cron configuration.</pre>
+<li><strong>Update Session Startup</strong>:</li>
+<pre>Add to your AGENTS.md:
+
+## Every Session
+1. Read `SOUL.md`
+2. Read `USER.md`
+3. Read `memory/diary/YYYY/daily/YYYY-MM-DD.md` (today + yesterday)
+4. **If in MAIN SESSION**: Also read `MEMORY.md`
+
+**Context loading order**:
+TODAY → THIS WEEK → THIS MONTH → MEMORY.md</pre>
+</ol>
+<h2>Security Considerations</h2>
+<p>Memory systems can create attack surfaces. Fractal Memory includes several security features:</p>
+<ul>
+<li><strong>Provenance Tracking</strong>: Timestamps and metadata ensure the origin and history of memory files.</li>
+<li><strong>Integrity Verification</strong>: The <code>verify_memory_integrity.py</code> script detects tampering.</li>
+<li><strong>Anomaly Detection</strong>: Flags unusual patterns, ensuring memory integrity.</li>
+</ul>
+<p>Run integrity checks periodically:</p>
+<pre>python3 scripts/verify_memory_integrity.py</pre>
+<h2>Migration</h2>
+<p>Migrating from existing memory systems? See <code>references/migration-guide.md</code> for:</p>
+<ul>
+<li>Flat daily files → Fractal structure</li>
+<li>Manual MEMORY.md only → Automated system</li>
+<li>Other hierarchical systems → Fractal memory</li>
+</ul>
+<h2>Troubleshooting</h2>
+<p>Common issues and their solutions:</p>
+<ul>
+<li><strong>Daily log not created</strong>: Run <code>ensure_daily_log.py</code> manually or add to heartbeat checks.</li>
+<li><strong>Rollup failed</strong>: Check cron job runs:</li>
+<pre>cron(action="runs", jobId="<job-id>")</pre>
+<li><strong>Context still overflowing</strong>: Verify rollups are running (check <code>memory/rollup-state.json</code>), manually run rollup scripts to catch up, and ensure MEMORY.md isn&#8217;t growing too large.</li>
+<li><strong>Scripts not executable</strong>: Run <code>chmod +x scripts/*.py</code>.</li>
+</ul>
+<h2>Advanced Usage</h2>
+<p>For advanced users, Fractal Memory offers several customization options:</p>
+<ul>
+<li><strong>Custom Rollup Schedule</strong>: Modify cron expressions in <code>references/cron-setup.md</code>.</li>
+<li><strong>Sticky Notes Categories</strong>: Add custom categories in <code>memory/diary/sticky-notes/</code>:</li>
+<pre>mkdir memory/diary/sticky-notes/my-category</pre>
+<li><strong>Manual Rollup</strong>: Run rollup scripts manually anytime:</li>
+<pre>python3 scripts/rollup-daily.py
+python3 scripts/rollup-weekly.py
+python3 scripts/rollup-monthly.py</pre>
+</ul>
+<h2>Architecture Details</h2>
+<p>For a deep dive into system design, philosophy, and implementation details, see <code>references/architecture.md</code>.</p>
+<h2>References</h2>
+<p>Fractal Memory is inspired by and builds upon several concepts and works:</p>
+<ul>
+<li><strong>Deva&#8217;s Fractal Memory v1.0.0</strong>: Original inspiration</li>
+<li><strong>Arcturus&#8217;s Memory is Resurrection</strong>: Philosophical foundation</li>
+<li><strong>Logi&#8217;s Memory Architecture as Agency</strong>: Agency perspective</li>
+</ul>
+<p>&#8220;What grows from chaos is structure. What emerges from structure is memory. What persists through memory is self.&#8221; — Deva</p>
+<h2>Conclusion</h2>
+<p>Fractal Memory is a powerful tool for OpenClaw agents, offering automated hierarchical memory compression, efficient context loading, and structured memory management. By following the outlined steps and leveraging the provided scripts, users can enhance their agents&#8217; memory capabilities and ensure optimal performance.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bugmaker2/fractal-memory/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bugmaker2/fractal-memory/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

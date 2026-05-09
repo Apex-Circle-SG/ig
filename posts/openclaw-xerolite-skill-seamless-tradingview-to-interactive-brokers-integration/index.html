@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Xerolite Skill: Seamless TradingView to Interactive Brokers Integration | News of Tomorrow</title>
+<meta name="description" content="The OpenClaw Xerolite skill bridges TradingView alerts to Interactive Brokers accounts, enabling automated order placement and contract search through natural l">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-xerolite-skill-seamless-tradingview-to-interactive-brokers-integration/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Xerolite Skill: Seamless TradingView to Interactive Brokers Integration">
+<meta property="og:description" content="The OpenClaw Xerolite skill bridges TradingView alerts to Interactive Brokers accounts, enabling automated order placement and contract search through natural l">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-xerolite-skill-seamless-tradingview-to-interactive-brokers-integration/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-xerolite-skill-seamless-tradingview-to-interactive-brokers-integration/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-14">
+<meta property="article:modified_time" content="2026-03-14">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Xerolite Skill: Seamless TradingView to Interactive Brokers Integration">
+<meta name="twitter:description" content="The OpenClaw Xerolite skill bridges TradingView alerts to Interactive Brokers accounts, enabling automated order placement and contract search through natural l">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-xerolite-skill-seamless-tradingview-to-interactive-brokers-integration/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Xerolite Skill: Seamless TradingView to Interactive Brokers Integration", "datePublished": "2026-03-14", "dateModified": "2026-03-14", "image": ["https://picsum.photos/seed/openclaw-xerolite-skill-seamless-tradingview-to-interactive-brokers-integration/1200/630"], "description": "The OpenClaw Xerolite skill bridges TradingView alerts to Interactive Brokers accounts, enabling automated order placement and contract search through natural l", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-xerolite-skill-seamless-tradingview-to-interactive-brokers-integration/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Xerolite Skill: Seamless TradingView to Interactive Brokers Integration", "item": "https://github.insightginie.com/posts/openclaw-xerolite-skill-seamless-tradingview-to-interactive-brokers-integration/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Xerolite Skill: Seamless TradingView to Interactive Brokers Integration</h1>
+<time datetime="2026-03-14" class="post-date" data-date="2026-03-14T21:17:06+00:00">2026-03-14</time>
+<img src="https://picsum.photos/seed/openclaw-xerolite-skill-seamless-tradingview-to-interactive-brokers-integration/800/400" class="post-hero" alt="OpenClaw Xerolite Skill: Seamless TradingView to Interactive Brokers Integration">
+<h2>Introduction to the OpenClaw Xerolite Skill</h2>
+<p>The OpenClaw Xerolite skill represents a powerful integration between your OpenClaw agent and Xerolite, a specialized trading bridge that connects TradingView alerts directly to Interactive Brokers (IBKR) accounts. This skill eliminates manual trading steps by allowing your agent to place orders and search contracts through natural language commands or automated workflows.</p>
+<h2>What is Xerolite?</h2>
+<p>Xerolite serves as a trading automation bridge that connects TradingView alerts to your Interactive Brokers account (via TWS or IB Gateway). When you design trading logic and alerts in TradingView, Xerolite handles the seamless bridge to IBKR and executes orders in real-time without manual intervention.</p>
+<p>Instead of manually transferring TradingView alerts to your broker, Xerolite automates the entire process. This skill extends that capability by allowing your OpenClaw agent to interact with Xerolite&#8217;s REST API, enabling order placement and contract searches directly from your workflow.</p>
+<h2>Core Capabilities</h2>
+<p>The Xerolite skill provides two primary functions that transform how you interact with your trading infrastructure:</p>
+<ol>
+<li><strong>Order Placement</strong>: Send buy or sell orders through Xerolite&#8217;s REST API</li>
+<li><strong>Contract Search</strong>: Look up contract information and symbols via the same API</li>
+</ol>
+<p>These capabilities mean you can execute trades or find trading symbols using natural language commands without leaving your OpenClaw workflow.</p>
+<h2>Package Structure</h2>
+<p>The skill follows a clean, organized structure:</p>
+<pre><code>skills/xerolite/
+├── SKILL.md              # This documentation file
+├── scripts/
+│   ├── xerolite.mjs      # Command-line interface for order placement and contract search
+└── references/
+    └── API.md            # Detailed REST API documentation
+</code></pre>
+<h2>Getting Started with the CLI</h2>
+<p>The skill includes a command-line interface that you can use directly from the skill directory. The CLI supports two main operations: placing orders and searching contracts.</p>
+<h3>Default Configuration</h2>
+<p>The CLI uses sensible defaults to simplify common use cases:</p>
+<ul>
+<li><strong>Currency</strong>: USD</li>
+<li><strong>Asset Class</strong>: STOCK</li>
+<li><strong>Exchange</strong>: SMART</li>
+</ul>
+<p>You can override these defaults when needed for more complex trading scenarios.</p>
+<h3>Placing Orders</h3>
+<p>To place an order, you need to specify at minimum:</p>
+<ul>
+<li><strong>&#8211;action</strong>: BUY or SELL</li>
+<li><strong>&#8211;qty</strong>: Quantity of shares or contracts</li>
+<li><strong>&#8211;symbol</strong>: Trading symbol</li>
+</ul>
+<p>Example usage:</p>
+<pre><code># Basic order (uses defaults)
+node {baseDir}/scripts/xerolite.mjs order place --symbol AAPL --action BUY --qty 10
+
+# Full specification
+node {baseDir}/scripts/xerolite.mjs order place \
+--symbol AAPL \
+--currency USD \
+--asset-class STOCK \
+--exch SMART \
+--action BUY \
+--qty 10
+</code></pre>
+<p>The CLI sends a JSON payload to Xerolite&#8217;s REST API:</p>
+<pre><code>{
+  "name": "Agent",
+  "action": "BUY",
+  "qty": "10",
+  "symbol": "AAPL",
+  "currency": "USD",
+  "asset_class": "STOCK",
+  "exch": "SMART"
+}
+</code></pre>
+<h3>Searching Contracts</h3>
+<p>Contract search requires only the symbol, with optional parameters for currency, asset class, and exchange:</p>
+<pre><code># Basic search (uses defaults)
+node {baseDir}/scripts/xerolite.mjs contract search --symbol AAPL
+
+# Full specification
+node {baseDir}/scripts/xerolite.mjs contract search \
+--symbol AAPL \
+--currency USD \
+--asset-class STOCK \
+--exch SMART
+</code></pre>
+<p>The search sends this JSON to Xerolite:</p>
+<pre><code>{
+  "brokerName": "IBKR",
+  "symbol": "AAPL",
+  "currency": "USD",
+  "xeroAssetClass": "STOCK"
+}
+</code></pre>
+<h2>REST API Integration</h2>
+<p>The skill communicates with Xerolite through two primary REST API endpoints:</p>
+<ol>
+<li><strong>POST /api/internal/agent/order/place-order</strong>: For placing trading orders</li>
+<li><strong>POST /api/internal/agent/contract/search</strong>: For searching contract information</li>
+</ol>
+<p>Detailed API documentation is available in the references/API.md file within the skill package.</p>
+<h2>Technical Requirements</h2>
+<p>The skill has minimal technical requirements:</p>
+<ul>
+<li><strong>Node.js 18+</strong>: Required for built-in fetch support</li>
+<li><strong>CLI-only operation</strong>: No additional installation needed beyond Node.js</li>
+</ul>
+<p>Optional configuration:</p>
+<ul>
+<li><strong>XEROLITE_API_URL</strong>: Base URL for Xerolite API (defaults to http://localhost)</li>
+</ul>
+<p>The skill assumes local access to Xerolite by default, making it ideal for development and local trading setups.</p>
+<h2>Practical Use Cases</h2>
+<p>This skill enables several powerful trading workflows:</p>
+<ol>
+<li><strong>Voice-Activated Trading</strong>: Say &#8220;Buy 10 shares of Apple&#8221; and have it executed automatically</li>
+<li><strong>Automated Alert Processing</strong>: Convert TradingView alerts into executed trades without manual steps</li>
+<li><strong>Contract Research</strong>: Quickly look up contract details while analyzing trading opportunities</li>
+<li><strong>Multi-Strategy Integration</strong>: Combine different trading strategies that all route through the same execution engine</li>
+</ol>
+<h2>Security Considerations</h2>
+<p>The current implementation does not require an API key, assuming local network access to Xerolite. This simplifies setup but means you should secure your local network appropriately. Future versions may add API key authentication for enhanced security.</p>
+<h2>Integration Benefits</h2>
+<p>By using this skill, you gain:</p>
+<ul>
+<li><strong>Reduced Latency</strong>: Orders execute as soon as TradingView alerts trigger</li>
+<li><strong>Eliminated Manual Steps</strong>: No copy-pasting or manual order entry required</li>
+<li><strong>Unified Workflow</strong>: All trading activities accessible through OpenClaw</li>
+<li><strong>Natural Language Interface</strong>: Trade using conversational commands</li>
+</ul>
+<h2>Future Enhancements</h2>
+<p>Potential future improvements could include:</p>
+<ul>
+<li>API key authentication for enhanced security</li>
+<li>Support for additional broker integrations beyond IBKR</li>
+<li>Advanced order types (stop-loss, take-profit, etc.)</li>
+<li>Portfolio management features</li>
+<li>Real-time position monitoring</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The OpenClaw Xerolite skill represents a significant advancement in trading automation by bridging the gap between TradingView&#8217;s powerful charting and alert system and Interactive Brokers&#8217; execution capabilities. By integrating these systems through OpenClaw, traders can create sophisticated, automated workflows that execute trades based on market conditions without manual intervention.</p>
+<p>Whether you&#8217;re a professional trader looking to automate your strategies or a retail trader seeking to eliminate manual trading steps, this skill provides the foundation for building powerful, responsive trading systems that can operate 24/7 based on your predefined criteria.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/xero-flex/xerolite/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/xero-flex/xerolite/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

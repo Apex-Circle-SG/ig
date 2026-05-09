@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the OpenClaw Meta Ads Analyser: A Comprehensive Guide to Ad Strategy Analysis | News of Tomorrow</title>
+<meta name="description" content="Learn how the OpenClaw Meta Ads Analyser skill transforms extracted ad creatives into a professional strategy report.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-openclaw-meta-ads-analyser-a-comprehensive-guide-to-ad-strategy-analysis/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the OpenClaw Meta Ads Analyser: A Comprehensive Guide to Ad Strategy Analysis">
+<meta property="og:description" content="Learn how the OpenClaw Meta Ads Analyser skill transforms extracted ad creatives into a professional strategy report.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-openclaw-meta-ads-analyser-a-comprehensive-guide-to-ad-strategy-analysis/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-openclaw-meta-ads-analyser-a-comprehensive-guide-to-ad-strategy-analysis/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-14">
+<meta property="article:modified_time" content="2026-03-14">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the OpenClaw Meta Ads Analyser: A Comprehensive Guide to Ad Strategy Analysis">
+<meta name="twitter:description" content="Learn how the OpenClaw Meta Ads Analyser skill transforms extracted ad creatives into a professional strategy report.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-openclaw-meta-ads-analyser-a-comprehensive-guide-to-ad-strategy-analysis/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the OpenClaw Meta Ads Analyser: A Comprehensive Guide to Ad Strategy Analysis", "datePublished": "2026-03-14", "dateModified": "2026-03-14", "image": ["https://picsum.photos/seed/understanding-the-openclaw-meta-ads-analyser-a-comprehensive-guide-to-ad-strategy-analysis/1200/630"], "description": "Learn how the OpenClaw Meta Ads Analyser skill transforms extracted ad creatives into a professional strategy report.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-openclaw-meta-ads-analyser-a-comprehensive-guide-to-ad-strategy-analysis/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the OpenClaw Meta Ads Analyser: A Comprehensive Guide to Ad Strategy Analysis", "item": "https://github.insightginie.com/posts/understanding-the-openclaw-meta-ads-analyser-a-comprehensive-guide-to-ad-strategy-analysis/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the OpenClaw Meta Ads Analyser: A Comprehensive Guide to Ad Strategy Analysis</h1>
+<time datetime="2026-03-14" class="post-date" data-date="2026-03-14T00:46:00+00:00">2026-03-14</time>
+<img src="https://picsum.photos/seed/understanding-the-openclaw-meta-ads-analyser-a-comprehensive-guide-to-ad-strategy-analysis/800/400" class="post-hero" alt="Understanding the OpenClaw Meta Ads Analyser: A Comprehensive Guide to Ad Strategy Analysis">
+<article>
+<header>
+<h1>Understanding the OpenClaw Meta Ads Analyser: A Comprehensive Guide to Ad Strategy Analysis</h1>
+<p class="meta">Published on <time>2023-11-15</time> by <span class="author">WordPress Generator</span></p>
+</header>
+<section>
+<p>The <a href="https://github.com/openclaw/skills/blob/main/skills/bluerockerr/meta-ads-analyser/SKILL.md">OpenClaw Meta Ads Analyser</a> is a powerful skill that helps digital marketers and advertisers analyze and interpret Meta ad creatives. It generates a professional, organized strategy report that can provide valuable insights for enhancing ad campaigns. This article will delve into the functionalities, prerequisites, input requirements, analysis process, output format, and integration capabilities of this skill.</p>
+<h2>Prerequisites</h2>
+<p>Before using the Meta Ads Analyser, you need to ensure that you have the extracted ad assets from the <a href="https://github.com/openclaw/skills/blob/main/meta_ads_extractor/SKILL.md">/meta_ads_extractor</a> skill. These assets typically include images, videos, and landing page screenshots stored in a specific folder structure on your system.</p>
+<h2>Input Requirements</h2>
+<p>The skill requires the assets folder from the extraction process, which is usually located at:</p>
+<pre>
+~/clawd/output/meta-ads/{advertiser-slug}/<br>
+├── {slug}-video-01.mp4<br>
+├── {slug}-video-02.mp4<br>
+├── {slug}-image-01.jpg<br>
+├── {slug}-image-02.jpg<br>
+├── landing-{page-name}.jpg<br>
+└── ...
+</pre>
+<h2>Analysis Process</h2>
+<p>The Meta Ads Analyser follows a structured process to generate a comprehensive analysis report:</p>
+<h3>1. Analyzing Each Creative</h3>
+<p>For each ad creative, the skill identifies various key elements such as:</p>
+<ul>
+<li><strong>Aspect Ratio:</strong> Dimensions and ratio (e.g., 1:1, 4:5, 9:16, 16:9)</li>
+<li><strong>Duration:</strong> Length of videos in seconds</li>
+<li><strong>Hook:</strong> Opening line or visual that stops the scroll</li>
+<li><strong>Script/Copy:</strong> Key messaging and value proposition</li>
+<li><strong>Visual Flow:</strong> Sequence of scenes/elements for videos</li>
+<li><strong>Emotion:</strong> Primary emotional trigger (e.g., curiosity, fear, aspiration)</li>
+<li><strong>CTA (Call to Action):</strong> Call to action and friction level</li>
+<li><strong>Strengths:</strong> What works well</li>
+<li><strong>Weaknesses/Gaps:</strong> What could be improved</li>
+</ul>
+<p>The skill uses vision models for images and Gemini for video analysis. It also retrieves dimensions using commands like:</p>
+<pre>
+# Images (macOS)
+sips -g pixelWidth -g pixelHeight image.jpg
+# Videos
+ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 video.mp4
+</pre>
+<h3>2. Analyzing Landing Pages</h3>
+<p>For each landing page, the skill identifies:</p>
+<ul>
+<li><strong>Headline:</strong> Primary value proposition</li>
+<li><strong>Strategy:</strong> Key conversion elements (e.g., social proof, urgency)</li>
+<li><strong>Conversion Flow:</strong> Path from landing to purchase or signup</li>
+<li><strong>Strengths:</strong> What converts well</li>
+<li><strong>Gaps:</strong> Missing elements or friction points</li>
+</ul>
+<h3>3. Mapping Funnels</h3>
+<p>The skill groups ads by their destination landing page. Each funnel consists of a landing page and all ads driving to it. Typical funnel types include:</p>
+<ul>
+<li><strong>TOFU (Top of Funnel):</strong> Awareness, lead magnets, quizzes, free content</li>
+<li><strong>BOFU (Bottom of Funnel):</strong> Direct offer, application, purchase</li>
+</ul>
+<h3>4. Identifying Strategy Patterns</h3>
+<p>The skill looks for various strategy patterns such as:</p>
+<ul>
+<li><strong>Credibility Stacking:</strong> Logos, credentials, social proof</li>
+<li><strong>Price Anchoring:</strong> Setting a reference price to make the actual price seem more attractive</li>
+<li><strong>Native Creative:</strong> Ads that don&#8217;t look like ads</li>
+<li><strong>Identity-Driven Copy:</strong> Tailoring the ad copy to resonate with specific audience identities</li>
+<li><strong>Testing Patterns:</strong> Variants of the same creative to test different elements</li>
+</ul>
+<h2>Output Format</h2>
+<p>The Meta Ads Analyser generates a self-contained HTML report using a specific template structure. The report includes:</p>
+<h3>1. Header</h3>
+<ul>
+<li>Advertiser name</li>
+<li>Stats (number of ads, number of funnels, date)</li>
+</ul>
+<h3>2. Strategy Overview (TOP)</h3>
+<ul>
+<li>High-level acquisition strategy</li>
+<li>Funnel flow visualization</li>
+<li>Creative testing patterns</li>
+<li>Key takeaways (actionable insights)</li>
+</ul>
+<h3>3. Funnel Sections</h3>
+<p>Each section corresponds to a landing page and includes:</p>
+<ul>
+<li>Funnel header (name, URL)</li>
+<li>Landing page card (screenshot + analysis)</li>
+<li>Ad cards grid (media + analysis for each ad)</li>
+</ul>
+<h3>4. Footer</h3>
+<ul>
+<li>Source attribution</li>
+<li>Date generated</li>
+</ul>
+<p>Each ad card in the report displays:</p>
+<ul>
+<li>Media (video or image)</li>
+<li>Badges (Type, Funnel Stage, Aspect Ratio, Duration if video)</li>
+<li>Title</li>
+<li>Analysis fields (Hook, Script, Emotion, Strengths, Gaps)</li>
+</ul>
+<p>The styling of the report follows guidelines for a clean, professional look, ensuring it is mobile-friendly and easy to scan with badges for quick insights.</p>
+<h2>Delivery</h2>
+<p>The HTML report is generated in the assets folder and zipped along with all media assets for easy delivery. The recipient can open the HTML file locally to view the complete analysis with all embedded media.</p>
+<h2>Example Workflow</h2>
+<p>A typical workflow using the Meta Ads Analyser skill might look like this:</p>
+<pre>
+User: Analyze the EricPartaker ads we extracted<br>
+1. Read assets folder: ~/clawd/output/meta-ads/ericpartaker/<br>
+2. Analyze each video with Gemini / image with vision<br>
+3. Analyze landing page screenshots<br>
+4. Map ads to landing pages (identify 3 funnels)<br>
+5. Identify strategy patterns<br>
+6. Generate HTML report<br>
+7. Zip folder<br>
+8. Send to user
+</pre>
+<h2>Integration</h2>
+<p>The Meta Ads Analyser is designed to follow the <a href="https://github.com/openclaw/skills/blob/main/meta_ads_extractor/SKILL.md">/meta_ads_extractor</a> skill and can also integrate with other skills such as <a href="https://github.com/openclaw/skills/blob/main/ad-creative-analysis/SKILL.md">ad-creative-analysis</a> and <a href="https://github.com/openclaw/skills/blob/main/landing-page-analysis/SKILL.md">landing-page-analysis</a> for more detailed individual ad breakdowns and landing page audits.</p>
+<p>In conclusion, the OpenClaw Meta Ads Analyser is a valuable tool for anyone looking to gain deeper insights into their Meta ad campaigns. By following a structured analysis process, it generates comprehensive and professional strategy reports that can drive more effective advertising efforts.</p>
+</section>
+</article>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bluerockerr/meta-ads-analyser/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bluerockerr/meta-ads-analyser/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

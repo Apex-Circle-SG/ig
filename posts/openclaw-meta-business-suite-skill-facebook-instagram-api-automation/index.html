@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Meta Business Suite Skill: Facebook &amp;#038; Instagram API Automation | News of Tomorrow</title>
+<meta name="description" content="Learn how to automate Meta Business Suite tasks using OpenClaw&amp;#8217;s Meta skill. Publish to Facebook/Instagram, schedule posts, manage comments, and access in">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-meta-business-suite-skill-facebook-instagram-api-automation/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Meta Business Suite Skill: Facebook &amp;#038; Instagram API Automation">
+<meta property="og:description" content="Learn how to automate Meta Business Suite tasks using OpenClaw&amp;#8217;s Meta skill. Publish to Facebook/Instagram, schedule posts, manage comments, and access in">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-meta-business-suite-skill-facebook-instagram-api-automation/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-meta-business-suite-skill-facebook-instagram-api-automation/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-07">
+<meta property="article:modified_time" content="2026-03-07">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Meta Business Suite Skill: Facebook &amp;#038; Instagram API Automation">
+<meta name="twitter:description" content="Learn how to automate Meta Business Suite tasks using OpenClaw&amp;#8217;s Meta skill. Publish to Facebook/Instagram, schedule posts, manage comments, and access in">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-meta-business-suite-skill-facebook-instagram-api-automation/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Meta Business Suite Skill: Facebook &#038; Instagram API Automation", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "image": ["https://picsum.photos/seed/openclaw-meta-business-suite-skill-facebook-instagram-api-automation/1200/630"], "description": "Learn how to automate Meta Business Suite tasks using OpenClaw&#8217;s Meta skill. Publish to Facebook/Instagram, schedule posts, manage comments, and access in", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-meta-business-suite-skill-facebook-instagram-api-automation/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Meta Business Suite Skill: Facebook &#038; Instagram API Automation", "item": "https://github.insightginie.com/posts/openclaw-meta-business-suite-skill-facebook-instagram-api-automation/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Meta Business Suite Skill: Facebook &#038; Instagram API Automation</h1>
+<time datetime="2026-03-07" class="post-date" data-date="2026-03-07T05:17:05+00:00">2026-03-07</time>
+<img src="https://picsum.photos/seed/openclaw-meta-business-suite-skill-facebook-instagram-api-automation/800/400" class="post-hero" alt="OpenClaw Meta Business Suite Skill: Facebook &amp;#038; Instagram API Automation">
+<h2>Introduction to the Meta Business Suite Skill</h2>
+<p>The Meta Business Suite skill for OpenClaw provides comprehensive automation capabilities for Facebook Pages and Instagram Business accounts through Meta&#8217;s Graph API. This powerful skill enables users to manage their social media presence programmatically, handling everything from content publishing to analytics collection.</p>
+<h2>What This Skill Does</h2>
+<p>The Meta Business Suite skill is designed to handle seven core use cases:</p>
+<ol>
+<li>Publishing posts to Facebook Pages</li>
+<li>Scheduling Facebook posts for future publication</li>
+<li>Publishing to Instagram (photos, reels, carousels)</li>
+<li>Reading insights and analytics from Facebook or Instagram</li>
+<li>Managing comments on Facebook or Instagram</li>
+<li>Uploading photos or videos to Facebook Pages</li>
+<li>Deleting posts from Facebook or Instagram</li>
+</ol>
+<h2>Prerequisites and Configuration</h2>
+<p>Before using this skill, you need to set up proper authentication. The skill requires two critical environment variables:</p>
+<ul>
+<li><strong>META_PAGE_ACCESS_TOKEN</strong>: Your Facebook Page Access Token</li>
+<li><strong>META_PAGE_ID</strong>: Your Facebook Page ID</li>
+</ul>
+<p>Configuration Option A (Recommended): Environment Variables</p>
+<pre><code class="language-bash">export META_PAGE_ACCESS_TOKEN="your-page-access-token"
+export META_PAGE_ID="your-page-id"
+</code></pre>
+<p>Configuration Option B: Token Cache File</p>
+<p>If environment variables aren&#8217;t set, the skill can read credentials from <code>~/.meta_tokens_cache.json</code> with appropriate permissions.</p>
+<h2>API Version Compatibility</h2>
+<p>The skill is built for Graph API v25.0. Always include this version number in your API calls to ensure compatibility and access to the latest features.</p>
+<h2>Facebook Page Operations</h2>
+<h3>Publishing Text Posts</h3>
+<p>Publishing a simple text post to your Facebook Page:</p>
+<pre><code class="language-bash">curl -X POST "https://graph.facebook.com/v25.0/$PAGE_ID/feed" \
+  -d "message=Your message here" \
+  -d "access_token=$PAGE_TOKEN"
+</code></pre>
+<h3>Publishing Posts with Images</h3>
+<p>Using image URLs:</p>
+<pre><code class="language-bash">curl -X POST "https://graph.facebook.com/v25.0/$PAGE_ID/photos" \
+  -d "url=https://example.com/image.jpg" \
+  -d "message=Your post text" \
+  -d "access_token=$PAGE_TOKEN"
+</code></pre>
+<p>Using local files:</p>
+<pre><code class="language-bash">curl -X POST "https://graph.facebook.com/v25.0/$PAGE_ID/photos" \
+  -F "source=@/path/to/image.jpg" \
+  -F "message=Your post text" \
+  -F "access_token=$PAGE_TOKEN"
+</code></pre>
+<h3>Publishing Video Content</h3>
+<pre><code class="language-bash">curl -X POST "https://graph.facebook.com/v25.0/$PAGE_ID/videos" \
+  -F "source=@/path/to/video.mp4" \
+  -F "description=Video description" \
+  -F "title=Video title" \
+  -F "access_token=$PAGE_TOKEN"
+</code></pre>
+<h3>Scheduling Posts</h3>
+<p>Scheduling requires setting <code>published=false</code> and providing a Unix timestamp:</p>
+<pre><code class="language-bash"># Get Unix timestamp: python3 -c "from datetime import datetime; print(int(datetime(2026,3,1,9,0).timestamp()))"
+curl -X POST "https://graph.facebook.com/v25.0/$PAGE_ID/feed" \
+  -d "message=Scheduled post" \
+  -d "published=false" \
+  -d "scheduled_publish_time=UNIX_TIMESTAMP" \
+  -d "access_token=$PAGE_TOKEN"
+</code></pre>
+<p>Scheduled posts must be between 10 minutes and 75 days from the current time.</p>
+<h3>Reading Page Information</h3>
+<pre><code class="language-bash">curl -s "https://graph.facebook.com/v25.0/$PAGE_ID?fields=name,fan_count,followers_count,about&access_token=$PAGE_TOKEN"
+</code></pre>
+<h3>Managing Comments</h3>
+<pre><code class="language-bash">curl -X POST "https://graph.facebook.com/v25.0/POST_ID/comments" \
+  -d "message=Your comment" \
+  -d "access_token=$PAGE_TOKEN"
+</code></pre>
+<h2>Instagram Operations</h2>
+<p>Instagram uses a two-step process for publishing: creating a media container, then publishing it.</p>
+<h3>Publishing Photos</h3>
+<pre><code class="language-bash"># Step 1: Create container
+CONTAINER_ID=$(curl -s -X POST "https://graph.facebook.com/v25.0/$IG_ID/media" \
+  -d "image_url=https://example.com/image.jpg" \
+  -d "caption=Your caption with #hashtags" \
+  -d "access_token=$PAGE_TOKEN" |
+  python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+
+# Step 2: Publish
+curl -X POST "https://graph.facebook.com/v25.0/$IG_ID/media_publish" \
+  -d "creation_id=$CONTAINER_ID" \
+  -d "access_token=$PAGE_TOKEN"
+</code></pre>
+<h3>Publishing Reels</h3>
+<pre><code class="language-bash"># Step 1: Create container
+CONTAINER_ID=$(curl -s -X POST "https://graph.facebook.com/v25.0/$IG_ID/media" \
+  -d "media_type=REELS" \
+  -d "video_url=https://example.com/video.mp4" \
+  -d "caption=Reel caption #reels" \
+  -d "access_token=$PAGE_TOKEN" |
+  python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+
+# Step 2: Wait for processing
+curl -s "https://graph.facebook.com/v25.0/$CONTAINER_ID?fields=status_code&access_token=$PAGE_TOKEN"
+
+# Step 3: Publish
+curl -X POST "https://graph.facebook.com/v25.0/$IG_ID/media_publish" \
+  -d "creation_id=$CONTAINER_ID" \
+  -d "access_token=$PAGE_TOKEN"
+</code></pre>
+<h3>Publishing Carousels</h3>
+<pre><code class="language-bash"># Step 1: Create each item
+IMG1=$(curl -s -X POST "https://graph.facebook.com/v25.0/$IG_ID/media" \
+  -d "image_url=https://example.com/img1.jpg" \
+  -d "is_carousel_item=true" \
+  -d "access_token=$PAGE_TOKEN" |
+  python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+
+IMG2=$(curl -s -X POST "https://graph.facebook.com/v25.0/$IG_ID/media" \
+  -d "image_url=https://example.com/img2.jpg" \
+  -d "is_carousel_item=true" \
+  -d "access_token=$PAGE_TOKEN" |
+  python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+
+# Step 2: Create carousel container
+CAROUSEL=$(curl -s -X POST "https://graph.facebook.com/v25.0/$IG_ID/media" \
+  -d "media_type=CAROUSEL" \
+  -d "children=$IMG1,$IMG2" \
+  -d "caption=My carousel #carousel" \
+  -d "access_token=$PAGE_TOKEN" |
+  python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+
+# Step 3: Publish
+curl -X POST "https://graph.facebook.com/v25.0/$IG_ID/media_publish" \
+  -d "creation_id=$CAROUSEL" \
+  -d "access_token=$PAGE_TOKEN"
+</code></pre>
+<h2>Analytics and Insights</h2>
+<h3>Facebook Page Insights</h3>
+<pre><code class="language-bash">curl -s "https://graph.facebook.com/v25.0/$PAGE_ID/insights?metric=page_views_total,page_fan_adds,page_engaged_users&period=day&access_token=$PAGE_TOKEN"
+</code></pre>
+<h3>Instagram Media Insights</h3>
+<pre><code class="language-bash">curl -s "https://graph.facebook.com/v25.0/MEDIA_ID/insights?metric=impressions,reach,engagement&access_token=$PAGE_TOKEN"
+</code></pre>
+<h2>Managing Content</h2>
+<h3>Deleting Posts</h3>
+<pre><code class="language-bash">curl -X DELETE "https://graph.facebook.com/v25.0/POST_ID?access_token=$PAGE_TOKEN"
+</code></pre>
+<h2>Best Practices</h2>
+<ol>
+<li>Always use environment variables for tokens and IDs</li>
+<li>Handle API rate limits gracefully</li>
+<li>Test with small batches before scaling</li>
+<li>Monitor for permission changes or API updates</li>
+<li>Implement proper error handling and logging</li>
+</ol>
+<h2>Conclusion</h2>
+<p>The Meta Business Suite skill for OpenClaw provides a comprehensive solution for automating social media management across Facebook and Instagram. By leveraging Meta&#8217;s Graph API, users can streamline their content publishing workflows, gather valuable analytics, and maintain consistent engagement with their audience. Whether you&#8217;re a social media manager, content creator, or business owner, this skill can significantly reduce manual effort while improving your social media strategy execution.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/nachx639/meta-business-suite/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/nachx639/meta-business-suite/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding OpenClaw&amp;#8217;s Leak-Check Skill: A Guide to Scanning for Credential Leaks | News of Tomorrow</title>
+<meta name="description" content="Learn about OpenClaw&amp;#8217;s leak-check skill that scans session logs for leaked credentials, identifying which AI provider received the data.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-openclaws-leak-check-skill-a-guide-to-scanning-for-credential-leaks/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding OpenClaw&amp;#8217;s Leak-Check Skill: A Guide to Scanning for Credential Leaks">
+<meta property="og:description" content="Learn about OpenClaw&amp;#8217;s leak-check skill that scans session logs for leaked credentials, identifying which AI provider received the data.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-openclaws-leak-check-skill-a-guide-to-scanning-for-credential-leaks/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-openclaws-leak-check-skill-a-guide-to-scanning-for-credential-leaks/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-11">
+<meta property="article:modified_time" content="2026-03-11">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding OpenClaw&amp;#8217;s Leak-Check Skill: A Guide to Scanning for Credential Leaks">
+<meta name="twitter:description" content="Learn about OpenClaw&amp;#8217;s leak-check skill that scans session logs for leaked credentials, identifying which AI provider received the data.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-openclaws-leak-check-skill-a-guide-to-scanning-for-credential-leaks/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding OpenClaw&#8217;s Leak-Check Skill: A Guide to Scanning for Credential Leaks", "datePublished": "2026-03-11", "dateModified": "2026-03-11", "image": ["https://picsum.photos/seed/understanding-openclaws-leak-check-skill-a-guide-to-scanning-for-credential-leaks/1200/630"], "description": "Learn about OpenClaw&#8217;s leak-check skill that scans session logs for leaked credentials, identifying which AI provider received the data.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-openclaws-leak-check-skill-a-guide-to-scanning-for-credential-leaks/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding OpenClaw&#8217;s Leak-Check Skill: A Guide to Scanning for Credential Leaks", "item": "https://github.insightginie.com/posts/understanding-openclaws-leak-check-skill-a-guide-to-scanning-for-credential-leaks/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding OpenClaw&#8217;s Leak-Check Skill: A Guide to Scanning for Credential Leaks</h1>
+<time datetime="2026-03-11" class="post-date" data-date="2026-03-11T10:46:10+00:00">2026-03-11</time>
+<img src="https://picsum.photos/seed/understanding-openclaws-leak-check-skill-a-guide-to-scanning-for-credential-leaks/800/400" class="post-hero" alt="Understanding OpenClaw&amp;#8217;s Leak-Check Skill: A Guide to Scanning for Credential Leaks">
+<p><html><br />
+<head><br />
+    <title>Understanding OpenClaw&#8217;s Leak-Check Skill</title><br />
+</head><br />
+<body></p>
+<h1>Understanding OpenClaw&#8217;s Leak-Check Skill: A Guide to Scanning for Credential Leaks</h1>
+<p>In the world of AI and machine learning, security and privacy are paramount. OpenClaw&#8217;s leak-check skill is designed to help users scan their session logs for leaked credentials, providing an additional layer of security. This article will delve into what this skill does, how it works, and its key features.</p>
+<h2>What is OpenClaw&#8217;s Leak-Check Skill?</h2>
+<p>OpenClaw&#8217;s leak-check skill is a tool that scans OpenClaw session JSONL files for leaked credentials. It reports which real AI provider (such as Anthropic, OpenAI, Google, etc.) received the data, skipping internal delivery echoes. This skill is crucial for identifying potential security breaches and ensuring that sensitive credentials are not inadvertently leaked.</p>
+<h2>Quick Start</h2>
+<p>To get started with the leak-check skill, you can run the following commands:</p>
+<ul>
+<li><code>node scripts/leak-check.js</code> &#8211; Check for leaked credentials (default: discord format)</li>
+<li><code>node scripts/leak-check.js --format json</code> &#8211; JSON output</li>
+</ul>
+<h2>Configuration</h2>
+<p>Credentials to check are defined in <code>leak-check.json</code>. The script searches for this file in the following order:</p>
+<ul>
+<li>Skill directory (<code>./leak-check.json</code>) &#8211; for backward compatibility</li>
+<li><code>~/.openclaw/credentials/leak-check.json</code> &#8211; recommended persistent location (survives skill updates via clawhub)</li>
+</ul>
+<p>Since clawhub clears the skill directory on updates, it&#8217;s recommended to place your config in <code>~/.openclaw/credentials/</code> to avoid losing it:</p>
+<pre><code>mkdir -p ~/.openclaw/credentials
+cp leak-check.json ~/.openclaw/credentials/leak-check.json</code></pre>
+<p>You can also specify an explicit path with the <code>--config</code> option.</p>
+<h3>Example Configuration</h3>
+<p>The <code>leak-check.json</code> file should contain an array of objects, each representing a credential to check. Here&#8217;s an example configuration:</p>
+<pre><code>[
+    {
+        "name": "Discord",
+        "search": "abc*xyz"
+    },
+    {
+        "name": "Postmark",
+        "search": "k7Qm9x"
+    }
+]</code></pre>
+<h4>Important Notes:</h4>
+<ul>
+<li><strong>Do not store full credentials in this file.</strong> Use only a partial fragment—enough to uniquely identify the credential via a contains, begins-with, or ends-with match.</li>
+<li><strong>Wildcard patterns:</strong></li>
+<ul>
+<li><code>abc*</code> &#8211; starts with &#8220;abc&#8221;</li>
+<li><code>*xyz</code> &#8211; ends with &#8220;xyz&#8221;</li>
+<li><code>abc*xyz</code> &#8211; starts with &#8220;abc&#8221; AND ends with &#8220;xyz&#8221;</li>
+<li><code>abc</code> (no asterisk) &#8211; contains &#8220;abc&#8221;</li>
+<li><code>""</code> (empty) &#8211; skip this credential</li>
+</ul>
+</ul>
+<h2>Options</h2>
+<p>The leak-check skill provides several options that can be used to customize its behavior:</p>
+<ul>
+<li><code>--format &lt;type&gt;</code> &#8211; Output format: <code>discord</code> (default) or <code>json</code></li>
+<li><code>--config &lt;path&gt;</code> &#8211; Path to credential config file (default: <code>./leak-check.json</code>, then <code>~/.openclaw/credentials/leak-check.json</code>)</li>
+<li><code>--help, -h</code> &#8211; Show help message</li>
+</ul>
+<h2>Output</h2>
+<p>The leak-check skill provides output in two formats: Discord and JSON.</p>
+<h3>Discord (Default)</h3>
+<p>The default output format is designed to be easily readable and visually appealing. Here&#8217;s an example of the Discord output:</p>
+<pre><code>🔐 **Credential Leak Check**
+⚠️ **2 leaked credentials found**
+**Discord Token**
+• Session: `abc12345` | 2026-02-14 18:30 UTC | Provider: anthropic
+**Postmark**
+• Session: `def67890` | 2026-02-10 09:15 UTC | Provider: anthropic</code></pre>
+<p>Or if clean:</p>
+<pre><code>🔐 **Credential Leak Check**
+✅ No leaked credentials found (checked 370 files, 7 credentials)</code></pre>
+<h3>Config Echoes</h3>
+<p>If the <code>leak-check.json</code> config file is read or discussed during an OpenClaw session, the credential patterns will appear in that session&#8217;s JSONL log. The scanner detects this and reports these matches separately as <strong>config echoes</strong> rather than real leaks:</p>
+<pre><code>📋 **3 possible config echoes** (session contains leak-check config)
+• **Discord**: 1 session
+...
+✅ No credential leaks beyond config echoes</code></pre>
+<p>Config echoes will continue to appear on every run until the session file is removed. To clear them, delete the session file from <code>~/.openclaw/agents/main/sessions/</code>:</p>
+<pre><code>rm ~/.openclaw/agents/main/sessions/<session-uuid>.jsonl</code></pre>
+<h4>Tip:</h4>
+<p>Avoid reading or referencing <code>leak-check.json</code> during an OpenClaw session. If it happens, note the session ID from the report and delete it.</p>
+<h3>JSON</h3>
+<p>The JSON output format provides a structured and machine-readable representation of the leak-check results. Here&#8217;s an example of the JSON output:</p>
+<pre><code>{
+    "leaks": [
+        {
+            "credential": "Discord Token",
+            "session": "abc12345",
+            "timestamp": "2026-02-14T18:30:00.000Z",
+            "provider": "anthropic"
+        }
+    ],
+    "configEchoes": [
+        {
+            "credential": "Gateway",
+            "session": "b175e53c",
+            "timestamp": "2026-02-19T18:00:30.067Z",
+            "provider": "minimax-portal",
+            "configEcho": true
+        }
+    ],
+    "summary": {
+        "filesScanned": 370,
+        "credentialsChecked": 7,
+        "leaksFound": 2,
+        "configEchoesFound": 1
+    }
+}</code></pre>
+<h2>Security</h2>
+<p>The leak-check skill is designed to be local-only and read-only. The following properties can be verified by inspecting <code>scripts/leak-check.js</code>:</p>
+<ul>
+<li><strong>No network access</strong> &#8211; no use of <code>http</code>, <code>https</code>, <code>net</code>, <code>dgram</code>, <code>fetch</code>, <code>WebSocket</code>, or any network API</li>
+<li><strong>No child processes</strong> &#8211; no use of <code>child_process</code>, <code>exec</code>, <code>spawn</code>, or <code>execSync</code></li>
+<li><strong>No external dependencies</strong> &#8211; zero <code>npm</code> packages; only Node.js built-ins (<code>fs</code>, <code>path</code>, <code>os</code>)</li>
+<li><strong>No dynamic code execution</strong> &#8211; no <code>eval()</code>, <code>Function()</code>, or dynamic <code>require()</code> / <code>import()</code></li>
+<li><strong>No file writes</strong> &#8211; only <code>fs.readFileSync</code>, <code>fs.existsSync</code>, and <code>fs.readdirSync</code> are used; no files are created, modified, or deleted</li>
+<li><strong>No environment variable access</strong> &#8211; does not read <code>process.env</code></li>
+<li><strong>Output is stdout only</strong> &#8211; all results go to <code>console.log</code>; nothing is sent elsewhere</li>
+</ul>
+<h3>Verify It Yourself</h3>
+<p>You can confirm that no unexpected APIs are used anywhere in the script by running the following command:</p>
+<pre><code>grep -E 'require(|import |http|fetch|net.|dgram|child_process|exec|spawn|eval(|Function(|.write|.unlink|.rename|process.env' scripts/leak-check.js</code></pre>
+<p>This command will search for any usage of the specified APIs in the <code>scripts/leak-check.js</code> file. The expected output should only include the three built-in <code>require()</code> calls at the top of the file:</p>
+<pre><code>const fs = require('fs');
+const path = require('path');
+const os = require('os');</code></pre>
+<h2>Conclusion</h2>
+<p>OpenClaw&#8217;s leak-check skill is a powerful tool for scanning session logs and identifying potential credential leaks. By understanding how this skill works and utilizing its key features, you can enhance the security of your OpenClaw sessions and mitigate the risks associated with credential leaks.</p>
+<p>For more information, visit the <a href=
+
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/khaney64/leak-check/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/khaney64/leak-check/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

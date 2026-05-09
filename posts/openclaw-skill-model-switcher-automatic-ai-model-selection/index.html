@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill: Model Switcher &amp;#8211; Automatic AI Model Selection | News of Tomorrow</title>
+<meta name="description" content="Learn how the Model Switcher skill automatically chooses between fast and powerful AI models based on task complexity, improving efficiency for developers using">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-model-switcher-automatic-ai-model-selection/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill: Model Switcher &amp;#8211; Automatic AI Model Selection">
+<meta property="og:description" content="Learn how the Model Switcher skill automatically chooses between fast and powerful AI models based on task complexity, improving efficiency for developers using">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-model-switcher-automatic-ai-model-selection/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-model-switcher-automatic-ai-model-selection/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-06">
+<meta property="article:modified_time" content="2026-03-06">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill: Model Switcher &amp;#8211; Automatic AI Model Selection">
+<meta name="twitter:description" content="Learn how the Model Switcher skill automatically chooses between fast and powerful AI models based on task complexity, improving efficiency for developers using">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-model-switcher-automatic-ai-model-selection/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill: Model Switcher &#8211; Automatic AI Model Selection", "datePublished": "2026-03-06", "dateModified": "2026-03-06", "image": ["https://picsum.photos/seed/openclaw-skill-model-switcher-automatic-ai-model-selection/1200/630"], "description": "Learn how the Model Switcher skill automatically chooses between fast and powerful AI models based on task complexity, improving efficiency for developers using", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-model-switcher-automatic-ai-model-selection/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill: Model Switcher &#8211; Automatic AI Model Selection", "item": "https://github.insightginie.com/posts/openclaw-skill-model-switcher-automatic-ai-model-selection/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill: Model Switcher &#8211; Automatic AI Model Selection</h1>
+<time datetime="2026-03-06" class="post-date" data-date="2026-03-06T16:18:43+00:00">2026-03-06</time>
+<img src="https://picsum.photos/seed/openclaw-skill-model-switcher-automatic-ai-model-selection/800/400" class="post-hero" alt="OpenClaw Skill: Model Switcher &amp;#8211; Automatic AI Model Selection">
+<h2>What is the Model Switcher Skill?</h2>
+<p>The Model Switcher is an intelligent automation skill within the OpenClaw framework that automatically selects between fast and powerful AI models based on the complexity of tasks being performed. This skill helps optimize both performance and cost by using the appropriate model for each specific task.</p>
+<h2>How It Works</h2>
+<p>The skill operates by analyzing user messages and detecting keywords that indicate task complexity. When it identifies complex tasks such as analysis, refactoring, or architecture design, it switches to a more powerful model. For simpler tasks, it uses a faster, more efficient model.</p>
+<h3>Model Configuration</h3>
+<p>The skill uses two main models:</p>
+<ul>
+<li><strong>Fast Model (Haiku):</strong> Designed for quick, simple tasks with minimal computational requirements</li>
+<li><strong>Powerful Model (Sonnet):</strong> Optimized for complex analysis, deep thinking, and comprehensive problem-solving</li>
+</ul>
+<h3>Trigger Keywords</h3>
+<p>The skill monitors for specific Chinese keywords that indicate task complexity:</p>
+<ul>
+<li>Switch to Sonnet when detecting: 分析、深入分析、详细分析、重构、代码重构、架构、系统架构、设计架构、设计、系统设计、优化、性能优化、复杂、复杂问题、调试、深度调试、评估、技术评估</li>
+</ul>
+<h2>Implementation Details</h2>
+<p>The skill uses the session_status tool to manage model switching:</p>
+<pre><code>// Switch to sonnet for complex tasks
+model_status({
+    model: "kiro-cli"
+})
+
+// Switch back to haiku for simple tasks
+model_status({
+    model: "haiku"
+})
+
+// Reset to default
+model_status({
+    model: "default"
+})
+</code></pre>
+<h3>Workflow Process</h3>
+<p>The skill follows a systematic workflow:</p>
+<ol>
+<li>Checks the current model using session_status</li>
+<li>Analyzes user messages for complexity indicators</li>
+<li>Switches models when necessary based on detected complexity</li>
+<li>Informs users about model switches</li>
+</ol>
+<h2>Benefits of Using Model Switcher</h2>
+<h3>Performance Optimization</h3>
+<p>By using the appropriate model for each task, the skill ensures optimal performance. Simple tasks complete quickly using the fast model, while complex tasks receive the computational power they need.</p>
+<h3>Cost Efficiency</h3>
+<p>More powerful models typically cost more to run. By reserving these models for complex tasks only, the skill helps reduce overall operational costs.</p>
+<h3>Improved User Experience</h3>
+<p>Users don&#8217;t need to manually select models or worry about which model is best for their current task. The skill handles this automatically, providing a seamless experience.</p>
+<h2>Best Practices</h2>
+<p>The Model Switcher skill follows several intelligent practices:</p>
+<ul>
+<li><strong>Smart Switching:</strong> Avoids unnecessary model switches for every message</li>
+<li><strong>Context Awareness:</strong> Considers the overall conversation context before switching</li>
+<li><strong>Batching:</strong> Groups related complex tasks before switching back to the fast model</li>
+<li><strong>Minimal Disruption:</strong> Only informs users when actual switches occur</li>
+</ul>
+<h2>Real-World Applications</h2>
+<p>This skill is particularly useful in development environments where tasks vary significantly in complexity. For example:</p>
+<ul>
+<li>Code review and analysis of complex systems</li>
+<li>Architecture design discussions</li>
+<li>Performance optimization tasks</li>
+<li>Debugging complex issues</li>
+<li>Technical evaluation and planning</li>
+</ul>
+<h2>Integration with OpenClaw</h2>
+<p>The Model Switcher is part of the larger OpenClaw ecosystem, which provides a modular approach to building AI-powered development tools. This skill can be easily integrated with other OpenClaw skills to create comprehensive development workflows.</p>
+<h2>Future Enhancements</h2>
+<p>Potential future improvements could include:</p>
+<ul>
+<li>Support for additional languages beyond Chinese</li>
+<li>More sophisticated complexity detection algorithms</li>
+<li>User-customizable model configurations</li>
+<li>Learning capabilities to adapt to individual user patterns</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The Model Switcher skill represents an intelligent approach to AI model management, automatically optimizing the balance between performance and efficiency. By intelligently selecting the appropriate model based on task complexity, it helps developers work more effectively while managing costs and resources efficiently.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/puaservice/model-switcher/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/puaservice/model-switcher/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

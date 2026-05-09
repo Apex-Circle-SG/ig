@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the AI Usage Skill in OpenClaw: A Comprehensive Guide | News of Tomorrow</title>
+<meta name="description" content="The AI Usage skill in OpenClaw helps users monitor and track their AI token consumption across multiple providers, providing detailed insights into usage patter">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-ai-usage-skill-in-openclaw-a-comprehensive-guide/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the AI Usage Skill in OpenClaw: A Comprehensive Guide">
+<meta property="og:description" content="The AI Usage skill in OpenClaw helps users monitor and track their AI token consumption across multiple providers, providing detailed insights into usage patter">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-ai-usage-skill-in-openclaw-a-comprehensive-guide/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-ai-usage-skill-in-openclaw-a-comprehensive-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-10">
+<meta property="article:modified_time" content="2026-03-10">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the AI Usage Skill in OpenClaw: A Comprehensive Guide">
+<meta name="twitter:description" content="The AI Usage skill in OpenClaw helps users monitor and track their AI token consumption across multiple providers, providing detailed insights into usage patter">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-ai-usage-skill-in-openclaw-a-comprehensive-guide/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the AI Usage Skill in OpenClaw: A Comprehensive Guide", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "image": ["https://picsum.photos/seed/understanding-the-ai-usage-skill-in-openclaw-a-comprehensive-guide/1200/630"], "description": "The AI Usage skill in OpenClaw helps users monitor and track their AI token consumption across multiple providers, providing detailed insights into usage patter", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-ai-usage-skill-in-openclaw-a-comprehensive-guide/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the AI Usage Skill in OpenClaw: A Comprehensive Guide", "item": "https://github.insightginie.com/posts/understanding-the-ai-usage-skill-in-openclaw-a-comprehensive-guide/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the AI Usage Skill in OpenClaw: A Comprehensive Guide</h1>
+<time datetime="2026-03-10" class="post-date" data-date="2026-03-10T19:15:57+00:00">2026-03-10</time>
+<img src="https://picsum.photos/seed/understanding-the-ai-usage-skill-in-openclaw-a-comprehensive-guide/800/400" class="post-hero" alt="Understanding the AI Usage Skill in OpenClaw: A Comprehensive Guide">
+<h2>What This AI Usage Skill Does</h2>
+<p>The AI Usage skill is a monitoring and reporting tool that provides comprehensive insights into AI token consumption across multiple providers. It serves as a central dashboard for understanding how AI resources are being utilized, tracking costs, and ensuring you stay within usage limits.</p>
+<h3>Core Functionality</h3>
+<p>This skill primarily checks AI usage across Anthropic and other providers. It activates when users ask about their AI usage, token consumption, quota limits, or costs. The skill monitors usage during heartbeats and daily checks to provide real-time insights.</p>
+<h3>Quick Start Options</h3>
+<p>The skill offers two main execution modes:</p>
+<ul>
+<li>Basic mode: <code>python3 scripts/usage_check.py</code> for a pretty report with visual gauges</li>
+<li>JSON mode: <code>python3 scripts/usage_check.py --json</code> for structured data output suitable for scripting</li>
+</li>
+<h3>What It Shows You</h3>
+<p>The skill provides detailed breakdowns including:</p>
+<ul>
+<li>Anthropic (real quota from OAuth API): Weekly utilization percentages with reset countdowns, 5-hour rolling window usage, and model-specific weekly usage for Sonnet and Opus</li>
+<li>Extra usage spend versus monthly limits</li>
+<li>Other providers: Token counts and call counts per model detected through OpenClaw session logs</li>
+<li>OpenClaw Anthropic breakdown: Per-model token counts and equivalent API costs</li>
+</ul>
+<h3>How It Works Technically</h3>
+<p>The skill uses several technical approaches to gather data:</p>
+<ul>
+<li>Anthropic quota: Fetches data from <code>https://api.anthropic.com/api/oauth/usage</code> using Claude Code&#8217;s OAuth token</li>
+<li>Token auto-refresh: Automatically refreshes expired tokens by invoking Claude Code commands</li>
+<li>Session stats: Parses OpenClaw session logs from <code>~/.openclaw/agents/main/sessions/*.jsonl</code> for provider-specific data</li>
+</ul>
+<h3>Requirements and Setup</h3>
+<p>The skill requires:</p>
+<ul>
+<li>Python 3.10+</li>
+<li>Claude Code installed and authenticated (claude CLI in PATH)</li>
+<li>OpenClaw installed for session log access</li>
+</ul>
+<h3>Configuration Options</h3>
+<p>Environment variables allow customization:</p>
+<ul>
+<li><code>OPENCLAW_SESSIONS_DIR</code>: OpenClaw session log directory (default: ~/.openclaw/agents/main/sessions)</li>
+<li><code>CLAUDE_CREDENTIALS_PATH</code>: Claude Code credentials file location (default: ~/.claude/.credentials.json)</li>
+</ul>
+<h3>Best Practices</h3>
+<p>For optimal usage:</p>
+<ul>
+<li>Run via Haiku or lightweight models for heartbeat/background checks</li>
+<li>Use &#8211;json output for programmatic consumption in cron jobs or dashboards</li>
+<li>The skill works with any Anthropic subscription tier (Pro, Max, Team, etc.)</li>
+</ul>
+<h3>Why This Skill Matters</h3>
+<p>This skill is essential for AI workflow management because it provides transparency into resource consumption, helps prevent unexpected costs, and enables data-driven decisions about AI model selection and usage patterns. By monitoring usage across providers, users can optimize their AI spending and ensure they stay within allocated quotas.</p>
+<h3>Practical Applications</h3>
+<p>Common use cases include:</p>
+<ul>
+<li>Daily usage reports for team billing</li>
+<li>Cost optimization analysis</li>
+<li>Quota limit warnings</li>
+<li>Performance monitoring across different AI providers</li>
+</ul>
+<h3>Integration Capabilities</h3>
+<p>The skill integrates seamlessly with existing OpenClaw workflows and can be incorporated into automated monitoring systems, providing a foundation for comprehensive AI resource management across development teams and organizations.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bshandley/ai-usage/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bshandley/ai-usage/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

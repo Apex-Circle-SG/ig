@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding OpenClaw&amp;#8217;s ngrok-preview Skill for Temporary Task Previews | News of Tomorrow</title>
+<meta name="description" content="Learn about OpenClaw&amp;#8217;s ngrok-preview skill that creates short-lived, mobile-friendly preview links for local artifacts and shares them via Telegram.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-openclaws-ngrok-preview-skill-for-temporary-task-previews/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding OpenClaw&amp;#8217;s ngrok-preview Skill for Temporary Task Previews">
+<meta property="og:description" content="Learn about OpenClaw&amp;#8217;s ngrok-preview skill that creates short-lived, mobile-friendly preview links for local artifacts and shares them via Telegram.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-openclaws-ngrok-preview-skill-for-temporary-task-previews/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-openclaws-ngrok-preview-skill-for-temporary-task-previews/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-06">
+<meta property="article:modified_time" content="2026-03-06">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding OpenClaw&amp;#8217;s ngrok-preview Skill for Temporary Task Previews">
+<meta name="twitter:description" content="Learn about OpenClaw&amp;#8217;s ngrok-preview skill that creates short-lived, mobile-friendly preview links for local artifacts and shares them via Telegram.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-openclaws-ngrok-preview-skill-for-temporary-task-previews/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding OpenClaw&#8217;s ngrok-preview Skill for Temporary Task Previews", "datePublished": "2026-03-06", "dateModified": "2026-03-06", "image": ["https://picsum.photos/seed/understanding-openclaws-ngrok-preview-skill-for-temporary-task-previews/1200/630"], "description": "Learn about OpenClaw&#8217;s ngrok-preview skill that creates short-lived, mobile-friendly preview links for local artifacts and shares them via Telegram.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-openclaws-ngrok-preview-skill-for-temporary-task-previews/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding OpenClaw&#8217;s ngrok-preview Skill for Temporary Task Previews", "item": "https://github.insightginie.com/posts/understanding-openclaws-ngrok-preview-skill-for-temporary-task-previews/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding OpenClaw&#8217;s ngrok-preview Skill for Temporary Task Previews</h1>
+<time datetime="2026-03-06" class="post-date" data-date="2026-03-06T20:45:50+00:00">2026-03-06</time>
+<img src="https://picsum.photos/seed/understanding-openclaws-ngrok-preview-skill-for-temporary-task-previews/800/400" class="post-hero" alt="Understanding OpenClaw&amp;#8217;s ngrok-preview Skill for Temporary Task Previews">
+<h1>Understanding OpenClaw&#8217;s ngrok-preview Skill for Temporary Task Previews</h1>
+<p>In the ever-evolving landscape of digital task management, OpenClaw&#8217;s ngrok-preview skill stands out as a powerful tool for creating temporary, mobile-friendly preview links for local artifacts. This skill is particularly useful when OpenClaw produces images, charts, or generated files that users need to view remotely on their phones, making it an excellent alternative to manual file transfers.</p>
+<h2>What is the ngrok-preview Skill?</h2>
+<p>The ngrok-preview skill is designed to provide a temporary preview window for task outputs. It focuses on speed, scope, and ease of use: generate a link, send it, and then close it. This ensures that users can quickly access the necessary files without the need for permanent hosting or extensive setup.</p>
+<h2>One-time Setup</h2>
+<p>Before you can use the ngrok-preview skill, there are a few setup steps you need to follow:</p>
+<ol>
+<li><strong>Install ngrok:</strong> If ngrok is not already installed on your system, you&#8217;ll need to install it. ngrok is a tool that creates secure tunnels from public endpoints to localhost. It&#8217;s essential for creating the temporary preview links.</li>
+<li><strong>Configure auth token:</strong> You&#8217;ll need to configure an auth token once. This can be done using the following command:</li>
+<pre>
+    ngrok config add-authtoken "${NGROK_AUTHTOKEN}"
+  </pre>
+<li><strong>Check configuration:</strong> Finally, check that the configuration is correct with the command:</li>
+<pre>
+    ngrok config check
+  </pre>
+</ol>
+<p>If the token is not preconfigured, you can pass it when running the script using the <code>--auth-token</code> flag.</p>
+<h2>Per-task Workflow</h2>
+<p>The ngrok-preview skill is designed to be used on a per-task basis. Here&#8217;s how the workflow typically looks:</p>
+<p><strong>1. Collect task artifacts:</strong> Gather the images, charts, or files that are relevant to the current task.</p>
+<p><strong>2. Create a session-scoped temporary preview link:</strong> Use the <code>ngrok_preview.py up</code> command to generate a temporary link that can be used to view the artifacts. This link is valid for a limited time, ensuring that it&#8217;s only used for the current task.</p>
+<p><strong>3. Send the link:</strong> Once the link is generated, send it to the relevant users via Telegram, including the expiry time.</p>
+<p><strong>4. Stop and delete the preview session:</strong> After the user has confirmed that they&#8217;ve viewed the link, or when the task ends, stop and delete the preview session to free up resources.</p>
+<p>The command to create a preview link is typically run from the skill directory and looks like this:</p>
+<p><code><br />
+  python3 scripts/ngrok_preview.py up \<br />
+  --title "&lt;task title&gt;" \<br />
+  --session-id "&lt;task-id&gt;" \<br />
+  --ttl-minutes 120 \<br />
+  --source "&lt;artifact-path-1&gt;" \<br />
+  --source "&lt;artifact-path-2&gt;"<br />
+</code></p>
+<p>The command returns a JSON output including the <code>public_url</code>, <code>expires_at</code>, <code>session_id</code>, and <code>stop_command</code>.</p>
+<h2>Session ID Convention</h2>
+<p>The ngrok-preview skill uses session IDs to map to the current conversation or task. The recommended convention is to use IDs that tie to the current context, such as:</p>
+<p><code><br />
+  tg-&lt;date&gt;-&lt;topic&gt;</code></p>
+<p>or</p>
+<p><code><br />
+task-&lt;short-request-id&gt;<br />
+</code></p>
+<p>This ensures that each link is tied to one task context, making it easier to manage and track.</p>
+<h2>Telegram Send Pattern</h2>
+<p>After generating a preview link, the skill sends a concise message via Telegram with the following format:</p>
+<pre>
+  🔗 Temporary preview link (valid for &lt;X&gt; minutes)
+  &lt;public_url&gt;
+</pre>
+<p>The message includes the temporary preview link, its validity period, and a reminder that the link will be cleaned up after expiry. This ensures that users are aware of the temporary nature of the link and can plan accordingly.</p>
+<h2>Safety Boundaries</h2>
+<p>The ngrok-preview skill is designed with safety in mind. It includes several boundaries to ensure that task-specific outputs are protected and not exposed inadvertently:</p>
+<ul>
+<li><strong>Publish only task-specific outputs:</strong> The skill never exposes broad directories, such as the workspace root. This ensures that sensitive data is not accidentally shared.</li>
+<li><strong>Keep TTL short:</strong> The default validity period for preview links is 120 minutes. This can be shortened when possible to further minimize exposure.</li>
+<li><strong>Treat link as temporary access:</strong> The preview link is not intended for persistent hosting. It&#8217;s designed to provide temporary access to task-specific outputs and should be treated as such.</li>
+</ul>
+<h2>Stopping and Cleaning Up Sessions</h2>
+<p>When a preview link is no longer needed, it&#8217;s important to stop the session to free up resources. This can be done using the <code>ngrok_preview.py down</code> command:</p>
+<p><code><br />
+  python3 scripts/ngrok_preview.py down --session-id "&lt;task-id&gt;" --delete-session-dir<br />
+</code></p>
+<p>To periodically clear expired sessions, use the <code>cleanup</code> command:</p>
+<p><code><br />
+  python3 scripts/ngrok_preview.py cleanup<br />
+</code></p>
+<h2>Command Quick Reference</h2>
+<p>Here&#8217;s a quick reference for some of the most commonly used commands:</p>
+<pre>
+  # List sessions
+  python3 scripts/ngrok_preview.py status
+
+  # Create preview (auto-generate session id)
+  python3 scripts/ngrok_preview.py up \
+    --title "image results" \
+    --source ./outputs/result-1.png \
+    --source ./outputs/result-2.png
+
+  # Stop latest session
+  python3 scripts/ngrok_preview.py down
+</pre>
+<h2>Troubleshooting</h2>
+<p>If link creation fails, refer to the <code>references/troubleshooting.md</code> file for a minimum recovery sequence. This guide provides step-by-step instructions for resolving common issues that may arise when using the ngrok-preview skill.</p>
+<h2>Conclusion</h2>
+<p>The ngrok-preview skill is a valuable tool for anyone looking to streamline their task management workflow. By providing temporary, mobile-friendly preview links for local artifacts, it eliminates the need for manual file transfers and ensures that users can quickly and securely access the files they need. With its focus on speed, scope, and ease of use, the ngrok-preview skill is an excellent addition to any task management toolkit.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/wynnsu/ngrok-preview/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/wynnsu/ngrok-preview/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

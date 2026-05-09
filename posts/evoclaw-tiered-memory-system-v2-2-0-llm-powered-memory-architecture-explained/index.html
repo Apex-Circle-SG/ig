@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EvoClaw Tiered Memory System v2.2.0: LLM-Powered Memory Architecture Explained | News of Tomorrow</title>
+<meta name="description" content="Discover the advanced three-tier memory system for EvoClaw agents, featuring automatic daily note ingestion, structured metadata extraction, and cloud-first syn">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/evoclaw-tiered-memory-system-v2-2-0-llm-powered-memory-architecture-explained/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="EvoClaw Tiered Memory System v2.2.0: LLM-Powered Memory Architecture Explained">
+<meta property="og:description" content="Discover the advanced three-tier memory system for EvoClaw agents, featuring automatic daily note ingestion, structured metadata extraction, and cloud-first syn">
+<meta property="og:image" content="https://picsum.photos/seed/evoclaw-tiered-memory-system-v2-2-0-llm-powered-memory-architecture-explained/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/evoclaw-tiered-memory-system-v2-2-0-llm-powered-memory-architecture-explained/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-10">
+<meta property="article:modified_time" content="2026-03-10">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EvoClaw Tiered Memory System v2.2.0: LLM-Powered Memory Architecture Explained">
+<meta name="twitter:description" content="Discover the advanced three-tier memory system for EvoClaw agents, featuring automatic daily note ingestion, structured metadata extraction, and cloud-first syn">
+<meta name="twitter:image" content="https://picsum.photos/seed/evoclaw-tiered-memory-system-v2-2-0-llm-powered-memory-architecture-explained/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "EvoClaw Tiered Memory System v2.2.0: LLM-Powered Memory Architecture Explained", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "image": ["https://picsum.photos/seed/evoclaw-tiered-memory-system-v2-2-0-llm-powered-memory-architecture-explained/1200/630"], "description": "Discover the advanced three-tier memory system for EvoClaw agents, featuring automatic daily note ingestion, structured metadata extraction, and cloud-first syn", "mainEntityOfPage": "https://github.insightginie.com/posts/evoclaw-tiered-memory-system-v2-2-0-llm-powered-memory-architecture-explained/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "EvoClaw Tiered Memory System v2.2.0: LLM-Powered Memory Architecture Explained", "item": "https://github.insightginie.com/posts/evoclaw-tiered-memory-system-v2-2-0-llm-powered-memory-architecture-explained/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>EvoClaw Tiered Memory System v2.2.0: LLM-Powered Memory Architecture Explained</h1>
+<time datetime="2026-03-10" class="post-date" data-date="2026-03-10T12:45:52+00:00">2026-03-10</time>
+<img src="https://picsum.photos/seed/evoclaw-tiered-memory-system-v2-2-0-llm-powered-memory-architecture-explained/800/400" class="post-hero" alt="EvoClaw Tiered Memory System v2.2.0: LLM-Powered Memory Architecture Explained">
+<article>
+<header>
+<h1>EvoClaw Tiered Memory System v2.2.0: LLM-Powered Memory Architecture Explained</h1>
+<p class="meta">Published on June 10, 2024 by WordPress Admin</p>
+</header>
+<section>
+<p>Welcome to the comprehensive guide on the EvoClaw Tiered Memory Architecture v2.2.0! This post will walk you through the intricacies of this LLM-powered three-tier memory system, designed to enhance the cognitive capabilities of EvoClaw agents. With significant updates including automatic daily note ingestion, structured metadata extraction, URL preservation, validation, and cloud-first sync, this memory architecture is poised to redefine how AI agents manage and retrieve information.</p>
+</section>
+<section>
+<h2>Understanding the Architecture</h2>
+<p>The EvoClaw memory system is meticulously structured into three distinct tiers: Hot, Warm, and Cold memory. Each tier serves a unique purpose, mimicking the way human memory operates with different levels of importance and accessibility. Below, we delve into each tier and explore their functionalities, design principles, and recent updates.</p>
+</section>
+<section>
+<h3>Hot Memory (5KB max)</h3>
+<p>The Hot Memory tier is the core of the EvoClaw agent&#8217;s context, holding essential information that is always available in the agent&#8217;s context window. This tier includes:</p>
+<ul>
+<li><strong>Identity:</strong> Basic information about the agent, such as its name and owner.</li>
+<li><strong>Owner Profile:</strong> Details about the user, including their preferences, family, and work hours.</li>
+<li><strong>Active Context:</strong> Information about ongoing projects, events, and tasks.</li>
+<li><strong>Critical Lessons:</strong> Important lessons learned, categorized and prioritized.</li>
+</ul>
+<p>This tier is auto-pruned to ensure it stays within the 5KB limit, progressively removing less important information if the limit is exceeded.</p>
+</section>
+<section>
+<h3>Warm Memory (50KB max, 30-day retention)</h3>
+<p>The Warm Memory tier holds recent distilled facts with a scoring mechanism that determines their relevance and importance. Each entry in this tier includes:</p>
+<ul>
+<li><strong>Text:</strong> The fact or information stored.</li>
+<li><strong>Category:</strong> The category under which the fact is stored.</li>
+<li><strong>Importance:</strong> A score indicating the importance of the fact.</li>
+<li><strong>Created At:</strong> The timestamp when the fact was created.</li>
+<li><strong>Access Count:</strong> The number of times the fact has been accessed.</li>
+<li><strong>Score:</strong> A calculated score based on importance, recency, and access count.</li>
+<li><strong>Tier:</strong> The classification of the fact&#8217;s tier (Hot, Warm, Cold).</li>
+</ul>
+<p>The scoring mechanism ensures that the most relevant and frequently accessed facts are retained, while less important ones are gradually moved to the Cold Memory tier or deleted.</p>
+</section>
+<section>
+<h3>Cold Memory (Unlimited, Turso)</h3>
+<p>The Cold Memory tier serves as a long-term archive, storing information that is queryable but not bulk-loaded. This tier uses a database schema to manage the vast amount of information, including:</p>
+<ul>
+<li><strong>ID:</strong> A unique identifier for each memory entry.</li>
+<li><strong>Agent ID:</strong> The identifier for the agent associated with the memory.</li>
+<li><strong>Text:</strong> The stored fact or information.</li>
+<li><strong>Category:</strong> The category under which the fact is stored.</li>
+<li><strong>Importance:</strong> The importance score of the fact.</li>
+<li><strong>Created At:</strong> The timestamp when the fact was created.</li>
+<li><strong>Access Count:</strong> The number of times the fact has been accessed.</li>
+</ul>
+<p>This tier ensures that information is retained for up to 10 years (configurable) and provides monthly consolidation to remove frozen entries older than the retention period.</p>
+</section>
+<section>
+<h2>Design Principles</h2>
+<p>The EvoClaw memory system is built on several key design principles:</p>
+<ul>
+<li><strong>From Human Memory:</strong> Consolidation, Relevance Decay, Strategic Forgetting, Hierarchical Organization.</li>
+<li><strong>From PageIndex:</strong> Vectorless Retrieval, Tree-Structured Index, Explainable Results, Reasoning-Based Search.</li>
+<li><strong>Cloud-First (EvoClaw):</strong> Device is replaceable, Critical sync, Disaster recovery, Multi-device.</li>
+</ul>
+</section>
+<section>
+<h2>What&#8217;s New in v2.2.0</h2>
+<p>The latest update to the EvoClaw Tiered Memory System introduces several innovative features:</p>
+<ul>
+<li><strong>Automatic Daily Note Ingestion:</strong> Consolidation (daily/monthly/full modes) now auto-runs ingest-daily, bridging memory/YYYY-MM-DD.md files to the tiered memory system. No more manual ingestion required—facts flow automatically.</li>
+<li><strong>Structured Metadata Extraction:</strong> Automatic extraction of URLs, shell commands, and file paths from facts. Preserved during distillation and consolidation, searchable by URL fragment.</li>
+<li><strong>Memory Completeness Validation:</strong> Check daily notes for missing URLs, commands, and next steps. Proactive warnings for incomplete information and actionable suggestions for improvement.</li>
+<li><strong>Enhanced Search:</strong> Search facts by URL fragment. Get all stored URLs from warm memory. Metadata-aware fact storage.</li>
+<li><strong>URL Preservation:</strong> URLs explicitly preserved during LLM distillation. Fallback metadata extraction if LLM misses them. Command-line support for adding metadata manually.</li>
+</ul>
+</section>
+<section>
+<h2>Conclusion</h2>
+<p>The EvoClaw Tiered Memory System v2.2.0 represents a significant advancement in LLM-powered memory architectures. By leveraging a three-tiered structure inspired by human cognition and incorporating innovative features like automatic daily note ingestion, structured metadata extraction, and enhanced search capabilities, this system offers robust and efficient memory management for AI agents. Whether you&#8217;re a developer, researcher, or enthusiast, understanding this architecture can provide valuable insights into the future of AI memory systems.</p>
+</section>
+<section>
+<h2>Further Reading</h2>
+<ul>
+<li><a href="https://github.com/openclaw/skills/tree/main/skills/bowen31337/tiered-memory">GitHub Repository: OpenClaw Tiered Memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Working_memory">Wikipedia: Working Memory</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Long-term_memory">Wikipedia: Long-term Memory</a></li>
+</ul>
+</section>
+</article>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bowen31337/tiered-memory/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bowen31337/tiered-memory/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

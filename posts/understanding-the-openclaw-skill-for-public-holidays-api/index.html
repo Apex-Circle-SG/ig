@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the OpenClaw Skill for Public Holidays API | News of Tomorrow</title>
+<meta name="description" content="The OpenClaw skill &amp;#8216;apipick-public-holidays&amp;#8217; allows users to query public holidays for any country and year using the apipick Public Holidays API. T">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-openclaw-skill-for-public-holidays-api/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the OpenClaw Skill for Public Holidays API">
+<meta property="og:description" content="The OpenClaw skill &amp;#8216;apipick-public-holidays&amp;#8217; allows users to query public holidays for any country and year using the apipick Public Holidays API. T">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-openclaw-skill-for-public-holidays-api/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-openclaw-skill-for-public-holidays-api/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-17">
+<meta property="article:modified_time" content="2026-03-17">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the OpenClaw Skill for Public Holidays API">
+<meta name="twitter:description" content="The OpenClaw skill &amp;#8216;apipick-public-holidays&amp;#8217; allows users to query public holidays for any country and year using the apipick Public Holidays API. T">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-openclaw-skill-for-public-holidays-api/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the OpenClaw Skill for Public Holidays API", "datePublished": "2026-03-17", "dateModified": "2026-03-17", "image": ["https://picsum.photos/seed/understanding-the-openclaw-skill-for-public-holidays-api/1200/630"], "description": "The OpenClaw skill &#8216;apipick-public-holidays&#8217; allows users to query public holidays for any country and year using the apipick Public Holidays API. T", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-openclaw-skill-for-public-holidays-api/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the OpenClaw Skill for Public Holidays API", "item": "https://github.insightginie.com/posts/understanding-the-openclaw-skill-for-public-holidays-api/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the OpenClaw Skill for Public Holidays API</h1>
+<time datetime="2026-03-17" class="post-date" data-date="2026-03-17T05:16:24+00:00">2026-03-17</time>
+<img src="https://picsum.photos/seed/understanding-the-openclaw-skill-for-public-holidays-api/800/400" class="post-hero" alt="Understanding the OpenClaw Skill for Public Holidays API">
+<h2>What is the OpenClaw Public Holidays Skill?</h2>
+<p>The OpenClaw skill &#8216;apipick-public-holidays&#8217; is a specialized tool designed to query public holidays for any country and year using the apipick Public Holidays API. This skill provides a streamlined way to access holiday information for over 100 countries, making it invaluable for planning, scheduling, and cultural awareness applications.</p>
+<h2>Core Functionality</h2>
+<p>At its core, this skill allows users to retrieve comprehensive holiday information through a simple API call. The skill supports ISO 3166-1 alpha-2 country codes, ensuring standardized identification across different nations. Whether you need to find holidays for the United States, Japan, Germany, or any other supported country, this skill provides accurate and up-to-date information.</p>
+<h3>Key Features</h3>
+<ul>
+<li>Support for 100+ countries worldwide</li>
+<li>Ability to query specific years or use the current year by default</li>
+<li>Comprehensive holiday data including official names and dates</li>
+<li>Cost-effective with only 1 credit per request</li>
+<li>Easy integration with existing systems</li>
+</ul>
+<h2>Technical Implementation</h2>
+<p>The skill operates through a straightforward API endpoint: <code>GET https://www.apipick.com/api/holidays</code>. It requires authentication via an API key (x-api-key header), which users can obtain for free from the apipick website. The skill handles both the technical implementation and user-friendly aspects of holiday queries.</p>
+<h3>API Parameters</h3>
+<p>The skill accepts two main parameters:</p>
+<ul>
+<li><strong>country</strong> (required): ISO 3166-1 alpha-2 code such as &#8216;US&#8217;, &#8216;GB&#8217;, &#8216;CN&#8217;, &#8216;DE&#8217;, or &#8216;JP&#8217;</li>
+<li><strong>year</strong> (optional): 4-digit year, defaulting to the current year if not specified</li>
+</ul>
+<h2>Response Format</h2>
+<p>When a query is successful, the API returns a structured JSON response containing:</p>
+<ul>
+<li>Success status and HTTP code</li>
+<li>Country information and year queried</li>
+<li>Total number of holidays found</li>
+<li>Detailed list of holidays with dates and official names</li>
+<li>API usage information including credits used and remaining</li>
+</ul>
+<h3>Example Response</h3>
+<p>A typical response for a US holiday query in 2026 might include New Year&#8217;s Day, Independence Day, and Christmas Day, each with their respective dates and official names.</p>
+<h2>Usage Scenarios</h2>
+<p>This skill proves valuable in numerous scenarios:</p>
+<ul>
+<li>Planning international business operations around local holidays</li>
+<li>Creating cultural awareness applications</li>
+<li>Scheduling events and meetings across different time zones</li>
+<li>Developing travel planning tools</li>
+<li>Educational applications about global cultures</li>
+</ul>
+<h2>Integration and Setup</h2>
+<p>To use this skill effectively, users need to:</p>
+<ol>
+<li>Obtain an API key from apipick.com</li>
+<li>Set up the APIPICK_API_KEY environment variable</li>
+<li>Configure the skill to handle country name conversions to ISO codes</li>
+<li>Implement error handling for various API response codes</li>
+</ol>
+<h2>Cost and Credits</h2>
+<p>The skill operates on a credit-based system, with each request consuming 1 credit. Users receive credits upon registration and can monitor their usage through the API response, which includes information about credits used and remaining.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw &#8216;apipick-public-holidays&#8217; skill represents a powerful tool for accessing global holiday information through a standardized, reliable API. Its ease of use, comprehensive coverage, and cost-effectiveness make it an excellent choice for developers and businesses needing accurate holiday data across multiple countries and years.</p>
+<h3>Related Skills</h3>
+<p>For users interested in similar functionality, OpenClaw offers related skills for weather data, time zone information, and other location-based services, all following similar integration patterns and quality standards.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/javainthinking/apipick-public-holidays/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/javainthinking/apipick-public-holidays/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

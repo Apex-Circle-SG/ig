@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explaining OpenClaw&amp;#8217;s Canary Skill: A Comprehensive Guide to Secret Leak Detection | News of Tomorrow</title>
+<meta name="description" content="Learn about OpenClaw&amp;#8217;s Canary skill for scanning and securing API keys, tokens, and credentials in your environment, with details on its functionality, de">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/explaining-openclaws-canary-skill-a-comprehensive-guide-to-secret-leak-detection/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Explaining OpenClaw&amp;#8217;s Canary Skill: A Comprehensive Guide to Secret Leak Detection">
+<meta property="og:description" content="Learn about OpenClaw&amp;#8217;s Canary skill for scanning and securing API keys, tokens, and credentials in your environment, with details on its functionality, de">
+<meta property="og:image" content="https://picsum.photos/seed/explaining-openclaws-canary-skill-a-comprehensive-guide-to-secret-leak-detection/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/explaining-openclaws-canary-skill-a-comprehensive-guide-to-secret-leak-detection/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-13">
+<meta property="article:modified_time" content="2026-03-13">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Explaining OpenClaw&amp;#8217;s Canary Skill: A Comprehensive Guide to Secret Leak Detection">
+<meta name="twitter:description" content="Learn about OpenClaw&amp;#8217;s Canary skill for scanning and securing API keys, tokens, and credentials in your environment, with details on its functionality, de">
+<meta name="twitter:image" content="https://picsum.photos/seed/explaining-openclaws-canary-skill-a-comprehensive-guide-to-secret-leak-detection/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Explaining OpenClaw&#8217;s Canary Skill: A Comprehensive Guide to Secret Leak Detection", "datePublished": "2026-03-13", "dateModified": "2026-03-13", "image": ["https://picsum.photos/seed/explaining-openclaws-canary-skill-a-comprehensive-guide-to-secret-leak-detection/1200/630"], "description": "Learn about OpenClaw&#8217;s Canary skill for scanning and securing API keys, tokens, and credentials in your environment, with details on its functionality, de", "mainEntityOfPage": "https://github.insightginie.com/posts/explaining-openclaws-canary-skill-a-comprehensive-guide-to-secret-leak-detection/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Explaining OpenClaw&#8217;s Canary Skill: A Comprehensive Guide to Secret Leak Detection", "item": "https://github.insightginie.com/posts/explaining-openclaws-canary-skill-a-comprehensive-guide-to-secret-leak-detection/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Explaining OpenClaw&#8217;s Canary Skill: A Comprehensive Guide to Secret Leak Detection</h1>
+<time datetime="2026-03-13" class="post-date" data-date="2026-03-13T01:47:10+00:00">2026-03-13</time>
+<img src="https://picsum.photos/seed/explaining-openclaws-canary-skill-a-comprehensive-guide-to-secret-leak-detection/800/400" class="post-hero" alt="Explaining OpenClaw&amp;#8217;s Canary Skill: A Comprehensive Guide to Secret Leak Detection">
+<h1>Explaining OpenClaw&#8217;s Canary Skill: A Comprehensive Guide to Secret Leak Detection</h1>
+<p>In today&#39;s digital landscape, safeguarding sensitive information such as API keys, tokens, and credentials is paramount. OpenClaw&#39;s Canary skill is designed to be your early warning system, diligently scanning your environment for any exposed secrets. This comprehensive guide will illuminate the functionality, detection methods, and auto-fix capabilities of the Canary skill&#46;</p>
+<h2>Understanding OpenClaw&#8217;s Canary Skill</h2>
+<p>The Canary skill is a powerful tool that operates in two distinct modes: Light Scan and Deep Scan. Let&#39;s delve into each of these modes and understand how they contribute to protecting your environment.</p>
+<h3>Light Scan: The Automatic Check</h3>
+<p>Every time OpenClaw starts, the Light Scan mode kicks into action. This mode performs a swift and silent check of critical locations:</p>
+<ul>
+<li>&#39;~/.openclaw/.env&#39; and &#39;~/.clawdbot/.env&#39; for plaintext credentials</li>
+<li>File permissions on config files containing secrets (world-readable = bad)</li>
+<li>Any .env files in the active workspace</li>
+</ul>
+<p>If everything checks out, Canary remains silent, ensuring a smooth and uninterrupted operation. However, if any issues are detected, Canary will display a short alert, providing the option to fix the problem or obtain more details.</p>
+<h3>Deep Scan: The Comprehensive Check</h3>
+<p>The Deep Scan mode can be manually triggered whenever you desire a thorough security check. This mode covers everything checked in the Light Scan and extends to:</p>
+<ul>
+<li>All installed skill directories for hardcoded secrets</li>
+<li>Session/chat history files for accidentally pasted credentials</li>
+<li>Git repositories in the workspace for committed secrets</li>
+<li>SSH keys and config (~/.ssh/) for weak permissions</li>
+<li>Shell history files for commands containing tokens or passwords</li>
+<li>Known credential file paths (.netrc, .npmrc, .pypirc, Docker config, AWS credentials, etc.)</li>
+</ul>
+<h2>Detecting Secrets: What Canary Looks For</h2>
+<p>Canary employs pattern matching and heuristic checks to identify various types of secrets. Let&#39;s explore the different secret types, examples, and the locations where Canary looks for them.</p>
+<p><img decoding="async" src="https://example.com/image1.jpg" alt="Secret Type, Examples, and Locations" width="600"></p>
+<h3>Secret Type</h3>
+<p>The following table provides an overview of the secret types Canary can detect:</p>
+<table>
+<thead>
+<tr>
+<th>Secret Type</th>
+<th>Examples</th>
+<th>Where It Looks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API Keys</td>
+<td>Shodan, VirusTotal, OpenAI, Anthropic, AWS, GCP, Stripe, GitHub tokens</td>
+<td>.env files, skill configs, shell history, git repos</td>
+</tr>
+<tr>
+<td>Passwords</td>
+<td>Plaintext passwords in configs, database connection strings with embedded passwords</td>
+<td>Config files, .env, .netrc, skill directories</td>
+</tr>
+<tr>
+<td>Private Keys</td>
+<td>SSH private keys, PEM files, JWTs with embedded secrets</td>
+<td>~/.ssh/, workspace, skill directories</td>
+</tr>
+<tr>
+<td>Cloud Credentials</td>
+<td>AWS access keys, GCP service account JSON, Azure tokens</td>
+<td>~/.aws/, ~/.config/gcloud/, env vars, configs</td>
+</tr>
+<tr>
+<td>Tokens &#038; Sessions</td>
+<td>OAuth tokens, bearer tokens, session cookies, webhook URLs</td>
+<td>Chat history, shell history, .env files</td>
+</tr>
+<tr>
+<td>Local System Files</td>
+<td>Credential exports, service account JSONs, PEM/key files, password manager CSV exports, Kubernetes tokens, Terraform state secrets, database passwords</td>
+<td>~/Downloads/, ~/Desktop/, ~/Documents/, ~/.kube/config, *.tfstate, ~/.config/, ~/Library/Application Support/, ~/.my.cnf, ~/.pgpass, browser password export CSVs, Redis/MongoDB configs</td>
+</tr>
+</tbody>
+</table>
+<p>The image below illustrates the secret types, examples, and locations where Canary looks for them.</p>
+<h2>Severity Levels: Prioritizing Your Security</h2>
+<p>Each finding in the Canary scan is assigned a clear severity level to help you prioritize your security efforts:</p>
+<ul>
+<li>&#39;&#8217;tissues found&#39;: First time Canary runs: show a brief all-clear so the user knows it&#39;s active. Example: &#39;ðŸ�¦ Canary checked your environment â€” everything looks clean.&#39;</li>
+<li>&#39;&#8217;issues found&#39;: display a single line with the total count of issues found, allowing users to take immediate action.</li>
+</ul>
+<h2>Auto-Fix: Streamlining Your Security Efforts</h2>
+<p>Canary’s auto-fix feature is designed to streamline your security efforts by automatically addressing identified issues. However, it’s essential to note the following:</p>
+<ul>
+<li>Canary will never change, move, or delete anything on your system without your explicit confirmation.</li>
+<li>Every auto-fix is shown to you in full before it happens. You can always say no, and Canary will provide a step-by-step guide to address the issue manually.</li>
+</ul>
+<h3>Issue Resolution: What Canary Will Do (with your OK)</h3>
+<p>Canary offers seamless solutions to common issues, making the process of securing your environment a breeze. Let’s explore some of these auto-fixes:</p>
+<ul>
+<li>&#39;Your .env file can be read by other users on this machine&#39;: Make the file private to your account only.</li>
+<li>&#39;Secret pasted in your shell history&#39;: Remove that one line from your history.</li>
+<li>&#39;SSH key file isn&#39;t locked down&#39;: Restrict the key file to your account only.</li>
+<li>&#39;API key hardcoded inside a skill&#39;: Move the key to your .env file and reference it from there.</li>
+<li>&#39;Secret committed to a git repo&#39;: Add the file to .gitignore so it won&#39;t be shared again.</li>
+<li>&#39;Credential file sitting in Downloads/Desktop/Documents&#39;: Move the file to a secure location with private permissions.</li>
+<li>&#39;Kubernetes config with embedded tokens is too open&#39;: Make the config file private to your account.</li>
+<li>&#39;Terraform state file with plaintext secrets&#39;: Flag and restrict file permissions.</li>
+<li>&#39;Database config with embedded password&#39;: Restrict the config file to your account only.</li>
+<li>&#39;Browser password export CSV left unprotected&#39;: Move to a secure location or securely delete.</li>
+</ul>
+<h2>Backup Security: Ensuring Data Integrity</h2>
+<p>Before every fix, Canary creates a backup of the affected file at &#39;&lt;workspace&gt;/.<canary&gt;/backups/&#39; with a timestamp (e.g., &#39;<en></v><env.2026-02-07T14:30:00.bak&#39;). If anything goes wrong, you can ask Canary to roll back the changes:</p>
+<ul>
+<li>&#39;Canary, undo that last fix&#39;</li>
+<li>&#39;Restore my .env file&#39;</li>
+</ul>
+<p>Backup security is paramount to Canary. Here&#39;s how Canary ensures the safety of your backups:</p>
+<ul>
+<li>Backups are encrypted at rest using a key derived from the machine&#39;s unique identifier. They cannot be read by simply opening the file â€” only Canary&#39;s rollback process can decrypt them.</li>
+<li>Canary &lt;i&gt;never&lt;/i&gt; scans its own backup directory. The path <workspace&gt;/.<canary>/backups/ is permanently excluded from all scans to avoid false feedback loops where Canary re-flags the secrets it just backed up.</li>
+<li>The backup directory is created with owner-only permissions (700). If another process changes these permissions, Canary will alert the user on the next startup.</li>
+<li>Backups older than 7 days are securely deleted (overwritten before removal) rather than simply unlinked.</li>
+</ul>
+<h2>Instructions for the Agent: A Step-by-Step Guide</h2>
+<p>As the Canary security skill, your primary responsibility is to protect the user&#39;s secrets and credentials. Here&#39;s a step-by-step guide on how to perform a Light Scan on startup:</p>
+<ol>
+<li>&#39;On Startup (Light Scan)&#39;: Silently check these locations: &#39;~/.openclaw/.env&#39;, &#39;~/.clawdbot/.env&#39;, and any &#39;.env&#39; in the current workspace.</li>
+<li>&#39;File permissions on all config files found above&#39;</li>
+<li>&#39;If no issues found&#39;:</li>
+<ol>
+<li>First time Canary runs: show a brief all-clear so the user knows it&#39;s active. Example: &#39;ðŸ�¦ Canary checked your environment â€” everything looks clean.&#39;<l/li>
+<li>Every startup after that: stay silent. No news is good news.</li>
+</ol>
+<li>&#39;If issues found&#39;: display a single line with the total count of issues found, allowing users to take immediate action.</li>
+</ol>
+<h2>Conclusion: Embrace Security with OpenClaw&#8217;s Canary Skill</h2>
+<p>In conclusion, OpenClaw&#39;s Canary skill is an indispensable tool for anyone seeking to fortify their environment against the inadvertent exposure of sensitive data. By operating in Light Scan and Deep Scan modes, Canary ensures comprehensive coverage, helping you identify and address potential vulnerabilities proactively. Embrace the power of Canary to elevate your security posture and safeguard your digital assets with ease and confidence.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/sukiraman/canary/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/sukiraman/canary/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

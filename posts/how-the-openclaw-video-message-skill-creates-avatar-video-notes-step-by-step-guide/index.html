@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How the OpenClaw Video Message Skill Creates Avatar Video Notes – Step‑by‑Step Guide | News of Tomorrow</title>
+<meta name="description" content="Learn how the OpenClaw video‑message skill turns text into lip‑synced VRM avatar videos and sends them as Telegram video notes.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/how-the-openclaw-video-message-skill-creates-avatar-video-notes-step-by-step-guide/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="How the OpenClaw Video Message Skill Creates Avatar Video Notes – Step‑by‑Step Guide">
+<meta property="og:description" content="Learn how the OpenClaw video‑message skill turns text into lip‑synced VRM avatar videos and sends them as Telegram video notes.">
+<meta property="og:image" content="https://picsum.photos/seed/how-the-openclaw-video-message-skill-creates-avatar-video-notes-step-by-step-guide/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/how-the-openclaw-video-message-skill-creates-avatar-video-notes-step-by-step-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-19">
+<meta property="article:modified_time" content="2026-03-19">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How the OpenClaw Video Message Skill Creates Avatar Video Notes – Step‑by‑Step Guide">
+<meta name="twitter:description" content="Learn how the OpenClaw video‑message skill turns text into lip‑synced VRM avatar videos and sends them as Telegram video notes.">
+<meta name="twitter:image" content="https://picsum.photos/seed/how-the-openclaw-video-message-skill-creates-avatar-video-notes-step-by-step-guide/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How the OpenClaw Video Message Skill Creates Avatar Video Notes – Step‑by‑Step Guide", "datePublished": "2026-03-19", "dateModified": "2026-03-19", "image": ["https://picsum.photos/seed/how-the-openclaw-video-message-skill-creates-avatar-video-notes-step-by-step-guide/1200/630"], "description": "Learn how the OpenClaw video‑message skill turns text into lip‑synced VRM avatar videos and sends them as Telegram video notes.", "mainEntityOfPage": "https://github.insightginie.com/posts/how-the-openclaw-video-message-skill-creates-avatar-video-notes-step-by-step-guide/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "How the OpenClaw Video Message Skill Creates Avatar Video Notes – Step‑by‑Step Guide", "item": "https://github.insightginie.com/posts/how-the-openclaw-video-message-skill-creates-avatar-video-notes-step-by-step-guide/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>How the OpenClaw Video Message Skill Creates Avatar Video Notes – Step‑by‑Step Guide</h1>
+<time datetime="2026-03-19" class="post-date" data-date="2026-03-19T06:47:25+00:00">2026-03-19</time>
+<img src="https://picsum.photos/seed/how-the-openclaw-video-message-skill-creates-avatar-video-notes-step-by-step-guide/800/400" class="post-hero" alt="How the OpenClaw Video Message Skill Creates Avatar Video Notes – Step‑by‑Step Guide">
+<p>The OpenClaw ecosystem provides a growing library of skills that extend the capabilities of personal AI assistants. One of the most visually engaging skills is the <strong>video‑message</strong> skill, which enables users to generate short avatar‑driven video clips and deliver them as Telegram video notes. This guide explains the skill’s purpose, its underlying components, installation requirements, configuration options, and a typical usage workflow.</p>
+<p>At its core, the video‑message skill relies on the <code>avatarcam</code> command‑line tool. Avatarcam takes an audio file (either supplied directly or produced by a text‑to‑speech engine) and a VRM avatar model, then renders the avatar speaking in sync with the audio. The output is a square MP4 video (384×384 pixels) encoded with H.264 video and AAC audio at a constant 30 fps. When the skill is invoked through OpenClaw’s messaging system, the resulting video is sent via the Telegram <code>sendVideoNote</code> API, which displays the clip as a circular video note in chats.</p>
+<p>The skill is particularly useful when a user prefers a richer, more personal response than plain text or audio. Examples include sending a greeting, delivering a short tutorial, or reacting with an expressive avatar that lip‑syncs to a spoken message. Because the output conforms to Telegram’s video note format, the file size stays modest while preserving high visual quality.</p>
+<p>To use the skill, several system dependencies must be present. FFmpeg is required for video processing and encoding. On macOS, FFmpeg can be installed with Homebrew (<code>brew install ffmpeg</code>). On Linux distributions that use APT, the command <code>sudo apt-get install -y ffmpeg</code> suffices. Windows users should download the FFmpeg binary and add its folder to the system PATH. Additionally, Linux users need a virtual framebuffer (Xvfb) and Xauthority to run headless rendering; these are installed via <code>sudo apt-get install -y xvfb xauth</code>. macOS and Windows provide native display support, so Xvfb is unnecessary on those platforms.</p>
+<p>For Docker‑based deployments, the OpenClaw documentation recommends adding a set of APT packages to the <code>OPENCLAW_DOCKER_APT_PACKAGES</code> environment variable. The list includes <code>build-essential procps curl file git ca-certificates xvfb xauth libgbm1 libxss1 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libasound2 libnss3 ffmpeg</code>. These packages ensure that the container can render the VRM avatar without a physical GPU or display.</p>
+<p>Configuration of the video‑message skill is handled in the <code>TOOLS.md</code> file of the OpenClaw instance. Two primary settings control the appearance of the generated video: the avatar file and the background. The <code>avatar</code> setting expects a path to a VRM model (defaulting to <code>default.vrm</code> if unspecified). The <code>background</code> setting can be a hex colour (e.g., <code>#00FF00</code>) or a path to an image file that will be used as the backdrop behind the avatar. Adjusting these values allows creators to match the video to a brand palette or a specific scene.</p>
+<p>The typical flow begins when a user asks the assistant to “send a video message saying hello”. OpenClaw first checks whether the request matches the video‑message skill’s trigger phrases (e.g., “video message”, “avatar video”, “video reply”). If a match is found, the skill proceeds through three main stages: text‑to‑speech conversion, avatar video generation, and video‑note transmission.</p>
+<p>In the text‑to‑speech stage, the skill invokes OpenClaw’s built‑in TTS tool (or an external TTS service if configured) with the supplied text. For the example phrase “Hello! How are you today?”, the TTS engine produces an audio file, commonly stored in a temporary location such as <code>/tmp/voice.mp3</code>. If the user already provides an audio file, this step can be skipped.</p>
+<p>Next, the skill runs <code>avatarcam</code> with the generated audio, the avatar path from <code>TOOLS.md</code>, and the background setting. A representative command looks like:</p>
+<p><code>avatarcam --audio /tmp/voice.mp3 --output /tmp/video.mp4 --background '#00FF00'</code></p>
+<p>When executed, avatarcam launches an Electron process that loads the VRM model, animates its visemes based on the audio’s phonetic content, and renders the scene at 1280×720 pixels. The rendered frames are captured via <code>canvas.captureStream(30)</code>, piped to FFmpeg, which crops the image to a square, normalises the frame rate, scales it to 384×384, and encodes the final MP4. The entire pipeline typically takes about 1.5 times the length of the audio; a 20‑second clip therefore requires roughly 30 seconds of processing.</p>
+<p>After the MP4 file is ready, the skill uses OpenClaw’s <code>message</code> tool to send it as a video note. The command format is:</p>
+<p><code>message action=send filePath=/tmp/video.mp4 asVideoNote=true</code></p>
+<p>The <code>asVideoNote=true</code> flag tells the message tool to call Telegram’s <code>sendVideoNote</code> endpoint, which displays the video as a circular note. Once the transmission succeeds, the skill returns <code>NO_REPLY</code> to indicate that no further textual response is needed. Finally, any temporary files (e.g., <code>/tmp/voice.mp3</code> and <code>/tmp/video.mp4</code>) are cleaned up to free disk space.</p>
+<p>For users who prefer a regular rectangular video instead of a circular note, the skill can be invoked with <code>asVideoNote=false</code> or simply omitted, causing the message tool to use the standard <code>sendVideo</code> API. This flexibility makes the skill adaptable to various chat platforms that support different video formats.</p>
+<p>Performance considerations are worth noting. Because the rendering relies on CPU‑based compositing via Electron and FFmpeg, generation times scale linearly with audio length. On a typical modern laptop, a 10‑second message may be produced in about 15 seconds, while a 60‑second clip (the maximum duration enforced by the skill) could take close to 90 seconds. Users seeking faster turnaround can reduce the output resolution or frame rate by modifying the internal FFmpeg parameters, though doing so may affect visual fidelity.</p>
+<p>Security and privacy are also addressed. The skill processes all data locally; no audio or video leaves the host machine except for the final transmission to Telegram. Temporary files are stored in a system‑specific temp directory and removed immediately after sending, minimizing the risk of residual data exposure. Moreover, the skill does not require any external API keys for TTS if the built‑in engine is used, keeping the deployment self‑contained.</p>
+<p>In summary, the OpenClaw video‑message skill provides a seamless way to transform spoken or typed messages into engaging avatar videos. By combining TTS, VRM animation, and FFmpeg processing, it delivers high‑quality, lip‑synced content that can be sent as Telegram video notes or regular videos. The skill’s modest system requirements, clear configuration via <code>TOOLS.md</code>, and straightforward workflow make it an accessible addition for anyone looking to enrich their AI‑driven conversations with visual flair.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/thewulf7/avatar-video-messages/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/thewulf7/avatar-video-messages/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill: AI-Collab — The Autonomous Multi-Agent Collaboration System | News of Tomorrow</title>
+<meta name="description" content="Discover how the OpenClaw AI-Collab skill enables seamless multi-agent collaboration between two agents working in parallel with shared tasks and structured com">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-ai-collab-the-autonomous-multi-agent-collaboration-system/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill: AI-Collab — The Autonomous Multi-Agent Collaboration System">
+<meta property="og:description" content="Discover how the OpenClaw AI-Collab skill enables seamless multi-agent collaboration between two agents working in parallel with shared tasks and structured com">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-ai-collab-the-autonomous-multi-agent-collaboration-system/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-ai-collab-the-autonomous-multi-agent-collaboration-system/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-16">
+<meta property="article:modified_time" content="2026-03-16">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill: AI-Collab — The Autonomous Multi-Agent Collaboration System">
+<meta name="twitter:description" content="Discover how the OpenClaw AI-Collab skill enables seamless multi-agent collaboration between two agents working in parallel with shared tasks and structured com">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-ai-collab-the-autonomous-multi-agent-collaboration-system/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill: AI-Collab — The Autonomous Multi-Agent Collaboration System", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "image": ["https://picsum.photos/seed/openclaw-skill-ai-collab-the-autonomous-multi-agent-collaboration-system/1200/630"], "description": "Discover how the OpenClaw AI-Collab skill enables seamless multi-agent collaboration between two agents working in parallel with shared tasks and structured com", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-ai-collab-the-autonomous-multi-agent-collaboration-system/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill: AI-Collab — The Autonomous Multi-Agent Collaboration System", "item": "https://github.insightginie.com/posts/openclaw-skill-ai-collab-the-autonomous-multi-agent-collaboration-system/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill: AI-Collab — The Autonomous Multi-Agent Collaboration System</h1>
+<time datetime="2026-03-16" class="post-date" data-date="2026-03-16T16:46:50+00:00">2026-03-16</time>
+<img src="https://picsum.photos/seed/openclaw-skill-ai-collab-the-autonomous-multi-agent-collaboration-system/800/400" class="post-hero" alt="OpenClaw Skill: AI-Collab — The Autonomous Multi-Agent Collaboration System">
+<h1>OpenClaw Skill: AI-Collab — The Autonomous Multi-Agent Collaboration System</h1>
+<p><strong>Introduction</strong></p>
+<p>The <a href="https://github.com/openclaw/skills/blob/main/skills/jeremysommerfeld8910-cpu/ai-collab/SKILL.md">OpenClaw AI-Collab skill</a> is a cutting-edge multi-agent autonomous collaboration system designed to facilitate seamless interaction between two OpenClaw agents working in parallel. This skill is particularly useful when setting up agent-to-agent communication, running a daemon agent alongside a primary agent, coordinating tasks between Claude and GPT instances, or establishing a shared chat log and inbox protocol.</p>
+<p><strong>Key Features</strong></p>
+<ul>
+<li><strong>Multi-Agent Collaboration:</strong> Enables two OpenClaw agents to work together on shared tasks, enhancing efficiency and productivity.</li>
+<li><strong>Structured Communication Protocol:</strong> Implements a robust communication protocol to ensure clear and effective interaction between agents.</li>
+<li><strong>Shared Chat Log and Inbox:</strong> Maintains a shared chat log and inbox to keep track of messages and tasks.</li>
+<li><strong>Daemon Agent Support:</strong> Supports running a daemon agent alongside a primary agent for coordinated tasks.</li>
+<li><strong>Task Coordination:</strong> Facilitates task coordination between Claude and GPT instances, ensuring smooth collaboration.</li>
+</ul>
+<p><strong>Use Cases</strong></p>
+<p>The AI-Collab skill is ideal for a variety of scenarios, including:</p>
+<ul>
+<li><strong>Agent-to-Agent Communication:</strong> Establishing clear communication channels between agents.</li>
+<li><strong>Daemon Agent Setup:</strong> Running a daemon agent alongside a primary agent for background tasks and monitoring.</li>
+<li><strong>Multi-Agent Coordination:</strong> Coordinating tasks between multiple agents to achieve complex goals.</li>
+<li><strong>Shared Chat Log and Inbox Protocol:</strong> Creating a shared record of communications and tasks for better tracking and management.</li>
+</ul>
+<p><strong>Architecture Overview</strong></p>
+<p>The AI-Collab skill employs a structured architecture that ensures seamless interaction between Agent A (main) and Agent B (daemon). Here&#8217;s a simplified representation:</p>
+<pre>
+┌─────────────────────────────────────────────────────────┐
+│                     User (Jeremy)                       │
+│               Telegram / Direct Message                  │
+└──────────────────────┬──────────────────────────────────┘
+                         │
+┌─────────────┴──────────────┐
+▼                            ▼
+┌─────────────────┐         ┌──────────────────┐
+│   AGENT A       │         │   AGENT B        │
+│  (Jim / main)   │◄───────►│ (Clawdy / daemon)│
+│  claude code    │         │ claude --print    │
+│  port: main     │         │ inbox: filesystem │
+└────────┬────────┘         └────────┬─────────┘
+           │                           │
+└──────────┬────────────────┘
+           ▼
+┌──────────────────┐
+│   chat.log       │ ← THE shared record
+│   collab/inbox/  │ ← A→B messages
+└──────────────────┘
+</pre>
+<p><strong>Agent A (Primary)</strong></p>
+<ul>
+<li><strong>Interactive Session:</strong> Agent A runs an interactive Claude Code session, handling complex tasks, browser interactions, and user-facing responses.</li>
+<li><strong>Task Management:</strong> It manages tasks and ensures smooth coordination with Agent B, providing a primary point of contact for user interactions.</li>
+<li><strong>Port Access:</strong> Agent A has access to ports for real-time interactions and task assignments.</li>
+</ul>
+<p><strong>Agent B (Daemon)</strong></p>
+<ul>
+<li><strong>Subprocess Handling:</strong> Agent B operates as a subprocess using the claude &#8211;print command, handling background tasks, monitoring, and quick lookups.</li>
+<li><strong>Message Routing:</strong> It is triggered by messages dropped in the inbox, ensuring timely responses and task completion.</li>
+<li><strong>Inbox Monitoring:</strong> Agent B continuously monitors the inbox for new messages and responds accordingly.</li>
+</ul>
+<p><strong>Configuration</strong></p>
+<p>The AI-Collab skill is highly configurable using environment variables, ensuring flexibility and adaptability to different use cases. Here are some key environment variables and their purposes:</p>
+<ul>
+<li><strong>AGENT_A_NAME and AGENT_B_NAME:</strong> Define the names of Agent A (main) and Agent B (daemon), respectively.</li>
+<li><strong>AGENT_B_MODEL:</strong> Specifies the model used by Agent B, such as claude-haiku-4-5-20251001 or claude-sonnet-4-6. This can also be any OpenAI model if using the GPT daemon variant.</li>
+<li><strong>AGENT_B_SESSION:</strong> Sets the tmux session name for Agent B.</li>
+<li><strong>COLLAB_INBOX:</strong> Defines the path to the shared inbox directory for messages between Agent A and Agent B.</li>
+<li><strong>COLLAB_LOG:</strong> Specifies the path to the shared chat log file.</li>
+</ul>
+<p><strong>Quick Setup</strong></p>
+<p>To set up the AI-Collab skill, follow these steps:</p>
+<ol>
+<li><strong>Source Configuration:</strong> Load the environment variables by sourcing the configuration file.</li>
+<pre>
+# Source config
+source ~/.openclaw/workspace/collab/.ai-collab.env
+</pre>
+<li><strong>Create Workspace:</strong> Create the collab workspace directory to store shared files and logs.</li>
+<pre>
+# Create the collab workspace
+mkdir -p "$COLLAB_INBOX"
+</pre>
+<li><strong>Start Agent B Daemon:</strong> Launch Agent B as a daemon in a tmux session.</li>
+<pre>
+# Start Agent B daemon (in a tmux session)
+tmux new-session -d -s "$AGENT_B_SESSION" \
+    "source ~/.openclaw/workspace/collab/.ai-collab.env && \
+    bash ~/.openclaw/workspace/skills/ai-collab/scripts/daemon.sh"
+</pre>
+<li><strong>Start Message Polling:</strong> Initiate message polling for Agent B to Agent A routing, running every 60 seconds via cron.</li>
+<pre>
+# Start message polling (Agent B → Agent A routing)
+bash ~/.openclaw/workspace/skills/ai-collab/scripts/poll_chatlog.sh &
+</pre>
+<li><strong>Test the Link:</strong> Send a test message from Agent A to ensure the connection is working.</li>
+<pre>
+# Test the link
+bash ~/.openclaw/workspace/skills/ai-collab/scripts/send.sh "Hello from Agent A"
+</pre>
+</ol>
+<p><strong>Communication Protocol</strong></p>
+<p>The AI-Collab skill employs a structured communication protocol to ensure clear and effective interaction between Agent A and Agent B. Every message follows a specific format, ensuring no open loops and efficient task handling. The protocol includes several tags to indicate the direction and meaning of messages:</p>
+<ul>
+<li><strong>[TASK:name]:</strong> Assign a task (A→B or B→A).</li>
+<li><strong>[ACK:name]:</strong> Acknowledgment of task receipt (receiver).</li>
+<li><strong>[DONE:name]:</strong> Task completion with a one-line result (executor).</li>
+<li><strong>[BLOCKED:name]:</strong> Indication of task blocking with a reason (executor).</li>
+<li><strong>[HANDOFF:name]:</strong> Task handoff with instructions (either).</li>
+<li><strong>[STATUS:update]:</strong> Async update on long-running task (either).</li>
+<li><strong>[QUESTION:topic]:</strong> Request for information before proceeding (either).</li>
+</ul>
+<p><strong>Rules for Communication</strong></p>
+<ul>
+<li><strong>Answer Questions First:</strong> Prioritize answering questions before asking new ones.</li>
+<li><strong>Close Tasks Before Starting New Ones:</strong> Ensure tasks are completed before initiating new ones.</li>
+<li><strong>Progressive Messages:</strong> Every message should move work forward or close a loop.</li>
+<li><strong>Avoid Unproductive Messages:</strong> Never use messages like &#8220;let me know,&#8221; &#8220;ready when you are,&#8221; or &#8220;standing by.&#8221;</li>
+</ul>
+<p><strong>Example Exchange</strong></p>
+<p>Here&#8217;s an example of how Agent A and Agent B might interact using the AI-Collab skill protocol:</p>
+<pre>
+A → B: [TASK:price-check] Get BTC price from CoinGecko
+B → A: [ACK:price-check] Checking now.
+B → A: [DONE:price-check] BTC $94,230 as of 03:15 UTC
+</pre>
+<p><strong>Daemon Script (Agent B)</strong></p>
+<p>The daemon script for Agent B is a crucial component of the AI-Collab skill. It ensures that Agent B is always running and ready to handle incoming messages from Agent A. Here&#8217;s a simplified version of the daemon script:</p>
+<pre>
+#!/bin/bash
+
+# Define the PID file
+PIDFILE="/tmp/agentb_daemon.pid"
+
+# Check if the daemon is already running
+if [ -f "$PIDFILE" ] && kill -0 "$(cat $PIDFILE)" 2>/dev/null; then
+    echo "Daemon already running (PID $(cat $PIDFILE)). Exiting." >&2
+    exit 1
+fi
+
+# Create the PID file
+echo $$ > "$PIDFILE"
+trap "rm -f $PIDFILE" EXIT
+
+# Required: unset so nested claude --print works
+unset CLAUDECODE
+
+# Define the inbox and log paths
+INBOX="$HOME/.openclaw/workspace/collab/inbox"
+LOG="$HOME/.openclaw/workspace/collab/chat.log"
+
+# Create the inbox directory
+mkdir -p "$INBOX"
+
+# Function to log messages to chat.log
+logline() {
+    printf "%s %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG"
+}
+
+# Log the start of the daemon
+logline "SYSTEM: Agent B daemon started"
+
+# Monitor the inbox for new messages
+inotifywait -m -e moved_to "$INBOX" 2>/dev/null | while read dir event file; do
+    FULLPATH="$INBOX/$file"
+    [ ! -f "$FULLPATH" ] && continue
+
+    MSG=$(cat "$FULLPATH")
+    rm "$FULLPATH"
+
+    logline "A -> B: $MSG"
+
+    # Run Agent B (claude --print)
+    RESPONSE=$(claude --print --model claude-haiku-4-5-20251001 \
+        "You are Agent B. Agent A says:\n$MSG\nRespond in under 100 words. Use [DONE:taskname] or [BLOCKED:taskname] to close loops.\nContext: shared collab system. Chat log:\n$LOG" 2>/dev/null)
+
+    logline "B -> A: $RESPONSE"
+
+    # Route response back to Agent A
+    openclaw agent --agent main -m "[AgentB]: $RESPONSE" --json >/dev/null 2>&1
+done
+</pre>
+<p><strong>Sending Messages (A → B)</strong></p>
+<p>To send messages from Agent A to Agent B, you can use the send.sh script. This script ensures that messages are sent atomically to prevent partial reads. Here&#8217;s a simplified version:</p>
+<pre>
+# Define the inbox path
+INBOX="$HOME/.openclaw/workspace/collab/inbox"
+
+# Use mktemp and mv to ensure atomic write
+TMPFILE=$(mktemp "$INBOX/.msg.XXXXXX")
+echo "$*" > "$TMPFILE"
+mv "$TMPFILE" "$INBOX/msg_$(date +%s%N).txt"
+</pre>
+<p><strong>Chat Log Polling (B → A)</strong></p>
+<p>The poll_chatlog.sh script is responsible for polling the chat log every 60 seconds to route messages from Agent B to Agent A. This script ensures that Agent A is always up-to-date with the latest messages from Agent B. Here&#8217;s a simplified version:</p>
+<pre>
+# Define the log path and pointer file
+LOG="$HOME/.openclaw/workspace/collab/chat.log"
+PTR_FILE="/tmp/chatlog_ptr"
+
+# Check if log file exists
+[ ! -f "$LOG" ] && exit 0
+
+# Get total lines and last pointer
+TOTAL=$(wc -l < "$LOG")
+LAST=$(cat "$PTR_FILE" 2>/dev/null || echo "0")
+
+# Exit if total lines is less than or equal to last pointer
+[ "$TOTAL" -le "$LAST" ] && echo "$TOTAL" > "$PTR_FILE" && exit 0
+
+# Get new messages
+NEW=$(tail -n +$(($LAST + 1)) "$LOG" | grep "B -> A:" | sed 's/.*B -> A: //')
+
+# Update pointer
+echo "$TOTAL" > "$PTR_FILE"
+
+# Exit if no new messages
+[ -z "$NEW" ] && exit 0
+
+# Route new messages to Agent A
+while IFS= read -r line; do
+    [ -z "$line" ] && continue
+    openclaw agent --agent main -m "[AgentB]: $line" --json >/dev/null 2>&1
+done <<< "$NEW"
+</pre>
+<p><strong>Shared Filesystem Conventions</strong></p>
+<p>The AI-Collab skill adheres to specific filesystem conventions to ensure smooth collaboration between Agent A and Agent B. Here are the key directories and files:</p>
+<ul>
+<li><strong>~/openclaw/workspace/collab/chat.log:</strong> The shared record of all messages between agents.</li>
+<li><strong>~/openclaw/workspace/collab/inbox/:</strong> The message queue for A→B messages (atomic mv only).</li>
+<li><strong>~/openclaw/workspace/collab/.env:</strong> Shared secrets for the collaboration system (chmod 600, never log).</li>
+<li><strong>~/openclaw/workspace/collab/task_queue.md:</strong> Optional structured task backlog.</li>
+<li><strong>~/openclaw/workspace/collab/status_tracker.md:</strong> Optional current task status per agent.</li>
+</ul>
+<p><strong>Logging to chat.log</strong></p>
+<p>Logging to the shared chat.log file follows specific rules to ensure consistency and security:</p>
+<ul>
+<li><strong>Never Log Secrets:</strong> Avoid logging secrets from the .env file.</li>
+<li><strong>Always Timestamp:</strong> Timestamp every line for better tracking.</li>
+<li><strong>Prefix with Sender:</strong> Use prefixes such as "A -> B:", "B -> A:", "SYSTEM:", or "JEREMY ->" to indicate the message sender.</li>
+</ul>
+<p><strong>Telegram Bridge (Optional)</strong></p>
+<p>The optional Telegram Bridge enhances the AI-Collab skill by routing user Telegram messages into Agent B's inbox. This feature enables seamless integration with popular messaging platforms, allowing users to interact with the agents through Telegram. For a full setup guide, refer to the references/telegram-bridge.md file.</p>
+<p><strong>Conclusion</strong></p>
+<p>The OpenClaw AI-Collab skill is a powerful tool for enabling autonomous multi-agent collaboration. By leveraging a structured communication protocol and shared filesystem conventions, this skill ensures seamless interaction between Agent A and Agent B, enhancing efficiency and productivity. Whether you're setting up agent-to-agent communication, running a daemon agent, or coordinating tasks between Claude and GPT instances, the AI-Collab skill provides a robust solution for autonomous collaboration.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/jeremysommerfeld8910-cpu/ai-collab/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/jeremysommerfeld8910-cpu/ai-collab/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

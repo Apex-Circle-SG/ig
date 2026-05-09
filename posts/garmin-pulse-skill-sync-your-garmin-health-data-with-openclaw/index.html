@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garmin Pulse Skill: Sync Your Garmin Health Data with OpenClaw | News of Tomorrow</title>
+<meta name="description" content="Discover how the Garmin Pulse skill syncs your Garmin Connect health data into markdown files, providing comprehensive fitness tracking including sleep, heart r">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/garmin-pulse-skill-sync-your-garmin-health-data-with-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Garmin Pulse Skill: Sync Your Garmin Health Data with OpenClaw">
+<meta property="og:description" content="Discover how the Garmin Pulse skill syncs your Garmin Connect health data into markdown files, providing comprehensive fitness tracking including sleep, heart r">
+<meta property="og:image" content="https://picsum.photos/seed/garmin-pulse-skill-sync-your-garmin-health-data-with-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/garmin-pulse-skill-sync-your-garmin-health-data-with-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-15">
+<meta property="article:modified_time" content="2026-03-15">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Garmin Pulse Skill: Sync Your Garmin Health Data with OpenClaw">
+<meta name="twitter:description" content="Discover how the Garmin Pulse skill syncs your Garmin Connect health data into markdown files, providing comprehensive fitness tracking including sleep, heart r">
+<meta name="twitter:image" content="https://picsum.photos/seed/garmin-pulse-skill-sync-your-garmin-health-data-with-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Garmin Pulse Skill: Sync Your Garmin Health Data with OpenClaw", "datePublished": "2026-03-15", "dateModified": "2026-03-15", "image": ["https://picsum.photos/seed/garmin-pulse-skill-sync-your-garmin-health-data-with-openclaw/1200/630"], "description": "Discover how the Garmin Pulse skill syncs your Garmin Connect health data into markdown files, providing comprehensive fitness tracking including sleep, heart r", "mainEntityOfPage": "https://github.insightginie.com/posts/garmin-pulse-skill-sync-your-garmin-health-data-with-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Garmin Pulse Skill: Sync Your Garmin Health Data with OpenClaw", "item": "https://github.insightginie.com/posts/garmin-pulse-skill-sync-your-garmin-health-data-with-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Garmin Pulse Skill: Sync Your Garmin Health Data with OpenClaw</h1>
+<time datetime="2026-03-15" class="post-date" data-date="2026-03-15T01:15:59+00:00">2026-03-15</time>
+<img src="https://picsum.photos/seed/garmin-pulse-skill-sync-your-garmin-health-data-with-openclaw/800/400" class="post-hero" alt="Garmin Pulse Skill: Sync Your Garmin Health Data with OpenClaw">
+<h2>What is the Garmin Pulse Skill?</h2>
+<p>The Garmin Pulse skill is a powerful OpenClaw integration that automatically syncs your daily health and fitness data from Garmin Connect into readable markdown files. This skill provides comprehensive health metrics including sleep patterns, activity levels, heart rate, stress measurements, body battery, HRV (Heart Rate Variability), SpO2 levels, and weight tracking.</p>
+<h2>Why Use Garmin Pulse?</h2>
+<p>Health and fitness tracking has become increasingly important for maintaining wellness and achieving fitness goals. The Garmin Pulse skill eliminates the manual effort of logging your health data by automatically retrieving it from your Garmin Connect account and organizing it in an accessible format. Whether you&#8217;re monitoring your sleep quality, tracking stress levels, or analyzing your fitness progress, this skill provides all your health data in one centralized location.</p>
+<h3>Key Features and Benefits</h3>
+<ul>
+<li>Automated daily health data synchronization</li>
+<li>Comprehensive metrics including sleep, heart rate, stress, and body battery</li>
+<li>Easy-to-read markdown file format</li>
+<li>Support for historical data retrieval</li>
+<li>Secure authentication with cached tokens</li>
+<li>Simple setup process with one-time authentication</li>
+</ul>
+<h2>Setting Up the Garmin Pulse Skill</h2>
+<p>Setting up the Garmin Pulse skill is straightforward and requires minimal technical knowledge. The skill uses Python and the uv package manager for dependency management, ensuring a smooth installation process.</p>
+<h3>Prerequisites</h3>
+<p>Before getting started, ensure you have:</p>
+<ul>
+<li>A Garmin Connect account with health data</li>
+<li>Python installed on your system</li>
+<li>Access to the OpenClaw skills repository</li>
+</ul>
+<h3>Authentication Setup</h3>
+<p>The first step is authenticating with your Garmin Connect account. This process is secure and only needs to be completed once:</p>
+<ol>
+<li>Open your terminal</li>
+<li>Run the setup command with your email address:
+<pre><code>uv run {baseDir}/scripts/sync_garmin.py --setup --email you@example.com</code></pre>
+</li>
+<li>Enter your Garmin Connect password when prompted (this is done securely and won&#8217;t be displayed)</li>
+<li>Upon successful authentication, you&#8217;ll see a confirmation message</li>
+</ol>
+<p><strong>Important Security Note:</strong> The skill uses OAuth tokens that are cached locally for approximately one year. Your password is never stored and is only used once to obtain these tokens. This approach ensures both security and convenience.</p>
+<h2>Using the Garmin Pulse Skill</h2>
+<p>Once set up, using the Garmin Pulse skill is incredibly simple. Here are the various ways you can sync and access your health data:</p>
+<h3>Syncing Today&#8217;s Data</h3>
+<p>To sync your health data for the current day, simply run:</p>
+<pre><code>uv run {baseDir}/scripts/sync_garmin.py</code></pre>
+<h3>Syncing Specific Dates</h3>
+<p>You can retrieve data for any specific date using the &#8211;date flag:</p>
+<pre><code>uv run {baseDir}/scripts/sync_garmin.py --date 2026-02-07</code></pre>
+<h3>Syncing Multiple Days</h3>
+<p>To sync data for the last N days, use the &#8211;days flag:</p>
+<pre><code>uv run {baseDir}/scripts/sync_garmin.py --days 7</code></pre>
+<h2>Understanding Your Health Data Files</h2>
+<p>All health data is stored in markdown files at {baseDir}/health/YYYY-MM-DD.md. Each file contains comprehensive health information for that specific day, making it easy to track your progress over time.</p>
+<h3>Available Health Metrics</h3>
+<p>The Garmin Pulse skill provides access to a wide range of health metrics:</p>
+<ul>
+<li><strong>Sleep Data:</strong> Sleep duration, sleep stages, sleep score</li>
+<li><strong>Activity:</strong> Steps taken, calories burned, active minutes</li>
+<li><strong>Heart Rate:</strong> Resting heart rate, heart rate zones</li>
+<li><strong>Stress:</strong> Stress levels and stress trends</li>
+<li><strong>Body Battery:</strong> Energy levels throughout the day</li>
+<li><strong>HRV:</strong> Heart Rate Variability measurements</li>
+<li><strong>SpO2:</strong> Blood oxygen saturation levels</li>
+<li><strong>Weight:</strong> Body weight measurements</li>
+</ul>
+<h2>Technical Implementation</h2>
+<p>The Garmin Pulse skill leverages modern Python tooling to provide a seamless experience. Here&#8217;s what makes it work:</p>
+<h3>Dependency Management</h3>
+<p>The skill uses uv, a fast Python package manager by Astral, which reads inline script metadata (PEP 723) and automatically installs dependencies like garminconnect and cloudscraper in an isolated environment. This means no manual pip install commands are needed.</p>
+<h3>Security Features</h3>
+<p>Security is a top priority for the Garmin Pulse skill. Here&#8217;s how it protects your data:</p>
+<ul>
+<li>Passwords are never stored or logged</li>
+<li>OAuth tokens are cached locally in ~/.garminconnect/</li>
+<li>Tokens expire after approximately one year, requiring re-authentication</li>
+<li>No credentials are passed as command-line arguments</li>
+<li>Data is only accessible from your local machine</li>
+</ul>
+<h2>Setting Up Automated Syncing</h2>
+<p>To ensure your health data stays up to date automatically, you can schedule the sync script to run every morning using OpenClaw&#8217;s cron tool. This eliminates the need for manual syncing and ensures you always have the latest data available.</p>
+<h3>Cron Configuration</h3>
+<p>Setting up automated syncing is simple:</p>
+<ol>
+<li>Access your OpenClaw cron configuration</li>
+<li>Add a new job to run the sync script daily</li>
+<li>Set the schedule to run early in the morning (e.g., 6:00 AM)</li>
+<li>Save the configuration</li>
+</ol>
+<p>With this setup, you&#8217;ll wake up to fresh health data every day without any manual intervention.</p>
+<h2>Troubleshooting Common Issues</h2>
+<p>While the Garmin Pulse skill is designed to work smoothly, you might encounter occasional issues. Here are solutions to common problems:</p>
+<h3>Authentication Failed</h3>
+<p>If you see &#8220;No cached tokens found&#8221; error, run the setup command again. This usually means your tokens have expired (after approximately one year).</p>
+<h3>Data Not Syncing</h3>
+<p>Ensure you have an active internet connection and that your Garmin Connect account is accessible. Also verify that you&#8217;ve completed the initial authentication setup.</p>
+<h3>Permission Issues</h3>
+<p>Make sure the script has appropriate permissions to write to the {baseDir}/health/ directory. You may need to create this directory if it doesn&#8217;t exist.</p>
+<h2>Privacy and Data Ownership</h2>
+<p>Your health data remains entirely under your control. The Garmin Pulse skill only reads data from Garmin Connect and stores it locally in markdown files. No data is transmitted to third-party servers, and you maintain complete ownership of your health information.</p>
+<h2>Conclusion</h2>
+<p>The Garmin Pulse skill represents a significant advancement in personal health data management. By automating the synchronization of your Garmin Connect health metrics, it provides you with comprehensive, accessible health data without the hassle of manual logging. Whether you&#8217;re a fitness enthusiast, someone monitoring specific health conditions, or simply interested in understanding your wellness patterns, this skill offers a powerful, secure, and user-friendly solution.</p>
+<p>Ready to get started? Set up the Garmin Pulse skill today and take control of your health data like never before!</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/freakyflow/garmin-pulse/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/freakyflow/garmin-pulse/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

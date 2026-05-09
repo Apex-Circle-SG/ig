@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the WeChat Article Extractor Skill by OpenClaw | News of Tomorrow</title>
+<meta name="description" content="Learn how to extract metadata and content from WeChat Official Account articles using the OpenClaw WeChat Article Extractor skill. This comprehensive guide cove">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-wechat-article-extractor-skill-by-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the WeChat Article Extractor Skill by OpenClaw">
+<meta property="og:description" content="Learn how to extract metadata and content from WeChat Official Account articles using the OpenClaw WeChat Article Extractor skill. This comprehensive guide cove">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-wechat-article-extractor-skill-by-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-wechat-article-extractor-skill-by-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-07">
+<meta property="article:modified_time" content="2026-03-07">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the WeChat Article Extractor Skill by OpenClaw">
+<meta name="twitter:description" content="Learn how to extract metadata and content from WeChat Official Account articles using the OpenClaw WeChat Article Extractor skill. This comprehensive guide cove">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-wechat-article-extractor-skill-by-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the WeChat Article Extractor Skill by OpenClaw", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "image": ["https://picsum.photos/seed/understanding-the-wechat-article-extractor-skill-by-openclaw/1200/630"], "description": "Learn how to extract metadata and content from WeChat Official Account articles using the OpenClaw WeChat Article Extractor skill. This comprehensive guide cove", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-wechat-article-extractor-skill-by-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the WeChat Article Extractor Skill by OpenClaw", "item": "https://github.insightginie.com/posts/understanding-the-wechat-article-extractor-skill-by-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the WeChat Article Extractor Skill by OpenClaw</h1>
+<time datetime="2026-03-07" class="post-date" data-date="2026-03-07T01:16:57+00:00">2026-03-07</time>
+<img src="https://picsum.photos/seed/understanding-the-wechat-article-extractor-skill-by-openclaw/800/400" class="post-hero" alt="Understanding the WeChat Article Extractor Skill by OpenClaw">
+<h2>What is the WeChat Article Extractor Skill?</h2>
+<p>The WeChat Article Extractor is a specialized skill developed by OpenClaw that enables developers to extract structured data from WeChat Official Account (微信公众号) articles. This skill is particularly useful for content aggregation, analysis, and repurposing of WeChat articles in various applications.</p>
+<h2>Core Capabilities</h2>
+<p>The skill offers comprehensive extraction capabilities:</p>
+<ul>
+<li><strong>URL Parsing</strong>: Extracts data from mp.weixin.qq.com article URLs</li>
+<li><strong>Metadata Extraction</strong>: Retrieves title, author, description, publish time, and account information</li>
+<li><strong>Content Retrieval</strong>: Extracts HTML content of articles</li>
+<li><strong>Cover Image</strong>: Gets the article&#8217;s cover image URL</li>
+<li><strong>Article Type Support</strong>: Handles posts, videos, images, voice messages, text articles, and reposts</li>
+</ul>
+<h2>Basic Usage</h2>
+<p>Using the skill is straightforward with its simple API:</p>
+<pre><code class="language-javascript">const { extract } = require('./scripts/extract.js');
+const result = await extract('https://mp.weixin.qq.com/s?__biz=...');
+// Returns: { done: true, code: 0, data: {...} }
+</code></pre>
+<p>The skill can also extract from HTML content:</p>
+<pre><code class="language-javascript">const html = await fetch(url).then(r => r.text());
+const result = await extract(html, { url: sourceUrl });
+</code></pre>
+<h2>Configuration Options</h2>
+<p>The skill provides several options to customize the extraction process:</p>
+<ul>
+<li><code>shouldReturnContent</code>: Return HTML content (default: true)</li>
+<li><code>shouldReturnRawMeta</code>: Return raw metadata (default: false)</li>
+<li><code>shouldFollowTransferLink</code>: Follow migrated account links (default: true)</li>
+<li><code>shouldExtractMpLinks</code>: Extract embedded mp.weixin links (default: false)</li>
+<li><code>shouldExtractTags</code>: Extract article tags (default: false)</li>
+<li><code>shouldExtractRepostMeta</code>: Extract repost source info (default: false)</li>
+</ul>
+<h2>Response Format</h2>
+<p>On successful extraction, the skill returns a structured response:</p>
+<pre><code class="language-json">{
+  "done": true,
+  "code": 0,
+  "data": {
+    "account_name": "公众号名称",
+    "account_alias": "微信号",
+    "account_avatar": "头像URL",
+    "account_description": "功能介绍",
+    "account_id": "原始ID",
+    "account_biz": "biz参数",
+    "account_biz_number": 1234567890,
+    "account_qr_code": "二维码URL",
+    "msg_title": "文章标题",
+    "msg_desc": "文章摘要",
+    "msg_content": "HTML内容",
+    "msg_cover": "封面图URL",
+    "msg_author": "作者",
+    "msg_type": "post",
+    "msg_has_copyright": true,
+    "msg_publish_time": "2024-01-15T10:30:00.000Z",
+    "msg_publish_time_str": "2024/01/15 10:30:00",
+    "msg_link": "文章链接",
+    "msg_source_url": "阅读原文链接",
+    "msg_sn": "sn参数",
+    "msg_mid": 1234567890,
+    "msg_idx": 1
+  }
+}
+</code></pre>
+<h2>Error Handling</h2>
+<p>The skill provides comprehensive error handling with specific error codes:</p>
+<ul>
+<li><strong>1000</strong>: 文章获取失败 (General failure)</li>
+<li><strong>1001</strong>: 无法获取文章信息 (Missing title or publish time)</li>
+<li><strong>1002</strong>: 请求失败 (HTTP request failed)</li>
+<li><strong>1003</strong>: 响应为空 (Empty response)</li>
+<li><strong>1004</strong>: 访问过于频繁 (Rate limited)</li>
+<li><strong>1005</strong>: 脚本解析失败 (Script parsing error)</li>
+<li><strong>1006</strong>: 公众号已迁移 (Account migrated)</li>
+</ul>
+<p>Additional error codes (2001-2016) cover various content and account-related issues including copyright violations, deleted content, blocked accounts, and more.</p>
+<h2>Dependencies</h2>
+<p>The skill relies on several npm packages:</p>
+<ul>
+<li><strong>cheerio</strong>: HTML parsing</li>
+<li><strong>dayjs</strong>: Date formatting</li>
+<li><strong>request-promise</strong>: HTTP requests</li>
+<li><strong>qs</strong>: Query string parsing</li>
+<li><strong>lodash.unescape</strong>: HTML entities</li>
+</ul>
+<h2>Key Features</h2>
+<p>The WeChat Article Extractor skill stands out for its:</p>
+<ul>
+<li><strong>Robust Error Handling</strong>: Comprehensive error codes and messages</li>
+<li><strong>Flexible Input</strong>: Accepts both URLs and HTML content</li>
+<li><strong>Multiple Article Types</strong>: Supports various WeChat content formats</li>
+<li><strong>Anti-scraping Measures</strong>: Handles WeChat&#8217;s anti-scraping mechanisms</li>
+<li><strong>Sogou Integration</strong>: Can extract from Sogou WeChat search results</li>
+</ul>
+<h2>Practical Applications</h2>
+<p>This skill is valuable for:</p>
+<ul>
+<li><strong>Content Aggregators</strong>: Building WeChat article collections</li>
+<li><strong>Analytics Tools</strong>: Analyzing WeChat content trends</li>
+<li><strong>Content Repurposing</strong>: Converting WeChat articles for other platforms</li>
+<li><strong>Research Projects</strong>: Studying WeChat content patterns</li>
+<li><strong>Archiving Systems</strong>: Preserving WeChat articles</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The WeChat Article Extractor skill by OpenClaw provides a powerful and flexible solution for extracting structured data from WeChat Official Account articles. With its comprehensive feature set, robust error handling, and support for various article types, it&#8217;s an essential tool for developers working with WeChat content.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/freestylefly/wechat-article-extractor-skill/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/freestylefly/wechat-article-extractor-skill/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

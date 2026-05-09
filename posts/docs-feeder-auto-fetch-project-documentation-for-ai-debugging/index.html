@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docs Feeder: Auto-Fetch Project Documentation for AI Debugging | News of Tomorrow</title>
+<meta name="description" content="Docs Feeder automatically fetches comprehensive project documentation and feeds it to your AI agent for debugging and learning. Supports 50+ built-in projects w">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/docs-feeder-auto-fetch-project-documentation-for-ai-debugging/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Docs Feeder: Auto-Fetch Project Documentation for AI Debugging">
+<meta property="og:description" content="Docs Feeder automatically fetches comprehensive project documentation and feeds it to your AI agent for debugging and learning. Supports 50+ built-in projects w">
+<meta property="og:image" content="https://picsum.photos/seed/docs-feeder-auto-fetch-project-documentation-for-ai-debugging/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/docs-feeder-auto-fetch-project-documentation-for-ai-debugging/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-09">
+<meta property="article:modified_time" content="2026-03-09">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Docs Feeder: Auto-Fetch Project Documentation for AI Debugging">
+<meta name="twitter:description" content="Docs Feeder automatically fetches comprehensive project documentation and feeds it to your AI agent for debugging and learning. Supports 50+ built-in projects w">
+<meta name="twitter:image" content="https://picsum.photos/seed/docs-feeder-auto-fetch-project-documentation-for-ai-debugging/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Docs Feeder: Auto-Fetch Project Documentation for AI Debugging", "datePublished": "2026-03-09", "dateModified": "2026-03-09", "image": ["https://picsum.photos/seed/docs-feeder-auto-fetch-project-documentation-for-ai-debugging/1200/630"], "description": "Docs Feeder automatically fetches comprehensive project documentation and feeds it to your AI agent for debugging and learning. Supports 50+ built-in projects w", "mainEntityOfPage": "https://github.insightginie.com/posts/docs-feeder-auto-fetch-project-documentation-for-ai-debugging/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Docs Feeder: Auto-Fetch Project Documentation for AI Debugging", "item": "https://github.insightginie.com/posts/docs-feeder-auto-fetch-project-documentation-for-ai-debugging/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Docs Feeder: Auto-Fetch Project Documentation for AI Debugging</h1>
+<time datetime="2026-03-09" class="post-date" data-date="2026-03-09T02:16:23+00:00">2026-03-09</time>
+<img src="https://picsum.photos/seed/docs-feeder-auto-fetch-project-documentation-for-ai-debugging/800/400" class="post-hero" alt="Docs Feeder: Auto-Fetch Project Documentation for AI Debugging">
+<h2>What is Docs Feeder?</h2>
+<p>Docs Feeder is an intelligent documentation automation tool that fetches comprehensive project documentation and feeds it directly to your AI agent for debugging and learning. Instead of manually searching through documentation, Docs Feeder provides your AI with complete context by automatically retrieving the entire knowledge base of popular projects.</p>
+<h2>Core Functionality</h2>
+<p>The skill works by automatically fetching documentation from a registry of over 50 built-in projects including React, Next.js, Vue, Svelte, Astro, Hono, Express, Fastify, NestJS, Prisma, Drizzle, tRPC, Zod, Tailwind CSS, shadcn/ui, TypeScript, Vite, Bun, Deno, Playwright, Vitest, Supabase, Stripe, Clerk, Anthropic, OpenAI, LangChain, Docker, Kubernetes, Terraform, Rust, Go, Python, FastAPI, Django, and more.</p>
+<h2>How It Works</h2>
+<p>Docs Feeder uses intelligent discovery to locate documentation. It first checks for LLM-friendly formats like <code>/llms-full.txt</code> or <code>/llms.txt</code> at the project&#8217;s URL, which contain the entire knowledge base formatted for AI consumption. If those aren&#8217;t available, it falls back to GitHub README files or common patterns like <code>docs.xxx.com</code> or <code>xxx.dev</code>.</p>
+<h2>Usage Examples</h2>
+<p>The tool is incredibly simple to use. You can fetch documentation by project name with automatic registry lookup: <code>node fetch-docs.js nextjs</code>. For direct URL fetching: <code>node fetch-docs.js https://docs.anthropic.com</code>. You can also fetch raw content only without metadata headers using <code>--raw</code>, save to files with <code>--save</code>, or list all supported projects with <code>--list</code>.</p>
+<h2>Why This Approach Works</h2>
+<p>Most modern documentation sites ship with <code>/llms.txt</code> or <code>/llms-full.txt</code> &#8211; single files containing the entire knowledge base formatted for LLMs. This approach eliminates the need for manual searching, reading, and understanding documentation. Instead, you dump the complete documentation into context and let the AI cross-reference everything automatically.</p>
+<h2>Workflow Integration</h2>
+<p>The typical workflow involves fetching docs first, then describing your problem to the AI. For example: <code>node fetch-docs.js nextjs</code> followed by <code>&quot;I'm getting a hydration mismatch error with App Router...&quot;</code>. The AI then provides solutions based on complete documentation rather than fragmented information.</p>
+<h2>Technical Requirements</h2>
+<p>Docs Feeder requires only Node.js and has no external dependencies, making it lightweight and easy to deploy. The registry format is simple JSON where you can add your own projects by editing <code>docs-registry.json</code>.</p>
+<h2>Size Management</h2>
+<p>The tool includes intelligent size management, alerting users when documentation exceeds 500KB to prevent overwhelming the AI context window. This ensures optimal performance while maintaining comprehensive coverage.</p>
+<h2>Practical Applications</h2>
+<p>This skill is particularly valuable for developers working with complex frameworks or APIs where documentation is extensive. Whether you&#8217;re debugging a Next.js hydration error, troubleshooting Prisma migrations, or implementing Stripe payments, Docs Feeder provides your AI assistant with the complete context needed to deliver accurate, comprehensive solutions.</p>
+<h2>Open Source Availability</h2>
+<p>Docs Feeder is part of the OpenClaw skills repository, available on GitHub with full source code and documentation. The project demonstrates how intelligent documentation management can significantly enhance AI-assisted development workflows.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/zerone0x/docs-feeder/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/zerone0x/docs-feeder/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

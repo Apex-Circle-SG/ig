@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw AI Music Video Generator Skill &amp;#8211; Create Complete AI Music Videos | News of Tomorrow</title>
+<meta name="description" content="Learn how to use the OpenClaw AI Music Video Generator skill to create complete music videos with AI-generated music, visuals, and ffmpeg assembly.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-ai-music-video-generator-skill-create-complete-ai-music-videos/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw AI Music Video Generator Skill &amp;#8211; Create Complete AI Music Videos">
+<meta property="og:description" content="Learn how to use the OpenClaw AI Music Video Generator skill to create complete music videos with AI-generated music, visuals, and ffmpeg assembly.">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-ai-music-video-generator-skill-create-complete-ai-music-videos/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-ai-music-video-generator-skill-create-complete-ai-music-videos/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-07">
+<meta property="article:modified_time" content="2026-03-07">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw AI Music Video Generator Skill &amp;#8211; Create Complete AI Music Videos">
+<meta name="twitter:description" content="Learn how to use the OpenClaw AI Music Video Generator skill to create complete music videos with AI-generated music, visuals, and ffmpeg assembly.">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-ai-music-video-generator-skill-create-complete-ai-music-videos/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw AI Music Video Generator Skill &#8211; Create Complete AI Music Videos", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "image": ["https://picsum.photos/seed/openclaw-ai-music-video-generator-skill-create-complete-ai-music-videos/1200/630"], "description": "Learn how to use the OpenClaw AI Music Video Generator skill to create complete music videos with AI-generated music, visuals, and ffmpeg assembly.", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-ai-music-video-generator-skill-create-complete-ai-music-videos/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw AI Music Video Generator Skill &#8211; Create Complete AI Music Videos", "item": "https://github.insightginie.com/posts/openclaw-ai-music-video-generator-skill-create-complete-ai-music-videos/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw AI Music Video Generator Skill &#8211; Create Complete AI Music Videos</h1>
+<time datetime="2026-03-07" class="post-date" data-date="2026-03-07T16:19:07+00:00">2026-03-07</time>
+<img src="https://picsum.photos/seed/openclaw-ai-music-video-generator-skill-create-complete-ai-music-videos/800/400" class="post-hero" alt="OpenClaw AI Music Video Generator Skill &amp;#8211; Create Complete AI Music Videos">
+<h2>What is the AI Music Video Generator Skill?</h2>
+<p>The AI Music Video Generator skill is a comprehensive tool that creates complete music videos end-to-end. It generates AI music using Suno, creates visuals with OpenAI/Seedream/Google/Seedance, and assembles everything into a music video using ffmpeg. This skill supports timestamped lyrics, Suno native music video generation, and multiple modes including slideshow, video, and hybrid options.</p>
+<h2>Quick Start Examples</h2>
+<p>Start with these simple commands to generate different types of music videos:</p>
+<pre><code class="language-bash">"90년대 보이밴드 풍 한국어 노래 만들어줘" → music only
+"발라드 뮤비 만들어줘" → music + slideshow MV
+"EDM 뮤비 풀영상으로" → music + video clips MV
+"Suno 뮤비로 만들어줘" → Suno native music video
+</code></pre>
+<h2>Workflow Overview</h2>
+<h3>1. Plan Your Scenes</h3>
+<p>Before generating anything, create a <code>prompts.json</code> file with scene descriptions derived from your song&#8217;s lyrics, mood, and narrative. For a 3-minute song, aim for 8-12 scenes:</p>
+<pre><code class="language-json">[
+  {
+    "prompt": "Neon-lit city street at night, rain reflections",
+    "type": "image"
+  },
+  {
+    "prompt": "Camera slowly panning across a rooftop at sunset",
+    "type": "video"
+  },
+  "A lone figure walking through cherry blossoms"
+]
+</code></pre>
+<h3>2. Generate Music</h3>
+<p>Use the Suno music generation script with your desired style and settings:</p>
+<pre><code class="language-bash">bash scripts/suno_music.sh \
+  --prompt "가사 또는 설명" \
+  --style "90s boy band pop, korean" \
+  --title "너만을 원해" \
+  --model V4_5ALL --custom \
+  --outdir /tmp/mv_project
+</code></pre>
+<p>Available model options include V4_5ALL (default), V5, V4_5PLUS, V4_5, and V4. You can also generate instrumental tracks, specify vocal gender, and avoid certain styles using negative tags.</p>
+<h3>3. Generate Visuals</h3>
+<p>Choose your preferred provider and mode for visual generation:</p>
+<pre><code class="language-bash">bash scripts/gen_visuals.sh \
+  --mode slideshow \
+  --prompts-file /tmp/mv_project/prompts.json \
+  --image-provider seedream \
+  --outdir /tmp/mv_project
+</code></pre>
+<p>Alternatively, use OpenAI for cheaper but lower resolution images:</p>
+<pre><code class="language-bash">bash scripts/gen_visuals.sh \
+  --mode slideshow \
+  --prompts-file /tmp/mv_project/prompts.json \
+  --image-provider openai --image-model gpt-image-1-mini --image-quality medium \
+  --outdir /tmp/mv_project
+</code></pre>
+<h3>4. Assemble the Music Video</h3>
+<p>Combine your audio and visuals into a final music video:</p>
+<pre><code class="language-bash">bash scripts/assemble_mv.sh \
+  --audio /tmp/mv_project/track_0_xxx.mp3 \
+  --outdir /tmp/mv_project \
+  --output /tmp/mv_project/final_mv.mp4 \
+  --transition fade
+</code></pre>
+<p>The script automatically detects and overlays lyrics if a <code>lyrics.srt</code> file exists, or you can provide custom subtitle files.</p>
+<h2>Available Modes</h2>
+<p>Choose from different visual generation modes based on your needs and budget:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Visual Type</th>
+<th>Best For</th>
+<th>Cost (10 scenes)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slideshow</td>
+<td>AI images</td>
+<td>Fast, cheap</td>
+<td>~$0.02 (mini low) / ~$0.09 (mini med) / ~$0.45 (Seedream)</td>
+</tr>
+<tr>
+<td>video</td>
+<td>AI video clips</td>
+<td>Premium</td>
+<td>~$1.40 (Seedance Lite) / ~$8.00 (Sora 2)</td>
+</tr>
+<tr>
+<td>hybrid</td>
+<td>Mix of both</td>
+<td>Balanced</td>
+<td>~$0.50-$4.00</td>
+</tr>
+<tr>
+<td>suno-native</td>
+<td>Suno MV</td>
+<td>Easiest</td>
+<td>Suno credits only</td>
+</tr>
+</table>
+<h2>Provider Options</h2>
+<p>Choose from various providers for images and videos:</p>
+<h3>Image Providers</h3>
+<ul>
+<li><code>--image-provider seedream</code> (recommended)</li>
+<li><code>--image-provider openai</code></li>
+<li><code>--image-provider google-together</code></li>
+</ul>
+<p>OpenAI model options: <code>gpt-image-1-mini</code> (default, cheap) or <code>gpt-image-1</code> (premium)</p>
+<h3>Video Providers</h3>
+<ul>
+<li><code>--video-provider sora</code> (default)</li>
+<li><code>--video-provider sora-pro</code></li>
+<li><code>--video-provider seedance-lite</code></li>
+<li><code>--video-provider seedance-pro</code></li>
+<li><code>--video-provider veo-fast</code></li>
+<li><code>--video-provider veo-audio</code></li>
+</ul>
+<h2>Cost Tracking and Management</h2>
+<p>Every script provides cost estimates before and after execution. Always use <code>--dry-run</code> first to see the cost estimate:</p>
+<pre><code class="language-bash">bash scripts/suno_music.sh --dry-run --prompt "your prompt" --style "your style"
+</code></pre>
+<p>Cost data is saved to <code>{outdir}/cost_estimate.json</code> and <code>{outdir}/visuals_meta.json</code> for your records.</p>
+<h2>Environment Variables</h2>
+<p>Set these required environment variables before running any scripts:</p>
+<pre><code class="language-bash">export SUNO_API_KEY="your-sunoapi-key"          # Required — sunoapi.org
+export OPENAI_API_KEY="your-openai-key"        # Required — images + Sora video
+export BYTEPLUS_API_KEY="your-byteplus-key"    # Optional — Seedream 4.5
+export TOGETHER_API_KEY="your-together-key"    # Optional — Seedance, Veo, Imagen
+export SUNO_CALLBACK_URL=""                   # Optional — see Callback URL below
+</code></pre>
+<h2>Persona Workflow for Channel Consistency</h2>
+<p>Maintain consistent style across multiple songs using the persona system:</p>
+<pre><code class="language-bash"># 1. Create first song and persona
+bash scripts/suno_music.sh \
+  --prompt "코드 리뷰하며 듣는 노래" \
+  --style "indie rock, energetic, coding vibe" \
+  --title "Pull Request" \
+  --custom --create-persona \
+  --persona-name "개발자 노동요 싱어" \
+  --persona-desc "개발자가 코딩하며 듣기 좋은 에너지 넘치는 보컬. 인디록, 일렉, 팝 장르를 넘나든다." \
+  --persona-style "indie rock, electronic, developer work music" \
+  --outdir /tmp/dev-bgm-01
+
+# 2. Check persona.json for personaId
+cat /tmp/dev-bgm-01/persona.json
+
+# 3. Use same persona for next song
+bash scripts/suno_music.sh \
+  --prompt "야근하면서 듣는 노래" \
+  --style "electronic pop, night coding" \
+  --title "Midnight Deploy" \
+  --custom --persona-id &lt;PERSONA_ID&gt; \
+  --outdir /tmp/dev-bgm-02
+</code></pre>
+<h2>Prerequisites</h2>
+<p>Ensure you have these tools installed:</p>
+<ul>
+<li><code>curl</code></li>
+<li><code>python3</code></li>
+<li><code>ffmpeg</code> (for final assembly)</li>
+</ul>
+<h2>Callback URL Configuration</h2>
+<p>The Suno API requires a <code>callBackUrl</code> field. By default, if <code>SUNO_CALLBACK_URL</code> is not set, the script uses <code>https://localhost/noop</code> as a harmless no-op endpoint. You can customize this or disable it by setting it to any unreachable URL.</p>
+<h2>References</h2>
+<p>For more detailed information:</p>
+<ul>
+<li>SunoAPI details: Read <code>references/sunoapi.md</code></li>
+<li>Visual provider details: Read <code>references/visual-providers.md</code></li>
+</ul>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/gprecious/ai-music-video/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/gprecious/ai-music-video/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

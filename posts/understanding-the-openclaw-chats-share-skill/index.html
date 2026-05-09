@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the OpenClaw Chats-Share Skill | News of Tomorrow</title>
+<meta name="description" content="The OpenClaw chats-share skill enables users to export AI agent conversations as public web pages, making it easy to share and document chat sessions.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-openclaw-chats-share-skill/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the OpenClaw Chats-Share Skill">
+<meta property="og:description" content="The OpenClaw chats-share skill enables users to export AI agent conversations as public web pages, making it easy to share and document chat sessions.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-openclaw-chats-share-skill/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-openclaw-chats-share-skill/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-14">
+<meta property="article:modified_time" content="2026-03-14">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the OpenClaw Chats-Share Skill">
+<meta name="twitter:description" content="The OpenClaw chats-share skill enables users to export AI agent conversations as public web pages, making it easy to share and document chat sessions.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-openclaw-chats-share-skill/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the OpenClaw Chats-Share Skill", "datePublished": "2026-03-14", "dateModified": "2026-03-14", "image": ["https://picsum.photos/seed/understanding-the-openclaw-chats-share-skill/1200/630"], "description": "The OpenClaw chats-share skill enables users to export AI agent conversations as public web pages, making it easy to share and document chat sessions.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-openclaw-chats-share-skill/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the OpenClaw Chats-Share Skill", "item": "https://github.insightginie.com/posts/understanding-the-openclaw-chats-share-skill/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the OpenClaw Chats-Share Skill</h1>
+<time datetime="2026-03-14" class="post-date" data-date="2026-03-14T02:16:23+00:00">2026-03-14</time>
+<img src="https://picsum.photos/seed/understanding-the-openclaw-chats-share-skill/800/400" class="post-hero" alt="Understanding the OpenClaw Chats-Share Skill">
+<h2>What is the OpenClaw Chats-Share Skill?</h2>
+<p>The OpenClaw chats-share skill is a specialized tool designed to transform AI agent conversations into shareable public web pages. This skill serves as a bridge between private chat sessions and public documentation, allowing users to export conversation histories for various purposes including sharing externally, creating documentation, or publishing chat sessions to public URLs.</p>
+<h2>Core Functionality</h2>
+<p>At its essence, the chats-share skill provides a structured workflow for converting AI conversations into a format suitable for public consumption. The skill operates through a series of well-defined steps that ensure conversations are properly extracted, formatted, and prepared for sharing while maintaining privacy and security standards.</p>
+<h3>Supported Platforms and Agents</h2>
+<p>The skill is designed to work with multiple AI agent platforms, with specific support for OpenClaw agents. It also includes a generic fallback for unknown platforms, making it versatile enough to handle various AI conversation scenarios. The skill can automatically detect the agent type and adapt its behavior accordingly.</p>
+<h2>The Workflow Process</h2>
+<h3>1. Setup and Configuration</h3>
+<p>The skill begins by detecting the agent type and loading the project directory and site URL using the agent profile. For new users, it asks whether they have an existing chats-share repository, guiding them through either first-time setup or integration with an existing project.</p>
+<h3>2. Session Location and Selection</h3>
+<p>Once configured, the skill lists available sessions using the agent profile discovery mechanism. Users can then review and confirm which session they want to share, providing a clear selection interface.</p>
+<h3>3. Extraction and Conversion</h3>
+<p>The skill follows platform-specific conversion guidelines to extract conversation data and convert it into a standardized YAML format. This ensures consistency across different platforms and agent types.</p>
+<h3>4. Metadata Population</h3>
+<p>A critical aspect of the skill is its ability to automatically populate structural fields while prompting users for human-facing metadata. This includes setting visibility to public, asking for display names for participants, suggesting titles based on content, and requesting descriptions and channel information.</p>
+<h3>5. Privacy and Security Measures</h3>
+<p>Before finalizing the export, the skill performs comprehensive redaction of sensitive information. This includes removing API keys, tokens, passwords, file paths containing usernames, email addresses, phone numbers, and internal URLs or private IPs. This step ensures that shared conversations don&#8217;t inadvertently expose sensitive data.</p>
+<h3>6. Confirmation and Version Control</h3>
+<p>The skill suggests appropriate filenames based on dates and topics, shows previews for user confirmation, and then creates dedicated Git branches for each conversation export. This version control approach keeps each conversation isolated and organized, making it easier to manage and track changes over time.</p>
+<h2>Publishing and Sharing</h2>
+<p>After the conversation is processed and saved, users have the option to publish their shared conversation. The skill can push the dedicated branch and open a pull request, though this step only occurs after explicit user request. This gives users full control over when and how their conversations become publicly available.</p>
+<h2>Edge Cases and Special Considerations</h2>
+<p>The skill includes handling for various edge cases, such as first-time project setup and large or complex sessions that might require special processing. For unknown platforms, it provides a generic skill-based fallback to ensure broad compatibility.</p>
+<h2>Benefits and Use Cases</h2>
+<p>The OpenClaw chats-share skill offers numerous benefits for users who need to share AI conversations. It provides a professional way to document AI interactions, create tutorials or examples, share successful prompts or workflows, and maintain conversation archives. The skill&#8217;s structured approach ensures that shared content is both useful and secure.</p>
+<h2>Technical Implementation</h2>
+<p>Under the hood, the skill leverages Git for version control, YAML for data serialization, and follows platform-specific guidelines for data extraction. Its modular design allows for easy extension to support new platforms and agent types as they emerge in the AI ecosystem.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw chats-share skill represents a thoughtful solution to the challenge of sharing AI conversations in a safe, organized, and professional manner. By automating the complex process of conversation extraction, formatting, and publishing while maintaining strict privacy standards, it enables users to leverage their AI interactions for documentation, sharing, and public engagement without compromising security or quality.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/imyelo/chats-share/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/imyelo/chats-share/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

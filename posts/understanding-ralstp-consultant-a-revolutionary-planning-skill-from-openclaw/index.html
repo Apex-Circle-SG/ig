@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding RALSTP Consultant: A Revolutionary Planning Skill from OpenClaw | News of Tomorrow</title>
+<meta name="description" content="Discover how RALSTP Consultant uses Recursive Agents and Landmarks Strategic-Tactical Planning to analyze complex problems, identify dependencies, and suggest o">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-ralstp-consultant-a-revolutionary-planning-skill-from-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding RALSTP Consultant: A Revolutionary Planning Skill from OpenClaw">
+<meta property="og:description" content="Discover how RALSTP Consultant uses Recursive Agents and Landmarks Strategic-Tactical Planning to analyze complex problems, identify dependencies, and suggest o">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-ralstp-consultant-a-revolutionary-planning-skill-from-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-ralstp-consultant-a-revolutionary-planning-skill-from-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-16">
+<meta property="article:modified_time" content="2026-03-16">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding RALSTP Consultant: A Revolutionary Planning Skill from OpenClaw">
+<meta name="twitter:description" content="Discover how RALSTP Consultant uses Recursive Agents and Landmarks Strategic-Tactical Planning to analyze complex problems, identify dependencies, and suggest o">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-ralstp-consultant-a-revolutionary-planning-skill-from-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding RALSTP Consultant: A Revolutionary Planning Skill from OpenClaw", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "image": ["https://picsum.photos/seed/understanding-ralstp-consultant-a-revolutionary-planning-skill-from-openclaw/1200/630"], "description": "Discover how RALSTP Consultant uses Recursive Agents and Landmarks Strategic-Tactical Planning to analyze complex problems, identify dependencies, and suggest o", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-ralstp-consultant-a-revolutionary-planning-skill-from-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding RALSTP Consultant: A Revolutionary Planning Skill from OpenClaw", "item": "https://github.insightginie.com/posts/understanding-ralstp-consultant-a-revolutionary-planning-skill-from-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding RALSTP Consultant: A Revolutionary Planning Skill from OpenClaw</h1>
+<time datetime="2026-03-16" class="post-date" data-date="2026-03-16T05:15:55+00:00">2026-03-16</time>
+<img src="https://picsum.photos/seed/understanding-ralstp-consultant-a-revolutionary-planning-skill-from-openclaw/800/400" class="post-hero" alt="Understanding RALSTP Consultant: A Revolutionary Planning Skill from OpenClaw">
+<h2>What is RALSTP Consultant?</h2>
+<p>RALSTP Consultant is an advanced planning skill developed as part of the OpenClaw skills repository. Based on the groundbreaking PhD thesis &#8220;Recursive Agents and Landmarks Strategic-Tactical Planning (RALSTP)&#8221; by Dorian Buksz from King&#8217;s College London (2024), this skill provides a systematic approach to analyzing complex problems by identifying agents, calculating difficulty, and suggesting decomposition strategies.</p>
+<h2>Core Concepts of RALSTP</h2>
+<h3>1. Agents Identification</h3>
+<p>At the heart of RALSTP is the concept of <strong>agents</strong> &#8211; objects with dynamic types that are active during goal state search. Agents are identified by their appearance as the first argument of a predicate in any action&#8217;s effects.</p>
+<p><strong>Dynamic vs Static Types:</strong></p>
+<ul>
+<li><strong>Dynamic types</strong> appear in action effects (e.g., truck, driver in drive actions)</li>
+<li><strong>Static types</strong> never appear in action effects (e.g., location)</li>
+</ul>
+<p><strong>Real PDDL Example:</strong></p>
+<pre><code>(:types
+  ambulance police_car tow_truck fire_brigade - vehicle
+  acc_victim vehicle car - subject
+  ...
+)
+</code></pre>
+<p>In this example, ambulance, police_car, tow_truck, and fire_brigade are agents because they appear in action effects like &#8216;at&#8217;, &#8216;available&#8217;, and &#8216;busy&#8217;.</p>
+<h3>2. Passive Objects</h3>
+<p>Passive objects are entities that are acted upon but don&#8217;t act themselves. These include packages, cargo, data, files, and in the RTAM example, victims and vehicles that need assistance.</p>
+<h3>3. Agent Dependencies</h3>
+<p>Agent dependencies define relationships between agents based on what preconditions they satisfy for other agents. These relationships fall into three categories:</p>
+<ul>
+<li><strong>Independent</strong>: Agents that don&#8217;t depend on each other</li>
+<li><strong>Dependent</strong>: Agents that need other agents&#8217; preconditions satisfied</li>
+<li><strong>Conflicting</strong>: Agents that interfere with each other</li>
+</ul>
+<h3>4. Entanglement</h3>
+<p>Entanglement occurs when agents compete for shared resources such as time, space, or locations. It&#8217;s measured by:</p>
+<ul>
+<li>Count of shared predicates</li>
+<li>Conflict frequency in goal states</li>
+</ul>
+<p><strong>Real PDDL Example (RTAM &#8211; Road Traffic Accident):</strong></p>
+<pre><code>(:durative-action
+  confirm_accident
+  :parameters (?V - police_car ?P - subject ?A - accident_location)
+  :condition (and (at start (at ?V ?A)) (at start (at ?P ?A)) ...)
+  :effect (and (at end (certified ?P)) ...)
+)
+
+(:durative-action
+  untrap
+  :parameters (?V - fire_brigade ?P - acc_victim ?A - accident_location)
+  :condition (and (at start (certified ?P)) (at start (available ?V)) ...)
+)
+</code></pre>
+<p>In this example, police_car must certify the accident BEFORE fire_brigade can untrap victims, creating a dependency chain. Both actions require being at the same accident_location, creating resource conflict.</p>
+<h3>5. Landmarks</h3>
+<p>Landmarks are facts that must be true in any valid plan, identified by working backward from goals to initial state. There are three types:</p>
+<ul>
+<li><strong>Fact landmarks</strong>: Propositions that must hold</li>
+<li><strong>Action landmarks</strong>: Actions that must be executed</li>
+<li><strong>Relaxed landmarks</strong>: Landmarks considering only positive effects</li>
+</ul>
+<p><strong>Real PDDL Example (RTAM Sequential Dependencies):</strong></p>
+<p>Goal: (delivered victim1) ∧ (delivered car1)</p>
+<p>Required sequence of fact landmarks:</p>
+<ol>
+<li>(certified victim1) &#8211; police must confirm</li>
+<li>(untrapped victim1) &#8211; fire must free them</li>
+<li>(aided victim1) &#8211; ambulance must treat</li>
+<li>(loaded victim1 ambulance) &#8211; ambulance must load</li>
+<li>(at victim1 hospital) &#8211; deliver to hospital</li>
+<li>(delivered victim1) &#8211; FINAL</li>
+</ol>
+<p>Action landmarks follow the sequence: confirm_accident → untrap → first_aid → load_victim → unload_victim → deliver_victim.</p>
+<h3>6. Strategic vs Tactical Planning</h3>
+<p>RALSTP distinguishes between two levels of planning:</p>
+<ul>
+<li><strong>Strategic</strong>: Abstract planning level that solves &#8220;what needs to happen first&#8221; while ignoring details</li>
+<li><strong>Tactical</strong>: Detailed execution level that solves &#8220;exactly how to do it&#8221;</li>
+</ul>
+<h3>7. Difficulty Metrics</h3>
+<p>The difficulty of a problem increases with:</p>
+<ul>
+<li>More agents in goal state</li>
+<li>More entangled agents (conflicting dependencies)</li>
+<li>More inactive dynamic objects not in goal</li>
+</ul>
+<p>The Buksz Complexity Score can be approximated as: Agent Count × Entanglement Factor.</p>
+<h2>Implementation and Usage</h2>
+<p>The RALSTP Consultant skill operates in two modes:</p>
+<ol>
+<li><strong>Conceptual Mode (Default)</strong>: Uses LLM to apply RALSTP methodology to natural language problems without requiring PDDL files. The agent identifies agents and landmarks conceptually.</li>
+<li><strong>Formal Mode (Optional)</strong>: If PDDL domain/problem files are provided, the included scripts/analyze.py can be run to mathematically extract agents and landmarks.</li>
+</ol>
+<p><strong>Usage Example:</strong></p>
+<p>For any complex problem, simply describe it and the skill will apply RALSTP analysis:</p>
+<pre><code>RALSTP analyze: I need to migrate 1000 VMs from datacentre A to B with minimal downtime
+</code></pre>
+<h2>Output Format</h2>
+<p>The skill provides a comprehensive analysis in this format:</p>
+<pre><code>## RALSTP Analysis
+### Agents Identified
+- [list agents and their types]
+### Passive Objects
+- [list objects being acted upon]
+### Dependency Graph
+- [which agents depend on which]
+### Difficulty Assessment
+- Agent Count: X
+- Entanglement: Low/Medium/High
+- Estimated Complexity: [score]
+### Strategic Phase
+- [high-level plan ignoring details]
+### Tactical Phase
+- [detailed execution]
+### Decomposition Suggestion
+- Split by: [agent type / landmark / location]
+- Parallelize: [what can run concurrently]
+- Risks: [potential conflicts/entanglements]
+</code></pre>
+<h2>When to Use RALSTP Consultant</h2>
+<p><strong>USE for:</strong></p>
+<ul>
+<li>Multi-step workflows with multiple actors</li>
+<li>Migration/tasks with dependencies</li>
+<li>Resource contention problems</li>
+<li>Complex orchestrations</li>
+</ul>
+<p><strong>SKIP for:</strong></p>
+<ul>
+<li>Simple Q&#038;A</li>
+<li>Single-task problems</li>
+</ul>
+<h2>Reference Example: RTAM Domain</h2>
+<p>The Road Traffic Accident Management domain from IPC-2014 provides an excellent illustration of RALSTP in action:</p>
+<p><strong>Agents (4):</strong></p>
+<ul>
+<li>ambulance &#8211; transports victims to hospital</li>
+<li>police_car &#8211; certifies accident/victims</li>
+<li>tow_truck &#8211; recovers vehicles</li>
+<li>fire_brigade &#8211; untraps victims, extinguishes fires</li>
+</ul>
+<p><strong>Passive Objects:</strong></p>
+<ul>
+<li>acc_victim &#8211; people needing help</li>
+<li>car &#8211; vehicles involved in accident</li>
+</ul>
+<p><strong>Dependencies (Critical Path):</strong></p>
+<p>police_car → fire_brigade → ambulance → hospital</p>
+<p><strong>Landmarks Chain:</strong></p>
+<p>confirm_accident → untrap → first_aid → load_victim → unload_victim → deliver_victim</p>
+<p><strong>Entanglement:</strong></p>
+<ul>
+<li>Multiple vehicles must be at same location (accident scene)</li>
+<li>Vehicles have limited availability (busy during actions)</li>
+<li>Sequence constraints: can&#8217;t deliver before certify</li>
+</ul>
+<p><strong>Difficulty:</strong> High &#8211; 4 agents, tight dependencies, shared locations</p>
+<h2>Conclusion</h2>
+<p>RALSTP Consultant represents a significant advancement in AI-assisted planning and problem-solving. By systematically identifying agents, analyzing dependencies, and calculating difficulty, it provides a structured approach to tackling complex, multi-actor problems. Whether you&#8217;re managing IT migrations, orchestrating business processes, or coordinating emergency responses, RALSTP Consultant offers valuable insights for strategic and tactical planning.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/thedragosexperience/ralstp-consultant/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/thedragosexperience/ralstp-consultant/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

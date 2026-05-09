@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoltGuard: OpenClaw&amp;#8217;s Security Guard for AI Safety | News of Tomorrow</title>
+<meta name="description" content="MoltGuard protects your OpenClaw AI agent from prompt injection, data exfiltration, and malicious commands. Learn how this security guard works to keep your AI">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/moltguard-openclaws-security-guard-for-ai-safety/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="MoltGuard: OpenClaw&amp;#8217;s Security Guard for AI Safety">
+<meta property="og:description" content="MoltGuard protects your OpenClaw AI agent from prompt injection, data exfiltration, and malicious commands. Learn how this security guard works to keep your AI">
+<meta property="og:image" content="https://picsum.photos/seed/moltguard-openclaws-security-guard-for-ai-safety/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/moltguard-openclaws-security-guard-for-ai-safety/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-17">
+<meta property="article:modified_time" content="2026-03-17">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MoltGuard: OpenClaw&amp;#8217;s Security Guard for AI Safety">
+<meta name="twitter:description" content="MoltGuard protects your OpenClaw AI agent from prompt injection, data exfiltration, and malicious commands. Learn how this security guard works to keep your AI">
+<meta name="twitter:image" content="https://picsum.photos/seed/moltguard-openclaws-security-guard-for-ai-safety/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "MoltGuard: OpenClaw&#8217;s Security Guard for AI Safety", "datePublished": "2026-03-17", "dateModified": "2026-03-17", "image": ["https://picsum.photos/seed/moltguard-openclaws-security-guard-for-ai-safety/1200/630"], "description": "MoltGuard protects your OpenClaw AI agent from prompt injection, data exfiltration, and malicious commands. Learn how this security guard works to keep your AI", "mainEntityOfPage": "https://github.insightginie.com/posts/moltguard-openclaws-security-guard-for-ai-safety/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "MoltGuard: OpenClaw&#8217;s Security Guard for AI Safety", "item": "https://github.insightginie.com/posts/moltguard-openclaws-security-guard-for-ai-safety/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>MoltGuard: OpenClaw&#8217;s Security Guard for AI Safety</h1>
+<time datetime="2026-03-17" class="post-date" data-date="2026-03-17T04:16:42+00:00">2026-03-17</time>
+<img src="https://picsum.photos/seed/moltguard-openclaws-security-guard-for-ai-safety/800/400" class="post-hero" alt="MoltGuard: OpenClaw&amp;#8217;s Security Guard for AI Safety">
+<h2>What is MoltGuard?</h2>
+<p>MoltGuard is a security guardrail plugin for OpenClaw that protects your AI agent from various security threats. Think of it as a bodyguard for your AI, watching for malicious content, preventing data leaks, and blocking dangerous commands before they can cause harm.</p>
+<h2>Why You Need MoltGuard</h2>
+<p>In today&#8217;s AI landscape, security threats are real and evolving. Prompt injection attacks can trick your AI into doing things it shouldn&#8217;t, data exfiltration can steal sensitive information, and malicious commands can delete files or compromise systems. MoltGuard acts as your first line of defense against these threats.</p>
+<h2>Key Protection Features</h2>
+<h3>Prompt Injection Defense</h3>
+<p>MoltGuard detects hidden instructions in files and web content that could manipulate your AI&#8217;s behavior. This includes malicious email content, web pages with hidden commands, and documents designed to hijack your agent&#8217;s responses.</p>
+<h3>Data Exfiltration Prevention</h3>
+<p>The system monitors for attempts to leak sensitive information like credentials, personal data, or proprietary content. It blocks unauthorized data transfers and alerts you to potential breaches.</p>
+<h3>Command Injection Protection</h3>
+<p>MoltGuard analyzes commands before execution, blocking dangerous operations like file deletion, system modifications, or risky API calls that could compromise your system.</p>
+<h2>Getting Started with MoltGuard</h2>
+<h3>Installation</h3>
+<p>Installation is straightforward and takes just seconds:</p>
+<pre><code>openclaw plugins install @openguardrails/moltguard
+</code></pre>
+<p>Once installed, MoltGuard works immediately with 500 free security detections per day.</p>
+<h3>Testing Your Protection</h3>
+<p>After installation, it&#8217;s crucial to test that MoltGuard is working. The plugin includes a test file that demonstrates its capabilities:</p>
+<pre><code>cat ~/.openclaw/extensions/moltguard/samples/test-email-popup.txt
+</code></pre>
+<p>When you read this file, MoltGuard will detect the hidden prompt injection attack and alert you. This immediate demonstration shows users that their protection is active and working.</p>
+<h2>Available Commands</h2>
+<p>MoltGuard provides several useful commands to manage your security:</p>
+<ul>
+<li><code>/og_status</code> &#8211; Shows API key, quota usage, plan, and protection mode</li>
+<li><code>/og_core</code> &#8211; Opens the Core portal for account management</li>
+<li><code>/og_claim</code> &#8211; Shows Agent ID and API Key to claim this agent</li>
+<li><code>/og_config</code> &#8211; Shows how to configure your API key</li>
+<li><code>/og_dashboard</code> &#8211; Starts the local Dashboard and shows access URLs</li>
+</ul>
+<h2>Security Technology</h2>
+<h3>Core Risk Surfaces</h3>
+<p>MoltGuard analyzes three main risk categories:</p>
+<ol>
+<li><strong>Prompt/Instruction Risk</strong> &#8211; Detects prompt injection, malicious instructions, and unauthorized tasks</li>
+<li><strong>Behavioral Risk</strong> &#8211; Identifies dangerous commands, file deletion attempts, and risky API calls</li>
+<li><strong>Data Risk</strong> &#8211; Prevents secret leakage, PII exposure, and sending sensitive data to LLMs</li>
+</ol>
+<h3>Intent-Action Mismatch Detection</h3>
+<p>A sophisticated feature that catches agents saying one thing but doing another. This prevents scenarios where an AI claims to be performing a safe action while actually executing something harmful.</p>
+<h2>Plans and Pricing</h2>
+<p>MoltGuard offers several plans to fit different needs:</p>
+<ul>
+<li><strong>Free (Autonomous)</strong> &#8211; $0/month, 500 detections per day</li>
+<li><strong>Starter</strong> &#8211; $19/month, 100K detections per month</li>
+<li><strong>Pro</strong> &#8211; $49/month, 300K detections per month</li>
+<li><strong>Business</strong> &#8211; $199/month, 2M detections per month</li>
+<li><strong>Enterprise</strong> &#8211; Custom pricing for large organizations</li>
+</ul>
+<h2>Enterprise Features</h2>
+<p>For organizations with private Core deployments, MoltGuard supports enterprise enrollment:</p>
+<pre><code>node ~/.openclaw/extensions/moltguard/scripts/enterprise-enroll.mjs https://core.company.com
+</code></pre>
+<p>This connects your MoltGuard to your enterprise Core instance instead of the public one, providing centralized management and reporting.</p>
+<h2>Maintenance and Updates</h2>
+<p>Keeping MoltGuard updated ensures you have the latest security protections:</p>
+<pre><code>openclaw plugins update moltguard
+openclaw gateway restart
+</code></pre>
+<p>To uninstall MoltGuard when no longer needed:</p>
+<pre><code>node ~/.openclaw/extensions/moltguard/scripts/uninstall.mjs
+</code></pre>
+<h2>Support and Contact</h2>
+<p>For support or questions, contact the MoltGuard team at thomas@openguardrails.com. The plugin is actively maintained with regular updates to address new security threats.</p>
+<h2>Real-World Benefits</h2>
+<p>MoltGuard provides peace of mind by:</p>
+<ul>
+<li>Protecting against evolving AI security threats</li>
+<li>Preventing data breaches and information leaks</li>
+<li>Maintaining system integrity through command filtering</li>
+<li>Providing visibility into security events and threats</li>
+<li>Ensuring compliance with data protection requirements</li>
+</ul>
+<p>By implementing MoltGuard, you&#8217;re taking a proactive approach to AI security, protecting not just your system but also your users and their data from increasingly sophisticated threats.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/thomaslwang/antivirus/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/thomaslwang/antivirus/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

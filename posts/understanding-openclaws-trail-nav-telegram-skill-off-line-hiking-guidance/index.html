@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding OpenClaw&amp;#8217;s Trail-Nav-Telegram Skill: Off-Line Hiking Guidance | News of Tomorrow</title>
+<meta name="description" content="Discover how the Trail-Nav-Telegram skill by OpenClaw enables offline hiking guidance using Telegram location messages for a safer and efficient hike.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-openclaws-trail-nav-telegram-skill-off-line-hiking-guidance/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding OpenClaw&amp;#8217;s Trail-Nav-Telegram Skill: Off-Line Hiking Guidance">
+<meta property="og:description" content="Discover how the Trail-Nav-Telegram skill by OpenClaw enables offline hiking guidance using Telegram location messages for a safer and efficient hike.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-openclaws-trail-nav-telegram-skill-off-line-hiking-guidance/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-openclaws-trail-nav-telegram-skill-off-line-hiking-guidance/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-07">
+<meta property="article:modified_time" content="2026-03-07">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding OpenClaw&amp;#8217;s Trail-Nav-Telegram Skill: Off-Line Hiking Guidance">
+<meta name="twitter:description" content="Discover how the Trail-Nav-Telegram skill by OpenClaw enables offline hiking guidance using Telegram location messages for a safer and efficient hike.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-openclaws-trail-nav-telegram-skill-off-line-hiking-guidance/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding OpenClaw&#8217;s Trail-Nav-Telegram Skill: Off-Line Hiking Guidance", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "image": ["https://picsum.photos/seed/understanding-openclaws-trail-nav-telegram-skill-off-line-hiking-guidance/1200/630"], "description": "Discover how the Trail-Nav-Telegram skill by OpenClaw enables offline hiking guidance using Telegram location messages for a safer and efficient hike.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-openclaws-trail-nav-telegram-skill-off-line-hiking-guidance/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding OpenClaw&#8217;s Trail-Nav-Telegram Skill: Off-Line Hiking Guidance", "item": "https://github.insightginie.com/posts/understanding-openclaws-trail-nav-telegram-skill-off-line-hiking-guidance/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding OpenClaw&#8217;s Trail-Nav-Telegram Skill: Off-Line Hiking Guidance</h1>
+<time datetime="2026-03-07" class="post-date" data-date="2026-03-07T21:45:46+00:00">2026-03-07</time>
+<img src="https://picsum.photos/seed/understanding-openclaws-trail-nav-telegram-skill-off-line-hiking-guidance/800/400" class="post-hero" alt="Understanding OpenClaw&amp;#8217;s Trail-Nav-Telegram Skill: Off-Line Hiking Guidance">
+<p><!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Understanding OpenClaw&#8217;s Trail-Nav-Telegram Skill: Off-Line Hiking Guidance</title></head><body></p>
+<article>
+<h1>Understanding OpenClaw&#8217;s Trail-Nav-Telegram Skill: Off-Line Hiking Guidance</h1>
+<p>The <strong>Trail-Nav-Telegram</strong> skill by OpenClaw is an innovative tool designed for hikers who want to navigate their routes efficiently using Telegram. This skill empowers LLM (Language Learning Model) agents to offer offline-capable hiking route guidance through Telegram location messages, ensuring hikers stay on track and safe during their adventures.</p>
+<h2>Introduction to Trail-Nav-Telegram</h2>
+<p>The primary function of the Trail-Nav-Telegram skill is to provide offline-capable hiking route guidance using Telegram location messages. This is particularly useful when building and operating LLM agent workflows that import GPX/KML routes and answer questions like &#8216;Am I off-route?&#8217; or &#8216;Which way should I go?&#8217; with minimal token usage and fixed outputs.</p>
+<h2>Key Features and Goals</h2>
+<ul>
+<li><strong>Telegram Integration</strong>: Hikers can send their location and short commands directly through Telegram (iOS), making it a user-friendly interface.</li>
+<li><strong>Low-Token Usage</strong>: The skill performs all geometry calculations deterministically, minimizing the use of LLM tokens. This ensures that the LLM is used only for optional wording, keeping the process efficient.</li>
+<li><strong>Respect for Access Controls</strong>: The skill respects access controls and does not bypass logins or captchas on external sites, ensuring a secure and reliable experience.</li>
+</ul>
+<h3>Workflow</h3>
+<ol>
+<li><strong>Import Route</strong>: The skill allows users to import a route (GPX/KML) and build a compact RoutePack, which includes a simplified polyline, bounding box, and endpoints.</li>
+<li><strong>Bind Route</strong>: Users can bind a route to the chat using the <code>/use <routeId></code> command.</li>
+<li><strong>Guide</strong>: By sending their location or using a short command (<code>/g</code> followed by location), users receive a 2-line output that includes machine line and a Chinese template, guiding them along the route.</li>
+</ol>
+<h2>External Discovery (2bulu)</h2>
+<p>The Trail-Nav-Telegram skill supports two modes for external discovery:</p>
+<ol>
+<li><strong>Public Discovery (No Login)</strong>: This mode scrapes public list/search pages (e.g., <code>/track/track_search.htm</code> or <code>/track/search-<keyword>.htm</code>) without requiring user login. The data stored includes title, URL, and the time scraped.</li>
+<li><strong>Manual-Login Assist (Optional)</strong>: If the user logs in manually (e.g., WeChat/QQ) in a persistent browser profile, automation can proceed within that profile, provided login/captcha steps are completed by the user. The preferred alternative is for the user to export and send the GPX/KML file via Telegram.</li>
+</ol>
+<h2>Bundle Resources and Scripts</h2>
+<p>The Trail-Nav-Telegram skill comes with several bundled resources that enhance its functionality:</p>
+<ul>
+<li><strong>Scripts</strong>:
+<ul>
+<li><code>scrape_2bulu_tracks.js</code>: List-page scraper that converts data to JSON/CSV and creates a screenshot.</li>
+<li><code>parse_2bulu_kml.js</code>: Parses KML files to generate stats, GeoJSON, and routepack.</li>
+<li><code>render_route_map.js</code>: Renders route map into HTML+PNG format for sharing.</li>
+<li><code>render_route_map_annotated.js</code>: Renders an annotated map (GeoJSON + alerts) into HTML+PNG.</li>
+<li><code>guide_route.js</code>: Provides deterministic off-route guidance from GeoJSON and current location, outputting the 2-4 line guide protocol.</li>
+<li><code>weather_alert.js</code>: Offers deterministic weather change alerts (Open-Meteo) for day_hike/summit_camp/trail_run modes.</li>
+<li><code>outsideclaw_setup.sh</code>: One-command installation/update of outsideclaw repository into <code>~/.outsideclaw/app/outsideclaw</code>.</li>
+<li><code>generate_openclaw_snippet.js</code>: Prints an OpenClaw config snippet pointing to the installed outsideclaw skill.</li>
+<li><code>patch_openclaw_config.js</code>: Patches an OpenClaw config JSON to include the installed skill path (creates .bak).</li>
+<li><code>openclaw_oneclick_setup.sh</code>: One-click setup for installing outsideclaw, patching config, and optional gateway restart.</li>
+</ul>
+</li>
+<li><strong>References</strong>:
+<ul>
+<li><code>2bulu-notes.md</code>: Notes on 2bulu functionality.</li>
+<li><code>guide-protocol.md</code>: Details on the guide protocol.</li>
+<li><code>safety-checklist.md</code>: Safety reminders and checklists.</li>
+<li><code>gear-list-overnight.md</code>: Gear lists for overnight hikes.</li>
+<li><code>qiniangshan_alerts.json</code>: Risk-based key-node alerts for map annotations and alert triggering.</li>
+<li><code>route-alerts.md</code>: Alerts schema and how to apply them to any route.</li>
+<li><code>share-bundles.md</code>: Instructions for sharing route bundles between outsideclaw agents.</li>
+<li><code>outsideclaw-integration.md</code>: Guide for installing outsideclaw repo and generating OpenClaw config snippet.</li>
+<li><code>openclaw-oneclick.md</code>: One-click OpenClaw integration guide.</li>
+</ul>
+</li>
+</ul>
+<h2>Safety Reminders and Reminders</h2>
+<p>The Trail-Nav-Telegram skill emphasizes safety during hikes. It provides explicit guidance for no-signal situations and SOS procedures (references/safety-checklist.md). Additionally, it encourages &#8216;hard cutoffs&#8217; for overnight hikes based on time, wind/fog conditions, and hydration levels, helping hikers make informed decisions for a safe and enjoyable experience.</p>
+<h2>Conclusion</h2>
+<p>The Trail-Nav-Telegram skill by OpenClaw is a powerful tool for hikers looking to navigate their routes efficiently and safely. By integrating with Telegram and using minimal tokens through deterministic calculations, this skill provides offline-capable hiking route guidance. With support for external discovery (2bulu), bundled resources, and a strong emphasis on safety, Trail-Nav-Telegram is an invaluable addition to any LLM agent workflow for hiking enthusiasts.</p>
+</article>
+<p></body></html></p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/jack4world/trail-nav-telegram/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/jack4world/trail-nav-telegram/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

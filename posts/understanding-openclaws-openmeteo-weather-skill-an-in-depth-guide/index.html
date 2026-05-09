@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding OpenClaw&amp;#8217;s OpenMeteo Weather Skill: An In-Depth Guide | News of Tomorrow</title>
+<meta name="description" content="Explore the OpenMeteo Weather skill in OpenClaw, a powerful tool for fetching weather data without API keys. Ideal for developers and tech-savvy users.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-openclaws-openmeteo-weather-skill-an-in-depth-guide/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding OpenClaw&amp;#8217;s OpenMeteo Weather Skill: An In-Depth Guide">
+<meta property="og:description" content="Explore the OpenMeteo Weather skill in OpenClaw, a powerful tool for fetching weather data without API keys. Ideal for developers and tech-savvy users.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-openclaws-openmeteo-weather-skill-an-in-depth-guide/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-openclaws-openmeteo-weather-skill-an-in-depth-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-16">
+<meta property="article:modified_time" content="2026-03-16">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding OpenClaw&amp;#8217;s OpenMeteo Weather Skill: An In-Depth Guide">
+<meta name="twitter:description" content="Explore the OpenMeteo Weather skill in OpenClaw, a powerful tool for fetching weather data without API keys. Ideal for developers and tech-savvy users.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-openclaws-openmeteo-weather-skill-an-in-depth-guide/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding OpenClaw&#8217;s OpenMeteo Weather Skill: An In-Depth Guide", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "image": ["https://picsum.photos/seed/understanding-openclaws-openmeteo-weather-skill-an-in-depth-guide/1200/630"], "description": "Explore the OpenMeteo Weather skill in OpenClaw, a powerful tool for fetching weather data without API keys. Ideal for developers and tech-savvy users.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-openclaws-openmeteo-weather-skill-an-in-depth-guide/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding OpenClaw&#8217;s OpenMeteo Weather Skill: An In-Depth Guide", "item": "https://github.insightginie.com/posts/understanding-openclaws-openmeteo-weather-skill-an-in-depth-guide/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding OpenClaw&#8217;s OpenMeteo Weather Skill: An In-Depth Guide</h1>
+<time datetime="2026-03-16" class="post-date" data-date="2026-03-16T00:46:14+00:00">2026-03-16</time>
+<img src="https://picsum.photos/seed/understanding-openclaws-openmeteo-weather-skill-an-in-depth-guide/800/400" class="post-hero" alt="Understanding OpenClaw&amp;#8217;s OpenMeteo Weather Skill: An In-Depth Guide">
+<p><!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Understanding OpenClaw&#8217;s OpenMeteo Weather Skill: An In-Depth Guide</title></head><body></p>
+<article>
+<header>
+<h1>Understanding OpenClaw&#8217;s OpenMeteo Weather Skill: An In-Depth Guide</h1>
+</header>
+<section>
+<h2>Introduction</h2>
+<p>Welcome to the comprehensive guide on OpenClaw&#8217;s OpenMeteo Weather skill! This skill is a powerful tool designed for fetching current weather, hourly forecasts, and daily forecasts for any city or coordinates around the world. It leverages the free Open-Meteo API, making it an excellent choice for developers and users who need reliable weather data without the hassle of API keys.</p>
+<p>This article will dive deep into the functionalities, usage, and practical examples of the OpenMeteo Weather skill. Whether you&#8217;re a developer, a tech enthusiast, or just someone curious about how to integrate weather data into your projects, this guide is for you.</p>
+<h2>What is OpenMeteo Weather Skill?</h2>
+<p>The OpenMeteo Weather skill is a part of the OpenClaw project, which is hosted on GitHub. This skill allows users to get detailed weather information for any location worldwide using the Open-Meteo API. The best part? It doesn&#8217;t require an API key, making it hassle-free to use.</p>
+<p>Here&#8217;s a quick overview of what you can do with this skill:</p>
+<ul>
+<li>Fetch current weather conditions for any city or coordinates.</li>
+<li>Get hourly weather forecasts.</li>
+<li>Obtain daily weather forecasts.</li>
+<li>Check specific weather parameters like temperature, rain, snow, wind, sunrise/sunset, UV, humidity, pressure, etc.</li>
+<li>Determine if you need an umbrella based on precipitation data.</li>
+</ul>
+<h2>Prerequisites and Requirements</h2>
+<p>Before you can start using the OpenMeteo Weather skill, ensure you have the following:</p>
+<ul>
+<li>Access to a terminal or command-line interface.</li>
+<li>Bash installed on your system.</li>
+<li>The required bins: curl and jq (for JSON processing).</li>
+<li>The OpenClaw skill repository cloned on your machine.</li>
+</ul>
+<p>You can install the required bins using the following commands:</p>
+<pre><code>sudo apt-get update</code></pre>
+<pre><code>sudo apt-get install curl jq</code></pre>
+<h2>Using the OpenMeteo Weather Skill</h2>
+<p>The OpenMeteo Weather skill can be used via the command-line interface (CLI). Here&#8217;s the basic syntax:</p>
+<pre><code>bash {baseDir}/scripts/weather.sh [options]</code></pre>
+<p>replace <code>{baseDir}</code> with the directory where the OpenClaw skills repository is cloned.</p>
+<h2>Quick Reference</h2>
+<p>Here are some quick examples to help you get started:</p>
+<ul>
+<li><strong>Current Weather:</strong></li>
+<li><code>bash {baseDir}/scripts/weather.sh --current --city=Berlin</code></li>
+<li><code>bash {baseDir}/scripts/weather.sh --current --city=London</code></li>
+<li><code>bash {baseDir}/scripts/weather.sh --current --lat=48.8566 --lon=2.3522</code></li>
+<li><strong>Disambiguate with &#8211;country:</strong></li>
+<li><code>bash {baseDir}/scripts/weather.sh --current --city=Portland --country=US</code></li>
+<li><strong>Forecast:</strong></li>
+<li><code>bash {baseDir}/scripts/weather.sh --forecast-days=3 --city=Paris</code></li>
+<li><strong>Both Current + Forecast:</strong></li>
+<li><code>bash {baseDir}/scripts/weather.sh --current --forecast-days=2 --city=Rome</code></li>
+<li><strong>Custom Params:</strong></li>
+<li><code>bash {baseDir}/scripts/weather.sh --forecast-days=2 --city=Vienna<br />
+--hourly-params=precipitation,precipitation_probability,weather_code</code></li>
+</ul>
+<h2>Options</h2>
+<p>The OpenMeteo Weather skill offers a variety of options to customize your weather data requests. Here&#8217;s a detailed breakdown of the available options:</p>
+<h3>Location Options</h3>
+<p><strong>&#8211;city=NAME</strong> — Specify the city name for which you want to fetch weather data. The city name is auto-geocoded, so it&#8217;s usually sufficient on its own.</p>
+<p><strong>&#8211;country=…</strong> — An optional country hint to disambiguate city names. This can be any format (e.g., GB, France, Ger). It&#8217;s only needed when the city name is ambiguous (e.g., Portland, US vs. Portland, UK).</p>
+<p><strong>&#8211;lat=FLOAT &#8211;lon=FLOAT</strong> — Direct coordinates for precision. If you have the exact latitude and longitude, you can bypass the geocoding process by using these options.</p>
+<h3>Mode Options</h3>
+<p><strong>&#8211;current</strong> — Fetch current weather conditions.</p>
+<p><strong>&#8211;forecast</strong> — Fetch hourly and daily forecasts.</p>
+<p><strong>&#8211;forecast-days=N</strong> — Specify the forecast length in days (1–16 days, default: 7; implies &#8211;forecast).</p>
+<h3>Param Overrides</h3>
+<p><strong>&#8211;current-params=…</strong> — Override current weather variables. Use comma-separated variable names.</p>
+<p><strong>&#8211;hourly-params=…</strong> — Override hourly forecast variables. Use comma-separated variable names.</p>
+<p><strong>&#8211;daily-params=…</strong> — Override daily forecast variables. Use comma-separated variable names.</p>
+<h3>Output Options</h3>
+<p><strong>&#8211;human</strong> — Emoji-rich formatted output for humans (default is porcelain, optimized for agents).</p>
+<h2>Available API Variables</h2>
+<p>The OpenMeteo Weather skill supports a wide range of weather variables. Here&#8217;s a list of available variables that you can override using the param override options:</p>
+<h3>Current &#038; Hourly Variables</h3>
+<ul>
+<li><strong>temperature_2m</strong> (default) — Air temperature at 2m, °C.</li>
+<li><strong>apparent_temperature</strong> (default) — Feels-like temperature, °C.</li>
+<li><strong>relative_humidity_2m</strong> (default) — Relative humidity at 2m, %.</li>
+<li><strong>precipitation</strong> (default) — Total precipitation (rain + showers + snow), mm.</li>
+<li><strong>precipitation_probability</strong> (default, hourly only) — Probability of precipitation, %.</li>
+<li><strong>weather_code</strong> (default) — Weather condition, auto-resolved to text in output.</li>
+<li><strong>wind_speed_10m</strong> (default) — Wind speed at 10m, km/h.</li>
+<li><strong>wind_gusts_10m</strong> — Wind gust speed at 10m, km/h.</li>
+<li><strong>wind_direction_10m</strong> — Wind direction, °.</li>
+<li><strong>cloud_cover</strong> (default, current only) — Total cloud cover, %.</li>
+<li><strong>is_day</strong> (default, current only) — Daytime flag, 0/1.</li>
+<li><strong>pressure_msl</strong> — Sea-level atmospheric pressure, hPa.</li>
+<li><strong>surface_pressure</strong> — Surface pressure, hPa.</li>
+<li><strong>visibility</strong> — Visibility distance, m.</li>
+<li><strong>rain</strong> — Rain only (no showers/snow), mm.</li>
+<li><strong>showers</strong> — Shower rain only, mm.</li>
+<li><strong>snowfall</strong> — Snowfall amount, cm.</li>
+<li><strong>snow_depth</strong> — Snow depth on the ground, m.</li>
+<li><strong>dew_point_2m</strong> — Dew point temperature at 2m, °C.</li>
+<li><strong>uv_index</strong> (hourly only) — UV index.</li>
+</ul>
+<h3>Daily Variables</h3>
+<ul>
+<li><strong>temperature_2m_max</strong> (default) — Daily max temperature, °C.</li>
+<li><strong>temperature_2m_min</strong> (default) — Daily min temperature, °C.</li>
+<li><strong>precipitation_sum</strong> (default) — Total daily precipitation, mm.</li>
+<li><strong>precipitation_probability_max</strong> (default) — Max precipitation probability, %.</li>
+<li><strong>weather_code</strong> (default) — Dominant weather condition for the day.</li>
+<li><strong>wind_speed_10m_max</strong> (default) — Max wind speed, km/h.</li>
+<li><strong>wind_gusts_10m_max</strong> — Max wind gust speed, km/h.</li>
+<li><strong>wind_direction_10m_dominant</strong> — Dominant wind direction, °.</li>
+<li><strong>sunrise</strong> — Sunrise time, ISO 8601.</li>
+<li><strong>sunset</strong> — Sunset time, ISO 8601.</li>
+<li><strong>daylight_duration</strong> — Daylight duration, seconds.</li>
+<li><strong>sunshine_duration</strong> — Sunshine duration, seconds.</li>
+<li><strong>precipitation_hours</strong> — Hours with precipitation.</li>
+<li><strong>rain_sum</strong> — Total daily rain, mm.</li>
+<li><strong>showers_sum</strong> — Total daily showers, mm.</li>
+<li><strong>snowfall_sum</strong> — Total daily snowfall, cm.</li>
+<li><strong>uv_index_max</strong> — Max UV index.</li>
+<li><strong>apparent_temperature_max</strong> — Daily max feels-like, °C.</li>
+<li><strong>apparent_temperature_min</strong> — Daily min feels-like, °C.</li>
+</ul>
+<h2>Conversational Examples</h2>
+<p>Here are some practical examples of how you can use the OpenMeteo Weather skill in a conversational context:</p>
+<h3>Example 1: General Weather Overview</h3>
+<p><strong>User:</strong> </p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/lstpsche/openmeteo-weather/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/lstpsche/openmeteo-weather/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

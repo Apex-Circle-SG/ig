@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unlocking Long-Term Memory for OpenClaw Agents with the SQ Memory Skill | News of Tomorrow</title>
+<meta name="description" content="Tired of your AI agent forgetting everything upon restart? Discover the SQ Memory skill for OpenClaw and how to implement persistent, 11D storage today.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/unlocking-long-term-memory-for-openclaw-agents-with-the-sq-memory-skill/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Unlocking Long-Term Memory for OpenClaw Agents with the SQ Memory Skill">
+<meta property="og:description" content="Tired of your AI agent forgetting everything upon restart? Discover the SQ Memory skill for OpenClaw and how to implement persistent, 11D storage today.">
+<meta property="og:image" content="https://picsum.photos/seed/unlocking-long-term-memory-for-openclaw-agents-with-the-sq-memory-skill/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/unlocking-long-term-memory-for-openclaw-agents-with-the-sq-memory-skill/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-08">
+<meta property="article:modified_time" content="2026-03-08">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Unlocking Long-Term Memory for OpenClaw Agents with the SQ Memory Skill">
+<meta name="twitter:description" content="Tired of your AI agent forgetting everything upon restart? Discover the SQ Memory skill for OpenClaw and how to implement persistent, 11D storage today.">
+<meta name="twitter:image" content="https://picsum.photos/seed/unlocking-long-term-memory-for-openclaw-agents-with-the-sq-memory-skill/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Unlocking Long-Term Memory for OpenClaw Agents with the SQ Memory Skill", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "image": ["https://picsum.photos/seed/unlocking-long-term-memory-for-openclaw-agents-with-the-sq-memory-skill/1200/630"], "description": "Tired of your AI agent forgetting everything upon restart? Discover the SQ Memory skill for OpenClaw and how to implement persistent, 11D storage today.", "mainEntityOfPage": "https://github.insightginie.com/posts/unlocking-long-term-memory-for-openclaw-agents-with-the-sq-memory-skill/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Unlocking Long-Term Memory for OpenClaw Agents with the SQ Memory Skill", "item": "https://github.insightginie.com/posts/unlocking-long-term-memory-for-openclaw-agents-with-the-sq-memory-skill/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Unlocking Long-Term Memory for OpenClaw Agents with the SQ Memory Skill</h1>
+<time datetime="2026-03-08" class="post-date" data-date="2026-03-08T14:00:22+00:00">2026-03-08</time>
+<img src="https://picsum.photos/seed/unlocking-long-term-memory-for-openclaw-agents-with-the-sq-memory-skill/800/400" class="post-hero" alt="Unlocking Long-Term Memory for OpenClaw Agents with the SQ Memory Skill">
+<h1>Introduction to Agent Amnesia</h1>
+<p>If you have been working with OpenClaw, you have likely encountered the most significant hurdle in modern agent development: amnesia. By default, OpenClaw agents operate within a vacuum of stateless execution. Every time the process restarts, your agent loses every interaction, preference, and learned detail from its previous session. This cycle of forgetting limits an agent&#8217;s utility, forcing it to re-ask questions and re-learn user preferences repeatedly. Fortunately, the open-source community has provided a robust solution: the <strong>SQ Memory Skill</strong>.</p>
+<h2>What is the SQ Memory Skill?</h2>
+<p>The SQ Memory skill is an integration designed to give your OpenClaw agents permanent, persistent memory. By connecting your agent to the SQ storage engine—which utilizes 11D text storage—you move beyond the constraints of short-term context windows. This skill acts as a long-term storage bridge, allowing agents to store data that persists even after the agent process is terminated and relaunched.</p>
+<h3>Why SQ Matters</h3>
+<p>Unlike standard database solutions, SQ is built specifically for the needs of AI agents. It is not a vector database relying on fuzzy similarity searches, nor is it a simple key-value store like Redis. Instead, it provides a deterministic, hierarchical coordinate system that maps perfectly to how agents categorize information. Because it is MIT licensed, you maintain full control over your data, with no vendor lock-in, and you have the freedom to self-host the service for free.</p>
+<h2>Key Features and Capabilities</h2>
+<p>Once integrated, your agent gains a set of powerful tools that change the paradigm of agent-user interaction:</p>
+<ul>
+<li><strong>Cross-Session Persistence:</strong> Remember user preferences like theme, language, or tone across days or even months.</li>
+<li><strong>Extended Context:</strong> Store conversation summaries to bypass context limits, allowing the agent to reference past discussions that occurred long ago.</li>
+<li><strong>Multi-Agent Coordination:</strong> Share memory across different agents, enabling complex workflows where one agent gathers information and another processes it.</li>
+<li><strong>Deterministic Recall:</strong> No more hallucinating forgotten details; the agent explicitly pulls stored text from defined coordinates.</li>
+</ul>
+<h2>Getting Started: Installation and Setup</h2>
+<p>Adding memory to your agent is a streamlined process. You can install the skill via the command line using <code>npx clawhub install sq-memory</code>. If you prefer a manual approach, you can clone the repository directly into your <code>~/.openclaw/skills/</code> directory.</p>
+<p>Configuration is handled within your agent&#8217;s <code>.openclaw/config.yaml</code> file. You will need to define your endpoint, authentication credentials, and a unique namespace. The namespace is particularly critical, as it ensures that your agent’s memory is isolated, preventing data collisions if you are running multiple agents on the same server.</p>
+<h2>The Power of the 11D Coordinate System</h2>
+<p>The core innovation of SQ is its unique 11D coordinate system. Instead of flat storage, memories are organized into structured paths, such as <code>namespace.1.1/category.subcategory.item/1.1.1</code>. This hierarchy allows for logical data management. For example, a user&#8217;s preference for dark mode can be stored under <code>user.preferences.theme</code>. Because the system is hierarchical, you can easily list all memories within a specific category, such as everything under <code>user/</code>, allowing the agent to perform broad administrative tasks on its own stored data.</p>
+<h2>Practical Examples</h2>
+<h3>User Preference Management</h3>
+<p>Imagine an agent that remembers a user&#8217;s UI preference. By utilizing the <code>remember()</code> and <code>recall()</code> functions, you can create a seamless experience. In the first session, the user states they prefer dark mode. The agent calls <code>remember("user/preferences/theme", "dark")</code>. In a subsequent session days later, the agent can call <code>recall("user/preferences/theme")</code> to instantly retrieve that information, effectively &#8216;knowing&#8217; the user without needing to be told again.</p>
+<h3>Conversation Summarization</h3>
+<p>Context windows are expensive and limited. By using the SQ memory skill, your agent can summarize long-form discussions and store them away. Later, the agent can search for those specific conversation IDs, retrieve the summary, and maintain a historical narrative of the relationship, regardless of how many tokens the current conversation uses.</p>
+<h2>Advanced Use Case: Multi-Agent Workflows</h2>
+<p>The true power of SQ reveals itself when deploying multiple agents. Since the storage is persistent and globally accessible via the API, you can have a &#8216;Task Master&#8217; agent that writes pending tasks into a shared coordinate space (e.g., <code>shared/tasks/pending/</code>), and a &#8216;Worker&#8217; agent that periodically polls that same coordinate to pick up new assignments. This architecture turns individual agents into a distributed, collaborative system.</p>
+<h2>API Reference for Developers</h2>
+<p>Integrating the SQ skill is straightforward for any developer familiar with JavaScript or Python-like function calls:</p>
+<ul>
+<li><strong>sq.remember(coordinate, text):</strong> Writes data to a specific path.</li>
+<li><strong>sq.recall(coordinate):</strong> Fetches the content stored at a path.</li>
+<li><strong>sq.forget(coordinate):</strong> Deletes specific data, crucial for privacy and data hygiene.</li>
+<li><strong>sq.list_memories(prefix):</strong> Returns an array of keys, perfect for discovery and data management.</li>
+</ul>
+<h2>Conclusion: Why Choose SQ?</h2>
+<p>In the evolving landscape of AI, the ability to retain information is a differentiator. Most agents today are &#8216;goldfish&#8217; by design, but your OpenClaw agents do not have to be. By leveraging the SQ Memory skill, you provide your agents with the history and consistency they need to act as true assistants. Whether you choose to host it yourself for zero cost or utilize the convenience of the hosted cloud service, SQ provides the structural reliability needed for production-grade agent workflows. Stop letting your agents forget—give them the power of persistent memory today.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/wbic16/sq-memory/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/wbic16/sq-memory/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

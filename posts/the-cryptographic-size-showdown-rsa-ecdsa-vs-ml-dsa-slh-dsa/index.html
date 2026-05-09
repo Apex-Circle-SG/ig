@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cryptographic Size Showdown: RSA &amp;amp; ECDSA vs. ML-DSA &amp;amp; SLH-DSA | News of Tomorrow</title>
+<meta name="description" content="PQC is here, and it’s heavy. We compare the key sizes and signature lengths of ML-DSA and SLH-DSA against legacy RSA and ECDSA to reveal the true cost of migrat">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/the-cryptographic-size-showdown-rsa-ecdsa-vs-ml-dsa-slh-dsa/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="The Cryptographic Size Showdown: RSA &amp;amp; ECDSA vs. ML-DSA &amp;amp; SLH-DSA">
+<meta property="og:description" content="PQC is here, and it’s heavy. We compare the key sizes and signature lengths of ML-DSA and SLH-DSA against legacy RSA and ECDSA to reveal the true cost of migrat">
+<meta property="og:image" content="https://picsum.photos/seed/the-cryptographic-size-showdown-rsa-ecdsa-vs-ml-dsa-slh-dsa/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/the-cryptographic-size-showdown-rsa-ecdsa-vs-ml-dsa-slh-dsa/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-18">
+<meta property="article:modified_time" content="2025-12-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Cryptographic Size Showdown: RSA &amp;amp; ECDSA vs. ML-DSA &amp;amp; SLH-DSA">
+<meta name="twitter:description" content="PQC is here, and it’s heavy. We compare the key sizes and signature lengths of ML-DSA and SLH-DSA against legacy RSA and ECDSA to reveal the true cost of migrat">
+<meta name="twitter:image" content="https://picsum.photos/seed/the-cryptographic-size-showdown-rsa-ecdsa-vs-ml-dsa-slh-dsa/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The Cryptographic Size Showdown: RSA &amp; ECDSA vs. ML-DSA &amp; SLH-DSA", "datePublished": "2025-12-18", "dateModified": "2025-12-18", "image": ["https://picsum.photos/seed/the-cryptographic-size-showdown-rsa-ecdsa-vs-ml-dsa-slh-dsa/1200/630"], "description": "PQC is here, and it’s heavy. We compare the key sizes and signature lengths of ML-DSA and SLH-DSA against legacy RSA and ECDSA to reveal the true cost of migrat", "mainEntityOfPage": "https://github.insightginie.com/posts/the-cryptographic-size-showdown-rsa-ecdsa-vs-ml-dsa-slh-dsa/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "The Cryptographic Size Showdown: RSA &amp; ECDSA vs. ML-DSA &amp; SLH-DSA", "item": "https://github.insightginie.com/posts/the-cryptographic-size-showdown-rsa-ecdsa-vs-ml-dsa-slh-dsa/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>The Cryptographic Size Showdown: RSA &amp; ECDSA vs. ML-DSA &amp; SLH-DSA</h1>
+<time datetime="2025-12-18" class="post-date" data-date="2025-12-18T04:13:33+00:00">2025-12-18</time>
+<img src="https://picsum.photos/seed/the-cryptographic-size-showdown-rsa-ecdsa-vs-ml-dsa-slh-dsa/800/400" class="post-hero" alt="The Cryptographic Size Showdown: RSA &amp;amp; ECDSA vs. ML-DSA &amp;amp; SLH-DSA">
+
+<p>For decades, the internet has run on a &#8220;lightweight&#8221; trust model. We have grown accustomed to digital signatures that are barely a blip on the network radar. Elliptic Curve Cryptography (ECDSA), the current gold standard, operates with keys and signatures so small that they are effectively negligible in terms of bandwidth and storage.</p>
+
+
+
+<p>However, the transition to Post-Quantum Cryptography (PQC) is about to change the mathematics of overhead.</p>
+
+
+
+<p>As organizations prepare to adopt NIST’s newly finalized standards—<strong>ML-DSA</strong>&nbsp;(FIPS 204, formerly Dilithium) and&nbsp;<strong>SLH-DSA</strong>&nbsp;(FIPS 205, formerly SPHINCS+)—they are encountering a rude awakening: quantum resistance comes with a massive weight penalty.</p>
+
+
+
+<p>Understanding the disparity in key sizes and signature lengths between the &#8220;old world&#8221; (RSA/ECDSA) and the &#8220;new world&#8221; (ML-DSA/SLH-DSA) is essential for engineers planning the migration. This is not just a security upgrade; it is a data engineering challenge.</p>
+
+
+
+<h2 class="wp-block-heading">The Benchmark: The &#8220;Old World&#8221; Efficiency</h2>
+
+
+
+<p>To understand the impact of PQC, we must first establish the baseline. Most of the modern internet currently runs on&nbsp;<strong>RSA-2048</strong>&nbsp;or&nbsp;<strong>ECDSA (P-256)</strong>.</p>
+
+
+
+<h3 class="wp-block-heading">ECDSA (Elliptic Curve Digital Signature Algorithm)</h3>
+
+
+
+<p>ECDSA is the reigning champion of efficiency.</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Public Key:</strong> ~64 bytes</li>
+
+
+
+<li><strong>Signature:</strong> ~64 bytes</li>
+</ul>
+
+
+
+<p>This efficiency is why ECDSA is ubiquitous in mobile applications, IoT devices, and TLS handshakes. It fits easily inside a single TCP packet with ample room to spare.</p>
+
+
+
+<h3 class="wp-block-heading">RSA (Rivest–Shamir–Adleman)</h3>
+
+
+
+<p>RSA is the older workhorse. While its keys are larger, its signatures are still manageable.</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Public Key (2048-bit):</strong> ~256 bytes</li>
+
+
+
+<li><strong>Signature:</strong> ~256 bytes</li>
+</ul>
+
+
+
+<p>Even with RSA, the overhead is minimal. A 256-byte signature does not cause fragmentation issues or noticeable latency in handshake protocols.</p>
+
+
+
+<h2 class="wp-block-heading">The New General Purpose: ML-DSA (FIPS 204)</h2>
+
+
+
+<p><strong>ML-DSA</strong>, based on structured lattices (CRYSTALS-Dilithium), is NIST’s primary recommendation for general-purpose digital signatures. It is intended to be the direct replacement for RSA and ECDSA in most protocols, including TLS.</p>
+
+
+
+<p>While it strikes a balance between security and performance, it introduces a significant jump in size.</p>
+
+
+
+<p><strong>At Security Category 3 (ML-DSA-65):</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Public Key:</strong> ~1,952 bytes (1.9 KB)</li>
+
+
+
+<li><strong>Signature:</strong> ~3,293 bytes (3.3 KB)</li>
+</ul>
+
+
+
+<p><strong>The Impact:</strong><br>Compared to ECDSA, an ML-DSA signature is roughly&nbsp;<strong>50 times larger</strong>. While 3.3 KB is manageable for broadband connections, it creates challenges. A typical Ethernet Maximum Transmission Unit (MTU) is 1,500 bytes. This means a single ML-DSA signature will span multiple packets, increasing the probability of packet loss and retransmission delays during a handshake.</p>
+
+
+
+<h2 class="wp-block-heading">The Heavyweight: SLH-DSA (FIPS 205)</h2>
+
+
+
+<p><strong>SLH-DSA</strong>, based on stateless hash-based cryptography (SPHINCS+), is the conservative backup. It trades performance for the assurance of well-understood hash security.</p>
+
+
+
+<p>The size profile of SLH-DSA is unique: it has surprisingly small public keys but undeniably massive signatures.</p>
+
+
+
+<p><strong>At Security Category 1 (SLH-DSA-SHA2-128s):</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Public Key:</strong> ~32 bytes</li>
+
+
+
+<li><strong>Signature:</strong> ~7,856 bytes (7.8 KB)</li>
+</ul>
+
+
+
+<p><strong>At Security Category 5 (SLH-DSA-SHA2-256f):</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Public Key:</strong> ~64 bytes</li>
+
+
+
+<li><strong>Signature:</strong> ~41,000 bytes (41 KB)</li>
+</ul>
+
+
+
+<p><strong>The Impact:</strong><br>The disparity here is shocking. The public key is actually smaller than ECDSA, which is excellent for distribution. However, the signature size ranges from&nbsp;<strong>8 KB to 41 KB</strong>.<br>To put this in perspective, a single 41 KB signature is larger than the entire average webpage from the early 2000s. In a protocol exchange, this guarantees significant fragmentation, potentially requiring dozens of packets just to transmit the signature.</p>
+
+
+
+<h2 class="wp-block-heading">Comparative Data Analysis</h2>
+
+
+
+<p>The following breakdown illustrates the stark differences at a comparable security level (aiming for roughly AES-128 or NIST Level 1 equivalent where applicable):</p>
+
+
+
+<figure class="wp-block-table"><table class="has-fixed-layout"><tbody><tr><td>Algorithm</td><td>Public Key Size</td><td>Signature Size</td><td>Size Multiplier (vs ECDSA)</td></tr><tr><td><strong>ECDSA (P-256)</strong></td><td>64 bytes</td><td>64 bytes</td><td>1x</td></tr><tr><td><strong>RSA-3072</strong></td><td>384 bytes</td><td>384 bytes</td><td>6x</td></tr><tr><td><strong>ML-DSA-44</strong></td><td>1,312 bytes</td><td>2,420 bytes</td><td>~37x</td></tr><tr><td><strong>SLH-DSA-128s</strong></td><td>32 bytes</td><td>7,856 bytes</td><td>~122x</td></tr><tr><td><strong>SLH-DSA-128f</strong></td><td>32 bytes</td><td>17,088 bytes</td><td>~267x</td></tr></tbody></table></figure>
+
+
+
+<p><em>Note: ML-DSA-44 and SLH-DSA-128 are the &#8220;Category 1&#8221; PQC entries.</em></p>
+
+
+
+<h2 class="wp-block-heading">Engineering Implications</h2>
+
+
+
+<p>The migration to PQC is not a simple &#8220;find and replace&#8221; operation. The size differences impose strictly physical constraints on your infrastructure.</p>
+
+
+
+<h3 class="wp-block-heading">1. Network Fragmentation and DoS Risks</h3>
+
+
+
+<p>Because both ML-DSA and SLH-DSA signatures exceed the standard 1500-byte MTU, fragmentation is inevitable.</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Latency:</strong> Reassembling fragmented packets takes time, adding latency to TLS establishment.</li>
+
+
+
+<li><strong>Amplification Attacks:</strong> Large signatures can be exploited for Denial of Service (DoS) attacks. If a server can be tricked into sending a 40 KB signature in response to a small request, the network can be flooded.</li>
+</ul>
+
+
+
+<h3 class="wp-block-heading">2. Database Schema Limits</h3>
+
+
+
+<p>Many legacy systems store digital signatures in database columns defined with strict character limits (e.g.,&nbsp;VARCHAR(2048)). Attempting to shove an 8 KB or 40 KB SLH-DSA signature into these fields will result in truncation or application crashes. Database schemas will need to be audited and migrated to&nbsp;BLOB&nbsp;or larger text types.</p>
+
+
+
+<h3 class="wp-block-heading">3. Certificate Sizes</h3>
+
+
+
+<p>X.509 certificates contain both the public key and the signature from the issuing CA.</p>
+
+
+
+<ul class="wp-block-list">
+<li>In an <strong>ML-DSA</strong> chain, the certificate size balloons because both the key and signature are kilobytes long.</li>
+
+
+
+<li>In an <strong>SLH-DSA</strong> chain, while the public key inside the certificate is small, the signature <em>on</em> the certificate is huge.<br>This increases the size of the certificate chain sent during a handshake, further consuming bandwidth.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Conclusion: Choosing the Right Tool</h2>
+
+
+
+<p>The comparative data makes one thing clear:&nbsp;<strong>ECDSA has spoiled us.</strong></p>
+
+
+
+<p>As we move forward, ML-DSA (FIPS 204) is the only viable option for general-purpose web traffic. Its 2.4 KB signature is a bitter pill to swallow compared to ECDSA’s 64 bytes, but it is engineered to be just small enough to work within current protocols.</p>
+
+
+
+<p>SLH-DSA (FIPS 205), with its massive signatures, effectively disqualifies itself from high-frequency, low-latency applications like mobile web browsing. However, its small public key size makes it an interesting candidate for scenarios where the key must be distributed widely (like in a firmware root of trust), but the signature is verified only occasionally.</p>
+
+
+
+<p>In the post-quantum era, &#8220;efficiency&#8221; is no longer about minimal bits; it is about minimal disruption. Understanding these size constraints is the first step in ensuring your PQC migration doesn&#8217;t grind your network to a halt.</p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

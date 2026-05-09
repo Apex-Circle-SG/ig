@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unlocking Video Insights: Understanding the OpenClaw AI-Notes Video Skill | News of Tomorrow</title>
+<meta name="description" content="Discover how the OpenClaw AI-Notes Video skill leverages Baidu technology to automatically generate comprehensive document, outline, and graphic notes from vide">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/unlocking-video-insights-understanding-the-openclaw-ai-notes-video-skill/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Unlocking Video Insights: Understanding the OpenClaw AI-Notes Video Skill">
+<meta property="og:description" content="Discover how the OpenClaw AI-Notes Video skill leverages Baidu technology to automatically generate comprehensive document, outline, and graphic notes from vide">
+<meta property="og:image" content="https://picsum.photos/seed/unlocking-video-insights-understanding-the-openclaw-ai-notes-video-skill/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/unlocking-video-insights-understanding-the-openclaw-ai-notes-video-skill/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-08">
+<meta property="article:modified_time" content="2026-03-08">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Unlocking Video Insights: Understanding the OpenClaw AI-Notes Video Skill">
+<meta name="twitter:description" content="Discover how the OpenClaw AI-Notes Video skill leverages Baidu technology to automatically generate comprehensive document, outline, and graphic notes from vide">
+<meta name="twitter:image" content="https://picsum.photos/seed/unlocking-video-insights-understanding-the-openclaw-ai-notes-video-skill/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Unlocking Video Insights: Understanding the OpenClaw AI-Notes Video Skill", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "image": ["https://picsum.photos/seed/unlocking-video-insights-understanding-the-openclaw-ai-notes-video-skill/1200/630"], "description": "Discover how the OpenClaw AI-Notes Video skill leverages Baidu technology to automatically generate comprehensive document, outline, and graphic notes from vide", "mainEntityOfPage": "https://github.insightginie.com/posts/unlocking-video-insights-understanding-the-openclaw-ai-notes-video-skill/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Unlocking Video Insights: Understanding the OpenClaw AI-Notes Video Skill", "item": "https://github.insightginie.com/posts/unlocking-video-insights-understanding-the-openclaw-ai-notes-video-skill/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Unlocking Video Insights: Understanding the OpenClaw AI-Notes Video Skill</h1>
+<time datetime="2026-03-08" class="post-date" data-date="2026-03-08T13:00:23+00:00">2026-03-08</time>
+<img src="https://picsum.photos/seed/unlocking-video-insights-understanding-the-openclaw-ai-notes-video-skill/800/400" class="post-hero" alt="Unlocking Video Insights: Understanding the OpenClaw AI-Notes Video Skill">
+<h1>Introduction to the OpenClaw AI-Notes Video Skill</h1>
+<p>In today&#8217;s fast-paced digital environment, processing video content efficiently is a challenge. Whether you are a student trying to summarize a lecture, a professional analyzing a webinar, or a content creator looking to repurpose video materials, manual transcription and summarization are time-consuming tasks. Enter the OpenClaw &#8216;ai-notes-video&#8217; skill, a powerful tool designed to automate this process. By leveraging the robust AI capabilities provided by Baidu, this skill allows users to transform raw video URLs into structured, actionable notes.</p>
+<h2>What Does the AI-Notes Video Skill Actually Do?</h2>
+<p>The primary purpose of this OpenClaw skill is to bridge the gap between video data and readable knowledge. Once provided with a valid video download address, the tool initiates a backend process that downloads and parses the video content. It then subjects the video data to advanced AI analysis, resulting in the generation of three distinct types of notes:</p>
+<ul>
+<li><strong>Document Notes (Manuscript Notes):</strong> A full-text representation of the video content.</li>
+<li><strong>Outline Notes:</strong> A structured summary that includes hierarchy, key points, and even a mind map component to help you visualize the information structure.</li>
+<li><strong>Graphic and Text Notes:</strong> A visually enriched version of the notes that incorporates visual context from the video with descriptive text.</li>
+</ul>
+<p>This multi-faceted approach ensures that users get the specific type of output that best suits their needs, whether they prefer a comprehensive transcript or a concise outline.</p>
+<h2>Technical Requirements and Setup</h2>
+<p>Integrating this skill into your OpenClaw environment is relatively straightforward, but it does require certain dependencies to be met. First and foremost, you need a valid Baidu API Key. This key is the engine that powers the AI processing backend. Within the OpenClaw configuration, this is managed via the <code>BAIDU_API_KEY</code> environment variable. Additionally, the system expects a functional Python environment, as the core logic—processing the tasks and querying the results—is executed through Python scripts located within the OpenClaw repository.</p>
+<h2>The Workflow: How It Works Under the Hood</h2>
+<p>The operation of this skill is divided into a two-part asynchronous workflow, which is a common design pattern for tasks that require significant processing time. Since AI video analysis cannot happen instantaneously, the process is split into &#8216;Task Creation&#8217; and &#8216;Task Querying&#8217;.</p>
+<h3>Step 1: AINotesTaskCreate</h3>
+<p>The user interacts with the <code>AINotesTaskCreate</code> API. By passing a valid <code>video_url</code> as an argument, you trigger the <code>scripts/ai_notes_task_create.py</code> script. This script validates the URL, initiates the download/parsing, and immediately returns a unique <code>task_id</code>. This identifier is crucial for tracking the progress of your specific request.</p>
+<h3>Step 2: AINotesTaskQuery</h3>
+<p>Once you have your <code>task_id</code>, you use the <code>AINotesTaskQuery</code> API to check the status of the generation. You call <code>scripts/ai_notes_task_query.py</code> repeatedly, passing your <code>task_id</code>. The system communicates via status codes:</p>
+<ul>
+<li><strong>10000:</strong> Task is still in progress. You should continue to poll the API.</li>
+<li><strong>10002:</strong> Task success. The notes have been generated and are ready for retrieval.</li>
+<li><strong>Other:</strong> Indicates a failure state, allowing the system to handle errors gracefully.</li>
+</ul>
+<h2>Interpreting the Output</h2>
+<p>When the query API returns a success status (10002), it provides a list of note items. Each item is classified by a <code>tpl_no</code> field:</p>
+<ul>
+<li>Type 1: Manuscript/Document Notes.</li>
+<li>Type 2: Outline Notes (Look for the &#8216;Mind&#8217; tag to find embedded mind maps).</li>
+<li>Type 3: Graphic and Text Notes.</li>
+</ul>
+<p>The <code>detail</code> field within each item contains the final structured content, which you can then copy, save, or further process according to your project requirements.</p>
+<h2>Why Use This Skill?</h2>
+<p>The value proposition of the OpenClaw AI-Notes Video skill is immense. It moves beyond simple transcription. By utilizing Baidu&#8217;s AI to organize content into outlines and graphic summaries, it fundamentally changes how information is extracted from video. Instead of watching a 30-minute video to find one specific detail, you can use this skill to generate an outline and immediately find the timestamp or conceptual section you need. It is an essential tool for any workflow that relies heavily on video content and requires rapid knowledge ingestion.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw AI-Notes Video skill is a testament to how API-driven automation can revolutionize our interaction with media. By simply providing a video link, users can harness sophisticated backend AI to create organized, categorized, and readable notes in minutes. Whether you are managing complex documentation or simply looking to save time on video review, this skill provides a robust and scalable solution within the OpenClaw ecosystem.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/jlpjavawayup/ai-notes-video/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/jlpjavawayup/ai-notes-video/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

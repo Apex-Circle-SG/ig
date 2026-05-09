@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the Didit Phone Verification Skill for OpenClaw | News of Tomorrow</title>
+<meta name="description" content="Learn how the Didit Phone Verification skill integrates OTP-based phone verification via SMS, WhatsApp, Telegram, and voice channels for secure user authenticat">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-didit-phone-verification-skill-for-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the Didit Phone Verification Skill for OpenClaw">
+<meta property="og:description" content="Learn how the Didit Phone Verification skill integrates OTP-based phone verification via SMS, WhatsApp, Telegram, and voice channels for secure user authenticat">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-didit-phone-verification-skill-for-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-didit-phone-verification-skill-for-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-11">
+<meta property="article:modified_time" content="2026-03-11">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the Didit Phone Verification Skill for OpenClaw">
+<meta name="twitter:description" content="Learn how the Didit Phone Verification skill integrates OTP-based phone verification via SMS, WhatsApp, Telegram, and voice channels for secure user authenticat">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-didit-phone-verification-skill-for-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the Didit Phone Verification Skill for OpenClaw", "datePublished": "2026-03-11", "dateModified": "2026-03-11", "image": ["https://picsum.photos/seed/understanding-the-didit-phone-verification-skill-for-openclaw/1200/630"], "description": "Learn how the Didit Phone Verification skill integrates OTP-based phone verification via SMS, WhatsApp, Telegram, and voice channels for secure user authenticat", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-didit-phone-verification-skill-for-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the Didit Phone Verification Skill for OpenClaw", "item": "https://github.insightginie.com/posts/understanding-the-didit-phone-verification-skill-for-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the Didit Phone Verification Skill for OpenClaw</h1>
+<time datetime="2026-03-11" class="post-date" data-date="2026-03-11T17:16:22+00:00">2026-03-11</time>
+<img src="https://picsum.photos/seed/understanding-the-didit-phone-verification-skill-for-openclaw/800/400" class="post-hero" alt="Understanding the Didit Phone Verification Skill for OpenClaw">
+<h2>What Is the Didit Phone Verification Skill?</h2>
+<p>The <strong>Didit Phone Verification</strong> skill is an OpenClaw integration that enables two-step phone verification using one-time passwords (OTPs). It leverages Didit&#8217;s standalone API to send verification codes via multiple channels—SMS, WhatsApp, Telegram, and voice calls—and validate them securely. This skill is ideal for implementing phone-based identity verification, fraud prevention, and user authentication workflows.</p>
+<h3>Core Functionality</h3>
+<p>The skill operates in two steps:</p>
+<ol>
+<li><strong>Send</strong> a verification code to a phone number</li>
+<li><strong>Check</strong> the code the user provides</li>
+</ol>
+<p>Key constraints include:</p>
+<ul>
+<li>Codes expire after 5 minutes</li>
+<li>Maximum 3 verification attempts per code</li>
+<li>Maximum 2 resend requests within 24 hours</li>
+<li>Rate limit: 4 sends per hour per phone number</li>
+<li>Phone numbers must be in E.164 format (e.g., +14155552671)</li>
+<li>Send must be called before Check</li>
+</ul>
+<h2>Key Features and Capabilities</h2>
+<p>The Didit Phone Verification skill offers robust verification features:</p>
+<ul>
+<li><strong>Multi-channel delivery</strong>: SMS (default fallback), WhatsApp, Telegram, and voice calls</li>
+<li><strong>Fraud detection</strong>: Identifies disposable/temporary numbers, VoIP numbers, and carrier information</li>
+<li><strong>Policy-based auto-decline</strong>: Automatically rejects risky numbers based on configurable policies</li>
+<li><strong>Duplicate detection</strong>: Detects if a number has already been verified by another user</li>
+<li><strong>Risk scoring</strong>: Provides fraud signals for enhanced security</li>
+</ul>
+<h3>Delivery Channel Fallback</h3>
+<p>The skill intelligently falls back to SMS if the preferred channel is unavailable. For example, if WhatsApp verification fails, it automatically attempts SMS delivery.</p>
+<h2>Getting Started with Authentication</h2>
+<p>All API requests require an API key via the x-api-key header. Here&#8217;s how to obtain one:</p>
+<h3>For New Users</h3>
+<p>If you don&#8217;t have a Didit API key, you can create one in just two API calls:</p>
+<ol>
+<li>Register: POST https://apx.didit.me/auth/v2/programmatic/register/ with your email and password</li>
+<li>Verify: Check your email for a 6-character OTP code, then POST to https://apx.didit.me/auth/v2/programmatic/verify-email/ with the code</li>
+</ol>
+<p>The response includes your api_key. To add credits, check your balance via GET /v3/billing/balance/ and top up using POST /v3/billing/top-up/.</p>
+<h2>Step 1: Sending the Verification Code</h2>
+<p>The Send request initiates the verification process. Here&#8217;s the structure:</p>
+<h3>Request Details</h3>
+<pre><code>POST https://verification.didit.me/v3/phone/send/
+Headers:
+  x-api-key: YOUR_API_KEY
+  Content-Type: application/json
+</code></pre>
+<h3>Request Body Parameters</h3>
+<table>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>phone_number</td>
+<td>string</td>
+<td>Yes</td>
+<td>E.164 format phone number</td>
+</tr>
+<tr>
+<td>options.code_size</td>
+<td>integer</td>
+<td>No</td>
+<td>Code length (4-8, default 6)</td>
+</tr>
+<tr>
+<td>options.locale</td>
+<td>string</td>
+<td>No</td>
+<td>Message locale (e.g., en-US)</td>
+</tr>
+<tr>
+<td>options.preferred_channel</td>
+<td>string</td>
+<td>No</td>
+<td>&#8220;sms&#8221;, &#8220;whatsapp&#8221;, &#8220;telegram&#8221;, or &#8220;voice&#8221;</td>
+</tr>
+<tr>
+<td>signals.ip</td>
+<td>string</td>
+<td>No</td>
+<td>User&#8217;s IP for fraud detection</td>
+</tr>
+<tr>
+<td>signals.device_id</td>
+<td>string</td>
+<td>No</td>
+<td>Unique device identifier</td>
+</tr>
+</table>
+<h3>Status Handling</h3>
+<p>Common status responses include:</p>
+<ul>
+<li><strong>Success</strong>: Code sent successfully</li>
+<li><strong>Retry</strong>: Temporary issue, wait and retry (max 2 retries)</li>
+<li><strong>Undeliverable</strong>: Number cannot receive messages</li>
+<li><strong>Blocked</strong>: Number blocked due to spam</li>
+</ul>
+<h2>Step 2: Checking the Verification Code</h2>
+<p>After successfully sending a code, you must verify it using the Check endpoint.</p>
+<h3>Request Details</h3>
+<pre><code>POST https://verification.didit.me/v3/phone/check/
+Headers:
+  x-api-key: YOUR_API_KEY
+  Content-Type: application/json
+</code></pre>
+<h3>Request Body Parameters</h3>
+<table>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>phone_number</td>
+<td>string</td>
+<td>Yes</td>
+<td>Same E.164 number used in Send</td>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Yes</td>
+<td>4-8 character code user received</td>
+</tr>
+<tr>
+<td>duplicated_phone_number_action</td>
+<td>string</td>
+<td>No</td>
+<td>&#8220;NO_ACTION&#8221; or &#8220;DECLINE&#8221;</td>
+</tr>
+<tr>
+<td>disposable_number_action</td>
+<td>string</td>
+<td>No</td>
+<td>&#8220;NO_ACTION&#8221; or &#8220;DECLINE&#8221;</td>
+</tr>
+<tr>
+<td>voip_number_action</td>
+<td>string</td>
+<td>No</td>
+<td>&#8220;NO_ACTION&#8221; or &#8220;DECLINE&#8221;</td>
+</tr>
+</table>
+<h3>Status Handling</h3>
+<p>Common status responses include:</p>
+<ul>
+<li><strong>Approved</strong>: Code correct, no policy violations</li>
+<li><strong>Failed</strong>: Code incorrect, ask user to retry (up to 3 attempts)</li>
+<li><strong>Declined</strong>: Code correct but policy violation detected</li>
+<li><strong>Expired or Not Found</strong>: No pending code, resend required</li>
+</ul>
+<h2>Response Data and Fraud Detection</h2>
+<p>The Check response includes comprehensive phone information:</p>
+<ul>
+<li>Carrier details (name, type: mobile/landline/VoIP)</li>
+<li>Country information (code, name)</li>
+<li>Verification method used</li>
+<li>Disposable and VoIP status</li>
+<li>Verification attempts count</li>
+<li>Warnings array with fraud risk information</li>
+</ul>
+<h3>Warning Tags</h3>
+<p>The system provides detailed warnings for potential fraud:</p>
+<ul>
+<li>VERIFICATION_CODE_MISMATCH: Incorrect code entered</li>
+<li>DUPLICATE_PHONE_NUMBER: Number already verified by another user</li>
+<li>DISPOSABLE_NUMBER: Temporary/disposable number detected</li>
+<li>VOIP_NUMBER: VoIP number detected</li>
+</ul>
+<h2>Best Practices and Implementation Tips</h2>
+<p>To ensure successful implementation:</p>
+<ol>
+<li>Always validate phone numbers in E.164 format before sending</li>
+<li>Implement proper error handling for rate limits and temporary failures</li>
+<li>Use fraud signals (IP, device ID, user agent) to enhance security</li>
+<li>Configure appropriate auto-decline policies based on your risk tolerance</li>
+<li>Monitor API usage and credits through the Didit Business Console</li>
+<li>Consider using the didit-verification-management skill for full platform management</li>
+</ol>
+<h2>Integration with OpenClaw</h2>
+<p>The Didit Phone Verification skill integrates seamlessly with OpenClaw workflows. It can be triggered when users need phone verification, sending SMS/WhatsApp codes, checking verification codes, or implementing phone-based identity verification. The skill supports multiple delivery channels and provides comprehensive fraud signals for risk assessment.</p>
+<p>For advanced use cases, consider combining this skill with other OpenClaw skills for complete user verification workflows, session management, and billing integration.</p>
+<h2>Conclusion</h2>
+<p>The Didit Phone Verification skill provides a robust, secure solution for phone-based authentication and identity verification. With support for multiple delivery channels, comprehensive fraud detection, and flexible policy controls, it&#8217;s an essential tool for any application requiring phone verification. By following the implementation guidelines and best practices outlined above, you can effectively integrate this skill into your OpenClaw workflows for enhanced security and user verification.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/rosasalberto/didit-phone-verification/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/rosasalberto/didit-phone-verification/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

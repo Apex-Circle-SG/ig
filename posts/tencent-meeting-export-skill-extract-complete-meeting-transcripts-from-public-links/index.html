@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tencent Meeting Export Skill: Extract Complete Meeting Transcripts from Public Links | News of Tomorrow</title>
+<meta name="description" content="Learn how to export Tencent Meeting transcripts, AI summaries, smart chapters, and critical events using the OpenClaw skill. Supports Markdown and JSON formats">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/tencent-meeting-export-skill-extract-complete-meeting-transcripts-from-public-links/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Tencent Meeting Export Skill: Extract Complete Meeting Transcripts from Public Links">
+<meta property="og:description" content="Learn how to export Tencent Meeting transcripts, AI summaries, smart chapters, and critical events using the OpenClaw skill. Supports Markdown and JSON formats">
+<meta property="og:image" content="https://picsum.photos/seed/tencent-meeting-export-skill-extract-complete-meeting-transcripts-from-public-links/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/tencent-meeting-export-skill-extract-complete-meeting-transcripts-from-public-links/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-09">
+<meta property="article:modified_time" content="2026-03-09">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tencent Meeting Export Skill: Extract Complete Meeting Transcripts from Public Links">
+<meta name="twitter:description" content="Learn how to export Tencent Meeting transcripts, AI summaries, smart chapters, and critical events using the OpenClaw skill. Supports Markdown and JSON formats">
+<meta name="twitter:image" content="https://picsum.photos/seed/tencent-meeting-export-skill-extract-complete-meeting-transcripts-from-public-links/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Tencent Meeting Export Skill: Extract Complete Meeting Transcripts from Public Links", "datePublished": "2026-03-09", "dateModified": "2026-03-09", "image": ["https://picsum.photos/seed/tencent-meeting-export-skill-extract-complete-meeting-transcripts-from-public-links/1200/630"], "description": "Learn how to export Tencent Meeting transcripts, AI summaries, smart chapters, and critical events using the OpenClaw skill. Supports Markdown and JSON formats", "mainEntityOfPage": "https://github.insightginie.com/posts/tencent-meeting-export-skill-extract-complete-meeting-transcripts-from-public-links/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Tencent Meeting Export Skill: Extract Complete Meeting Transcripts from Public Links", "item": "https://github.insightginie.com/posts/tencent-meeting-export-skill-extract-complete-meeting-transcripts-from-public-links/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Tencent Meeting Export Skill: Extract Complete Meeting Transcripts from Public Links</h1>
+<time datetime="2026-03-09" class="post-date" data-date="2026-03-09T04:17:31+00:00">2026-03-09</time>
+<img src="https://picsum.photos/seed/tencent-meeting-export-skill-extract-complete-meeting-transcripts-from-public-links/800/400" class="post-hero" alt="Tencent Meeting Export Skill: Extract Complete Meeting Transcripts from Public Links">
+<h2>What This Skill Does</h2>
+<p>The Tencent Meeting Export skill is a powerful tool designed to extract complete meeting transcription data from Tencent Meeting (腾讯会议) public share links. This skill is particularly useful when you need to access AI-generated summaries, smart chapters, critical events, or full transcriptions from Tencent Meeting cloud recordings that have been shared publicly.</p>
+<p>The skill supports exporting data in both Markdown and JSON formats, complete with speaker identification and precise timestamps, making it an invaluable resource for meeting documentation, content analysis, and knowledge management.</p>
+<h2>Key Features and Export Capabilities</h2>
+<p>The skill can extract four main types of content from Tencent Meeting recordings:</p>
+<ol>
+<li><strong>AI Full Summary</strong>: Tencent Meeting&#8217;s automatically generated meeting summary that provides a concise overview of the entire meeting.</li>
+<li><strong>Smart Chapters</strong>: Automatically segmented content organized by topic, complete with timestamps and brief summaries for each section.</li>
+<li><strong>Critical Events</strong>: Important meeting moments such as screen sharing start/stop events, member join/leave notifications, and other significant occurrences.</li>
+<li><strong>Complete Transcription</strong>: Detailed paragraph-by-paragraph speech-to-text conversion with speaker identification and precise timestamps.</li>
+</ol>
+<h2>Prerequisites and Setup</h2>
+<p>Before using this skill, you&#8217;ll need to install the required dependencies:</p>
+<pre><code>pip install playwright
+playwright install chromium
+</code></pre>
+<p>The skill uses Playwright with a headless Chromium browser to interact with Tencent Meeting&#8217;s web interface, ensuring reliable data extraction without manual intervention.</p>
+<h2>Basic Usage</h2>
+<p>The skill is straightforward to use from the command line. Here&#8217;s the basic syntax:</p>
+<pre><code>python scripts/tencent_meeting_export.py &lt;share_link&gt;
+</code></pre>
+<p>For example, to export a meeting transcript to a Markdown file:</p>
+<pre><code>python scripts/tencent_meeting_export.py https://meeting.tencent.com/cw/xxxxx -o meeting_summary.md
+</code></pre>
+<h2>Advanced Options</h2>
+<p>The skill offers several useful options for customizing the export process:</p>
+<ul>
+<li><strong>Output File</strong>: Use <code>-o</code> or <code>--output</code> to specify the output file path (default: <code>meeting_transcript.md</code>).</li>
+<li><strong>JSON Export</strong>: Add <code>--json</code> to simultaneously export raw JSON data alongside Markdown.</li>
+<li><strong>JSON Only</strong>: Use <code>--json-only</code> to export only JSON data without generating Markdown.</li>
+<li><strong>Timeout</strong>: Adjust page load timeout with <code>--timeout</code> (default: 60 seconds).</li>
+<li><strong>Quiet Mode</strong>: Use <code>-q</code> or <code>--quiet</code> for silent operation without progress messages.</li>
+</ol>
+<h2>Technical Implementation</h2>
+<p>The skill works by using Playwright to load the Tencent Meeting share page in a headless browser. It then intercepts API requests to extract various data types:</p>
+<ul>
+<li><code>v1/minutes/detail</code> &#8211; Transcription paragraphs (lazy-loaded pagination)</li>
+<li><code>get-full-summary</code> &#8211; AI-generated summary</li>
+<li><code>get-chapter</code> &#8211; Smart chapter segmentation</li>
+<li><code>get-critical-node</code> &#8211; Critical event nodes</li>
+<li><code>common-record-info</code> &#8211; Meeting metadata</li>
+</ul>
+<p>The script automatically clicks the &#8220;Transcription&#8221; tab and scrolls to load all content before formatting and exporting the data.</p>
+<h2>Data Structure</h2>
+<p>The exported transcription data includes detailed paragraph structures with these key fields:</p>
+<pre><code>paragraph
+├── start_time / end_time (timestamp in milliseconds)
+├── speaker
+│   ├── user_id
+│   ├── user_name ← Speaker name
+│   └── avatar_url
+└── sentences[]
+└── words[]
+└── text ← Transcription text
+</code></pre>
+<h2>Limitations</h2>
+<p>Currently, the skill has these limitations:</p>
+<ul>
+<li>Only works with publicly shared meeting recordings (no login required)</li>
+<li>Requires the meeting to have transcription/subtitle functionality enabled</li>
+<li>The share link must be within its valid period</li>
+<li>Depends on Tencent Meeting&#8217;s current page structure and APIs, which may change and require script updates</li>
+</ul>
+<h2>Programming Interface</h2>
+<p>For developers who want to integrate this functionality into their own applications, the skill provides a Python API:</p>
+<pre><code>import asyncio
+from scripts.tencent_meeting_export import TranscriptCapture, format_markdown
+
+async def export():
+    capture = TranscriptCapture("https://meeting.tencent.com/cw/xxxxx")
+    data = await capture.capture()
+    md = format_markdown(data)
+    print(md)
+
+asyncio.run(export())
+</code></pre>
+<h2>Practical Use Cases</h2>
+<p>This skill is valuable for various scenarios:</p>
+<ul>
+<li>Creating meeting minutes from recorded sessions</li>
+<li>Extracting key discussion points for documentation</li>
+<li>Analyzing meeting content for research or compliance purposes</li>
+<li>Building searchable knowledge bases from meeting recordings</li>
+<li>Integrating meeting content into learning management systems</li>
+<li>Generating content summaries for busy executives</li>
+</ul>
+<h2>Why This Skill Matters</h2>
+<p>As remote work and online meetings become increasingly prevalent, the ability to efficiently extract and utilize meeting content is crucial. This skill bridges the gap between Tencent Meeting&#8217;s recording capabilities and practical content management needs, saving users countless hours of manual transcription and content organization.</p>
+<p>By automating the extraction of structured meeting data, it enables better knowledge sharing, improved documentation, and more effective use of recorded meeting content across organizations.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/snow-dust/tencent-meeting-export/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/snow-dust/tencent-meeting-export/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

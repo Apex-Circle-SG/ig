@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the ARC Creator Skill: A Comprehensive Guide | News of Tomorrow</title>
+<meta name="description" content="Learn how the ARC Creator skill helps researchers create FAIR Digital Objects following the nfdi4plants ARC specification, guiding users through investigation s">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-arc-creator-skill-a-comprehensive-guide/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the ARC Creator Skill: A Comprehensive Guide">
+<meta property="og:description" content="Learn how the ARC Creator skill helps researchers create FAIR Digital Objects following the nfdi4plants ARC specification, guiding users through investigation s">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-arc-creator-skill-a-comprehensive-guide/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-arc-creator-skill-a-comprehensive-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-18">
+<meta property="article:modified_time" content="2026-03-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the ARC Creator Skill: A Comprehensive Guide">
+<meta name="twitter:description" content="Learn how the ARC Creator skill helps researchers create FAIR Digital Objects following the nfdi4plants ARC specification, guiding users through investigation s">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-arc-creator-skill-a-comprehensive-guide/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the ARC Creator Skill: A Comprehensive Guide", "datePublished": "2026-03-18", "dateModified": "2026-03-18", "image": ["https://picsum.photos/seed/understanding-the-arc-creator-skill-a-comprehensive-guide/1200/630"], "description": "Learn how the ARC Creator skill helps researchers create FAIR Digital Objects following the nfdi4plants ARC specification, guiding users through investigation s", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-arc-creator-skill-a-comprehensive-guide/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the ARC Creator Skill: A Comprehensive Guide", "item": "https://github.insightginie.com/posts/understanding-the-arc-creator-skill-a-comprehensive-guide/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the ARC Creator Skill: A Comprehensive Guide</h1>
+<time datetime="2026-03-18" class="post-date" data-date="2026-03-18T06:15:46+00:00">2026-03-18</time>
+<img src="https://picsum.photos/seed/understanding-the-arc-creator-skill-a-comprehensive-guide/800/400" class="post-hero" alt="Understanding the ARC Creator Skill: A Comprehensive Guide">
+<p>The ARC Creator skill is a powerful tool designed to help researchers create and populate Annotated Research Contexts (ARCs) following the nfdi4plants ARC specification. This skill guides users through the entire process of creating FAIR Digital Objects, from initial investigation setup to final DataHUB synchronization.</p>
+<h2>What is an ARC?</h2>
+<p>An Annotated Research Context (ARC) is a FAIR (Findable, Accessible, Interoperable, Reusable) Digital Object that organizes research data, metadata, and documentation following the nfdi4plants specification. ARCs provide a structured way to capture the complete context of a research investigation, making it easier to share, reproduce, and build upon scientific work.</p>
+<h2>Key Features of the ARC Creator Skill</h2>
+<p>The ARC Creator skill offers several essential capabilities:</p>
+<ul>
+<li><strong>Interactive Guidance</strong>: Walks users through metadata collection conversationally, asking questions in manageable batches</li>
+<li><strong>Comprehensive Coverage</strong>: Handles investigation setup, studies, assays, workflows, runs, contacts, and publications</li>
+<li><strong>Git Integration</strong>: Manages version control and DataHUB synchronization</li>
+<li><strong>ISA Metadata Compliance</strong>: Ensures adherence to the nfdi4plants ARC specification v3.0.0</li>
+</ul>
+<h2>Prerequisites for Using ARC Creator</h2>
+<p>Before using the ARC Creator skill, ensure you have:</p>
+<ul>
+<li>git and git-lfs installed on your system</li>
+<li>The ARC Commander CLI available at ~/bin/arc (recommended but optional)</li>
+<li>A Personal Access Token for git.nfdi4plants.org or datahub.hhu.de (for DataHUB sync)</li>
+</ul>
+<h2>The Interactive ARC Creation Workflow</h2>
+<p>The skill guides users through seven distinct phases:</p>
+<h3>Phase 1: Investigation Setup</h3>
+<p>The skill begins by asking for basic investigation details:</p>
+<ul>
+<li>Investigation identifier (short, lowercase-hyphenated)</li>
+<li>Title and description of the research</li>
+<li>Local storage location for the ARC</li>
+</ul>
+<p>It then creates the ARC structure and sets initial investigation metadata.</p>
+<h3>Phase 2: Studies</h3>
+<p>For each study, the skill collects:</p>
+<ul>
+<li>Study identifier and descriptive information</li>
+<li>Organism and growth conditions</li>
+<li>Source and sample materials</li>
+<li>Protocols and experimental factors</li>
+</ul>
+<p>The skill then creates the study structure and copies relevant files to appropriate directories.</p>
+<h3>Phase 3: Assays</h3>
+<p>For each assay, the skill gathers:</p>
+<ul>
+<li>Assay identifier and measurement type</li>
+<li>Technology details and platform information</li>
+<li>Data file locations and processed data</li>
+<li>Protocol documents and performer information</li>
+</ul>
+<p>The skill creates the assay structure and organizes data files appropriately.</p>
+<h3>Phase 4: Workflows (Optional)</h3>
+<p>If computational analysis is involved, the skill asks about:</p>
+<ul>
+<li>Workflow identifiers and descriptions</li>
+<li>Code files and dependencies</li>
+<li>Scripts, notebooks, and required libraries</li>
+</ul>
+<p>Workflow files are placed in the workflows directory.</p>
+<h3>Phase 5: Runs (Optional)</h3>
+<p>For computational outputs, the skill collects:</p>
+<ul>
+<li>Run identifiers and associated workflows</li>
+<li>Output files including figures, tables, and processed data</li>
+</ul>
+<h3>Phase 6: Contacts and Publications</h3>
+<p>The skill gathers information about:</p>
+<ul>
+<li>Investigation contacts (names, emails, affiliations, roles)</li>
+<li>Publications with DOIs, PubMed IDs, titles, and authors</li>
+</ul>
+<h3>Phase 7: Git Commit and DataHUB Sync</h3>
+<p>Finally, the skill:</p>
+<ul>
+<li>Configures git user information</li>
+<li>Commits all changes with an appropriate message</li>
+<li>Offers to push to a DataHUB if desired</li>
+</ul>
+<h2>Key Reminders for ARC Users</h2>
+<p>The skill emphasizes several important principles:</p>
+<ul>
+<li>Assay data is immutable once placed in the dataset directory</li>
+<li>Studies describe materials while assays describe measurements</li>
+<li>Workflows contain code while runs contain outputs</li>
+<li>Git LFS should be used for large files (&gt;100 MB)</li>
+<li>ARCs should not be stored on OneDrive/Dropbox to avoid conflicts</li>
+</ul>
+<h2>Benefits of Using ARC Creator</h2>
+<p>Researchers benefit from using the ARC Creator skill in multiple ways:</p>
+<ul>
+<li><strong>Standardization</strong>: Ensures consistent metadata collection and organization</li>
+<li><strong>Completeness</strong>: Guides users to include all necessary information</li>
+<li><strong>FAIR Compliance</strong>: Helps create research objects that meet FAIR principles</li>
+<li><strong>Reproducibility</strong>: Captures complete research context for future reproduction</li>
+<li><strong>Shareability</strong>: Creates well-structured ARCs ready for sharing and publication</li>
+</ul>
+<h2>Technical Implementation</h2>
+<p>The skill leverages the ARC Commander CLI for many operations, providing a user-friendly interface to complex command-line tools. It handles file organization, metadata annotation, and git operations automatically, reducing the technical burden on researchers.</p>
+<h2>Conclusion</h2>
+<p>The ARC Creator skill is an invaluable tool for researchers working with the nfdi4plants ARC specification. By providing interactive guidance through the entire ARC creation process, it ensures that research data is properly organized, documented, and prepared for FAIR sharing. Whether you&#8217;re creating a new ARC, adding studies, or preparing data for DataHUB synchronization, this skill streamlines the process and helps maintain high standards of research data management.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/ingogiebel/arc-creator/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/ingogiebel/arc-creator/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

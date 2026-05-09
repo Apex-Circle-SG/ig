@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding OpenClaw’s Merge Check Skill: Predicting GitHub PR Mergeability | News of Tomorrow</title>
+<meta name="description" content="Explore how OpenClaw’s Merge Check skill analyzes GitHub PRs to predict mergeability using technical, social, and compliance factors.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-openclaws-merge-check-skill-predicting-github-pr-mergeability/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding OpenClaw’s Merge Check Skill: Predicting GitHub PR Mergeability">
+<meta property="og:description" content="Explore how OpenClaw’s Merge Check skill analyzes GitHub PRs to predict mergeability using technical, social, and compliance factors.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-openclaws-merge-check-skill-predicting-github-pr-mergeability/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-openclaws-merge-check-skill-predicting-github-pr-mergeability/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-07">
+<meta property="article:modified_time" content="2026-03-07">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding OpenClaw’s Merge Check Skill: Predicting GitHub PR Mergeability">
+<meta name="twitter:description" content="Explore how OpenClaw’s Merge Check skill analyzes GitHub PRs to predict mergeability using technical, social, and compliance factors.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-openclaws-merge-check-skill-predicting-github-pr-mergeability/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding OpenClaw’s Merge Check Skill: Predicting GitHub PR Mergeability", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "image": ["https://picsum.photos/seed/understanding-openclaws-merge-check-skill-predicting-github-pr-mergeability/1200/630"], "description": "Explore how OpenClaw’s Merge Check skill analyzes GitHub PRs to predict mergeability using technical, social, and compliance factors.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-openclaws-merge-check-skill-predicting-github-pr-mergeability/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding OpenClaw’s Merge Check Skill: Predicting GitHub PR Mergeability", "item": "https://github.insightginie.com/posts/understanding-openclaws-merge-check-skill-predicting-github-pr-mergeability/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding OpenClaw’s Merge Check Skill: Predicting GitHub PR Mergeability</h1>
+<time datetime="2026-03-07" class="post-date" data-date="2026-03-07T22:46:19+00:00">2026-03-07</time>
+<img src="https://picsum.photos/seed/understanding-openclaws-merge-check-skill-predicting-github-pr-mergeability/800/400" class="post-hero" alt="Understanding OpenClaw’s Merge Check Skill: Predicting GitHub PR Mergeability">
+<h1>Understanding OpenClaw’s Merge Check Skill: Predicting GitHub PR Mergeability</h1>
+<p>In the dynamic world of software development, managing pull requests (PRs) efficiently is crucial. GitHub PRs act as gateways for integrating new code into projects, and their successful merging hinges on multiple factors. OpenClaw’s <strong>Merge Check</strong> skill emerges as a powerful tool to analyze and predict the likelihood of a PR being merged. This skill scrutinizes PRs based on technical, architectural, process, social, and compliance dimensions. Here, we delve into what the Merge Check skill entails, its key features, and how it can streamline your PR review process.</p>
+<h2>Introduction to Merge Check Skill</h2>
+<p>The Merge Check skill in OpenClaw is a sophisticated mechanism designed to evaluate GitHub pull requests against a comprehensive rejection vector taxonomy. Unlike generic code quality tools, Merge Check specifically addresses the question: <em>“Will this PR get merged by the maintainer?”</em>. This targeted analysis helps developers, reviewers, and maintainers make informed decisions about PR quality and acceptance likelihood.</p>
+<h2>Key Features of Merge Check Skill</h2>
+<h3>1. Initial Setup</h3>
+<p>To use the Merge Check skill, you need to run a data-gathering script that fetches PR metadata from GitHub. The script can be executed using the PR identifier (in the format <code>owner/repo#number</code>) or the PR URL. Here’s a step-by-step breakdown:</p>
+<ol>
+<li><strong>Run the Data Gathering Script:</strong> Execute the bash script located at <code>skills/merge-check/scripts/merge-check.sh</code>. This script gathers all relevant data from GitHub using the GitHub CLI (<code>gh</code>).</li>
+<li><code>bash skills/merge-check/scripts/merge-check.sh owner/repo#123</code></li>
+<li><strong>or</strong></li>
+<li><code>bash skills/merge-check/scripts/merge-check.sh https://github.com/owner/repo/pull/123</code></li>
+<li>
+<li><strong>Parse the JSON Output:</strong> The script outputs a JSON object containing detailed PR data, which you need to parse to understand various dimensions.</li>
+<li><strong>Analyze Using Rejection Taxonomy:</strong> Load the <code>skills/merge-check/references/rejection-taxonomy.md</code> file to cross-reference the gathered data against the rejection vector framework.</li>
+<li><strong>Produce a Mergeability Report:</strong> Based on your analysis across different dimensions, generate a structured report that highlights key insights and recommendations.</li>
+</ol>
+<h3>2. Analysis Dimensions</h3>
+<p>Merge Check evaluates PRs across several dimensions, each contributing to the overall likelihood of the PR being merged. Here’s a detailed look at these dimensions:</p>
+<h4>2.1 Technical Signals</h4>
+<ol>
+<li><strong>CI Status:</strong> Checks if all continuous integration checks are passing or if there are any failed or pending checks.</li>
+<li><strong>Build Status:</strong> Determines whether the PR’s code compiles and builds successfully.</li>
+<li><strong>Coverage:</strong> Assesses any coverage regression indicated by the PR, ensuring code quality remains high.</li>
+</ol>
+<h4>2.2 PR Hygiene</h4>
+<ol>
+<li><strong>Size:</strong> Lines of Code (LOC) changed is a significant predictor. Smaller PRs (less than 400 LOC) are deemed ideal, medium-sized PRs (400-1000 LOC) pose some risk, and larger PRs (over 1000 LOC) are in the danger zone.</li>
+<li><strong>File Spread:</strong> Evaluates whether changes are concentrated in one area or scattered across multiple directories.</li>
+<li><strong>Single Concern:</strong> Checks if the PR addresses one thing or if it’s a “kitchen-sink” PR trying to do too much.</li>
+<li><strong>Title &#038; Description:</strong> Assesses if the PR title and description are clear, descriptive, or vague/empty.</li>
+<li><strong>Linked Issue:</strong> Determines if the PR references an issue, indicating intentional work.</li>
+<li><strong>Commit Hygiene:</strong> Reviews the clarity and relevance of commit messages, the number of commits, and if they are squash-ready.</li>
+</ol>
+<h4>2.3 Architectural Fit</h4>
+<ol>
+<li><strong>Pattern Consistency:</strong> Ensures that the PR follows the repository’s conventions in language, directory structure, and naming.</li>
+<li><strong>Dependencies:</strong> Identifies if new dependencies are introduced, which can be a high friction point.</li>
+<li><strong>Scope Creep:</strong> Determines if the PR touches areas outside its stated purpose, indicating potential overreach.</li>
+<li><strong>File Types:</strong> Checks if the file types are consistent with the repository’s tech stack.</li>
+</ol>
+<h4>2.4 Review Status</h4>
+<ol>
+<li><strong>Approvals:</strong> Checks for any existing approvals and compares against the number required.</li>
+<li><strong>Changes Requested:</strong> Identifies any outstanding and unaddressed changes requested, a strong rejection signal.</li>
+<li><strong>Reviewer Assignment:</strong> Verifies if the required reviewers are assigned and actively reviewing.</li>
+<li><strong>Review Comment Sentiment:</strong> Analyzes review comments for positive, neutral, or adversarial sentiment.</li>
+<li><strong>CODEOWNERS:</strong> Checks if the PR touches files with code owners and if those owners are reviewing.</li>
+</ol>
+<h4>2.5 Process Compliance</h4>
+<ol>
+<li><strong>Draft Status:</strong> Indicates if the PR is in draft status, which won’t merge until finalized.</li>
+<li><strong>Blocking Labels:</strong> Identifies any blocking labels like WIP, do-not-merge, or needs-work.</li>
+<li><strong>PR Template:</strong> Checks if the PR template was followed; an empty template is a red flag.</li>
+<li><strong>CLA/DCO:</strong> Verifies if a Contributor License Agreement or Developer Certificate of Origin is signed if required by the repository.</li>
+</ol>
+<h4>2.6 Social/Meta Signals</h4>
+<ol>
+<li><strong>Author Merge History:</strong> Looks at the percentage of the author’s recent PRs that were merged in this repository.</li>
+<li><strong>Staleness:</strong> Determines how long the PR has been open, with longer durations indicating potential issues or abandonment.</li>
+<li><strong>Activity Level:</strong> Reviews the level of recent activity, such as comments and updates, or radio silence.</li>
+<li><strong>First-Time Contributor:</strong> Highlights any higher rejection rates for first-time contributors.</li>
+</ol>
+<h3>3. Output Format</h3>
+<p>The Merge Check skill produces a structured report based on the analysis. This report includes:</p>
+<ol>
+<li><strong>Mergeability Score:</strong> A color-coded rating indicating the likelihood of the PR being merged, with 🟢 (High, >80%), 🟡 (Medium, 40-80%), and 🔴 (Low, <40%).</li>
+<li><strong>Risk Factors:</strong> A bullet list of specific concerns, ordered by severity.</li>
+<li><strong>Strengths:</strong> Highlights what is working well in the PR, such as passing CI checks or detailed descriptions.</li>
+<li><strong>Recommendations:</strong> Provides actionable steps to improve the PR’s mergeability, focusing on addressing the identified issues.</li>
+<li><strong>Verdict:</strong> Summarizes the overall assessment in one sentence.</li>
+</ol>
+<h3>4. Example Report</h3>
+<p>Here’s an example of what a Mergeability Report might look like:</p>
+<pre>
+<h2>PR Mergeability Report: owner/repo#123</h2>
+<b>Score: 🟡 Medium (~55%)</b>
+<h3>Risk Factors</h3>
+<ul>
+<li>⚠️ 847 lines changed — approaching reviewer fatigue threshold</li>
+<li>⚠️ Changes requested by @maintainer not yet addressed</li>
+<li>⚠️ Touches 12 files across 6 directories — scattered scope</li>
+<li>ℹ️ No linked issue</li>
+</ul>
+<h3>Strengths</h3>
+<ul>
+<li>✅ All 14 CI checks passing</li>
+<li>✅ Clear title and detailed description</li>
+<li>✅ Author has 73% merge rate in this repo (8/11 recent PRs)</li>
+<li>✅ Active discussion — last update 2 hours ago</li>
+</ul>
+<h3>Recommendations</h3>
+<ol>
+<li>Address @maintainer’s review comments before requesting re-review</li>
+<li>Consider splitting into smaller PRs (config changes vs logic changes)</li>
+<li>Link the relevant issue for traceability</li>
+</ol>
+<h3>Verdict</h3>
+<p>Solid PR with passing CI and an active author, but stalled on unaddressed review feedback — resolving those comments is the critical path to merge.</p>
+</pre>
+<h3>5. Script Reference</h3>
+<p>The <code>merge-check.sh</code> script gathers all necessary data and outputs a single JSON object. Key fields in the JSON object include:</p>
+<ul>
+<li><strong>pr:</strong> Full PR metadata (title, body, author, state, draft, labels, reviewers)</li>
+<li><strong>files:</strong> List of changed files with patch stats</li>
+<li><strong>diff_stats:</strong> Total additions, deletions, changed files count</li>
+<li><strong>checks:</strong> CI/check run results for the head commit</li>
+<li><strong>reviews:</strong> All reviews (approved, changes_requested, commented)</li>
+<li><strong>review_comments:</strong> Inline review comments</li>
+<li><strong>issue_comments:</strong> PR conversation comments</li>
+<li><strong>commits:</strong> Commit list with messages</li>
+<li><strong>repo:</strong> Repository metadata (language, size, defaults)</li>
+<li><strong>author_history:</strong> Author’s recent closed PRs and merge rate</li>
+<li><strong>has_codeowners:</strong> Boolean indicating if CODEOWNERS are involved</li>
+<li><strong>has_contributing:</strong> Boolean indicating if a contributing file is present</li>
+</ul>
+<p>The script handles errors gracefully by outputting “error” fields when individual API calls fail. You should note any missing data in your report due to API limitations or errors.</p>
+<h2>Conclusion</h2>
+<p>OpenClaw’s Merge Check skill is an invaluable tool for anyone involved in GitHub PR reviews. By analyzing PRs across multiple dimensions, it provides insights into their mergeability, helping maintainers, reviewers, and contributors make informed decisions. Whether you’re addressing review comments, evaluating architectural fit, or ensuring process compliance, Merge Check offers a structured approach to enhance your PR review process. With its ability to predict merge likelihood accurately, Merge Check can significantly streamline your development workflow, ultimately leading to more successful PR merges.</p>
+<p>If you haven’t already, consider integrating Merge Check into your GitHub PR evaluation process. Its detailed reports and actionable recommendations can save valuable time and effort, making your PR reviews more efficient and effective.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/tag-assistant/merge-check/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/tag-assistant/merge-check/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

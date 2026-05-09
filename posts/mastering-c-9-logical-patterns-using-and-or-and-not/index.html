@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mastering C# 9 Logical Patterns: Using and, or, and not | News of Tomorrow</title>
+<meta name="description" content="Discover how C# 9 revolutionized pattern matching with logical patterns. Learn how to use and, or, and not keywords to write cleaner, more readable code.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/mastering-c-9-logical-patterns-using-and-or-and-not/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Mastering C# 9 Logical Patterns: Using and, or, and not">
+<meta property="og:description" content="Discover how C# 9 revolutionized pattern matching with logical patterns. Learn how to use and, or, and not keywords to write cleaner, more readable code.">
+<meta property="og:image" content="https://picsum.photos/seed/mastering-c-9-logical-patterns-using-and-or-and-not/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/mastering-c-9-logical-patterns-using-and-or-and-not/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-03">
+<meta property="article:modified_time" content="2026-05-03">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mastering C# 9 Logical Patterns: Using and, or, and not">
+<meta name="twitter:description" content="Discover how C# 9 revolutionized pattern matching with logical patterns. Learn how to use and, or, and not keywords to write cleaner, more readable code.">
+<meta name="twitter:image" content="https://picsum.photos/seed/mastering-c-9-logical-patterns-using-and-or-and-not/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Mastering C# 9 Logical Patterns: Using and, or, and not", "datePublished": "2026-05-03", "dateModified": "2026-05-03", "image": ["https://picsum.photos/seed/mastering-c-9-logical-patterns-using-and-or-and-not/1200/630"], "description": "Discover how C# 9 revolutionized pattern matching with logical patterns. Learn how to use and, or, and not keywords to write cleaner, more readable code.", "mainEntityOfPage": "https://github.insightginie.com/posts/mastering-c-9-logical-patterns-using-and-or-and-not/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Mastering C# 9 Logical Patterns: Using and, or, and not", "item": "https://github.insightginie.com/posts/mastering-c-9-logical-patterns-using-and-or-and-not/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Mastering C# 9 Logical Patterns: Using and, or, and not</h1>
+<time datetime="2026-05-03" class="post-date" data-date="2026-05-03T14:15:27+00:00">2026-05-03</time>
+<img src="https://picsum.photos/seed/mastering-c-9-logical-patterns-using-and-or-and-not/800/400" class="post-hero" alt="Mastering C# 9 Logical Patterns: Using and, or, and not">
+<h2>Introduction to C# 9 Logical Patterns</h2>
+<p>The evolution of the C# language has consistently focused on improving developer productivity and code readability. With the release of C# 9, Microsoft introduced a powerful feature set known as logical patterns. These patterns allow developers to combine existing patterns using the <strong>and</strong>, <strong>or</strong>, and <strong>not</strong> keywords. This shift fundamentally changes how we handle conditional logic, making complex validation and data filtering significantly more expressive.</p>
+<p>Before C# 9, pattern matching was often limited to simple type checks or constant comparisons. If you needed to verify that a number fell within a specific range or that an object satisfied multiple criteria, you were often forced to write nested if-statements or complex boolean expressions. Logical patterns simplify these structures, enabling you to express your intent directly within the syntax of the pattern matching expression.</p>
+<h2>Understanding the New Keywords</h2>
+<p>The three new logical patterns act as building blocks for creating sophisticated logic. By combining these with existing patterns like relational, property, and type patterns, you can create highly readable conditional statements.</p>
+<h3>The and Pattern</h3>
+<p>The <strong>and</strong> keyword requires that both the preceding and succeeding patterns are satisfied. This is particularly useful for range checking. For example, validating that an integer is within a specific range used to require two separate comparisons. Now, it can be handled in a single line.</p>
+<h3>The or Pattern</h3>
+<p>The <strong>or</strong> keyword is satisfied if either the preceding or the succeeding pattern matches. This is a massive improvement over multiple equality checks. Instead of writing <code>if (x == 1 || x == 2 || x == 3)</code>, you can now use a pattern matching approach that is cleaner and more declarative.</p>
+<h3>The not Pattern</h3>
+<p>The <strong>not</strong> keyword acts as a logical negation. It is often used to ensure that a value does not match a certain pattern, such as checking for non-null values or excluding specific types from a list. It simplifies scenarios where you want to perform an action on everything except a specific case.</p>
+<h2>Practical Use Cases and Examples</h2>
+<p>To truly appreciate the power of C# 9 logical patterns, let us look at real-world scenarios where these features shine. Consider a scenario where you are processing a temperature input. You need to ensure the value is within a safe operating range and not a sentinel value.</p>
+<ul>
+<li><strong>Range Validation:</strong> Using <code>input is >= 0 and <= 100</code> ensures the value is valid.</li>
+<li><strong>Filtering Collections:</strong> When working with lists, you can filter objects using <code>item is not null and { IsActive: true }</code>.</li>
+<li><strong>Handling Multiple States:</strong> Using <code>status is "Pending" or "Processing"</code> simplifies state machine logic significantly.</li>
+</ul>
+<p>The readability improvements are not just aesthetic. By reducing the cognitive load required to parse complex nested if-else structures, these patterns make code easier to maintain and debug. When a developer sees <code>not null</code>, the intent is immediately clear, reducing the chance of logic errors.</p>
+<h2>Comparing Old vs New Syntax</h2>
+<p>Consider a typical scenario where you are validating a user age. In older versions of C#, you might write: <code>if (age >= 18 && age < 65) { /* logic */ }</code>. While this is simple, as requirements grow—such as adding a check for a specific identification flag—the boolean logic becomes bloated. With C# 9, you can write: <code>if (age is >= 18 and < 65)</code>. This declarative style reads almost like natural language, making the code self-documenting.</p>
+<p>Furthermore, consider the <strong>not</strong> pattern. Previously, you might have written <code>if (!(obj is string))</code>. The new syntax allows for <code>if (obj is not string)</code>, which is much more intuitive for developers coming from different backgrounds and improves the overall symmetry of the language.</p>
+<h2>Best Practices for Pattern Matching</h2>
+<p>While logical patterns are powerful, they should be used judiciously. Here are a few tips for maintaining clean code:</p>
+<ul>
+<li><strong>Keep patterns simple:</strong> Do not chain too many <strong>and</strong>/<strong>or</strong> operators together, as it can still become difficult to read.</li>
+<li><strong>Prioritize readability:</strong> If a pattern matching expression becomes longer than a single line, consider breaking the logic into a separate method or using a named variable.</li>
+<li><strong>Combine with Switch Expressions:</strong> Logical patterns are most effective when used within switch expressions, allowing for concise and exhaustive handling of different data scenarios.</li>
+</ul>
+<h2>Frequently Asked Questions</h2>
+<h3>What versions of .NET support C# 9 logical patterns?</h3>
+<p>Logical patterns were introduced in C# 9, which is supported in .NET 5 and all subsequent versions, including .NET 6, 7, and 8. You must ensure your project is configured to use the C# 9.0 language version or higher.</p>
+<h3>Can I use logical patterns with property patterns?</h3>
+<p>Yes, absolutely. One of the greatest strengths of C# 9 is that you can combine property patterns with logical patterns. For example, you can check if an object's property matches a specific condition using <code>person is { Age: > 18 and < 65 }</code>.</p>
+<h3>Is there a performance penalty for using these new patterns?</h3>
+<p>No, there is no performance penalty. The C# compiler optimizes these logical patterns into the same underlying IL (Intermediate Language) code that would be produced by standard boolean operators. You get the benefit of cleaner, more maintainable code without sacrificing execution speed.</p>
+<h3>How does the not pattern handle nulls?</h3>
+<p>The <strong>not</strong> pattern is very effective for null checking. Using <code>x is not null</code> is a idiomatic and highly readable way to perform null checks in modern C#. It is semantically equivalent to checking <code>x != null</code>, but it integrates perfectly into larger pattern matching expressions.</p>
+<h3>Can I mix and and or in the same expression?</h3>
+<p>Yes, you can mix them. However, it is important to be mindful of operator precedence. The <strong>and</strong> keyword has a higher precedence than <strong>or</strong>. Always test your logic or use parentheses if you are concerned about the order of operations, just as you would with standard boolean logic.</p>
+<h2>Conclusion</h2>
+<p>C# 9 logical patterns represent a significant step forward in making C# a more expressive and modern language. By utilizing <strong>and</strong>, <strong>or</strong>, and <strong>not</strong>, developers can write code that is not only shorter but also easier to read and maintain. Whether you are validating data, filtering collections, or implementing complex business rules, these patterns provide the tools necessary to write cleaner, more robust applications. If you haven't started incorporating these patterns into your daily workflow, now is the perfect time to start.</p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

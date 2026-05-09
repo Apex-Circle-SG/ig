@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill Scanner: Protect Yourself from Malicious AI Skills | News of Tomorrow</title>
+<meta name="description" content="Learn how the OpenClaw Skill Scanner detects 341+ malicious AI skills on ClawHub, protecting you from credential stealers, data exfiltration, and supply chain a">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-scanner-protect-yourself-from-malicious-ai-skills/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill Scanner: Protect Yourself from Malicious AI Skills">
+<meta property="og:description" content="Learn how the OpenClaw Skill Scanner detects 341+ malicious AI skills on ClawHub, protecting you from credential stealers, data exfiltration, and supply chain a">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-scanner-protect-yourself-from-malicious-ai-skills/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-scanner-protect-yourself-from-malicious-ai-skills/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-09">
+<meta property="article:modified_time" content="2026-03-09">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill Scanner: Protect Yourself from Malicious AI Skills">
+<meta name="twitter:description" content="Learn how the OpenClaw Skill Scanner detects 341+ malicious AI skills on ClawHub, protecting you from credential stealers, data exfiltration, and supply chain a">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-scanner-protect-yourself-from-malicious-ai-skills/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill Scanner: Protect Yourself from Malicious AI Skills", "datePublished": "2026-03-09", "dateModified": "2026-03-09", "image": ["https://picsum.photos/seed/openclaw-skill-scanner-protect-yourself-from-malicious-ai-skills/1200/630"], "description": "Learn how the OpenClaw Skill Scanner detects 341+ malicious AI skills on ClawHub, protecting you from credential stealers, data exfiltration, and supply chain a", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-scanner-protect-yourself-from-malicious-ai-skills/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill Scanner: Protect Yourself from Malicious AI Skills", "item": "https://github.insightginie.com/posts/openclaw-skill-scanner-protect-yourself-from-malicious-ai-skills/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill Scanner: Protect Yourself from Malicious AI Skills</h1>
+<time datetime="2026-03-09" class="post-date" data-date="2026-03-09T16:17:59+00:00">2026-03-09</time>
+<img src="https://picsum.photos/seed/openclaw-skill-scanner-protect-yourself-from-malicious-ai-skills/800/400" class="post-hero" alt="OpenClaw Skill Scanner: Protect Yourself from Malicious AI Skills">
+<h2>What is the OpenClaw Skill Scanner?</h2>
+<p>The OpenClaw Skill Scanner is a security tool designed to analyze AI skills before installation, protecting users from the 22-26% of skills on ClawHub that contain vulnerabilities or malicious code. This scanner acts as your first line of defense against credential stealers, data exfiltration attempts, and supply chain attacks.</p>
+<h2>Why Skill Scanning Matters</h2>
+<p>The AI skill marketplace has become a target for malicious actors. Recent analysis found that 341 skills on ClawHub were flagged as containing vulnerabilities. These attacks range from simple credential harvesting to sophisticated supply chain compromises.</p>
+<p>Common attack vectors include:</p>
+<ul>
+<li>Credential stealers disguised as legitimate plugins</li>
+<li>Typosquatting attacks using similar names to popular skills</li>
+<li>Data exfiltration through hidden HTTP requests</li>
+<li>Obfuscated code hiding malicious payloads</li>
+<li>Prompt injection via SKILL.md content</li>
+</ul>
+<h2>How the Scanner Works</h2>
+<p>The scanner performs comprehensive analysis across multiple dimensions:</p>
+<h3>SKILL.md Analysis</h3>
+<p>The scanner examines the skill&#8217;s documentation for suspicious patterns including:</p>
+<ul>
+<li>Non-HTTPS URLs, IP addresses, and URL shorteners</li>
+<li>Prompt injection patterns attempting to override instructions</li>
+<li>Requests for credentials, API keys, or tokens</li>
+<li>Obfuscated content using base64, hex, or unicode escapes</li>
+</ul>
+<h3>Script Analysis</h3>
+<p>The tool analyzes the actual skill code for dangerous patterns:</p>
+<ul>
+<li>Network calls using curl, wget, requests, urllib, or fetch</li>
+<li>File system writes outside expected paths</li>
+<li>Environment variable access that could harvest credentials</li>
+<li>Shell command execution via os.system, subprocess, or exec</li>
+<li>Obfuscated strings using base64 decode or eval</li>
+<li>Data exfiltration patterns POSTing to external URLs</li>
+<li>Cryptocurrency wallet patterns</li>
+<li>Known malicious domains</li>
+<li>Remote code execution attempts</li>
+</ul>
+<h3>Name Analysis</h3>
+<p>The scanner checks for typosquatting by comparing skill names against known popular skills and calculating edit distances to catch misspellings and character swaps.</p>
+<h3>Binary/Asset Verification</h3>
+<p>For skills containing binary assets, the scanner generates and verifies SHA-256 checksums:</p>
+<ul>
+<li>Creates checksum manifests for trusted skill versions</li>
+<li>Verifies binaries against expected checksums on updates</li>
+<li>Flags unverified binaries and checksum mismatches</li>
+</ul>
+<h3>Metadata Analysis</h3>
+<p>The tool examines skill metadata for:</p>
+<ul>
+<li>Excessive permission requirements</li>
+<li>Suspicious install scripts</li>
+<li>Unnecessary environment requirements</li>
+</ul>
+<h2>Risk Levels Explained</h2>
+<p>The scanner categorizes findings into five risk levels:</p>
+<ul>
+<li><strong>CRITICAL</strong>: Almost certainly malicious. Do NOT install.</li>
+<li><strong>HIGH</strong>: Likely malicious or extremely risky. Manual review required.</li>
+<li><strong>MEDIUM</strong>: Suspicious patterns found. Review before installing.</li>
+<li><strong>LOW</strong>: Minor concerns. Probably safe but worth checking.</li>
+<li><strong>CLEAN</strong>: No issues detected. Safe to install.</li>
+</ul>
+<h2>Essential Commands</h2>
+<p>Getting started with the scanner is straightforward. Here are the key commands:</p>
+<pre><code class="language-bash"># Scan a local skill directory
+python3 {baseDir}/scripts/scanner.py scan --path ~/.openclaw/skills/some-skill/
+
+# Scan a SKILL.md file directly
+scan --file ./SKILL.md
+
+# Scan with verbose output
+python3 {baseDir}/scripts/scanner.py scan --path ~/.openclaw/skills/some-skill/ --verbose
+
+# Scan all installed skills
+python3 {baseDir}/scripts/scanner.py scan-all
+
+# Scan with binary checksum verification
+python3 {baseDir}/scripts/scanner.py scan --path ~/.openclaw/skills/some-skill/ --checksum checksums.json
+
+# Generate checksums for binary assets
+python3 {baseDir}/scripts/scanner.py checksum --path ~/.openclaw/skills/some-skill/ -o checksums.json
+
+# Verify checksums against a manifest
+python3 {baseDir}/scripts/scanner.py checksum --path ~/.openclaw/skills/some-skill/ --verify checksums.json
+
+# Output results as JSON
+python3 {baseDir}/scripts/scanner.py scan --path ./skill-dir/ --json
+</code></pre>
+<h2>Best Practices for Skill Security</h2>
+<p>Follow these guidelines to stay protected:</p>
+<ol>
+<li><strong>Always scan before installing</strong> ANY third-party skill, even from official sources</li>
+<li>Remember that &#8220;CLEAN&#8221; results aren&#8217;t guarantees &#8211; the scanner catches known patterns</li>
+<li>If a skill needs network access, verify the domains it contacts</li>
+<li>Cross-reference skill names with known typosquats</li>
+<li>When in doubt, read the source code yourself</li>
+</ol>
+<h2>Advanced Security Features</h2>
+<p>The scanner includes sophisticated detection capabilities:</p>
+<h3>Supply Chain Attack Detection</h3>
+<p>Identifies skills that download and execute remote code, a common supply chain attack vector.</p>
+<h3>Telemetry Leak Prevention</h3>
+<p>Detects skills that print environment variables, configurations, or secrets to stdout, potentially leaking sensitive information.</p>
+<h3>Path Traversal Protection</h3>
+<p>Identifies directory escape attempts using ../ sequences that could allow skills to access files outside their intended directories.</p>
+<h3>Shell Command Execution Prevention</h3>
+<p>Flags risky patterns like shell=True in subprocess calls that enable remote code execution.</p>
+<h2>Getting Started</h2>
+<p>To begin using the OpenClaw Skill Scanner:</p>
+<ol>
+<li>Clone the OpenClaw repository</li>
+<li>Navigate to the scripts/scanner.py directory</li>
+<li>Run the scan command on any skill you&#8217;re considering</li>
+<li>Review the results before installation</li>
+</ol>
+<p>The scanner is your essential tool for navigating the AI skill marketplace safely. With 22-26% of skills containing vulnerabilities, taking a few seconds to scan can save you from significant security headaches.</p>
+<h2>Conclusion</h2>
+<p>The OpenClaw Skill Scanner represents a critical advancement in AI security, providing users with the tools needed to make informed decisions about skill installation. By combining comprehensive analysis techniques with practical usability, it helps maintain the integrity of the AI ecosystem while protecting users from increasingly sophisticated threats.</p>
+<p>Don&#8217;t become the next victim of malicious AI skills. Make scanning a standard part of your installation process and contribute to a safer AI skill marketplace for everyone.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/trypto1019/arc-skill-scanner/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/trypto1019/arc-skill-scanner/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

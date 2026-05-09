@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw PR Triage Skill: Automate GitHub Pull Request Management | News of Tomorrow</title>
+<meta name="description" content="Learn how the OpenClaw PR Triage skill detects duplicate pull requests, assesses quality, and generates prioritized reports to help maintainers manage large rep">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-pr-triage-skill-automate-github-pull-request-management/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw PR Triage Skill: Automate GitHub Pull Request Management">
+<meta property="og:description" content="Learn how the OpenClaw PR Triage skill detects duplicate pull requests, assesses quality, and generates prioritized reports to help maintainers manage large rep">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-pr-triage-skill-automate-github-pull-request-management/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-pr-triage-skill-automate-github-pull-request-management/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-12">
+<meta property="article:modified_time" content="2026-03-12">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw PR Triage Skill: Automate GitHub Pull Request Management">
+<meta name="twitter:description" content="Learn how the OpenClaw PR Triage skill detects duplicate pull requests, assesses quality, and generates prioritized reports to help maintainers manage large rep">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-pr-triage-skill-automate-github-pull-request-management/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw PR Triage Skill: Automate GitHub Pull Request Management", "datePublished": "2026-03-12", "dateModified": "2026-03-12", "image": ["https://picsum.photos/seed/openclaw-pr-triage-skill-automate-github-pull-request-management/1200/630"], "description": "Learn how the OpenClaw PR Triage skill detects duplicate pull requests, assesses quality, and generates prioritized reports to help maintainers manage large rep", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-pr-triage-skill-automate-github-pull-request-management/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw PR Triage Skill: Automate GitHub Pull Request Management", "item": "https://github.insightginie.com/posts/openclaw-pr-triage-skill-automate-github-pull-request-management/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw PR Triage Skill: Automate GitHub Pull Request Management</h1>
+<time datetime="2026-03-12" class="post-date" data-date="2026-03-12T08:15:39+00:00">2026-03-12</time>
+<img src="https://picsum.photos/seed/openclaw-pr-triage-skill-automate-github-pull-request-management/800/400" class="post-hero" alt="OpenClaw PR Triage Skill: Automate GitHub Pull Request Management">
+<h2>What is the OpenClaw PR Triage Skill?</h2>
+<p>The PR Triage skill is an OpenClaw capability designed to help repository maintainers manage large volumes of open pull requests efficiently. It automatically detects duplicate PRs, assesses their quality, and generates actionable reports that prioritize which PRs deserve attention.</p>
+<h2>How Does PR Triage Work?</h2>
+<p>The skill follows a six-phase workflow that systematically analyzes open pull requests in any GitHub repository. Here&#8217;s how it operates:</p>
+<h3>Phase 1: Fetching PR Data</h3>
+<p>The skill begins by collecting comprehensive metadata about all open pull requests using GitHub CLI commands. It retrieves information including PR numbers, titles, descriptions, authors, timestamps, labels, changed files, and code additions/deletions.</p>
+<h3>Phase 2: Intent Extraction</h3>
+<p>Each PR is analyzed to extract its core intent through keyword extraction and issue reference detection. This creates a normalized representation that can be compared across PRs to identify similar work.</p>
+<h3>Phase 3: Duplicate Detection</h3>
+<p>The skill employs multiple similarity detection methods:</p>
+<ul>
+<li><strong>File Overlap Analysis:</strong> Uses Jaccard similarity to compare which files each PR modifies</li>
+<li><strong>Keyword Similarity:</strong> Compares extracted keywords from titles and descriptions</li>
+<li><strong>Issue Reference Matching:</strong> Detects when multiple PRs reference the same issue</li>
+<li><strong>Combined Scoring:</strong> Calculates a weighted similarity score from multiple signals</li>
+</ul>
+<h3>Phase 4: Quality Assessment</h3>
+<p>Each PR receives a quality score based on objective signals:</p>
+<ul>
+<li>Presence of detailed description (+10 points)</li>
+<li>References to issues (+15 points)</li>
+<li>Inclusion of tests (+20 points)</li>
+<li>PR size under 100 lines (+10 points)</li>
+<li>Presence of labels (+5 points)</li>
+<li>Recent activity (+10 points)</li>
+<li>First-time contributor status (-5 points)</li>
+</ul>
+<p>PRs are graded from A (60+ points) to D (under 20 points).</p>
+<h3>Phase 5: Report Generation</h3>
+<p>The skill generates comprehensive Markdown reports that include:</p>
+<ul>
+<li>Duplicate groups with recommendations for which PR to keep</li>
+<li>Quality summary with distribution statistics</li>
+<li>Stale PRs requiring attention</li>
+<li>Ready-to-merge high-quality PRs</li>
+</ul>
+<h3>Phase 6: Optional Actions</h3>
+<p>With the &#8211;action flag, the skill can automatically comment on duplicates and add labels to PRs, though it never closes or merges PRs without explicit approval.</p>
+<h2>Usage Examples</h2>
+<p>Basic triage of recent PRs: <code>/pr-triage --repo opencode/opencode --days 7</code></p>
+<p>Full repository audit: <code>/pr-triage --repo anthropics/claude --all --output report.md</code></p>
+<p>High threshold for obvious duplicates: <code>/pr-triage --repo microsoft/vscode --threshold 90</code></p>
+<h2>Benefits for Maintainers</h2>
+<p>The PR Triage skill saves maintainers significant time by:</p>
+<ul>
+<li>Automatically identifying duplicate work before it wastes reviewer time</li>
+<li>Highlighting high-quality PRs ready for review</li>
+<li>Flagging stale PRs that need follow-up</li>
+<li>Providing objective quality metrics for decision-making</li>
+</ul>
+<h2>Implementation Details</h2>
+<p>The skill uses GitHub CLI authentication patterns to avoid token conflicts, fetches PR metadata efficiently without reading full diffs, and implements local similarity calculations to minimize API costs. It&#8217;s designed to be run as needed rather than continuously, with recommended workflows for weekly or monthly audits.</p>
+<h2>Best Practices</h2>
+<p>For optimal results, maintainers should:</p>
+<ul>
+<li>Start with a 7-day analysis for recent PRs</li>
+<li>Run broader 30-day analyses weekly</li>
+<li>Use the &#8211;all flag sparingly for full audits</li>
+<li>Review the generated reports before taking automated actions</li>
+</ul>
+<p>The PR Triage skill represents a practical application of AI-assisted repository management that helps teams maintain code quality while reducing manual overhead in large, active projects.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/zerone0x/pr-triage/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/zerone0x/pr-triage/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

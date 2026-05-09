@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automating Proof of Address: A Deep Dive into the Didit OpenClaw Skill | News of Tomorrow</title>
+<meta name="description" content="Learn how the Didit Proof of Address skill for OpenClaw simplifies identity verification through automated OCR, document analysis, and geocoding.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/automating-proof-of-address-a-deep-dive-into-the-didit-openclaw-skill/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Automating Proof of Address: A Deep Dive into the Didit OpenClaw Skill">
+<meta property="og:description" content="Learn how the Didit Proof of Address skill for OpenClaw simplifies identity verification through automated OCR, document analysis, and geocoding.">
+<meta property="og:image" content="https://picsum.photos/seed/automating-proof-of-address-a-deep-dive-into-the-didit-openclaw-skill/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/automating-proof-of-address-a-deep-dive-into-the-didit-openclaw-skill/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-19">
+<meta property="article:modified_time" content="2026-03-19">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Automating Proof of Address: A Deep Dive into the Didit OpenClaw Skill">
+<meta name="twitter:description" content="Learn how the Didit Proof of Address skill for OpenClaw simplifies identity verification through automated OCR, document analysis, and geocoding.">
+<meta name="twitter:image" content="https://picsum.photos/seed/automating-proof-of-address-a-deep-dive-into-the-didit-openclaw-skill/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Automating Proof of Address: A Deep Dive into the Didit OpenClaw Skill", "datePublished": "2026-03-19", "dateModified": "2026-03-19", "image": ["https://picsum.photos/seed/automating-proof-of-address-a-deep-dive-into-the-didit-openclaw-skill/1200/630"], "description": "Learn how the Didit Proof of Address skill for OpenClaw simplifies identity verification through automated OCR, document analysis, and geocoding.", "mainEntityOfPage": "https://github.insightginie.com/posts/automating-proof-of-address-a-deep-dive-into-the-didit-openclaw-skill/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Automating Proof of Address: A Deep Dive into the Didit OpenClaw Skill", "item": "https://github.insightginie.com/posts/automating-proof-of-address-a-deep-dive-into-the-didit-openclaw-skill/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Automating Proof of Address: A Deep Dive into the Didit OpenClaw Skill</h1>
+<time datetime="2026-03-19" class="post-date" data-date="2026-03-19T04:00:29+00:00">2026-03-19</time>
+<img src="https://picsum.photos/seed/automating-proof-of-address-a-deep-dive-into-the-didit-openclaw-skill/800/400" class="post-hero" alt="Automating Proof of Address: A Deep Dive into the Didit OpenClaw Skill">
+<h2>Streamlining Identity Verification with OpenClaw and Didit</h2>
+<p>In the evolving landscape of digital security and regulatory compliance, Proof of Address (PoA) remains a critical hurdle for businesses. Whether you are running a fintech startup, a rental platform, or any service requiring strict Know Your Customer (KYC) protocols, the process of manually vetting utility bills and bank statements is time-consuming, prone to error, and difficult to scale. Enter the <strong>Didit Proof of Address skill</strong> for the OpenClaw ecosystem—a powerful, automated solution designed to integrate seamlessly into your existing verification workflows.</p>
+<h3>What is the Didit Proof of Address Skill?</h3>
+<p>The Didit Proof of Address skill is a specialized module available within the OpenClaw repository (under <code>rosasalberto/didit-proof-of-address</code>). Its primary function is to provide developers with a ready-to-use interface to interact with the Didit standalone API, specifically tailored for residential address verification. By leveraging this skill, developers can automate the extraction of address data, validate document authenticity, and perform sophisticated name matching without having to build the underlying infrastructure from scratch.</p>
+<h3>Key Features and Capabilities</h3>
+<p>This skill isn&#8217;t just a simple file uploader; it acts as an intelligent layer between your user interface and the Didit processing engine. Here is what it brings to the table:</p>
+<ul>
+<li><strong>Advanced OCR Extraction:</strong> The skill parses images and PDFs (JPG, PNG, TIFF, PDF) to pull out critical data like the issuing institution, issue date, and the full physical address.</li>
+<li><strong>Automated Geocoding:</strong> Beyond just reading text, the API returns lat/lng coordinates for the extracted address, allowing you to plot locations on a map or verify against known boundaries.</li>
+<li><strong>Document Classification:</strong> It intelligently detects whether a file is a utility bill, a bank statement, or a government-issued document, and assesses its validity based on strict criteria.</li>
+<li><strong>Validation Logic:</strong> It enforces a 90-day rule for document age and performs name matching against existing identity documentation to prevent fraud.</li>
+<li><strong>Language and Multi-page Support:</strong> The system is designed to handle various document types and languages, ensuring a global reach for your verification services.</li>
+</ul>
+<h3>How the Technical Workflow Works</h3>
+<p>The integration is built around a standard RESTful POST request. Once your application sends a file to the <code>/v3/poa/</code> endpoint, the skill orchestrates the entire verification process. The response includes a structured JSON object containing a <code>status</code> field—returning &#8216;Approved&#8217;, &#8216;Declined&#8217;, &#8216;In Review&#8217;, or &#8216;Not Finished&#8217;.</p>
+<p>This structured output is where the real value lies. If a document is declined, the API provides a granular set of <strong>Warning Tags</strong>. These tags inform the developer exactly why the document failed—be it a &#8216;POOR_DOCUMENT_QUALITY&#8217;, &#8216;EXPIRED_DOCUMENT&#8217;, or &#8216;NAME_MISMATCH_WITH_PROVIDED&#8217;. This allows your frontend to provide immediate, actionable feedback to the end-user (e.g., &#8216;Please upload a clearer image&#8217; or &#8216;The document provided is older than 90 days&#8217;).</p>
+<h3>Getting Started: Implementation Steps</h3>
+<p>For those looking to integrate this into their stack, the process is straightforward:</p>
+<ol>
+<li><strong>Authentication:</strong> You will need a Didit API key. If you don&#8217;t have one, the programmatic registration flow provided by the documentation allows you to create an account and verify your email directly via API calls.</li>
+<li><strong>Credit Management:</strong> You can monitor your billing and top up your account balance directly through the API, ensuring that your verification services remain uninterrupted.</li>
+<li><strong>Request Structure:</strong> You prepare a <code>multipart/form-data</code> request containing the document file. The skill handles the headers, including the required <code>x-api-key</code>.</li>
+<li><strong>Processing Responses:</strong> Implement logic to handle the JSON response. For instance, an &#8216;In Review&#8217; status should trigger a manual audit process in your admin dashboard, whereas an &#8216;Approved&#8217; status should allow the user&#8217;s registration flow to proceed automatically.</li>
+</ol>
+<h3>Best Practices for Compliance</h3>
+<p>While the technical integration is simple, maintaining compliance requires adhering to best practices. Ensure that the documents collected are full-color, with all corners visible, and free from digital editing. Because the Didit API is capable of detecting document manipulation, providing high-quality source files is paramount to keeping your approval rates high and your manual review queue short.</p>
+<h3>Why Choose This Skill?</h3>
+<p>The beauty of using the OpenClaw Didit skill lies in its abstraction. You avoid the headache of managing OCR engines, geocoding datasets, and complex image processing pipelines. Instead, you focus on your core product, leaving the heavy lifting of document validation to a specialized, hardened API.</p>
+<p>For developers, this means faster time-to-market. For businesses, it means a more secure onboarding process that reduces the risk of fraud and identity theft. By integrating this skill, you aren&#8217;t just adding a feature; you are upgrading your entire verification infrastructure to enterprise-grade standards.</p>
+<p>If you are already using OpenClaw, check the <code>SKILL.md</code> file in the repository to view the full list of parameters and response field definitions. Whether you are performing basic address checks or full-blown KYC workflows, the Didit Proof of Address skill is an essential tool in your developer toolkit.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/rosasalberto/didit-proof-of-address/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/rosasalberto/didit-proof-of-address/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>(10/50) Data engineering &amp;amp; storage at scale | News of Tomorrow</title>
+<meta name="description" content="Discover how to design a high-performance, scalable storage schema for minute-level data from 200 assets. Learn to leverage Time-Series Databases like Timescale">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/10-50-data-engineering-storage-at-scale/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="(10/50) Data engineering &amp;amp; storage at scale">
+<meta property="og:description" content="Discover how to design a high-performance, scalable storage schema for minute-level data from 200 assets. Learn to leverage Time-Series Databases like Timescale">
+<meta property="og:image" content="https://picsum.photos/seed/10-50-data-engineering-storage-at-scale/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/10-50-data-engineering-storage-at-scale/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-08">
+<meta property="article:modified_time" content="2025-10-08">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="(10/50) Data engineering &amp;amp; storage at scale">
+<meta name="twitter:description" content="Discover how to design a high-performance, scalable storage schema for minute-level data from 200 assets. Learn to leverage Time-Series Databases like Timescale">
+<meta name="twitter:image" content="https://picsum.photos/seed/10-50-data-engineering-storage-at-scale/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "(10/50) Data engineering &amp; storage at scale", "datePublished": "2025-10-08", "dateModified": "2025-10-08", "image": ["https://picsum.photos/seed/10-50-data-engineering-storage-at-scale/1200/630"], "description": "Discover how to design a high-performance, scalable storage schema for minute-level data from 200 assets. Learn to leverage Time-Series Databases like Timescale", "mainEntityOfPage": "https://github.insightginie.com/posts/10-50-data-engineering-storage-at-scale/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "(10/50) Data engineering &amp; storage at scale", "item": "https://github.insightginie.com/posts/10-50-data-engineering-storage-at-scale/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>(10/50) Data engineering &amp; storage at scale</h1>
+<time datetime="2025-10-08" class="post-date" data-date="2025-10-08T02:19:09+00:00">2025-10-08</time>
+<img src="https://picsum.photos/seed/10-50-data-engineering-storage-at-scale/800/400" class="post-hero" alt="(10/50) Data engineering &amp;amp; storage at scale">
+<p>In today&#8217;s data-driven world, the ability to efficiently store, process, and analyze vast amounts of data is not just an advantage—it&#8217;s a necessity. This is especially true for time-series data, which streams continuously from sensors, devices, and applications, recording changes over time. Imagine managing minute-level data from hundreds or thousands of assets; the sheer volume and velocity present significant engineering challenges. This article delves into the strategies and technologies essential for handling such scale, culminating in a practical storage schema design for high-frequency asset data.</p>
+<h2>The Unstoppable Influx: Why Traditional Methods Fall Short</h2>
+<p>The core problem with time-series data at scale is its unique characteristics:</p>
+<ul>
+<li><strong>High Volume &amp; Velocity:</strong> Data points arrive constantly, often every second or minute, leading to petabytes of data over time.</li>
+<li><strong>Append-Only Nature:</strong> New data is almost always appended, rarely updated, but queries often involve wide time ranges and aggregations.</li>
+<li><strong>Temporal Queries:</strong> The most common queries involve time windows (e.g., &#8220;what was the average temperature last hour?&#8221;) or comparisons across periods.</li>
+<li><strong>Cardinality:</strong> While the number of assets might be fixed, the number of distinct metric values can be very high, and each asset might have multiple metrics.</li>
+</ul>
+<p>Traditional relational databases (RDBMs), while versatile, often struggle with the write amplification, indexing overhead, and query performance for time-series workloads, especially when dealing with the scale required for minute-level data from 200 assets.</p>
+<h2>The Power of Columnar Storage and Parquet</h2>
+<p>To overcome these challenges, specialized approaches are required. One fundamental concept is <strong>columnar storage</strong>. Unlike row-oriented databases where an entire row is stored together, columnar storage stores data column by column. This offers several profound advantages for analytical workloads:</p>
+<ul>
+<li><strong>Superior Compression:</strong> Data within a single column is often of the same type and has similar values (e.g., all timestamps, all temperature readings). This allows for highly effective compression algorithms, significantly reducing storage footprint.</li>
+<li><strong>Faster Query Performance:</strong> When a query only needs a few columns (e.g., average temperature), only those relevant columns need to be read from disk, not entire rows. This dramatically reduces I/O.</li>
+<li><strong>Optimized for Aggregations:</strong> Aggregations (SUM, AVG, MIN, MAX) are inherently faster because the data for a specific column is contiguous.</li>
+</ul>
+<p><strong>Apache Parquet</strong> is a leading open-source columnar storage format designed for efficient data storage and retrieval in big data ecosystems. It&#8217;s language-agnostic and widely used in data lakes and data warehousing solutions. Parquet files are self-describing, containing schema information, and support complex nested data structures. While not a database itself, Parquet is a critical component for storing historical or analytical data efficiently.</p>
+<h2>Time-Series Databases: The Engine for High-Frequency Data</h2>
+<p>For primary, real-time ingestion and querying of time-series data, a <strong>Time-Series Database (TSDB)</strong> is often the optimal choice. TSDBs are purpose-built to handle the unique demands of time-stamped data. Key characteristics include:</p>
+<ul>
+<li><strong>Optimized Data Layout:</strong> They organize data by time, often partitioning or sharding data based on time intervals, which makes time-range queries extremely fast.</li>
+<li><strong>Efficient Indexing:</strong> Specialized indexing for timestamps and tags allows for rapid retrieval of specific data points or ranges.</li>
+<li><strong>Built-in Functions:</strong> Many TSDBs offer native functions for aggregation, downsampling, interpolation, and other time-series specific operations.</li>
+<li><strong>High Ingestion Rates:</strong> Designed for high write throughput, essential for continuous data streams.</li>
+</ul>
+<p>Popular TSDBs include InfluxDB, Prometheus, OpenTSDB, and TimescaleDB (a PostgreSQL extension). For our assignment, we will consider TimescaleDB due to its SQL compatibility and robust features, combining the power of a TSDB with the familiarity and reliability of PostgreSQL.</p>
+<h2>Mastering Incremental Updates at Scale</h2>
+<p>For time-series data, the concept of &#8220;updates&#8221; is typically replaced by &#8220;appends.&#8221; Data points, once recorded, are usually immutable. <strong>Incremental updates</strong> in this context refer to the efficient process of continuously adding new data without re-processing or re-writing existing data. This is crucial for maintaining high ingestion rates and keeping systems performant.</p>
+<p>A well-designed data pipeline will typically:</p>
+<ol>
+<li>Ingest new data streams (e.g., from IoT devices, APIs).</li>
+<li>Perform light transformation or validation.</li>
+<li>Append data to the primary TSDB.</li>
+<li>Optionally, periodically extract, transform, and load (ETL) aggregated or older data into more cost-effective archival storage (e.g., Parquet files in a data lake).</li>
+</ol>
+<p>This append-only model simplifies data consistency and improves write performance significantly compared to systems that require frequent updates to existing records.</p>
+<h2>The Assignment: Designing a Robust Storage Schema for 200 Assets (Minute-Level Data)</h2>
+<p>Let&#8217;s tackle the core challenge: designing a storage schema for minute-level data from 200 assets. Each asset generates multiple metrics (e.g., temperature, pressure, humidity, power consumption) every minute. We need a solution that is scalable, performs well for both real-time dashboards and historical analysis, and is cost-effective.</p>
+<h3>Defining the Challenge Parameters:</h3>
+<ul>
+<li><strong>Number of Assets:</strong> 200</li>
+<li><strong>Data Frequency:</strong> Minute-level (1 point per minute per asset)</li>
+<li><strong>Data Granularity:</strong> High precision (e.g., float or double for metric values)</li>
+<li><strong>Expected Queries:</strong>
+<ul>
+<li>Retrieve all metrics for a single asset over a time range.</li>
+<li>Retrieve a specific metric for all assets over a time range.</li>
+<li>Aggregate metrics (average, min, max) over various time windows (hour, day, week).</li>
+<li>Identify outliers or anomalies.</li>
+</ul>
+</li>
+<li><strong>Retention:</strong> Full granularity for 3-6 months; downsampled data for several years.</li>
+</ul>
+<h3>Proposed Primary Storage Solution: TimescaleDB on PostgreSQL</h3>
+<p>Given the requirements, a hybrid approach leveraging TimescaleDB as the primary high-ingestion/query store and Parquet for archival/deep analytics offers the best balance.</p>
+<h4>1. Database Choice &amp; Schema Structure</h4>
+<p>We&#8217;ll use TimescaleDB for its robust time-series capabilities built on top of PostgreSQL, providing a familiar SQL interface and ACID compliance.</p>
+<p><strong>Table: <code>asset_metrics</code> (Hypertable)</strong></p>
+<pre><code>CREATE TABLE asset_metrics ( timestamp TIMESTAMPTZ NOT NULL, -- The time of the reading (minute-level) asset_id INTEGER NOT NULL, -- Foreign key to an assets metadata table metric_type TEXT NOT NULL, -- E.g., 'temperature', 'pressure', 'humidity' value DOUBLE PRECISION NOT NULL, -- The measured value tags JSONB -- Optional: for flexible additional metadata (e.g., sensor_id, location)
+); -- Convert to a TimescaleDB hypertable, partitioning by time and asset_id
+SELECT create_hypertable('asset_metrics', 'timestamp', chunk_time_interval =&gt; INTERVAL '1 day', partition_column =&gt; 'asset_id', number_partitions =&gt; 8); -- Create a composite index for efficient querying
+CREATE INDEX ix_asset_metrics_time_asset_metric ON asset_metrics (timestamp DESC, asset_id, metric_type);
+</code></pre>
+<p><strong>Rationale:</strong></p>
+<ul>
+<li><strong><code>timestamp</code>:</strong> Essential for all time-series queries. <code>TIMESTAMPTZ</code> handles timezones correctly.</li>
+<li><strong><code>asset_id</code>:</strong> Allows quick filtering by asset. An <code>assets</code> lookup table would store asset names, locations, and other static metadata (<code>CREATE TABLE assets (id INTEGER PRIMARY KEY, name TEXT, location TEXT, ...);</code>).</li>
+<li><strong><code>metric_type</code> &amp; <code>value</code>:</strong> This &#8216;narrow&#8217; table design is flexible. Instead of adding a new column for every new metric, we add a new row. This scales well for an unknown or evolving number of metrics per asset. For a fixed, small number of metrics, a &#8216;wide&#8217; table (e.g., <code>temp DOUBLE PRECISION, pressure DOUBLE PRECISION</code>) might be considered, but the narrow approach is generally more robust for evolving IoT data.</li>
+<li><strong><code>tags JSONB</code>:</strong> Provides schema flexibility for additional, non-core metadata that might vary between metrics or assets.</li>
+<li><strong>Hypertable Partitioning:</strong> TimescaleDB automatically partitions data by time (e.g., into daily chunks) and further by <code>asset_id</code>. This significantly speeds up queries by only scanning relevant chunks and allows for efficient data retention policies. We chose 8 partitions for 200 assets, which means ~25 assets per partition.</li>
+<li><strong>Indexing:</strong> A composite index on <code>(timestamp DESC, asset_id, metric_type)</code> supports the most common queries (latest data for an asset, specific metric for an asset over time).</li>
+</ul>
+<h4>2. Handling Incremental Updates</h4>
+<p>With TimescaleDB, incremental updates are handled simply by <code>INSERT</code> statements. The hypertable structure is optimized for high-volume appends. Data ingestion pipelines (e.g., using Kafka, AWS Kinesis, or custom scripts) would feed new minute-level data points into this table continuously.</p>
+<h4>3. Data Retention and Downsampling</h4>
+<p>To manage storage costs and optimize query performance for long-term analysis, a multi-tiered approach is essential:</p>
+<ul>
+<li><strong>Tier 1 (Hot Data &#8211; TimescaleDB):</strong> Full minute-level granularity for 3-6 months. TimescaleDB&#8217;s data retention policies can automatically drop old chunks.</li>
+<li><strong>Tier 2 (Warm Data &#8211; TimescaleDB Aggregates):</strong> Create continuous aggregates (materialized views in TimescaleDB) for hourly or daily averages, mins, and maxes. This aggregated data can be retained for 1-2 years within TimescaleDB, significantly reducing the data volume for older periods.</li>
+<li><strong>Tier 3 (Cold Data &#8211; Data Lake with Parquet):</strong> For data older than 6 months (or after aggregation), move the raw minute-level data (or even the hourly aggregates) into a data lake (e.g., S3, ADLS) as Parquet files.</li>
+</ul>
+<p><strong>Why Parquet for Cold Storage?</strong></p>
+<ul>
+<li><strong>Cost-Effective:</strong> Cloud object storage is significantly cheaper than database storage.</li>
+<li><strong>Extreme Compression:</strong> Parquet&#8217;s columnar nature and compression codecs make it highly efficient for static, historical data.</li>
+<li><strong>Analytical Power:</strong> Tools like Apache Spark, Presto, Athena, or Databricks can directly query Parquet files in the data lake for complex, ad-hoc historical analysis without loading them into a database.</li>
+<li><strong>Long-Term Archival:</strong> Ideal for compliance and long-term data preservation.</li>
+</ul>
+<p>An ETL job would periodically (e.g., daily or weekly) extract old minute-level data from TimescaleDB, transform it if necessary, and write it to Parquet files in the data lake, partitioned by year/month/day/asset for optimal query performance in the lake (e.g., <code>s3://data-lake/asset_metrics/year=2023/month=01/day=01/asset_id=123/data.parquet</code>).</p>
+<h3>Scalability and Performance Considerations</h3>
+<ul>
+<li><strong>Vertical Scaling:</strong> Start with a powerful PostgreSQL/TimescaleDB instance.</li>
+<li><strong>Horizontal Scaling:</strong> TimescaleDB supports distributed hypertables for extreme scale, allowing you to shard data across multiple PostgreSQL instances.</li>
+<li><strong>Connection Pooling:</strong> Use connection pooling (e.g., PgBouncer) to manage database connections efficiently.</li>
+<li><strong>Monitoring:</strong> Continuously monitor database performance (CPU, memory, I/O, query execution times) to identify and address bottlenecks.</li>
+</ul>
+<h2>Beyond the Schema: Operationalizing Your Data Platform</h2>
+<p>A robust schema is just one piece of the puzzle. For a high-performing data platform, also consider:</p>
+<ul>
+<li><strong>Data Ingestion Pipeline:</strong> A reliable and fault-tolerant system (e.g., Kafka, Pub/Sub) to collect and stream data from assets to the database.</li>
+<li><strong>Monitoring &amp; Alerting:</strong> Implement comprehensive monitoring for data quality, pipeline health, and database performance.</li>
+<li><strong>Backup &amp; Disaster Recovery:</strong> Regular backups and a tested disaster recovery plan are non-negotiable.</li>
+<li><strong>Security:</strong> Implement robust access controls, encryption at rest and in transit, and regular security audits.</li>
+<li><strong>Cost Optimization:</strong> Regularly review storage tiers, instance sizes, and query patterns to optimize cloud spending.</li>
+</ul>
+<h2>Conclusion: Building a Future-Proof Data Foundation</h2>
+<p>Designing a storage schema for minute-level data from 200 assets at scale requires a thoughtful combination of specialized technologies and design principles. By leveraging the power of Time-Series Databases like TimescaleDB for high-velocity ingestion and real-time queries, complemented by columnar formats like Parquet for cost-effective archival and deep analytical processing, we can build a highly performant, scalable, and future-proof data foundation. This approach ensures that your organization can not only keep pace with the relentless flow of data but also extract maximum value from it to drive informed decisions.</p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

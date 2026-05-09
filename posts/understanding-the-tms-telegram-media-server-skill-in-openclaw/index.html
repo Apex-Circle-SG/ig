@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the TMS (Telegram Media Server) Skill in OpenClaw | News of Tomorrow</title>
+<meta name="description" content="Learn how to manage downloads via Telegram Media Server REST API with OpenClaw&amp;#8217;s TMS skill, including adding videos, torrents, and searching content.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-tms-telegram-media-server-skill-in-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the TMS (Telegram Media Server) Skill in OpenClaw">
+<meta property="og:description" content="Learn how to manage downloads via Telegram Media Server REST API with OpenClaw&amp;#8217;s TMS skill, including adding videos, torrents, and searching content.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-tms-telegram-media-server-skill-in-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-tms-telegram-media-server-skill-in-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-14">
+<meta property="article:modified_time" content="2026-03-14">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the TMS (Telegram Media Server) Skill in OpenClaw">
+<meta name="twitter:description" content="Learn how to manage downloads via Telegram Media Server REST API with OpenClaw&amp;#8217;s TMS skill, including adding videos, torrents, and searching content.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-tms-telegram-media-server-skill-in-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the TMS (Telegram Media Server) Skill in OpenClaw", "datePublished": "2026-03-14", "dateModified": "2026-03-14", "image": ["https://picsum.photos/seed/understanding-the-tms-telegram-media-server-skill-in-openclaw/1200/630"], "description": "Learn how to manage downloads via Telegram Media Server REST API with OpenClaw&#8217;s TMS skill, including adding videos, torrents, and searching content.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-tms-telegram-media-server-skill-in-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the TMS (Telegram Media Server) Skill in OpenClaw", "item": "https://github.insightginie.com/posts/understanding-the-tms-telegram-media-server-skill-in-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the TMS (Telegram Media Server) Skill in OpenClaw</h1>
+<time datetime="2026-03-14" class="post-date" data-date="2026-03-14T11:15:58+00:00">2026-03-14</time>
+<img src="https://picsum.photos/seed/understanding-the-tms-telegram-media-server-skill-in-openclaw/800/400" class="post-hero" alt="Understanding the TMS (Telegram Media Server) Skill in OpenClaw">
+<h2>What is the TMS Skill in OpenClaw?</h2>
+<p>The TMS skill is a specialized OpenClaw skill that provides seamless integration with Telegram Media Server (TMS) through its REST API. This skill enables users to manage downloads, search torrents, and monitor download status directly through OpenClaw&#8217;s interface.</p>
+<h2>Core Functionality</h2>
+<p>The TMS skill offers four primary operations:</p>
+<ul>
+<li><strong>Health Check</strong> &#8211; Verify API availability</li>
+<li><strong>List Downloads</strong> &#8211; View current download status</li>
+<li><strong>Add Download</strong> &#8211; Initiate new downloads via URL</li>
+<li><strong>Search Torrents</strong> &#8211; Find content through Prowlarr integration</li>
+</ul>
+<h2>Setting Up the TMS Skill</h2>
+<h3>Base URL Configuration</h3>
+<p>The skill automatically determines the TMS API base URL using the following logic:</p>
+<ul>
+<li>If <code>TMS_API_URL</code> environment variable is set, use that value</li>
+<li>If running on the same host as TMS, default to <code>http://127.0.0.1:8080</code></li>
+</ul>
+<p>All API endpoints use the prefix <code>/api/v1</code>, so a full endpoint would be <code>{BaseURL}/api/v1/health</code>.</p>
+<h3>Authentication Options</h3>
+<p>Authentication is flexible:</p>
+<ul>
+<li><strong>No authentication</strong> &#8211; When OpenClaw and TMS run on the same host, TMS accepts requests from localhost without a key</li>
+<li><strong>Bearer token</strong> &#8211; Send <code>Authorization: Bearer &lt;TMS_API_KEY&gt;</code></li>
+<li><strong>API key header</strong> &#8211; Send <code>X-API-Key: &lt;TMS_API_KEY&gt;</code></li>
+</ul>
+<h2>API Operations in Detail</h2>
+<h3>Health Check</h3>
+<p>Endpoint: <code>GET {BaseURL}/api/v1/health</code></p>
+<p>This simple endpoint returns <code>{&quot;status&quot;:&quot;ok&quot;}</code> if the API is reachable. No authentication is required for this endpoint in most configurations.</p>
+<h3>Listing Downloads</h3>
+<p>Endpoint: <code>GET {BaseURL}/api/v1/downloads</code></p>
+<p>This operation returns an array of download items with the following properties:</p>
+<ul>
+<li><code>id</code> &#8211; Numeric identifier</li>
+<li><code>title</code> &#8211; Display name</li>
+<li><code>status</code> &#8211; Current state (queued, downloading, converting, completed, failed, stopped)</li>
+<li><code>progress</code> &#8211; Download progress (0-100)</li>
+<li><code>conversion_progress</code> &#8211; Conversion progress if applicable</li>
+<li><code>error</code> &#8211; Error message if failed</li>
+<li><code>position_in_queue</code> &#8211; Queue position if queued</li>
+</ul>
+<h3>Adding Downloads</h3>
+<p>Endpoint: <code>POST {BaseURL}/api/v1/downloads</code></p>
+<p>Request body requires a JSON object with:</p>
+<ul>
+<li><code>url</code> (required) &#8211; Video URL, magnet link, .torrent file URL, or Prowlarr proxy URL</li>
+<li><code>title</code> (optional) &#8211; Custom display name</li>
+</ul>
+<p>Supported URL types:</p>
+<ul>
+<li>Video URLs (processed by yt-dlp)</li>
+<li>Magnet links (<code>magnet:...</code>)</li>
+<li>.torrent file URLs</li>
+<li>Prowlarr proxy download URLs (when configured)</li>
+</ul>
+<p>Successful responses return <code>201</code> with <code>{&quot;id&quot;: &lt;number&gt;, &quot;title&quot;: &quot;&lt;string&gt;&quot;}</code>.</p>
+<h3>Deleting Downloads</h3>
+<p>Endpoint: <code>DELETE {BaseURL}/api/v1/downloads/{id}</code></p>
+<p>This operation stops and removes the download with the specified ID. Returns <code>204</code> with no body on success.</p>
+<h3>Searching Torrents</h3>
+<p>Endpoint: <code>GET {BaseURL}/api/v1/search?q=&lt;query&gt;&limit=20&quality=1080</code></p>
+<p>Parameters:</p>
+<ul>
+<li><code>q</code> (required) &#8211; Search query</li>
+<li><code>limit</code> (optional, 1-100, default 20) &#8211; Maximum results</li>
+<li><code>quality</code> (optional) &#8211; Filter by quality string</li>
+</ul>
+<p>Results include:</p>
+<ul>
+<li><code>title</code></li>
+<li><code>size</code></li>
+<li><code>magnet</code></li>
+<li><code>torrent_url</code></li>
+<li><code>indexer_name</code></li>
+<li><code>peers</code></li>
+</ul>
+<p>When adding from search results, use the <code>magnet</code> field in the POST /downloads request.</p>
+<h2>Practical Usage Examples</h2>
+<h3>Adding a Video</h3>
+<pre><code class="language-javascript">const response = await fetch(
+  `${baseURL}/api/v1/downloads`,
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer YOUR_API_KEY'
+    },
+    body: JSON.stringify({
+      url: 'https://youtube.com/watch?v=VIDEO_ID',
+      title: 'My Video'
+    })
+  }
+);
+</code></pre>
+<h3>Searching and Adding a Torrent</h3>
+<pre><code class="language-javascript">// Search
+const searchResponse = await fetch(
+  `${baseURL}/api/v1/search?q=ubuntu+linux&limit=10`
+);
+const results = await searchResponse.json();
+
+// Add the first result
+const addResponse = await fetch(
+  `${baseURL}/api/v1/downloads`,
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer YOUR_API_KEY'
+    },
+    body: JSON.stringify({
+      url: results[0].magnet,
+      title: results[0].title
+    })
+  }
+);
+</code></pre>
+<h2>Security Considerations</h2>
+<p>The skill implements proper security practices:</p>
+<ul>
+<li>Uses environment variables for sensitive configuration</li>
+<li>Supports both token-based and header-based authentication</li>
+<li>Defaults to localhost-only access when no authentication is configured</li>
+</ul>
+<h2>Integration Benefits</h2>
+<p>By using the TMS skill, OpenClaw provides:</p>
+<ul>
+<li>Unified download management interface</li>
+<li>Support for multiple content types (videos, torrents)</li>
+<li>Real-time download status monitoring</li>
+<li>Powerful search capabilities through Prowlarr</li>
+<li>Programmatic control for automation workflows</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The TMS skill transforms OpenClaw into a powerful media management platform by providing direct access to Telegram Media Server&#8217;s capabilities. Whether you&#8217;re downloading videos, managing torrents, or building automated workflows, this skill offers the tools you need through a well-documented, secure API interface.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/nikitadmitryuk/tms/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/nikitadmitryuk/tms/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

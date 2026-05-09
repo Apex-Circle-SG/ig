@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill Installer: A Comprehensive Guide | News of Tomorrow</title>
+<meta name="description" content="Learn how to install, search, and manage OpenClaw skills using the ClawHub Skill Manager. This guide covers everything from basic installation to advanced manag">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-installer-a-comprehensive-guide/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill Installer: A Comprehensive Guide">
+<meta property="og:description" content="Learn how to install, search, and manage OpenClaw skills using the ClawHub Skill Manager. This guide covers everything from basic installation to advanced manag">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-installer-a-comprehensive-guide/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-installer-a-comprehensive-guide/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-11">
+<meta property="article:modified_time" content="2026-03-11">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill Installer: A Comprehensive Guide">
+<meta name="twitter:description" content="Learn how to install, search, and manage OpenClaw skills using the ClawHub Skill Manager. This guide covers everything from basic installation to advanced manag">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-installer-a-comprehensive-guide/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill Installer: A Comprehensive Guide", "datePublished": "2026-03-11", "dateModified": "2026-03-11", "image": ["https://picsum.photos/seed/openclaw-skill-installer-a-comprehensive-guide/1200/630"], "description": "Learn how to install, search, and manage OpenClaw skills using the ClawHub Skill Manager. This guide covers everything from basic installation to advanced manag", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-installer-a-comprehensive-guide/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill Installer: A Comprehensive Guide", "item": "https://github.insightginie.com/posts/openclaw-skill-installer-a-comprehensive-guide/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill Installer: A Comprehensive Guide</h1>
+<time datetime="2026-03-11" class="post-date" data-date="2026-03-11T20:16:33+00:00">2026-03-11</time>
+<img src="https://picsum.photos/seed/openclaw-skill-installer-a-comprehensive-guide/800/400" class="post-hero" alt="OpenClaw Skill Installer: A Comprehensive Guide">
+<h2 id="what-is-the-clawhub-skill-manager">What is the ClawHub Skill Manager?</h2>
+<p>The ClawHub Skill Manager is a powerful tool for OpenClaw users that allows you to install, search, update, and manage skills from ClawHub &#8211; the public OpenClaw skill registry. Think of it as an app store for OpenClaw skills, where you can discover and add new capabilities to your OpenClaw agent.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before you can use the ClawHub Skill Manager, you need to ensure that the <code>clawhub</code> CLI tool is installed on your system. Here&#8217;s how to check:</p>
+<pre><code class="language-bash">which clawhub
+</code></pre>
+<p>If the command returns nothing or an error, you&#8217;ll need to install it manually:</p>
+<pre><code class="language-bash">npm i -g clawhub
+</code></pre>
+<p><strong>Important:</strong> Do not auto-install without user confirmation. Always ask the user before installing any software.</p>
+<h2 id="how-to-install-a-skill">How to Install a Skill</h2>
+<p>Installing a skill is straightforward. First, navigate to your OpenClaw workspace:</p>
+<pre><code class="language-bash">cd ~/.openclaw/workspace
+</code></pre>
+<p>Then use the install command with the skill slug (the skill&#8217;s identifier from ClawHub):</p>
+<pre><code class="language-bash">clawhub install &lt;skill-slug&gt;
+</code></pre>
+<p>For example, to install the summarize skill:</p>
+<pre><code class="language-bash">clawhub install summarize
+</code></pre>
+<p>The skill will be installed into the <code>./skills/</code> directory under your workspace. After installation, you&#8217;ll need to start a new OpenClaw session or restart the gateway for the skill to take effect.</p>
+<h2 id="searching-for-skills">Searching for Skills</h2>
+<p>Not sure what skills are available? Use the search function:</p>
+<pre><code class="language-bash">clawhub search &quot;&lt;query&gt;&quot;
+</code></pre>
+<p>This will return a list of skills matching your query, making it easy to discover new capabilities for your OpenClaw agent.</p>
+<h2 id="updating-skills">Updating Skills</h2>
+<p>Keeping your skills up to date is important for security and functionality. You have two options:</p>
+<pre><code class="language-bash"># Update a specific skill
+clawhub update &lt;skill-slug&gt;
+
+# Update all installed skills
+clawhub update --all
+</code></pre>
+<h2 id="other-useful-commands">Other Useful Commands</h2>
+<p>The ClawHub CLI offers several other helpful commands:</p>
+<pre><code class="language-bash">clawhub info &lt;skill-slug&gt;    # Show detailed information about a skill
+clawhub list                  # List all installed skills
+clawhub --help                # Display full CLI reference
+</code></pre>
+<h2 id="installing-via-whatsapp">Installing via WhatsApp</h2>
+<p>For added convenience, you can install skills directly through WhatsApp. Simply message the OpenClaw agent:</p>
+<pre><code class="language-plain">clawhub install &lt;skill-slug&gt;
+</code></pre>
+<p>For example:</p>
+<pre><code class="language-plain">clawhub install summarize
+</code></pre>
+<p>The agent will handle the CLI installation process and confirm when the skill is ready to use.</p>
+<h2 id="important-notes">Important Notes</h2>
+<p>Before using third-party skills, keep these points in mind:</p>
+<ol>
+<li><strong>All ClawHub skills are public and open-source</strong></li>
+<li><strong>Treat third-party skills as untrusted</strong> &#8211; always review the skill&#8217;s code and documentation before enabling it</li>
+<li><strong>Workspace skills take precedence</strong> &#8211; skills installed in <code>&lt;workspace&gt;/skills/</code> override managed and bundled skills</li>
+</ol>
+<h2 id="workflow-summary">Workflow Summary</h2>
+<p>Here&#8217;s a quick recap of the typical workflow:</p>
+<ol>
+<li>Check if <code>clawhub</code> is installed (use <code>which clawhub</code>)</li>
+<li>If missing, install it with <code>npm i -g clawhub</code></li>
+<li>Navigate to your workspace: <code>cd ~/.openclaw/workspace</code></li>
+<li>Run the appropriate <code>clawhub</code> command</li>
+<li>Start a new session or restart the gateway for changes to take effect</li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>The ClawHub Skill Manager makes it incredibly easy to extend your OpenClaw agent&#8217;s capabilities. Whether you&#8217;re looking to summarize text, check the weather, or add a coding agent, ClawHub provides a centralized, user-friendly way to discover and install skills. Just remember to review third-party skills before installation and always start a new session after adding new skills to your agent.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/sreejith77/skill-installer/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/sreejith77/skill-installer/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

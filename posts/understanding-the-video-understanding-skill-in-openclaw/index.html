@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the Video Understanding Skill in OpenClaw | News of Tomorrow</title>
+<meta name="description" content="The Video Understanding skill leverages Google Gemini&amp;#8217;s multimodal AI to analyze videos from 1000+ sources, providing transcripts, descriptions, summaries">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-video-understanding-skill-in-openclaw/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the Video Understanding Skill in OpenClaw">
+<meta property="og:description" content="The Video Understanding skill leverages Google Gemini&amp;#8217;s multimodal AI to analyze videos from 1000+ sources, providing transcripts, descriptions, summaries">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-video-understanding-skill-in-openclaw/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-video-understanding-skill-in-openclaw/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-14">
+<meta property="article:modified_time" content="2026-03-14">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the Video Understanding Skill in OpenClaw">
+<meta name="twitter:description" content="The Video Understanding skill leverages Google Gemini&amp;#8217;s multimodal AI to analyze videos from 1000+ sources, providing transcripts, descriptions, summaries">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-video-understanding-skill-in-openclaw/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the Video Understanding Skill in OpenClaw", "datePublished": "2026-03-14", "dateModified": "2026-03-14", "image": ["https://picsum.photos/seed/understanding-the-video-understanding-skill-in-openclaw/1200/630"], "description": "The Video Understanding skill leverages Google Gemini&#8217;s multimodal AI to analyze videos from 1000+ sources, providing transcripts, descriptions, summaries", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-video-understanding-skill-in-openclaw/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the Video Understanding Skill in OpenClaw", "item": "https://github.insightginie.com/posts/understanding-the-video-understanding-skill-in-openclaw/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the Video Understanding Skill in OpenClaw</h1>
+<time datetime="2026-03-14" class="post-date" data-date="2026-03-14T06:15:37+00:00">2026-03-14</time>
+<img src="https://picsum.photos/seed/understanding-the-video-understanding-skill-in-openclaw/800/400" class="post-hero" alt="Understanding the Video Understanding Skill in OpenClaw">
+<h2>What is the Video Understanding Skill?</h2>
+<p>The Video Understanding skill is a powerful tool within the OpenClaw framework that enables AI assistants to analyze video content using Google Gemini&#8217;s multimodal capabilities. This skill transforms how AI can interact with video content by providing structured analysis of videos from virtually any source.</p>
+<h2>Core Functionality</h2>
+<p>The skill performs comprehensive video analysis by:</p>
+<ul>
+<li>Downloading videos from 1000+ supported platforms using yt-dlp</li>
+<li>Extracting transcripts with accurate timestamps</li>
+<li>Generating visual descriptions of on-screen content</li>
+<li>Creating concise summaries</li>
+<li>Answering specific questions about video content</li>
+</ul>
+<h2>Technical Requirements</h2>
+<p>To function properly, the skill requires:</p>
+<ul>
+<li><strong>yt-dlp</strong> &#8211; For downloading videos from various platforms</li>
+<li><strong>ffmpeg</strong> &#8211; For processing video and audio streams</li>
+<li><strong>GEMINI_API_KEY</strong> &#8211; Google Gemini API key for AI analysis</li>
+<li><strong>Python 3.10+</strong> &#8211; With uv package manager for dependency handling</li>
+</ul>
+<h2>How It Works</h2>
+<p>The skill operates through a streamlined process:</p>
+<ol>
+<li><strong>URL Detection</strong> &#8211; Identifies video URLs or requests involving video content</li>
+<li><strong>Download (if needed)</strong> &#8211; YouTube URLs are sent directly to Gemini; all others are downloaded first</li>
+<li><strong>Upload to Gemini</strong> &#8211; Video files are uploaded to Gemini&#8217;s File API</li>
+<li><strong>Analysis</strong> &#8211; Gemini processes the video with structured prompts</li>
+<li><strong>Output</strong> &#8211; Returns structured JSON with transcript, description, summary, and more</li>
+</ol>
+<h2>Usage Examples</h2>
+<p>Basic video analysis:</p>
+<pre><code>uv run {baseDir}/scripts/analyze_video.py "https://example.com/video.mp4"
+</code></pre>
+<p>Analysis with a specific question:</p>
+<pre><code>uv run {baseDir}/scripts/analyze_video.py "https://example.com/video.mp4" -q "What product is shown?"
+</code></pre>
+<p>Custom prompt override:</p>
+<pre><code>uv run {baseDir}/scripts/analyze_video.py "https://example.com/video.mp4" -p "Custom prompt"
+</code></pre>
+<h2>Supported Video Sources</h2>
+<p>The skill supports an extensive range of platforms including:</p>
+<ul>
+<li>YouTube (direct API integration)</li>
+<li>Loom</li>
+<li>TikTok</li>
+<li>Vimeo</li>
+<li>Twitter/X</li>
+<li>Instagram</li>
+<li>Dailymotion</li>
+<li>Twitch</li>
+<li>And over 1000+ additional sites supported by yt-dlp</li>
+</ul>
+<h2>Output Structure</h2>
+<p>The skill returns structured JSON containing:</p>
+<ul>
+<li><strong>transcript</strong> &#8211; Verbatim transcript with timestamps</li>
+<li><strong>description</strong> &#8211; Visual description of content</li>
+<li><strong>summary</strong> &#8211; 2-3 sentence summary</li>
+<li><strong>duration_seconds</strong> &#8211; Video duration</li>
+<li><strong>speakers</strong> &#8211; Identified speakers</li>
+<li><strong>answer</strong> &#8211; Response to specific questions (if asked)</li>
+</ul>
+<h2>Performance Considerations</h2>
+<p>Key performance features include:</p>
+<ul>
+<li>YouTube integration is fastest (no download required)</li>
+<li>Supports videos up to 2GB (free) or 20GB (paid) via Gemini File API</li>
+<li>Handles videos longer than 10 minutes efficiently</li>
+<li>Automatically cleans up temporary files</li>
+<li>Auto-installs Python dependencies via uv</li>
+</ul>
+<h2>Practical Applications</h2>
+<p>This skill enables AI assistants to:</p>
+<ul>
+<li>Watch and summarize educational content</li>
+<li>Extract key information from product demos</li>
+<li>Transcribe meetings and presentations</li>
+<li>Answer specific questions about video content</li>
+<li>Analyze social media videos for insights</li>
+</ul>
+<h2>Installation Commands</h2>
+<p>Quick installation via brew:</p>
+<pre><code>brew install yt-dlp
+brew install ffmpeg
+</code></pre>
+<p>Or via pip:</p>
+<pre><code>pip install yt-dlp
+</code></pre>
+<h2>Why This Skill Matters</h2>
+<p>The Video Understanding skill bridges a critical gap in AI capabilities by enabling comprehensive video analysis. As video content becomes increasingly dominant across platforms, this skill provides the tools needed for AI assistants to effectively process, understand, and extract value from visual media content, making it an essential component of modern AI workflows.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/bill492/video-understanding/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/bill492/video-understanding/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

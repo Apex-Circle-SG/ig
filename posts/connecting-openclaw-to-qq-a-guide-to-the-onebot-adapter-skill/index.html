@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connecting OpenClaw to QQ: A Guide to the OneBot Adapter Skill | News of Tomorrow</title>
+<meta name="description" content="Discover how the OpenClaw OneBot Adapter skill allows you to integrate your AI agents with QQ bots using the OneBot protocol for seamless messaging.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/connecting-openclaw-to-qq-a-guide-to-the-onebot-adapter-skill/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Connecting OpenClaw to QQ: A Guide to the OneBot Adapter Skill">
+<meta property="og:description" content="Discover how the OpenClaw OneBot Adapter skill allows you to integrate your AI agents with QQ bots using the OneBot protocol for seamless messaging.">
+<meta property="og:image" content="https://picsum.photos/seed/connecting-openclaw-to-qq-a-guide-to-the-onebot-adapter-skill/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/connecting-openclaw-to-qq-a-guide-to-the-onebot-adapter-skill/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-17">
+<meta property="article:modified_time" content="2026-03-17">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Connecting OpenClaw to QQ: A Guide to the OneBot Adapter Skill">
+<meta name="twitter:description" content="Discover how the OpenClaw OneBot Adapter skill allows you to integrate your AI agents with QQ bots using the OneBot protocol for seamless messaging.">
+<meta name="twitter:image" content="https://picsum.photos/seed/connecting-openclaw-to-qq-a-guide-to-the-onebot-adapter-skill/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Connecting OpenClaw to QQ: A Guide to the OneBot Adapter Skill", "datePublished": "2026-03-17", "dateModified": "2026-03-17", "image": ["https://picsum.photos/seed/connecting-openclaw-to-qq-a-guide-to-the-onebot-adapter-skill/1200/630"], "description": "Discover how the OpenClaw OneBot Adapter skill allows you to integrate your AI agents with QQ bots using the OneBot protocol for seamless messaging.", "mainEntityOfPage": "https://github.insightginie.com/posts/connecting-openclaw-to-qq-a-guide-to-the-onebot-adapter-skill/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Connecting OpenClaw to QQ: A Guide to the OneBot Adapter Skill", "item": "https://github.insightginie.com/posts/connecting-openclaw-to-qq-a-guide-to-the-onebot-adapter-skill/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Connecting OpenClaw to QQ: A Guide to the OneBot Adapter Skill</h1>
+<time datetime="2026-03-17" class="post-date" data-date="2026-03-17T12:00:31+00:00">2026-03-17</time>
+<img src="https://picsum.photos/seed/connecting-openclaw-to-qq-a-guide-to-the-onebot-adapter-skill/800/400" class="post-hero" alt="Connecting OpenClaw to QQ: A Guide to the OneBot Adapter Skill">
+<h1>Understanding the OpenClaw OneBot Adapter</h1>
+<p>In the rapidly evolving world of AI-driven automation, connecting your intelligent agents to communication platforms is a critical step for real-world utility. If you are a developer using OpenClaw, you may have encountered the <code>onebot-adapter</code> skill in the GitHub repository. This tool is designed to bridge the gap between the OpenClaw framework and the widespread QQ messaging platform, leveraging the powerful OneBot protocol.</p>
+<h2>What is the OneBot Adapter?</h2>
+<p>The OneBot Adapter is a specialized skill within the OpenClaw ecosystem. Its primary purpose is to enable OpenClaw agents to communicate via the OneBot protocol, a universal interface standard for messaging bots. By utilizing this adapter, your OpenClaw agent can seamlessly interact with QQ through implementations like NapCat. Whether you need to build a customer support bot, a personal assistant, or an automated monitoring system that notifies you via QQ, this adapter provides the necessary infrastructure to send and receive messages efficiently.</p>
+<h2>Why Use OneBot?</h2>
+<p>The OneBot protocol is the gold standard for QQ bot development because it abstracts the underlying complexities of the NTQQ architecture. By using this adapter, developers don&#8217;t need to reinvent the wheel every time they want to create a bot. The <code>onebot-adapter</code> simplifies the connection process, allowing you to focus on the logic of your agent rather than the intricacies of message formatting and WebSocket handling.</p>
+<h2>Setting Up Your Connection</h2>
+<p>To begin using the adapter, you need to configure your environment. The adapter supports both WebSocket and HTTP connection modes. WebSocket is generally recommended for production environments because it enables real-time, bidirectional communication, ensuring that your agent receives incoming events as they happen.</p>
+<h3>Configuration Steps</h3>
+<p>To establish a connection, you must define specific environment variables or configuration settings:</p>
+<ul>
+<li><code>ONEBOT_WS_URL</code>: Set this to the address of your WebSocket server (e.g., ws://127.0.0.1:3001).</li>
+<li><code>ONEBOT_HTTP_URL</code>: Provide the HTTP endpoint for request-response operations (e.g., http://127.0.0.1:3000).</li>
+<li><code>ONEBOT_TOKEN</code>: A vital security measure for authenticating your connection with the server.</li>
+</ul>
+<p>Once these variables are set, you can initiate the listener script provided in the <code>scripts/</code> directory of the repository to begin polling for incoming messages from your QQ contacts or groups.</p>
+<h2>Practical Implementation: Sending Messages</h2>
+<p>The Python integration included with the adapter is incredibly intuitive. For developers looking to push messages from their OpenClaw agent, the <code>OneBotClient</code> class handles the heavy lifting. A simple implementation looks like this:</p>
+<p><code>from scripts.onebot_client import OneBotClient</code><br /><code>client = OneBotClient()</code><br /><code>client.send_private_msg(user_id=123456, message="Hello!")</code><br /><code>client.send_group_msg(group_id=789012, message="Group message")</code></p>
+<p>This snippet demonstrates how quickly you can trigger a message to a specific user or a group, making it perfect for status alerts or automated responses triggered by your AI agent&#8217;s internal logic.</p>
+<h2>WebSocket vs. HTTP</h2>
+<p>Choosing the right mode for your bot is essential. WebSocket is the preferred choice for most developers because it supports real-time event handling. This is crucial if your bot needs to react instantly to user queries. Conversely, the HTTP mode is best suited for simple tasks where you only need to send messages and do not require instant response loops. HTTP, however, usually requires polling, which can introduce latency.</p>
+<h2>Common Use Cases</h2>
+<p>What can you actually build with this? The possibilities are vast:</p>
+<ul>
+<li><strong>Personal Assistants:</strong> Create a bot that manages your daily tasks and notifies you on QQ.</li>
+<li><strong>Automated Monitoring:</strong> Connect server monitoring tools to an OpenClaw agent that sends emergency alerts to a group chat.</li>
+<li><strong>Customer Service:</strong> Implement an AI chatbot that answers standard user queries on QQ automatically.</li>
+<li><strong>Data Aggregation:</strong> Send daily reports or data summaries from your databases directly to your personal QQ account.</li>
+</ul>
+<h2>Troubleshooting Tips</h2>
+<p>Even the best integrations run into issues. If you find that your bot is not communicating, check the following:</p>
+<ol>
+<li><strong>Connection Refused:</strong> This usually means your OneBot server (like NapCat) is not running or is listening on the wrong port.</li>
+<li><strong>Authentication Failed:</strong> Ensure your <code>ONEBOT_TOKEN</code> matches exactly what is configured in your NapCat or OneBot server settings.</li>
+<li><strong>Message Not Delivered:</strong> Double-check the <code>user_id</code> or <code>group_id</code>. Also, ensure your bot account has the appropriate permissions to send messages in the target destination.</li>
+</ol>
+<h2>Conclusion</h2>
+<p>The <code>onebot-adapter</code> for OpenClaw is a powerful tool for developers looking to integrate AI agents with one of the world&#8217;s most popular messaging platforms. By providing a clean interface for message handling and robust support for the OneBot protocol, it significantly reduces development time. Whether you are automating your business workflows or creating a personal AI companion, this adapter provides the backbone you need to stay connected.</p>
+<p>For further details, ensure you review the <code>references/message-handling.md</code> file within the OpenClaw repository to master the advanced techniques of message parsing and dynamic response pattern development.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/gu-heping/onebot-adapter/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/gu-heping/onebot-adapter/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

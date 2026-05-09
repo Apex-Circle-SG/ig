@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GuavaGuard: Runtime Security Scanner for OpenClaw Agents | News of Tomorrow</title>
+<meta name="description" content="GuavaGuard provides real-time security monitoring for OpenClaw agents, detecting reverse shells, credential theft, and sandbox escapes before they cause damage.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/guavaguard-runtime-security-scanner-for-openclaw-agents/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="GuavaGuard: Runtime Security Scanner for OpenClaw Agents">
+<meta property="og:description" content="GuavaGuard provides real-time security monitoring for OpenClaw agents, detecting reverse shells, credential theft, and sandbox escapes before they cause damage.">
+<meta property="og:image" content="https://picsum.photos/seed/guavaguard-runtime-security-scanner-for-openclaw-agents/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/guavaguard-runtime-security-scanner-for-openclaw-agents/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-15">
+<meta property="article:modified_time" content="2026-03-15">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GuavaGuard: Runtime Security Scanner for OpenClaw Agents">
+<meta name="twitter:description" content="GuavaGuard provides real-time security monitoring for OpenClaw agents, detecting reverse shells, credential theft, and sandbox escapes before they cause damage.">
+<meta name="twitter:image" content="https://picsum.photos/seed/guavaguard-runtime-security-scanner-for-openclaw-agents/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "GuavaGuard: Runtime Security Scanner for OpenClaw Agents", "datePublished": "2026-03-15", "dateModified": "2026-03-15", "image": ["https://picsum.photos/seed/guavaguard-runtime-security-scanner-for-openclaw-agents/1200/630"], "description": "GuavaGuard provides real-time security monitoring for OpenClaw agents, detecting reverse shells, credential theft, and sandbox escapes before they cause damage.", "mainEntityOfPage": "https://github.insightginie.com/posts/guavaguard-runtime-security-scanner-for-openclaw-agents/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "GuavaGuard: Runtime Security Scanner for OpenClaw Agents", "item": "https://github.insightginie.com/posts/guavaguard-runtime-security-scanner-for-openclaw-agents/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>GuavaGuard: Runtime Security Scanner for OpenClaw Agents</h1>
+<time datetime="2026-03-15" class="post-date" data-date="2026-03-15T22:15:36+00:00">2026-03-15</time>
+<img src="https://picsum.photos/seed/guavaguard-runtime-security-scanner-for-openclaw-agents/800/400" class="post-hero" alt="GuavaGuard: Runtime Security Scanner for OpenClaw Agents">
+<h2>What GuavaGuard Does</h2>
+<p>GuavaGuard is a runtime security guard and scanner specifically designed for OpenClaw agents. It functions as part of the guard-scanner ecosystem, providing real-time detection of security threats including reverse shells, credential theft attempts, and sandbox escapes. While guard-scanner handles static analysis before installation, GuavaGuard monitors tool calls during execution to catch threats that emerge at runtime.</p>
+<h2>Core Security Features</h2>
+<p>The tool monitors 12 critical security patterns in real-time, categorized by severity levels. Critical threats include reverse shell attempts using patterns like /dev/tcp/, nc -e, and socat TCP; credential exfiltration to services like webhook.site and ngrok; guardrail disabling attempts such as exec.approval = off; macOS Gatekeeper bypasses using xattr -d quarantine; ClawHavoc AMOS indicators; and various shell injection techniques including base64 -d | bash and curl | bash patterns.</p>
+<h2>Installation and Setup</h2>
+<p>Getting started requires installing both components of the security suite. First, install the full static scanner with clawhub install guard-scanner, which provides 150+ patterns across 23 categories. Then install the runtime monitor using clawhub install guava-guard. Before enabling runtime protection, run a pre-install safety check with npx guard-scanner ./skills &#8211;self-exclude &#8211;verbose to scan your skills directory.</p>
+<h2>Runtime Protection Configuration</h2>
+<p>Enable the runtime hook by running openclaw hooks install skills/guava-guard/hooks/guava-guard followed by openclaw hooks enable guava-guard. After restarting your gateway, verify the installation with openclaw hooks list, which should show the guava-guard hook as ready. All detections are logged to ~/.openclaw/guava-guard/audit.jsonl in JSON lines format for audit trail purposes.</p>
+<h2>Detection Categories</h2>
+<p>Beyond critical threats, GuavaGuard also monitors high-severity patterns including DNS exfiltration attempts using nslookup and dig commands, SSH key access attempts targeting .ssh/id_* and .ssh/authorized_keys files, and cryptocurrency wallet access attempts looking for wallet seeds, mnemonics, or seed phrases. The tool also detects cloud metadata SSRF attacks targeting 169.254.169.254 and connections to known malicious IP addresses like 91.92.242.30.</p>
+<h2>Two-Layer Defense Strategy</h2>
+<p>GuavaGuard represents the runtime half of a comprehensive two-layer security defense. The static layer, guard-scanner, analyzes skills before installation using 150+ patterns and provides HTML dashboards, SARIF, and JSON output. The runtime layer, guava-guard, monitors execution with 12 specialized patterns. Together they provide defense-in-depth security, with guard-scanner achieving top ClawHub search ranking and over 4,000 downloads.</p>
+<h2>Current Limitations and Future Plans</h2>
+<p>Due to OpenClaw&#8217;s current hook API limitations, GuavaGuard can only warn about detected threats rather than blocking them outright. The tool will automatically enable blocking capabilities when OpenClaw adds cancel API support. Users can track this development through Issue #18677. Despite this limitation, the warning system provides crucial visibility into potential security breaches during agent operation.</p>
+<h2>License and Dependencies</h2>
+<p>GuavaGuard is released under the MIT license with zero dependencies, making it lightweight and easy to integrate. The tool is developed by the Guava Parity Institute (GPI) as part of their ASI×Human Perfect Parity initiative. For comprehensive protection, users should install both guard-scanner and guava-guard through ClawHub, creating a robust security framework for OpenClaw agent deployment.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/koatora20/guava-guard/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/koatora20/guava-guard/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voice.ai Creator Voiceover Pipeline: Turn Scripts into Publish-Ready Voiceovers | News of Tomorrow</title>
+<meta name="description" content="Transform any script into professional voiceovers with Voice.ai TTS, complete with chapters, captions, and video muxing. One command, studio-quality results.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/voice-ai-creator-voiceover-pipeline-turn-scripts-into-publish-ready-voiceovers/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Voice.ai Creator Voiceover Pipeline: Turn Scripts into Publish-Ready Voiceovers">
+<meta property="og:description" content="Transform any script into professional voiceovers with Voice.ai TTS, complete with chapters, captions, and video muxing. One command, studio-quality results.">
+<meta property="og:image" content="https://picsum.photos/seed/voice-ai-creator-voiceover-pipeline-turn-scripts-into-publish-ready-voiceovers/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/voice-ai-creator-voiceover-pipeline-turn-scripts-into-publish-ready-voiceovers/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-18">
+<meta property="article:modified_time" content="2026-03-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Voice.ai Creator Voiceover Pipeline: Turn Scripts into Publish-Ready Voiceovers">
+<meta name="twitter:description" content="Transform any script into professional voiceovers with Voice.ai TTS, complete with chapters, captions, and video muxing. One command, studio-quality results.">
+<meta name="twitter:image" content="https://picsum.photos/seed/voice-ai-creator-voiceover-pipeline-turn-scripts-into-publish-ready-voiceovers/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Voice.ai Creator Voiceover Pipeline: Turn Scripts into Publish-Ready Voiceovers", "datePublished": "2026-03-18", "dateModified": "2026-03-18", "image": ["https://picsum.photos/seed/voice-ai-creator-voiceover-pipeline-turn-scripts-into-publish-ready-voiceovers/1200/630"], "description": "Transform any script into professional voiceovers with Voice.ai TTS, complete with chapters, captions, and video muxing. One command, studio-quality results.", "mainEntityOfPage": "https://github.insightginie.com/posts/voice-ai-creator-voiceover-pipeline-turn-scripts-into-publish-ready-voiceovers/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Voice.ai Creator Voiceover Pipeline: Turn Scripts into Publish-Ready Voiceovers", "item": "https://github.insightginie.com/posts/voice-ai-creator-voiceover-pipeline-turn-scripts-into-publish-ready-voiceovers/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Voice.ai Creator Voiceover Pipeline: Turn Scripts into Publish-Ready Voiceovers</h1>
+<time datetime="2026-03-18" class="post-date" data-date="2026-03-18T12:16:51+00:00">2026-03-18</time>
+<img src="https://picsum.photos/seed/voice-ai-creator-voiceover-pipeline-turn-scripts-into-publish-ready-voiceovers/800/400" class="post-hero" alt="Voice.ai Creator Voiceover Pipeline: Turn Scripts into Publish-Ready Voiceovers">
+<h2>What This Skill Does</h2>
+<p>The Voice.ai Creator Voiceover Pipeline is a comprehensive skill that transforms scripts into publish-ready voiceovers with Voice.ai TTS technology. It handles everything from segment creation to final video muxing, making it ideal for content creators who want professional narration without the studio.</p>
+<p>The pipeline generates numbered audio segments, stitches them into a master track, creates YouTube chapters, produces SRT captions, and builds an interactive review page. You can also replace the audio track on existing videos with just one command.</p>
+<h2>Why Use This Skill</h2>
+<p>This skill is perfect for various content creation scenarios:</p>
+<ul>
+<li><strong>YouTube long-form</strong>: Full narration with chapter markers and captions</li>
+<li><strong>YouTube Shorts</strong>: Quick hooks with the shortform template</li>
+<li><strong>Podcasts</strong>: Consistent host voice with intro/outro templates</li>
+<li><strong>Course content</strong>: Professional narration for educational videos</li>
+<li><strong>Quick iteration</strong>: Smart caching means editing one section only re-renders that segment</li>
+<li><strong>Video audio replacement</strong>: Drop AI voiceover onto screen recordings or B-roll</li>
+</ul>
+<h2>The One-Command Workflow</h2>
+<p>If you have a script and a video, you can turn them into a finished video with AI voiceover in one shot:</p>
+<pre><code>node voiceai-vo.cjs build \
+  --input my-script.md \
+  --voice oliver \
+  --title "My Video" \
+  --video ./my-recording.mp4 \
+  --mux
+</code></pre>
+<p>This renders the voiceover, stitches the master audio, and drops it onto your video—all in one command. The output includes:</p>
+<ul>
+<li><code>out/my-video/muxed.mp4</code> — your video with the new voiceover</li>
+<li><code>out/my-video/master.wav</code> — the standalone audio</li>
+<li><code>out/my-video/review.html</code> — listen and review each segment</li>
+<li><code>out/my-video/chapters.txt</code> — YouTube-ready chapter timestamps</li>
+<li><code>out/my-video/captions.srt</code> — SRT captions</li>
+</ul>
+<p>Use <code>--sync pad</code> if the audio is shorter than the video, or <code>--sync trim</code> to cut it to match.</p>
+<h2>Requirements</h2>
+<p>The skill requires:</p>
+<ul>
+<li><strong>Node.js 20+</strong> — runtime (no npm install needed—the CLI is a single bundled file)</li>
+<li><strong>VOICE_AI_API_KEY</strong> — set as environment variable or in a .env file in the skill root. Get a key at voice.ai/dashboard.</li>
+<li><strong>ffmpeg</strong> (optional) — needed for master stitching, MP3 encoding, loudness normalization, and video muxing. The pipeline still produces individual segments, the review page, chapters, and captions without it.</li>
+</ul>
+<h2>Available Voices</h2>
+<p>The pipeline supports various voice aliases and UUIDs:</p>
+<ul>
+<li><strong>ellie</strong>: Ellie (F) — Youthful, vibrant vlogger</li>
+<li><strong>oliver</strong>: Oliver (M) — Friendly British</li>
+<li><strong>lilith</strong>: Lilith (F) — Soft, feminine</li>
+<li><strong>smooth</strong>: Smooth Calm Voice (M) — Deep, smooth narrator</li>
+<li><strong>corpse</strong>: Corpse Husband (M) — Deep, distinctive</li>
+<li><strong>skadi</strong>: Skadi (F) — Anime character</li>
+<li><strong>zhongli</strong>: Zhongli (M) — Deep, authoritative</li>
+<li><strong>flora</strong>: Flora (F) — Cheerful, high pitch</li>
+<li><strong>chief</strong>: Master Chief (M) — Heroic, commanding</li>
+</ul>
+<h2>Build Outputs</h2>
+<p>After a build, the output directory contains:</p>
+<pre><code>out/&lt;title-slug&gt;/
+  segments/           # Numbered WAV files (001-intro.wav, 002-section.wav, …)
+  master.wav          # Stitched audio (requires ffmpeg)
+  master.mp3          # MP3 encode (requires ffmpeg)
+  manifest.json       # Build metadata: voice, template, segment list, hashes
+  timeline.json       # Segment durations and start times
+  review.html         # Interactive review page with audio players
+  chapters.txt        # YouTube-friendly chapter timestamps
+  captions.srt        # SRT captions using segment boundaries
+  description.txt     # YouTube description with chapters + Voice.ai credit
+</code></pre>
+<h2>Templates</h2>
+<p>The pipeline supports three templates that auto-inject intro/outro segments:</p>
+<ul>
+<li><strong>youtube</strong>: Includes both intro and outro segments</li>
+<li><strong>podcast</strong>: Includes intro segment only</li>
+<li><strong>shortform</strong>: Includes hook segment only</li>
+</ul>
+<p>You can edit the template files in the templates/ directory to customize the content.</p>
+<h2>Caching</h2>
+<p>Segments are cached by a hash of text content + voice ID + language. Unchanged segments are skipped on rebuild for fast iteration, while modified segments are re-rendered automatically. Use &#8211;force to re-render everything.</p>
+<h2>Multilingual Support</h2>
+<p>Voice.ai supports 11 languages. Use &#8211;language &lt;code&gt; to switch between English (en), Spanish (es), French (fr), German (de), Italian (it), Portuguese (pt), Polish (pl), Russian (ru), Dutch (nl), Swedish (sv), and Catalan (ca). The pipeline auto-selects the multilingual TTS model for non-English languages.</p>
+<h2>Troubleshooting</h2>
+<p>Common issues and solutions:</p>
+<ul>
+<li><strong>ffmpeg missing</strong>: Pipeline still works—you get segments, review page, chapters, and captions without muxing capabilities</li>
+<li><strong>API key issues</strong>: Check VOICE_AI_API_KEY in environment variables or .env file</li>
+<li><strong>Voice not found</strong>: Use &#8211;mock to test without API calls or check available voices with the voices command</li>
+</ul>
+<h2>Privacy</h2>
+<p>Video processing is entirely local. Only script text is sent to Voice.ai for TTS, ensuring your content remains private throughout the workflow.</p>
+<h2>Commands</h2>
+<p>The skill provides several commands:</p>
+<ul>
+<li><strong>build</strong>: Generate a voiceover from a script</li>
+<li><strong>replace-audio</strong>: Swap the audio track on a video</li>
+<li><strong>voices</strong>: List available voices</li>
+</ul>
+<p>Each command supports various options for customization, including voice selection, templates, language settings, and video muxing capabilities.</p>
+<p>With the Voice.ai Creator Voiceover Pipeline, you can create professional-quality voiceovers for any content type with minimal effort and maximum flexibility.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/gizmogremlin/voiceai-voiceover-creator/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/gizmogremlin/voiceai-voiceover-creator/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

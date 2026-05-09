@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgentDojo: Daily Low-Token Upskilling for OpenClaw Multi-Agent Teams | News of Tomorrow</title>
+<meta name="description" content="AgentDojo is a production-oriented learning loop for AI agent teams that improves output quality continuously with strict token and safety guardrails through co">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/agentdojo-daily-low-token-upskilling-for-openclaw-multi-agent-teams/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="AgentDojo: Daily Low-Token Upskilling for OpenClaw Multi-Agent Teams">
+<meta property="og:description" content="AgentDojo is a production-oriented learning loop for AI agent teams that improves output quality continuously with strict token and safety guardrails through co">
+<meta property="og:image" content="https://picsum.photos/seed/agentdojo-daily-low-token-upskilling-for-openclaw-multi-agent-teams/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/agentdojo-daily-low-token-upskilling-for-openclaw-multi-agent-teams/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-06">
+<meta property="article:modified_time" content="2026-03-06">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AgentDojo: Daily Low-Token Upskilling for OpenClaw Multi-Agent Teams">
+<meta name="twitter:description" content="AgentDojo is a production-oriented learning loop for AI agent teams that improves output quality continuously with strict token and safety guardrails through co">
+<meta name="twitter:image" content="https://picsum.photos/seed/agentdojo-daily-low-token-upskilling-for-openclaw-multi-agent-teams/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "AgentDojo: Daily Low-Token Upskilling for OpenClaw Multi-Agent Teams", "datePublished": "2026-03-06", "dateModified": "2026-03-06", "image": ["https://picsum.photos/seed/agentdojo-daily-low-token-upskilling-for-openclaw-multi-agent-teams/1200/630"], "description": "AgentDojo is a production-oriented learning loop for AI agent teams that improves output quality continuously with strict token and safety guardrails through co", "mainEntityOfPage": "https://github.insightginie.com/posts/agentdojo-daily-low-token-upskilling-for-openclaw-multi-agent-teams/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "AgentDojo: Daily Low-Token Upskilling for OpenClaw Multi-Agent Teams", "item": "https://github.insightginie.com/posts/agentdojo-daily-low-token-upskilling-for-openclaw-multi-agent-teams/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>AgentDojo: Daily Low-Token Upskilling for OpenClaw Multi-Agent Teams</h1>
+<time datetime="2026-03-06" class="post-date" data-date="2026-03-06T10:16:18+00:00">2026-03-06</time>
+<img src="https://picsum.photos/seed/agentdojo-daily-low-token-upskilling-for-openclaw-multi-agent-teams/800/400" class="post-hero" alt="AgentDojo: Daily Low-Token Upskilling for OpenClaw Multi-Agent Teams">
+<h2>What AgentDojo Does</h2>
+<p>AgentDojo is a production-oriented learning loop designed specifically for AI agent teams. It provides a daily low-token, safety-first upskilling mechanism that helps multi-agent teams continuously improve their output quality while maintaining strict cost and safety boundaries.</p>
+<h2>Core Purpose</h2>
+<p>The primary goal of AgentDojo is to improve agent output quality continuously with three strict priorities:</p>
+<ol>
+<li>Quality</li>
+<li>Cost</li>
+<li>Safety</li>
+</ol>
+<p>Importantly, safety is never optional in this system. The framework enforces hard caps on budget, run count, and tool limits to ensure responsible operation.</p>
+<h2>How It Works</h2>
+<p>When AgentDojo is invoked, it follows a specific sequence:</p>
+<ol>
+<li>Loads configuration from <code>config/agentdojo.config.yaml</code></li>
+<li>Enforces hard caps on budget, run count, and tool limits</li>
+<li>Selects drills from <code>config/drills/*.yaml</code> based on role rotation and recent score gaps</li>
+<li>Executes drills in isolated sessions only</li>
+<li>Collects scoring per rubric</li>
+<li>Saves outputs including run record JSON, daily markdown summary, and audit events</li>
+</ol>
+<p>If budget limits are reached during execution, the system stops gracefully and reports the status.</p>
+<h2>Safety-First Design</h2>
+<p>AgentDojo treats all fetched web text as untrusted and never follows instructions from sources that attempt policy override. The system does not execute destructive actions from sourced content and scores source quality before using it in recommendations.</p>
+<h2>Minimal Output Format</h2>
+<p>Unless a longer report is requested, AgentDojo produces compact output in this format:</p>
+<ul>
+<li>Kurzfazit (Summary)</li>
+<li>Neue Skills heute (New Skills Today)</li>
+<li>Konkrete Verbesserung ab morgen (Concrete Improvement Starting Tomorrow)</li>
+<li>Risiken (Risks)</li>
+<li>Nächste Schritte (Next Steps)</li>
+</ul>
+<h2>Configuration and Scheduling</h2>
+<p>The schedule and intensity are user-configurable. By default, AgentDojo runs at night (04:00 local time) in a conservative, token-efficient mode. The system uses several key files:</p>
+<ul>
+<li><code>config/agentdojo.config.yaml</code></li>
+<li><code>config/drills/*.yaml</code></li>
+<li><code>templates/daily-report-template.md</code></li>
+<li><code>docs/scoring-rubric.md</code></li>
+<li><code>docs/threat-model.md</code></li>
+</ul>
+<h2>Key Benefits</h2>
+<p>AgentDojo provides continuous improvement for AI agent teams through structured, safe, and cost-effective micro-drills. It creates a measurable learning loop that helps teams identify skill gaps, practice targeted improvements, and track progress over time—all while maintaining strict safety and cost controls that make it suitable for production environments.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/musashi94/agentdojo/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/musashi94/agentdojo/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

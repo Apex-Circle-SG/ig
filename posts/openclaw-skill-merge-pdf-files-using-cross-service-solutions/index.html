@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill: Merge PDF Files Using Cross-Service-Solutions | News of Tomorrow</title>
+<meta name="description" content="Discover how the OpenClaw merge-pdf skill simplifies combining multiple PDF files by leveraging Cross-Service-Solutions&amp;#8217; powerful API for seamless documen">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-merge-pdf-files-using-cross-service-solutions/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill: Merge PDF Files Using Cross-Service-Solutions">
+<meta property="og:description" content="Discover how the OpenClaw merge-pdf skill simplifies combining multiple PDF files by leveraging Cross-Service-Solutions&amp;#8217; powerful API for seamless documen">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-merge-pdf-files-using-cross-service-solutions/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-merge-pdf-files-using-cross-service-solutions/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-06">
+<meta property="article:modified_time" content="2026-03-06">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill: Merge PDF Files Using Cross-Service-Solutions">
+<meta name="twitter:description" content="Discover how the OpenClaw merge-pdf skill simplifies combining multiple PDF files by leveraging Cross-Service-Solutions&amp;#8217; powerful API for seamless documen">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-merge-pdf-files-using-cross-service-solutions/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill: Merge PDF Files Using Cross-Service-Solutions", "datePublished": "2026-03-06", "dateModified": "2026-03-06", "image": ["https://picsum.photos/seed/openclaw-skill-merge-pdf-files-using-cross-service-solutions/1200/630"], "description": "Discover how the OpenClaw merge-pdf skill simplifies combining multiple PDF files by leveraging Cross-Service-Solutions&#8217; powerful API for seamless documen", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-merge-pdf-files-using-cross-service-solutions/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill: Merge PDF Files Using Cross-Service-Solutions", "item": "https://github.insightginie.com/posts/openclaw-skill-merge-pdf-files-using-cross-service-solutions/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill: Merge PDF Files Using Cross-Service-Solutions</h1>
+<time datetime="2026-03-06" class="post-date" data-date="2026-03-06T11:18:40+00:00">2026-03-06</time>
+<img src="https://picsum.photos/seed/openclaw-skill-merge-pdf-files-using-cross-service-solutions/800/400" class="post-hero" alt="OpenClaw Skill: Merge PDF Files Using Cross-Service-Solutions">
+<p>The OpenClaw merge-pdf skill provides a streamlined solution for combining multiple PDF documents using the Cross-Service-Solutions (XSS) platform. This skill automates the entire process of merging PDFs, from file upload to final download, making it an essential tool for anyone who regularly works with multiple PDF documents.</p>
+<h2>How the Merge PDF Skill Works</h2>
+<p>The skill operates through a straightforward workflow that handles the complexities of PDF merging behind the scenes. When a user provides multiple PDF files, the skill automatically uploads them to the Cross-Service-Solutions merge API. The system then polls the job status continuously until the merging process is complete, at which point it provides a direct download URL for the merged PDF document.</p>
+<h2>Technical Requirements and Setup</h2>
+<p>To use this skill, you&#8217;ll need an API key from Cross-Service-Solutions. Users can obtain this key by registering at the official XSS registration portal. The API key must be included in the request headers as a Bearer token, following the format: Authorization: Bearer <API_KEY>. For security purposes, the skill never echoes or logs the API key during processing.</p>
+<h2>API Integration Details</h2>
+<p>The skill communicates with Cross-Service-Solutions through their dedicated API endpoints. The base URL for all requests is https://api.xss-cross-service-solutions.com/solutions/solutions. To initiate a merge job, the skill sends a POST request to /api/30 with multipart/form-data, including all the PDF files to be merged. Once the job is created, the skill can retrieve the status and results by making GET requests to /api/<ID>, where <ID> is the job identifier.</p>
+<h2>Input and Output Specifications</h2>
+<p>The skill requires one or more PDF files in binary format and an API key as string input. The order of files in the final merged document follows the sequence in which they were provided. The output is a structured JSON response containing the job ID, current status, download URL for the merged PDF, the resulting file name, and a list of the input files that were processed.</p>
+<h2>Practical Applications</h2>
+<p>This skill is particularly valuable for businesses and individuals who frequently need to combine multiple documents into a single PDF. Common use cases include merging reports, combining contracts, consolidating scanned documents, and creating comprehensive presentations from multiple sources. The automation eliminates manual merging processes and ensures consistent, high-quality results every time.</p>
+<h2>Security and Privacy Considerations</h2>
+<p>The skill adheres to strict security protocols by never exposing or logging sensitive API credentials. All file processing occurs through the secure Cross-Service-Solutions platform, ensuring that your documents remain protected throughout the merging process. The temporary nature of the processing and the direct download links help maintain data privacy and security.</p>
+<h2>Integration with OpenClaw Ecosystem</h2>
+<p>As part of the OpenClaw skills collection, this merge-pdf skill integrates seamlessly with other document processing capabilities. The MIT license ensures flexibility for both personal and commercial use, while the compatibility with agentskills version 0.1.0 or higher guarantees smooth operation within the broader OpenClaw framework.</p>
+<h2>Getting Started</h2>
+<p>To begin using the merge-pdf skill, ensure you have the required API key from Cross-Service-Solutions, prepare your PDF files in the desired order, and integrate the skill into your workflow through the OpenClaw platform. The straightforward setup and automated processing make it accessible for users of all technical levels.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/crossservicesolutions/merge-pdf/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/crossservicesolutions/merge-pdf/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

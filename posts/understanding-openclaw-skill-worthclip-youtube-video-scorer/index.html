@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding OpenClaw Skill: WorthClip YouTube Video Scorer | News of Tomorrow</title>
+<meta name="description" content="Explore the WorthClip AI-powered YouTube video scorer skill on OpenClaw to enhance your video watching experience.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-openclaw-skill-worthclip-youtube-video-scorer/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding OpenClaw Skill: WorthClip YouTube Video Scorer">
+<meta property="og:description" content="Explore the WorthClip AI-powered YouTube video scorer skill on OpenClaw to enhance your video watching experience.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-openclaw-skill-worthclip-youtube-video-scorer/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-openclaw-skill-worthclip-youtube-video-scorer/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-07">
+<meta property="article:modified_time" content="2026-03-07">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding OpenClaw Skill: WorthClip YouTube Video Scorer">
+<meta name="twitter:description" content="Explore the WorthClip AI-powered YouTube video scorer skill on OpenClaw to enhance your video watching experience.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-openclaw-skill-worthclip-youtube-video-scorer/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding OpenClaw Skill: WorthClip YouTube Video Scorer", "datePublished": "2026-03-07", "dateModified": "2026-03-07", "image": ["https://picsum.photos/seed/understanding-openclaw-skill-worthclip-youtube-video-scorer/1200/630"], "description": "Explore the WorthClip AI-powered YouTube video scorer skill on OpenClaw to enhance your video watching experience.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-openclaw-skill-worthclip-youtube-video-scorer/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding OpenClaw Skill: WorthClip YouTube Video Scorer", "item": "https://github.insightginie.com/posts/understanding-openclaw-skill-worthclip-youtube-video-scorer/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding OpenClaw Skill: WorthClip YouTube Video Scorer</h1>
+<time datetime="2026-03-07" class="post-date" data-date="2026-03-07T08:46:01+00:00">2026-03-07</time>
+<img src="https://picsum.photos/seed/understanding-openclaw-skill-worthclip-youtube-video-scorer/800/400" class="post-hero" alt="Understanding OpenClaw Skill: WorthClip YouTube Video Scorer">
+<h1>Understanding OpenClaw Skill: WorthClip YouTube Video Scorer</h1>
+<p>Welcome to this comprehensive guide on the WorthClip YouTube Video Scorer skill available on OpenClaw. This powerful tool leverages artificial intelligence to score YouTube videos based on personalized learning goals, providing AI-powered summaries, alignment analysis, and a curated feed. In this article, we&#8217;ll delve into how this skill works, its setup, and commands, and how it can enhance your video watching experience.</p>
+<h2>What is WorthClip YouTube Video Scorer?</h2>
+<p>The WorthClip YouTube Video Scorer is an AI-powered tool designed to help users evaluate YouTube videos. It scores videos on a scale of 1 to 10 based on personalized learning goals and user personas. This skill is particularly useful for those looking to manage their tracked channels, check their scored feed, or monitor API usage. With WorthClip, you can get AI summaries, alignment analysis, and a curated video feed tailored to your preferences.</p>
+<h2>Key Features</h2>
+<ul>
+<li><strong>Personalized Scoring</strong>: Scores videos based on your learning goals and persona.</li>
+<li><strong>AI Summaries</strong>: Provides concise summaries of videos.</li>
+<li><strong>Alignment Analysis</strong>: Analyzes how well the video content aligns with your goals.</li>
+<li><strong>Curated Feed</strong>: Offers a feed of videos sorted by relevance and filtered by your preferences.</li>
+<li><strong>Channel Management</strong>: Helps you track and manage your favorite YouTube channels.</li>
+<li><strong>API Usage Monitoring</strong>: Allows you to monitor your API usage and stay within limits.</li>
+</ul>
+<h2>Setup</h2>
+<ol>
+<li><strong>Sign Up</strong>: Visit <a href="https://worthclip.com">WorthClip</a> and sign up for an account.</li>
+<li><strong>Generate API Key</strong>: Go to Settings > API Keys and generate an API key.</li>
+<li><strong>Set API Key</strong>: Export your API key as an environment variable:
+<pre>
+export WORTHCLIP_API_KEY="wc_your_key_here"
+    </pre>
+</li>
+</ol>
+<h2>Commands</h2>
+<p>The WorthClip YouTube Video Scorer skill comes with several commands that allow you to interact with the API and manage your video scoring experience.</p>
+<h3>Score a Video</h3>
+<p>This command scores a YouTube video against your persona and goals. It handles asynchronous scoring automatically with polling:
+</p>
+<pre>
+bash {baseDir}/scripts/score.sh &quot;VIDEO_ID&quot;
+</pre>
+<p>The script submits the video for scoring, polls for completion (up to 60 seconds), and returns the completed score JSON. If the video was already scored, it returns the existing score immediately.</p>
+<h3>Get Your Feed</h3>
+<p>This command returns scored videos sorted by relevance, with optional filters:
+</p>
+<pre>
+bash {baseDir}/scripts/feed.sh [--min-score N] [--verdict VERDICT] [--limit N] [--cursor N]
+</pre>
+<p>Options:</p>
+<ul>
+<li><strong>&#8211;min-score N</strong>: Only return videos scored N or above (1-10).</li>
+<li><strong>&#8211;verdict VERDICT</strong>: Filter by verdict (e.g., &#8220;watch&#8221;, &#8220;skip&#8221;).</li>
+<li><strong>&#8211;limit N</strong>: Number of results per page.</li>
+<li><strong>&#8211;cursor N</strong>: Pagination cursor from the previous response.</li>
+</ul>
+<h3>Check Usage</h3>
+<p>This command shows your current billing period usage stats and limits:
+</p>
+<pre>
+bash {baseDir}/scripts/usage.sh
+</pre>
+<h2>API Reference</h2>
+<p>The WorthClip API is hosted on Convex (convex.site), WorthClip&#8217;s serverless backend. The base URL for the API is:</p>
+<pre>
+https://greedy-mallard-11.convex.site/api/v1
+</pre>
+<p>All requests (except /health) require the <code>Authorization: Bearer YOUR_API_KEY</code> header.</p>
+<h3>Endpoints</h3>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/health</td>
+<td>GET</td>
+<td>Health check (no auth required).</td>
+</tr>
+<tr>
+<td>/score</td>
+<td>POST</td>
+<td>Score a video (async, returns 202 with jobId).</td>
+</tr>
+<tr>
+<td>/score/:jobId</td>
+<td>GET</td>
+<td>Poll scoring job status.</td>
+</tr>
+<tr>
+<td>/videos/:ytId/summary</td>
+<td>GET</td>
+<td>Get video summary (summarization).</td>
+</tr>
+<tr>
+<td>/videos/:ytId</td>
+<td>GET</td>
+<td>Get video detail with full score.</td>
+</tr>
+<tr>
+<td>/feed</td>
+<td>GET</td>
+<td>Paginated scored feed with filters.</td>
+</tr>
+<tr>
+<td>/channels</td>
+<td>GET</td>
+<td>List tracked channels.</td>
+</tr>
+<tr>
+<td>/channels/lookup</td>
+<td>POST</td>
+<td>Lookup channel by YouTube URL.</td>
+</tr>
+<tr>
+<td>/channels/track</td>
+<td>POST</td>
+<td>Track a new channel.</td>
+</tr>
+<tr>
+<td>/persona</td>
+<td>GET</td>
+<td>Get current persona and goals.</td>
+</tr>
+<tr>
+<td>/persona</td>
+<td>PUT</td>
+<td>Update persona description.</td>
+</tr>
+<tr>
+<td>/goals</td>
+<td>PUT</td>
+<td>Update learning goals.</td>
+</tr>
+<tr>
+<td>/usage</td>
+<td>GET</td>
+<td>Current billing period usage stats.</td>
+</tr>
+</tbody>
+</table>
+<h3>Rate Limits</h3>
+<p>General:</p>
+<ul>
+<li>60 requests/minute (all endpoints).</li>
+</ul>
+<p>Scoring:</p>
+<ul>
+<li>20 requests/minute (POST /score and GET /score/:jobId).</li>
+</ul>
+<h3>Response Headers</h3>
+<ul>
+<li><code>X-RateLimit-Limit</code>: Maximum requests per window.</li>
+<li><code>X-RateLimit-Remaining</code>: Requests remaining in the current window.</li>
+<li><code>Retry-After</code>: Seconds to wait before retrying (only on 429 responses).</li>
+</ul>
+<h3>Error Format</h3>
+<p>All errors return a consistent JSON structure with an appropriate HTTP status code:</p>
+<pre>
+{
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable description of the error"
+  }
+}
+</pre>
+<p>Common error codes:</p>
+<ul>
+<li><code>UNAUTHORIZED</code> (401): Missing or invalid API key.</li>
+<li><code>RATE_LIMITED</code> (429): Too many requests.</li>
+<li><code>NOT_FOUND</code> (404): Resource not found.</li>
+<li><code>VALIDATION_ERROR</code> (400): Invalid request parameters.</li>
+<li><code>INTERNAL_ERROR</code> (500): Server error.</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The WorthClip YouTube Video Scorer skill on OpenClaw is a powerful tool for anyone looking to enhance their YouTube video watching experience. With its AI-powered scoring, personalized feed, and comprehensive API reference, it provides a tailored solution for managing and evaluating videos based on your unique learning goals and preferences. By following the setup instructions and utilizing the commands effectively, you can make the most out of this skill and optimize your video consumption.</p>
+<p>To learn more and get started, visit the <a href="https://worthclip.com/developers">WorthClip Developers page</a> and explore the full range of features and capabilities offered by this innovative tool.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/ivanstancich/worthclip-youtube-video-scorer/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/ivanstancich/worthclip-youtube-video-scorer/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

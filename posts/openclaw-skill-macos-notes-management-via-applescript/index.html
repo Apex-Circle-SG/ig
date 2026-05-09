@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill: macOS Notes Management via AppleScript | News of Tomorrow</title>
+<meta name="description" content="Learn how to create, read, search, and manage macOS Notes using the OpenClaw skill that leverages AppleScript for seamless Apple Notes integration.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-macos-notes-management-via-applescript/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill: macOS Notes Management via AppleScript">
+<meta property="og:description" content="Learn how to create, read, search, and manage macOS Notes using the OpenClaw skill that leverages AppleScript for seamless Apple Notes integration.">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-macos-notes-management-via-applescript/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-macos-notes-management-via-applescript/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-16">
+<meta property="article:modified_time" content="2026-03-16">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill: macOS Notes Management via AppleScript">
+<meta name="twitter:description" content="Learn how to create, read, search, and manage macOS Notes using the OpenClaw skill that leverages AppleScript for seamless Apple Notes integration.">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-macos-notes-management-via-applescript/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill: macOS Notes Management via AppleScript", "datePublished": "2026-03-16", "dateModified": "2026-03-16", "image": ["https://picsum.photos/seed/openclaw-skill-macos-notes-management-via-applescript/1200/630"], "description": "Learn how to create, read, search, and manage macOS Notes using the OpenClaw skill that leverages AppleScript for seamless Apple Notes integration.", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-macos-notes-management-via-applescript/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill: macOS Notes Management via AppleScript", "item": "https://github.insightginie.com/posts/openclaw-skill-macos-notes-management-via-applescript/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill: macOS Notes Management via AppleScript</h1>
+<time datetime="2026-03-16" class="post-date" data-date="2026-03-16T01:16:40+00:00">2026-03-16</time>
+<img src="https://picsum.photos/seed/openclaw-skill-macos-notes-management-via-applescript/800/400" class="post-hero" alt="OpenClaw Skill: macOS Notes Management via AppleScript">
+<h2>What This OpenClaw Skill Does</h2>
+<p>The macOS Notes skill is a powerful automation tool that allows you to create, read, search, and manage Apple Notes on macOS through a simple command-line interface. This skill uses AppleScript and Python to interact with the native Notes.app, making it perfect for users who want to integrate note-taking into their workflows or build voice-controlled assistants.</p>
+<h3>Core Functionality</h3>
+<p>This skill provides a comprehensive set of commands for managing your Apple Notes:</p>
+<ul>
+<li><strong>Create notes</strong> &#8211; Jot down ideas, meeting notes, or any information you need to save</li>
+<li><strong>Read notes</strong> &#8211; Retrieve and view existing notes by title</li>
+<li><strong>Search notes</strong> &#8211; Find notes containing specific text across your accounts</li>
+<li><strong>List notes</strong> &#8211; Browse your notes with optional folder and account filtering</li>
+<li><strong>Manage folders</strong> &#8211; Discover available accounts and folders in your Notes.app</li>
+</ul>
+<h3>Key Features and Benefits</h3>
+<p>The skill is designed with practical considerations in mind:</p>
+<ul>
+<li><strong>Natural language processing</strong> &#8211; Maps conversational requests like &#8220;note this down&#8221; or &#8220;show my notes&#8221; to specific commands</li>
+<li><strong>Multi-account support</strong> &#8211; Works with iCloud, On My Mac, and other Notes accounts</li>
+<li><strong>HTML/Plain text flexibility</strong> &#8211; Accepts both plain text (converted to HTML) and raw HTML content</li>
+<li><strong>Security-conscious</strong> &#8211; Skips password-protected notes and uses JSON input via stdin to avoid command-line exposure</li>
+<li><strong>Comprehensive logging</strong> &#8211; All actions are logged with timestamps for audit and debugging</li>
+</ul>
+<h3>Getting Started</h3>
+<p>To use this skill effectively, you&#8217;ll need to start by discovering your available folders:</p>
+<pre><code>$SKILL_DIR/scripts/notes.sh list-folders
+</code></pre>
+<p>This command shows you the accounts and folder names available in your Notes.app, which is essential for targeting specific locations when creating or reading notes.</p>
+<h3>Usage Examples</h3>
+<p>Here are practical examples of how to use the skill:</p>
+<p><strong>Create a simple note:</strong></p>
+<pre><code>echo '{"title":"Meeting notes","body":"Discussed Q1 roadmap\n- Launch MVP\n- Iterate on feedback"}' | "$SKILL_DIR/scripts/notes.sh" create-note
+</code></pre>
+<p><strong>Search for specific content:</strong></p>
+<pre><code>echo '{"query":"password"}' | "$SKILL_DIR/scripts/notes.sh" search-notes
+</code></pre>
+<p><strong>Read a specific note:</strong></p>
+<pre><code>echo '{"name":"Hinge"}' | "$SKILL_DIR/scripts/notes.sh" read-note
+</code></pre>
+<h3>Best Practices</h3>
+<p>For optimal use of this skill:</p>
+<ul>
+<li>Always run <code>list-folders</code> first if you&#8217;re unsure about account/folder names</li>
+<li>Specify both account and folder when targeting specific locations to avoid ambiguity</li>
+<li>Use plain text for body content unless you need rich HTML formatting</li>
+<li>Remember that the first line of your body becomes the note title in Notes.app</li>
+<li>Be aware that password-protected notes cannot be accessed through this skill</li>
+</ul>
+<h3>Technical Requirements</h3>
+<p>This skill requires:</p>
+<ul>
+<li>macOS with Notes.app installed</li>
+<li>Python 3 for JSON parsing</li>
+<li>osascript (AppleScript) for macOS automation</li>
+</ul>
+<p>The skill is MIT licensed and maintained by lucaperret as part of the OpenClaw skills collection, making it a reliable choice for developers and power users looking to automate their macOS note-taking workflows.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/lucaperret/macos-notes/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/lucaperret/macos-notes/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

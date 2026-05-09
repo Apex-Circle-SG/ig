@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BitNet a4.8: Advancing 1-Bit LLMs with 4-Bit Activations for Enhanced Efficiency | News of Tomorrow</title>
+<meta name="description" content="As the demand for deploying large language models (LLMs) on resource-constrained environments grows, the focus has shifted towards optimizing both model weights">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/bitnet-a4-8-advancing-1-bit-llms-with-4-bit-activations-for-enhanced-efficiency/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="BitNet a4.8: Advancing 1-Bit LLMs with 4-Bit Activations for Enhanced Efficiency">
+<meta property="og:description" content="As the demand for deploying large language models (LLMs) on resource-constrained environments grows, the focus has shifted towards optimizing both model weights">
+<meta property="og:image" content="https://picsum.photos/seed/bitnet-a4-8-advancing-1-bit-llms-with-4-bit-activations-for-enhanced-efficiency/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/bitnet-a4-8-advancing-1-bit-llms-with-4-bit-activations-for-enhanced-efficiency/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-30">
+<meta property="article:modified_time" content="2025-04-30">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BitNet a4.8: Advancing 1-Bit LLMs with 4-Bit Activations for Enhanced Efficiency">
+<meta name="twitter:description" content="As the demand for deploying large language models (LLMs) on resource-constrained environments grows, the focus has shifted towards optimizing both model weights">
+<meta name="twitter:image" content="https://picsum.photos/seed/bitnet-a4-8-advancing-1-bit-llms-with-4-bit-activations-for-enhanced-efficiency/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "BitNet a4.8: Advancing 1-Bit LLMs with 4-Bit Activations for Enhanced Efficiency", "datePublished": "2025-04-30", "dateModified": "2025-04-30", "image": ["https://picsum.photos/seed/bitnet-a4-8-advancing-1-bit-llms-with-4-bit-activations-for-enhanced-efficiency/1200/630"], "description": "As the demand for deploying large language models (LLMs) on resource-constrained environments grows, the focus has shifted towards optimizing both model weights", "mainEntityOfPage": "https://github.insightginie.com/posts/bitnet-a4-8-advancing-1-bit-llms-with-4-bit-activations-for-enhanced-efficiency/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "BitNet a4.8: Advancing 1-Bit LLMs with 4-Bit Activations for Enhanced Efficiency", "item": "https://github.insightginie.com/posts/bitnet-a4-8-advancing-1-bit-llms-with-4-bit-activations-for-enhanced-efficiency/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>BitNet a4.8: Advancing 1-Bit LLMs with 4-Bit Activations for Enhanced Efficiency</h1>
+<time datetime="2025-04-30" class="post-date" data-date="2025-04-30T01:56:51+00:00">2025-04-30</time>
+<img src="https://picsum.photos/seed/bitnet-a4-8-advancing-1-bit-llms-with-4-bit-activations-for-enhanced-efficiency/800/400" class="post-hero" alt="BitNet a4.8: Advancing 1-Bit LLMs with 4-Bit Activations for Enhanced Efficiency">
+
+<p>As the demand for deploying large language models (LLMs) on resource-constrained environments grows, the focus has shifted towards optimizing both model weights and activations for efficiency. Building upon the foundation laid by BitNet b1.58, which introduced 1.58-bit quantized weights using ternary values (-1, 0, +1), researchers have now turned their attention to activation quantization. This progression has led to the development of BitNet a4.8, a model that employs 4-bit activations in conjunction with 1.58-bit weights, aiming to enhance inference efficiency without compromising performance.​</p>
+
+
+
+<p>BitNet a4.8 introduces a hybrid quantization and sparsification strategy to address the challenges posed by activation outliers—rare but significant activation values that can adversely affect model performance when quantized. Specifically, the model applies 4-bit quantization to the inputs of attention and feed-forward network (FFN) layers, where activations typically follow a Gaussian-like distribution. For intermediate states, which are more prone to outlier activations, BitNet a4.8 employs sparsification followed by 8-bit quantization. This approach effectively balances the need for low-bit precision with the preservation of critical activation information.</p>
+
+
+
+<p>One of the notable features of BitNet a4.8 is its ability to activate only 55% of the model&#8217;s parameters during inference. This selective activation contributes to reduced computational load and energy consumption, making the model more suitable for deployment on devices with limited resources. Additionally, BitNet a4.8 supports a 3-bit key-value (KV) cache, further optimizing memory usage and inference speed.</p>
+
+
+
+<p>Training BitNet a4.8 involves a two-stage process. Initially, the model is trained with 8-bit activations (denoted as W1.58A8) to establish a robust foundation. Subsequently, it undergoes continued pretraining to adapt to 4-bit activations (W1.58A4). This methodology leverages the observation that while the optimal configurations for low-bit weights differ significantly from their higher-precision counterparts, the optimal configurations for low-bit activations are relatively close to those of higher-precision activations.</p>
+
+
+
+<p>The implementation of BitNet a4.8 is facilitated by an unofficial PyTorch repository, which provides the necessary components such as RMSNorm for layer normalization, 4-bit and 8-bit quantizers, TopK sparsification, and the BitLinear module for 1.58-bit weights. This implementation enables researchers and developers to experiment with and deploy BitNet a4.8 in various applications .​<br>GitHub</p>
+
+
+
+<p>In summary, BitNet a4.8 represents a significant advancement in the pursuit of efficient and scalable LLMs. By integrating 4-bit activations with 1.58-bit weights and employing a hybrid quantization-sparsification strategy, the model achieves a balance between performance and resource efficiency. This development holds promise for the broader adoption of LLMs in environments where computational resources are at a premium.​</p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

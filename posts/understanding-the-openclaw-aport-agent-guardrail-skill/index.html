@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the OpenClaw Aport Agent Guardrail Skill | News of Tomorrow</title>
+<meta name="description" content="Learn how this security skill provides pre-action authorization for AI agents, blocking unauthorized commands and ensuring deterministic enforcement before tool">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-openclaw-aport-agent-guardrail-skill/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the OpenClaw Aport Agent Guardrail Skill">
+<meta property="og:description" content="Learn how this security skill provides pre-action authorization for AI agents, blocking unauthorized commands and ensuring deterministic enforcement before tool">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-openclaw-aport-agent-guardrail-skill/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-openclaw-aport-agent-guardrail-skill/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-08">
+<meta property="article:modified_time" content="2026-03-08">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the OpenClaw Aport Agent Guardrail Skill">
+<meta name="twitter:description" content="Learn how this security skill provides pre-action authorization for AI agents, blocking unauthorized commands and ensuring deterministic enforcement before tool">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-openclaw-aport-agent-guardrail-skill/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the OpenClaw Aport Agent Guardrail Skill", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "image": ["https://picsum.photos/seed/understanding-the-openclaw-aport-agent-guardrail-skill/1200/630"], "description": "Learn how this security skill provides pre-action authorization for AI agents, blocking unauthorized commands and ensuring deterministic enforcement before tool", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-openclaw-aport-agent-guardrail-skill/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the OpenClaw Aport Agent Guardrail Skill", "item": "https://github.insightginie.com/posts/understanding-the-openclaw-aport-agent-guardrail-skill/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the OpenClaw Aport Agent Guardrail Skill</h1>
+<time datetime="2026-03-08" class="post-date" data-date="2026-03-08T00:17:20+00:00">2026-03-08</time>
+<img src="https://picsum.photos/seed/understanding-the-openclaw-aport-agent-guardrail-skill/800/400" class="post-hero" alt="Understanding the OpenClaw Aport Agent Guardrail Skill">
+<h2>What This Skill Does</h2>
+<p>The OpenClaw Aport Agent Guardrail skill provides pre-action authorization for AI agents by enforcing policies before tools execute. It blocks unauthorized commands, data exfiltration, and malicious actions through deterministic enforcement that the agent cannot bypass.</p>
+<h2>Key Features</h2>
+<ul>
+<li><strong>Deterministic Enforcement</strong> &#8211; Runs in before_tool_call hook; agent cannot bypass</li>
+<li><strong>Blocks Malicious Actions</strong> &#8211; Unauthorized commands, data exfiltration, API abuse prevented</li>
+<li><strong>Structured Policies</strong> &#8211; Based on Open Agent Passport (OAP) v1.0</li>
+<li><strong>Fail-Closed by Default</strong> &#8211; Errors deny tool execution (security over availability)</li>
+<li><strong>Audit Trail</strong> &#8211; Every decision logged with tamper-evident hashes</li>
+<li><strong>Framework-Agnostic</strong> &#8211; Works with OpenClaw, IronClaw, PicoClaw, and compatible runtimes</li>
+</ul>
+<h2>How It Protects You</h2>
+<ul>
+<li>Prompt injection → Agent cannot bypass hook-based enforcement</li>
+<li>Malicious skills → All tool calls checked regardless of source</li>
+<li>Unauthorized commands → Allowlist + 40+ blocked patterns (rm -rf, sudo, etc.)</li>
+<li>Data exfiltration → File access, messaging, web requests controlled</li>
+<li>Resource exhaustion → Rate limits, size caps enforced</li>
+</ul>
+<h2>Quick Start Installation</h2>
+<pre><code># Install APort guardrails (one-time setup)
+npx @aporthq/aport-agent-guardrails
+# Follow wizard to create passport and configure policies
+# Plugin auto-registers with OpenClaw
+# Now your agent is protected
+# All tool calls checked before execution
+</code></pre>
+<h2>How It Works: Pre-Action Authorization Flow</h2>
+<p>When a user makes a request, the agent decides to use a tool, and OpenClaw fires the before_tool_call hook. The APort system then evaluates the passport (identity, capabilities, limits), maps the tool to policy, checks allowlists and blocked patterns, and makes an ALLOW or DENY decision. This entire process happens before the tool executes, ensuring deterministic enforcement.</p>
+<h2>Installation Options</h2>
+<h3>Option 1: npm (Recommended)</h3>
+<pre><code>npx @aporthq/aport-agent-guardrails
+</code></pre>
+<p>The wizard will create or load a passport, configure capabilities and limits, install the OpenClaw plugin automatically, and set up wrapper scripts.</p>
+<h3>Option 2: With Hosted Passport</h3>
+<pre><code>npx @aporthq/aport-agent-guardrails &lt;agent_id&gt;
+</code></pre>
+<p>Get agent_id at aport.io for cryptographically signed decisions, global suspend capabilities, centralized audit and compliance dashboards, and team collaboration.</p>
+<h2>Usage</h2>
+<p>After installation, the plugin runs automatically on every tool call. Your agent uses tools normally, but each call is checked before execution. Testing can be done through direct script calls for allowed or blocked commands.</p>
+<h2>Privacy and Network Usage</h2>
+<p>Local mode (default) requires zero network calls with full privacy and offline capability. API mode (optional) sends tool names and context to the APort API for policy evaluation, providing cryptographically signed decisions and centralized compliance features.</p>
+<h2>Tool Name Mapping</h2>
+<p>The skill maps various tool calls to specific policies: shell commands map to system.command.execute with allowlists and blocked patterns, messaging tools have rate limits and recipient allowlists, git operations have PR size and branch restrictions, MCP tools have server/tool allowlists, data export has row limits and PII filtering, file operations have path restrictions, and web requests have domain allowlists.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/uchibeke/aport-agent-guardrail/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/uchibeke/aport-agent-guardrail/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

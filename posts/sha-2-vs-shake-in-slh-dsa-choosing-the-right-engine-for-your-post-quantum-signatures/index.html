@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHA-2 vs. SHAKE in SLH-DSA: Choosing the Right Engine for Your Post-Quantum Signatures | News of Tomorrow</title>
+<meta name="description" content="SHA-2 or SHAKE? Uncover the critical differences in FIPS 205. We analyze the performance and security roles of these hash functions in SLH-DSA implementation.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/sha-2-vs-shake-in-slh-dsa-choosing-the-right-engine-for-your-post-quantum-signatures/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="SHA-2 vs. SHAKE in SLH-DSA: Choosing the Right Engine for Your Post-Quantum Signatures">
+<meta property="og:description" content="SHA-2 or SHAKE? Uncover the critical differences in FIPS 205. We analyze the performance and security roles of these hash functions in SLH-DSA implementation.">
+<meta property="og:image" content="https://picsum.photos/seed/sha-2-vs-shake-in-slh-dsa-choosing-the-right-engine-for-your-post-quantum-signatures/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/sha-2-vs-shake-in-slh-dsa-choosing-the-right-engine-for-your-post-quantum-signatures/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-18">
+<meta property="article:modified_time" content="2025-12-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SHA-2 vs. SHAKE in SLH-DSA: Choosing the Right Engine for Your Post-Quantum Signatures">
+<meta name="twitter:description" content="SHA-2 or SHAKE? Uncover the critical differences in FIPS 205. We analyze the performance and security roles of these hash functions in SLH-DSA implementation.">
+<meta name="twitter:image" content="https://picsum.photos/seed/sha-2-vs-shake-in-slh-dsa-choosing-the-right-engine-for-your-post-quantum-signatures/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SHA-2 vs. SHAKE in SLH-DSA: Choosing the Right Engine for Your Post-Quantum Signatures", "datePublished": "2025-12-18", "dateModified": "2025-12-18", "image": ["https://picsum.photos/seed/sha-2-vs-shake-in-slh-dsa-choosing-the-right-engine-for-your-post-quantum-signatures/1200/630"], "description": "SHA-2 or SHAKE? Uncover the critical differences in FIPS 205. We analyze the performance and security roles of these hash functions in SLH-DSA implementation.", "mainEntityOfPage": "https://github.insightginie.com/posts/sha-2-vs-shake-in-slh-dsa-choosing-the-right-engine-for-your-post-quantum-signatures/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "SHA-2 vs. SHAKE in SLH-DSA: Choosing the Right Engine for Your Post-Quantum Signatures", "item": "https://github.insightginie.com/posts/sha-2-vs-shake-in-slh-dsa-choosing-the-right-engine-for-your-post-quantum-signatures/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>SHA-2 vs. SHAKE in SLH-DSA: Choosing the Right Engine for Your Post-Quantum Signatures</h1>
+<time datetime="2025-12-18" class="post-date" data-date="2025-12-18T04:19:36+00:00">2025-12-18</time>
+<img src="https://picsum.photos/seed/sha-2-vs-shake-in-slh-dsa-choosing-the-right-engine-for-your-post-quantum-signatures/800/400" class="post-hero" alt="SHA-2 vs. SHAKE in SLH-DSA: Choosing the Right Engine for Your Post-Quantum Signatures">
+
+<p>When the National Institute of Standards and Technology (NIST) finalized&nbsp;<strong>FIPS 205</strong>, establishing&nbsp;<strong>SLH-DSA</strong>&nbsp;as the standard for stateless hash-based digital signatures, they did not provide a single, monolithic algorithm. Instead, they provided a framework with choices.</p>
+
+
+
+<p>Beyond the decisions regarding signature size (Small vs. Fast) and security levels (128, 192, 256), there is a fundamental architectural decision every implementer must make:&nbsp;<strong>The Hash Function.</strong></p>
+
+
+
+<p>FIPS 205 explicitly defines two distinct &#8220;flavors&#8221; of SLH-DSA based on the core cryptographic engine used:</p>
+
+
+
+<ol class="wp-block-list">
+<li><strong>SLH-DSA-SHA2</strong> (relying on the SHA-2 family)</li>
+
+
+
+<li><strong>SLH-DSA-SHAKE</strong> (relying on the SHA-3/Keccak family)</li>
+</ol>
+
+
+
+<p>For SLH-DSA, the hash function is not just a utility; it is the entire security model. Unlike RSA or Elliptic Curve cryptography, which rely on number theory, SLH-DSA is built entirely out of hashes. Therefore, the choice between SHA-2 and SHAKE influences performance, hardware compatibility, and implementation complexity.</p>
+
+
+
+<p>This article dissects the roles of these two hash families within SLH-DSA to help you select the right engine for your post-quantum infrastructure.</p>
+
+
+
+<h2 class="wp-block-heading">The &#8220;Security-Only&#8221; Assumption</h2>
+
+
+
+<p>To understand why this choice matters, we must reiterate the unique nature of SLH-DSA. In this algorithm, the security of the digital signature is directly reducible to the security of the underlying hash function.</p>
+
+
+
+<ul class="wp-block-list">
+<li>If the hash function is collision-resistant and preimage-resistant, the signature is secure.</li>
+
+
+
+<li>If the hash function breaks, the signature scheme breaks instantly.</li>
+</ul>
+
+
+
+<p>NIST included both SHA-2 and SHAKE to provide&nbsp;<strong>diversity</strong>. If a cryptanalytic breakthrough were to weaken one family (e.g., a new attack on the Merkle-Damgård structure of SHA-2), the industry could pivot to the other (the Sponge construction of SHAKE) without abandoning the SLH-DSA standard entirely.</p>
+
+
+
+<h2 class="wp-block-heading">Contender 1: The SHA-2 Family (SHA-256 / SHA-512)</h2>
+
+
+
+<p><strong>SHA-2</strong>&nbsp;(Secure Hash Algorithm 2) is the veteran of the industry. Designed by the NSA and published in 2001, it is ubiquitous. From TLS certificates to Bitcoin, SHA-2 is the backbone of the current digital economy.</p>
+
+
+
+<h3 class="wp-block-heading">The Architecture: Merkle-Damgård</h3>
+
+
+
+<p>SHA-2 utilizes the&nbsp;<strong>Merkle-Damgård</strong>&nbsp;construction. It processes data in fixed-size blocks (512 bits for SHA-256, 1024 bits for SHA-512).</p>
+
+
+
+<p>In the context of SLH-DSA, this presents a slight engineering challenge. SLH-DSA requires the ability to process inputs of varying lengths and produce outputs of varying lengths to construct the Hypertree and WOTS+ chains. Because SHA-2 outputs a fixed length (e.g., 32 bytes), implementing it inside SLH-DSA requires additional mechanisms—specifically&nbsp;<strong>HMAC</strong>&nbsp;(Hash-based Message Authentication Code) or&nbsp;<strong>MGF1</strong>&nbsp;(Mask Generation Functions)—to extend the output or randomize the input safely.</p>
+
+
+
+<h3 class="wp-block-heading">The Hardware Advantage</h3>
+
+
+
+<p>The primary argument for choosing&nbsp;<strong>SLH-DSA-SHA2</strong>&nbsp;is&nbsp;<strong>Hardware Acceleration</strong>.</p>
+
+
+
+<p>Almost all modern processors—from Intel and AMD CPUs in servers to ARM chips in mobile phones—have dedicated instruction sets for SHA-2 (specifically SHA-256).</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Performance:</strong> On hardware with SHA extensions, SLH-DSA-SHA2 can be incredibly fast. The CPU can process the hashing operations natively, drastically reducing the cycle count for signing and verification.</li>
+
+
+
+<li><strong>Legacy Support:</strong> Because SHA-2 has been the standard for two decades, virtually every crypto library, hardware security module (HSM), and smart card supports it out of the box.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Contender 2: The SHAKE Family (SHAKE-128 / SHAKE-256)</h2>
+
+
+
+<p><strong>SHAKE</strong>&nbsp;represents the modern era. It is based on&nbsp;<strong>Keccak</strong>, the winner of the NIST SHA-3 competition. While it is newer, it offers a level of flexibility that older algorithms cannot match.</p>
+
+
+
+<h3 class="wp-block-heading">The Architecture: The Sponge Construction</h3>
+
+
+
+<p>SHAKE uses a&nbsp;<strong>Sponge construction</strong>. It &#8220;absorbs&#8221; data into its state and then &#8220;squeezes&#8221; it out. Unlike SHA-2, SHAKE is an&nbsp;<strong>XOF (Extendable Output Function)</strong>.</p>
+
+
+
+<p>This is a game-changer for SLH-DSA. An XOF allows the developer to request an output of&nbsp;<em>any</em>&nbsp;length.</p>
+
+
+
+<ul class="wp-block-list">
+<li>Need a 32-byte hash for a node? SHAKE can do it.</li>
+
+
+
+<li>Need a 100-byte bitmask? SHAKE can do it without needing complex loops or counter modes.</li>
+</ul>
+
+
+
+<p>Because of this, the internal implementation of&nbsp;<strong>SLH-DSA-SHAKE</strong>&nbsp;is cleaner and simpler. It does not require the HMAC wrappers needed for SHA-2. It simply absorbs the input and squeezes the exact number of bytes required for the signature components.</p>
+
+
+
+<h3 class="wp-block-heading">Software Performance</h3>
+
+
+
+<p>In pure software implementations (where no dedicated hardware acceleration is available), SHAKE/Keccak is often faster than SHA-2. Its internal permutations are designed to be efficient in software. For generic microcontrollers or older systems lacking SHA extensions, SLH-DSA-SHAKE often wins the race.</p>
+
+
+
+<h2 class="wp-block-heading">The Parameter Sets</h2>
+
+
+
+<p>FIPS 205 defines the parameter sets by combining the hash function with the security category.</p>
+
+
+
+<p><strong>For SHA-2:</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>SLH-DSA-SHA2-128s/f:</strong> Uses SHA-256.</li>
+
+
+
+<li><strong>SLH-DSA-SHA2-192s/f:</strong> Uses SHA-512 (truncated).</li>
+
+
+
+<li><strong>SLH-DSA-SHA2-256s/f:</strong> Uses SHA-512.</li>
+
+
+
+<li><em>Note: The switch to SHA-512 at higher levels provides a significant speed boost on 64-bit platforms.</em></li>
+</ul>
+
+
+
+<p><strong>For SHAKE:</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>SLH-DSA-SHAKE-128s/f:</strong> Uses SHAKE-128.</li>
+
+
+
+<li><strong>SLH-DSA-SHAKE-192s/f:</strong> Uses SHAKE-256.</li>
+
+
+
+<li><strong>SLH-DSA-SHAKE-256s/f:</strong> Uses SHAKE-256.</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">Choosing the Right Engine: A Decision Matrix</h2>
+
+
+
+<p>Which one should you implement? The answer depends on your deployment environment.</p>
+
+
+
+<h3 class="wp-block-heading">Choose SLH-DSA-SHA2 if:</h3>
+
+
+
+<ol class="wp-block-list">
+<li><strong>You rely on Hardware Acceleration:</strong> Your servers run modern Intel/AMD/ARM chips with SHA extensions. The performance gain here is undeniable.</li>
+
+
+
+<li><strong>You require FIPS 140-2/3 validated modules <em>now</em>:</strong> Most existing certified HSMs already have optimized SHA-2 engines.</li>
+
+
+
+<li><strong>You prefer the &#8220;Tried and True&#8221;:</strong> SHA-2 has a longer history of widespread deployment than Keccak.</li>
+</ol>
+
+
+
+<h3 class="wp-block-heading">Choose SLH-DSA-SHAKE if:</h3>
+
+
+
+<ol class="wp-block-list">
+<li><strong>You are running on non-accelerated hardware:</strong> If you are deploying to RISC-V chips or older embedded systems without SHA instructions, SHAKE often performs better in software.</li>
+
+
+
+<li><strong>You value code simplicity:</strong> The implementation of SHAKE within the SLH-DSA logic is more elegant and less prone to implementation errors regarding padding and masking.</li>
+
+
+
+<li><strong>You want Masking Protection:</strong> The sponge construction of Keccak makes it slightly easier to implement side-channel protections (like masking against power analysis) compared to the HMAC-SHA2 constructions.</li>
+</ol>
+
+
+
+<h2 class="wp-block-heading">Conclusion</h2>
+
+
+
+<p>Both SHA-2 and SHAKE provide the robust security foundation required for FIPS 205. The &#8220;security&#8221; difference between them is negligible for practical purposes—both are considered secure against quantum and classical attacks.</p>
+
+
+
+<p>The choice, therefore, is one of&nbsp;<strong>optimization</strong>.</p>
+
+
+
+<p>If you are building high-throughput server farms to verify signatures,&nbsp;<strong>SLH-DSA-SHA2</strong>&nbsp;is likely your champion due to the ubiquity of hardware instructions. If you are building a clean, modern codebase for diverse IoT devices or prioritizing side-channel resistance,&nbsp;<strong>SLH-DSA-SHAKE</strong>&nbsp;offers the modern flexibility you need.</p>
+
+
+
+<p>Ultimately, NIST’s decision to include both ensures that SLH-DSA remains resilient. Whether powered by the veteran Merkle-Damgård or the agile Sponge, the engine of hash-based signatures is ready for the post-quantum road ahead.</p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

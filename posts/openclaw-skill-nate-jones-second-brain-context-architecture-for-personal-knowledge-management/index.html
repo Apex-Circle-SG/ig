@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Skill: Nate Jones Second Brain &amp;#8211; Context Architecture for Personal Knowledge Management | News of Tomorrow</title>
+<meta name="description" content="A personal knowledge system using Supabase and OpenRouter that captures thoughts, classifies them with AI, and routes them to structured tables for semantic sea">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-skill-nate-jones-second-brain-context-architecture-for-personal-knowledge-management/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Skill: Nate Jones Second Brain &amp;#8211; Context Architecture for Personal Knowledge Management">
+<meta property="og:description" content="A personal knowledge system using Supabase and OpenRouter that captures thoughts, classifies them with AI, and routes them to structured tables for semantic sea">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-skill-nate-jones-second-brain-context-architecture-for-personal-knowledge-management/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-skill-nate-jones-second-brain-context-architecture-for-personal-knowledge-management/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-10">
+<meta property="article:modified_time" content="2026-03-10">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Skill: Nate Jones Second Brain &amp;#8211; Context Architecture for Personal Knowledge Management">
+<meta name="twitter:description" content="A personal knowledge system using Supabase and OpenRouter that captures thoughts, classifies them with AI, and routes them to structured tables for semantic sea">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-skill-nate-jones-second-brain-context-architecture-for-personal-knowledge-management/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Skill: Nate Jones Second Brain &#8211; Context Architecture for Personal Knowledge Management", "datePublished": "2026-03-10", "dateModified": "2026-03-10", "image": ["https://picsum.photos/seed/openclaw-skill-nate-jones-second-brain-context-architecture-for-personal-knowledge-management/1200/630"], "description": "A personal knowledge system using Supabase and OpenRouter that captures thoughts, classifies them with AI, and routes them to structured tables for semantic sea", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-skill-nate-jones-second-brain-context-architecture-for-personal-knowledge-management/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Skill: Nate Jones Second Brain &#8211; Context Architecture for Personal Knowledge Management", "item": "https://github.insightginie.com/posts/openclaw-skill-nate-jones-second-brain-context-architecture-for-personal-knowledge-management/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Skill: Nate Jones Second Brain &#8211; Context Architecture for Personal Knowledge Management</h1>
+<time datetime="2026-03-10" class="post-date" data-date="2026-03-10T07:17:29+00:00">2026-03-10</time>
+<img src="https://picsum.photos/seed/openclaw-skill-nate-jones-second-brain-context-architecture-for-personal-knowledge-management/800/400" class="post-hero" alt="OpenClaw Skill: Nate Jones Second Brain &amp;#8211; Context Architecture for Personal Knowledge Management">
+<h2>Introduction: Context as the New Intelligence</h2>
+<p>When intelligence is abundant, context becomes the scarce resource. This skill is context architecture — a persistent, searchable knowledge layer that turns your agent into a personal knowledge manager.</p>
+<p>The Nate Jones Second Brain skill establishes the foundation layer for a personal knowledge system. It&#8217;s built on two opinionated primitives: Supabase for persistent context architecture, and OpenRouter as the AI gateway. Together, they create a system where your context persists while models come and go.</p>
+<h2>Core Architecture</h2>
+<p>The skill operates on five structured tables — thoughts (inbox log), people, projects, ideas, and admin — with AI-powered classification, confidence-based routing, and semantic search across all categories.</p>
+<h3>Two Opinionated Primitives</h3>
+<ul>
+<li><strong>Supabase</strong> — Your database, and so much more. PostgreSQL + pgvector. Stores thoughts, people, projects, ideas, and tasks as structured data with vector embeddings. REST API built in. Your data, your infrastructure.</li>
+<li><strong>OpenRouter</strong> — Your AI gateway. One API key, every model. Embeddings and LLM calls for classification and routing. Swap models by changing a string. Future-proof by design.</li>
+</ul>
+<h2>Building Blocks</h2>
+<p>These are the operational concepts behind the system. Understanding them helps you operate correctly.</p>
+<h3>Drop Box</h3>
+<p>One frictionless capture point. Everything goes to <code>thoughts</code> first.</p>
+<h3>Sorter</h3>
+<p>AI classification + routing. LLM classifies type, then routes to structured table.</p>
+<h3>Form</h3>
+<p>Consistent data contracts. Each table has a defined schema.</p>
+<h3>Filing Cabinet</h3>
+<p>Source of truth per category. <code>people</code>, <code>projects</code>, <code>ideas</code>, <code>admin</code> tables.</p>
+<h3>Bouncer</h3>
+<p>Confidence threshold. Confidence < 0.6 = don't route, stay in inbox.</p>
+<h3>Receipt</h3>
+<p>Audit trail. <code>thoughts</code> row logs what came in, where it went.</p>
+<h3>Tap on the Shoulder</h3>
+<p>Proactive surfacing. Daily digest queries (application layer).</p>
+<h3>Fix Button</h3>
+<p>Agent-mediated corrections. Move records between tables on user request.</p>
+<h2>Five Tables</h2>
+<p>Table | Role | Key Fields</p>
+<p>&#8212; | &#8212; | &#8212;</p>
+<p><code>thoughts</code> | Inbox Log / audit trail | content, embedding, metadata (type, topics, people, confidence, routed_to)</p>
+<p><code>people</code> | Relationship tracking | name (unique), context, follow_ups, tags, embedding</p>
+<p><code>projects</code> | Work tracking | name, status, next_action, notes, tags, embedding</p>
+<p><code>ideas</code> | Insight capture | title, summary, elaboration, topics, embedding</p>
+<p><code>admin</code> | Task management | name, due_date, status, notes, embedding</p>
+<p>Every table has semantic search via its own <code>match_*</code> function. Cross-table search via <code>search_all</code>.</p>
+<h2>Routing Rules</h2>
+<p>When a thought is classified:</p>
+<p>Type | Route | Action</p>
+<p>&#8212; | &#8212; | &#8212;</p>
+<p><code>person_note</code> | <code>people</code> | Upsert: create person or append to existing context</p>
+<p><code>task</code> | <code>admin</code> | Insert new task (status=pending)</p>
+<p><code>idea</code> | <code>ideas</code> | Insert new idea</p>
+<p><code>observation</code> | none | Stays in thoughts only</p>
+<p><code>reference</code> | none | Stays in thoughts only</p>
+<p>If confidence < 0.6, don't route. Leave in thoughts, tell user.</p>
+<h2>Quick Start</h2>
+<h3>Capture a Thought (Full Pipeline)</h3>
+<p>The complete ingestion process involves four steps:</p>
+<ol>
+<li><strong>Embed</strong> the text via OpenRouter (1536-dim vector)</li>
+<li><strong>Classify</strong> via OpenRouter LLM (type, topics, people, confidence, suggested route)</li>
+<li><strong>Log</strong> in <code>thoughts</code> (the Receipt — always)</li>
+<li><strong>Route</strong> based on classification (if confidence >= 0.6)</li>
+</ol>
+<h3>Semantic Search (Single Table)</h3>
+<p>Query thoughts with semantic search:</p>
+<pre><code>QUERY_EMBEDDING=$(curl -s -X POST "https://openrouter.ai/api/v1/embeddings" \
+  -H "Authorization: Bearer $OPENROUTER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "openai/text-embedding-3-small", "input": "career changes"}' \
+  | jq -c '.data[0].embedding')
+
+curl -s -X POST "$SUPABASE_URL/rest/v1/rpc/match_thoughts" \
+  -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+  -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+  -H "Content-Type: application/json" \
+  -d "{
+    \"query_embedding\": $QUERY_EMBEDDING,
+    \"match_threshold\": 0.5,
+    \"match_count\": 10,
+    \"filter\": {}
+  }"
+</code></pre>
+<h3>Cross-Table Search</h3>
+<p>Search across all tables:</p>
+<pre><code>curl -s -X POST "$SUPABASE_URL/rest/v1/rpc/search_all" \
+  -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+  -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+  -H "Content-Type: application/json" \
+  -d "{
+    \"query_embedding\": $QUERY_EMBEDDING,
+    \"match_threshold\": 0.5,
+    \"match_count\": 20
+  }"
+</code></pre>
+<p>Returns <code>table_name</code>, <code>record_id</code>, <code>label</code>, <code>detail</code>, <code>similarity</code>, <code>created_at</code> from all tables.</p>
+<h3>List Active Projects</h3>
+<pre><code>curl -s "$SUPABASE_URL/rest/v1/projects?status=eq.active&select=name,next_action,notes&order=updated_at.desc" \
+  -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+  -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY"
+</code></pre>
+<h3>List Pending Tasks</h3>
+<pre><code>curl -s "$SUPABASE_URL/rest/v1/admin?status=eq.pending&select=name,due_date,notes&order=due_date.asc" \
+  -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+  -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY"
+</code></pre>
+<h2>Environment Variables</h2>
+<p>The skill requires these environment variables:</p>
+<ul>
+<li><code>SUPABASE_URL</code> &#8211; Your Supabase project URL</li>
+<li><code>SUPABASE_SERVICE_ROLE_KEY</code> &#8211; Your Supabase service role key</li>
+<li><code>OPENROUTER_API_KEY</code> &#8211; Your OpenRouter API key</li>
+</ul>
+<h2>Implementation Details</h2>
+<p>The skill is designed as a foundation layer. It covers the context architecture — how to capture, classify, store, and retrieve information. The application layer (how you use this information) is up to you.</p>
+<p>The system uses a confidence-based routing approach. When the LLM classifies a thought, it returns a confidence score. If the confidence is below 0.6, the system doesn&#8217;t route the thought to a structured table. Instead, it stays in the <code>thoughts</code> inbox with a note that classification was uncertain. This prevents the system from making incorrect categorizations.</p>
+<p>The semantic search uses pgvector embeddings. Each table has a <code>match_*</code> function that performs similarity search within that table. The <code>search_all</code> function performs cross-table search, returning results from all tables with their similarity scores.</p>
+<h2>Conceptual Framework</h2>
+<p>The full conceptual framework is available in the references documentation. The system is designed around the principle that context is the scarce resource when intelligence is abundant. By creating a persistent, searchable knowledge layer, the skill turns your agent into a personal knowledge manager that can retrieve relevant information at the right time.</p>
+<h2>Getting Started</h2>
+<p>To set up the tables, see the setup documentation. The skill provides a complete foundation for personal knowledge management, but you&#8217;ll need to create the database tables first. Once the tables exist, you can start capturing thoughts and building your knowledge system.</p>
+<p>The skill is opinionated by design. It chooses specific tools (Supabase and OpenRouter) and specific approaches (confidence-based routing, semantic search) to create a working system. If you want to use different tools or approaches, you can modify the skill, but the provided version gives you a complete, working foundation.</p>
+<h2>Conclusion</h2>
+<p>The Nate Jones Second Brain skill is context architecture for the AI age. It provides a persistent, searchable knowledge layer that turns your agent into a personal knowledge manager. By using Supabase for data persistence and OpenRouter for AI operations, it creates a system where your context persists while models come and go.</p>
+<p>The skill covers the foundation — how to capture, classify, store, and retrieve information. The application layer — how you use this information to be more productive, creative, or informed — is up to you. But with this foundation in place, you have unlimited possibilities for building on top of your personal knowledge system.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/justfinethanku/nate-jones-second-brain/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/justfinethanku/nate-jones-second-brain/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

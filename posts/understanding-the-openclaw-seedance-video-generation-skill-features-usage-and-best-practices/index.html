@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Understanding the OpenClaw Seedance Video Generation Skill: Features, Usage, and Best Practices | News of Tomorrow</title>
+<meta name="description" content="Learn how the OpenClaw seedance-video skill lets you generate AI videos from text or images using ByteDance’s Seedance models via the Volcengine Ark API.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/understanding-the-openclaw-seedance-video-generation-skill-features-usage-and-best-practices/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Understanding the OpenClaw Seedance Video Generation Skill: Features, Usage, and Best Practices">
+<meta property="og:description" content="Learn how the OpenClaw seedance-video skill lets you generate AI videos from text or images using ByteDance’s Seedance models via the Volcengine Ark API.">
+<meta property="og:image" content="https://picsum.photos/seed/understanding-the-openclaw-seedance-video-generation-skill-features-usage-and-best-practices/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/understanding-the-openclaw-seedance-video-generation-skill-features-usage-and-best-practices/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-18">
+<meta property="article:modified_time" content="2026-03-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding the OpenClaw Seedance Video Generation Skill: Features, Usage, and Best Practices">
+<meta name="twitter:description" content="Learn how the OpenClaw seedance-video skill lets you generate AI videos from text or images using ByteDance’s Seedance models via the Volcengine Ark API.">
+<meta name="twitter:image" content="https://picsum.photos/seed/understanding-the-openclaw-seedance-video-generation-skill-features-usage-and-best-practices/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Understanding the OpenClaw Seedance Video Generation Skill: Features, Usage, and Best Practices", "datePublished": "2026-03-18", "dateModified": "2026-03-18", "image": ["https://picsum.photos/seed/understanding-the-openclaw-seedance-video-generation-skill-features-usage-and-best-practices/1200/630"], "description": "Learn how the OpenClaw seedance-video skill lets you generate AI videos from text or images using ByteDance’s Seedance models via the Volcengine Ark API.", "mainEntityOfPage": "https://github.insightginie.com/posts/understanding-the-openclaw-seedance-video-generation-skill-features-usage-and-best-practices/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Understanding the OpenClaw Seedance Video Generation Skill: Features, Usage, and Best Practices", "item": "https://github.insightginie.com/posts/understanding-the-openclaw-seedance-video-generation-skill-features-usage-and-best-practices/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Understanding the OpenClaw Seedance Video Generation Skill: Features, Usage, and Best Practices</h1>
+<time datetime="2026-03-18" class="post-date" data-date="2026-03-18T10:49:28+00:00">2026-03-18</time>
+<img src="https://picsum.photos/seed/understanding-the-openclaw-seedance-video-generation-skill-features-usage-and-best-practices/800/400" class="post-hero" alt="Understanding the OpenClaw Seedance Video Generation Skill: Features, Usage, and Best Practices">
+<h1>Understanding the OpenClaw Seedance Video Generation Skill</h1>
+<p>The OpenClaw repository hosts a collection of reusable skills that extend the capabilities of AI assistants. One of the most impressive additions is the <code>seedance-video</code> skill, which provides a straightforward interface to ByteDance’s Seedance video generation models. This skill enables users to create high‑quality AI‑driven videos from simple text prompts, from still images, or even from a combination of first and last frames. In this article we will explore what the skill does, the models it supports, how to set it up, and practical examples that illustrate its power.</p>
+<h2>What the Skill Does</h2>
+<p>At its core, the seedance-video skill is a wrapper around the Volcengine Ark API that exposes ByteDance’s Seedance family of video generation models. The skill can:</p>
+<ul>
+<li>Generate videos from a pure text prompt (text‑to‑video).</li>
+<li>Generate videos where the first frame is supplied by an image (image‑to‑video).</li>
+<li>Generate videos where both the first and last frames are supplied, allowing the model to interpolate motion between two keyframes.</li>
+<li>Work with reference images (up to four) for the Seedance 1.0 Lite I2V model, letting the user steer the visual style via placeholders like <code>[图1]</code> in the prompt.</li>
+<li>Query, wait for, list, and delete existing generation tasks.</li>
+<li>Support a draft mode that creates a low‑resolution preview quickly and cheaply, which can later be upscaled to a final video.</li>
+</ul>
+<p>All of these capabilities are accessed through a small Python CLI tool (<code>seedance.py</code>) that handles authentication, base64 conversion of local images, automatic retries, and proper error handling. The skill documentation also shows how to achieve the same results with raw <code>curl</code> commands for users who prefer a lower‑level approach.</p>
+<h2>Prerequisites and Setup</h2>
+<p>Before you can use the skill you need to:</p>
+<ol>
+<li>Obtain an API key for the Volcengine Ark service. This key must be stored in the environment variable <code>ARK_API_KEY</code>. You can set it in your shell with:</li>
+</ol>
+<pre><code>export ARK_API_KEY="your-api-key-here"
+</code></pre>
+<ol start="2">
+<li>Clone the OpenClaw skills repository (or copy just the <code>seedance-video</code> directory) to your local machine.</li>
+<li>Ensure you have Python 3.7+ installed and optionally create a virtual environment.</li>
+<li>Install any required dependencies – the CLI script has minimal external needs, mainly the <code>requests</code> library for HTTP calls.</li>
+</ol>
+<p>Once the environment variable is set, the CLI tool is ready to use. The skill’s documentation recommends invoking the Python script directly rather than crafting raw HTTP requests, because the script takes care of converting local image files to base64 data URLs, handling retries on transient failures, and providing helpful progress output.</p>
+<h2>Supported Seedance Models</h2>
+<p>The skill exposes four distinct Seedance models, each tuned for different trade‑offs between quality, speed, and capabilities:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Model ID</th>
+<th>Capabilities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Seedance 1.5 Pro</td>
+<td>doubao-seedance-1-5-pro-251215</td>
+<td>Text‑to‑video, image‑to‑video (first frame, first+last frame), audio support, draft mode.</td>
+</tr>
+<tr>
+<td>Seedance 1.0 Pro</td>
+<td>doubao-seedance-1-0-pro-250428</td>
+<td>Text‑to‑video, image‑to‑video (first frame, first+last frame).</td>
+</tr>
+<tr>
+<td>Seedance 1.0 Pro Fast</td>
+<td>doubao-seedance-1-0-pro-fast-250528</td>
+<td>Text‑to‑video, image‑to‑video (first frame only).</td>
+</tr>
+<tr>
+<td>Seedance 1.0 Lite T2V</td>
+<td>doubao-seedance-1-0-lite-t2v-250219</td>
+<td>Text‑to‑video only.</td>
+</tr>
+<tr>
+<td>Seedance 1.0 Lite I2V</td>
+<td>doubao-seedance-1-0-lite-i2v-250219</td>
+<td>Image‑to‑video (first frame, first+last frame, reference images 1‑4).</td>
+</tr>
+</tbody>
+</table>
+<p>The default model is Seedance 1.5 Pro because it offers the latest features, including audio generation and a draft mode that reduces cost for quick previews.</p>
+<h2>How to Use the Python CLI</h2>
+<p>The CLI follows a simple verb‑first pattern: <code>python3 seedance.py &lt;action&gt; [options]</code>. The most common actions are:</p>
+<ul>
+<li><code>create</code> – start a new video generation task.</li>
+<li><code>status</code> – poll the state of an existing task.</li>
+<li><code>wait</code> – block until a task reaches a terminal state (succeeded, failed, etc.).</li>
+<li><code>list</code> – show recent tasks, optionally filtered by status.</li>
+<li><code>delete</code> – cancel or remove a task.</li>
+</ul>
+<p>Below are typical usage patterns, each illustrating a different generation mode.</p>
+<h3>Text‑to‑Video</h3>
+<p>To generate a video from a description alone, you only need to provide the <code>--prompt</code> flag. Adding <code>--wait</code> makes the script poll the API until the video is ready, and <code>--download</code> saves the resulting MP4 to a local folder.</p>
+<pre><code>python3 seedance.py create --prompt "A small cat yawning at the camera" --wait --download ~/Desktop
+</code></pre>
+<h3>Image‑to‑Video (First Frame)</h3>
+<p>When you have a still image that should serve as the starting frame, pass it with <code>--image</code>. The script accepts either a local file path or a publicly accessible URL. Local files are automatically base64‑encoded and sent as a data URL.</p>
+<pre><code>python3 seedance.py create --prompt "Person slowly turns head and smiles" --image /path/to/photo.jpg --wait --download ~/Desktop
+</code></pre>
+<h3>First + Last Frame (Keyframe Interpolation)</h3>
+<p>Some models can generate a video that transitions smoothly from a first frame to a last frame. Supply both images with <code>--image</code> for the first frame and <code>--last-frame</code> for the last frame.</p>
+<pre><code>python3 seedance.py create --prompt "Bud opening into a full bloom" --image first.jpg --last-frame last.jpg --wait --download ~/Desktop
+</code></pre>
+<h3>Reference Image‑to‑Video (Lite I2V)</h3>
+<p>The Seedance 1.0 Lite I2V model accepts up to four reference images. In the prompt you refer to them with placeholders like <code>[图1]</code>, <code>[图2]</code>, etc. This allows you to guide the model’s style or composition.</p>
+<pre><code>python3 seedance.py create --prompt "[图1]的人物在跳舞" --ref-images ref1.jpg ref2.jpg \
+  --model doubao-seedance-1-0-lite-i2v-250219 --wait --download ~/Desktop
+</code></pre>
+<h3>Custom Parameters</h3>
+<p>You can fine‑tune the output with options that control aspect ratio, duration, resolution, and whether audio should be generated.</p>
+<pre><code>python3 seedance.py create --prompt "City night timelapse" \
+  --ratio 21:9 --duration 8 --resolution 1080p --generate-audio false \
+  --wait --download ~/Desktop
+</code></pre>
+<h3>Draft Mode</h3>
+<p>Draft mode creates a low‑resolution preview quickly and at a lower cost. Once you are happy with the draft, you can ask the skill to generate the final video from the draft task ID.</p>
+<pre><code># Step 1: create a draft
+python3 seedance.py create --prompt "Ocean waves hitting the shore" \
+  --draft true --wait --download ~/Desktop
+
+# Step 2: upscale the draft to final quality
+python3 seedance.py create --draft-task-id <DRAFT_TASK_ID> \
+  --resolution 720p --wait --download ~/Desktop
+</code></pre>
+<h3>Task Management</h3>
+<p>The skill also provides convenience commands for checking on existing work:</p>
+<ul>
+<li><code>python3 seedance.py status &lt;TASK_ID&gt;</code> – returns JSON with the current state.</li>
+<li><code>python3 seedance.py wait &lt;TASK_ID&gt; --download &lt;DIR&gt;</code> – blocks until completion then fetches the video.</li>
+<li><code>python3 seedance.py list --status succeeded</code> – lists all successful generations.</li>
+<li><code>python3 seedance.py delete &lt;TASK_ID&gt;</code> – cancels a pending task or removes a completed one.</li>
+</ul>
+<h2>Raw Curl Alternative</h2>
+<p>For users who prefer to work directly with HTTP, the skill’s README includes a detailed section showing how to construct the API calls with <code>curl</code>. The examples demonstrate:</p>
+<ul>
+<li>How to build the JSON payload for each mode (text‑only, first frame, first+last frame, reference images).</li>
+<li>How to extract the task ID from the response using a short Python one‑liner.</li>
+<li>How to convert a local image to base64 on the fly with shell utilities.</li>
+</ul>
+<p>While the curl approach gives full visibility into the request format, it requires manual handling of retries, error parsing, and image encoding – tasks that the Python CLI abstracts away.</p>
+<h2>Best Practices and Tips</h2>
+<p>To get the most out of the seedance‑video skill, keep the following recommendations in mind:</p>
+<ol>
+<li>**Start with a draft** – If you are experimenting with a new prompt or image combination, enable draft mode first. This saves credits and lets you iterate quickly.</li>
+<li>**Match model capabilities to your needs** – If you require audio, always choose Seedance 1.5 Pro. If you only need a quick text‑to‑video clip and want the fastest turnaround, Seedance 1.0 Pro Fast is a good choice.</li>
+<li>**Use appropriate aspect ratios** – The API accepts ratios like <code>16:9</code>, <code>9:16</code>, <code>1:1</code>, or <code>adaptive</code>. Choose the ratio that fits your target platform (YouTube, TikTok, Instagram).</li>
+<li>**Keep prompts concise yet descriptive** – The models respond best to clear, concrete descriptions. Avoid overly vague language; instead, specify actions, lighting, and camera motion when relevant.</li>
+<li>**Leverage reference images for style transfer** – When using the Lite I2V model, supplying reference images that share a color palette or artistic style can dramatically improve visual consistency.</li>
+<li>**Monitor your usage** – Video generation consumes credits based on model, duration, and resolution. Regularly check the Ark dashboard to stay within budget.</li>
+<li>**Store generated videos securely** – The downloaded MP4 files can be large; consider moving them to a cloud bucket or external drive after download.</li>
+</ol>
+<h2>Conclusion</h2>
+<p>The OpenClaw seedance‑video skill bridges the gap between powerful ByteDance video generation models and everyday users who may not be familiar with low‑level API details. By providing a ready‑to‑use Python CLI, clear documentation, and fallback curl examples, the skill lowers the barrier to creating AI‑driven videos from text, images, or keyframes. Whether you are a content creator looking to prototype visual ideas quickly, a developer building a media‑rich application, or simply an enthusiast curious about generative video, the seedance‑video skill offers a flexible, well‑documented pathway to turn imagination into moving pictures. With support for multiple models, audio generation, draft previews, and robust task management, it stands out as one of the most versatile generative media tools available in the OpenClaw ecosystem today.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/jackycser/seedance-video-generation/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/jackycser/seedance-video-generation/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talent Powers: Unlocking Professional Data with Talent Protocol API | News of Tomorrow</title>
+<meta name="description" content="Talent Powers is a powerful skill that allows you to query professional data from Talent Protocol, enabling you to find verified developers, check builder reput">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/talent-powers-unlocking-professional-data-with-talent-protocol-api/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="Talent Powers: Unlocking Professional Data with Talent Protocol API">
+<meta property="og:description" content="Talent Powers is a powerful skill that allows you to query professional data from Talent Protocol, enabling you to find verified developers, check builder reput">
+<meta property="og:image" content="https://picsum.photos/seed/talent-powers-unlocking-professional-data-with-talent-protocol-api/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/talent-powers-unlocking-professional-data-with-talent-protocol-api/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-17">
+<meta property="article:modified_time" content="2026-03-17">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Talent Powers: Unlocking Professional Data with Talent Protocol API">
+<meta name="twitter:description" content="Talent Powers is a powerful skill that allows you to query professional data from Talent Protocol, enabling you to find verified developers, check builder reput">
+<meta name="twitter:image" content="https://picsum.photos/seed/talent-powers-unlocking-professional-data-with-talent-protocol-api/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Talent Powers: Unlocking Professional Data with Talent Protocol API", "datePublished": "2026-03-17", "dateModified": "2026-03-17", "image": ["https://picsum.photos/seed/talent-powers-unlocking-professional-data-with-talent-protocol-api/1200/630"], "description": "Talent Powers is a powerful skill that allows you to query professional data from Talent Protocol, enabling you to find verified developers, check builder reput", "mainEntityOfPage": "https://github.insightginie.com/posts/talent-powers-unlocking-professional-data-with-talent-protocol-api/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "Talent Powers: Unlocking Professional Data with Talent Protocol API", "item": "https://github.insightginie.com/posts/talent-powers-unlocking-professional-data-with-talent-protocol-api/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>Talent Powers: Unlocking Professional Data with Talent Protocol API</h1>
+<time datetime="2026-03-17" class="post-date" data-date="2026-03-17T14:17:09+00:00">2026-03-17</time>
+<img src="https://picsum.photos/seed/talent-powers-unlocking-professional-data-with-talent-protocol-api/800/400" class="post-hero" alt="Talent Powers: Unlocking Professional Data with Talent Protocol API">
+<h2>Introduction to Talent Powers</h2>
+<p>Talent Powers is an advanced skill designed to help you access and analyze professional data from Talent Protocol, a platform that tracks and verifies builders in the tech ecosystem. This skill provides comprehensive access to builder profiles, reputation data, and identity verification across multiple platforms.</p>
+<h2>Core Capabilities</h2>
+<p>The Talent Powers skill offers several key functionalities that make it an invaluable tool for developers, recruiters, and platform builders:</p>
+<h3>Identity Resolution and Verification</h3>
+<p>Talent Powers can map and verify identities across multiple platforms including Twitter, GitHub, Farcaster, ENS domains, and cryptocurrency wallets. This cross-platform identity resolution helps you understand the complete professional footprint of any builder.</p>
+<h3>Builder Reputation and Ranking</h3>
+<p>The skill provides access to builder reputation data, including ranks and scores. By default, it returns rank positions, but you can also request detailed score information when needed. This helps you assess the credibility and impact of different builders in the ecosystem.</p>
+<h3>Location-Based Search</h3>
+<p>You can search for verified developers by location, skills, or other criteria. The skill supports filtering by nationality verification and human verification status, making it easier to find the right talent for your needs.</p>
+<h2>Technical Implementation</h2>
+<p>The Talent Powers skill interacts with the Talent Protocol API through a well-defined set of endpoints and parameters. Here&#8217;s how it works:</p>
+<h3>API Authentication</h3>
+<p>The skill requires a TALENT_API_KEY for accessing Talent Protocol data. For GitHub enrichment features, a GITHUB_TOKEN is recommended to increase rate limits from 60 to 5,000 requests per hour.</p>
+<h3>Key Endpoints</h3>
+<p>The skill utilizes several API endpoints:</p>
+<ul>
+<li><code>/search/advanced/profiles</code> &#8211; Advanced profile search with filters</li>
+<li><code>/profile</code> &#8211; Get specific profile by ID</li>
+<li><code>/accounts</code> &#8211; Get connected wallets and social accounts</li>
+<li><code>/socials</code> &#8211; Get social profiles and bios</li>
+<li><code>/credentials</code> &#8211; Get data points like earnings and contributions</li>
+<li><code>/human_checkmark</code> &#8211; Verify human identity (optional)</li>
+<li><code>/scores</code> &#8211; Get ranks or scores</li>
+</ul>
+<h3>Search Parameters</h3>
+<p>The skill supports various search parameters including identity lookup by Twitter, GitHub, Farcaster, ENS, or wallet addresses. You can filter by tags (like developer or designer), verification status, and sort by builder score.</p>
+<h2>Advanced Features</h2>
+<p>Beyond basic profile lookup, Talent Powers offers several advanced capabilities:</p>
+<h3>GitHub Enrichment</h3>
+<p>After resolving a GitHub username from the Talent Protocol data, the skill can query GitHub for additional information including:</p>
+<ul>
+<li>Top repositories by stars</li>
+<li>Recent activity and commits</li>
+<li>Open pull requests</li>
+</ul>
+<h3>Custom Query Support</h3>
+<p>For location-based searches, the skill uses custom JSON queries with regex support, as the standard location parameter is broken. This allows for flexible location matching including partial matches and case-insensitive searches.</p>
+<h3>Credential Analysis</h3>
+<p>The skill can retrieve various credentials including earnings, followers, hackathons participated in, contracts, and other contributions. This provides a comprehensive view of a builder&#8217;s professional achievements.</p>
+<h2>Practical Use Cases</h2>
+<p>Talent Powers can be used in numerous scenarios:</p>
+<h3>Recruiting and Talent Sourcing</h3>
+<p>Find verified developers in specific locations or with particular skills. Filter by human verification status to ensure authenticity. Check reputation scores to assess candidate quality.</p>
+<h3>Platform Building</h3>
+<p>Integrate builder reputation data into your platform to showcase top contributors. Use identity verification to prevent fraud and ensure quality.</p>
+<h3>Research and Analysis</h3>
+<p>Analyze builder demographics, track emerging talent, and understand skill distribution across different regions and platforms.</p>
+<h2>Limitations and Considerations</h2>
+<p>While Talent Powers is powerful, it has some limitations:</p>
+<ul>
+<li>Maximum 250 results per page</li>
+<li>GET requests only for most endpoints (POST required for custom queries)</li>
+<li>Standard location parameter is broken &#8211; requires custom JSON queries</li>
+<li>GitHub rate limits apply without authentication</li>
+</ul>
+<h2>Getting Started</h2>
+<p>To use Talent Powers, you&#8217;ll need:</p>
+<ol>
+<li>Obtain a TALENT_API_KEY from Talent Protocol</li>
+<li>(Optional) Create a GitHub token for enhanced rate limits</li>
+<li>Integrate the skill into your application or workflow</li>
+<li>Start querying builder data using the available endpoints</li>
+</ol>
+<h2>Conclusion</h2>
+<p>Talent Powers represents a significant advancement in how we can access and utilize professional data from the builder ecosystem. By providing comprehensive identity resolution, reputation tracking, and rich credential data, it enables more informed decision-making in recruiting, platform building, and talent analysis. Whether you&#8217;re a recruiter looking for verified talent, a platform builder wanting to showcase top contributors, or a researcher analyzing the tech ecosystem, Talent Powers provides the tools you need to succeed.</p>
+<h2>Resources</h2>
+<p>For more detailed information about specific endpoints, use cases, and GitHub enrichment, refer to the following documentation:</p>
+<ul>
+<li>endpoints.md &#8211; Full endpoint documentation</li>
+<li>use-cases.md &#8211; Common usage patterns and examples</li>
+<li>github-enrichment.md &#8211; GitHub data integration details</li>
+</ul>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/juampihernandez/talent-powers/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/juampihernandez/talent-powers/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenClaw Camino Places Skill: Flexible Geocoding and Place Lookup | News of Tomorrow</title>
+<meta name="description" content="Discover how the Camino Places skill helps you locate places using free-form queries or structured addresses, returning coordinates, addresses, and optional str">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://github.insightginie.com/posts/openclaw-camino-places-skill-flexible-geocoding-and-place-lookup/">
+<meta name="author" content="News of Tomorrow">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="News of Tomorrow">
+<meta property="og:title" content="OpenClaw Camino Places Skill: Flexible Geocoding and Place Lookup">
+<meta property="og:description" content="Discover how the Camino Places skill helps you locate places using free-form queries or structured addresses, returning coordinates, addresses, and optional str">
+<meta property="og:image" content="https://picsum.photos/seed/openclaw-camino-places-skill-flexible-geocoding-and-place-lookup/1200/630">
+<meta property="og:url" content="https://github.insightginie.com/posts/openclaw-camino-places-skill-flexible-geocoding-and-place-lookup/">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-08">
+<meta property="article:modified_time" content="2026-03-08">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OpenClaw Camino Places Skill: Flexible Geocoding and Place Lookup">
+<meta name="twitter:description" content="Discover how the Camino Places skill helps you locate places using free-form queries or structured addresses, returning coordinates, addresses, and optional str">
+<meta name="twitter:image" content="https://picsum.photos/seed/openclaw-camino-places-skill-flexible-geocoding-and-place-lookup/1200/630">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" href="https://fastly.picsum.photos/id/695/64/64.jpg?hmac=9e78jBXMmSJ38MUvNXDQKWoN0KrAVf9CwfYXlYVxY2s">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OpenClaw Camino Places Skill: Flexible Geocoding and Place Lookup", "datePublished": "2026-03-08", "dateModified": "2026-03-08", "image": ["https://picsum.photos/seed/openclaw-camino-places-skill-flexible-geocoding-and-place-lookup/1200/630"], "description": "Discover how the Camino Places skill helps you locate places using free-form queries or structured addresses, returning coordinates, addresses, and optional str", "mainEntityOfPage": "https://github.insightginie.com/posts/openclaw-camino-places-skill-flexible-geocoding-and-place-lookup/", "publisher": {"@type": "Organization", "name": "News of Tomorrow", "url": "https://github.insightginie.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://github.insightginie.com/"}, {"@type": "ListItem", "position": 2, "name": "OpenClaw Camino Places Skill: Flexible Geocoding and Place Lookup", "item": "https://github.insightginie.com/posts/openclaw-camino-places-skill-flexible-geocoding-and-place-lookup/"}]}</script>
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+<article>
+<h1>OpenClaw Camino Places Skill: Flexible Geocoding and Place Lookup</h1>
+<time datetime="2026-03-08" class="post-date" data-date="2026-03-08T17:19:26+00:00">2026-03-08</time>
+<img src="https://picsum.photos/seed/openclaw-camino-places-skill-flexible-geocoding-and-place-lookup/800/400" class="post-hero" alt="OpenClaw Camino Places Skill: Flexible Geocoding and Place Lookup">
+<h2>Introduction to Camino Places Skill</h2>
+<p>The Camino Places skill is a powerful tool within the OpenClaw ecosystem that enables flexible place lookup and geocoding capabilities. Whether you need to find the coordinates of a famous landmark, geocode an address, or discover places within a specific area, this skill provides comprehensive location intelligence through both free-form queries and structured address components.</p>
+<h2>Core Functionality</h2>
+<p>The Places skill serves as a flexible place lookup system that can handle multiple input formats. You can search for locations using natural language queries like &#8220;Eiffel Tower&#8221; or provide structured address components such as street name, city, state, and country. This dual approach makes the skill versatile for various use cases, from finding tourist attractions to geocoding business addresses.</p>
+<p>The skill returns essential information including geographic coordinates (latitude and longitude), formatted addresses, place types, and importantly, can optionally provide street-level photos to give visual context to the locations found.</p>
+<h2>Installation and Setup</h2>
+<p>Installing the Camino Places skill is straightforward through multiple methods. You can install it as part of the complete Camino AI location intelligence suite using the command <code>npx skills add https://github.com/barneyjm/camino-skills</code>, or install it individually with <code>npx skills add https://github.com/barneyjm/camino-skills --skill places</code>.</p>
+<p>For those using clawhub, installation is even simpler with <code>npx clawhub@latest install places</code>. Once installed, you&#8217;ll need to configure your API key. You can start with a free trial that provides 25 calls without signup, or sign up at <a href="https://app.getcamino.ai/skills/activate">https://app.getcamino.ai/skills/activate</a> for 1,000 free calls per month.</p>
+<h2>Key Features and Capabilities</h2>
+<p>The Places skill offers several powerful features that make it stand out. Unlike the Query skill which uses AI ranking for natural language searches, Places focuses on precise geocoding and location lookup. It can return coordinates for any address or place name, making it ideal for applications that need exact geographic positioning.</p>
+<p>One of the most valuable features is the optional street-level photo capability. When enabled, the skill can provide imagery from around the searched location, giving users visual confirmation and context. This is particularly useful for real estate applications, travel planning, or any scenario where seeing the actual location matters.</p>
+<h2>Usage Examples</h2>
+<p>The skill supports various usage patterns through both shell scripts and direct API calls. For simple landmark searches, you can use commands like <code>./scripts/places.sh '{"query": "Eiffel Tower"}'</code>. For more complex searches with photos, try <code>./scripts/places.sh '{"query": "Empire State Building", "include_photos": true}'</code>.</p>
+<p>Structured address searches work equally well: <code>./scripts/places.sh '{"street": "1600 Pennsylvania Avenue", "city": "Washington", "state": "DC", "country": "USA"}'</code>. You can also search by city alone or combine multiple address components for more accurate results.</p>
+<h2>Parameters and Configuration</h2>
+<p>The skill offers extensive configuration options through its parameters. You can specify the query type, address components (street, city, state, country, postal code), and control the number of results with the limit parameter. The include_photos parameter enables or disables street-level imagery, while photo_radius controls the search area for photos in meters.</p>
+<p>For more comprehensive searches, the mode parameter allows switching between &#8220;basic&#8221; and &#8220;advanced&#8221; search depths. The advanced mode provides richer data by leveraging web-enriched place information, making it ideal for applications that need detailed location intelligence.</p>
+<h2>Response Format and Data Structure</h2>
+<p>Responses from the Places skill are well-structured JSON objects containing multiple useful fields. Each result includes the display_name (formatted address), geographic coordinates (lat and lon), place type, importance score, and a detailed address breakdown. When photos are included, they appear in a photos array with URLs, coordinates, and camera heading information.</p>
+<p>The response also indicates whether street imagery is available for the location, helping users understand the completeness of the visual data provided. This structured format makes it easy to integrate the skill&#8217;s output into various applications and workflows.</p>
+<h2>Best Practices and Use Cases</h2>
+<p>For optimal results, use the query parameter for landmarks, points of interest, and well-known places. When you need precise geocoding for addresses, use structured address fields instead. Enable include_photos when visual context is important, such as in real estate applications or travel planning tools.</p>
+<p>The advanced mode is particularly useful when you need comprehensive place data beyond basic coordinates and addresses. Combining multiple address components improves accuracy, especially for locations in areas with similar names or when searching internationally.</p>
+<h2>Integration and Workflow</h2>
+<p>The Places skill integrates seamlessly into larger workflows through its API endpoints and shell script interfaces. Whether you&#8217;re building a real estate application that needs property location data, a travel app that shows landmarks with photos, or a logistics system that requires accurate address geocoding, this skill provides the foundation.</p>
+<p>Its companion skills in the Camino suite, including Query, Route, Journey, and others, allow for building comprehensive location-based applications. The Places skill serves as a fundamental building block for any system that needs to understand and work with geographic locations.</p>
+<h2>Conclusion</h2>
+<p>The Camino Places skill represents a robust solution for flexible place lookup and geocoding within the OpenClaw ecosystem. Its combination of free-form query support, structured address handling, optional street-level photos, and comprehensive response data makes it an invaluable tool for developers building location-aware applications.</p>
+<p>With easy installation, generous free tier, and extensive configuration options, the Places skill provides everything needed to add sophisticated location intelligence to your projects. Whether you&#8217;re building a simple address lookup tool or a complex location-based service, this skill offers the reliability and features required for professional-grade applications.</p>
+<p>Skill can be found at: <a href="https://github.com/openclaw/skills/tree/main/skills/james-southendsolutions/camino-places/SKILL.md">https://github.com/openclaw/skills/tree/main/skills/james-southendsolutions/camino-places/SKILL.md</a></p>
+
+</article>
+<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
+</main>
+<div id="site-footer"></div>
+<script src="../../assets/app.js"></script>
+</body>
+</html>
