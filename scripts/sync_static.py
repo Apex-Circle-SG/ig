@@ -147,7 +147,6 @@ def generate_post_html(title, slug, date, excerpt, content, image):
 <img src="{image}" class="post-hero" alt="{esc(title)}">
 {content}
 </article>
-<div class="pagination"><a href="/" class="button">&laquo; Back to archive</a></div>
 </main>
 <div id="site-footer"></div>
 <script src="../../assets/app.js"></script>
