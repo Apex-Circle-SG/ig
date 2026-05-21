@@ -10,7 +10,7 @@ This is a read-only public mirror of the InsightGinie knowledge base. All conten
 
 - **Live mirror**: https://github.insightginie.com
 - **Original site**: https://insightginie.com
-- **Generator**: Jekyll
+- **Generator**: HTML
 - **Hosting**: GitHub Pages
 
 ## Repository Structure
